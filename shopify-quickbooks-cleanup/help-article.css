@@ -1,0 +1,80 @@
+/* Help article layout — extends FMP brand styles */
+
+.help-article main {
+  max-width: 42rem;
+}
+
+.help-article h1 {
+  color: var(--color-text);
+}
+
+.help-article h2 {
+  font-size: 1.2rem;
+  margin: 2rem 0 0.75rem;
+}
+
+.help-article h3 {
+  font-size: 1rem;
+  margin: 1.25rem 0 0.5rem;
+}
+
+.help-article .lede {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+}
+
+.help-article .meta,
+.help-article .source {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.help-article .source a {
+  color: var(--color-accent-cyan);
+}
+
+.help-article .callout {
+  background: var(--color-surface-elevated);
+  border-left: 4px solid var(--color-accent-cyan);
+  padding: 1rem 1.1rem;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.help-article .faq dt {
+  font-weight: 600;
+  margin-top: 1rem;
+  color: var(--color-accent-cyan);
+}
+
+.help-article .faq dd {
+  margin: 0.35rem 0 0 0;
+  color: var(--color-text-muted);
+}
+
+.help-article .breadcrumb {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.help-article .breadcrumb a {
+  color: var(--color-accent-cyan);
+  text-decoration: none;
+}
+
+.help-article .breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.help-article .disclaimer {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-top: 1rem;
+}
+
+.help-article article footer {
+  border-top: 1px solid var(--color-border);
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+}
