@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" class="help-article">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shopify QuickBooks Connector Problems After Migration (U.S.) | First Mover Projects</title>
+  <meta name="description" content="Fix duplicate Shopify sales, payout vs deposit mismatches, and bank feed errors after Shopify Connector by QuickBooks migration. Steps from Intuit and Shopify help." />
+  <link rel="canonical" href="https://firstmoverprojects.com/help/shopify-quickbooks-connector-migration-problems.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="First Mover Projects" />
+  <meta property="og:title" content="Shopify QuickBooks Connector Problems After Migration (U.S.)" />
+  <meta property="og:description" content="Fix duplicate Shopify sales, payout vs deposit mismatches, and bank feed errors after Shopify Connector by QuickBooks migration. Steps from Intuit and Shopify help." />
+  <meta property="og:url" content="https://firstmoverprojects.com/help/shopify-quickbooks-connector-migration-problems.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Shopify QuickBooks Connector Problems After Migration (U.S.)" />
+  <meta name="twitter:description" content="Five common post-migration issues between Shopify and QuickBooks Online—and fix steps from Intuit and Shopify help." />
+  <link rel="stylesheet" href="../shopify-quickbooks-cleanup/styles.css" />
+  <link rel="stylesheet" href="../shopify-quickbooks-cleanup/help-article.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://firstmoverprojects.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Shopify + QuickBooks sync cleanup", "item": "https://firstmoverprojects.com/shopify-quickbooks-cleanup/" },
+      { "@type": "ListItem", "position": 3, "name": "Migration problems", "item": "https://firstmoverprojects.com/help/shopify-quickbooks-connector-migration-problems.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why do I have duplicate Shopify sales in QuickBooks after the connector migration?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Duplicates usually mean your new connector import start date overlaps days already imported from the legacy OneSaas or Commerce app, a CSV, or a second sync tool. Intuit instructs you to choose a start date that does not overlap previously imported data. Turn off other Shopify-to-QuickBooks sync paths, then confirm each entry is a true duplicate before removing or undoing it in the overlap window (if that period is already closed, check with your accountant first) and only then match bank deposits."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why doesn't my Shopify payout match my QuickBooks deposit or bank feed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A Shopify payout is net of fees, refunds, and adjustments. In QuickBooks, confirm each sale, refund, and fee inside Integration transactions until they are Categorized, assign accounts on Funds in this payout, then confirm the payout to create a Deposit. The deposit total should equal the Shopify net payout and your bank deposit. Compare amounts using Shopify's export payout transactions CSV and your QBO Deposit detail."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I Add or Match Shopify deposits in the QuickBooks bank feed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use Match. Intuit's Shopify connect help says to confirm transactions from Integration transactions first, then Match the bank deposit to the Deposit created from the payout—not Add—which duplicates income."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is Undeposited Funds growing after I connected Shopify?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sales and fees often sit in Undeposited Funds or Payments to deposit until you confirm the payout. If you Match bank deposits before individual Integration transactions are categorized, or you Add bank deposits instead of Match, balances drift. Finish Integration transactions for the payout, confirm the payout deposit, then Match in Bank transactions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where do I export Shopify payout details to compare with QuickBooks?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In Shopify admin, use Finance, then Payouts, open a payout, and Export payout transactions for one deposit. For a date range, export payouts for that range from Shopify Payments; menus vary, so use Shopify's current Payments export help. Compare those totals with your QBO Deposit and bank statement."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand-link" href="https://firstmoverprojects.com/">
+        <img
+          class="brand-logo"
+          src="../shopify-quickbooks-cleanup/assets/fmp-logo.webp"
+          alt="First Mover Projects"
+          width="140"
+          height="140"
+        />
+      </a>
+    </div>
+  </header>
+  <main id="main">
+    <article>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="https://firstmoverprojects.com/">Home</a> ›
+        <a href="https://firstmoverprojects.com/shopify-quickbooks-cleanup/">Shopify + QuickBooks sync cleanup</a> ›
+        <span aria-current="page">Migration problems</span>
+      </nav>
+      <h1>Shopify + QuickBooks problems after the Shopify Connector by QuickBooks migration</h1>
+      <p class="lede">Practical fixes for U.S. store owners when sales, payouts, or bank feeds stop lining up after Intuit’s e-commerce connector rebuild—not tax or accounting advice.</p>
+      <p class="meta">Updated October 7, 2026 · Sources linked under each section.</p>
+
+      <p>Intuit replaced legacy OneSaas and Commerce connectors with <strong>Shopify Connector by QuickBooks</strong> inside QuickBooks Online. The new flow imports individual sales, refunds, fees, and payouts, then expects you to reconcile each payout before you touch the bank feed (<a href="https://quickbooks.intuit.com/learn-support/en-us/help-article/sales-channels/migrate-new-quickbooks-online-e-commerce/L1yLsHvLk_US_en_US">Intuit migration overview</a>).</p>
+
+      <p>Below are the <strong>five problems</strong> merchants report most often right after migration—and fix steps you can take with Intuit and Shopify documentation.</p>
+
+      <h2>1. Duplicate Shopify sales after connector migration</h2>
+      <p><strong>What it looks like:</strong> The same order or amount appears twice in Sales Receipts, income looks inflated, or payout totals no longer tie.</p>
+      <p><strong>Common causes:</strong> Import <strong>start date overlaps</strong> days you already brought in via the old connector, CSV, or manual entry; or two sync tools run at once.</p>
+      <h3>Fix steps</h3>
+      <ol class="fix-steps">
+        <li>Note your connector <strong>transaction sync start date</strong> and the last day covered by legacy imports.</li>
+        <li>If you can remigrate or adjust settings, set a start date that <strong>does not overlap</strong> prior imported data (Intuit migration article).</li>
+        <li>Disconnect other Shopify→QuickBooks apps or stop parallel CSV imports for the same period.</li>
+        <li>In <strong>Integration transactions</strong> (<em>Accounting → Integration transactions</em> or <em>All apps → Accounting → Integration transactions</em>), review <strong>For Review</strong> and <strong>Excluded</strong> for duplicate payout lines.</li>
+        <li>Before changing posted amounts, confirm each entry is a <strong>true duplicate</strong> (same order reference and amount). If the accounting period is <strong>closed or already filed</strong>, check with your accountant before voiding or deleting anything—Intuit’s cited migration help focuses on preventing overlap, not on how to void entries.</li>
+        <li>After duplicates are resolved in your books, match bank deposits as in section 3.</li>
+      </ol>
+      <p class="source">Sources: <a href="https://quickbooks.intuit.com/learn-support/en-us/help-article/sales-channels/migrate-new-quickbooks-online-e-commerce/L1yLsHvLk_US_en_US">Intuit — Migrate to new e-commerce connectors</a>; <a href="https://support.onesaas.com/hc/en-us/articles/58392167727641">Intuit-published migration mirror</a>.</p>
+
+      <h2>2. Shopify payout not matching QuickBooks deposit or bank amount</h2>
+      <p><strong>What it looks like:</strong> Shopify’s net payout for a day does not equal the QuickBooks Deposit or the amount that hit your bank.</p>
+      <p><strong>Common causes:</strong> Fees, refunds, or adjustment lines inside the payout were not categorized; payout confirmed before child transactions were <strong>Categorized</strong>; or timing (payout initiated vs bank received).</p>
+      <h3>Fix steps</h3>
+      <ol class="fix-steps">
+        <li>Export the payout from Shopify: <strong>Finance → Payouts</strong> → open payout → <strong>Export payout transactions</strong> (<a href="https://help.shopify.com/en/manual/payments/shopify-payments/payouts/view-details">Shopify Help</a>).</li>
+        <li>In Integration transactions, open the payout: ensure included sales/refunds show <strong>Categorized</strong>.</li>
+        <li>Assign accounts for every line under <strong>Funds in this payout</strong>.</li>
+        <li>Confirm the payout so QuickBooks creates a <strong>Deposit</strong> equal to the net payout (Intuit connect workflow).</li>
+        <li>Compare Shopify net, QBO Deposit total, and bank statement; document small timing gaps separately.</li>
+      </ol>
+      <p class="source">Sources: <a href="https://quickbooks.intuit.com/learn-support/en-us/help-article/manage-integrations/connect-shopify-quickbooks-online/L1Xv7ZCFB_US_en_US">Intuit U.S. — Connect Shopify</a> (three-step reconcile); <a href="https://help.shopify.com/en/manual/payments/shopify-payments/payouts/view-details">Shopify — Export payout transactions</a>.</p>
+
+      <h2>3. Bank feed: used Add instead of Match on a Shopify deposit</h2>
+      <p><strong>What it looks like:</strong> Bank balance is right but income is overstated; Shopify deposits appear twice (once from connector Deposit, once from bank Add).</p>
+      <p><strong>Common cause:</strong> Adding the bank line instead of matching to the Deposit Intuit created from the payout.</p>
+      <h3>Fix steps</h3>
+      <ol class="fix-steps">
+        <li>Finish Integration transactions for that payout (sales/fees, then payout confirm) first.</li>
+        <li>Go to <strong>Bank transactions</strong> (<em>All apps → Accounting → Bank transactions</em>, or Banking for your deposit account).</li>
+        <li>Select <strong>Match</strong> to the existing Deposit—not <strong>Add</strong> (Intuit connect article).</li>
+        <li>If you already Added, undo the bank entry per your accountant’s guidance, then Match correctly.</li>
+      </ol>
+      <p class="source">Source: <a href="https://quickbooks.intuit.com/learn-support/en-us/help-article/manage-integrations/connect-shopify-quickbooks-online/L1Xv7ZCFB_US_en_US">Intuit U.S. — Connect Shopify</a> (“Always use Match”; confirm Integration transactions before bank feed).</p>
+
+      <h2>4. Undeposited Funds or For Review backlog won’t clear</h2>
+      <p><strong>What it looks like:</strong> Undeposited Funds (or Payments to deposit) stays high; payouts sit in Integration transactions while bank deposits already cleared.</p>
+      <p><strong>Common cause:</strong> Individual <strong>Payment received</strong> rows not confirmed, or bank feed handled before payout workflow completed.</p>
+      <h3>Fix steps</h3>
+      <ol class="fix-steps">
+        <li>Work the <strong>For Review</strong> tab: <strong>Confirm</strong> or complete <strong>Review</strong> for missing customer/product/account mapping.</li>
+        <li>When Intuit creates Sales Receipts and fee Expenses, they remain in Undeposited Funds until the payout is confirmed (connector help).</li>
+        <li>Confirm the payout only when all included lines are <strong>Categorized</strong>.</li>
+        <li>Then Match the bank deposit as in problem #3.</li>
+      </ol>
+      <p class="source">Sources: <a href="https://support.onesaas.com/hc/en-us/articles/56070164375065-Shopify-Connector-by-QuickBooks">Shopify Connector by QuickBooks help</a>; <a href="https://quickbooks.intuit.com/learn-support/en-us/help-article/manage-integrations/connect-shopify-quickbooks-online/L1Xv7ZCFB_US_en_US">Intuit U.S. connect article</a>.</p>
+
+      <h2>5. Fees or adjustments missing inside a payout</h2>
+      <p><strong>What it looks like:</strong> Deposit is a few dollars off; Shopify CSV shows fee or adjustment lines QBO did not map.</p>
+      <p><strong>Common cause:</strong> Unassigned lines in <strong>Funds in this payout</strong>, or comparing gross sales to net bank deposit.</p>
+      <h3>Fix steps</h3>
+      <ol class="fix-steps">
+        <li>From Shopify Payments, export payout detail for a single deposit (<strong>Finance → Payouts</strong> → <strong>Export payout transactions</strong>, per <a href="https://help.shopify.com/en/manual/payments/shopify-payments/payouts/view-details">Shopify Help</a>). To compare a date range, export payouts for the date range from Shopify Payments (balance-transaction export paths vary by admin version—use Shopify’s current Payments export help if your menus differ).</li>
+        <li>In the payout row in Integration transactions, open <strong>Funds in this payout</strong> and assign fee, reserve, gift card, or tax adjustment accounts (connector settings defaults are editable).</li>
+        <li>Assign all lines in <strong>Funds in this payout</strong> before confirming the payout; if you already confirmed the payout and totals still do not tie, contact Intuit support at qbo-integrationsupport@intuit.com before changing posted amounts.</li>
+        <li>For period-level review, use <strong>Finance → Documents → Shopify Payments activity report</strong> (<a href="https://help.shopify.com/en/manual/payments/shopify-payments/payouts/payouts-activity-report">Shopify Help</a>).</li>
+      </ol>
+      <p class="source">Sources: Shopify payout export and activity report URLs above; Intuit connector terminology on fees and adjustments in <a href="https://support.onesaas.com/hc/en-us/articles/56070164375065-Shopify-Connector-by-QuickBooks">connector help</a>.</p>
+
+      <h2>FAQ</h2>
+      <dl class="faq">
+        <dt>Why do I have duplicate Shopify sales in QuickBooks after the connector migration?</dt>
+        <dd>Duplicates usually mean your new connector import start date overlaps days already imported from the legacy OneSaas or Commerce app, a CSV, or a second sync tool. Intuit instructs you to choose a start date that does not overlap previously imported data. Turn off other Shopify-to-QuickBooks sync paths, then confirm each entry is a true duplicate before removing or undoing it in the overlap window (if that period is already closed, check with your accountant first) and only then match bank deposits.</dd>
+
+        <dt>Why doesn't my Shopify payout match my QuickBooks deposit or bank feed?</dt>
+        <dd>A Shopify payout is net of fees, refunds, and adjustments. In QuickBooks, confirm each sale, refund, and fee inside Integration transactions until they are Categorized, assign accounts on Funds in this payout, then confirm the payout to create a Deposit. The deposit total should equal the Shopify net payout and your bank deposit. Compare amounts using Shopify's export payout transactions CSV and your QBO Deposit detail.</dd>
+
+        <dt>Should I Add or Match Shopify deposits in the QuickBooks bank feed?</dt>
+        <dd>Use Match. Intuit's Shopify connect help says to confirm transactions from Integration transactions first, then Match the bank deposit to the Deposit created from the payout—not Add—which duplicates income.</dd>
+
+        <dt>Why is Undeposited Funds growing after I connected Shopify?</dt>
+        <dd>Sales and fees often sit in Undeposited Funds or Payments to deposit until you confirm the payout. If you Match bank deposits before individual Integration transactions are categorized, or you Add bank deposits instead of Match, balances drift. Finish Integration transactions for the payout, confirm the payout deposit, then Match in Bank transactions.</dd>
+
+        <dt>Where do I export Shopify payout details to compare with QuickBooks?</dt>
+        <dd>In Shopify admin, use Finance, then Payouts, open a payout, and Export payout transactions for one deposit. For a date range, export payouts for that range from Shopify Payments; menus vary, so use Shopify's current Payments export help. Compare those totals with your QBO Deposit and bank statement.</dd>
+      </dl>
+
+      <h2>When to get help</h2>
+      <div class="callout">
+        <p><strong>Done-for-you:</strong> Want it done for you? Use the contact form at <a href="https://firstmoverprojects.com/shopify-quickbooks-cleanup/">firstmoverprojects.com/shopify-quickbooks-cleanup/</a>.</p>
+        <p><strong>Intuit product support:</strong> For connector bugs, Intuit lists qbo-integrationsupport@intuit.com and in-app chat on the Shopify tile in Integration transactions.</p>
+        <p>Escalate to a bookkeeper or CPA when duplicates span closed periods, B2B invoices won’t link, multi-gateway deposits mix on one bank line, or variances exceed your materiality threshold.</p>
+      </div>
+
+      <footer>
+        <p class="disclaimer">Educational article only. Not tax, accounting, or legal advice. Not affiliated with, endorsed by, or sponsored by Intuit or Shopify. QuickBooks and Shopify are trademarks of their respective owners.</p>
+        <p>© 2026 First Mover Projects</p>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>
