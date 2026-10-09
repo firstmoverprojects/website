@@ -1,0 +1,53 @@
+/* Shared additions for draft offer landing pages */
+
+.draft-banner {
+  background: rgba(255, 193, 7, 0.12);
+  border: 1px solid rgba(255, 193, 7, 0.45);
+  color: #f4e4bc;
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius);
+  margin-bottom: var(--space-xl);
+  font-size: 0.9375rem;
+}
+
+.draft-banner strong {
+  color: #ffd966;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 var(--space-lg);
+  font-size: 0.9375rem;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid var(--color-border);
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  vertical-align: top;
+}
+
+.data-table th {
+  background: var(--color-surface-elevated);
+  color: var(--color-accent-cyan);
+  font-weight: 600;
+}
+
+.data-table caption {
+  caption-side: top;
+  text-align: left;
+  margin-bottom: var(--space-sm);
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.site-footer .footer-links {
+  margin: var(--space-sm) 0;
+}
+
+.site-footer .footer-disclaimer {
+  margin-top: var(--space-md);
+  max-width: 40rem;
+}

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta
+      name="description"
+      content="DRAFT — Done-for-you ProductCart move-out plan: public URL inventory, 301 redirect map, Shopify import file, and cutover runbook before NetSource hosting ends."
+    />
+    <title>ProductCart move-out to Shopify (DRAFT) | First Mover Projects</title>
+    <link rel="stylesheet" href="../shopify-quickbooks-cleanup/styles.css" />
+    <link rel="stylesheet" href="../draft-offers/shared.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand-link" href="https://firstmoverprojects.com/">
+          <img
+            class="brand-logo"
+            src="../shopify-quickbooks-cleanup/assets/fmp-logo.webp"
+            alt="First Mover Projects"
+            width="140"
+            height="140"
+          />
+        </a>
+        <p class="tagline">
+          Advantage for small businesses: AI tools, workflow fixes, business automation &amp;
+          practical problem-solving.
+        </p>
+      </div>
+    </header>
+
+    <main id="main">
+      <p class="draft-banner" role="status">
+        <strong>DRAFT</strong> — Pending Risk review. This page is not linked from the main site
+        navigation and is not an offer until Risk clears it.
+      </p>
+
+      <section class="hero" aria-labelledby="hero-heading">
+        <p class="hero__badge">ProductCart sunset</p>
+        <h1 id="hero-heading">ProductCart move-out to Shopify</h1>
+        <p class="lead">
+          NetSource-managed ProductCart hosting ends
+          <strong>January 11, 2027</strong> per the
+          <a
+            href="https://productcart-kb.nsource.com/kb/productcart-sunset-faq"
+            rel="noopener"
+            >ProductCart sunset FAQ</a
+          >. This done-for-you scope maps your old public URLs to Shopify paths and delivers a
+          cutover runbook. You keep DNS, hosting, email, and store build decisions; First Mover
+          Projects never touches DNS, proxy, or CDN settings.
+        </p>
+        <p>
+          One primary domain per scope. Stores with more than 1,200 public ProductCart URLs are not
+          a fit for this offer.
+        </p>
+        <!-- PRICE_PLACEHOLDER: Tier A (1–250 public URLs) from $490; Tier B (251–600) from $650; Tier C (601–1,200) from $750 — all pending Risk review -->
+      </section>
+
+      <section aria-labelledby="deliverables-heading">
+        <h2 id="deliverables-heading">What you get</h2>
+        <ul>
+          <li>
+            <strong>Public URL inventory (CSV)</strong> — Customer-visible ProductCart URLs found by
+            a polite public crawl (GET only, <code>robots.txt</code> respected, at most one request
+            per second), plus your sitemap and any URL list you send. No login or admin access.
+          </li>
+          <li>
+            <strong>301 redirect map (CSV)</strong> — One row per old URL with a suggested new Shopify
+            path, match confidence, and redirect outcome (see below).
+          </li>
+          <li>
+            <strong>Shopify-ready redirect import file</strong> — Rows Shopify’s redirect tool can
+            accept, in its two-column import format.
+          </li>
+          <li>
+            <strong>Exceptions list</strong> — URLs that cannot use a native Shopify redirect, with
+            options and risks written out for your team.
+          </li>
+          <li>
+            <strong>Merchant-run export checklist</strong> — What to export from your ProductCart
+            control panel and how to store it (you run it).
+          </li>
+          <li>
+            <strong>Cutover and rollback runbook (PDF)</strong> — Ordered steps for whoever you
+            assign, plus a launch-day redirect test list.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="redirect-outcomes-heading">
+        <h2 id="redirect-outcomes-heading">How each old URL is classified</h2>
+        <p>
+          Every URL in the redirect map is labeled with exactly one of three outcomes:
+        </p>
+        <ol>
+          <li>
+            <strong>Native Shopify redirect</strong> — Shopify’s admin redirect import can handle the
+            old path.
+          </li>
+          <li>
+            <strong>Edge-only option</strong> — Not solvable inside Shopify alone; any front-door
+            routing change is entirely your store’s decision. First Mover Projects documents the
+            option and its risks; we do not change your infrastructure.
+          </li>
+          <li>
+            <strong>Unmapped</strong> — No documented redirect method for that URL pattern in this
+            scope.
+          </li>
+        </ol>
+        <p>
+          The main gap is query-string product URLs (for example paths that identify a product only
+          with <code>?idproduct=</code>): those stay <strong>unmapped</strong>.
+        </p>
+        <p>
+          Many ProductCart stores live under <code>/shop/pc/</code> paths. Shopify's built-in
+          redirects can't start from /shop paths. Those URLs are flagged for the edge-only option or
+          as unmapped, depending on the exact pattern.
+        </p>
+        <p>
+          NetSource’s FAQ notes that some fluctuation in search rankings is expected with any new
+          site. We cannot promise rankings or traffic after the move.
+        </p>
+      </section>
+
+      <section aria-labelledby="timeline-heading">
+        <h2 id="timeline-heading">Timeline</h2>
+        <ul>
+          <li>
+            Delivery within <strong>5 business days</strong> after your Square invoice is paid and we
+            receive intake (domain, store folder, optional URL list).
+          </li>
+          <li>
+            We count public URLs in a free pre-check before you pay and confirm tier and fit in
+            writing.
+          </li>
+          <li>
+            Last paid start date: <strong>December 14, 2026</strong>, so you have time to use the map
+            before hosting ends January 11, 2027.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="who-does-what-heading">
+        <h2 id="who-does-what-heading">Who does what</h2>
+        <table class="data-table">
+          <caption>
+            First Mover Projects handles mapping and documentation; you or your developer handle the
+            store and infrastructure.
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Task</th>
+              <th scope="col">First Mover Projects</th>
+              <th scope="col">You / your developer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Public crawl and URL inventory</td>
+              <td>Yes</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Redirect map and Shopify import file</td>
+              <td>Yes</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Exports from ProductCart</td>
+              <td></td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Shopify store build and product import</td>
+              <td></td>
+              <td>Yes (or your migration vendor)</td>
+            </tr>
+            <tr>
+              <td>Loading redirects into Shopify</td>
+              <td></td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>DNS, SSL, email, and routing decisions</td>
+              <td></td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Launch-day redirect test</td>
+              <td>Test list provided</td>
+              <td>You run it</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section aria-labelledby="not-included-heading">
+        <h2 id="not-included-heading">Not included</h2>
+        <p>
+          Admin logins; customer or order data handling; full store migration or data import;
+          theme or design work; DNS, SSL, email, or hosting changes; loading redirects on your
+          behalf; payment gateway, tax, or shipping setup; ongoing SEO monitoring; additional
+          domains (each extra domain is a separate scope).
+        </p>
+        <p>
+          Working files are deleted within 30 days of delivery. We use only public pages and what you
+          choose to send.
+        </p>
+      </section>
+
+      <section aria-labelledby="payment-heading">
+        <h2 id="payment-heading">Payment and next step</h2>
+        <p>
+          Paid by Square invoice after you say yes. No card details by email. Custom-work refunds
+          follow the written offer terms described on our
+          <a href="https://firstmoverprojects.com/refund-policy.html">refund policy</a> page when
+          Risk clears the scope.
+        </p>
+        <p>
+          Email
+          <a href="mailto:firstmoverprojects@gmail.com?subject=ProductCart%20move-out%20interest"
+            >firstmoverprojects@gmail.com</a
+          >
+          with your primary domain if you want the free URL-count pre-check.
+        </p>
+      </section>
+
+      <section aria-labelledby="sources-heading">
+        <h2 id="sources-heading">Official sources</h2>
+        <ul>
+          <li>
+            <a
+              href="https://productcart-kb.nsource.com/kb/productcart-sunset-faq"
+              rel="noopener"
+              >NetSource — ProductCart sunset FAQ</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://help.shopify.com/en/manual/online-store/menus-and-links/url-redirect"
+              rel="noopener"
+              >Shopify Help — URL redirects</a
+            >
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>First Mover Projects</p>
+      <p class="footer-links">
+        Contact:
+        <a href="mailto:firstmoverprojects@gmail.com">firstmoverprojects@gmail.com</a>
+        · <a href="/">Home</a> · <a href="/tools">Tools</a> ·
+        <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> ·
+        <a href="/refund-policy.html">Refund Policy</a>
+      </p>
+      <p>PO Box 98, Firth, NE 68358</p>
+      <p>© 2026 First Mover Projects. All rights reserved.</p>
+      <p class="footer-disclaimer">
+        Not affiliated with or endorsed by OpenAI, NetSource, Shopify, Zendesk, or Microsoft.
+      </p>
+    </footer>
+  </body>
+</html>
