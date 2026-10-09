@@ -116,26 +116,36 @@
             the launch-day test list checks each one.
           </li>
           <li>
-            <strong>Edge-only option</strong> — Not solvable inside Shopify alone; any front-door
-            routing change is entirely your store’s decision. First Mover Projects documents the
-            option and its risks; we do not change your infrastructure.
+            <strong>Not native on Shopify (your decision)</strong> — Shopify's built-in redirects
+            can't handle this URL (for example, paths that start with /shop). Any other approach,
+            such as routing in front of Shopify, is your store's decision. First Mover Projects
+            documents the options and risks and does not change your infrastructure. Shopify says
+            Cloudflare proxy setups aren't supported by Shopify and can cause SSL certificate
+            problems.
           </li>
           <li>
-            <strong>Unmapped</strong> — No documented redirect method for that URL pattern in this
-            scope.
+            <strong>Unmapped</strong> (our own label, not Shopify's) — We have no tested redirect
+            row for that URL pattern in this scope.
           </li>
         </ol>
         <p>
-          The main gap is query-string URLs (for example <code>viewPrd.asp?idproduct=123</code>):
-          wherever they live, those stay <strong>unmapped</strong> on Shopify. We list them separately
-          and never point them all at one page.
+          The main gap is query-string URLs (for example viewPrd.asp?idproduct=123). Shopify's Help
+          Center says URLs with query strings "might not work as expected" with URL redirects. We
+          list them separately, never point them all at one page, and put each one on the launch-day
+          test list. A row that fails the test is labeled "not native on Shopify (your decision)"; a
+          pattern we can't map at all is labeled "Unmapped" (our own label).
         </p>
         <p>
           ProductCart stores keep their catalog in different folders (for example
           <code>/store/pc/</code>, <code>/eshop/pc/</code>, <code>/productcart/pc/</code> or
           <code>/shop/pc/</code>). Shopify's built-in redirects can't start from /shop paths, so if
-          your store uses <code>/shop/…</code>, those path-only URLs are marked edge-only (your
-          decision) and any query-string URLs stay unmapped.
+          your store uses <code>/shop/…</code>, those URLs are marked "not native on Shopify (your
+          decision)".
+        </p>
+        <p>
+          Shopify also says you can't redirect the fixed paths /products, /collections and
+          /collections/all, or URLs beginning /apps, /application, /cart, /carts, /orders or
+          /services.
         </p>
         <p>
           NetSource’s FAQ notes that some fluctuation in search rankings is expected with any new
@@ -225,7 +235,9 @@
           Admin logins; customer or order data handling; full store migration or data import;
           theme or design work; DNS, SSL, email, or hosting changes; loading redirects on your
           behalf; payment gateway, tax, or shipping setup; ongoing SEO monitoring; additional
-          domains (each extra domain is a separate scope).
+          domains (each extra domain is a separate scope). If NetSource runs your DNS (nameservers
+          ending in productcartlive.com), ask NetSource in writing where your DNS records will live
+          after January 11, 2027; its FAQ doesn't say.
         </p>
         <p>
           Working files are deleted within 30 days of delivery. We use only public pages and what you
@@ -251,7 +263,7 @@
       </section>
 
       <section aria-labelledby="sources-heading">
-        <h2 id="sources-heading">Sources (checked October 8, 2026)</h2>
+        <h2 id="sources-heading">Sources (checked October 8 and 9, 2026)</h2>
         <ul>
           <li>
             <a
@@ -265,6 +277,13 @@
               href="https://help.shopify.com/en/manual/online-store/menus-and-links/url-redirect"
               rel="noopener"
               >Shopify Help — URL redirects</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://help.shopify.com/en/manual/domains/troubleshoot-issues-with-domains"
+              rel="noopener"
+              >Shopify Help — Troubleshooting issues with domains connected to Shopify</a
             >
           </li>
         </ul>
@@ -283,8 +302,8 @@
       <p>PO Box 98, Firth, NE 68358</p>
       <p>© 2026 First Mover Projects. All rights reserved.</p>
       <p class="footer-disclaimer">
-        Not affiliated with or endorsed by NetSource, ProductCart or Shopify. Not affiliated with or
-        endorsed by OpenAI, Zendesk, or Microsoft.
+        Not affiliated with or endorsed by NetSource, ProductCart or Shopify. Names are used only
+        to describe compatibility.
       </p>
     </footer>
   </body>
