@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta
+      name="description"
+      content="A 48-hour async review of your code and item list for OpenAI's Nov 30, 2026 shutdowns (Agent Builder, prompt objects, Evals), with a ranked fix list using tools you already have. No logins."
+    />
+    <title>OpenAI Nov 30, 2026 shutdown: exposure sprint | First Mover Projects</title>
+    <link rel="canonical" href="https://firstmoverprojects.com/openai-nov30-shutdown/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="First Mover Projects" />
+    <meta
+      property="og:title"
+      content="OpenAI Nov 30, 2026 shutdown: exposure sprint | First Mover Projects"
+    />
+    <meta
+      property="og:description"
+      content="A 48-hour async review of your code and item list for OpenAI's Nov 30, 2026 shutdowns (Agent Builder, prompt objects, Evals), with a ranked fix list using tools you already have. No logins."
+    />
+    <meta property="og:url" content="https://firstmoverprojects.com/openai-nov30-shutdown/" />
+    <meta
+      property="og:image"
+      content="https://firstmoverprojects.com/shopify-quickbooks-cleanup/assets/fmp-logo.webp"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="OpenAI Nov 30, 2026 shutdown: exposure sprint | First Mover Projects"
+    />
+    <meta
+      name="twitter:description"
+      content="A 48-hour async review of your code and item list for OpenAI's Nov 30, 2026 shutdowns (Agent Builder, prompt objects, Evals), with a ranked fix list using tools you already have. No logins."
+    />
+    <link rel="stylesheet" href="../shopify-quickbooks-cleanup/styles.css" />
+    <link rel="stylesheet" href="../draft-offers/shared.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand-link" href="https://firstmoverprojects.com/">
+          <img
+            class="brand-logo"
+            src="../shopify-quickbooks-cleanup/assets/fmp-logo.webp"
+            alt="First Mover Projects"
+            width="140"
+            height="140"
+          />
+        </a>
+        <p class="tagline">
+          Advantage for small businesses: AI tools, workflow fixes, business automation &amp;
+          practical problem-solving.
+        </p>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-heading">
+        <p class="hero__badge">OpenAI deprecations</p>
+        <h1 id="hero-heading">OpenAI Nov 30, 2026 shutdown: exposure sprint</h1>
+        <p class="lead">
+          OpenAI has published shutdown dates for Agent Builder, reusable prompt objects, the
+          <code>v1/prompts</code> API, and the Evals dashboard and API. The Assistants API is already
+          sunset. This async exposure sprint maps what in <em>your</em> code and item list depends
+          on those pieces and returns a ranked fix list that uses only tools you already have. It
+          does not implement fixes for you.
+        </p>
+        <p>One site or app per sprint. No logins, calls, or screen-shares.</p>
+      </section>
+
+      <section aria-labelledby="dates-heading">
+        <h2 id="dates-heading">Dates this work rests on</h2>
+        <p>
+          These are OpenAI's published dates. We don't control them, and OpenAI can change them. Not
+          legal advice.
+        </p>
+        <div class="table-wrap">
+          <table class="data-table">
+            <caption>OpenAI's published dates (checked October 8, 2026).</caption>
+            <thead>
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Status / date</th>
+                <th scope="col">Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Agent Builder</td>
+                <td>
+                  Scheduled to shut down <strong>November 30, 2026</strong>. ChatKit remains
+                  available.
+                </td>
+                <td>
+                  <a href="https://developers.openai.com/api/docs/deprecations" rel="noopener"
+                    >OpenAI deprecations</a
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td><code>v1/prompts</code> API and reusable prompt objects</td>
+                <td>Scheduled to shut down <strong>November 30, 2026</strong></td>
+                <td>
+                  <a
+                    href="https://developers.openai.com/api/docs/guides/prompting/migrate-from-prompt-object"
+                    rel="noopener"
+                    >Migrate from prompt object</a
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td>Evals</td>
+                <td>
+                  Existing evals <strong>read-only October 31, 2026</strong>; dashboard and API
+                  scheduled to shut down <strong>November 30, 2026</strong>
+                </td>
+                <td>
+                  <a
+                    href="https://developers.openai.com/cookbook/examples/evaluation/moving-from-openai-evals-to-promptfoo"
+                    rel="noopener"
+                    >Moving from OpenAI Evals to Promptfoo</a
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td>Assistants API</td>
+                <td>
+                  <strong>Already sunset August 26, 2026</strong> — no longer available; replacement is
+                  Responses and Conversations APIs
+                </td>
+                <td>
+                  <a href="https://developers.openai.com/api/docs/assistants/migration" rel="noopener"
+                    >Assistants migration</a
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          OpenAI's migration guide says the Code → Agents SDK export 'does not convert your workflow
+          graph', and not every behavior is certain to transfer unchanged (
+          <a
+            href="https://developers.openai.com/api/docs/guides/agent-builder/migrate-from-agent-builder"
+            rel="noopener"
+            >migration guide</a
+          >). Do not move workflow prompts into dashboard saved prompts (Prompt Objects); keep prompt
+          text in your own code or repo.
+        </p>
+        <p>
+          For Evals: if your Evals dashboard offers a runnable Promptfoo config export for an eval,
+          download it. A results download (JSONL) isn't enough on its own; OpenAI Support says it
+          'only contains the results of a completed evaluation.' OpenAI's current migration guide
+          describes recreating each eval's prompts, test cases and assertions in Promptfoo by hand,
+          so plan a manual rebuild for any eval without a runnable export. Copy out each eval's
+          prompts, test data and grading criteria before existing evals become read-only on October
+          31, 2026.
+        </p>
+      </section>
+
+      <section aria-labelledby="who-for-heading">
+        <h2 id="who-for-heading">Who it is for</h2>
+        <p>
+          Small U.S. businesses and agencies with live chat or automation on Agent Builder, ChatKit
+          hosted-workflow sessions, prompt objects, Evals, or leftover Assistants API code — and
+          code or files you can send for review. Not for teams that have already migrated.
+        </p>
+      </section>
+
+      <section aria-labelledby="inputs-heading">
+        <h2 id="inputs-heading">What you send (email only)</h2>
+        <p>Everything goes to <a href="mailto:firstmoverprojects@gmail.com">firstmoverprojects@gmail.com</a>.</p>
+        <ol>
+          <li>
+            <strong>Item list (max 25 items):</strong> Agent Builder workflow names and
+            <code>wf_</code> IDs, ChatKit embed locations, <code>pmpt_</code> references, eval
+            names, models in use.
+          </li>
+          <li>
+            <strong>Code that calls OpenAI:</strong> Public repo URL or relevant files attached. Include
+            Agents SDK export if you have it. We never take repo access — no invites, deploy keys, or
+            tokens.
+          </li>
+          <li>
+            <strong>Edge cases you know:</strong> Error handling, timeouts, tool calls, dashboard-only
+            prompt edits, and what must behave the same every time.
+          </li>
+          <li>
+            <strong>Tools already in place:</strong> Repo host, CI, hosting, OpenAI plan — so the fix
+            list stays inside what you already have.
+          </li>
+        </ol>
+        <p>
+          Send code with all keys and secrets removed. If we find one, we stop, ask you to rotate it,
+          and delete our copy. We read code only; we do not run, deploy, or change anything in your
+          systems during the sprint. We use AI tools to help review what you send; we don't share it.
+        </p>
+      </section>
+
+      <section aria-labelledby="deliverables-heading">
+        <h2 id="deliverables-heading">What you get</h2>
+        <p>Delivery within <strong>48 hours of complete inputs</strong>.</p>
+        <ul>
+          <li>
+            <strong>Exposure map (CSV and markdown)</strong> — One row per item in what you send:
+            category, what changes and when, with dated OpenAI sources.
+          </li>
+          <li>
+            <strong>Edge-case register</strong> — Non-happy paths found in supplied code or notes.
+          </li>
+          <li>
+            <strong>Ranked fix list</strong> — Tied to Nov 30 risks, the October 31 Evals freeze, or
+            Assistants code that is already broken; ranked by payoff vs effort with owner and due date.
+          </li>
+          <li>
+            <strong>Tools-you-already-have note</strong> — Each fix names existing tooling (your repo,
+            OpenAI account, Agents SDK, Promptfoo CLI, and similar). No new SaaS sign-ups recommended.
+          </li>
+          <li>
+            <strong>Step-2 flag</strong> — Items that may fit a separate fixed-price ChatKit patch
+            (Agent Builder workflow sessions only).
+          </li>
+        </ul>
+        <p>
+          The sprint does not deploy code. Prompt-object, Evals, and Assistants fixes stay on your
+          team’s fix list. ChatKit-on-workflow items may qualify for a follow-on patch you apply
+          yourself with your own keys.
+        </p>
+        <p>
+          <strong>Deadline notes:</strong> No new work after <strong>November 20, 2026</strong>. Jobs
+          accepted after about October 27 cannot meet the October 31 Evals read-only date for that
+          work.
+        </p>
+      </section>
+
+      <section aria-labelledby="out-of-scope-heading">
+        <h2 id="out-of-scope-heading">Out of scope</h2>
+        <p>
+          Dashboard logins; repo access; running or deploying code during the sprint; promises about
+          OpenAI's dates or about outcomes; legal advice; calls or meetings; contact with your clients.
+        </p>
+        <p>We delete what you send within 30 days of delivery.</p>
+      </section>
+
+      <section aria-labelledby="payment-heading">
+        <h2 id="payment-heading">Payment and next step</h2>
+        <p>Paid by Square invoice after you say yes.</p>
+        <p>
+          Email
+          <a href="mailto:firstmoverprojects@gmail.com?subject=OpenAI%20Nov%2030%20exposure%20sprint"
+            >firstmoverprojects@gmail.com</a
+          >
+          when you're ready to discuss fit. Refund terms are in the written scope we send before you
+          pay; see our
+          <a href="https://firstmoverprojects.com/refund-policy.html">refund policy</a>. Our total
+          liability is limited to the fee you paid.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>First Mover Projects</p>
+      <p class="footer-links">
+        Contact:
+        <a href="mailto:firstmoverprojects@gmail.com">firstmoverprojects@gmail.com</a>
+        · <a href="/">Home</a> · <a href="/tools">Tools</a> ·
+        <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> ·
+        <a href="/refund-policy.html">Refund Policy</a>
+      </p>
+      <p>PO Box 98, Firth, NE 68358</p>
+      <p>© 2026 First Mover Projects. All rights reserved.</p>
+      <p class="footer-disclaimer">
+        Not affiliated with or endorsed by OpenAI, NetSource, Shopify, Zendesk, or Microsoft.
+      </p>
+    </footer>
+  </body>
+</html>
