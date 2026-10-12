@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Short plain-English pages for small-business tech and compliance deadlines, each with a source link." />
+    <title>Small-business tech and compliance deadlines | First Mover Projects</title>
+    <link rel="canonical" href="https://firstmoverprojects.com/deadlines/index.html" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand-link" href="https://firstmoverprojects.com/">
+          <img class="brand-logo" src="assets/fmp-logo.webp" alt="First Mover Projects" width="140" height="140" />
+        </a>
+        <p class="tagline">Deadlines for small businesses, in plain English, with source links.</p>
+      </div>
+    </header>
+    <main id="main">
+      <section class="hero" aria-label="Deadlines">
+        <h1>Deadlines for small businesses. In plain words.</h1>
+        <p class="lead">Each page has the date, the official source link and a copy-paste prompt you can give your own AI agent. Always check the official source too.</p>
+        <p>Last checked: Oct 12, 2026.</p>
+      </section>
+
+      <section aria-labelledby="list-h">
+        <h2 id="list-h">Deadlines</h2>
+        <table class="deadline-table">
+          <thead><tr><th scope="col">Date</th><th scope="col">Deadline</th><th scope="col">Source</th></tr></thead>
+          <tbody>
+          <tr class="dated-item" data-date="Oct 13, 2026">
+            <td><strong>Oct 13, 2026</strong><br /><span class="chip">Upcoming</span></td>
+            <td><a href="office-2021-windows-11-24h2-oct-13.html">Office 2021 and Windows 11 24H2 Home/Pro</a><br /><span class="lead">Anyone still on Office 2021 or Windows 11 version 24H2 Home or Pro.</span></td>
+            <td>Source: <a href="https://support.microsoft.com/en-us/office/system-requirements/end-of-support-for-office-2021">Microsoft Support: End of support for Office 2021</a></td>
+          </tr>
+          <tr class="dated-item" data-date="Oct 16, 2026">
+            <td><strong>Oct 16, 2026</strong><br /><span class="chip">Upcoming</span></td>
+            <td><a href="whiteboard-azure-oct-16.html">Old Whiteboards still stored in Azure</a><br /><span class="lead">Work or school Whiteboard users with boards still in the &quot;Not migrated&quot; section.</span></td>
+            <td>Source: <a href="https://support.microsoft.com/en-us/whiteboard/migration-of-whiteboards-from-azure-to-onedrive">Microsoft Support: Migration of Whiteboards from Azure to OneDrive</a></td>
+          </tr>
+          <tr class="dated-item" data-date="Nov 2, 2026">
+            <td><strong>Nov 2, 2026</strong><br /><span class="chip">Upcoming</span></td>
+            <td><a href="amazon-insurance-nov-2.html">Amazon commercial liability insurance rules</a><br /><span class="lead">Amazon sellers. Check which rules apply to your products.</span></td>
+            <td>Source: <a href="https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408">Amazon Seller Central announcement: New Commercial Liability Insurance Requirements effective November 2, 2026</a></td>
+          </tr>
+          </tbody>
+        </table>
+        <p>Dates and sources were read on Oct 12, 2026. Check each official source for the current date.</p>
+        <p class="notadvice">General guidance, not legal or IT advice. Check official sources for your case.</p>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <p>First Mover Projects, PO Box 98, Firth, NE 68358. firstmoverprojects@gmail.com. General guidance, not legal or IT advice. Check official sources for your case. Not affiliated with any vendor named on this page. Names are used only to describe compatibility.</p>
+    </footer>
+    <script>
+      (function () {
+        var b = document.getElementById("copy-prompt");
+        if (b && navigator.clipboard) {
+          b.hidden = false;
+          b.addEventListener("click", function () {
+            navigator.clipboard.writeText(document.getElementById("prompt-text").textContent).then(function () {
+              b.textContent = "Copied";
+            });
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
