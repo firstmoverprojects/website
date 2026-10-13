@@ -1,0 +1,161 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//First Mover Projects//Small Business Deadline Calendar DRAFT//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Small Business Deadline Calendar (vendor changes)
+X-WR-TIMEZONE:America/Chicago
+BEGIN:VEVENT
+UID:whiteboard-azure-20261016@firstmoverprojects.com
+DTSTAMP:20261013T194913Z
+DTSTART;VALUE=DATE:20261016
+DTEND;VALUE=DATE:20261017
+SUMMARY:Old Microsoft Whiteboards still in Azure are deleted
+DESCRIPTION:Who: Work or school accounts with Whiteboards not migrated to
+  OneDrive\nWhat to check: Check the 'Not migrated' section in Whiteboard 
+ and export what you need.\nOfficial source: https://support.microsoft.com
+ /en-us/whiteboard/migration-of-whiteboards-from-azure-to-onedrive\nDetail
+ s: https://firstmoverprojects.com/deadlines/whiteboard-azure-oct-16.html\
+ nGeneral guidance\, not legal\, tax or IT advice. Dates from the official
+  source\; re-check it before you act.
+URL:https://firstmoverprojects.com/deadlines/whiteboard-azure-oct-16.html
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Old Microsoft Whiteboards still in Azure are deleted
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:irs-fire-test-20261101@firstmoverprojects.com
+DTSTAMP:20261013T194913Z
+DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261102
+SUMMARY:IRS FIRE: last day for test files
+DESCRIPTION:Who: Businesses that e-file 1099s themselves through FIRE\nWh
+ at to check: Check who files your 1099s and which system they use.\nOffic
+ ial source: https://www.irs.gov/e-file-providers/filing-information-retur
+ ns-electronically-fire\nDetails: https://firstmoverprojects.com/deadlines
+ /irs-fire-retirement-nov-19.html\nGeneral guidance\, not legal\, tax or I
+ T advice. Dates from the official source\; re-check it before you act.
+URL:https://firstmoverprojects.com/deadlines/irs-fire-retirement-nov-19.h
+ tml
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:IRS FIRE: last day for test files
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:amazon-insurance-20261102@firstmoverprojects.com
+DTSTAMP:20261013T194913Z
+DTSTART;VALUE=DATE:20261102
+DTEND;VALUE=DATE:20261103
+SUMMARY:Amazon commercial liability insurance changes start
+DESCRIPTION:Who: Amazon sellers in categories with enhanced safety listin
+ g requirements\; sellers based in Mainland China\nWhat to check: Check wh
+ ether your category is covered and whether your policy is on file with Am
+ azon.\nOfficial source: https://sellercentral.amazon.com/seller-forums/di
+ scussions/t/287d5c33-8278-4802-ba69-2f58f7dda408\nDetails: https://firstm
+ overprojects.com/deadlines/amazon-insurance-nov-2.html\nGeneral guidance\
+ , not legal\, tax or IT advice. Dates from the official source\; re-check
+  it before you act.
+URL:https://firstmoverprojects.com/deadlines/amazon-insurance-nov-2.html
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Amazon commercial liability insurance changes start
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:zenbusiness-deposits-20261103@firstmoverprojects.com
+DTSTAMP:20261013T194913Z
+DTSTART;VALUE=DATE:20261103
+DTEND;VALUE=DATE:20261104
+SUMMARY:ZenBusiness Banking: deposits stop
+DESCRIPTION:Who: ZenBusiness Banking account holders\nWhat to check: Chec
+ k everything that pays into the account and send new bank details.\nOffic
+ ial source: https://help.zenbusiness.com/zenbusiness-banking/banking-clos
+ ure-faq\nDetails: https://firstmoverprojects.com/deadlines/zenbusiness-ba
+ nking-closure.html\nGeneral guidance\, not legal\, tax or IT advice. Date
+ s from the official source\; re-check it before you act.
+URL:https://firstmoverprojects.com/deadlines/zenbusiness-banking-closure.
+ html
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:ZenBusiness Banking: deposits stop
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:irs-fire-tcc-20261109@firstmoverprojects.com
+DTSTAMP:20261013T194913Z
+DTSTART;VALUE=DATE:20261109
+DTEND;VALUE=DATE:20261110
+SUMMARY:IRS FIRE: last day to change IR Applications for TCC
+DESCRIPTION:Who: Businesses that file through FIRE\nWhat to check: Check 
+ whether an IRIS Application for TCC is started (the IRS says current FIRE
+  users must complete a separate IRIS Application for TCC).\nOfficial sour
+ ce: https://www.irs.gov/e-file-providers/filing-information-returns-elect
+ ronically-fire\nDetails: https://firstmoverprojects.com/deadlines/irs-fir
+ e-retirement-nov-19.html\nGeneral guidance\, not legal\, tax or IT advice
+ . Dates from the official source\; re-check it before you act.
+URL:https://firstmoverprojects.com/deadlines/irs-fire-retirement-nov-19.h
+ tml
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:IRS FIRE: last day to change IR Applications for TCC
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:irs-fire-last-20261119@firstmoverprojects.com
+DTSTAMP:20261013T194913Z
+DTSTART:20261119T190000Z
+DTEND:20261119T200000Z
+SUMMARY:IRS FIRE: last day to file information returns (3 p.m. ET)
+DESCRIPTION:Who: Businesses that file 1099s through FIRE\nWhat to check: 
+ Check for open corrections or late returns and ask your provider if they 
+ are on IRIS.\nOfficial source: https://www.irs.gov/e-file-providers/filin
+ g-information-returns-electronically-fire | https://www.irs.gov/filing/e-
+ file-information-returns-with-iris\nDetails: https://firstmoverprojects.c
+ om/deadlines/irs-fire-retirement-nov-19.html\nGeneral guidance\, not lega
+ l\, tax or IT advice. Dates from the official source\; re-check it before
+  you act.
+URL:https://firstmoverprojects.com/deadlines/irs-fire-retirement-nov-19.h
+ tml
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:IRS FIRE: last day to file information returns (3 p.m. ET)
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:zenbusiness-close-20261130@firstmoverprojects.com
+DTSTAMP:20261013T194913Z
+DTSTART;VALUE=DATE:20261130
+DTEND;VALUE=DATE:20261201
+SUMMARY:ZenBusiness Banking: accounts close
+DESCRIPTION:Who: ZenBusiness Banking account holders\nWhat to check: Chec
+ k balance moved\, payments switched\, debit card charges moved\, mailing 
+ address current.\nOfficial source: https://help.zenbusiness.com/zenbusine
+ ss-banking/banking-closure-faq | https://help.zenbusiness.com/zenbusiness
+ -banking/move-your-money-from-zenbusiness-banking\nDetails: https://first
+ moverprojects.com/deadlines/zenbusiness-banking-closure.html\nGeneral gui
+ dance\, not legal\, tax or IT advice. Dates from the official source\; re
+ -check it before you act.
+URL:https://firstmoverprojects.com/deadlines/zenbusiness-banking-closure.
+ html
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:ZenBusiness Banking: accounts close
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+END:VCALENDAR
