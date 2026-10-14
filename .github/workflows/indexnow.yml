@@ -1,0 +1,32 @@
+# Tell IndexNow about HTML pages changed in a GitHub Pages deploy of main.
+# The key file is public (IndexNow fetches it to prove ownership), so this
+# job uses no secrets and no paid services.
+
+name: IndexNow
+
+on:
+  workflow_run:
+    workflows: ["pages-build-deployment"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout deployed commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          fetch-depth: 2
+
+      - name: Submit changed pages
+        run: |
+          CHANGED=$(git diff --name-only HEAD~1 HEAD -- '*.html' | sed -e 's#^#https://firstmoverprojects.com/#' -e 's#index\.html$##'); if [ -n "$CHANGED" ]; then python3 scripts/indexnow_ping.py $CHANGED; else echo "No page changes; no ping."; fi
