@@ -93,7 +93,8 @@
     shown.forEach(function (it, i) {
       var txt = it.prompt_text;
       if (status(it) === "passed" && it.past_prompt) txt = (today >= D.past_switch && it.past_prompt_late) ? it.past_prompt_late : it.past_prompt;
-      parts.push("--- " + (i + 1) + ". " + it.tool + ": " + it.change + " ---\n" + txt);
+      var hd = it.change.toLowerCase().indexOf(it.tool.toLowerCase()) === 0 ? it.change : it.tool + ": " + it.change;
+      parts.push("--- " + (i + 1) + ". " + hd + " ---\n" + txt);
     });
     parts.push("Do not buy, install, file or change anything, and do not log in to any account. Only list what I should check and I will decide.");
     pre.textContent = parts.join("\n\n");
