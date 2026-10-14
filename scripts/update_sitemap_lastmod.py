@@ -2,7 +2,8 @@
 """Refresh <lastmod> in sitemap.xml from each URL's latest git commit date.
 
 Uses the committer calendar date stored on the commit (YYYY-MM-DD), so the
-result does not depend on the machine's timezone. Standard library only.
+result does not depend on the machine's timezone. Commits with [no-lastmod]
+in the message are skipped. Standard library only.
 
     python3 scripts/update_sitemap_lastmod.py
 """
@@ -51,10 +52,24 @@ def loc_to_repo_path(loc: str) -> Path:
 
 
 def commit_date(path: Path) -> str:
-    """Return YYYY-MM-DD for the latest commit that touched path."""
+    """Return YYYY-MM-DD for the latest content commit that touched path.
+
+    Commits whose message contains [no-lastmod] are skipped.
+    """
     rel = path.relative_to(ROOT).as_posix()
     proc = subprocess.run(
-        ["git", "-C", str(ROOT), "log", "-1", "--format=%cI", "--", rel],
+        [
+            "git",
+            "-C",
+            str(ROOT),
+            "log",
+            "-1",
+            "--format=%cI",
+            "--invert-grep",
+            "--grep=\\[no-lastmod\\]",
+            "--",
+            rel,
+        ],
         check=False,
         capture_output=True,
         text=True,
