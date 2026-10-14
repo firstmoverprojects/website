@@ -623,3 +623,8 @@ pre.prompt {
     padding: var(--space-xs) var(--space-sm);
   }
 }
+
+/* A/B CTA test (ab-cta.js). Cyan = current gradient; green = brand Option 1 #22c55e. */
+html[data-ab-cta="green"] .ab-cta.btn--primary { background: #22c55e; color: #01060b; }
+html[data-ab-cta="green"] .ab-cta.btn--primary:hover { background: #16a34a; filter: none; }
+.ab-cta.btn { margin: 0.25rem 0; }
