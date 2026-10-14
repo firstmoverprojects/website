@@ -27,54 +27,6 @@
     ]
   }
   </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Why do I have duplicate Shopify sales in QuickBooks after the connector migration?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Duplicates usually mean your new connector import start date overlaps days already imported from the legacy OneSaas or Commerce app, a CSV, or a second sync tool. Intuit instructs you to choose a start date that does not overlap previously imported data. Turn off other Shopify-to-QuickBooks sync paths, then confirm each entry is a true duplicate before removing or undoing it in the overlap window (if that period is already closed, check with your accountant first) and only then match bank deposits."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Why doesn't my Shopify payout match my QuickBooks deposit or bank feed?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "A Shopify payout is net of fees, refunds, and adjustments. In QuickBooks, confirm each sale, refund, and fee inside Integration transactions until they are Categorized, assign accounts on Funds in this payout, then confirm the payout to create a Deposit. The deposit total should equal the Shopify net payout and your bank deposit. Compare amounts using Shopify's export payout transactions CSV and your QBO Deposit detail."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Should I Add or Match Shopify deposits in the QuickBooks bank feed?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Use Match. Intuit's Shopify connect help says to confirm transactions from Integration transactions first, then Match the bank deposit to the Deposit created from the payout—not Add—which duplicates income."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Why is Undeposited Funds growing after I connected Shopify?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sales and fees often sit in Undeposited Funds or Payments to deposit until you confirm the payout. If you Match bank deposits before individual Integration transactions are categorized, or you Add bank deposits instead of Match, balances drift. Finish Integration transactions for the payout, confirm the payout deposit, then Match in Bank transactions."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Where do I export Shopify payout details to compare with QuickBooks?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "In Shopify admin, use Finance, then Payouts, open a payout, and Export payout transactions for one deposit. For a date range, export payouts for that range from Shopify Payments; menus vary, so use Shopify's current Payments export help. Compare those totals with your QBO Deposit and bank statement."
-        }
-      }
-    ]
-  }
-  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
