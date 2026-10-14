@@ -1,0 +1,30 @@
+# Tell IndexNow about the URLs in sitemap.xml after GitHub Pages finishes
+# deploying main. The key file is public (IndexNow fetches it to prove
+# ownership), so this job uses no secrets and no paid services.
+
+name: IndexNow
+
+on:
+  workflow_run:
+    workflows: ["pages-build-deployment"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout deployed commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Submit sitemap URLs
+        run: python3 scripts/indexnow_ping.py
