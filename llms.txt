@@ -15,8 +15,6 @@ Run by First Mover Projects, PO Box 98, Firth, NE 68358. Contact: firstmoverproj
 - [Office 2021 and Windows 11 24H2 Home/Pro updates end, Oct 13, 2026](https://firstmoverprojects.com/deadlines/office-2021-windows-11-24h2-oct-13.html): Official source: https://support.microsoft.com/en-us/office/system-requirements/end-of-support-for-office-2021
 
 ## Other pages
-- [Tools and templates](https://firstmoverprojects.com/tools): Offline checklists, kits and CSV review tools sold on Gumroad.
-- [Shopify QuickBooks connector cleanup](https://firstmoverprojects.com/shopify-quickbooks-cleanup/): Fixed-scope cleanup offer and what it does and does not cover.
 - [Shopify QuickBooks connector migration problems](https://firstmoverprojects.com/help/shopify-quickbooks-connector-migration-problems.html): Common problems and checks.
 - [Deadline Finder](https://firstmoverprojects.com/deadlines/finder/): Filter deadlines by the tools you use.
 
