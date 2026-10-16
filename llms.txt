@@ -5,13 +5,13 @@
 Run by First Mover Projects, PO Box 98, Firth, NE 68358. Contact: firstmoverprojects@gmail.com. Not affiliated with any vendor or agency named.
 
 ## Deadlines (upcoming)
-- [Old Microsoft Whiteboards in Azure deleted, Oct 16, 2026](https://firstmoverprojects.com/deadlines/whiteboard-azure-oct-16.html): Work or school Whiteboards not migrated to OneDrive. Official source: https://support.microsoft.com/en-us/whiteboard/migration-of-whiteboards-from-azure-to-onedrive
 - [Amazon commercial liability insurance changes, Nov 2, 2026](https://firstmoverprojects.com/deadlines/amazon-insurance-nov-2.html): Sellers in categories with enhanced safety listing requirements; sellers based in Mainland China. Official source: https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408
 - [ZenBusiness Banking closure, deposits stop Nov 3, accounts close Nov 30, 2026](https://firstmoverprojects.com/deadlines/zenbusiness-banking-closure.html): ZenBusiness Banking account holders. Official source: https://help.zenbusiness.com/zenbusiness-banking/banking-closure-faq
 - [IRS FIRE retirement, last filing day Nov 19, 2026](https://firstmoverprojects.com/deadlines/irs-fire-retirement-nov-19.html): Filers who e-file 1099s through FIRE (also Nov 1 test cutoff, Nov 9 TCC change cutoff). Official source: https://www.irs.gov/e-file-providers/filing-information-returns-electronically-fire
 - [Amazon Ads older Sponsored Ads and DSP reports pages retire, Dec 31, 2026](https://firstmoverprojects.com/deadlines/amazon-ads-legacy-reports-dec-31.html): Amazon advertisers using saved or scheduled reports from the older pages. Official source: https://advertising.amazon.com/resources/whats-new/streamline-campaign-analysis-with-unified-reporting
 
 ## Past
+- [Old Microsoft Whiteboards in Azure deleted, Oct 16, 2026 (just passed)](https://firstmoverprojects.com/deadlines/whiteboard-azure-oct-16.html): Work or school Whiteboards not migrated to OneDrive. Official source: https://support.microsoft.com/en-us/whiteboard/migration-of-whiteboards-from-azure-to-onedrive
 - [Office 2021 and Windows 11 24H2 Home/Pro updates end, Oct 13, 2026](https://firstmoverprojects.com/deadlines/office-2021-windows-11-24h2-oct-13.html): Official source: https://support.microsoft.com/en-us/office/system-requirements/end-of-support-for-office-2021
 
 ## Other pages
