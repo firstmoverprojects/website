@@ -1,4 +1,4 @@
-/* Deadline Finder v1. Vanilla JS, no network calls, no storage. Works without JS: the full list is server-rendered. */
+/* Deadline Finder v1.1. Vanilla JS, no network calls, no storage. Works without JS: the full list is server-rendered. */
 (function () {
   "use strict";
   var el = document.getElementById("finder-data");
@@ -26,8 +26,19 @@
     var st = status(it);
     if (st === "expired") { a.parentNode.removeChild(a); return; }
     if (st !== a.getAttribute("data-status")) {
-      /* status changed after build: hide rather than show stale wording */
-      a.parentNode.removeChild(a); return;
+      /* deadline passed after the build: mark it expired in place, by date */
+      if (st === "passed" && it.past_summary) {
+        var lbl = (it.key_dates.filter(function (k) { return k.date === it.primary_date; })[0] || {}).label || it.primary_date;
+        var chip = a.querySelector(".chip");
+        if (chip) {
+          chip.className = "chip chip--past";
+          chip.textContent = "Expired. Passed on " + lbl + ", what to do now";
+          var desc = chip.nextElementSibling;
+          if (!desc || desc.tagName !== "P" || desc.className) { desc = document.createElement("p"); chip.parentNode.insertBefore(desc, chip.nextSibling); }
+          desc.className = "past-sum"; desc.textContent = it.past_summary;
+        }
+        a.setAttribute("data-status", "passed");
+      } else { a.parentNode.removeChild(a); return; }
     }
     var late = today >= D.past_switch;
     var ps = a.querySelector(".past-sum");
@@ -41,6 +52,8 @@
     });
     var act = a.querySelector(".act");
     var future = it.key_dates.filter(function (k) { return k.date >= today; });
+    var nx = a.querySelector(".chip:not(.chip--past)");
+    if (nx && future.length) nx.textContent = "Next: " + future[0].label;
     if (act && future.length) {
       act.hidden = false;
       act.querySelector("button").addEventListener("click", function () { ics(it, future); });
