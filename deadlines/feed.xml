@@ -6,13 +6,20 @@
   <atom:link href="https://firstmoverprojects.com/deadlines/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Dated vendor and system changes small businesses should check, each with its official source. General guidance, not legal, tax or IT advice.</description>
   <language>en-us</language>
-  <lastBuildDate>Tue, 13 Oct 2026 20:00:00 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 20 Oct 2026 14:00:00 +0000</lastBuildDate>
   <item>
     <title>Oct 16: Old Microsoft Whiteboards still in Azure are deleted</title>
     <link>https://firstmoverprojects.com/deadlines/whiteboard-azure-oct-16.html</link>
     <guid isPermaLink="false">whiteboard-azure-20261016@firstmoverprojects.com</guid>
     <pubDate>Tue, 13 Oct 2026 20:00:00 +0000</pubDate>
     <description><![CDATA[<p><b>Date:</b> Oct 16, 2026<br/><b>Who:</b> Work or school accounts with Whiteboards not migrated to OneDrive<br/><b>What to check:</b> Check the &#x27;Not migrated&#x27; section in Whiteboard and export what you need.<br/><b>Official source:</b> <a href="https://support.microsoft.com/en-us/whiteboard/migration-of-whiteboards-from-azure-to-onedrive">https://support.microsoft.com/en-us/whiteboard/migration-of-whiteboards-from-azure-to-onedrive</a></p><p>General guidance, not legal, tax or IT advice.</p>]]></description>
+  </item>
+  <item>
+    <title>Nov 1: EU product identifiers become mandatory for low-value e-commerce imports</title>
+    <link>https://firstmoverprojects.com/deadlines/eu-product-identifiers-nov-1.html</link>
+    <guid isPermaLink="false">eu-product-identifiers-20261101@firstmoverprojects.com</guid>
+    <pubDate>Tue, 20 Oct 2026 14:00:00 +0000</pubDate>
+    <description><![CDATA[<p><b>Date:</b> Nov 1, 2026<br/><b>Who:</b> Sellers outside the EU who ship online orders up to EUR 150 to EU consumers, and whoever declares those parcels<br/><b>What to check:</b> Check that every product variant has a unique code and a manufacturer code, and ask your carrier or customs agent what product data they need.<br/><b>Official source:</b> <a href="https://taxation-customs.ec.europa.eu/news/guidance-and-legal-text-temporary-flat-fee-low-value-imports-which-will-apply-until-1-july-2028-2026-06-08_en">https://taxation-customs.ec.europa.eu/news/guidance-and-legal-text-temporary-flat-fee-low-value-imports-which-will-apply-until-1-july-2028-2026-06-08_en</a></p><p>General guidance, not legal, tax or IT advice.</p>]]></description>
   </item>
   <item>
     <title>Nov 1: IRS FIRE: last day for test files</title>
