@@ -27,6 +27,32 @@ TRIGGER:-P7D
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:eu-product-identifiers-20261101@firstmoverprojects.com
+DTSTAMP:20261020T140000Z
+DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261102
+SUMMARY:EU product identifiers become mandatory for low-value e-commerce im
+ ports
+DESCRIPTION:Who: Sellers outside the EU who ship online orders up to EUR 15
+ 0 to EU consumers\, and whoever declares those parcels\nWhat to check: Che
+ ck that every product variant has a unique code and a manufacturer code\, 
+ and ask your carrier or customs agent what product data they need.\nOffici
+ al source: https://taxation-customs.ec.europa.eu/news/guidance-and-legal-t
+ ext-temporary-flat-fee-low-value-imports-which-will-apply-until-1-july-202
+ 8-2026-06-08_en\nDetails: https://firstmoverprojects.com/deadlines/eu-prod
+ uct-identifiers-nov-1.html\nGeneral guidance\, not legal\, tax or IT advic
+ e. Dates from the official source\; re-check it before you act.
+URL:https://firstmoverprojects.com/deadlines/eu-product-identifiers-nov-1.h
+ tml
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:EU product identifiers become mandatory for low-value e-commerc
+ e imports
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:irs-fire-test-20261101@firstmoverprojects.com
 DTSTAMP:20261013T194913Z
 DTSTART;VALUE=DATE:20261101
