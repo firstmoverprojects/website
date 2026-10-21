@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Custom GPT Retirement Checker (free, runs in your browser)</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1b1f24;background:#f6f7f9}
+main{max-width:860px;margin:0 auto;padding:16px}h1{font-size:1.6rem;margin:.4em 0}h2{font-size:1.2rem;margin:1.2em 0 .4em}
+.card{background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:16px;margin:12px 0}
+.cd{display:flex;flex-wrap:wrap;gap:12px}.cd>div{flex:1 1 240px;background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:12px}
+.big{font-size:1.5rem;font-weight:700}.muted{color:#5a636e;font-size:.9rem}label{display:block;font-weight:600;margin-top:12px}
+textarea{width:100%;min-height:110px;font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;padding:8px;border:1px solid #b9c0c8;border-radius:6px}
+.chk label{font-weight:400;display:flex;gap:8px;align-items:flex-start;margin-top:6px}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:0;background:#1f5fbf;color:#fff;cursor:pointer;margin-top:12px}
+button.sec{background:#e4e8ee;color:#1b1f24}
+#out li{margin:8px 0}.tag{display:inline-block;font-size:.75rem;padding:1px 7px;border-radius:9px;margin-right:6px;background:#e4e8ee}
+.warn{background:#fde8e6;color:#8a1c12}.ok{background:#e3f4e6;color:#1d6b2c}q{font-style:italic}
+.cta{background:#fff8e6;border-color:#f0d58a}a{color:#1f5fbf}
+</style>
+</head>
+<body>
+<main>
+<h1>Custom GPT Retirement Checker</h1>
+<p>Paste your custom GPT's settings and get a migration checklist. <strong>Free, no sign-up, nothing uploaded:</strong> everything runs in this page and nothing you paste leaves your browser.</p>
+
+<section class="cd" aria-label="Countdowns">
+ <div id="cd-dec11"><div class="muted">Standard scheduled retirement</div><div class="big" data-k="t">Dec 11, 2026</div><div data-k="v"></div><div class="muted">OpenAI says: <q>Custom GPTs are scheduled to retire on Dec 11, 2026.</q> [1]</div></div>
+ <div id="cd-oct26"><div class="muted">Affected Enterprise workspaces (planned)</div><div class="big" data-k="t">Oct 26, 2026</div><div data-k="v"></div><div class="muted">Creation of new custom GPTs ends. OpenAI says: <q>This creation freeze does not prevent edits to existing, unmigrated GPTs.</q> [1]</div></div>
+</section>
+<p class="muted">Countdowns run to the start of each date in your device's time zone; OpenAI's FAQ gives dates only. OpenAI notes that <q>the dates are subject to change</q> and says to follow the notice for your own account or workspace. [1]</p>
+
+<section class="card">
+<h2>1. Paste your GPT settings</h2>
+<label for="f-instr">Instructions</label>
+<textarea id="f-instr" placeholder="Paste the GPT's Instructions box"></textarea>
+<label for="f-actions">Actions (OpenAPI schema, JSON or YAML)</label>
+<textarea id="f-actions" placeholder='{"openapi":"3.1.0","paths":{...}}'></textarea>
+<label for="f-knowledge">Knowledge files (one file name per line)</label>
+<textarea id="f-knowledge" placeholder="pricing.pdf&#10;faq.docx"></textarea>
+<label for="f-caps">Capabilities / connected apps (paste or describe)</label>
+<textarea id="f-caps" placeholder="Web search, Canvas, Image generation, Code interpreter, connected apps..."></textarea>
+<div class="chk">
+ <label><input type="checkbox" id="c-created"> I created this GPT (I'm not only a user of it)</label>
+ <label><input type="checkbox" id="c-drafts"> It has drafts or unpublished edits</label>
+ <label><input type="checkbox" id="c-shared"> Other people use it</label>
+ <label><input type="checkbox" id="c-ent"> It was created in an Enterprise workspace</label>
+</div>
+<button id="go" type="button">Build my checklist</button> <button id="clear" class="sec" type="button">Clear</button>
+</section>
+
+<section class="card" id="results" hidden>
+<h2>2. Your migration checklist</h2>
+<p id="summary"></p>
+<ol id="out"></ol>
+</section>
+
+<section class="card cta">
+<p>Optional: track every GPT, save before-and-after answers and print a readiness report with an offline workbook. It does not migrate anything or connect to ChatGPT; you run the migration in your own account.</p>
+<p><a id="cta" href="https://firstmoverprojects.gumroad.com/l/iqnssc?utm_source=firstmoverprojects&amp;utm_medium=checker&amp;utm_campaign=gpt-retirement" rel="noopener noreferrer" target="_blank">Get the $39 Plugin Migration Planner on Gumroad</a></p>
+</section>
+
+<section class="card">
+<h2>Sources</h2>
+<ol><li id="src1"><a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq" rel="noopener noreferrer" target="_blank">OpenAI Help Center: Custom GPT retirement and migration FAQ</a>, as quoted on <a href="https://firstmoverprojects.com/deadlines/custom-gpt-retirement-dec-11.html" rel="noopener noreferrer" target="_blank">First Mover Projects: ChatGPT custom GPTs retire Dec 11, 2026</a> (checked Oct 21, 2026).</li></ol>
+<p class="muted">General guidance, not legal, tax or IT advice. Check OpenAI's own FAQ and the notice in your account or workspace for your case. No promise is made that any GPT will migrate successfully or behave the same after migration. This checker only reads the text you paste; it cannot see your GPT. OpenAI, ChatGPT and GPTs are trademarks of OpenAI, named only to describe what this page covers. First Mover Projects is independent and is not affiliated with, endorsed or sponsored by OpenAI.</p>
+</section>
+</main>
+<script>
+(function(){
+"use strict";
+var MAX=500000;
+var DEADLINES=[{id:"cd-dec11",y:2026,m:11,d:11},{id:"cd-oct26",y:2026,m:9,d:26}];
+function nowMs(){return (window.__CHECKER_NOW__!=null)?window.__CHECKER_NOW__:Date.now();}
+function fmt(ms){var s=Math.floor(ms/1000),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),x=s%60;
+ return d+" days "+h+" h "+m+" min "+x+" s left";}
+function tick(){DEADLINES.forEach(function(D){var t=new Date(D.y,D.m,D.d).getTime(),left=t-nowMs(),el=document.querySelector("#"+D.id+" [data-k=v]");
+ el.textContent=left>0?fmt(left):"This date has passed. Follow the notice in your own account or workspace.";
+ el.setAttribute("data-left",String(Math.max(0,Math.floor(left/1000))));});}
+window.__checkerTick=tick;tick();setInterval(tick,1000);
+
+function clip(s){s=String(s==null?"":s);return s.length>MAX?s.slice(0,MAX):s;}
+function parseActions(raw){
+ raw=clip(raw).trim();var r={present:false,ops:0,servers:[],auth:false,format:"none",valid:false};
+ if(!raw)return r;r.present=true;var obj=null;
+ try{obj=JSON.parse(raw);}catch(e){obj=null;}
+ if(obj&&typeof obj==="object"){r.format="json";
+  if(obj.paths&&typeof obj.paths==="object"){r.valid=true;Object.keys(obj.paths).forEach(function(p){var v=obj.paths[p];if(v&&typeof v==="object")Object.keys(v).forEach(function(k){if(/^(get|post|put|patch|delete|head|options|trace)$/i.test(k))r.ops++;});});}
+  if(Array.isArray(obj.servers))obj.servers.forEach(function(s){if(s&&typeof s.url==="string")r.servers.push(s.url.slice(0,200));});
+  r.auth=!!(obj.security||(obj.components&&obj.components.securitySchemes));
+ }else{
+  if(/^\s*(openapi|swagger)\s*:/m.test(raw)||/^\s*paths\s*:/m.test(raw)){r.format="yaml";r.valid=true;}else r.format="text";
+  var m=raw.match(/^\s+(get|post|put|patch|delete|head|options|trace)\s*:/gim);r.ops=m?m.length:0;
+  var u=raw.match(/url\s*:\s*["']?(https?:\/\/[^\s"']+)/gi);if(u)u.slice(0,20).forEach(function(x){r.servers.push(x.replace(/url\s*:\s*["']?/i,"").slice(0,200));});
+  r.auth=/securitySchemes|security\s*:/i.test(raw);
+ }
+ return r;}
+function parseList(raw){return clip(raw).split(/\r?\n|,/).map(function(s){return s.trim();}).filter(function(s){return s.length>0;}).slice(0,1000);}
+window.__checkerParse={actions:parseActions,list:parseList};
+
+function build(){
+ var instr=clip(document.getElementById("f-instr").value).trim();
+ var A=parseActions(document.getElementById("f-actions").value);
+ var K=parseList(document.getElementById("f-knowledge").value);
+ var capsRaw=clip(document.getElementById("f-caps").value).trim();
+ var created=document.getElementById("c-created").checked,drafts=document.getElementById("c-drafts").checked,shared=document.getElementById("c-shared").checked,ent=document.getElementById("c-ent").checked;
+ var items=[];
+ function add(id,kind,text,quote){items.push({id:id,kind:kind,text:text,quote:quote});}
+ if(!created){add("user-only","info","If you only use someone else's GPT, you do not need to migrate it. Check the notice on the GPT and the creator's guidance about a replacement.","OpenAI says you do not need to migrate a GPT you only use, and permission to use it does not let you migrate it yourself.");}
+ add("account","todo","Note which account or workspace this GPT was created in. Migrate from that account or workspace.","What counts is the account or workspace where the GPT was created.");
+ if(instr){add("instructions","ok","Instructions found ("+instr.length.toLocaleString("en-US")+" characters). Under the planned workflow they become a skill in the new plugin. After migrating, check the plugin selects the right skill and follows your instructions.","a GPT's instructions become a skill in the new plugin");}
+ if(K.length){add("knowledge","ok","Knowledge files found ("+K.length+"). Under the planned workflow they are copied into the plugin's reference files. After migrating, check the plugin uses the expected reference material.","its knowledge files are copied into the plugin's reference files");}
+ if(A.present){add("actions","warn","Custom actions found"+(A.ops?" ("+A.ops+" operation"+(A.ops===1?"":"s")+")":"")+(A.valid?"":" (could not read this as an OpenAPI schema; treat it as custom actions anyway)")+". These do not transfer through the migration workflow. Plan to rebuild the connection; that may need an available app or a custom MCP server."+(A.servers.length?" Servers in your schema: "+A.servers.slice(0,5).join(", ")+".":""),"custom actions \u201cdo not transfer through the migration workflow\u201d, and rebuilding the connection may need an available app or a custom MCP server.");}
+ if(capsRaw){add("apps","todo","Capabilities / connected apps listed. Under the planned workflow connected apps are added as apps. After migrating, check the plugin has the tools and integrations your workflow needs.","its connected apps are added as apps");}
+ add("model","warn","The GPT's selected model does not carry over. Re-check answers on the plugin.","Some things do not carry over: custom actions, the GPT's selected model, its sharing settings, and drafts or unpublished edits.");
+ if(drafts){add("drafts","warn","You have drafts or unpublished edits. Finish and publish essential edits first: migration uses the latest published version. Publishing does not require sharing it publicly.","Migration uses the GPT's latest published version. Drafts and unpublished edits do not transfer.");}
+ else{add("publish","todo","Make sure every edit you need is published before migrating.","Migration uses the GPT's latest published version. Drafts and unpublished edits do not transfer.");}
+ if(ent){add("enterprise","warn","Enterprise workspace: creation of new custom GPTs is planned to end Oct 26, 2026 for affected workspaces. Publish any drafts you need to migrate before then.","Publish any drafts you need to migrate before this cutoff; public sharing is not required.");}
+ add("prompts","todo","Save a few familiar prompts, plus at least one harder case, and keep the GPT's current answers so you can compare.","Save a few familiar prompts, plus at least one harder case, and keep the GPT's current answers so you can compare.");
+ add("migrate","todo","When migration is available for your account, go to My GPTs, select Migrate to plugin, and follow the instructions. If you don't see it, check the notice in your account and that you are in the workspace where the GPT was created.","OpenAI says migration may not be available to your account yet, or plugin access may be disabled.");
+ add("test","todo","Run the same prompts on the plugin: right skill, expected reference material, complete answers or files in the required format.","checking that it selects the right skill and follows your instructions, uses the expected reference material, produces complete answers or files in the required format");
+ add("share",shared?"warn":"todo","The new plugin starts private"+(shared?" and migration does not give your existing users access. Share it with them and ask one to confirm they can install and use it.":". Share it with anyone who needs it."),"it starts private and migration does not give existing users access");
+ var ol=document.getElementById("out");ol.textContent="";
+ items.forEach(function(it){var li=document.createElement("li");li.setAttribute("data-id",it.id);var t=document.createElement("span");t.className="tag "+(it.kind==="warn"?"warn":it.kind==="ok"?"ok":"");t.textContent=it.kind==="warn"?"Action needed":it.kind==="ok"?"Carries over (planned)":it.kind==="info"?"Note":"To do";
+  li.appendChild(t);li.appendChild(document.createTextNode(it.text+" "));var s=document.createElement("span");s.className="muted";s.textContent="Source [1]: \u201c"+it.quote+"\u201d";li.appendChild(s);ol.appendChild(li);});
+ var found=[instr?"instructions":null,K.length?K.length+" knowledge file(s)":null,A.present?"custom actions":null,capsRaw?"capabilities/apps":null].filter(Boolean);
+ document.getElementById("summary").textContent=found.length?"Found: "+found.join(", ")+". "+items.length+" checklist items.":"Nothing pasted yet, so this is the general checklist ("+items.length+" items). Paste your settings for a tailored list.";
+ var r=document.getElementById("results");r.hidden=false;return items.map(function(i){return i.id;});}
+window.__checkerBuild=build;
+document.getElementById("go").addEventListener("click",build);
+document.getElementById("clear").addEventListener("click",function(){["f-instr","f-actions","f-knowledge","f-caps"].forEach(function(i){document.getElementById(i).value="";});["c-created","c-drafts","c-shared","c-ent"].forEach(function(i){document.getElementById(i).checked=false;});document.getElementById("results").hidden=true;});
+})();
+</script>
+</body>
+</html>
