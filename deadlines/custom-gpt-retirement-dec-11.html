@@ -60,6 +60,63 @@
  ]
 }
 </script>
+  <script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "dateModified": "2026-10-21",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "When do ChatGPT custom GPTs retire?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "OpenAI's FAQ says: \"Custom GPTs are scheduled to retire on Dec 11, 2026.\" Affected Enterprise workspaces with a qualified, approved deferral retire Feb 11, 2027. OpenAI notes that the dates are subject to change."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is there an earlier date for Enterprise workspaces?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. For affected Enterprise workspaces, creation of new custom GPTs is planned to end Oct 26, 2026. OpenAI says this creation freeze does not prevent edits to existing, unmigrated GPTs."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What happens to my custom GPT after Dec 11, 2026?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "OpenAI says custom GPTs and their GPT pages become inaccessible at the applicable retirement date. Your existing conversations with custom GPTs will remain accessible after retirement."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What carries over when I migrate a GPT to a plugin?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Under OpenAI's planned migration workflow, instructions become a skill, connected apps are added as apps, and knowledge files are copied into the plugin's reference files. Custom actions, the selected model, sharing settings, and drafts or unpublished edits do not carry over."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Do I need to migrate a GPT I only use?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. OpenAI says you do not need to migrate a GPT you only use, and permission to use it does not let you migrate it yourself. Check the creator's guidance about a replacement."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why don't I see Migrate to plugin?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "OpenAI says migration may not be available to your account yet, or plugin access may be disabled. Check the notice in your account and make sure you are in the account or workspace where the GPT was created."
+   }
+  }
+ ]
+}
+</script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -76,6 +133,9 @@
       <section class="hero" aria-label="Deadline">
         <p><span class="chip">Dec 11, 2026</span> <span class="chip">Enterprise: Oct 26, 2026 (planned)</span></p>
         <h1>ChatGPT custom GPTs are scheduled to retire (Dec 11, 2026)</h1>
+        <p class="answer" id="answer">OpenAI says ChatGPT custom GPTs are scheduled to retire on Dec 11, 2026, and creators can migrate each GPT to a plugin when migration is available for their account. For affected Enterprise workspaces, creation of new custom GPTs is planned to end Oct 26, 2026. Custom actions, the selected model, sharing settings and unpublished edits do not carry over, so check those first.</p>
+        <p id="who"><strong>Who it's for:</strong> anyone who created a custom GPT or relies on one for work, on any ChatGPT plan, including admins of Enterprise workspaces.</p>
+        <p class="updated" id="updated"><strong>Last updated Oct 21, 2026.</strong> Current dates: Oct 26, 2026 (planned, affected Enterprise workspaces), Dec 11, 2026 (standard retirement), Feb 11, 2027 (only with an approved deferral). Dates are subject to change.</p>
         <p class="lead">Anyone who created a custom GPT or relies on one for work, on any ChatGPT plan. Affected Enterprise workspaces have an earlier planned date: creation of new custom GPTs ends Oct 26, 2026.</p>
         <p>OpenAI&#x27;s FAQ says: &quot;Custom GPTs are scheduled to retire on Dec 11, 2026.&quot; Creators can migrate a GPT to a plugin when migration is available for their account. The free steps, sources and a checklist prompt are below.</p>
       </section>
@@ -115,6 +175,47 @@
         <p>OpenAI says migration may not be available to your account yet, or plugin access may be disabled. Check the notice in your account and make sure you are in the account or workspace where the GPT was created. In an Enterprise workspace, the GPT&#x27;s creator or a workspace admin can migrate it when migration is available and plugins are enabled.</p>
       </section>
 
+      <section aria-labelledby="cmp-h" id="compare">
+        <h2 id="cmp-h">Compare</h2>
+<table>
+<caption>Before and after migration (OpenAI's planned workflow)</caption>
+<thead><tr><th scope="col">In your custom GPT</th><th scope="col">In the new plugin</th></tr></thead>
+<tbody>
+<tr><td>Instructions</td><td>Become a skill</td></tr>
+<tr><td>Connected apps</td><td>Added as apps</td></tr>
+<tr><td>Knowledge files</td><td>Copied into reference files</td></tr>
+<tr><td>Custom actions</td><td>Do not transfer; may need an available app or a custom MCP server</td></tr>
+<tr><td>Selected model</td><td>Does not carry over</td></tr>
+<tr><td>Sharing settings</td><td>Do not carry over; the plugin starts private</td></tr>
+<tr><td>Drafts and unpublished edits</td><td>Do not transfer; migration uses the latest published version</td></tr>
+<tr><td>The original GPT</td><td>Stays usable until retirement but becomes read-only</td></tr>
+</tbody></table>
+<table>
+<caption>Your options</caption>
+<thead><tr><th scope="col">Option</th><th scope="col">Cost</th><th scope="col">What it does</th></tr></thead>
+<tbody>
+<tr><td>OpenAI's FAQ and the steps on the deadline page</td><td>Free</td><td>Official dates and the migration steps</td></tr>
+<tr><td>Custom GPT Retirement Checker</td><td>Free</td><td>Paste one GPT's settings, get a checklist; runs in your browser, nothing uploaded</td></tr>
+<tr><td>Plugin Migration Planner</td><td>$39</td><td>Offline workbook to track every GPT and before-and-after answers; does not migrate anything</td></tr>
+</tbody></table>
+      </section>
+
+      <section aria-labelledby="faq-h" id="faq">
+<h2 id="faq-h">FAQ</h2>
+<h3>When do ChatGPT custom GPTs retire?</h3>
+<p>OpenAI's FAQ says: "Custom GPTs are scheduled to retire on Dec 11, 2026." Affected Enterprise workspaces with a qualified, approved deferral retire Feb 11, 2027. OpenAI notes that the dates are subject to change.</p>
+<h3>Is there an earlier date for Enterprise workspaces?</h3>
+<p>Yes. For affected Enterprise workspaces, creation of new custom GPTs is planned to end Oct 26, 2026. OpenAI says this creation freeze does not prevent edits to existing, unmigrated GPTs.</p>
+<h3>What happens to my custom GPT after Dec 11, 2026?</h3>
+<p>OpenAI says custom GPTs and their GPT pages become inaccessible at the applicable retirement date. Your existing conversations with custom GPTs will remain accessible after retirement.</p>
+<h3>What carries over when I migrate a GPT to a plugin?</h3>
+<p>Under OpenAI's planned migration workflow, instructions become a skill, connected apps are added as apps, and knowledge files are copied into the plugin's reference files. Custom actions, the selected model, sharing settings, and drafts or unpublished edits do not carry over.</p>
+<h3>Do I need to migrate a GPT I only use?</h3>
+<p>No. OpenAI says you do not need to migrate a GPT you only use, and permission to use it does not let you migrate it yourself. Check the creator's guidance about a replacement.</p>
+<h3>Why don&#x27;t I see Migrate to plugin?</h3>
+<p>OpenAI says migration may not be available to your account yet, or plugin access may be disabled. Check the notice in your account and make sure you are in the account or workspace where the GPT was created.</p>
+</section>
+
       <section aria-labelledby="src-h">
         <h2 id="src-h">Sources</h2>
         <p><a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq">OpenAI Help Center: Custom GPT retirement and migration FAQ</a></p>
@@ -139,7 +240,7 @@ When you state any deadline or date, quote the exact line from OpenAI's own Help
       <p class="kit-link"><a href="/tools/custom-gpt-retirement-checker/">Free: check your custom GPT in your browser (no sign-up)</a></p>
       <p class="kit-link"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/iqnssc?utm_source=firstmoverprojects&amp;utm_medium=deadline_page&amp;utm_campaign=gpt-retirement">Get the $39 Plugin Migration Planner on Gumroad</a></p>
 
-      <p class="related">More: <a href="/deadlines/">All deadlines</a> · <a href="finder/">Deadline Finder</a> · <a href="/tools/">Tools and kits</a></p>
+      <p class="related">More: <a href="/tools/custom-gpt-retirement-checker/">Custom GPT Retirement Checker</a> · <a href="/deadlines/irs-fire-retirement-nov-19.html">IRS FIRE retirement (Nov 19)</a> · <a href="/deadlines/amazon-ads-legacy-reports-dec-31.html">Amazon Ads legacy reports (Dec 31)</a> · <a href="/deadlines/">All deadlines</a> · <a href="finder/">Deadline Finder</a> · <a href="/tools/">Tools and kits</a></p>
 
       <section aria-labelledby="na-h">
         <h2 id="na-h">Not advice</h2>
