@@ -27,6 +27,29 @@ TRIGGER:-P7D
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:openai-custom-gpt-creation-20261026@firstmoverprojects.com
+DTSTAMP:20261021T082000Z
+DTSTART;VALUE=DATE:20261026
+DTEND;VALUE=DATE:20261027
+SUMMARY:ChatGPT Enterprise: creation of new custom GPTs planned to end
+DESCRIPTION:Who: Affected ChatGPT Enterprise workspaces (planned date\; fol
+ low your workspace notice)\nWhat to check: Publish any drafts you need to 
+ migrate before this cutoff. Edits to existing\, unmigrated GPTs are not pr
+ evented.\nOfficial source: https://help.openai.com/en/articles/20001519-cu
+ stom-gpt-retirement-and-migration-faq\nDetails: https://firstmoverprojects
+ .com/deadlines/custom-gpt-retirement-dec-11.html\nGeneral guidance\, not l
+ egal\, tax or IT advice. Dates from the official source\; re-check it befo
+ re you act.
+URL:https://firstmoverprojects.com/deadlines/custom-gpt-retirement-dec-11.h
+ tml
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:ChatGPT Enterprise: creation of new custom GPTs planned to end
+TRIGGER:-P2D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:eu-product-identifiers-20261101@firstmoverprojects.com
 DTSTAMP:20261020T140000Z
 DTSTART;VALUE=DATE:20261101
@@ -181,6 +204,29 @@ TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:ZenBusiness Banking: accounts close
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:openai-custom-gpt-retirement-20261211@firstmoverprojects.com
+DTSTAMP:20261021T082000Z
+DTSTART;VALUE=DATE:20261211
+DTEND;VALUE=DATE:20261212
+SUMMARY:ChatGPT custom GPTs scheduled to retire
+DESCRIPTION:Who: Anyone who created or relies on a custom GPT (Enterprise w
+ orkspaces with an approved deferral: Feb 11\, 2027)\nWhat to check: List y
+ our GPTs\, publish essential edits\, migrate the ones you created to plugi
+ ns and test them. Custom actions do not transfer.\nOfficial source: https:
+ //help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration
+ -faq\nDetails: https://firstmoverprojects.com/deadlines/custom-gpt-retirem
+ ent-dec-11.html\nGeneral guidance\, not legal\, tax or IT advice. Dates fr
+ om the official source\; re-check it before you act.
+URL:https://firstmoverprojects.com/deadlines/custom-gpt-retirement-dec-11.h
+ tml
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:ChatGPT custom GPTs scheduled to retire
 TRIGGER:-P7D
 END:VALARM
 END:VEVENT
