@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Microsoft says EWS in Exchange Online is fully disabled from Apr 1, 2027, and the phased switch-off rolls out from Oct 2026. Free checks, sources, prompt." />
+    <title>Exchange Online EWS Fully Disabled Apr 1, 2027: Phased Switch-Off</title>
+    <link rel="canonical" href="https://firstmoverprojects.com/deadlines/exchange-online-ews-retirement-apr-1.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://firstmoverprojects.com/deadlines/exchange-online-ews-retirement-apr-1.html" />
+    <meta property="og:title" content="Exchange Online EWS Fully Disabled Apr 1, 2027: Phased Switch-Off" />
+    <meta property="og:description" content="Microsoft says EWS in Exchange Online is fully disabled from Apr 1, 2027, and the phased switch-off rolls out from Oct 2026. Free checks, sources, prompt." />
+    <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "Exchange Online EWS is fully disabled from Apr 1, 2027 (phased switch-off from Oct 2026)",
+   "description": "Microsoft says EWS in Exchange Online is fully disabled from Apr 1, 2027, and the phased switch-off rolls out from Oct 2026. Free checks, sources, prompt.",
+   "url": "https://firstmoverprojects.com/deadlines/exchange-online-ews-retirement-apr-1.html",
+   "datePublished": "2026-10-22",
+   "dateModified": "2026-10-22",
+   "inLanguage": "en-US",
+   "publisher": {
+    "@type": "Organization",
+    "name": "First Mover Projects",
+    "url": "https://firstmoverprojects.com/"
+   },
+   "author": {
+    "@type": "Organization",
+    "name": "First Mover Projects",
+    "url": "https://firstmoverprojects.com/"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://firstmoverprojects.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Deadlines",
+     "item": "https://firstmoverprojects.com/deadlines/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Exchange Online EWS is fully disabled from Apr 1, 2027 (phased switch-off from Oct 2026)",
+     "item": "https://firstmoverprojects.com/deadlines/exchange-online-ews-retirement-apr-1.html"
+    }
+   ]
+  }
+ ]
+}
+</script>
+  <script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "dateModified": "2026-10-22",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "When is EWS turned off in Exchange Online?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Microsoft's Exchange Team says: \"Starting with April 1, 2027, EWS will be fully and permanently disabled\" and \"There will be no exceptions past April 2027.\" Before that, a phased switch-off rolls out tenant by tenant from Oct 2026."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What happens to tenants that never changed the EWSEnabled setting?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Microsoft says any tenant with EWSEnabled still set to Null on October 1, 2026, will see the value changed to False as the deployment rolls out, which blocks EWS for all applications in the tenant at that time."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "We still need EWS for an app. What are the options?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Microsoft lists two choices until the final shutdown: set EWSEnabled to True and maintain an AppID Allow List (EWSAllowedAppIDs), or set EWSEnabled back to Null with Exchange Online PowerShell, which re-enables EWS without restrictions until the final deprecation. Microsoft's recommended path is to configure or validate the AppID allow list and then set EWSEnabled to True."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does EWSEnabled set to True still allow every app?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No, once enforcement reaches the tenant. Microsoft says that after enforcement begins, setting EWSEnabled=True without an AppID allow list effectively becomes a block-all configuration."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is EWS being retired for on-premises Exchange?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. Microsoft says EWS is not being retired on-prem. Hybrid scenarios vary: on-prem mailboxes may continue using EWS, while cloud mailboxes must move to Microsoft Graph."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can we get an extension past April 2027?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Microsoft's FAQ answers: \"There will be no exceptions past April 2027.\""
+   }
+  }
+ ]
+}
+</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand-link" href="https://firstmoverprojects.com/">
+          <img class="brand-logo" src="assets/fmp-logo.webp" alt="First Mover Projects" width="140" height="140" />
+        </a>
+        <p class="tagline">Deadlines for small businesses, in plain English, with source links.</p>
+      </div>
+    </header>
+    <main id="main">
+      <p class="crumbs"><a href="/deadlines/">&larr; All deadlines</a></p>
+      <section class="hero" aria-label="Deadline">
+        <p><span class="chip">Apr 1, 2027</span> <span class="chip">Phased switch-off: from Oct 2026</span></p>
+        <h1>Exchange Online EWS is fully disabled from Apr 1, 2027 (phased switch-off from Oct 2026)</h1>
+        <p class="answer" id="answer">Microsoft says Exchange Web Services (EWS) in Exchange Online will be &quot;fully and permanently disabled&quot; starting April 1, 2027, with &quot;no exceptions past April 2027.&quot; Before that, Microsoft is switching EWS off tenant by tenant from Oct 2026: tenants still on the default setting (Null) are changed to False, which blocks EWS for every app. Any app, script or service that still uses EWS needs to move to Microsoft Graph.</p>
+        <p id="who"><strong>Who it's for:</strong> Microsoft 365 admins, and the people who look after a small business&#x27;s Exchange Online mail, whose apps, scripts or services still use EWS.</p>
+        <p class="updated" id="updated"><strong>Last updated Oct 22, 2026.</strong> Current dates: phased switch-off on (or soon after) Oct 1, 2026, tenant by tenant; full and permanent shutdown Apr 1, 2027. Microsoft updates its posts often, so re-check the sources.</p>
+        <p>The free read-only checks, sources and a checklist prompt are below.</p>
+      </section>
+
+      <section aria-labelledby="dates-h">
+        <h2 id="dates-h">Key dates</h2>
+        <ul class="dates">
+          <li class="dated-item" data-date="Oct 1, 2026"><p class="when">On (or soon after) Oct 1, 2026, phased, tenant by tenant</p><p>Microsoft says: &quot;Any tenant with EWSEnabled still set to Null on October 1, 2026, will see the value changed to False as the deployment rolls out. That will block EWS for all applications in the tenant at that time.&quot; Microsoft controls when the change reaches each tenant.</p><p class="src">Source: <a href="https://techcommunity.microsoft.com/blog/exchange/exchange-online-ews-your-time-is-almost-up/4492361">Microsoft Exchange Team Blog: Exchange Online EWS, Your Time is Almost Up</a></p></li>
+          <li class="dated-item" data-date="Apr 1, 2027"><p class="when">Apr 1, 2027</p><p>Final shutdown. Microsoft says: &quot;Starting with April 1, 2027, EWS will be fully and permanently disabled&quot; and &quot;The ability to control EWSEnabled will be removed from tenant admins.&quot;</p><p class="src">Sources: <a href="https://techcommunity.microsoft.com/blog/exchange/exchange-online-ews-your-time-is-almost-up/4492361">Microsoft Exchange Team Blog</a> · <a href="https://learn.microsoft.com/en-us/exchange/clients-and-mobile-in-exchange-online/deprecation-of-ews-exchange-online">Microsoft Learn: Deprecation of Exchange Web Services in Exchange Online</a> (&quot;April 2027: EWS is fully disabled.&quot;)</p></li>
+        </ul>
+        <p>Microsoft Learn&#x27;s timeline says: &quot;October 2026: EWS starts to be disabled globally for all organizations.&quot;</p>
+      </section>
+
+      <section aria-labelledby="sum-h">
+        <h2 id="sum-h">Plain-English summary</h2>
+        <p>EWS (Exchange Web Services) is an older interface that apps and scripts use to connect to Exchange. Microsoft is retiring it in Exchange Online and calls Microsoft Graph &quot;the long-term strategic platform for most Exchange Online integration scenarios.&quot;</p>
+        <p>What your tenant sees now depends on its <code>EWSEnabled</code> setting. Microsoft says a tenant still on Null is changed to False as the rollout reaches it, which blocks all EWS. A tenant set to True keeps EWS only for apps on its AppID allow list (<code>EWSAllowedAppIDs</code>): Microsoft says that after enforcement begins, &quot;setting EWSEnabled=True without an AppID allow list effectively becomes a block-all configuration.&quot;</p>
+        <p>If you find out you still need EWS after the change, Microsoft says an admin can re-enable it, &quot;But note that there will be a service interruption in this case.&quot; Either way, everything stops on Apr 1, 2027. EWS on on-premises Exchange is not being retired.</p>
+      </section>
+
+      <section aria-labelledby="steps-h">
+        <h2 id="steps-h">Free steps, from Microsoft&#x27;s posts</h2>
+        <ol>
+          <li>Review the <strong>EWS usage reports in the Microsoft 365 admin center</strong> to see which apps still call EWS. Microsoft also links scripts in &quot;Notes From the Field: Finding and Remediating EWS App Usage Before Retirement&quot;.</li>
+          <li>Read your tenant&#x27;s setting (read-only), in Exchange Online PowerShell: <code>Get-OrganizationConfig | Format-List EWSEnabled</code>. Microsoft says an empty value is the default (Null).</li>
+          <li>Read your current AppID allow list (read-only): <code>Get-OrganizationConfig -RetrieveEwsOperationAccessPolicy | Format-List EwsAllowedAppIDs</code>. Microsoft says the extra switch is required to return the list.</li>
+          <li>If Microsoft filled in the list for you, check it. Microsoft says an auto-populated list is based on &quot;the previous 60 days of usage&quot;, so &quot;it may miss applications that run infrequently, and it may include apps you no longer want to have access.&quot; A list you create yourself is not overwritten.</li>
+          <li>Sort every app into keep for now, move to Microsoft Graph, or retire. Microsoft&#x27;s list of apps to keep can include its own clients: &quot;This includes Microsoft first-party client apps such as Office, Power Query for Excel etc.&quot;</li>
+          <li>Before anyone changes the list, note Microsoft&#x27;s warnings: setting the property &quot;writes the full list value&quot;, so existing App IDs are replaced unless included, and &quot;Changes to this list can take up to 24 hours to take effect.&quot; Make changes only under your own change control.</li>
+          <li>Ask each vendor whose app still uses EWS for its Graph date. Microsoft Learn says: &quot;Work with your vendors to prioritize their migration from EWS.&quot;</li>
+          <li>Check Microsoft Learn&#x27;s parity-gap roadmap. Microsoft says: &quot;If an EWS capability isn&#x27;t listed in this roadmap table, don&#x27;t plan on a corresponding Microsoft Graph or Exchange Admin API capability being available before EWS is fully disabled.&quot;</li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="cmp-h" id="compare">
+        <h2 id="cmp-h">Compare</h2>
+<table>
+<caption>What EWSEnabled does once the phased change reaches your tenant (Microsoft&#x27;s tables)</caption>
+<thead><tr><th scope="col">EWSEnabled</th><th scope="col">Result</th></tr></thead>
+<tbody>
+<tr><td>Null (default)</td><td>Changed to False during Microsoft&#x27;s rollout, which blocks all EWS</td></tr>
+<tr><td>True, AppID allow list has entries</td><td>Only apps on the list are allowed</td></tr>
+<tr><td>True, list missing or empty</td><td>No EWS allowed (cross-tenant organization relationship traffic still works)</td></tr>
+<tr><td>False</td><td>All EWS blocked</td></tr>
+<tr><td>Any value, from Apr 1, 2027</td><td>EWS fully and permanently disabled</td></tr>
+</tbody></table>
+<table>
+<caption>Your options</caption>
+<thead><tr><th scope="col">Option</th><th scope="col">Cost</th><th scope="col">What it does</th></tr></thead>
+<tbody>
+<tr><td>Microsoft&#x27;s posts and the steps on this page</td><td>Free</td><td>Official dates and read-only checks</td></tr>
+<tr><td>EWS Cutover Kit</td><td>$39</td><td>Offline worksheets to classify apps and plan the allow list; does not change your tenant</td></tr>
+</tbody></table>
+      </section>
+
+      <section aria-labelledby="faq-h" id="faq">
+<h2 id="faq-h">FAQ</h2>
+<h3>When is EWS turned off in Exchange Online?</h3>
+<p>Microsoft&#x27;s Exchange Team says: &quot;Starting with April 1, 2027, EWS will be fully and permanently disabled&quot; and &quot;There will be no exceptions past April 2027.&quot; Before that, a phased switch-off rolls out tenant by tenant from Oct 2026.</p>
+<h3>What happens to tenants that never changed the EWSEnabled setting?</h3>
+<p>Microsoft says any tenant with EWSEnabled still set to Null on October 1, 2026, will see the value changed to False as the deployment rolls out, which blocks EWS for all applications in the tenant at that time.</p>
+<h3>We still need EWS for an app. What are the options?</h3>
+<p>Microsoft lists two choices until the final shutdown: set EWSEnabled to True and maintain an AppID Allow List (EWSAllowedAppIDs), or set EWSEnabled back to Null with Exchange Online PowerShell, which re-enables EWS without restrictions until the final deprecation. Microsoft&#x27;s recommended path is to configure or validate the AppID allow list and then set EWSEnabled to True.</p>
+<h3>Does EWSEnabled set to True still allow every app?</h3>
+<p>No, once enforcement reaches the tenant. Microsoft says that after enforcement begins, setting EWSEnabled=True without an AppID allow list effectively becomes a block-all configuration.</p>
+<h3>Is EWS being retired for on-premises Exchange?</h3>
+<p>No. Microsoft says EWS is not being retired on-prem. Hybrid scenarios vary: on-prem mailboxes may continue using EWS, while cloud mailboxes must move to Microsoft Graph.</p>
+<h3>Can we get an extension past April 2027?</h3>
+<p>Microsoft&#x27;s FAQ answers: &quot;There will be no exceptions past April 2027.&quot;</p>
+</section>
+
+      <section aria-labelledby="src-h">
+        <h2 id="src-h">Sources</h2>
+        <p><a href="https://techcommunity.microsoft.com/blog/exchange/exchange-online-ews-your-time-is-almost-up/4492361">Microsoft Exchange Team Blog: Exchange Online EWS, Your Time is Almost Up</a> (updated Sep 9, 2026)</p>
+        <p><a href="https://techcommunity.microsoft.com/blog/exchange/introducing-ewsallowedappids-preparing-for-the-final-phase-of-ews-retirement/4529471">Microsoft Exchange Team Blog: Introducing EWSAllowedAppIDs</a></p>
+        <p><a href="https://techcommunity.microsoft.com/blog/exchange/take-control-of-your-ewsallowedappids-list-before-ews-access-changes/4553534">Microsoft Exchange Team Blog: Take control of your EWSAllowedAppIDs list before EWS access changes</a> (Sep 4, 2026)</p>
+        <p><a href="https://learn.microsoft.com/en-us/exchange/clients-and-mobile-in-exchange-online/deprecation-of-ews-exchange-online">Microsoft Learn: Deprecation of Exchange Web Services in Exchange Online</a></p>
+        <p><a href="https://techcommunity.microsoft.com/blog/exchange/the-way-to-control-ews-usage-in-exchange-online-is-changing/4383083">Microsoft Exchange Team Blog: The way to control EWS usage in Exchange Online is changing</a> (EWSEnabled empty is the default)</p>
+        <p>Checked Oct 22, 2026. Microsoft updates these posts often; always check the Message Center posts for your own tenant.</p>
+      </section>
+
+      <section aria-labelledby="prompt-h">
+        <h2 id="prompt-h">Copy-paste prompt for any AI agent</h2>
+        <pre class="prompt" id="prompt-text">My small business uses Microsoft 365 with Exchange Online. Microsoft's Exchange Team blog says EWS (Exchange Web Services) in Exchange Online is being switched off tenant by tenant from October 2026, that tenants with EWSEnabled still set to Null are changed to False (which blocks EWS for all apps), and that starting April 1, 2027, EWS will be fully and permanently disabled with no exceptions. Please help me check where we stand:
+1. Make a checklist table of every app, script, add-in or service that might connect to our Exchange Online mail, calendars or contacts (name, who set it up, vendor contact, uses EWS yes/no/unknown, on our AppID allow list yes/no, plan: keep for now / move to Microsoft Graph / retire).
+2. Tell me where to look: the EWS usage reports in the Microsoft 365 admin center, and the read-only commands Get-OrganizationConfig | Format-List EWSEnabled and Get-OrganizationConfig -RetrieveEwsOperationAccessPolicy | Format-List EwsAllowedAppIDs.
+3. Give me a short message I can send each vendor asking whether their app still uses EWS and when it will use Microsoft Graph instead.
+4. Remind me to read Microsoft's own posts and our Message Center for the current dates.
+5. Set up reminders for January 15 and March 1, 2027. (These reminder dates are my choice, not Microsoft's.)
+Do not change any settings and do not run any Set- commands. Do not ask me for passwords, tokens or App secrets, and do not log in to any account. Only list what I should check and I will decide.
+When you state any deadline or date, quote the exact line from Microsoft's own pages that states it. If you cannot find that line, say "no deadline line found" instead of guessing.</pre>
+        <button class="btn btn--secondary" type="button" id="copy-prompt" hidden>Copy prompt</button>
+      </section>
+
+      <p class="kit-link">Optional: an offline kit with the read-only checks (each linked to its Microsoft source), an app classification worksheet, an AppID allow-list planning sheet, an EWS-to-Graph migration map and a client notice template for MSPs. It does not change your tenant or connect to Microsoft 365; you run every check yourself.</p>
+      <p class="kit-link"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/ews-cutover-kit?utm_source=firstmoverprojects&amp;utm_medium=deadline_page&amp;utm_campaign=ews-retirement">Get the $39 EWS Cutover Kit on Gumroad</a></p>
+
+      <p class="related">More: <a href="/deadlines/office-2021-windows-11-24h2-oct-13.html">Office 2021 and Windows 11 24H2 (ended Oct 13)</a> · <a href="/deadlines/">All deadlines</a> · <a href="finder/">Deadline Finder</a> · <a href="/tools/">Tools and kits</a></p>
+
+      <section aria-labelledby="na-h">
+        <h2 id="na-h">Not advice</h2>
+        <p class="notadvice">General guidance, not legal, tax or IT advice. Check Microsoft&#x27;s own posts and the Message Center for your tenant. No promise is made that any app will keep working or that a change will apply to your tenant on a given day; Microsoft controls the rollout. Microsoft, Microsoft 365, Exchange, Exchange Online and Microsoft Graph are trademarks of Microsoft, named only to describe what this page covers. First Mover Projects is independent and is not affiliated with, endorsed or sponsored by Microsoft.</p>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <p>First Mover Projects, PO Box 98, Firth, NE 68358. firstmoverprojects@gmail.com. General guidance, not legal, tax or IT advice. Check the official sources for your case. Not affiliated with any vendor or agency named on this page. Names are used only to describe compatibility.</p>
+    </footer>
+    <script>
+      (function () {
+        var b = document.getElementById("copy-prompt");
+        if (b && navigator.clipboard) {
+          b.hidden = false;
+          b.addEventListener("click", function () {
+            navigator.clipboard.writeText(document.getElementById("prompt-text").textContent).then(function () {
+              b.textContent = "Copied";
+            });
+          });
+        }
+      })();
+    </script>
+    <script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+      <script src="/deadlines/assets/ab-cta.js" defer></script>
+</body>
+</html>
