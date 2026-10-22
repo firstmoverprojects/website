@@ -60,63 +60,6 @@
  ]
 }
 </script>
-  <script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "FAQPage",
- "dateModified": "2026-10-22",
- "mainEntity": [
-  {
-   "@type": "Question",
-   "name": "When is EWS turned off in Exchange Online?",
-   "acceptedAnswer": {
-    "@type": "Answer",
-    "text": "Microsoft's Exchange Team says: \"Starting with April 1, 2027, EWS will be fully and permanently disabled\" and \"There will be no exceptions past April 2027.\" Before that, a phased switch-off rolls out tenant by tenant from Oct 2026."
-   }
-  },
-  {
-   "@type": "Question",
-   "name": "What happens to tenants that never changed the EWSEnabled setting?",
-   "acceptedAnswer": {
-    "@type": "Answer",
-    "text": "Microsoft says any tenant with EWSEnabled still set to Null on October 1, 2026, will see the value changed to False as the deployment rolls out, which blocks EWS for all applications in the tenant at that time."
-   }
-  },
-  {
-   "@type": "Question",
-   "name": "We still need EWS for an app. What are the options?",
-   "acceptedAnswer": {
-    "@type": "Answer",
-    "text": "Microsoft lists two choices until the final shutdown: set EWSEnabled to True and maintain an AppID Allow List (EWSAllowedAppIDs), or set EWSEnabled back to Null with Exchange Online PowerShell, which re-enables EWS without restrictions until the final deprecation. Microsoft's recommended path is to configure or validate the AppID allow list and then set EWSEnabled to True."
-   }
-  },
-  {
-   "@type": "Question",
-   "name": "Does EWSEnabled set to True still allow every app?",
-   "acceptedAnswer": {
-    "@type": "Answer",
-    "text": "No, once enforcement reaches the tenant. Microsoft says that after enforcement begins, setting EWSEnabled=True without an AppID allow list effectively becomes a block-all configuration."
-   }
-  },
-  {
-   "@type": "Question",
-   "name": "Is EWS being retired for on-premises Exchange?",
-   "acceptedAnswer": {
-    "@type": "Answer",
-    "text": "No. Microsoft says EWS is not being retired on-prem. Hybrid scenarios vary: on-prem mailboxes may continue using EWS, while cloud mailboxes must move to Microsoft Graph."
-   }
-  },
-  {
-   "@type": "Question",
-   "name": "Can we get an extension past April 2027?",
-   "acceptedAnswer": {
-    "@type": "Answer",
-    "text": "Microsoft's FAQ answers: \"There will be no exceptions past April 2027.\""
-   }
-  }
- ]
-}
-</script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
