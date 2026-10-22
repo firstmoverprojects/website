@@ -230,4 +230,28 @@ DESCRIPTION:ChatGPT custom GPTs scheduled to retire
 TRIGGER:-P7D
 END:VALARM
 END:VEVENT
+BEGIN:VEVENT
+UID:exchange-online-ews-shutdown-20270401@firstmoverprojects.com
+DTSTAMP:20261022T083000Z
+DTSTART;VALUE=DATE:20270401
+DTEND;VALUE=DATE:20270402
+SUMMARY:Exchange Online: EWS fully and permanently disabled
+DESCRIPTION:Who: Microsoft 365 admins whose apps\, scripts or services stil
+ l use EWS (phased switch-off rolls out tenant by tenant from Oct 2026)\nWh
+ at to check: Review EWS usage reports\, read EWSEnabled and your AppID all
+ ow list (read-only)\, and move apps to Microsoft Graph. No exceptions past
+  April 2027.\nOfficial source: https://techcommunity.microsoft.com/blog/ex
+ change/exchange-online-ews-your-time-is-almost-up/4492361\nDetails: https:
+ //firstmoverprojects.com/deadlines/exchange-online-ews-retirement-apr-1.ht
+ ml\nGeneral guidance\, not legal\, tax or IT advice. Dates from the offici
+ al source\; re-check it before you act.
+URL:https://firstmoverprojects.com/deadlines/exchange-online-ews-retirement
+ -apr-1.html
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Exchange Online: EWS fully and permanently disabled
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
 END:VCALENDAR

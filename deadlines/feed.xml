@@ -6,7 +6,7 @@
   <atom:link href="https://firstmoverprojects.com/deadlines/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Dated vendor and system changes small businesses should check, each with its official source. General guidance, not legal, tax or IT advice.</description>
   <language>en-us</language>
-  <lastBuildDate>Wed, 21 Oct 2026 08:20:00 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 22 Oct 2026 08:30:00 +0000</lastBuildDate>
   <item>
     <title>Oct 16: Old Microsoft Whiteboards still in Azure are deleted</title>
     <link>https://firstmoverprojects.com/deadlines/whiteboard-azure-oct-16.html</link>
@@ -76,6 +76,13 @@
     <guid isPermaLink="false">openai-custom-gpt-retirement-20261211@firstmoverprojects.com</guid>
     <pubDate>Wed, 21 Oct 2026 08:20:00 +0000</pubDate>
     <description><![CDATA[<p><b>Date:</b> Dec 11, 2026<br/><b>Who:</b> Anyone who created or relies on a custom GPT (Enterprise workspaces with an approved deferral: Feb 11, 2027)<br/><b>What to check:</b> List your GPTs, publish essential edits, migrate the ones you created to plugins and test them. Custom actions do not transfer.<br/><b>Official source:</b> <a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq">https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq</a></p><p>General guidance, not legal, tax or IT advice.</p>]]></description>
+  </item>
+  <item>
+    <title>Apr 1, 2027: Exchange Online EWS fully and permanently disabled</title>
+    <link>https://firstmoverprojects.com/deadlines/exchange-online-ews-retirement-apr-1.html</link>
+    <guid isPermaLink="false">exchange-online-ews-shutdown-20270401@firstmoverprojects.com</guid>
+    <pubDate>Thu, 22 Oct 2026 08:30:00 +0000</pubDate>
+    <description><![CDATA[<p><b>Date:</b> Apr 1, 2027 (phased switch-off rolls out tenant by tenant from Oct 2026)<br/><b>Who:</b> Microsoft 365 admins whose apps, scripts or services still use EWS<br/><b>What to check:</b> Review EWS usage reports, read EWSEnabled and your AppID allow list (read-only), and move apps to Microsoft Graph. Microsoft says there will be no exceptions past April 2027.<br/><b>Official source:</b> <a href="https://techcommunity.microsoft.com/blog/exchange/exchange-online-ews-your-time-is-almost-up/4492361">https://techcommunity.microsoft.com/blog/exchange/exchange-online-ews-your-time-is-almost-up/4492361</a></p><p>General guidance, not legal, tax or IT advice.</p>]]></description>
   </item>
 </channel>
 </rss>
