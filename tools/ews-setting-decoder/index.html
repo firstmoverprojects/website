@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>EWS Setting Decoder: paste your EWSEnabled output, see what happens next (free, in your browser)</title>
+<meta name="description" content="Paste the output of a read-only Exchange Online PowerShell command and see what Microsoft's phased EWS switch-off means for your tenant, plus a dated checklist. Runs in your browser; nothing is uploaded.">
+<style>
+*{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1b1f24;background:#f6f7f9}
+main{max-width:860px;margin:0 auto;padding:16px}h1{font-size:1.6rem;margin:.4em 0}h2{font-size:1.2rem;margin:1.2em 0 .4em}
+.card{background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:16px;margin:12px 0}
+.cd{display:flex;flex-wrap:wrap;gap:12px}.cd>div{flex:1 1 240px;background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:12px}
+.big{font-size:1.5rem;font-weight:700}.muted{color:#5a636e;font-size:.9rem}label{display:block;font-weight:600;margin-top:12px}
+textarea{width:100%;min-height:150px;font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;padding:8px;border:1px solid #b9c0c8;border-radius:6px}
+code,pre{font:14px/1.4 ui-monospace,Menlo,Consolas,monospace}pre{background:#eef1f5;padding:10px;border-radius:6px;white-space:pre-wrap;word-break:break-all}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:0;background:#1f5fbf;color:#fff;cursor:pointer;margin-top:12px}
+button.sec{background:#e4e8ee;color:#1b1f24}
+#out li{margin:8px 0}.tag{display:inline-block;font-size:.75rem;padding:1px 7px;border-radius:9px;margin-right:6px;background:#e4e8ee}
+.warn{background:#fde8e6;color:#8a1c12}.ok{background:#e3f4e6;color:#1d6b2c}.mid{background:#fff3d6;color:#7a5200}
+.verdict{font-size:1.15rem;font-weight:700;padding:10px 12px;border-radius:8px}
+.cta{background:#fff8e6;border-color:#f0d58a}a{color:#1f5fbf}
+table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0}th,td{border:1px solid #dde1e6;padding:6px 8px;text-align:left;vertical-align:top}
+</style>
+</head>
+<body>
+<main>
+<p class="muted"><a href="https://firstmoverprojects.com/">First Mover Projects</a> · free tool · runs entirely in your browser</p>
+<h1>EWS Setting Decoder</h1>
+<p><strong>Paste one read-only PowerShell output → see what Microsoft's EWS switch-off does to your tenant, and what to check next.</strong> Nothing you paste leaves this page: no upload, no account, no AI call.</p>
+
+<div class="cd" aria-live="polite">
+ <div><div class="muted">Phased switch-off (Microsoft)</div><div class="big">Started Oct 2026</div><div class="muted">Tenant by tenant, "on (or soon after) Oct 1, 2026"</div></div>
+ <div><div class="muted">EWS fully disabled</div><div class="big" id="cd2">Apr 1, 2027</div><div class="muted" id="cd2s">"no exceptions past April 2027"</div></div>
+</div>
+
+<div class="card">
+<h2>1. Run this read-only command</h2>
+<p>In Exchange Online PowerShell (it only reads settings; it changes nothing):</p>
+<pre id="cmd">Get-OrganizationConfig -RetrieveEwsOperationAccessPolicy | Format-List EwsEnabled,EwsAllowedAppIDs,EwsApplicationAccessPolicy,EwsAllowList,EwsBlockList</pre>
+<button class="sec" id="copycmd" type="button">Copy command</button>
+<p class="muted">Microsoft notes the <code>-RetrieveEwsOperationAccessPolicy</code> switch is needed to return the AppID list. App IDs are not passwords, but you can blank them out: the decoder only needs to know whether the list has entries.</p>
+
+<h2>2. Paste the output here</h2>
+<label for="inp">Command output</label>
+<textarea id="inp" spellcheck="false" placeholder="EwsEnabled                 :
+EwsAllowedAppIDs           :
+EwsApplicationAccessPolicy :
+EwsAllowList               :
+EwsBlockList               :"></textarea>
+<button id="go" type="button">Decode my setting</button>
+<button class="sec" id="ex" type="button">Try an example</button>
+</div>
+
+<div id="res" class="card" hidden>
+<h2>What this means</h2>
+<div id="verdict" class="verdict"></div>
+<p id="detail"></p>
+<h2>Your checklist</h2>
+<ul id="out"></ul>
+<button class="sec" id="copyres" type="button">Copy checklist</button>
+</div>
+
+<div class="card cta">
+<h2>Need to sort every app before the switch-off?</h2>
+<p>The <strong>EWS Cutover Kit ($39)</strong> is a set of offline worksheets to list each app, decide keep for now / move to Microsoft Graph / retire, and plan your AppID allow list. It does not connect to or change your tenant.</p>
+<p><a href="https://firstmoverprojects.gumroad.com/l/ews-cutover-kit?utm_source=firstmoverprojects&amp;utm_medium=ews_decoder&amp;utm_campaign=ews-retirement">Get the EWS Cutover Kit on Gumroad</a> · <a href="https://firstmoverprojects.com/deadlines/exchange-online-ews-retirement-apr-1.html">Read the full EWS deadline page (free)</a></p>
+</div>
+
+<div class="card">
+<h2>Microsoft's table, in plain English</h2>
+<table>
+<tr><th>EwsEnabled</th><th>Once the phased change reaches your tenant</th></tr>
+<tr><td>Empty (Null, the default)</td><td>Changed to False during Microsoft's rollout, which blocks EWS for all apps</td></tr>
+<tr><td>True, AppID list has entries</td><td>Only apps on the list can use EWS</td></tr>
+<tr><td>True, list missing or empty</td><td>No EWS allowed (cross-tenant organization relationship traffic still works)</td></tr>
+<tr><td>False</td><td>All EWS blocked</td></tr>
+<tr><td>Any value, from Apr 1, 2027</td><td>EWS fully and permanently disabled</td></tr>
+</table>
+<p class="muted">Sources: <a href="https://techcommunity.microsoft.com/blog/exchange/exchange-online-ews-your-time-is-almost-up/4492361">Microsoft Exchange Team Blog: Exchange Online EWS, Your Time is Almost Up</a> · <a href="https://techcommunity.microsoft.com/blog/exchange/take-control-of-your-ewsallowedappids-list-before-ews-access-changes/4553534">Take control of your EWSAllowedAppIDs list</a> · <a href="https://learn.microsoft.com/en-us/exchange/client-developer/exchange-web-services/how-to-control-access-to-ews-in-exchange">Microsoft Learn: Control access to EWS in Exchange</a> · <a href="https://learn.microsoft.com/en-us/exchange/clients-and-mobile-in-exchange-online/deprecation-of-ews-exchange-online">Microsoft Learn: Deprecation of EWS in Exchange Online</a>. Checked Oct 22, 2026. Microsoft updates these posts often and dates can change; follow the Message Center posts for your own tenant.</p>
+</div>
+
+<p class="muted">General guidance, not legal, tax or IT advice. This page reads only the text you paste, keeps nothing, and can't see your tenant; it can't promise any app will keep working. Make changes only under your own change control. Not affiliated with or endorsed by Microsoft. Microsoft, Exchange and Microsoft 365 are trademarks of Microsoft Corporation. EWS on on-premises Exchange is not being retired; this page is about Exchange Online.</p>
+</main>
+<script>
+(function(){
+var END=new Date(2027,3,1);
+var GUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+var TEAMS='cc15fd57-2c6c-4117-a88c-83b1d56b4bbe';
+function daysLeft(now){return Math.max(0,Math.ceil((END-now)/86400000));}
+function parse(text){
+ var f={},seen={};
+ String(text||'').split(/\r?\n/).forEach(function(line){
+  var m=line.match(/^\s*(EwsEnabled|EwsAllowedAppIDs|EwsApplicationAccessPolicy|EwsAllowList|EwsBlockList)\s*:\s*(.*)$/i);
+  if(m){var k=m[1].toLowerCase();f[k]=m[2].trim();seen[k]=true;}
+ });
+ return {f:f,seen:seen};
+}
+function splitIds(v){
+ v=(v||'').replace(/^[\{\[]|[\}\]]$/g,'');
+ return v.split(/[,;\s]+/).map(function(s){return s.trim().replace(/^["']|["']$/g,'');}).filter(Boolean);
+}
+function decode(text,now){
+ now=now||new Date();
+ var p=parse(text),f=p.f,r={state:'',level:'',verdict:'',detail:'',items:[],days:daysLeft(now),ids:[],bad:[],dups:[]};
+ if(!p.seen.ewsenabled){r.state='unknown';r.level='mid';r.verdict='No EwsEnabled line found';r.detail='Paste the full output of the command above. The line must start with "EwsEnabled :".';r.items.push('Re-run the read-only command and paste every line it prints.');return r;}
+ var e=(f.ewsenabled||'').toLowerCase();
+ var hasListLine=!!p.seen.ewsallowedappids;
+ var ids=splitIds(f.ewsallowedappids),uniq={};
+ ids.forEach(function(id){var l=id.toLowerCase();if(!GUID.test(id)&&!/^x+$/i.test(id.replace(/-/g,'')))r.bad.push(id);if(uniq[l])r.dups.push(id);uniq[l]=1;});
+ r.ids=ids;
+ var listed=ids.length>0;
+ if(e===''||e==='null'||e==='$null'){
+  r.state='null';r.level='warn';r.verdict='Empty (Null): in line for Microsoft\'s switch-off, which blocks all EWS';
+  r.detail='Microsoft says any tenant with EWSEnabled still set to Null on October 1, 2026, "will see the value changed to False as the deployment rolls out. That will block EWS for all applications in the tenant at that time." If you see this value today, the change may not have reached your tenant yet. If an admin set it back to Null after the change, Microsoft says all EWS is allowed and the AppID list is ignored, but only until EWS is fully disabled on Apr 1, 2027.';
+  r.items.push('Open the EWS usage reports in the Microsoft 365 admin center and list every app that still calls EWS.');
+  r.items.push('Sort each app: keep for now (needs the AppID allow list), move to Microsoft Graph, or retire.');
+  r.items.push('If any app must keep EWS, Microsoft\'s recommended path is to configure and validate the AppID allow list, then set EWSEnabled to True. Plan this under your own change control.');
+ }else if(e==='true'){
+  if(listed){
+   r.state='true-list';r.level='mid';r.verdict='True with '+ids.length+' App ID'+(ids.length===1?'':'s')+' on the allow list: only those apps can use EWS, so check every app you need is on it';
+   r.detail='This is the setting Microsoft recommends for apps that still need EWS. It only lasts until Apr 1, 2027, when EWS is fully disabled for everyone.';
+   r.items.push('Check each App ID against your EWS usage report. Microsoft says a list it filled in for you is based on "the previous 60 days of usage", so it "may miss applications that run infrequently, and it may include apps you no longer want to have access."');
+   r.items.push('Remember that setting the list writes the full value: any App ID left out is removed. Microsoft says changes can take up to 24 hours to take effect.');
+  }else{
+   r.state='true-empty';r.level='warn';r.verdict='True with '+(hasListLine?'an empty':'no')+' allow list: blocks EWS apps once enforcement reaches you';
+   r.detail='Microsoft says that after enforcement begins, setting EWSEnabled=True without an AppID allow list "effectively becomes a block-all configuration". Microsoft also says it may fill in a list for you from the previous 60 days of usage shortly before the change; check whether that has happened.'+(hasListLine?'':' (No EwsAllowedAppIDs line was pasted. Did you include -RetrieveEwsOperationAccessPolicy?)');
+   r.items.push('Re-run the command with -RetrieveEwsOperationAccessPolicy to confirm the list really is empty.');
+   r.items.push('List the apps that still need EWS (EWS usage reports in the Microsoft 365 admin center) and plan the AppID allow list under your own change control.');
+  }
+ }else if(e==='false'){
+  r.state='false';r.level='warn';r.verdict='False: all EWS is blocked in your tenant now';
+  r.detail='Either the rollout has reached your tenant or someone set this on purpose. Microsoft says an admin can still re-enable EWS until the final shutdown, "But note that there will be a service interruption in this case."';
+  r.items.push('Ask users and vendors whether any app stopped syncing mail, calendars or contacts.');
+  r.items.push('If nothing broke, you may simply be ready: confirm against the EWS usage reports.');
+  r.items.push('If an app broke, compare Microsoft\'s two options (an AppID allow list with EWSEnabled True, or Null) in the sources below before changing anything.');
+ }else{
+  r.state='other';r.level='mid';r.verdict='Unrecognised value: "'+f.ewsenabled+'"';r.detail='Expected empty, True or False.';r.items.push('Re-run the read-only command and paste its output unchanged.');return r;
+ }
+ if(r.bad.length)r.items.push('These list entries don\'t look like App IDs (GUIDs), so check them: '+r.bad.join(', '));
+ if(r.dups.length)r.items.push('Duplicate App IDs on the list: '+r.dups.join(', '));
+ var pol=(f.ewsapplicationaccesspolicy||'').toLowerCase();
+ if(pol==='enforceallowlist'){
+  r.items.push('You also use the older user-agent allow list (EnforceAllowList). Microsoft Learn says the AppID list and the user-agent list "are both evaluated for each connection, and both must pass".');
+  if(ids.some(function(i){return i.toLowerCase()===TEAMS;}))r.items.push('Teams App ID '+TEAMS+' is on your list. Microsoft Learn says the user-agent allow list must then include \'Teams CalendarSkypeSpaces/1.0a$*+\', otherwise Teams Calendar will be blocked.');
+ }else if(pol==='enforceblocklist'){
+  r.items.push('You use a user-agent block list (EnforceBlockList). Microsoft Learn notes that user-agent based blocking also affects REST/Graph connections; review it when you move apps to Graph.');
+ }
+ r.items.push('EWS can also be switched off for single mailboxes. Check a mailbox whose app stopped working with the read-only Get-CASMailbox -Identity <mailbox> | Format-List EwsEnabled, and see Microsoft Learn: Control access to EWS in Exchange.');
+ r.items.push('Plan every app that still uses EWS onto Microsoft Graph (or retire it) before Apr 1, 2027: '+r.days+' days from today. Microsoft says there will be "no exceptions past April 2027."');
+ r.items.push('Ask each vendor whose app still uses EWS for its Microsoft Graph date.');
+ return r;
+}
+window.FMP_EWS={decode:decode,parse:parse,daysLeft:daysLeft};
+var $=function(id){return document.getElementById(id);};
+function render(){
+ var r=decode($('inp').value,new Date());
+ $('res').hidden=false;
+ var v=$('verdict');v.textContent=r.verdict;v.className='verdict '+r.level;
+ $('detail').textContent=r.detail;
+ var ul=$('out');ul.textContent='';
+ r.items.forEach(function(t){var li=document.createElement('li');li.textContent=t;ul.appendChild(li);});
+ $('res').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function copy(text,btn){
+ var done=function(){var o=btn.textContent;btn.textContent='Copied';setTimeout(function(){btn.textContent=o;},1500);};
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,function(){});}
+}
+$('go').addEventListener('click',render);
+$('ex').addEventListener('click',function(){$('inp').value='EwsEnabled                 : True\nEwsAllowedAppIDs           : \nEwsApplicationAccessPolicy : \nEwsAllowList               : \nEwsBlockList               : ';render();});
+$('copycmd').addEventListener('click',function(){copy($('cmd').textContent,this);});
+$('copyres').addEventListener('click',function(){
+ var t='EWS Setting Decoder result\n'+$('verdict').textContent+'\n\n'+$('detail').textContent+'\n\nChecklist:\n';
+ Array.prototype.forEach.call($('out').children,function(li,i){t+=(i+1)+'. '+li.textContent+'\n';});
+ t+='\nGeneral guidance, not legal, tax or IT advice. Check Microsoft\'s posts for current dates.';
+ copy(t,this);
+});
+var d=daysLeft(new Date());$('cd2s').textContent=d+' days left · "no exceptions past April 2027"';
+})();
+</script>
+</body>
+</html>
