@@ -68,7 +68,7 @@ footer{margin:8px 0 24px}
 <p>The EU ended the customs duty exemption for parcels worth up to €150 and, from July 1, 2026, charges a temporary €3 customs duty per item on most of those low-value imports. The European Commission says product identifiers become mandatory on November 1, 2026. <a href="https://taxation-customs.ec.europa.eu/news/guidance-and-legal-text-temporary-flat-fee-low-value-imports-which-will-apply-until-1-july-2028-2026-06-08_en" rel="noopener noreferrer">European Commission: Guidance and legal text on temporary flat fee on low-value imports</a></p>
 <p>Its guidance (Version of 5 October 2026) says the requirement “applies to all goods sold in distance sales of imported goods with an intrinsic value not exceeding EUR 150 as from 1 November 2026”, that it applies mainly to goods sold to consumers (B2C), and that business-to-business shipments are in principle not concerned. The Commission also says it is amending the legal text to make the €150 limit explicit, so check the current version. <a href="https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en" rel="noopener noreferrer">European Commission guidance on the temporary EUR 3 customs duty (PDF, Version of 5 October 2026), section 8.2</a></p>
 <p>The guidance names three identifiers for each product: a merchant product identifier assigned by the online seller, marketplace or platform (always required); a non-standardised manufacturer product identifier (always required); and a standardised manufacturer identifier such as an EAN barcode, only where one exists. If none exists, the declaration says so with code Y081. <a href="https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en" rel="noopener noreferrer">European Commission guidance on the temporary EUR 3 customs duty (PDF, Version of 5 October 2026), section 8.2</a></p>
-<p>The guidance says the declarant (the platform, seller, carrier or agent declaring the goods) is first responsible, so if a carrier or customs agent declares for you, ask them what product data they need from you. This page can't see what your carrier or customs agent needs. The declarant (platform, seller, carrier or agent) is first responsible, so ask them what format they need.</p>
+<p>The guidance says whoever lodges the customs declaration (you, your platform, your carrier or a customs agent) must provide the product identifiers to customs, and the online seller, marketplace or platform assigns the merchant product identifier. If a carrier or customs agent declares for you, ask them what product data they need from you and in what format. This page can't see what they need.</p>
 <p>The Commission lists the EU Customs Data Hub for e-commerce from July 1, 2028. Dutch Customs describes product identifier reporting as a temporary measure until then. <a href="https://taxation-customs.ec.europa.eu/news/guidance-and-legal-text-temporary-flat-fee-low-value-imports-which-will-apply-until-1-july-2028-2026-06-08_en" rel="noopener noreferrer">European Commission news: Guidance and legal text on temporary flat fee on low-value imports</a> · <a href="https://www.douane.nl/en/themes/import-and-export/import/e-commerce/including-product-identifiers-in-your-e-commerce-declaration/" rel="noopener noreferrer">Dutch Customs: Including product identifiers in your e-commerce declaration</a></p>
 </section>
 
@@ -134,6 +134,7 @@ footer{margin:8px 0 24px}
 <p>Related: <a href="/deadlines/eu-product-identifiers-nov-1.html">EU product identifiers, Nov 1, 2026</a> · <a href="/deadlines/">All deadlines</a> · <a href="/tools/">Tools and kits</a></p>
 
 <footer>
+<p>Not affiliated with the European Commission or any customs authority.</p>
 <p>General guidance, not legal, tax or IT advice.</p>
 <p>Made by First Mover Projects with AI coding tools.</p>
 </footer>
@@ -365,7 +366,7 @@ function analyze(text) {
     lines.push("Row " + row.n + " (" + name + "): " + bits.join(" "));
   });
   lines.push("");
-  lines.push("This page can't see what your carrier or customs agent needs. The declarant (platform, seller, carrier or agent) is first responsible, so ask them what format they need.");
+  lines.push("This page can't see what your carrier or customs agent needs. Whoever declares your parcels must give these identifiers to customs, so ask them what format they need.");
   lines.push("General guidance, not legal, tax or IT advice.");
   return {
     delimiter: delimiter,
