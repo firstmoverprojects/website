@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/eu-product-id-check/">
+<title>EU Nov 1 Product ID Quick Check (free, runs in your browser)</title>
+<meta name="description" content="Paste up to 25 rows of merchant SKU, manufacturer product code and barcode. Free in-browser check for the EU product identifiers the European Commission says become mandatory on 1 November 2026. Nothing is uploaded.">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1b1f24;background:#f6f7f9}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.2em 0 .4em}
+.card{background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:16px;margin:12px 0}
+.cd{display:flex;flex-wrap:wrap;gap:12px}
+.cd>div{flex:1 1 240px;background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:12px}
+.big{font-size:1.5rem;font-weight:700}
+.muted{color:#5a636e;font-size:.9rem}
+label{display:block;font-weight:600;margin-top:12px}
+textarea{width:100%;min-height:180px;font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;padding:8px;border:1px solid #b9c0c8;border-radius:6px}
+pre{font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;background:#eef1f5;padding:10px;border-radius:6px;white-space:pre-wrap;word-break:break-word;margin:.4em 0}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:0;background:#1f5fbf;color:#fff;cursor:pointer;margin:12px 8px 0 0}
+button.sec{background:#e4e8ee;color:#1b1f24}
+.tag{display:inline-block;font-size:.8rem;padding:2px 8px;border-radius:9px;margin:0 0 6px;background:#e4e8ee}
+.warn{background:#fde8e6;color:#8a1c12}
+.ok{background:#e3f4e6;color:#1d6b2c}
+.cta{background:#fff8e6;border-color:#f0d58a}
+a{color:#1f5fbf}
+a:focus,button:focus,textarea:focus{outline:3px solid #1f5fbf;outline-offset:2px}
+table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0}
+th,td{border:1px solid #dde1e6;padding:6px 8px;text-align:left;vertical-align:top;word-break:break-word}
+caption{text-align:left;font-weight:600;padding:4px 0}
+.table-wrap{overflow-x:auto}
+td ul{margin:.2em 0 0;padding-left:1.1em}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:8px;top:8px;background:#fff;padding:8px 12px;z-index:2}
+footer{margin:8px 0 24px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<p class="muted"><a href="https://firstmoverprojects.com/">First Mover Projects</a> · free tool</p>
+<h1>EU Nov 1 Product ID Quick Check</h1>
+<p><strong>Paste 3 columns, get a fix list in seconds.</strong></p>
+<p>Runs in your browser. Nothing is uploaded.</p>
+<p id="who"><strong>Who it's for:</strong> sellers outside the EU who ship online orders to consumers in the EU, and the platforms, carriers and customs agents who declare those parcels.</p>
+
+<div class="cd" aria-label="Date and limit">
+ <div>
+  <div class="muted">Product identifiers mandatory</div>
+  <div class="big">Nov 1, 2026</div>
+  <div id="days"></div>
+  <div class="muted">The guidance says: “Effective enforcement starts from 1 November 2026.”</div>
+ </div>
+ <div>
+  <div class="muted">This page</div>
+  <div class="big">25 rows</div>
+  <div class="muted">Merchant SKU, manufacturer product code, barcode (optional).</div>
+ </div>
+</div>
+
+<section class="card" aria-labelledby="guide-h">
+<h2 id="guide-h">What the guidance says</h2>
+<p>The EU ended the customs duty exemption for parcels worth up to €150 and, from July 1, 2026, charges a temporary €3 customs duty per item on most of those low-value imports. The European Commission says product identifiers become mandatory on November 1, 2026. <a href="https://taxation-customs.ec.europa.eu/news/guidance-and-legal-text-temporary-flat-fee-low-value-imports-which-will-apply-until-1-july-2028-2026-06-08_en" rel="noopener noreferrer">European Commission: Guidance and legal text on temporary flat fee on low-value imports</a></p>
+<p>Its guidance (Version of 5 October 2026) says the requirement “applies to all goods sold in distance sales of imported goods with an intrinsic value not exceeding EUR 150 as from 1 November 2026”, that it applies mainly to goods sold to consumers (B2C), and that business-to-business shipments are in principle not concerned. The Commission also says it is amending the legal text to make the €150 limit explicit, so check the current version. <a href="https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en" rel="noopener noreferrer">European Commission guidance on the temporary EUR 3 customs duty (PDF, Version of 5 October 2026), section 8.2</a></p>
+<p>The guidance names three identifiers for each product: a merchant product identifier assigned by the online seller, marketplace or platform (always required); a non-standardised manufacturer product identifier (always required); and a standardised manufacturer identifier such as an EAN barcode, only where one exists. If none exists, the declaration says so with code Y081. <a href="https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en" rel="noopener noreferrer">European Commission guidance on the temporary EUR 3 customs duty (PDF, Version of 5 October 2026), section 8.2</a></p>
+<p>The guidance says whoever lodges the customs declaration (you, your platform, your carrier or a customs agent) must provide the product identifiers to customs, and the online seller, marketplace or platform assigns the merchant product identifier. If a carrier or customs agent declares for you, ask them what product data they need from you and in what format. This page can't see what they need.</p>
+<p>The Commission lists the EU Customs Data Hub for e-commerce from July 1, 2028. Dutch Customs describes product identifier reporting as a temporary measure until then. <a href="https://taxation-customs.ec.europa.eu/news/guidance-and-legal-text-temporary-flat-fee-low-value-imports-which-will-apply-until-1-july-2028-2026-06-08_en" rel="noopener noreferrer">European Commission news: Guidance and legal text on temporary flat fee on low-value imports</a> · <a href="https://www.douane.nl/en/themes/import-and-export/import/e-commerce/including-product-identifiers-in-your-e-commerce-declaration/" rel="noopener noreferrer">Dutch Customs: Including product identifiers in your e-commerce declaration</a></p>
+</section>
+
+<section class="card" aria-labelledby="paste-h">
+<h2 id="paste-h">1. Paste up to 25 rows</h2>
+<p id="how">Three columns, in order: merchant SKU, manufacturer product code, barcode (optional). Separate columns with a tab, a comma or a semicolon. A header row is optional. This page checks a missing merchant SKU, a merchant SKU repeated on another row (each variant needs its own code), a missing manufacturer product code, and a barcode that is present but not a GTIN-8, GTIN-12, GTIN-13 or GTIN-14 with a correct GS1 mod-10 check digit. An empty barcode is a note, not a failed length check.</p>
+<label for="inp">Rows</label>
+<textarea id="inp" spellcheck="false" autocomplete="off" aria-describedby="how" placeholder="FAKE-SKU,NOT-A-REAL-MFR-CODE,96385074"></textarea>
+<button id="go" type="button">Check these rows</button>
+<button id="example" class="sec" type="button" aria-describedby="example-note">Load example</button>
+<button id="clear" class="sec" type="button">Clear</button>
+<p id="example-note" class="muted">Load example fills the box with clearly fake rows (FAKE-MUG and NOT-A-REAL-MFR). They are not real products.</p>
+</section>
+
+<section class="card" id="results" hidden aria-live="polite">
+<h2>2. Summary</h2>
+<div class="cd">
+ <div>
+  <div class="muted">No problems found in these checks</div>
+  <div class="big" id="n-ok">0</div>
+ </div>
+ <div>
+  <div class="muted">Rows needing fixes</div>
+  <div class="big" id="n-fix">0</div>
+ </div>
+</div>
+<p id="read-as"></p>
+<p id="cap" hidden></p>
+<p id="notes"></p>
+<div class="table-wrap">
+<table>
+<caption>Per-row checks</caption>
+<thead>
+<tr>
+<th scope="col">Row</th>
+<th scope="col">Merchant SKU</th>
+<th scope="col">Manufacturer product code</th>
+<th scope="col">Barcode</th>
+<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+</div>
+<h2>Fix list</h2>
+<pre id="fixlist" tabindex="0"></pre>
+<button id="copy" class="sec" type="button">Copy fix list</button>
+<p id="copystate" class="muted" role="status"></p>
+</section>
+
+<section class="card cta" id="paid-tool" aria-labelledby="paid-h">
+<h2 id="paid-h"><a id="paid-link" href="https://firstmoverprojects.gumroad.com/l/fetwsm?utm_source=fmp-tool&amp;utm_medium=eu-product-id-check" rel="noopener noreferrer">FMP's own paid tool: EU Customs Product Data Checker ($29) checks a full Shopify product CSV export</a></h2>
+<p>Free background, dates and sources: <a href="/deadlines/eu-product-identifiers-nov-1.html">EU product identifiers become mandatory for low-value e-commerce imports (Nov 1, 2026)</a></p>
+</section>
+
+<section class="card" aria-labelledby="src-h">
+<h2 id="src-h">Sources</h2>
+<p><a href="https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en" rel="noopener noreferrer">European Commission: The temporary EUR 3 customs duty and the Union handling fee, Guidance for Member States and Trade (PDF, Version of 5 October 2026)</a> · <a href="https://taxation-customs.ec.europa.eu/news/guidance-and-legal-text-temporary-flat-fee-low-value-imports-which-will-apply-until-1-july-2028-2026-06-08_en" rel="noopener noreferrer">European Commission news: Guidance and legal text on temporary flat fee on low-value imports</a> · <a href="https://www.douane.nl/en/themes/import-and-export/import/e-commerce/including-product-identifiers-in-your-e-commerce-declaration/" rel="noopener noreferrer">Dutch Customs: Including product identifiers in your e-commerce declaration</a></p>
+<p>Checked against European Commission guidance (Version of 5 October 2026) on October 23, 2026; the Commission says its guidance is not legally binding and may change.</p>
+<p class="muted">The day count uses your device's date. This page reads only the text you paste.</p>
+</section>
+
+<p>Related: <a href="/deadlines/eu-product-identifiers-nov-1.html">EU product identifiers, Nov 1, 2026</a> · <a href="/deadlines/">All deadlines</a> · <a href="/tools/">Tools and kits</a></p>
+
+<footer>
+<p>Not affiliated with the European Commission or any customs authority.</p>
+<p>General guidance, not legal, tax or IT advice.</p>
+<p>Made by First Mover Projects with AI coding tools.</p>
+</footer>
+</main>
+<noscript><p>This check needs JavaScript in your browser. Nothing is uploaded.</p></noscript>
+<script>
+(function () {
+"use strict";
+var PDF = "https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en";
+var PAID = "https://firstmoverprojects.gumroad.com/l/fetwsm?utm_source=fmp-tool&utm_medium=eu-product-id-check";
+var MAX = 500000;
+var HEADERS = {
+  "sku": 1,
+  "merchant sku": 1,
+  "product sku": 1,
+  "item sku": 1,
+  "variant sku": 1,
+  "merchant product id": 1,
+  "merchant product identifier": 1,
+  "manufacturer product code": 1,
+  "manufacturer product identifier": 1,
+  "manufacturer code": 1,
+  "manufacturer id": 1,
+  "manufacturer identifier": 1,
+  "mfr code": 1,
+  "mfr": 1,
+  "mpn": 1,
+  "product code": 1,
+  "barcode": 1,
+  "ean": 1,
+  "gtin": 1,
+  "upc": 1,
+  "ean gtin": 1,
+  "standardised identifier": 1,
+  "standardized identifier": 1
+};
+var EXAMPLE = [
+  "merchant SKU,manufacturer product code,barcode",
+  "FAKE-MUG-RED,NOT-A-REAL-MFR-100,96385074",
+  "FAKE-MUG-BLUE,NOT-A-REAL-MFR-200,4006381333931",
+  "FAKE-MUG-RED,NOT-A-REAL-MFR-300,96385075",
+  "FAKE-MUG-GREEN,,",
+  ",NOT-A-REAL-MFR-400,036000291452",
+  "FAKE-MUG-YELLOW,NOT-A-REAL-MFR-500,"
+].join("\n");
+
+function byId(id) { return document.getElementById(id); }
+
+function daysUntilNov1(now) {
+  now = now || new Date();
+  var end = new Date(2026, 10, 1);
+  var start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  return Math.round((end.getTime() - start.getTime()) / 86400000);
+}
+
+function normHeader(s) {
+  return String(s || "").trim().toLowerCase().replace(/[/_-]+/g, " ").replace(/\s+/g, " ");
+}
+
+function looksLikeCode(s) {
+  return /^\d{8,}$/.test(String(s || "").replace(/[\s-]+/g, ""));
+}
+
+function isHeader(cells) {
+  var slice = cells.slice(0, 3);
+  if (slice.some(looksLikeCode)) return false;
+  var hits = 0;
+  slice.forEach(function (c) {
+    if (HEADERS[normHeader(c)]) hits++;
+  });
+  return hits >= 2;
+}
+
+function detectDelimiter(text) {
+  var lines = String(text || "").split(/\r?\n/).filter(function (l) { return l.trim() !== ""; });
+  var delims = ["\t", ";", ","];
+  var best = ",";
+  var bestScore = -1;
+  delims.forEach(function (d) {
+    var threes = 0;
+    var multi = 0;
+    var marks = 0;
+    lines.forEach(function (line) {
+      var parts = line.split(d).length;
+      marks += parts - 1;
+      if (parts === 3) threes++;
+      if (parts >= 2) multi++;
+    });
+    var score = marks === 0 ? 0 : threes * 1000 + multi * 10 + marks;
+    if (score > bestScore) {
+      bestScore = score;
+      best = d;
+    }
+  });
+  return best;
+}
+
+function gs1CheckDigit(body) {
+  var sum = 0;
+  for (var i = 0; i < body.length; i++) {
+    var digit = body.charCodeAt(body.length - 1 - i) - 48;
+    sum += digit * (i % 2 === 0 ? 3 : 1);
+  }
+  return (10 - (sum % 10)) % 10;
+}
+
+function gtin(raw) {
+  var original = String(raw == null ? "" : raw).trim();
+  if (!original) return { state: "absent", reason: "", digits: "", length: 0 };
+  var cleaned = original.replace(/[\s-]+/g, "");
+  if (!cleaned) return { state: "absent", reason: "", digits: "", length: 0 };
+  if (!/^\d+$/.test(cleaned)) {
+    return { state: "invalid", reason: "chars", digits: cleaned, length: cleaned.length };
+  }
+  if (cleaned.length !== 8 && cleaned.length !== 12 && cleaned.length !== 13 && cleaned.length !== 14) {
+    return { state: "invalid", reason: "length", digits: cleaned, length: cleaned.length };
+  }
+  var expect = gs1CheckDigit(cleaned.slice(0, -1));
+  var got = cleaned.charCodeAt(cleaned.length - 1) - 48;
+  if (expect !== got) {
+    return { state: "invalid", reason: "check", digits: cleaned, length: cleaned.length, expect: expect };
+  }
+  return { state: "valid", reason: "", digits: cleaned, length: cleaned.length };
+}
+
+function listNums(ns) {
+  if (ns.length === 1) return "row " + ns[0];
+  if (ns.length === 2) return "rows " + ns[0] + " and " + ns[1];
+  return "rows " + ns.slice(0, -1).join(", ") + " and " + ns[ns.length - 1];
+}
+
+function barcodeFlag(g) {
+  if (g.reason === "chars") {
+    return "Barcode present but invalid: use digits only (spaces and hyphens are ignored).";
+  }
+  if (g.reason === "length") {
+    return "Barcode present but invalid: " + g.length + " digits is not a GTIN-8, GTIN-12, GTIN-13 or GTIN-14.";
+  }
+  return "Barcode present but invalid: the GS1 mod-10 check digit does not match.";
+}
+
+function analyze(text) {
+  var original = String(text == null ? "" : text).replace(/^\uFEFF/, "");
+  var truncated = original.length > MAX;
+  if (truncated) original = original.slice(0, MAX);
+  var delimiter = detectDelimiter(original);
+  var parsed = [];
+  original.split(/\r?\n/).forEach(function (line, idx) {
+    if (line.trim() === "") return;
+    parsed.push({
+      line: idx + 1,
+      cells: line.split(delimiter).map(function (c) { return c.trim(); })
+    });
+  });
+  var headerSkipped = parsed.length > 0 && isHeader(parsed[0].cells);
+  var data = headerSkipped ? parsed.slice(1) : parsed.slice();
+  var totalDataRows = data.length;
+  var capped = totalDataRows > 25;
+  var used = data.slice(0, 25);
+  var draft = used.map(function (row, i) {
+    var cells = row.cells;
+    return {
+      n: i + 1,
+      line: row.line,
+      sku: cells.length > 0 ? cells[0] : "",
+      mfr: cells.length > 1 ? cells[1] : "",
+      barcode: cells.length > 2 ? cells[2] : "",
+      key: (cells.length > 0 ? cells[0] : "").trim().toLowerCase()
+    };
+  });
+  var groups = {};
+  draft.forEach(function (row) {
+    if (!row.key) return;
+    if (!groups[row.key]) groups[row.key] = [];
+    groups[row.key].push(row);
+  });
+  var ready = 0;
+  var needsFix = 0;
+  var y081 = 0;
+  draft.forEach(function (row) {
+    var flags = [];
+    if (!row.sku) flags.push({ code: "missing-sku", text: "Missing merchant SKU." });
+    var group = row.key ? groups[row.key] : null;
+    if (group && group.length > 1) {
+      var others = group.filter(function (r) { return r.n !== row.n; }).map(function (r) { return r.n; });
+      var caseDiff = group.some(function (r) { return r.sku !== row.sku; });
+      flags.push({
+        code: "duplicate-sku",
+        text: "Duplicate merchant SKU across rows (same as " + listNums(others) + (caseDiff ? ", ignoring letter case" : "") + "). Each variant needs its own code."
+      });
+    }
+    if (!row.mfr) flags.push({ code: "missing-mfr", text: "Missing manufacturer product code." });
+    var g = gtin(row.barcode);
+    row.gtin = g;
+    if (g.state === "invalid") flags.push({ code: "bad-barcode", text: barcodeFlag(g) });
+    if (g.state === "absent") {
+      flags.push({
+        code: "no-barcode",
+        text: "No barcode pasted. Declare with code Y081 only if no standardised identifier exists, per the guidance."
+      });
+      y081++;
+    }
+    row.flags = flags;
+    row.status = flags.some(function (f) { return f.code !== "no-barcode"; }) ? "fix" : "clear";
+    if (row.status === "fix") needsFix++;
+    else ready++;
+  });
+  var delimName = delimiter === "\t" ? "tabs" : delimiter === ";" ? "semicolons" : "commas";
+  var readAs = draft.length ? "Read as columns separated by " + delimName + "." : "No data rows to check.";
+  if (headerSkipped) readAs += " Header row skipped.";
+  if (truncated) readAs += " Only the first 500,000 characters were read.";
+  var capMessage = capped
+    ? "You pasted " + totalDataRows + " data rows. This page checked the first 25 only. The full-catalogue Shopify CSV check is the paid tool."
+    : "";
+  var lines = [];
+  lines.push("EU Nov 1 Product ID Quick Check");
+  lines.push("Rows with no problems found in these checks: " + ready);
+  lines.push("Rows needing fixes: " + needsFix);
+  if (y081) {
+    lines.push("Rows with no barcode: " + y081 + ". Declare with code Y081 only if no standardised identifier exists, per the guidance.");
+  }
+  lines.push(readAs);
+  if (capMessage) lines.push(capMessage);
+  lines.push("");
+  draft.forEach(function (row) {
+    var name = row.sku ? row.sku : "no merchant SKU";
+    var bits = row.flags.map(function (f) { return f.text; });
+    if (row.status === "clear") bits.unshift("No problems found in these checks.");
+    lines.push("Row " + row.n + " (" + name + "): " + bits.join(" "));
+  });
+  lines.push("");
+  lines.push("This page can't see what your carrier or customs agent needs. Whoever declares your parcels must give these identifiers to customs, so ask them what format they need.");
+  lines.push("General guidance, not legal, tax or IT advice.");
+  return {
+    delimiter: delimiter,
+    headerSkipped: headerSkipped,
+    truncated: truncated,
+    totalDataRows: totalDataRows,
+    capped: capped,
+    processed: draft.length,
+    ready: ready,
+    needsFix: needsFix,
+    y081: y081,
+    readAs: readAs,
+    capMessage: capMessage,
+    rows: draft,
+    fixList: lines.join("\n")
+  };
+}
+
+function dash(s) { return s ? s : "\u2014"; }
+
+function render(text) {
+  var result = analyze(text);
+  byId("n-ok").textContent = String(result.ready);
+  byId("n-fix").textContent = String(result.needsFix);
+  byId("read-as").textContent = result.readAs;
+  var cap = byId("cap");
+  cap.hidden = !result.capped;
+  cap.textContent = "";
+  if (result.capped) {
+    cap.appendChild(document.createTextNode(result.capMessage + " "));
+    var paid = document.createElement("a");
+    paid.href = PAID;
+    paid.rel = "noopener noreferrer";
+    paid.textContent = "EU Customs Product Data Checker ($29)";
+    cap.appendChild(paid);
+  }
+  var notes = byId("notes");
+  notes.textContent = "";
+  if (result.y081) {
+    notes.appendChild(document.createTextNode(
+      result.y081 + (result.y081 === 1 ? " row has" : " rows have") +
+      " no barcode. Declare with code Y081 only if no standardised identifier exists, per the "
+    ));
+    var guide = document.createElement("a");
+    guide.href = PDF;
+    guide.rel = "noopener noreferrer";
+    guide.textContent = "guidance";
+    notes.appendChild(guide);
+    notes.appendChild(document.createTextNode("."));
+  }
+  var tb = byId("tbody");
+  tb.textContent = "";
+  if (!result.rows.length) {
+    var empty = document.createElement("tr");
+    var emptyCell = document.createElement("td");
+    emptyCell.colSpan = 5;
+    emptyCell.textContent = "No data rows to check.";
+    empty.appendChild(emptyCell);
+    tb.appendChild(empty);
+  }
+  result.rows.forEach(function (row) {
+    var tr = document.createElement("tr");
+    tr.setAttribute("data-status", row.status);
+    tr.setAttribute("data-sku", row.sku);
+    var th = document.createElement("th");
+    th.scope = "row";
+    th.textContent = String(row.n);
+    tr.appendChild(th);
+    [row.sku, row.mfr, row.barcode].forEach(function (value) {
+      var td = document.createElement("td");
+      td.textContent = dash(value);
+      tr.appendChild(td);
+    });
+    var res = document.createElement("td");
+    var tag = document.createElement("span");
+    tag.className = row.status === "fix" ? "tag warn" : "tag ok";
+    tag.textContent = row.status === "fix" ? "Needs a fix" : "No problems found in these checks";
+    res.appendChild(tag);
+    if (row.flags.length) {
+      var ul = document.createElement("ul");
+      row.flags.forEach(function (f) {
+        var li = document.createElement("li");
+        li.setAttribute("data-code", f.code);
+        li.textContent = f.text;
+        ul.appendChild(li);
+      });
+      res.appendChild(ul);
+    }
+    tr.appendChild(res);
+    tb.appendChild(tr);
+  });
+  byId("fixlist").textContent = result.fixList;
+  byId("copystate").textContent = "";
+  var box = byId("results");
+  box.hidden = false;
+  box.setAttribute("data-delimiter", result.delimiter === "\t" ? "tab" : result.delimiter);
+  box.setAttribute("data-capped", result.capped ? "yes" : "no");
+  box.setAttribute("data-header", result.headerSkipped ? "yes" : "no");
+  box.setAttribute("data-ready", String(result.ready));
+  box.setAttribute("data-fix", String(result.needsFix));
+  return result;
+}
+
+function showDays(now) {
+  var n = daysUntilNov1(now);
+  var el = byId("days");
+  if (n > 0) el.textContent = n + (n === 1 ? " day" : " days") + " until 1 November 2026";
+  else if (n === 0) el.textContent = "1 November 2026 is today";
+  else el.textContent = "1 November 2026 has passed. Check the Commission's current guidance.";
+}
+
+window.FMP_EU = {
+  gtin: gtin,
+  detectDelimiter: detectDelimiter,
+  analyze: analyze,
+  daysUntilNov1: daysUntilNov1,
+  render: render,
+  EXAMPLE: EXAMPLE
+};
+
+byId("go").addEventListener("click", function () { render(byId("inp").value); });
+byId("example").addEventListener("click", function () {
+  byId("inp").value = EXAMPLE;
+  render(EXAMPLE);
+});
+byId("clear").addEventListener("click", function () {
+  byId("inp").value = "";
+  byId("results").hidden = true;
+  byId("tbody").textContent = "";
+  byId("fixlist").textContent = "";
+  byId("copystate").textContent = "";
+});
+byId("copy").addEventListener("click", function () {
+  var text = byId("fixlist").textContent;
+  var state = byId("copystate");
+  if (!text) {
+    state.textContent = "Check rows first. The fix list is copied only when you press this button.";
+    return;
+  }
+  if (!navigator.clipboard || !navigator.clipboard.writeText) {
+    state.textContent = "Select the fix list above and copy it from there.";
+    return;
+  }
+  navigator.clipboard.writeText(text).then(function () {
+    state.textContent = "Copied.";
+  }, function () {
+    state.textContent = "Select the fix list above and copy it from there.";
+  });
+});
+showDays(new Date());
+})();
+</script>
+</body>
+</html>
