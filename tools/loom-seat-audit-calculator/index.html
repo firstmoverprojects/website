@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/loom-seat-audit-calculator/">
+<title>Loom Seat Audit &amp; Creator-Lite Migration Calculator (Free, Runs in Your Browser)</title>
+<meta name="description" content="Paste a seat-activity CSV or enter Creator seat counts and your per-seat rate. Get a Keep, Move, and Archive table plus annual arithmetic from your numbers. Name and email columns are dropped.">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1b1f24;background:#f6f7f9;overflow-wrap:anywhere}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.2em 0 .4em}
+h3{font-size:1.05rem;margin:.8em 0 .3em}
+.card{background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:16px;margin:12px 0}
+.cd{display:flex;flex-wrap:wrap;gap:12px}
+.cd>div{flex:1 1 240px;background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:12px;min-width:0}
+.big{font-size:1.5rem;font-weight:700}
+.muted{color:#5a636e;font-size:.9rem}
+label{display:block;font-weight:600;margin-top:12px}
+textarea,input[type=text],select{width:100%;max-width:100%;font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;padding:8px;border:1px solid #b9c0c8;border-radius:6px;background:#fff;color:inherit}
+textarea{min-height:160px}
+pre{font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;background:#eef1f5;padding:10px;border-radius:6px;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;margin:.4em 0;min-width:0;max-width:100%}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:0;background:#1f5fbf;color:#fff;cursor:pointer;margin:12px 8px 0 0;white-space:normal;max-width:100%}
+button.sec{background:#e4e8ee;color:#1b1f24}
+.tag{display:inline-block;font-size:.8rem;padding:2px 8px;border-radius:9px;margin:0 6px 6px 0;background:#e4e8ee}
+.warn{background:#fde8e6;color:#8a1c12}
+.ok{background:#e3f4e6;color:#1d6b2c}
+.mid{background:#fff3d6;color:#7a5200}
+.cta{background:#fff8e6;border-color:#f0d58a}
+a{color:#1f5fbf}
+a:focus,button:focus,textarea:focus,input:focus,select:focus{outline:3px solid #1f5fbf;outline-offset:2px}
+table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0}
+th,td{border:1px solid #dde1e6;padding:6px 8px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+caption{text-align:left;font-weight:600;padding:4px 0}
+.table-wrap{overflow-x:auto;max-width:100%}
+ul,ol{margin:.4em 0;padding-left:1.2em}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:8px;top:8px;background:#fff;padding:8px 12px;z-index:2}
+footer{margin:8px 0 24px}
+[hidden]{display:none !important}
+@media print{
+  body{background:#fff}
+  .noprint{display:none !important}
+  .card{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<header>
+<nav aria-label="Site">
+<p class="muted"><a href="https://firstmoverprojects.com/">First Mover Projects</a> · <a href="/tools/">Tools</a> · <a href="/deadlines/">Deadlines</a></p>
+</nav>
+</header>
+<h1>Loom Seat Audit &amp; Creator-Lite Migration Calculator</h1>
+<p><strong>Paste a seat export, get a reclassification table and the annual arithmetic.</strong> Free. Runs in your browser. Nothing is uploaded.</p>
+<p id="who"><strong>Who it's for:</strong> a workspace admin preparing a Loom renewal or an Atlassian billing change, who wants a Keep / Move / Archive split from their own counts.</p>
+
+<section class="card" aria-labelledby="rules-h">
+<h2 id="rules-h">How a seat is classified</h2>
+<p>Name, email, phone, and other identity columns are dropped before a row is counted. Results show counts only.</p>
+<ul>
+<li><strong>Archive &amp; Export:</strong> a Creator or Admin row whose 90-day video count is 0.</li>
+<li><strong>Move to Free Creator Lite/Viewer:</strong> a Creator or Admin row with a 30-day video count of 0 (and the 90-day count is not 0), or a Creator or Admin row that still recorded in the last 30 days but whose recorded-minutes cell is a plain number of 5 or less. In the count boxes, this bucket is the 30-day zeros that are not 90-day zeros, plus the view-only or occasional group you enter.</li>
+<li><strong>Keep Creator:</strong> every other Creator or Admin row with a usable activity number. Count-box mode: billed Creator seats, minus 30-day zeros, minus the view-only group.</li>
+<li><strong>Already Creator Lite or Viewer:</strong> a row whose role cell says Creator Lite or Viewer. These are not added to the savings line. Atlassian Support says Creator Lite is discontinued when a workspace is integrated with Atlassian, and those users become paid Creator seats until an admin changes or deactivates them. Legacy Loom billing described Creator Lite as not billed. Check the roles your plan still offers.</li>
+</ul>
+<p>The count boxes must not overlap. A person with 0 videos in 90 days is also a person with 0 videos in 30 days, so the 90-day number cannot be larger than the 30-day number. View-only seats are everyone else you would move, not people already inside the 30-day zero count.</p>
+<p class="muted">A blank activity cell is not treated as zero. A video count must be a whole number. Recorded minutes must be a plain number such as 5 or 4.5. This page does not read a clock time.</p>
+<p>Atlassian Support says a downgraded Creator keeps Creator access until the end of the billing period already paid, and that price examples on the billing page are illustrations. The annual line below is your entered rate times the seats this page puts in Archive or Move. It is not an invoice.</p>
+</section>
+
+<section class="card" aria-labelledby="paste-h">
+<h2 id="paste-h">1. Paste rows or enter counts</h2>
+<p id="how">CSV with a header row. Columns this page can use: role (or seat, plan, license), 30-day videos, 90-day videos, recorded minutes. A header that says name, email, user, or phone is dropped. If the paste box has data rows, the count boxes are ignored.</p>
+<label for="csv">Seat activity CSV</label>
+<textarea id="csv" spellcheck="false" autocomplete="off" aria-describedby="how" placeholder="role,videos_30d,videos_90d,recorded_minutes"></textarea>
+<p class="muted">Or leave the box empty and enter counts that do not overlap.</p>
+<label for="total">Billed Creator seats</label>
+<input id="total" type="text" inputmode="numeric" autocomplete="off" placeholder="0">
+<label for="z30">Users who recorded 0 videos in the last 30 days</label>
+<input id="z30" type="text" inputmode="numeric" autocomplete="off" placeholder="0">
+<label for="z90">Users who recorded 0 videos in the last 90 days (part of the 30-day count)</label>
+<input id="z90" type="text" inputmode="numeric" autocomplete="off" placeholder="0">
+<label for="viewers">Users who only view, or record 5 minutes or less occasionally (not already in the 30-day zeros)</label>
+<input id="viewers" type="text" inputmode="numeric" autocomplete="off" placeholder="0">
+<label for="rate">Per-seat rate you pay for a Creator seat</label>
+<input id="rate" type="text" inputmode="decimal" autocomplete="off" placeholder="0">
+<label for="period">That rate is</label>
+<select id="period">
+<option value="monthly">Monthly</option>
+<option value="annual">Annual</option>
+</select>
+<button id="go" class="noprint" type="button">Build the seat table</button>
+<button id="example" class="sec noprint" type="button">Load example</button>
+<button id="clear" class="sec noprint" type="button">Clear</button>
+</section>
+
+<section class="card" id="results" hidden aria-live="polite">
+<h2>Seat Reclassification Table</h2>
+<p id="note"></p>
+<div id="errors"></div>
+<div class="table-wrap">
+<table id="reclass">
+<caption>Keep Creator vs. Move to Free Creator Lite/Viewer vs. Archive &amp; Export</caption>
+<thead>
+<tr><th scope="col">Reclassification</th><th scope="col">Seats</th><th scope="col">Next step</th></tr>
+</thead>
+<tbody id="reclass-body"></tbody>
+</table>
+</div>
+<h2>Annual arithmetic</h2>
+<p id="basis"></p>
+<p id="formula"></p>
+<p id="savings" class="big"></p>
+<h2>Pre-renewal audit checklist</h2>
+<pre id="checklist" tabindex="0"></pre>
+<button id="copy" class="sec noprint" type="button">Copy checklist</button>
+<p id="copystate" class="muted" role="status"></p>
+</section>
+
+<section class="card cta" aria-labelledby="paid-h">
+<h2 id="paid-h">Paid kit</h2>
+<p><a id="paid-link" href="https://firstmoverprojects.gumroad.com/l/fguyxn?utm_source=fmp_site&amp;utm_medium=loom_audit_check&amp;utm_campaign=issue07_multi" rel="noopener noreferrer">Loom Seat Audit &amp; Exit Pack ($79)</a></p>
+<p class="muted">The $79 pack is a separate file on Gumroad. This page does not send your CSV there.</p>
+</section>
+
+<section class="card" aria-labelledby="src-h">
+<h2 id="src-h">Sources</h2>
+<ul>
+<li><a href="https://support.atlassian.com/loom/docs/loom-customer-integration-with-atlassian-pricing-billing-and-role-changes/" rel="noopener noreferrer">Atlassian Support: Loom customer integration — pricing, billing, and role changes</a> (Creator Lite discontinued on integration; grace period before those seats are billed; activity download path)</li>
+<li><a href="https://support.atlassian.com/loom/docs/looms-billing-policy-for-paid-plans/" rel="noopener noreferrer">Atlassian Support: Loom’s billing policy for paid plans</a> (Creators and Admins are the paid seats on those plans; a downgrade keeps Creator access until the period already paid ends; Creator Lite described as not billed on that legacy policy)</li>
+<li><a href="https://support.atlassian.com/loom/docs/add-remove-and-manage-members-in-your-workspace/" rel="noopener noreferrer">Atlassian Support: Add, remove and manage members</a> (role options depend on the plan)</li>
+</ul>
+<p class="muted">Support pages checked October 26, 2026. Your contract and billing page control the rate and the roles you can still assign.</p>
+</section>
+
+<p>Related: <a href="/tools/">Tools and kits</a> · <a href="/deadlines/">Deadlines</a></p>
+<footer>
+<p>General guidance, not legal, tax or IT advice.</p>
+<p>Not affiliated with Etsy, Inc., Atlassian/Loom, or any third-party platform.</p>
+<p class="muted">This page reads only what you type or paste. Nothing is uploaded.</p>
+</footer>
+</main>
+<noscript><p>This check needs JavaScript in your browser. Nothing is uploaded.</p></noscript>
+<script>
+(function () {
+"use strict";
+var MAX = 500000;
+var MAX_ROWS = 2000;
+var BASIS = "Calculated strictly from the numbers you entered above.";
+var EXAMPLE = [
+  "email,name,role,videos_30d,videos_90d,recorded_minutes",
+  "pat@example.com,Pat Example,Admin,12,40,80",
+  "lee@example.com,Lee Example,Creator,0,0,0",
+  "cara@example.com,Cara Example,Creator,0,3,20",
+  "dan@example.com,Dan Example,Creator,2,4,3",
+  "eve@example.com,Eve Example,Viewer,0,0,0"
+].join("\n");
+
+function byId(id) { return document.getElementById(id); }
+
+function redact(value) {
+  var s = String(value == null ? "" : value);
+  s = s.replace(/\b(?:ssn|social security(?: number)?)\s*[:#]?\s*\d{3}-?\d{2}-?\d{4}\b/gi, "[redacted-ssn]");
+  s = s.replace(/\b(?:ein|employer identification(?: number)?)\s*[:#]?\s*\d{2}-?\d{7}\b/gi, "[redacted-ein]");
+  s = s.replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, "[redacted-email]");
+  s = s.replace(/\b\d{3}-\d{2}-\d{4}\b/g, "[redacted-ssn]");
+  s = s.replace(/\b\d{2}-\d{7}\b/g, "[redacted-ein]");
+  s = s.replace(/(?:\+?\d{1,3}[\s.-])?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}\b/g, "[redacted-phone]");
+  return s;
+}
+
+function normKey(s) {
+  return String(s || "").trim().toLowerCase().replace(/[^a-z0-9]+/g, "");
+}
+
+function columnKind(header) {
+  var raw = String(header || "");
+  var k = normKey(raw);
+  if (!k) return "drop";
+  if (k.indexOf("email") !== -1 || k === "mail") return "email";
+  if (k.indexOf("phone") !== -1 || k === "ssn" || k === "ein" || k.indexOf("address") !== -1) return "drop";
+  if (k === "filename" || k === "hostname") return "drop";
+  if (k === "name" || k === "fullname" || k === "firstname" || k === "lastname" || k === "displayname" || k === "username" || k === "user" || k === "member" || k === "membername" || /name$/.test(k)) return "name";
+  if (k === "role" || k === "seat" || k === "seattype" || k === "plan" || k === "license" || k === "licensetype" || k === "memberrole" || k === "userrole" || k === "type") return "role";
+  if (/30/.test(k) && /video|record|count|activity/.test(k) && k.indexOf("90") === -1) return "v30";
+  if (/90/.test(k) && /video|record|count|activity/.test(k)) return "v90";
+  if (/minute|duration/.test(k)) return "minutes";
+  return "drop";
+}
+
+function parseLine(line, delim) {
+  var out = [];
+  var cur = "";
+  var q = false;
+  for (var i = 0; i < line.length; i++) {
+    var ch = line.charAt(i);
+    if (q) {
+      if (ch === '"') {
+        if (line.charAt(i + 1) === '"') { cur += '"'; i++; }
+        else q = false;
+      } else cur += ch;
+    } else if (ch === '"') q = true;
+    else if (ch === delim) { out.push(cur); cur = ""; }
+    else cur += ch;
+  }
+  out.push(cur);
+  return out.map(function (cell) { return cell.trim(); });
+}
+
+function detectDelim(line) {
+  var counts = {"\t": 0, ",": 0, ";": 0};
+  var q = false;
+  for (var i = 0; i < line.length; i++) {
+    var ch = line.charAt(i);
+    if (ch === '"') {
+      if (q && line.charAt(i + 1) === '"') { i++; continue; }
+      q = !q;
+    } else if (!q && counts[ch] != null) counts[ch]++;
+  }
+  if (counts["\t"] > 0 && counts["\t"] >= counts[","] && counts["\t"] >= counts[";"]) return "\t";
+  if (counts[";"] > counts[","]) return ";";
+  return ",";
+}
+
+function roleKind(role) {
+  var r = String(role || "").toLowerCase();
+  if (/\blite\b/.test(r) || /\bviewer\b/.test(r)) return "free";
+  if (/\badmin\b/.test(r) || /\bcreator\b/.test(r)) return "creator";
+  return "unknown";
+}
+
+function parseWhole(cell) {
+  var s = String(cell == null ? "" : cell).trim().replace(/,/g, "");
+  if (s === "") return {empty: true, ok: false};
+  if (!/^\d+$/.test(s)) return {empty: false, ok: false};
+  return {empty: false, ok: true, n: Number(s)};
+}
+
+function parseMinutes(cell) {
+  var s = String(cell == null ? "" : cell).trim().replace(/,/g, "");
+  if (s === "") return {empty: true, ok: false};
+  if (!/^\d+(\.\d+)?$/.test(s)) return {empty: false, ok: false};
+  return {empty: false, ok: true, n: Number(s)};
+}
+
+function emptyClass() {
+  return {keep: 0, move: 0, archive: 0, free: 0, unclassified: 0, keptPlainMinutes: 0};
+}
+
+function classifyCreator(row, cols) {
+  var v90 = cols.v90 == null ? null : parseWhole(row[cols.v90]);
+  var v30 = cols.v30 == null ? null : parseWhole(row[cols.v30]);
+  var mins = cols.minutes == null ? null : parseMinutes(row[cols.minutes]);
+  if (v90 && v90.ok && v90.n === 0) return "archive";
+  if (v30 && v30.ok && v30.n === 0) return "move";
+  var recorded = (v30 && v30.ok && v30.n > 0) || (v90 && v90.ok && v90.n > 0);
+  if (mins && mins.ok && mins.n <= 5 && recorded) return "move";
+  if (recorded) return "keep";
+  return "unclassified";
+}
+
+function auditCsv(text) {
+  var original = String(text == null ? "" : text).replace(/^\uFEFF/, "");
+  if (original.length > MAX) {
+    return {ok: false, errors: ["Paste is longer than 500,000 characters. Split the export and check a smaller piece."]};
+  }
+  var lines = [];
+  original.split(/\r?\n/).forEach(function (line) {
+    if (line.trim() !== "") lines.push(line);
+  });
+  if (!lines.length) return {ok: false, empty: true, errors: []};
+  var delim = detectDelim(lines[0]);
+  var header = parseLine(lines[0], delim);
+  var kinds = header.map(columnKind);
+  var cols = {};
+  kinds.forEach(function (kind, idx) {
+    if ((kind === "role" || kind === "v30" || kind === "v90" || kind === "minutes") && cols[kind] == null) cols[kind] = idx;
+  });
+  var dropped = {};
+  kinds.forEach(function (kind) {
+    if (kind === "email" || kind === "name" || kind === "drop") dropped[kind] = true;
+  });
+  if (cols.role == null && cols.v30 == null && cols.v90 == null && cols.minutes == null) {
+    return {ok: false, errors: ["No role or activity columns found. This page keeps seat role and count columns only. Name and email columns are dropped and are not shown."]};
+  }
+  var data = lines.slice(1);
+  if (!data.length) return {ok: false, empty: true, errors: []};
+  var capped = data.length > MAX_ROWS;
+  var used = data.slice(0, MAX_ROWS);
+  var counts = emptyClass();
+  var assumeCreator = cols.role == null;
+  used.forEach(function (line) {
+    var cells = parseLine(line, delim);
+    var kind = assumeCreator ? "creator" : roleKind(cells[cols.role]);
+    if (kind === "free") { counts.free++; return; }
+    if (kind === "unknown") { counts.unclassified++; return; }
+    var bucket = classifyCreator(cells, cols);
+    counts[bucket]++;
+    if (bucket === "keep" && cols.minutes != null) {
+      var mins = parseMinutes(cells[cols.minutes]);
+      var v30 = cols.v30 == null ? null : parseWhole(cells[cols.v30]);
+      if ((v30 && v30.ok && v30.n > 0) && !mins.ok) counts.keptPlainMinutes++;
+    }
+  });
+  var note = "Pasted rows were used. The seat count boxes were not used.";
+  if (assumeCreator) note += " No role column. Each data row was counted as a billed Creator or Admin seat.";
+  note += " Identity columns were dropped before counting.";
+  if (capped) note += " Only the first " + MAX_ROWS + " data rows were classified.";
+  return {
+    ok: true,
+    source: "csv",
+    note: note,
+    counts: counts,
+    rows: used.length,
+    totalRows: data.length,
+    capped: capped,
+    used: {role: cols.role != null, v30: cols.v30 != null, v90: cols.v90 != null, minutes: cols.minutes != null},
+    dropped: Object.keys(dropped)
+  };
+}
+
+function parseIntField(raw) {
+  var s = String(raw == null ? "" : raw).trim().replace(/,/g, "");
+  if (!/^\d+$/.test(s)) return null;
+  var n = Number(s);
+  if (!isFinite(n) || n > 10000000) return null;
+  return n;
+}
+
+function auditCounts(input) {
+  var total = parseIntField(input.total);
+  var z30 = parseIntField(input.z30);
+  var z90 = parseIntField(input.z90);
+  var viewers = parseIntField(input.viewers);
+  var errors = [];
+  if (total === null) errors.push("Enter billed Creator seats as a whole number from 0 to 10,000,000.");
+  if (z30 === null) errors.push("Enter users with 0 videos in 30 days as a whole number from 0 to 10,000,000.");
+  if (z90 === null) errors.push("Enter users with 0 videos in 90 days as a whole number from 0 to 10,000,000.");
+  if (viewers === null) errors.push("Enter view-only or occasional seats as a whole number from 0 to 10,000,000.");
+  if (errors.length) return {ok: false, errors: errors};
+  if (z90 > z30) errors.push("Users with 0 videos in 90 days cannot exceed users with 0 videos in 30 days. A 90-day zero is already inside the 30-day count.");
+  if (z30 + viewers > total) errors.push("30-day zeros plus view-only seats (" + (z30 + viewers) + ") exceed billed Creator seats (" + total + "). Those groups must not overlap and must fit inside the billed count.");
+  if (errors.length) return {ok: false, errors: errors};
+  var counts = emptyClass();
+  counts.archive = z90;
+  counts.move = (z30 - z90) + viewers;
+  counts.keep = total - z30 - viewers;
+  return {
+    ok: true,
+    source: "counts",
+    note: "Count boxes were used. Paste no rows if you want these numbers.",
+    counts: counts,
+    rows: total,
+    totalRows: total,
+    capped: false,
+    used: {role: false, v30: true, v90: true, minutes: false},
+    dropped: []
+  };
+}
+
+function parseRate(raw) {
+  var s = String(raw == null ? "" : raw).trim().replace(/^\$/, "").replace(/,/g, "");
+  if (s === "") return {empty: true};
+  if (!/^\d+(\.\d+)?$/.test(s)) return {empty: false, ok: false};
+  var n = Number(s);
+  if (!isFinite(n) || n > 1000000000) return {empty: false, ok: false};
+  return {empty: false, ok: true, cents: Math.round(n * 100), dollars: n};
+}
+
+function moneyFromCents(cents) {
+  var neg = cents < 0;
+  var a = Math.abs(cents);
+  var whole = Math.floor(a / 100);
+  var frac = a % 100;
+  var s = String(whole);
+  var out = "";
+  while (s.length > 3) {
+    out = "," + s.slice(-3) + out;
+    s = s.slice(0, -3);
+  }
+  return (neg ? "-$" : "$") + s + out + "." + (frac < 10 ? "0" : "") + frac;
+}
+
+function withRate(classified, rateRaw, period) {
+  var rate = parseRate(rateRaw);
+  var counts = classified.counts;
+  var leaving = counts.archive + counts.move;
+  if (!rate.ok) {
+    return {
+      ok: false,
+      empty: !!rate.empty,
+      error: rate.empty ? "" : "Enter the per-seat rate as a dollar amount from 0 to 1,000,000,000.",
+      leaving: leaving,
+      annualCents: null
+    };
+  }
+  var annualCents = period === "annual" ? rate.cents : rate.cents * 12;
+  if (leaving > 0 && annualCents > Math.floor(Number.MAX_SAFE_INTEGER / leaving)) {
+    return {ok: false, empty: false, error: "That rate times the seats leaving Creator is too large to show exactly. Enter a smaller rate.", leaving: leaving, annualCents: null};
+  }
+  return {
+    ok: true,
+    empty: false,
+    error: "",
+    leaving: leaving,
+    annualCents: annualCents,
+    savingsCents: leaving * annualCents,
+    rateCents: rate.cents,
+    period: period === "annual" ? "annual" : "monthly"
+  };
+}
+
+function checklistFor(classified, rateInfo) {
+  var c = classified.counts;
+  var lines = [];
+  lines.push("Loom seat pre-renewal audit checklist");
+  lines.push(classified.note);
+  lines.push("Keep Creator: " + c.keep);
+  lines.push("Move to Free Creator Lite/Viewer: " + c.move);
+  lines.push("Archive & Export: " + c.archive);
+  lines.push("Already Creator Lite or Viewer: " + c.free);
+  lines.push("Not classified: " + c.unclassified);
+  lines.push("");
+  lines.push("1. In your own Loom admin tools, download the user activity file (Atlassian Support describes Admin tools, then Users, then Download Data). Paste it only into this page if you want the count. This page does not send the file anywhere.");
+  lines.push("2. Match the billed Creator seat count to the invoice, not to a guess.");
+  lines.push("3. Archive & Export (" + c.archive + "): export any recording that person still needs, then deactivate or remove the paid seat before renewal.");
+  lines.push("4. Move to Free Creator Lite/Viewer (" + c.move + "): check whether your plan still offers Creator Lite or Viewer. Atlassian Support says Creator Lite is discontinued on workspaces integrated with Atlassian, and those users stay paid Creators until you change or deactivate them.");
+  lines.push("5. Keep Creator (" + c.keep + "): leave these billed Creator or Admin seats in place. Rows kept because recorded minutes were not a plain number: " + c.keptPlainMinutes + ".");
+  lines.push("6. Re-read the invoice after the change. Atlassian Support says a downgraded Creator keeps paid access until the end of the period already paid.");
+  if (rateInfo.ok) {
+    var periodLine = rateInfo.period === "monthly"
+      ? moneyFromCents(rateInfo.rateCents) + " per seat per month × 12 = " + moneyFromCents(rateInfo.annualCents) + " per seat per year"
+      : moneyFromCents(rateInfo.rateCents) + " per seat per year";
+    lines.push("7. Annual amount = (Archive & Export + Move to Free Creator Lite/Viewer) × annual per-seat rate = (" + c.archive + " + " + c.move + ") × " + moneyFromCents(rateInfo.annualCents) + " = " + moneyFromCents(rateInfo.savingsCents) + ".");
+    lines.push("Rate used: " + periodLine + ".");
+    lines.push(BASIS + " Seat counts come from the source named above. If a changed seat is still billed, this amount will not match the invoice.");
+  } else if (rateInfo.empty) {
+    lines.push("7. Enter a per-seat rate to see the annual arithmetic.");
+  } else {
+    lines.push("7. " + rateInfo.error);
+  }
+  lines.push("");
+  lines.push("General guidance, not legal, tax or IT advice.");
+  return redact(lines.join("\n"));
+}
+
+function combine(classified, rateRaw, period) {
+  if (!classified.ok) return {ok: false, errors: classified.errors, checklist: ""};
+  var rateInfo = withRate(classified, rateRaw, period);
+  return {
+    ok: true,
+    errors: rateInfo.ok || rateInfo.empty ? [] : [rateInfo.error],
+    classified: classified,
+    rateInfo: rateInfo,
+    checklist: checklistFor(classified, rateInfo)
+  };
+}
+
+function fromInputs(input) {
+  var pasted = String(input.csv || "");
+  if (pasted.trim() !== "") {
+    var csv = auditCsv(pasted);
+    if (csv.empty) return fromCounts(input);
+    return combine(csv, input.rate, input.period);
+  }
+  return fromCounts(input);
+}
+
+function fromCounts(input) {
+  return combine(auditCounts(input), input.rate, input.period);
+}
+
+function el(tag, text) {
+  var node = document.createElement(tag);
+  if (text != null) node.textContent = text;
+  return node;
+}
+
+function render(model) {
+  var errors = byId("errors");
+  errors.textContent = "";
+  (model.errors || []).forEach(function (err) { errors.appendChild(el("p", err)); });
+  var body = byId("reclass-body");
+  body.textContent = "";
+  byId("note").textContent = "";
+  byId("formula").textContent = "";
+  byId("savings").textContent = "";
+  byId("basis").textContent = "";
+  byId("checklist").textContent = "";
+  var box = byId("results");
+  if (!model.ok) {
+    box.hidden = false;
+    box.setAttribute("data-source", "");
+    box.setAttribute("data-math", "no");
+    byId("savings").removeAttribute("data-annual-cents");
+    byId("copystate").textContent = "";
+    return model;
+  }
+  var c = model.classified.counts;
+  byId("note").textContent = model.classified.note;
+  var rows = [
+    ["keep", "Keep Creator", c.keep, "Leave these on the billed Creator or Admin seat."],
+    ["move", "Move to Free Creator Lite/Viewer", c.move, "Check whether your plan still has Creator Lite or Viewer. If Creator Lite was upgraded to a paid Creator seat, deactivate it or change the role before the next bill. This worksheet bucket is not itself a free seat."],
+    ["archive", "Archive & Export", c.archive, "Export recordings the person still needs, then remove the paid seat."],
+    ["free", "Already Creator Lite or Viewer", c.free, "Not included in the annual amount. Confirm on your billing page whether the seat is still unpaid."],
+    ["unclassified", "Not classified", c.unclassified, "No usable role or activity number. These seats are not in the annual amount."]
+  ];
+  rows.forEach(function (row) {
+    if ((row[0] === "free" || row[0] === "unclassified") && row[2] === 0) return;
+    var tr = document.createElement("tr");
+    var th = el("th", row[1]);
+    th.scope = "row";
+    tr.appendChild(th);
+    var td = el("td", String(row[2]));
+    td.setAttribute("data-bucket", row[0]);
+    tr.appendChild(td);
+    tr.appendChild(el("td", row[3]));
+    body.appendChild(tr);
+  });
+  byId("basis").textContent = BASIS;
+  var rate = model.rateInfo;
+  if (rate.ok) {
+    var rateLine = rate.period === "monthly"
+      ? "Annual per-seat rate = " + moneyFromCents(rate.rateCents) + " monthly × 12 = " + moneyFromCents(rate.annualCents) + "."
+      : "Annual per-seat rate = " + moneyFromCents(rate.rateCents) + ".";
+    byId("formula").textContent = "Seats leaving billed Creator = Archive & Export + Move to Free Creator Lite/Viewer = " + c.archive + " + " + c.move + " = " + rate.leaving + ". " + rateLine;
+    byId("savings").textContent = moneyFromCents(rate.savingsCents);
+    byId("savings").setAttribute("data-annual-cents", String(rate.savingsCents));
+    byId("savings").setAttribute("data-leaving", String(rate.leaving));
+  } else {
+    byId("formula").textContent = rate.empty ? "Enter a per-seat rate to see the annual arithmetic." : rate.error;
+    byId("savings").textContent = "";
+    byId("savings").removeAttribute("data-annual-cents");
+  }
+  byId("savings").setAttribute("data-keep", String(c.keep));
+  byId("savings").setAttribute("data-move", String(c.move));
+  byId("savings").setAttribute("data-archive", String(c.archive));
+  byId("checklist").textContent = model.checklist;
+  byId("copystate").textContent = "";
+  box.hidden = false;
+  box.setAttribute("data-source", model.classified.source);
+  box.setAttribute("data-math", rate.ok ? "yes" : "no");
+  return model;
+}
+
+function fromDom() {
+  return fromInputs({
+    csv: byId("csv").value,
+    total: byId("total").value,
+    z30: byId("z30").value,
+    z90: byId("z90").value,
+    viewers: byId("viewers").value,
+    rate: byId("rate").value,
+    period: byId("period").value
+  });
+}
+
+window.FMP_LOOM = {
+  redact: redact,
+  columnKind: columnKind,
+  auditCsv: auditCsv,
+  auditCounts: auditCounts,
+  withRate: withRate,
+  fromInputs: fromInputs,
+  render: render,
+  fromDom: fromDom,
+  EXAMPLE: EXAMPLE,
+  BASIS: BASIS
+};
+
+byId("go").addEventListener("click", function () { render(fromDom()); });
+byId("example").addEventListener("click", function () {
+  byId("csv").value = EXAMPLE;
+  render(fromInputs({
+    csv: EXAMPLE,
+    total: "",
+    z30: "",
+    z90: "",
+    viewers: "",
+    rate: byId("rate").value,
+    period: byId("period").value
+  }));
+});
+byId("clear").addEventListener("click", function () {
+  ["csv", "total", "z30", "z90", "viewers", "rate"].forEach(function (id) { byId(id).value = ""; });
+  byId("period").value = "monthly";
+  byId("results").hidden = true;
+  byId("reclass-body").textContent = "";
+  byId("checklist").textContent = "";
+  byId("copystate").textContent = "";
+});
+byId("copy").addEventListener("click", function () {
+  var text = byId("checklist").textContent;
+  var state = byId("copystate");
+  if (!text) {
+    state.textContent = "Build the seat table first. The checklist is copied only when you press this button.";
+    return;
+  }
+  if (!navigator.clipboard || !navigator.clipboard.writeText) {
+    state.textContent = "Select the checklist above and copy it from there.";
+    return;
+  }
+  navigator.clipboard.writeText(text).then(function () {
+    state.textContent = "Copied.";
+  }, function () {
+    state.textContent = "Select the checklist above and copy it from there.";
+  });
+});
+})();
+</script>
+</body>
+</html>
