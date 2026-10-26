@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/fire-to-iris-check/">
+<title>IRS FIRE to IRIS Readiness &amp; 1099 CSV Header Check (free, runs in your browser)</title>
+<meta name="description" content="Free in-browser check for the IRS FIRE e-file retirement (Nov 1 test cutoff, Nov 9 TCC change cutoff, Nov 19 last FIRE filing day, Jan 1, 2027 IRIS-only). Check your TCC status and 1099 CSV column headers with nothing uploaded.">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1b1f24;background:#f6f7f9}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.2em 0 .4em}
+.card{background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:16px;margin:12px 0}
+.cd{display:flex;flex-wrap:wrap;gap:12px}
+.cd>div{flex:1 1 190px;background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:12px}
+.big{font-size:1.35rem;font-weight:700}
+.muted{color:#5a636e;font-size:.9rem}
+label{display:block;font-weight:600;margin-top:12px}
+.chk label{font-weight:400;display:flex;gap:8px;align-items:flex-start;margin-top:8px}
+textarea{width:100%;min-height:96px;font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;padding:8px;border:1px solid #b9c0c8;border-radius:6px}
+pre{font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;background:#eef1f5;padding:10px;border-radius:6px;white-space:pre-wrap;word-break:break-word;margin:.4em 0}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:0;background:#1f5fbf;color:#fff;cursor:pointer;margin:12px 8px 0 0}
+button.sec{background:#e4e8ee;color:#1b1f24}
+.tag{display:inline-block;font-size:.8rem;padding:2px 8px;border-radius:9px;margin:0 6px 0 0;background:#e4e8ee}
+.warn{background:#fde8e6;color:#8a1c12}
+.ok{background:#e3f4e6;color:#1d6b2c}
+.info{background:#fff3d6;color:#7a5200}
+.cta{background:#fff8e6;border-color:#f0d58a}
+a{color:#1f5fbf}
+a:focus,button:focus,textarea:focus,input:focus{outline:3px solid #1f5fbf;outline-offset:2px}
+table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0}
+th,td{border:1px solid #dde1e6;padding:6px 8px;text-align:left;vertical-align:top;word-break:break-word}
+caption{text-align:left;font-weight:600;padding:4px 0}
+#out li{margin:8px 0}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:8px;top:8px;background:#fff;padding:8px 12px;z-index:2}
+footer{margin:8px 0 24px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<p class="muted"><a href="https://firstmoverprojects.com/">First Mover Projects</a> · <a href="/tools/">All tools</a> · free browser check</p>
+<h1>IRS FIRE to IRIS Readiness &amp; 1099 CSV Header Check</h1>
+<p><strong>Check which November 2026 IRS FIRE cutoff hits you, and verify your 1099 export header row before moving to IRIS.</strong></p>
+<p>Runs entirely in your browser. Nothing is uploaded, stored or sent anywhere.</p>
+<p id="who"><strong>Who it's for:</strong> small businesses and bookkeepers who e-file Forms 1099 or other information returns through the IRS FIRE system or are preparing a CSV export for the IRIS Taxpayer Portal.</p>
+
+<div class="cd" aria-label="IRS FIRE and IRIS dates">
+ <div id="cd-nov1">
+  <div class="muted">FIRE test system closes</div>
+  <div class="big">Nov 1, 2026</div>
+  <div class="muted" data-k="v"></div>
+  <div class="muted">IRS: “Last day to file test information returns through the FIRE Trading Partner Test System.”</div>
+ </div>
+ <div id="cd-nov9">
+  <div class="muted">IR TCC changes close</div>
+  <div class="big">Nov 9, 2026</div>
+  <div class="muted" data-k="v"></div>
+  <div class="muted">IRS: “Last day to make changes to the Information Returns (IR) Applications for Transmitter Control Codes (TCC).”</div>
+ </div>
+ <div id="cd-nov19">
+  <div class="muted">Last day to file on FIRE</div>
+  <div class="big">Nov 19, 2026 (3 p.m. ET)</div>
+  <div class="muted" data-k="v"></div>
+  <div class="muted">IRS: “Last day to file information returns through the FIRE system.”</div>
+ </div>
+ <div id="cd-jan1">
+  <div class="muted">IRIS-only e-filing</div>
+  <div class="big">Jan 1, 2027</div>
+  <div class="muted" data-k="v"></div>
+  <div class="muted">IRS: “IRIS will be the only information returns electronic filing system, including current year, prior year, or corrections, after Jan. 1, 2027.”</div>
+ </div>
+</div>
+
+<section class="card" aria-labelledby="facts-h">
+<h2 id="facts-h">What the IRS says</h2>
+<p>In news release IR-2026-99 (Aug. 24, 2026) and on the IRS FIRE page, the IRS states that the Filing Information Returns Electronically (FIRE) system is retiring after the 2026 filing season and lists three November 2026 cutoffs: <strong>Nov. 1, 2026</strong> (last day to file test information returns through the FIRE Trading Partner Test System), <strong>Nov. 9, 2026</strong> (last day to make changes to Information Returns Applications for Transmitter Control Codes, after which existing IR TCC applications become read-only), and <strong>Nov. 19, 2026, at 3 p.m. ET</strong> (last day to file information returns through the FIRE system). <a href="https://www.irs.gov/newsroom/irs-reminder-information-return-e-file-system-transitioning-to-a-new-platform" rel="noopener noreferrer">IRS IR-2026-99: Information return e-file system transitioning to a new platform</a> · <a href="https://www.irs.gov/e-file-providers/filing-information-returns-electronically-fire" rel="noopener noreferrer">IRS: Filing Information Returns Electronically (FIRE)</a></p>
+<p>Starting <strong>Jan. 1, 2027</strong>, the Information Returns Intake System (IRIS) is the only electronic filing system for information returns, including prior-year returns and corrections. Current FIRE users must complete a separate IRIS Application for TCC to file in IRIS. The IRS notes that the <strong>IRIS Taxpayer Portal</strong> is a free, web-based filing system that allows filers to e-file up to 100 returns at a time (by typing information directly or uploading a CSV file using the IRS template). <a href="https://www.irs.gov/filing/e-file-information-returns-with-iris" rel="noopener noreferrer">IRS: E-file information returns with IRIS</a></p>
+</section>
+
+<section class="card" aria-labelledby="step1-h">
+<h2 id="step1-h">1. Check your filing setup and paste your CSV header row (optional)</h2>
+<div class="chk">
+ <label><input type="checkbox" id="c-self" checked> We e-file 1099s or other information returns ourselves (not through a full-service payroll or e-file provider that handles IRIS for us)</label>
+ <label><input type="checkbox" id="c-iris-tcc"> We have already submitted or received a separate <strong>IRIS Application for TCC</strong> (a FIRE TCC does not carry over automatically)</label>
+ <label><input type="checkbox" id="c-open-2026"> We still have 2026 or prior-year returns, corrections, or test files we plan to submit through FIRE before Nov 19, 2026 at 3 p.m. ET</label>
+ <label><input type="checkbox" id="c-ir-changes"> We need to update responsible officials or other details on an existing IR Application for TCC before it becomes read-only on Nov 9, 2026</label>
+ <label><input type="checkbox" id="c-over100"> We file more than 100 returns in a single upload (the free IRIS Taxpayer Portal handles up to 100 returns at a time)</label>
+</div>
+<label for="inp">Optional: paste only the first line (column headers) of your 1099 report or CSV export</label>
+<p class="muted" id="how"><strong>Privacy guard:</strong> Do not paste real taxpayer names, Social Security numbers, EINs, or TCCs. Paste only column header names (for example: <code>Vendor Name, Tax ID, Address, Total 1099-NEC Nonemployee Compensation</code>). Any 9-digit number pattern is automatically ignored and flagged.</p>
+<textarea id="inp" spellcheck="false" autocomplete="off" aria-describedby="how" placeholder="Payer Name,Payer TIN,Recipient Name,Recipient TIN,Street Address,City,State,ZIP,Box 1 Nonemployee Compensation"></textarea>
+<button id="go" type="button">Check my readiness</button>
+<button id="example" class="sec" type="button">Load sample header row</button>
+<button id="clear" class="sec" type="button">Clear</button>
+</section>
+
+<section class="card" id="results" hidden aria-live="polite">
+<h2>2. Your FIRE to IRIS readiness checklist</h2>
+<p id="summary" class="big"></p>
+<ul id="out"></ul>
+<div id="csv-box" hidden>
+ <h2>CSV header check (against core 1099 prep column groups)</h2>
+ <p class="muted">Note: The IRS IRIS Taxpayer Portal requires its own exact CSV template layout from irs.gov. This check only shows which core information groups appear in your current export header row so you know what to map before uploading.</p>
+ <table>
+  <caption>Detected column groups in your pasted header row</caption>
+  <thead><tr><th scope="col">Column group</th><th scope="col">Status</th><th scope="col">Matched header(s)</th></tr></thead>
+  <tbody id="csv-tbody"></tbody>
+ </table>
+</div>
+<pre id="plain-out" tabindex="0"></pre>
+<button id="copy" class="sec" type="button">Copy checklist</button>
+<p id="copystate" class="muted" role="status"></p>
+</section>
+
+<section class="card cta" id="paid-kit" aria-labelledby="paid-h">
+<h2 id="paid-h">Want this as a printable 3-page switch checklist (with 1099-NEC add-on)?</h2>
+<p>The <strong>FIRE to IRIS Switch Checklist ($9)</strong> is an offline 3-page PDF checklist covering the Nov 1, Nov 9, Nov 19 (3 p.m. ET), and Jan 1, 2027 IRS cutoffs, the IRIS TCC vs. FIRE TCC check, and a 1099-NEC prep sheet.</p>
+<p><a id="paid-link" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?utm_source=firstmoverprojects&amp;utm_medium=fire_iris_check&amp;utm_campaign=irs-fire-retirement-nov-19" rel="noopener noreferrer">Get the $9 FIRE→IRIS Switch Checklist on Gumroad</a> · <a href="/deadlines/irs-fire-retirement-nov-19.html">Read the full IRS FIRE retirement deadline page (free)</a></p>
+</section>
+
+<section class="card" aria-labelledby="src-h">
+<h2 id="src-h">Sources</h2>
+<p><a href="https://www.irs.gov/newsroom/irs-reminder-information-return-e-file-system-transitioning-to-a-new-platform" rel="noopener noreferrer">IRS IR-2026-99 (Aug. 24, 2026): IRS reminder: Information return e-file system transitioning to a new platform</a> · <a href="https://www.irs.gov/e-file-providers/filing-information-returns-electronically-fire" rel="noopener noreferrer">IRS: Filing Information Returns Electronically (FIRE)</a> · <a href="https://www.irs.gov/filing/e-file-information-returns-with-iris" rel="noopener noreferrer">IRS: E-file information returns with IRIS</a></p>
+<p>Checked against IRS pages on October 26, 2026. Always check the IRS's own pages for current dates, templates and instructions.</p>
+</section>
+
+<p>Related: <a href="/deadlines/irs-fire-retirement-nov-19.html">IRS FIRE retirement, Nov 19, 2026</a> · <a href="/deadlines/">All deadlines</a> · <a href="/tools/">Tools and kits</a></p>
+
+<footer>
+<p>Not affiliated with the IRS.</p>
+<p>General guidance, not legal, tax or IT advice.</p>
+<p>Made by First Mover Projects with AI coding tools.</p>
+</footer>
+</main>
+<noscript><p>This interactive check needs JavaScript in your browser. Nothing is uploaded.</p></noscript>
+<script>
+(function () {
+"use strict";
+var SAMPLE_HEADER = "Vendor Name,Vendor Tax ID,Street Address,City,State,ZIP,Total 1099-NEC Box 1";
+var DATES = [
+  { id: "cd-nov1", y: 2026, m: 10, d: 1, label: "Nov 1, 2026" },
+  { id: "cd-nov9", y: 2026, m: 10, d: 9, label: "Nov 9, 2026" },
+  { id: "cd-nov19", y: 2026, m: 10, d: 19, label: "Nov 19, 2026" },
+  { id: "cd-jan1", y: 2027, m: 0, d: 1, label: "Jan 1, 2027" }
+];
+var GROUPS = [
+  { key: "payer_name", label: "Payer name / address", re: /\b(payer|company|issuer|business\s*name|filer)\b/i },
+  { key: "payer_tin", label: "Payer TIN / EIN", re: /\b(payer.*(tin|ein|tax\s*id)|company.*ein|filer.*tin)\b/i },
+  { key: "recipient_name", label: "Recipient / payee / vendor name", re: /\b(recipient|payee|vendor|contractor|name|first\s*name|last\s*name)\b/i },
+  { key: "recipient_tin", label: "Recipient TIN / SSN / EIN", re: /\b(tin|tax\s*id|ssn|ein|taxpayer\s*id)\b/i },
+  { key: "address", label: "Recipient street / city / state / ZIP", re: /\b(address|street|city|state|zip|postal)\b/i },
+  { key: "amount", label: "Box amount / 1099 payment total", re: /\b(box\s*\d+|amount|total|nonemployee|compensation|nec|misc|paid|payment)\b/i }
+];
+
+function byId(id) { return document.getElementById(id); }
+
+function updateDays(now) {
+  now = now || new Date();
+  var start = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  DATES.forEach(function (D) {
+    var end = new Date(D.y, D.m, D.d).getTime();
+    var diff = Math.round((end - start) / 86400000);
+    var el = document.querySelector("#" + D.id + " [data-k=v]");
+    if (!el) return;
+    if (diff > 0) el.textContent = diff + (diff === 1 ? " day left" : " days left");
+    else if (diff === 0) el.textContent = "Today (" + D.label + ")";
+    else el.textContent = "Passed (" + D.label + ")";
+  });
+}
+
+function parseHeaders(raw) {
+  var text = String(raw == null ? "" : raw).slice(0, 50000).trim();
+  if (!text) return { present: false, headers: [], groups: [], tinRedacted: false, multiLine: false };
+  var lines = text.split(/\r?\n/).filter(function (l) { return l.trim() !== ""; });
+  var multiLine = lines.length > 1;
+  var tinRe = /\b\d{3}\s*[-\s]\s*\d{2}\s*[-\s]\s*\d{4}\b|\b\d{2}\s*[-\s]\s*\d{7}\b|\b\d{9}\b/g;
+  var tinRedacted = tinRe.test(text);
+  var first = lines[0].replace(tinRe, "[REDACTED-NUMBER]");
+  var delim = first.indexOf("\t") >= 0 ? "\t" : (first.indexOf(";") >= 0 ? ";" : ",");
+  var headers = first.split(delim).map(function (h) { return h.trim().replace(/^["']|["']$/g, ""); }).filter(Boolean).slice(0, 100);
+  var groupResults = GROUPS.map(function (G) {
+    var hits = headers.filter(function (h) { return G.re.test(h); });
+    return { key: G.key, label: G.label, matched: hits.length > 0, hits: hits };
+  });
+  return { present: headers.length > 0, headers: headers, groups: groupResults, tinRedacted: tinRedacted, multiLine: multiLine };
+}
+
+function analyze(opts) {
+  var selfFile = !!opts.selfFile;
+  var irisTcc = !!opts.irisTcc;
+  var open2026 = !!opts.open2026;
+  var irChanges = !!opts.irChanges;
+  var over100 = !!opts.over100;
+  var csv = parseHeaders(opts.rawCsv || "");
+  var items = [];
+  function add(kind, tagText, text, quote) {
+    items.push({ kind: kind, tag: tagText, text: text, quote: quote });
+  }
+  if (!selfFile) {
+    add("info", "Ask provider", "If a payroll provider, accountant, or third-party e-file service files for you, ask them in writing to confirm they are ready to file your tax year 2026 returns through IRIS.", "IRIS will be the only information returns electronic filing system, including current year, prior year, or corrections, after Jan. 1, 2027.");
+  }
+  if (selfFile && !irisTcc) {
+    add("warn", "Action needed", "Start your separate IRIS Application for TCC (either an IRIS Taxpayer Portal TCC or an IRIS A2A TCC). Both the free IRIS Taxpayer Portal and IRIS A2A require an IRIS TCC, and your existing FIRE TCC cannot be used for IRIS.", "To use the IRIS Taxpayer Portal, you need an IRIS Transmitter Control Code (TCC). This 5-digit code identifies your business when you e-file forms. It can only be used for IRIS.");
+  } else if (selfFile && irisTcc) {
+    add("ok", "Ready step", "You noted you already started or hold a separate IRIS TCC. Confirm your responsible officials and portal sign-in work before January filing.", "Current FIRE users must complete an Information Returns Intake System (IRIS) Application for TCC and transition to IRIS to file tax year 2026 information returns during the 2027 filing season.");
+  }
+  if (irChanges) {
+    add("warn", "Before Nov 9, 2026", "Submit any changes to your existing Information Returns (IR) Application for TCC by Nov. 9, 2026. After Nov. 9, existing IR TCC applications become read-only.", "Nov. 9, 2026: Last day to make changes to the Information Returns (IR) Applications for Transmitter Control Codes (TCC).");
+  }
+  if (open2026) {
+    add("warn", "Before Nov 1 / Nov 19, 2026", "If you need FIRE test filings, submit them by Nov. 1, 2026. Submit any remaining live FIRE information returns by Nov. 19, 2026, at 3 p.m. ET.", "Nov. 1, 2026: Last day to file test information returns through the FIRE Trading Partner Test System. Nov. 19, 2026, at 3 p.m. ET: Last day to file information returns through the FIRE system.");
+  }
+  if (over100) {
+    add("info", "Over 100 returns", "The free web-based IRIS Taxpayer Portal allows filers to e-file up to 100 returns at a time (or multiple batches of up to 100). For bulk Application-to-Application (A2A) transmission, check the IRS IRIS A2A specifications and TCC requirements.", "The IRIS Taxpayer Portal is a free, web-based filing system that allows filers to e-file up to 100 returns at a time.");
+  } else {
+    add("ok", "Fits 100-return portal batch", "The IRS states that the free, web-based IRIS Taxpayer Portal allows filers to e-file up to 100 returns at a time by entering data or uploading the IRS CSV template.", "The IRIS Taxpayer Portal is a free, web-based filing system that allows filers to e-file up to 100 returns at a time.");
+  }
+  if (csv.tinRedacted || csv.multiLine) {
+    add("warn", "Privacy guard triggered", "Only the first line (column headers) was checked, and any 9-digit number pattern was ignored. Never paste real taxpayer TINs, SSNs, or EINs into browser tools.", "The CSV file formatting guidelines are provided on the Taxpayer Portal.");
+  }
+  if (csv.present) {
+    var missing = csv.groups.filter(function (g) { return !g.matched; }).map(function (g) { return g.label; });
+    if (missing.length) {
+      add("info", "CSV columns to map", "Your pasted header row did not explicitly name: " + missing.join(", ") + ". Typical accounting exports (such as a QuickBooks 1099 report) omit Payer TIN or split address fields, so download the official IRS IRIS CSV template from irs.gov and map every required column before uploading.", "The CSV file formatting guidelines are provided on the Taxpayer Portal. ... You may download the formatting guidelines for each form you need to file.");
+    } else {
+      add("ok", "All 6 core header groups seen", "Your header row includes payer, recipient, TIN, address, and box/amount columns. Still compare exact column names and order against the official IRS IRIS CSV template on irs.gov before uploading.", "The IRIS Taxpayer Portal is a free, web-based filing system that allows filers to e-file up to 100 returns at a time.");
+    }
+  }
+  var warns = items.filter(function (i) { return i.kind === "warn"; }).length;
+  var summary = warns > 0
+    ? warns + (warns === 1 ? " time-sensitive item flagged before the November 2026 FIRE cutoffs." : " time-sensitive items flagged before the November 2026 FIRE cutoffs.")
+    : "No immediate FIRE cutoff blockers flagged from your selections — review the checklist below.";
+  return { summary: summary, items: items, csv: csv, warns: warns };
+}
+
+function render() {
+  var res = analyze({
+    selfFile: byId("c-self").checked,
+    irisTcc: byId("c-iris-tcc").checked,
+    open2026: byId("c-open-2026").checked,
+    irChanges: byId("c-ir-changes").checked,
+    over100: byId("c-over100").checked,
+    rawCsv: byId("inp").value
+  });
+  byId("summary").textContent = res.summary;
+  var ul = byId("out");
+  ul.textContent = "";
+  var lines = ["IRS FIRE to IRIS Readiness Check", res.summary, ""];
+  res.items.forEach(function (it, idx) {
+    var li = document.createElement("li");
+    var span = document.createElement("span");
+    span.className = "tag " + it.kind;
+    span.textContent = it.tag;
+    li.appendChild(span);
+    li.appendChild(document.createTextNode(it.text + " "));
+    var q = document.createElement("span");
+    q.className = "muted";
+    q.textContent = "(IRS: “" + it.quote + "”)";
+    li.appendChild(q);
+    ul.appendChild(li);
+    lines.push((idx + 1) + ". [" + it.tag + "] " + it.text + " (IRS: “" + it.quote + "”)");
+  });
+  var csvBox = byId("csv-box");
+  var tb = byId("csv-tbody");
+  tb.textContent = "";
+  if (res.csv.present) {
+    csvBox.hidden = false;
+    lines.push("");
+    lines.push("CSV Header Group Check:");
+    res.csv.groups.forEach(function (g) {
+      var tr = document.createElement("tr");
+      var td1 = document.createElement("td");
+      td1.textContent = g.label;
+      var td2 = document.createElement("td");
+      var badge = document.createElement("span");
+      badge.className = "tag " + (g.matched ? "ok" : "info");
+      badge.textContent = g.matched ? "Seen in header" : "Not seen — add/map in IRS template";
+      td2.appendChild(badge);
+      var td3 = document.createElement("td");
+      td3.textContent = g.matched ? g.hits.join(", ") : "—";
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
+      tb.appendChild(tr);
+      lines.push("- " + g.label + ": " + (g.matched ? "Seen (" + g.hits.join(", ") + ")" : "Not seen"));
+    });
+  } else {
+    csvBox.hidden = true;
+  }
+  lines.push("");
+  lines.push("Not affiliated with the IRS. General guidance, not legal, tax or IT advice. Check irs.gov for official templates and current dates.");
+  byId("plain-out").textContent = lines.join("\n");
+  byId("copystate").textContent = "";
+  byId("results").hidden = false;
+  return res;
+}
+
+window.FMP_FIRE_IRIS = {
+  parseHeaders: parseHeaders,
+  analyze: analyze,
+  render: render,
+  SAMPLE_HEADER: SAMPLE_HEADER
+};
+
+byId("go").addEventListener("click", render);
+byId("example").addEventListener("click", function () {
+  byId("inp").value = SAMPLE_HEADER;
+  render();
+});
+byId("clear").addEventListener("click", function () {
+  byId("inp").value = "";
+  byId("results").hidden = true;
+  byId("copystate").textContent = "";
+});
+byId("copy").addEventListener("click", function () {
+  var text = byId("plain-out").textContent;
+  var state = byId("copystate");
+  if (!text) return;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function () {
+      state.textContent = "Copied.";
+    }, function () {
+      state.textContent = "Select the checklist above and copy it.";
+    });
+  } else {
+    state.textContent = "Select the checklist above and copy it.";
+  }
+});
+updateDays(new Date());
+})();
+</script>
+</body>
+</html>
