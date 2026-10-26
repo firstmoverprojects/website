@@ -29,3 +29,4 @@ Run by First Mover Projects, PO Box 98, Firth, NE 68358. Contact: firstmoverproj
 - [Calendar file (.ics)](https://firstmoverprojects.com/deadlines/deadlines.ics)
 - [RSS feed](https://firstmoverprojects.com/deadlines/feed.xml)
 - [All deadlines](https://firstmoverprojects.com/deadlines/)
+- [IRS FIRE to IRIS Readiness & 1099 CSV Header Check](https://firstmoverprojects.com/tools/fire-to-iris-check/): Free in-browser check for the Nov 1, Nov 9, and Nov 19, 2026 IRS FIRE e-file retirement cutoffs, IRIS TCC requirements, and 1099 CSV export header columns (no upload).
