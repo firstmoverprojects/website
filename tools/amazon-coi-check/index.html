@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/amazon-coi-check/">
+<title>Amazon Nov 2 Insurance Certificate (COI) Pre-Check (free, runs in your browser)</title>
+<meta name="description" content="Paste your certificate of insurance text. Free in-browser check against Amazon's published insurance criteria: $1M per occurrence and aggregate, deductible no more than $10,000, exact additional insured wording, 30 days' notice. Nothing is uploaded.">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1b1f24;background:#f6f7f9}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.2em 0 .4em}
+.card{background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:16px;margin:12px 0}
+.cd{display:flex;flex-wrap:wrap;gap:12px}
+.cd>div{flex:1 1 240px;background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:12px}
+.big{font-size:1.5rem;font-weight:700}
+.muted{color:#5a636e;font-size:.9rem}
+label{display:block;font-weight:600;margin-top:12px}
+textarea{width:100%;min-height:180px;font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;padding:8px;border:1px solid #b9c0c8;border-radius:6px}
+input[type=text],input[type=date]{width:100%;max-width:100%;font:inherit;padding:8px;border:1px solid #b9c0c8;border-radius:6px}
+pre{font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;background:#eef1f5;padding:10px;border-radius:6px;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;margin:.4em 0;max-width:100%}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:0;background:#1f5fbf;color:#fff;cursor:pointer;margin:12px 8px 0 0}
+button.sec{background:#e4e8ee;color:#1b1f24}
+.tag{display:inline-block;font-size:.8rem;padding:2px 8px;border-radius:9px;margin:0 0 6px;background:#e4e8ee}
+.warn{background:#fde8e6;color:#8a1c12}
+.ok{background:#e3f4e6;color:#1d6b2c}
+.cta{background:#fff8e6;border-color:#f0d58a}
+a{color:#1f5fbf}
+a:focus,button:focus,textarea:focus,input:focus,pre:focus{outline:3px solid #1f5fbf;outline-offset:2px}
+table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0;table-layout:fixed}
+th,td{border:1px solid #dde1e6;padding:6px 8px;text-align:left;vertical-align:top;word-break:break-word;overflow-wrap:anywhere}
+caption{text-align:left;font-weight:600;padding:4px 0}
+.table-wrap{overflow-x:auto;max-width:100%}
+td ul{margin:.2em 0 0;padding-left:1.1em}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:8px;top:8px;background:#fff;padding:8px 12px;z-index:2}
+footer{margin:8px 0 24px}
+fieldset{border:1px solid #dde1e6;border-radius:8px;margin:12px 0;padding:8px 12px}
+legend{font-weight:600;padding:0 4px}
+.choice label,.chk label{font-weight:400;display:flex;gap:8px;align-items:flex-start;margin-top:6px}
+.hooks{list-style:none;padding:0;margin:8px 0 12px}
+.hooks li{display:inline-block;max-width:100%;font-size:.8rem;padding:2px 8px;border-radius:9px;margin:0 8px 8px 0;background:#e4e8ee}
+blockquote{margin:.4em 0 .8em;padding:4px 0 4px 10px;border-left:3px solid #c5ccd6}
+a,p,li,td,th,label,legend,h1,h2,blockquote{overflow-wrap:anywhere}
+[hidden]{display:none !important}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<p class="muted"><a href="/">First Mover Projects</a> · free tool</p>
+<h1>Amazon Nov 2 insurance certificate pre-check</h1>
+<p>From November 2, 2026, Amazon says sellers with products in categories with enhanced safety listing requirements need USD 1 million commercial liability coverage per occurrence and in aggregate, regardless of sales. Paste your certificate (COI) text and get a fix list to send your broker before you upload it.</p>
+<ul class="hooks">
+<li>No account. Nothing uploaded.</li>
+<li>Plain-text fix list you can paste to your broker or AI assistant</li>
+<li>7 key terms checked in seconds</li>
+</ul>
+<p id="who"><strong>Who it's for:</strong> Amazon.com sellers (US store) whose broker has sent a COI, or who are getting quotes.</p>
+
+<div class="cd" aria-label="Date and checks">
+ <div>
+  <div class="muted">Amazon's additional requirements</div>
+  <div class="big">Nov 2, 2026</div>
+  <div id="days"></div>
+  <div class="muted">Counted from this device's clock.</div>
+ </div>
+ <div>
+  <div class="muted">This page</div>
+  <div class="big">7 key terms</div>
+  <div class="muted">Additional insured, limits, deductible, occurrence basis, sunset clause, and notice.</div>
+ </div>
+</div>
+
+<section class="card" aria-labelledby="step1-h">
+<h2 id="step1-h">1. Does the Nov 2 change reach you?</h2>
+<p id="step1-how">Three questions. This page cannot see your Seller Central account.</p>
+<fieldset>
+<legend>Do any of your Amazon.com products fall in a category with enhanced safety listing requirements? Amazon's examples include children's products, cosmetic and ingestible products, and lithium battery products, and Amazon says the list is not complete. Check Account Health.</legend>
+<p><a href="https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT" rel="noopener noreferrer">Amazon's category list</a></p>
+<div class="choice">
+<label><input type="radio" name="q1" value="yes"> Yes</label>
+<label><input type="radio" name="q1" value="no"> No</label>
+<label><input type="radio" name="q1" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Have your Amazon.com gross proceeds gone over USD 10,000 in any one month?</legend>
+<div class="choice">
+<label><input type="radio" name="q2" value="yes"> Yes</label>
+<label><input type="radio" name="q2" value="no"> No</label>
+<label><input type="radio" name="q2" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Is your business based in Mainland China?</legend>
+<div class="choice">
+<label><input type="radio" name="q3" value="yes"> Yes</label>
+<label><input type="radio" name="q3" value="no"> No</label>
+<label><input type="radio" name="q3" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<div id="scope-out" aria-live="polite"><p class="muted">Choose Yes, No, or Not sure for each question.</p></div>
+</section>
+
+<section class="card" aria-labelledby="step2-h">
+<h2 id="step2-h">2. COI text check</h2>
+<p id="how">The check runs in this browser tab. The seven key terms are additional insured, per-occurrence limit, aggregate limit, deductible, occurrence basis, sunset clause, and 30-day notice. Named insured, policy type, expiry, insurer rating, and signature are extra.</p>
+<label for="coi">Paste the text of your certificate (copy it from the PDF)</label>
+<textarea id="coi" spellcheck="false" autocomplete="off" aria-describedby="how"></textarea>
+<label for="entity">Legal entity name exactly as in your Seller Central Account Info</label>
+<input type="text" id="entity" autocomplete="off" spellcheck="false">
+<div class="chk">
+<label><input type="checkbox" id="dba"> My business is a single-member LLC using a trade name/DBA</label>
+</div>
+<label for="expiry">Policy expiry date</label>
+<input type="date" id="expiry" autocomplete="off">
+<p class="muted">Optional. Flags a date before Nov 2, 2026 or before today.</p>
+<button id="go" type="button">Check my certificate</button>
+<button id="sample" class="sec" type="button" aria-describedby="sample-note">Load a sample</button>
+<button id="clear" class="sec" type="button">Clear</button>
+<p id="sample-note" class="muted">Load a sample fills the box with a fictional certificate for Sample Goods LLC and Example Mutual Insurance Co. It is not a real policy.</p>
+</section>
+
+<section class="card" id="results" hidden aria-live="polite">
+<h2>Results</h2>
+<div class="cd">
+ <div>
+  <div class="muted">Key terms that look right</div>
+  <div class="big" id="n-ok">0</div>
+  <div class="muted">of 7</div>
+ </div>
+ <div>
+  <div class="muted">Key terms to fix</div>
+  <div class="big" id="n-fix">0</div>
+  <div class="muted">of 7</div>
+ </div>
+ <div>
+  <div class="muted">Key terms to check by hand</div>
+  <div class="big" id="n-check">0</div>
+  <div class="muted">of 7</div>
+ </div>
+</div>
+<p id="cap" class="muted" hidden></p>
+<div class="table-wrap">
+<table>
+<caption>Certificate checks</caption>
+<thead>
+<tr>
+<th scope="col">Check</th>
+<th scope="col">Result</th>
+<th scope="col">What to do</th>
+<th scope="col">Amazon's criterion</th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+</div>
+<h2>Plain-text fix list</h2>
+<pre id="fixlist" tabindex="0"></pre>
+<button id="copy" class="sec" type="button">Copy fix list</button>
+<p id="copystate" class="muted" role="status"></p>
+<h2>Text checked</h2>
+<pre id="checked" tabindex="0"></pre>
+</section>
+
+<section class="card" aria-labelledby="agent-h">
+<h2 id="agent-h">Use it with your AI assistant</h2>
+<p>Copy this prompt, then paste your certificate text under it.</p>
+<pre id="agent-prompt" tabindex="0">Here is my certificate of insurance text and Amazon's published criteria from sellercentral.amazon.com/help/hub/reference/external/G200386300. List every criterion my certificate does not clearly meet, quoting Amazon's exact line for each. Do not guess; say 'not shown on the certificate' when a term isn't visible. Do not contact anyone or buy anything.</pre>
+<button id="copy-prompt" class="sec" type="button">Copy prompt</button>
+<p id="prompt-state" class="muted" role="status"></p>
+</section>
+
+<section class="card cta" id="paid-tool" aria-labelledby="paid-h">
+<h2 id="paid-h"><a href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?utm_source=fmp-tool&amp;utm_medium=amazon-coi-check" rel="noopener noreferrer">FMP's own paid kit: $1M Insurance Readiness Kit: Amazon Enhanced-Safety Categories, Nov 2 ($29)</a></h2>
+<p>A 17-field COI pre-submission checker, a category screen (Amazon's named examples plus how to check your own products), a broker email and an Excel workbook.</p>
+<p>Free deadline page: <a href="/deadlines/amazon-insurance-nov-2.html">Amazon commercial liability insurance changes start Nov 2, 2026</a></p>
+</section>
+
+<section class="card" aria-labelledby="src-h">
+<h2 id="src-h">Sources</h2>
+<ol>
+<li>Amazon Seller Central, Commercial Liability Insurance Requirements: <a href="https://sellercentral.amazon.com/help/hub/reference/external/G200386300" rel="noopener noreferrer">https://sellercentral.amazon.com/help/hub/reference/external/G200386300</a> (checked Oct 26, 2026)</li>
+<li>Amazon Seller Central, Product categories with enhanced safety listing requirements: <a href="https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT" rel="noopener noreferrer">https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT</a> (checked Oct 26, 2026)</li>
+<li>Amazon Seller Forums announcement, "New Commercial Liability Insurance Requirements effective November 2, 2026": <a href="https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408" rel="noopener noreferrer">https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408</a></li>
+</ol>
+<p>Seller Central may ask you to log in.</p>
+<h2 id="criteria-h">Amazon's criteria, quoted</h2>
+<p>Copied from Amazon's Commercial Liability Insurance Requirements page. This page does not reword these lines.</p>
+<ol id="criteria"></ol>
+</section>
+
+<p>Related: <a href="/deadlines/amazon-insurance-nov-2.html">Amazon insurance, Nov 2, 2026</a> · <a href="/deadlines/">All deadlines</a> · <a href="/tools/">Tools and kits</a></p>
+
+<footer>
+<p>General guidance, not legal, tax or IT advice.</p>
+<p>This is not insurance advice. Talk to your insurance broker. Amazon's Business Insurance verification decides whether a certificate is accepted.</p>
+<p>Not affiliated with or endorsed by Amazon.</p>
+<p>Made by First Mover Projects with AI coding tools.</p>
+<p>Your certificate text stays in this browser tab. Nothing is uploaded or saved.</p>
+</footer>
+</main>
+<noscript><p>This check needs JavaScript in your browser. Nothing is uploaded.</p></noscript>
+<script>
+(function () {
+"use strict";
+var MAX = 20000;
+var DEADLINE = "2026-11-02";
+var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var Q_THRESHOLD = "Under section 9 of the Amazon Services Business Solutions Agreement, you must obtain and maintain commercial liability insurance within 30 days after exceeding USD 10,000 in gross proceeds in sales in one month on Amazon.com, or if otherwise requested by us.";
+var Q_INTRO = "Your commercial liability insurance policy must meet all of the following criteria, unless otherwise required by applicable law or regulation:";
+var Q_TYPE = "The insurance policy type can be either commercial general, umbrella, or excess liability;";
+var Q_OCC = "The policy must be written on an \u201Coccurrence basis\u201D;";
+var Q_CLAIMS = "If you cannot procure an \u201Coccurrence-based policy\u201D for certain product categories that are outlined in the Frequently asked questions, reach out to your insurer for a \u2018claims-made policy\u2019;";
+var Q_LIMIT = "The policy limit must be at least USD 1 million per occurrence and in aggregate, and cover liabilities caused by or occurring in conjunction with your business operations, including products, products/completed operations and bodily injury;";
+var Q_DED = "The deductible for any policy(ies) must not be greater than $10,000. Any deductible amount must be listed on your Certificate of Insurance;";
+var Q_SALES = "The policy must cover all sales from products you have listed on the Amazon.com store;";
+var Q_AI = "The policy must name \"Amazon.com Services LLC and its affiliates and assignees\" as additional insureds;";
+var Q_SUNSET = "The policy must not have any sunset clause;";
+var Q_NAMED = "Except for single-member LLCs, your insured name must match the \u201Clegal entity\u201D name you provided to Amazon in your Account Info. For single member LLCs, where your legal entity name is different than the name you publicly use to identify your business (\u201Ctrade name,\u201D \u201Cdoing business as,\u201D or \u201CDBA\u201D), it is also acceptable for your insured name to match your trade name;";
+var Q_RATING = "Your insurance provider must have global claim handling capability and a financial rating of S&P A- and/or AM Best A- or better (if S&P or AM best is not valid or used in the country where you are required to obtain insurance, a local equivalent is allowed);";
+var Q_SIGN = "The policy must be completed in its entirety and signed by an authorized representative of your insurance provider;";
+var Q_NOTICE = "Your insurance provider must give Amazon at least 30 days\u2019 notice of cancellation, modification, or non-renewal;";
+var Q_NOV2 = "The following additional requirements will apply effective November 2, 2026:";
+var Q_NOV2_CAT = "If you sell products in categories with enhanced safety listing requirements, you must obtain an insurance policy with USD 1 million coverage per occurrence and in aggregate, regardless of your gross sales proceeds. Please refer to Product categories with enhanced safety listing requirements to learn which categories are subject to this requirement; and";
+var Q_AIA = "If you are a seller based in Mainland China, you are required to obtain your insurance policy through the Amazon Insurance Accelerator (AIA) program, unless otherwise agreed in writing by Amazon.";
+var QUOTES = [Q_THRESHOLD, Q_INTRO, Q_TYPE, Q_OCC, Q_CLAIMS, Q_LIMIT, Q_DED, Q_SALES, Q_AI, Q_SUNSET, Q_NAMED, Q_RATING, Q_SIGN, Q_NOTICE, Q_NOV2, Q_NOV2_CAT, Q_AIA];
+var FIX_AI = "Ask your broker to name 'Amazon.com Services LLC and its affiliates and assignees' as additional insured (Certificate Holder alone is not the same).";
+var FIX_SUNSET = "Amazon says the policy must not have any sunset clause.";
+var CHECK_SUNSET = "Ask your broker to confirm in writing there is no sunset clause (a COI usually doesn't show this).";
+var CHECK_CLAIMS = "Amazon says the policy must be occurrence-based. A claims-made policy is only for certain product categories in Amazon's FAQ. Ask your insurer.";
+var CHECK_DED_MISSING = "Amazon says any deductible amount must be listed on your Certificate of Insurance.";
+var NAMED_BASE = "Except for single-member LLCs, Amazon says your insured name must match the legal entity name in your Account Info.";
+var TRADE = " You marked a single-member LLC using a trade name/DBA. Amazon says the insured name may match the trade name.";
+var SAMPLE = [
+  "CERTIFICATE OF LIABILITY INSURANCE",
+  "This sample is fictional. It is not a real policy.",
+  "Insured: Sample Goods LLC",
+  "Insurer: Example Mutual Insurance Co.",
+  "Policy number: SAMPLE-NOT-A-REAL-POLICY",
+  "Type: Commercial general liability",
+  "Form: Claims-made",
+  "Limits of insurance",
+  "Each occurrence: $1,000,000",
+  "General aggregate: $500,000",
+  "Deductible: $25,000",
+  "Certificate holder:",
+  "Amazon.com Services LLC"
+].join("\n");
+
+function byId(id) { return document.getElementById(id); }
+
+function pad(n, w) {
+  var s = String(n);
+  while (s.length < w) s = "0" + s;
+  return s;
+}
+
+function ymd(v) {
+  if (v == null || v === "") return "";
+  if (Object.prototype.toString.call(v) === "[object Date]" && !isNaN(v.getTime())) {
+    return pad(v.getFullYear(), 4) + "-" + pad(v.getMonth() + 1, 2) + "-" + pad(v.getDate(), 2);
+  }
+  var s = String(v).trim();
+  var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s);
+  if (m) return m[1] + "-" + m[2] + "-" + m[3];
+  var d = new Date(s);
+  if (!isNaN(d.getTime())) return ymd(d);
+  return "";
+}
+
+function formatLong(v) {
+  var s = ymd(v || new Date());
+  if (!s) s = ymd(new Date());
+  var p = s.split("-");
+  return MONTHS[Number(p[1]) - 1] + " " + Number(p[2]) + ", " + p[0];
+}
+
+function daysUntilNov2(now) {
+  var n = now || new Date();
+  var end = new Date(2026, 10, 2);
+  var start = new Date(n.getFullYear(), n.getMonth(), n.getDate());
+  return Math.round((end.getTime() - start.getTime()) / 86400000);
+}
+
+function daysText(now) {
+  var n = daysUntilNov2(now);
+  if (n > 0) return n + (n === 1 ? " day" : " days") + " until Nov 2, 2026";
+  return "Amazon's Nov 2, 2026 change is now in effect.";
+}
+
+function squash(s) {
+  return String(s == null ? "" : s)
+    .replace(/[\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000\ufeff]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function oneLine(s) {
+  return squash(s);
+}
+
+function labelFor(status) {
+  if (status === "ok") return "Looks right";
+  if (status === "fix") return "Fix";
+  return "Check by hand";
+}
+
+function fmtMoney(n) {
+  var neg = n < 0;
+  var rounded = Math.round(Math.abs(n) * 100) / 100;
+  var parts = String(rounded).split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return (neg ? "-$" : "$") + parts.join(".");
+}
+
+function gap(a0, a1, b0, b1) {
+  if (a1 < b0) return b0 - a1;
+  if (b1 < a0) return a0 - b1;
+  return 0;
+}
+
+function moneyTokens(text) {
+  var out = [];
+  var re = /(?:\bUSD\s*)?(\$)?\s*(\d{1,3}(?:,\d{3})+|\d+)(?:\.(\d+))?\s*(million|m\b)?/gi;
+  var m;
+  while ((m = re.exec(text))) {
+    if (m.index === re.lastIndex) re.lastIndex++;
+    var rawNum = m[2];
+    var comma = rawNum.indexOf(",") !== -1;
+    var dollars = !!m[1];
+    var suffix = m[4] ? m[4].toLowerCase() : "";
+    var num = parseFloat(rawNum.replace(/,/g, "") + (m[3] ? "." + m[3] : ""));
+    if (suffix) num = num * 1000000;
+    var intDigits = rawNum.replace(/,/g, "").length;
+    var yearLike = !dollars && !comma && !suffix && num >= 1900 && num <= 2099 && intDigits === 4;
+    var keep = dollars || comma || suffix || (intDigits >= 4 && !yearLike);
+    if (!keep || !isFinite(num)) continue;
+    out.push({ value: num, index: m.index, end: m.index + m[0].length });
+  }
+  return out;
+}
+
+function keywords(text) {
+  var src = [
+    { kind: "occ", source: "(?:each|per)\\s+occurrence" },
+    { kind: "agg", source: "\\baggregate\\b|\\bagg\\b" },
+    { kind: "ded", source: "\\bdeductible\\b|\\bretention\\b|\\bSIR\\b" }
+  ];
+  var list = [];
+  src.forEach(function (item) {
+    var re = new RegExp(item.source, "gi");
+    var m;
+    while ((m = re.exec(text))) {
+      list.push({ kind: item.kind, index: m.index, end: m.index + m[0].length, amounts: [] });
+      if (m.index === re.lastIndex) re.lastIndex++;
+    }
+  });
+  list.sort(function (a, b) { return a.index - b.index; });
+  return list;
+}
+
+function tryBind(money, key) {
+  if (!money || !key || money.bound) return;
+  if (gap(key.index, key.end, money.index, money.end) > 80) return;
+  money.bound = true;
+  key.amounts.push(money.value);
+}
+
+function analyzeAmounts(text) {
+  var monies = moneyTokens(text);
+  var keys = keywords(text);
+  var tokens = [];
+  monies.forEach(function (m) { tokens.push({ type: "M", index: m.index }); });
+  keys.forEach(function (k) { tokens.push({ type: "K", index: k.index }); });
+  tokens.sort(function (a, b) { return a.index - b.index; });
+  var km = 0;
+  var mk = 0;
+  var i;
+  for (i = 0; i < tokens.length - 1; i++) {
+    if (tokens[i].type === "K" && tokens[i + 1].type === "M") km++;
+    if (tokens[i].type === "M" && tokens[i + 1].type === "K") mk++;
+  }
+  var valueLabel = mk > km;
+  if (!valueLabel) {
+    keys.forEach(function (kw) {
+      var nextStart = text.length;
+      keys.forEach(function (k) {
+        if (k.index >= kw.end && k.index < nextStart) nextStart = k.index;
+      });
+      var first = null;
+      monies.forEach(function (money) {
+        if (money.bound) return;
+        if (money.index >= kw.end && money.index < nextStart) {
+          if (!first || money.index < first.index) first = money;
+        }
+      });
+      tryBind(first, kw);
+    });
+    monies.forEach(function (money) {
+      if (money.bound) return;
+      var nextKey = null;
+      keys.forEach(function (k) {
+        if (k.index >= money.end && (!nextKey || k.index < nextKey.index)) nextKey = k;
+      });
+      if (nextKey && nextKey.amounts.length === 0) tryBind(money, nextKey);
+    });
+  } else {
+    keys.forEach(function (kw) {
+      var prevEnd = 0;
+      keys.forEach(function (k) {
+        if (k.end <= kw.index && k.end > prevEnd) prevEnd = k.end;
+      });
+      var last = null;
+      monies.forEach(function (money) {
+        if (money.bound) return;
+        if (money.end <= kw.index && money.end > prevEnd) {
+          if (!last || money.end > last.end) last = money;
+        }
+      });
+      tryBind(last, kw);
+    });
+  }
+  keys.forEach(function (kw) {
+    if (kw.amounts.length) return;
+    var best = null;
+    var bestD = 31;
+    monies.forEach(function (money) {
+      var d = gap(kw.index, kw.end, money.index, money.end);
+      if (d >= bestD) return;
+      if (kw.kind === "ded" && money.value > 100000) return;
+      if (kw.kind !== "ded" && money.value < 100000) return;
+      best = money;
+      bestD = d;
+    });
+    if (best) kw.amounts.push(best.value);
+  });
+  function ofKind(kind) {
+    var any = false;
+    var amounts = [];
+    keys.forEach(function (k) {
+      if (k.kind !== kind) return;
+      any = true;
+      k.amounts.forEach(function (v) { amounts.push(v); });
+    });
+    return { any: any, amounts: amounts };
+  }
+  return { occ: ofKind("occ"), agg: ofKind("agg"), ded: ofKind("ded") };
+}
+
+function hasAdditionalInsured(text) {
+  var s = squash(text).replace(/&amp;/gi, "&");
+  return /["'\u201c\u201d\u2018\u2019]?\s*amazon\.com services\s*,?\s*llc\s*,?\s*(?:and|&)\s*its affiliates\s*,?\s*(?:and|&)\s*assignees\s*["'\u201c\u201d\u2018\u2019]?/i.test(s);
+}
+
+function noticeDays(text) {
+  var days = [];
+  var any = false;
+  var re = /notice|cancel/gi;
+  var m;
+  while ((m = re.exec(text))) {
+    any = true;
+    if (m.index === re.lastIndex) re.lastIndex++;
+    var start = Math.max(0, m.index - 60);
+    var end = Math.min(text.length, m.index + m[0].length + 60);
+    var slice = text.slice(start, end);
+    var dr = /(\d+)\s*-?\s*days?\b/gi;
+    var dm;
+    while ((dm = dr.exec(slice))) days.push(parseInt(dm[1], 10));
+  }
+  return { any: any, days: days };
+}
+
+function row(id, title, key, status, detail, criterion, amount, amounts) {
+  return {
+    id: id,
+    title: title,
+    key: key,
+    status: status,
+    statusLabel: labelFor(status),
+    detail: detail,
+    criterion: criterion,
+    amount: amount == null ? null : amount,
+    amounts: amounts || []
+  };
+}
+
+function limitRow(id, title, hit, noun) {
+  if (!hit.any || !hit.amounts.length) {
+    return row(id, title, true, "check", "No dollar amount was found next to " + noun + ".", Q_LIMIT, null, []);
+  }
+  var min = hit.amounts[0];
+  hit.amounts.forEach(function (n) { if (n < min) min = n; });
+  if (min < 1000000) {
+    return row(id, title, true, "fix", "The " + noun + " found is " + fmtMoney(min) + ", which is below USD 1 million.", Q_LIMIT, min, hit.amounts);
+  }
+  return row(id, title, true, "ok", "The " + noun + " found is " + fmtMoney(min) + ".", Q_LIMIT, min, hit.amounts);
+}
+
+function checkCOI(text, entity, isSmllcDba, expiry, today) {
+  var original = String(text == null ? "" : text);
+  var truncated = original.length > MAX;
+  if (truncated) original = original.slice(0, MAX);
+  var flat = squash(original);
+  var amounts = analyzeAmounts(flat);
+  var checks = [];
+
+  if (hasAdditionalInsured(flat)) {
+    checks.push(row("C1", "Additional insured", true, "ok", "The certificate names Amazon.com Services LLC and its affiliates and assignees.", Q_AI, null, []));
+  } else {
+    checks.push(row("C1", "Additional insured", true, "fix", FIX_AI, Q_AI, null, []));
+  }
+
+  checks.push(limitRow("C2", "Per-occurrence limit", amounts.occ, "per-occurrence limit"));
+  checks.push(limitRow("C3", "Aggregate limit", amounts.agg, "aggregate limit"));
+
+  if (!amounts.ded.any) {
+    checks.push(row("C4", "Deductible", true, "check", CHECK_DED_MISSING, Q_DED, null, []));
+  } else if (!amounts.ded.amounts.length) {
+    checks.push(row("C4", "Deductible", true, "check", "A deductible, retention, or SIR is mentioned, but no amount was found next to it. " + CHECK_DED_MISSING, Q_DED, null, []));
+  } else {
+    var maxDed = amounts.ded.amounts[0];
+    amounts.ded.amounts.forEach(function (n) { if (n > maxDed) maxDed = n; });
+    if (maxDed > 10000) {
+      checks.push(row("C4", "Deductible", true, "fix", "The deductible found is " + fmtMoney(maxDed) + ", which is greater than $10,000.", Q_DED, maxDed, amounts.ded.amounts));
+    } else {
+      checks.push(row("C4", "Deductible", true, "ok", "The deductible found is " + fmtMoney(maxDed) + ".", Q_DED, maxDed, amounts.ded.amounts));
+    }
+  }
+
+  var formText = flat.replace(/(?:each|per)\s+occurrence/gi, " ");
+  var hasClaims = /claims[-\s]?made/i.test(flat);
+  var hasOccurrenceForm = /\boccurrence\b/i.test(formText);
+  if (hasClaims) {
+    checks.push(row("C5", "Occurrence basis", true, "check", CHECK_CLAIMS, Q_OCC + " " + Q_CLAIMS, null, []));
+  } else if (hasOccurrenceForm) {
+    checks.push(row("C5", "Occurrence basis", true, "ok", "The certificate text includes occurrence as the coverage form and does not say claims-made.", Q_OCC + " " + Q_CLAIMS, null, []));
+  } else {
+    checks.push(row("C5", "Occurrence basis", true, "check", "The certificate does not show an occurrence form or a claims-made form. " + Q_OCC, Q_OCC + " " + Q_CLAIMS, null, []));
+  }
+
+  if (/\bsunset\b/i.test(flat)) {
+    checks.push(row("C6", "Sunset clause", true, "fix", FIX_SUNSET, Q_SUNSET, null, []));
+  } else {
+    checks.push(row("C6", "Sunset clause", true, "check", CHECK_SUNSET, Q_SUNSET, null, []));
+  }
+
+  var notice = noticeDays(flat);
+  if (!notice.days.length) {
+    checks.push(row("C7", "30-day notice", true, "check", "No number of days was found next to notice or cancellation. " + Q_NOTICE, Q_NOTICE, null, []));
+  } else {
+    var minDays = notice.days[0];
+    notice.days.forEach(function (n) { if (n < minDays) minDays = n; });
+    if (minDays < 30) {
+      checks.push(row("C7", "30-day notice", true, "fix", "The notice period found is " + minDays + " days, which is under 30. " + Q_NOTICE, Q_NOTICE, minDays, notice.days));
+    } else {
+      checks.push(row("C7", "30-day notice", true, "ok", "The notice period found is " + minDays + " days.", Q_NOTICE, minDays, notice.days));
+    }
+  }
+
+  var extras = [];
+  var name = String(entity == null ? "" : entity);
+  var nameFlat = squash(name).toLowerCase();
+  var tradeBit = isSmllcDba ? TRADE : "";
+  if (!nameFlat) {
+    extras.push(row("Named insured", "Named insured", false, "check", "Enter the legal entity name from your Seller Central Account Info. " + NAMED_BASE + tradeBit, Q_NAMED, null, []));
+  } else if (flat.toLowerCase().indexOf(nameFlat) !== -1) {
+    extras.push(row("Named insured", "Named insured", false, "ok", "The legal entity name appears in the certificate text. Name entered: " + oneLine(name) + tradeBit, Q_NAMED, null, []));
+  } else {
+    extras.push(row("Named insured", "Named insured", false, "check", NAMED_BASE + tradeBit + " The name entered was not found in the certificate text. Name entered: " + oneLine(name), Q_NAMED, null, []));
+  }
+
+  var types = [];
+  if (/commercial general liability/i.test(flat)) types.push("commercial general liability");
+  if (/\bumbrella\b/i.test(flat)) types.push("umbrella");
+  if (/\bexcess\b/i.test(flat)) types.push("excess");
+  if (types.length) {
+    extras.push(row("Policy type", "Policy type", false, "ok", "The certificate mentions: " + types.join(", ") + ".", Q_TYPE, null, []));
+  } else {
+    extras.push(row("Policy type", "Policy type", false, "check", "The certificate text does not show commercial general liability, umbrella, or excess. Confirm the policy type with your broker.", Q_TYPE, null, []));
+  }
+
+  var exp = ymd(expiry);
+  var todayStr = ymd(today || new Date());
+  var expNote = "Amazon's quoted criteria on this page do not state an expiry date. This check uses only the date you enter.";
+  if (!exp) {
+    extras.push(row("Expiry", "Expiry", false, "check", "Enter the policy expiry date so this page can flag a certificate that lapses before Nov 2, 2026 or is already past.", expNote, null, []));
+  } else if (exp < DEADLINE || exp < todayStr) {
+    extras.push(row("Expiry", "Expiry", false, "fix", "The expiry date " + exp + " is before Nov 2, 2026 or before today (" + todayStr + ").", expNote, null, []));
+  } else {
+    extras.push(row("Expiry", "Expiry", false, "ok", "The expiry date " + exp + " is not before Nov 2, 2026 and is not before today (" + todayStr + ").", expNote, null, []));
+  }
+
+  extras.push(row("Insurer rating", "Insurer rating", false, "check", "Confirm global claim handling and the financial rating with your broker. A certificate often does not show the rating.", Q_RATING, null, []));
+  extras.push(row("Signature", "Signature", false, "check", "Confirm the certificate is completed and signed by an authorized representative of the insurer.", Q_SIGN, null, []));
+
+  var rows = checks.concat(extras);
+  var when = formatLong(today || new Date());
+  var lines = ["Amazon COI pre-check (firstmoverprojects.com/tools/amazon-coi-check/), checked " + when + ":"];
+  if (truncated) lines.push("Only the first 20,000 characters were checked.");
+  rows.forEach(function (item) {
+    if (item.status === "ok") return;
+    var label = item.key ? (item.id + " " + item.title) : item.title;
+    lines.push(label + ": " + item.statusLabel + ". " + oneLine(item.detail));
+  });
+  lines.push("Amazon's Business Insurance verification decides whether a certificate is accepted. This list is not insurance advice.");
+  var byIdMap = {};
+  checks.forEach(function (item) { byIdMap[item.id] = item; });
+  return {
+    truncated: truncated,
+    checkedText: original,
+    checks: checks,
+    extras: extras,
+    rows: rows,
+    byId: byIdMap,
+    fixList: lines.join("\n")
+  };
+}
+
+function scopeLines(q1, q2, q3) {
+  var out = [];
+  function add(text, quote) { out.push({ text: text, quote: quote || "" }); }
+  if (!q1 && !q2 && !q3) return out;
+  if (q1 === "yes") add("From Nov 2, 2026, Amazon's page says you need USD 1 million coverage for those products regardless of sales.", Q_NOV2_CAT);
+  if (q2 === "yes") add("Amazon's existing rule already applies: insurance within 30 days after exceeding USD 10,000 in gross proceeds in one month.", Q_THRESHOLD);
+  if (q3 === "yes") add("Amazon's page says Mainland China sellers must get the policy through the Amazon Insurance Accelerator (AIA) program unless Amazon agrees otherwise in writing. From Nov 2, Amazon says it will reject newly submitted policies not obtained through AIA.", Q_AIA);
+  if (q1 === "unsure") add("Check Amazon's category list and your Account Health page. This page can't see your account.", "");
+  if (q2 === "unsure") add("If you are not sure whether gross proceeds went over USD 10,000 in any one month, check your payments reports in Seller Central. This page can't see your account.", "");
+  if (q3 === "unsure") add("If you are not sure whether your business is based in Mainland China, check Account Info in Seller Central. This page can't see your account.", "");
+  if (q1 === "no" && q2 === "no" && q3 === "no") add("Based on your answers, neither rule appears to apply right now, but Amazon may request insurance at any time ('or if otherwise requested by us').", Q_THRESHOLD);
+  add("Amazon decides. Check Amazon's own help pages.", "");
+  return out;
+}
+
+function setText(id, value) {
+  var el = byId(id);
+  if (el) el.textContent = value;
+}
+
+function paint(result) {
+  var box = byId("results");
+  if (!box) return;
+  box.hidden = false;
+  var nOk = 0;
+  var nFix = 0;
+  var nCheck = 0;
+  result.checks.forEach(function (c) {
+    if (c.status === "ok") nOk++;
+    else if (c.status === "fix") nFix++;
+    else nCheck++;
+  });
+  setText("n-ok", String(nOk));
+  setText("n-fix", String(nFix));
+  setText("n-check", String(nCheck));
+  var cap = byId("cap");
+  if (cap) {
+    cap.hidden = !result.truncated;
+    cap.textContent = result.truncated ? "Only the first 20,000 characters were checked." : "";
+  }
+  var tb = byId("tbody");
+  if (tb) {
+    tb.textContent = "";
+    result.rows.forEach(function (item) {
+      var tr = document.createElement("tr");
+      tr.setAttribute("data-status", item.status);
+      tr.setAttribute("data-id", item.id);
+      var th = document.createElement("th");
+      th.setAttribute("scope", "row");
+      th.textContent = item.key ? (item.id + ". " + item.title) : item.title;
+      tr.appendChild(th);
+      var st = document.createElement("td");
+      var tag = document.createElement("span");
+      tag.className = item.status === "ok" ? "tag ok" : (item.status === "fix" ? "tag warn" : "tag");
+      tag.textContent = item.statusLabel;
+      st.appendChild(tag);
+      tr.appendChild(st);
+      var detail = document.createElement("td");
+      detail.textContent = item.detail;
+      tr.appendChild(detail);
+      var crit = document.createElement("td");
+      crit.textContent = item.criterion;
+      tr.appendChild(crit);
+      tb.appendChild(tr);
+    });
+  }
+  setText("fixlist", result.fixList);
+  setText("checked", result.checkedText);
+  setText("copystate", "");
+}
+
+function run() {
+  var text = byId("coi") ? byId("coi").value : "";
+  var entity = byId("entity") ? byId("entity").value : "";
+  var dba = byId("dba") ? !!byId("dba").checked : false;
+  var expiry = byId("expiry") ? byId("expiry").value : "";
+  var result = checkCOI(text, entity, dba, expiry, new Date());
+  paint(result);
+  return result;
+}
+
+function groupValue(name) {
+  if (!document.getElementsByName) return "";
+  var all = document.getElementsByName(name);
+  var i;
+  for (i = 0; i < all.length; i++) if (all[i].checked) return all[i].value;
+  return "";
+}
+
+function paintScope() {
+  var out = byId("scope-out");
+  if (!out) return;
+  var lines = scopeLines(groupValue("q1"), groupValue("q2"), groupValue("q3"));
+  out.textContent = "";
+  if (!lines.length) {
+    var hint = document.createElement("p");
+    hint.className = "muted";
+    hint.textContent = "Choose Yes, No, or Not sure for each question.";
+    out.appendChild(hint);
+    return;
+  }
+  lines.forEach(function (line) {
+    var p = document.createElement("p");
+    p.textContent = line.text;
+    out.appendChild(p);
+    if (line.quote) {
+      var bq = document.createElement("blockquote");
+      bq.textContent = line.quote;
+      out.appendChild(bq);
+    }
+  });
+}
+
+function paintCriteria() {
+  var list = byId("criteria");
+  if (!list || (list.children && list.children.length)) return;
+  QUOTES.forEach(function (q) {
+    var li = document.createElement("li");
+    li.textContent = q;
+    list.appendChild(li);
+  });
+}
+
+function copyFrom(text, stateId, selectId) {
+  var state = byId(stateId);
+  function fallback() {
+    try {
+      var node = byId(selectId);
+      if (node && node.focus) node.focus();
+      if (document.createRange && window.getSelection && node) {
+        var range = document.createRange();
+        range.selectNodeContents(node);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+    } catch (e) {}
+    if (state) state.textContent = "Select the text above and copy it from there.";
+  }
+  if (!text) {
+    if (state) state.textContent = "Check the certificate first. The fix list is copied only when you press this button.";
+    return;
+  }
+  var clip = navigator.clipboard;
+  if (!clip || !clip.writeText) { fallback(); return; }
+  clip.writeText(text).then(function () {
+    if (state) state.textContent = "Copied.";
+  }, fallback);
+}
+
+function boot() {
+  if (typeof document === "undefined" || !document.getElementById) return;
+  paintCriteria();
+  var daysEl = byId("days");
+  if (daysEl) daysEl.textContent = daysText(new Date());
+  var go = byId("go");
+  if (!go || !go.addEventListener) return;
+  go.addEventListener("click", function () { run(); });
+  var sample = byId("sample");
+  if (sample) sample.addEventListener("click", function () {
+    if (byId("coi")) byId("coi").value = SAMPLE;
+    run();
+  });
+  var clear = byId("clear");
+  if (clear) clear.addEventListener("click", function () {
+    if (byId("coi")) byId("coi").value = "";
+    if (byId("entity")) byId("entity").value = "";
+    if (byId("dba")) byId("dba").checked = false;
+    if (byId("expiry")) byId("expiry").value = "";
+    var box = byId("results");
+    if (box) box.hidden = true;
+    var tb = byId("tbody");
+    if (tb) tb.textContent = "";
+    setText("fixlist", "");
+    setText("checked", "");
+    setText("copystate", "");
+    var cap = byId("cap");
+    if (cap) { cap.hidden = true; cap.textContent = ""; }
+  });
+  var copy = byId("copy");
+  if (copy) copy.addEventListener("click", function () {
+    var pre = byId("fixlist");
+    copyFrom(pre ? pre.textContent : "", "copystate", "fixlist");
+  });
+  var copyPrompt = byId("copy-prompt");
+  if (copyPrompt) copyPrompt.addEventListener("click", function () {
+    var pre = byId("agent-prompt");
+    copyFrom(pre ? pre.textContent : "", "prompt-state", "agent-prompt");
+  });
+  if (document.getElementsByName) {
+    ["q1", "q2", "q3"].forEach(function (name) {
+      var nodes = document.getElementsByName(name);
+      var i;
+      for (i = 0; i < nodes.length; i++) nodes[i].addEventListener("change", paintScope);
+    });
+  }
+  paintScope();
+}
+
+window.checkCOI = checkCOI;
+window.FMP_COI = {
+  checkCOI: checkCOI,
+  run: run,
+  paint: paint,
+  SAMPLE: SAMPLE,
+  scopeLines: scopeLines,
+  daysText: daysText,
+  daysUntilNov2: daysUntilNov2,
+  QUOTES: QUOTES
+};
+boot();
+})();
+</script>
+</body>
+</html>
