@@ -19,6 +19,11 @@ Run by First Mover Projects, PO Box 98, Firth, NE 68358. Contact: firstmoverproj
 - [Old Microsoft Whiteboards in Azure deleted, Oct 16, 2026 (just passed)](https://firstmoverprojects.com/deadlines/whiteboard-azure-oct-16.html): Work or school Whiteboards not migrated to OneDrive. Official source: https://support.microsoft.com/en-us/whiteboard/migration-of-whiteboards-from-azure-to-onedrive
 - [Office 2021 and Windows 11 24H2 Home/Pro updates end, Oct 13, 2026](https://firstmoverprojects.com/deadlines/office-2021-windows-11-24h2-oct-13.html): Official source: https://support.microsoft.com/en-us/office/system-requirements/end-of-support-for-office-2021
 
+## Free browser tools
+- [Etsy Real-Photo & Listing Audit Check](https://firstmoverprojects.com/tools/etsy-photo-audit-check/): Paste up to 10 listing rows, or toggle one listing, and get a current-risk column beside a real-photo fix plan. Runs in the browser. Nothing is uploaded.
+- [After-Hours Lead Capture Side-by-Side Scorecard](https://firstmoverprojects.com/tools/after-hours-gap-check/): Six questions plus your own inquiry, ticket, and close-rate numbers. Current setup beside an instant-capture checklist. Arithmetic uses only the numbers you enter.
+- [Loom Seat Audit & Creator-Lite Migration Calculator](https://firstmoverprojects.com/tools/loom-seat-audit-calculator/): Paste a seat CSV or enter counts and your per-seat rate. Name and email columns are dropped. Annual arithmetic uses only your counts and rate.
+
 ## Other pages
 - [Tools and templates](https://firstmoverprojects.com/tools/): Offline CSV review tools, checklists, kits and workbooks sold on Gumroad.
 - [Shopify QuickBooks connector migration problems](https://firstmoverprojects.com/help/shopify-quickbooks-connector-migration-problems.html): Common problems and checks.

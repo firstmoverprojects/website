@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/after-hours-gap-check/">
+<title>After-Hours Lead Capture Side-by-Side Scorecard: Current Setup vs. Instant Web Capture</title>
+<meta name="description" content="Answer 6 questions and enter your own after-hours inquiries, ticket, and close rates. See the current setup beside an instant-capture triage profile, with arithmetic only from your numbers.">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1b1f24;background:#f6f7f9;overflow-wrap:anywhere}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.2em 0 .4em}
+h3{font-size:1.05rem;margin:.8em 0 .3em}
+.card{background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:16px;margin:12px 0}
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px}
+.pair>section{background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:12px;min-width:0}
+.cd{display:flex;flex-wrap:wrap;gap:12px}
+.cd>div{flex:1 1 240px;background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:12px;min-width:0}
+.big{font-size:1.5rem;font-weight:700}
+.muted{color:#5a636e;font-size:.9rem}
+label{display:block;font-weight:600;margin-top:12px}
+fieldset{border:1px solid #dde1e6;border-radius:8px;margin:12px 0;padding:8px 12px;min-width:0}
+legend{font-weight:600;padding:0 6px}
+textarea,input[type=text],select{width:100%;max-width:100%;font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;padding:8px;border:1px solid #b9c0c8;border-radius:6px;background:#fff;color:inherit}
+pre{font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;background:#eef1f5;padding:10px;border-radius:6px;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;margin:.4em 0;min-width:0;max-width:100%}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:0;background:#1f5fbf;color:#fff;cursor:pointer;margin:12px 8px 0 0;white-space:normal;max-width:100%}
+button.sec{background:#e4e8ee;color:#1b1f24}
+.tag{display:inline-block;font-size:.8rem;padding:2px 8px;border-radius:9px;margin:0 6px 6px 0;background:#e4e8ee}
+.warn{background:#fde8e6;color:#8a1c12}
+.ok{background:#e3f4e6;color:#1d6b2c}
+.mid{background:#fff3d6;color:#7a5200}
+.cta{background:#fff8e6;border-color:#f0d58a}
+a{color:#1f5fbf}
+a:focus,button:focus,textarea:focus,input:focus,select:focus{outline:3px solid #1f5fbf;outline-offset:2px}
+.is-selected{outline:3px solid #1f5fbf;outline-offset:2px;border-radius:6px}
+ul,ol{margin:.4em 0;padding-left:1.2em}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:8px;top:8px;background:#fff;padding:8px 12px;z-index:2}
+footer{margin:8px 0 24px}
+[hidden]{display:none !important}
+@media print{
+  body{background:#fff}
+  .noprint{display:none !important}
+  .card,.pair>section{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<header>
+<nav aria-label="Site">
+<p class="muted"><a href="https://firstmoverprojects.com/">First Mover Projects</a> · <a href="/tools/">Tools</a> · <a href="/deadlines/">Deadlines</a></p>
+</nav>
+</header>
+<h1>After-Hours Lead Capture Side-by-Side Scorecard: Current Setup vs. Instant Web Capture</h1>
+<p><strong>Two profiles, one check.</strong> Free. Runs in your browser. Nothing is uploaded.</p>
+<p id="who"><strong>Who it's for:</strong> an owner or dispatcher at an HVAC, roofing, plumbing, electrical, garage door, or water restoration company who wants to see tonight's web capture beside an instant-triage version.</p>
+<p class="muted">The dollar lines use only the weekly inquiries, ticket, and two close rates you type. They are not a forecast, and this page does not cite a close-rate study.</p>
+
+<section class="card" aria-labelledby="ask-h">
+<h2 id="ask-h">1. Six questions and your numbers</h2>
+<label for="trade">Trade</label>
+<select id="trade">
+<option value="hvac">HVAC</option>
+<option value="roofing">Roofing</option>
+<option value="plumbing">Plumbing</option>
+<option value="electrical">Electrical</option>
+<option value="garage">Garage Door</option>
+<option value="water">Water Restoration</option>
+</select>
+<label for="q-path">1. What happens to an after-hours inquiry?</label>
+<select id="q-path">
+<option value="">Choose</option>
+<option value="voicemail">Voicemail</option>
+<option value="generic">Generic "we'll call you back" form</option>
+<option value="instant">Instant triage form</option>
+</select>
+<label for="q-emergency">2. Can the visitor choose emergency vs. routine?</label>
+<select id="q-emergency">
+<option value="">Choose</option>
+<option value="yes">Yes</option>
+<option value="no">No</option>
+</select>
+<label for="q-address">3. Is the service address captured?</label>
+<select id="q-address">
+<option value="">Choose</option>
+<option value="yes">Yes</option>
+<option value="no">No</option>
+</select>
+<label for="q-gate">4. Are gate or access notes captured?</label>
+<select id="q-gate">
+<option value="">Choose</option>
+<option value="yes">Yes</option>
+<option value="no">No</option>
+</select>
+<label for="q-photo">5. Is a photo of the problem requested?</label>
+<select id="q-photo">
+<option value="">Choose</option>
+<option value="yes">Yes</option>
+<option value="no">No</option>
+</select>
+<label for="q-reply">6. Does the visitor get an instant SMS or email that says when you will reply?</label>
+<select id="q-reply">
+<option value="">Choose</option>
+<option value="yes">Yes</option>
+<option value="no">No</option>
+</select>
+<label for="weekly">Weekly after-hours inquiries</label>
+<input id="weekly" type="text" inputmode="decimal" autocomplete="off" placeholder="0">
+<label for="ticket">Average ticket value ($)</label>
+<input id="ticket" type="text" inputmode="decimal" autocomplete="off" placeholder="0">
+<label for="rate-fast">Close rate when answered in under 5 minutes (%)</label>
+<input id="rate-fast" type="text" inputmode="decimal" autocomplete="off" placeholder="0–100">
+<label for="rate-slow">Close rate on a next-morning callback (%)</label>
+<input id="rate-slow" type="text" inputmode="decimal" autocomplete="off" placeholder="0–100">
+<button id="go" class="noprint" type="button">Build the two profiles</button>
+<button id="clear" class="sec noprint" type="button">Clear</button>
+</section>
+
+<section class="card" id="results" hidden aria-live="polite">
+<h2>Two profiles side by side</h2>
+<p id="math-basis"></p>
+<p id="errors"></p>
+<div class="pair">
+<section id="profile-current">
+<h3>Current After-Hours Profile</h3>
+<ul id="current-list"></ul>
+<h3>Next-morning callback arithmetic</h3>
+<p id="math-current"></p>
+</section>
+<section id="profile-instant">
+<h3>Instant-Capture Triage Profile</h3>
+<p id="instant-lead"></p>
+<ul id="instant-list"></ul>
+<h3>Under-5-minute arithmetic</h3>
+<p id="math-instant"></p>
+<p id="math-diff"></p>
+<p id="math-annual"></p>
+<h3>10-minute implementation checklist</h3>
+<p class="muted">A short printable list. It is not a promise that the work takes ten minutes.</p>
+<ol id="steps"></ol>
+</section>
+</div>
+<h2>Copyable checklist</h2>
+<pre id="checklist" tabindex="0"></pre>
+<button id="copy" class="sec noprint" type="button">Copy checklist</button>
+<p id="copystate" class="muted" role="status"></p>
+</section>
+
+<section class="card cta" aria-labelledby="paid-h">
+<h2 id="paid-h">Paid kits for the trade you selected</h2>
+<p>The highlighted link matches the trade menu. The kits are templates you paste into a form you already run. They are not a phone bot, and this page does not send your numbers to Gumroad.</p>
+<ul id="kit-list">
+<li><a class="trade-link" data-trade="hvac" href="https://firstmoverprojects.gumroad.com/l/afwbvt?utm_source=fmp_site&amp;utm_medium=after_hours_check&amp;utm_campaign=issue07_multi" rel="noopener noreferrer">After-Hours Web Capture Kit — HVAC Edition ($79)</a></li>
+<li><a class="trade-link" data-trade="roofing" href="https://firstmoverprojects.gumroad.com/l/wymols?utm_source=fmp_site&amp;utm_medium=after_hours_check&amp;utm_campaign=issue07_multi" rel="noopener noreferrer">After-Hours Web Capture Kit — Roofing Edition ($79)</a></li>
+<li><a class="trade-link" data-trade="plumbing" href="https://firstmoverprojects.gumroad.com/l/unjou?utm_source=fmp_site&amp;utm_medium=after_hours_check&amp;utm_campaign=issue07_multi" rel="noopener noreferrer">After-Hours Web Capture Kit — Plumbing Edition ($79)</a></li>
+<li><a class="trade-link" data-trade="electrical" href="https://firstmoverprojects.gumroad.com/l/lykya?utm_source=fmp_site&amp;utm_medium=after_hours_check&amp;utm_campaign=issue07_multi" rel="noopener noreferrer">After-Hours Web Capture Kit — Electrical Edition ($79)</a></li>
+<li><a class="trade-link" data-trade="garage" href="https://firstmoverprojects.gumroad.com/l/cybqmi?utm_source=fmp_site&amp;utm_medium=after_hours_check&amp;utm_campaign=issue07_multi" rel="noopener noreferrer">After-Hours Web Capture Kit — Garage Door Edition ($79)</a></li>
+<li><a class="trade-link" data-trade="water" href="https://firstmoverprojects.gumroad.com/l/ykxxot?utm_source=fmp_site&amp;utm_medium=after_hours_check&amp;utm_campaign=issue07_multi" rel="noopener noreferrer">After-Hours Web Capture Kit — Water Restoration Edition ($79)</a></li>
+</ul>
+<p id="intake-wrap"><a id="cta-intake" data-trade="hvac" href="https://firstmoverprojects.gumroad.com/l/fretzy?utm_source=fmp_site&amp;utm_medium=after_hours_check&amp;utm_campaign=issue07_multi" rel="noopener noreferrer">IntakeBay — HVAC Intake Site Template ($39)</a></p>
+<p class="muted" id="intake-note">IntakeBay is an HTML template with Emergency, Quote, and Maintenance forms that post to a webhook you run. Shown with the HVAC kit.</p>
+</section>
+
+<p>Related: <a href="/tools/">Tools and kits</a> · <a href="/deadlines/">Deadlines</a></p>
+<footer>
+<p>General guidance, not legal, tax or IT advice.</p>
+<p>Not affiliated with Etsy, Inc., Atlassian/Loom, or any third-party platform.</p>
+<p class="muted">This page reads only what you type. Nothing is uploaded.</p>
+</footer>
+</main>
+<noscript><p>This check needs JavaScript in your browser. Nothing is uploaded.</p></noscript>
+<script>
+(function () {
+"use strict";
+var TRADES = {
+  hvac: {label: "HVAC", triage: "No heat, no cool, or a maintenance or quote request."},
+  roofing: {label: "Roofing", triage: "Active leak, storm damage, or an estimate."},
+  plumbing: {label: "Plumbing", triage: "Active leak, sewage backup, no water, or an estimate."},
+  electrical: {label: "Electrical", triage: "Sparks, burning smell, partial outage, or an estimate. Sparks and a burning smell use the safety line."},
+  garage: {label: "Garage Door", triage: "Door stuck open, broken spring or hanging door, vehicle trapped, or an estimate."},
+  water: {label: "Water Restoration", triage: "Active water, sewage, or an inspection."}
+};
+var BASIS = "Calculated strictly from the numbers you entered above.";
+
+function byId(id) { return document.getElementById(id); }
+
+function redact(value) {
+  var s = String(value == null ? "" : value);
+  s = s.replace(/\b(?:ssn|social security(?: number)?)\s*[:#]?\s*\d{3}-?\d{2}-?\d{4}\b/gi, "[redacted-ssn]");
+  s = s.replace(/\b(?:ein|employer identification(?: number)?)\s*[:#]?\s*\d{2}-?\d{7}\b/gi, "[redacted-ein]");
+  s = s.replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, "[redacted-email]");
+  s = s.replace(/\b\d{3}-\d{2}-\d{4}\b/g, "[redacted-ssn]");
+  s = s.replace(/\b\d{2}-\d{7}\b/g, "[redacted-ein]");
+  s = s.replace(/(?:\+?\d{1,3}[\s.-])?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}\b/g, "[redacted-phone]");
+  return s;
+}
+
+function parseNum(raw) {
+  var s = String(raw == null ? "" : raw).trim().replace(/^\$/, "").replace(/,/g, "");
+  if (!/^\d+(\.\d+)?$/.test(s)) return null;
+  var n = Number(s);
+  if (!isFinite(n) || n > 1000000000) return null;
+  return n;
+}
+
+function formatEntered(n) {
+  var cents = Math.round(n * 100);
+  if (Math.abs(n * 100 - cents) > 1e-6) return String(n);
+  var whole = Math.floor(Math.abs(cents) / 100);
+  var frac = Math.abs(cents) % 100;
+  var body = frac === 0 ? String(whole) : whole + "." + (frac < 10 ? "0" : "") + frac;
+  return (cents < 0 ? "-" : "") + body;
+}
+
+function formatUSD(n) {
+  var neg = n < 0;
+  var cents = Math.round(Math.abs(n) * 100);
+  var whole = Math.floor(cents / 100);
+  var frac = cents % 100;
+  var s = String(whole);
+  var out = "";
+  while (s.length > 3) {
+    out = "," + s.slice(-3) + out;
+    s = s.slice(0, -3);
+  }
+  out = s + out;
+  return (neg ? "-$" : "$") + out + "." + (frac < 10 ? "0" : "") + frac;
+}
+
+function compute(input) {
+  var weekly = parseNum(input.weekly);
+  var ticket = parseNum(input.ticket);
+  var fast = parseNum(input.rateFast);
+  var slow = parseNum(input.rateSlow);
+  var errors = [];
+  if (weekly === null || weekly < 0) errors.push("Enter weekly after-hours inquiries as a number from 0 to 1,000,000,000.");
+  if (ticket === null || ticket < 0) errors.push("Enter average ticket value as a dollar amount from 0 to 1,000,000,000.");
+  if (fast === null || fast < 0 || fast > 100) errors.push("Enter the under-5-minute close rate as a percent from 0 to 100.");
+  if (slow === null || slow < 0 || slow > 100) errors.push("Enter the next-morning close rate as a percent from 0 to 100.");
+  if (errors.length) return {ok: false, errors: errors};
+  var current = weekly * 52 / 12 * (slow / 100) * ticket;
+  var instant = weekly * 52 / 12 * (fast / 100) * ticket;
+  var diff = instant - current;
+  var annual = diff * 12;
+  var w = formatEntered(weekly);
+  var t = formatEntered(ticket);
+  var f = formatEntered(fast);
+  var sl = formatEntered(slow);
+  return {
+    ok: true,
+    errors: [],
+    weekly: weekly,
+    ticket: ticket,
+    fast: fast,
+    slow: slow,
+    current: current,
+    instant: instant,
+    diff: diff,
+    annual: annual,
+    currentText: w + " × 52 ÷ 12 × (" + sl + " ÷ 100) × " + t + " = " + formatUSD(current),
+    instantText: w + " × 52 ÷ 12 × (" + f + " ÷ 100) × " + t + " = " + formatUSD(instant),
+    diffText: "Under-5-minute dollars − next-morning dollars = " + formatUSD(diff),
+    annualText: "Annual difference = (under-5-minute dollars − next-morning dollars) × 12, before the monthly figures are rounded = " + formatUSD(annual)
+  };
+}
+
+function pathText(path) {
+  if (path === "voicemail") return "After-hours path is voicemail.";
+  if (path === "generic") return "After-hours path is a generic \"we'll call you back\" form.";
+  if (path === "instant") return "After-hours path is an instant triage form.";
+  return "After-hours path was not answered.";
+}
+
+function ynItem(value, yesText, noText, blankText) {
+  if (value === "yes") return {gap: false, text: yesText};
+  if (value === "no") return {gap: true, text: noText};
+  return {gap: true, text: blankText};
+}
+
+function profile(answers, tradeId) {
+  var trade = TRADES[tradeId] || TRADES.hvac;
+  var current = [];
+  var pathGap = answers.path !== "instant";
+  current.push({gap: pathGap, text: pathText(answers.path)});
+  current.push(ynItem(answers.emergency, "Emergency vs. routine choice is on the form.", "No emergency vs. routine choice.", "Emergency vs. routine was not answered."));
+  current.push(ynItem(answers.address, "Service address is captured.", "Service address is not captured.", "Service address was not answered."));
+  current.push(ynItem(answers.gate, "Gate or access notes are captured.", "Gate or access notes are not captured.", "Gate or access notes were not answered."));
+  current.push(ynItem(answers.photo, "A photo of the problem is requested.", "A photo of the problem is not requested.", "Photo of the problem was not answered."));
+  current.push(ynItem(answers.reply, "An instant SMS or email sets when you will reply.", "No instant SMS or email sets when you will reply.", "Instant SMS or email was not answered."));
+  var instant = [
+    "The visitor chooses emergency or routine before anything else.",
+    "The form asks for the service address, gate or access notes, and a photo of the problem.",
+    "An instant SMS or email says when you will reply: the same night for emergency, the next morning for routine.",
+    "One " + trade.label + " triage field: " + trade.triage,
+    "A safety line sits above submit: gas, a downed line, sparks, smoke, or water the caller cannot shut off goes to emergency services or the utility before anyone waits on this form."
+  ];
+  var steps = [
+    "Add an Emergency choice and a Routine choice at the top of the after-hours form.",
+    "Add a service-address field and make it required.",
+    "Add a gate or access-notes field.",
+    "Add a photo field for the problem.",
+    "Send an instant SMS or email that says when you will reply: the same night for Emergency, the next morning for Routine. Name the channel you actually send.",
+    "Add one triage field for " + trade.label + ": " + trade.triage,
+    "Put a safety line above the submit control: if there is gas, a downed line, sparks, smoke, or water you cannot shut off, call emergency services or the utility before you wait for a reply.",
+    "If the phone still goes to voicemail after hours, change the greeting so it speaks the form address.",
+    "Submit one test entry and read the reply before a customer uses the form."
+  ];
+  return {trade: trade, current: current, instant: instant, steps: steps};
+}
+
+function build(input) {
+  var math = compute(input);
+  var sides = profile(input, input.trade);
+  var lines = [];
+  lines.push("After-Hours Lead Capture Side-by-Side Scorecard");
+  lines.push("Trade: " + sides.trade.label);
+  lines.push("");
+  lines.push("Current After-Hours Profile");
+  sides.current.forEach(function (item) { lines.push("- " + item.text); });
+  lines.push("");
+  lines.push("Instant-Capture Triage Profile");
+  sides.instant.forEach(function (item) { lines.push("- " + item); });
+  lines.push("");
+  lines.push("10-minute implementation checklist");
+  sides.steps.forEach(function (step, idx) { lines.push(String(idx + 1) + ". " + step); });
+  lines.push("");
+  if (math.ok) {
+    lines.push("Next-morning callback arithmetic: " + math.currentText);
+    lines.push("Under-5-minute arithmetic: " + math.instantText);
+    lines.push(math.diffText);
+    lines.push(math.annualText);
+    lines.push(BASIS + " Both columns use the same weekly inquiries and ticket. Only the close rate changes. This is not a forecast.");
+  } else {
+    math.errors.forEach(function (err) { lines.push(err); });
+  }
+  lines.push("");
+  lines.push("General guidance, not legal, tax or IT advice.");
+  return {math: math, sides: sides, checklist: redact(lines.join("\n"))};
+}
+
+function el(tag, text) {
+  var node = document.createElement(tag);
+  if (text != null) node.textContent = text;
+  return node;
+}
+
+function highlightTrade(trade) {
+  document.querySelectorAll(".trade-link").forEach(function (link) {
+    var on = link.getAttribute("data-trade") === trade;
+    link.classList.toggle("is-selected", on);
+    if (on) link.setAttribute("aria-current", "true");
+    else link.removeAttribute("aria-current");
+  });
+  var intake = byId("intake-wrap");
+  var show = trade === "hvac";
+  intake.hidden = !show;
+  byId("intake-note").hidden = !show;
+}
+
+function render(model) {
+  byId("math-basis").textContent = model.math.ok
+    ? BASIS + " Both columns use the same weekly inquiries and ticket. Only the close rate changes. This is not a forecast."
+    : BASIS + " Enter the four numbers to see the arithmetic. This is not a forecast.";
+  var errors = byId("errors");
+  errors.textContent = "";
+  model.math.errors.forEach(function (err) {
+    errors.appendChild(el("p", err));
+  });
+  var current = byId("current-list");
+  current.textContent = "";
+  model.sides.current.forEach(function (item) {
+    var li = el("li", item.text);
+    li.setAttribute("data-gap", item.gap ? "yes" : "no");
+    current.appendChild(li);
+  });
+  byId("instant-lead").textContent = model.sides.trade.label + " instant capture routes emergency and routine inquiries, asks for address, gate or access notes, and a photo, and sends an immediate SMS or email that sets the reply time.";
+  var instant = byId("instant-list");
+  instant.textContent = "";
+  model.sides.instant.forEach(function (item) { instant.appendChild(el("li", item)); });
+  byId("math-current").textContent = model.math.ok ? model.math.currentText : "Next-morning arithmetic is waiting on the four numbers.";
+  byId("math-instant").textContent = model.math.ok ? model.math.instantText : "Under-5-minute arithmetic is waiting on the four numbers.";
+  byId("math-diff").textContent = model.math.ok ? model.math.diffText : "";
+  byId("math-annual").textContent = model.math.ok ? model.math.annualText : "";
+  if (model.math.ok) {
+    byId("math-current").setAttribute("data-dollars", String(model.math.current));
+    byId("math-instant").setAttribute("data-dollars", String(model.math.instant));
+    byId("math-diff").setAttribute("data-dollars", String(model.math.diff));
+    byId("math-annual").setAttribute("data-dollars", String(model.math.annual));
+  } else {
+    ["math-current", "math-instant", "math-diff", "math-annual"].forEach(function (id) {
+      byId(id).removeAttribute("data-dollars");
+    });
+  }
+  var steps = byId("steps");
+  steps.textContent = "";
+  model.sides.steps.forEach(function (step) { steps.appendChild(el("li", step)); });
+  byId("checklist").textContent = model.checklist;
+  byId("copystate").textContent = "";
+  var box = byId("results");
+  box.hidden = false;
+  box.setAttribute("data-trade", model.sides.trade.label);
+  box.setAttribute("data-math", model.math.ok ? "yes" : "no");
+  highlightTrade(model.tradeId);
+  return model;
+}
+
+function fromDom() {
+  var input = {
+    trade: byId("trade").value,
+    path: byId("q-path").value,
+    emergency: byId("q-emergency").value,
+    address: byId("q-address").value,
+    gate: byId("q-gate").value,
+    photo: byId("q-photo").value,
+    reply: byId("q-reply").value,
+    weekly: byId("weekly").value,
+    ticket: byId("ticket").value,
+    rateFast: byId("rate-fast").value,
+    rateSlow: byId("rate-slow").value
+  };
+  var model = build(input);
+  model.tradeId = TRADES[input.trade] ? input.trade : "hvac";
+  return model;
+}
+
+window.FMP_AFTER = {
+  redact: redact,
+  compute: compute,
+  profile: profile,
+  build: build,
+  render: render,
+  fromDom: fromDom,
+  TRADES: TRADES,
+  BASIS: BASIS
+};
+
+byId("go").addEventListener("click", function () { render(fromDom()); });
+byId("trade").addEventListener("change", function () { highlightTrade(byId("trade").value); });
+byId("clear").addEventListener("click", function () {
+  ["q-path", "q-emergency", "q-address", "q-gate", "q-photo", "q-reply"].forEach(function (id) {
+    byId(id).value = "";
+  });
+  ["weekly", "ticket", "rate-fast", "rate-slow"].forEach(function (id) { byId(id).value = ""; });
+  byId("trade").value = "hvac";
+  highlightTrade("hvac");
+  byId("results").hidden = true;
+  byId("checklist").textContent = "";
+  byId("copystate").textContent = "";
+});
+byId("copy").addEventListener("click", function () {
+  var text = byId("checklist").textContent;
+  var state = byId("copystate");
+  if (!text) {
+    state.textContent = "Build the two profiles first. The checklist is copied only when you press this button.";
+    return;
+  }
+  if (!navigator.clipboard || !navigator.clipboard.writeText) {
+    state.textContent = "Select the checklist above and copy it from there.";
+    return;
+  }
+  navigator.clipboard.writeText(text).then(function () {
+    state.textContent = "Copied.";
+  }, function () {
+    state.textContent = "Select the checklist above and copy it from there.";
+  });
+});
+highlightTrade("hvac");
+})();
+</script>
+</body>
+</html>

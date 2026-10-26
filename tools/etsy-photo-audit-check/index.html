@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/etsy-photo-audit-check/">
+<title>Etsy Real-Photo &amp; Listing Audit Check (Free, Runs in Your Browser)</title>
+<meta name="description" content="Paste up to 10 Etsy listing rows, or toggle one listing's photos, variations, disclosure and title. Get a side-by-side risk list and real-photo fix plan. Runs in your browser. Nothing is uploaded.">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1b1f24;background:#f6f7f9;overflow-wrap:anywhere}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.2em 0 .4em}
+h3{font-size:1.05rem;margin:.8em 0 .3em}
+.card{background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:16px;margin:12px 0}
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px}
+.pair>section{background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:12px;min-width:0}
+.cd{display:flex;flex-wrap:wrap;gap:12px}
+.cd>div{flex:1 1 240px;background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:12px;min-width:0}
+.big{font-size:1.5rem;font-weight:700}
+.muted{color:#5a636e;font-size:.9rem}
+label{display:block;font-weight:600;margin-top:12px}
+.choices label{font-weight:400;display:flex;gap:8px;align-items:flex-start;margin-top:6px}
+fieldset{border:1px solid #dde1e6;border-radius:8px;margin:12px 0;padding:8px 12px;min-width:0}
+legend{font-weight:600;padding:0 6px}
+textarea,input[type=text],select{width:100%;max-width:100%;font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;padding:8px;border:1px solid #b9c0c8;border-radius:6px;background:#fff;color:inherit}
+textarea{min-height:160px}
+input[type=radio]{margin-top:.35em;flex:0 0 auto}
+pre{font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;background:#eef1f5;padding:10px;border-radius:6px;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;margin:.4em 0;min-width:0;max-width:100%}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:0;background:#1f5fbf;color:#fff;cursor:pointer;margin:12px 8px 0 0;white-space:normal;max-width:100%}
+button.sec{background:#e4e8ee;color:#1b1f24}
+.tag{display:inline-block;font-size:.8rem;padding:2px 8px;border-radius:9px;margin:0 6px 6px 0;background:#e4e8ee}
+.warn{background:#fde8e6;color:#8a1c12}
+.ok{background:#e3f4e6;color:#1d6b2c}
+.mid{background:#fff3d6;color:#7a5200}
+.cta{background:#fff8e6;border-color:#f0d58a}
+a{color:#1f5fbf}
+a:focus,button:focus,textarea:focus,input:focus,select:focus{outline:3px solid #1f5fbf;outline-offset:2px}
+table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0}
+th,td{border:1px solid #dde1e6;padding:6px 8px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+caption{text-align:left;font-weight:600;padding:4px 0}
+.table-wrap{overflow-x:auto;max-width:100%}
+ul,ol{margin:.4em 0;padding-left:1.2em}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:8px;top:8px;background:#fff;padding:8px 12px;z-index:2}
+footer{margin:8px 0 24px}
+[hidden]{display:none !important}
+@media print{
+  body{background:#fff}
+  .noprint{display:none !important}
+  .card,.pair>section{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<header>
+<nav aria-label="Site">
+<p class="muted"><a href="https://firstmoverprojects.com/">First Mover Projects</a> · <a href="/tools/">Tools</a> · <a href="/deadlines/">Deadlines</a></p>
+</nav>
+</header>
+<h1>Etsy Real-Photo &amp; Listing Audit Check</h1>
+<p><strong>Paste your listing, get a ranked fix plan.</strong> Free. Runs in your browser. Nothing is uploaded.</p>
+<p id="who"><strong>Who it's for:</strong> an Etsy seller checking a physical, digital, or print-on-demand listing before a buyer sees the photos and title.</p>
+<p class="muted">This page applies the checks written below to the text and toggles you enter. It cannot see your shop. It does not score a listing with a percent, and it does not estimate sales.</p>
+
+<section class="card" aria-labelledby="rules-h">
+<h2 id="rules-h">Checks this page runs</h2>
+<ul>
+<li><strong>Primary photo.</strong> Etsy Help says a listing must include at least one unedited photo of the actual item against a real background (some exceptions may apply), and that the first photo should be the clearest realistic picture of what the buyer receives. You mark whether the primary photo is that unedited real photo of the finished physical item, or a mockup or render.</li>
+<li><strong>Photo count.</strong> Enter a whole number from 1 to 10, the photos you want this audit to score. Etsy's listing help says a listing can hold up to 20 photos and 2 short videos. This page does not score photos 11–20. A count of 1 is a note, not a failed rule.</li>
+<li><strong>Variation photos.</strong> You mark whether each color or size option has a linked photo. This page does not claim Etsy requires that link. It records your answer.</li>
+<li><strong>Disclosure.</strong> You mark whether a digital item or a print-on-demand production partner still needs a disclosure. Etsy's Handmade policy says a seller who uses a production partner must disclose the partner's name, location, and the work they do. Some of that detail can be kept confidential to shoppers. Check the current policy for your item.</li>
+<li><strong>Title.</strong> Etsy's listing help says a title can be up to 140 characters, and says to avoid repetition. This page's repetition rule: a word of at least 3 letters or digits counts, except and, are, for, from, item, the, this, that, with, your. The same counted word 3 or more times is a repetition flag. The help page also says to consider fewer than 15 words. That 15-word line is a note, not a failed check. Character count runs after phone, email, SSN, and EIN redaction, with spaces at the ends removed. Redaction markers are not counted as title words.</li>
+</ul>
+</section>
+
+<section class="card" aria-labelledby="paste-h">
+<h2 id="paste-h">1. Paste up to 10 listing rows</h2>
+<p id="how">Five columns, in order: title, photo count, primary photo, variation photos, disclosure. Separate columns with a tab, a comma, or a semicolon. Put quotes around a title that contains the separator. A header row is optional.</p>
+<div class="table-wrap">
+<table>
+<caption>Accepted tokens</caption>
+<thead><tr><th scope="col">Column</th><th scope="col">Tokens</th></tr></thead>
+<tbody>
+<tr><td>Primary photo</td><td><code>real</code> (also unedited, photo, actual) or <code>mockup</code> (also mock, render)</td></tr>
+<tr><td>Variation photos</td><td><code>none</code> (also no), <code>linked</code> (also yes), or <code>missing</code> (also unlinked, not-linked)</td></tr>
+<tr><td>Disclosure</td><td><code>not-needed</code>, <code>present</code> (also disclosed, yes), or <code>missing</code> (also needed)</td></tr>
+</tbody>
+</table>
+</div>
+<label for="inp">Listing rows</label>
+<textarea id="inp" spellcheck="false" autocomplete="off" aria-describedby="how" placeholder="title,photos,primary,variations,disclosure"></textarea>
+<p class="muted">Phone numbers, email addresses, SSNs, and EINs are redacted in the results and in both copy boxes. Name and email columns are not needed. Leave them out.</p>
+<button id="go" class="noprint" type="button">Build the audit</button>
+<button id="example" class="sec noprint" type="button">Load example</button>
+<button id="clear" class="sec noprint" type="button">Clear</button>
+</section>
+
+<section class="card" aria-labelledby="one-h">
+<h2 id="one-h">Or check one listing with toggles</h2>
+<p class="muted">Used only when the paste box is empty.</p>
+<label for="f-title">Title</label>
+<input id="f-title" type="text" autocomplete="off" spellcheck="false" placeholder="State what the item is">
+<label for="f-photos">Photo count (1–10)</label>
+<input id="f-photos" type="text" inputmode="numeric" autocomplete="off" placeholder="1–10">
+<fieldset>
+<legend>Primary photo</legend>
+<div class="choices">
+<label><input type="radio" name="primary" value="real"> Unedited real photo of the finished physical item</label>
+<label><input type="radio" name="primary" value="mockup"> Mockup or render</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Variation photos</legend>
+<div class="choices">
+<label><input type="radio" name="variations" value="none"> No color or size options</label>
+<label><input type="radio" name="variations" value="linked"> A photo is linked to each color or size option</label>
+<label><input type="radio" name="variations" value="missing"> Color or size options are missing linked photos</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Digital or print-on-demand production-partner disclosure</legend>
+<div class="choices">
+<label><input type="radio" name="disclosure" value="not-needed"> Not needed for this listing</label>
+<label><input type="radio" name="disclosure" value="present"> Needed, and already in the listing</label>
+<label><input type="radio" name="disclosure" value="missing"> Needed, and not in the listing</label>
+</div>
+</fieldset>
+</section>
+
+<section class="card" id="results" hidden aria-live="polite">
+<h2>Current Listing Risk vs. Real-Photo Audit Fix Plan</h2>
+<p id="mode-note"></p>
+<div class="cd" aria-label="Summary">
+<div><div class="muted">Listings checked</div><div class="big" id="n-checked">0</div></div>
+<div><div class="muted">Listings with a fix</div><div class="big" id="n-fix">0</div></div>
+</div>
+<div id="pairs"></div>
+<h2>Plain-text checklist</h2>
+<pre id="checklist" tabindex="0"></pre>
+<button id="copy-checklist" class="sec noprint" type="button">Copy checklist</button>
+<h2>AI-agent-ready prompt</h2>
+<p class="muted">Copy this into an agent you already use. This page does not call one.</p>
+<pre id="agent-prompt" tabindex="0"></pre>
+<button id="copy-prompt" class="sec noprint" type="button">Copy AI prompt</button>
+<p id="copystate" class="muted" role="status"></p>
+</section>
+
+<section class="card cta" aria-labelledby="paid-h">
+<h2 id="paid-h">Paid kit</h2>
+<p><a id="paid-link" href="https://firstmoverprojects.gumroad.com/l/lnfgc?utm_source=fmp_site&amp;utm_medium=etsy_photo_check&amp;utm_campaign=issue07_multi" rel="noopener noreferrer">Unedited Photo Checklist for Etsy Sellers: Real-Photo Listing Audit Kit ($9)</a></p>
+<p class="muted">The $9 kit is a separate file on Gumroad. This page does not send your listings there.</p>
+</section>
+
+<section class="card" aria-labelledby="src-h">
+<h2 id="src-h">Sources</h2>
+<ul>
+<li><a href="https://help.etsy.com/hc/en-us/articles/115015663347-Requirements-and-Best-Practices-for-Images-in-Your-Etsy-Shop" rel="noopener noreferrer">Etsy Help: Requirements and Best Practices for Images in Your Etsy Shop</a></li>
+<li><a href="https://help.etsy.com/hc/en-us/articles/115015628707-How-to-Create-a-Listing" rel="noopener noreferrer">Etsy Help: How to Create a Listing</a> (title length, photo slots, production-partner disclosure)</li>
+<li><a href="https://www.etsy.com/legal/handmade/" rel="noopener noreferrer">Etsy Handmade Policy</a> (production partners)</li>
+</ul>
+<p class="muted">Help pages checked October 26, 2026. Etsy can change them. Confirm the current page before you edit a listing.</p>
+</section>
+
+<p>Related: <a href="/tools/">Tools and kits</a> · <a href="/deadlines/">Deadlines</a></p>
+<footer>
+<p>General guidance, not legal, tax or IT advice.</p>
+<p>Not affiliated with Etsy, Inc., Atlassian/Loom, or any third-party platform.</p>
+<p class="muted">This page reads only what you type or paste. Nothing is uploaded.</p>
+</footer>
+</main>
+<noscript><p>This check needs JavaScript in your browser. Nothing is uploaded.</p></noscript>
+<script>
+(function () {
+"use strict";
+var MAX = 500000;
+var MAX_ROWS = 10;
+var STOP = {and:1, are:1, for:1, from:1, item:1, the:1, this:1, that:1, with:1, your:1};
+var EXAMPLE = [
+  "title,photos,primary,variations,disclosure",
+  "FAKE blue ceramic mug,5,real,linked,not-needed",
+  "FAKE wall print,1,mockup,missing,missing",
+  "FAKE gift gift gift coaster set,8,real,none,present"
+].join("\n");
+
+function byId(id) { return document.getElementById(id); }
+
+function redact(value) {
+  var s = String(value == null ? "" : value);
+  s = s.replace(/\b(?:ssn|social security(?: number)?)\s*[:#]?\s*\d{3}-?\d{2}-?\d{4}\b/gi, "[redacted-ssn]");
+  s = s.replace(/\b(?:ein|employer identification(?: number)?)\s*[:#]?\s*\d{2}-?\d{7}\b/gi, "[redacted-ein]");
+  s = s.replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, "[redacted-email]");
+  s = s.replace(/\b\d{3}-\d{2}-\d{4}\b/g, "[redacted-ssn]");
+  s = s.replace(/\b\d{2}-\d{7}\b/g, "[redacted-ein]");
+  s = s.replace(/(?:\+?\d{1,3}[\s.-])?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}\b/g, "[redacted-phone]");
+  return s;
+}
+
+function normKey(s) {
+  return String(s || "").trim().toLowerCase().replace(/[^a-z0-9]+/g, "");
+}
+
+function parseLine(line, delim) {
+  var out = [];
+  var cur = "";
+  var q = false;
+  for (var i = 0; i < line.length; i++) {
+    var ch = line.charAt(i);
+    if (q) {
+      if (ch === '"') {
+        if (line.charAt(i + 1) === '"') { cur += '"'; i++; }
+        else q = false;
+      } else cur += ch;
+    } else if (ch === '"') q = true;
+    else if (ch === delim) { out.push(cur); cur = ""; }
+    else cur += ch;
+  }
+  out.push(cur);
+  return out.map(function (cell) { return cell.trim(); });
+}
+
+function detectDelim(line) {
+  var counts = {"\t": 0, ",": 0, ";": 0};
+  var q = false;
+  for (var i = 0; i < line.length; i++) {
+    var ch = line.charAt(i);
+    if (ch === '"') {
+      if (q && line.charAt(i + 1) === '"') { i++; continue; }
+      q = !q;
+    } else if (!q && counts[ch] != null) counts[ch]++;
+  }
+  if (counts["\t"] > 0 && counts["\t"] >= counts[","] && counts["\t"] >= counts[";"]) return "\t";
+  if (counts[";"] > counts[","]) return ";";
+  return ",";
+}
+
+function mapHeader(cells) {
+  var map = {};
+  cells.forEach(function (cell, idx) {
+    var k = normKey(cell);
+    var kind = "";
+    if (k === "title" || k === "listing" || k === "listingtitle") kind = "title";
+    else if (k === "photos" || k === "photocount" || k === "images" || k === "imagecount") kind = "photos";
+    else if (k === "primary" || k === "primaryphoto" || k === "phototype") kind = "primary";
+    else if (k === "variations" || k === "variationphotos" || k === "variants") kind = "variations";
+    else if (k === "disclosure" || k === "productionpartner" || k === "pod") kind = "disclosure";
+    if (kind && map[kind] == null) map[kind] = idx;
+  });
+  return map;
+}
+
+function isHeader(cells) {
+  return Object.keys(mapHeader(cells)).length >= 2;
+}
+
+function normPrimary(value) {
+  var k = normKey(value);
+  if (k === "real" || k === "unedited" || k === "photo" || k === "actual" || k === "finished") return "real";
+  if (k === "mockup" || k === "mock" || k === "render" || k === "renderonly") return "mockup";
+  return "";
+}
+
+function normVariations(value) {
+  var k = normKey(value);
+  if (k === "none" || k === "no" || k === "na" || k === "novariations") return "none";
+  if (k === "linked" || k === "yes" || k === "each") return "linked";
+  if (k === "missing" || k === "unlinked" || k === "notlinked") return "missing";
+  return "";
+}
+
+function normDisclosure(value) {
+  var k = normKey(value);
+  if (k === "notneeded" || k === "no" || k === "na" || k === "none") return "not-needed";
+  if (k === "present" || k === "disclosed" || k === "yes" || k === "done") return "present";
+  if (k === "missing" || k === "needed" || k === "neededmissing") return "missing";
+  return "";
+}
+
+function analyzeTitle(raw) {
+  var title = redact(String(raw == null ? "" : raw)).trim();
+  var forWords = title.replace(/\[redacted-(?:email|phone|ssn|ein)\]/g, " ");
+  var words = forWords.toLowerCase().match(/[a-z0-9]+/g) || [];
+  var counts = {};
+  words.forEach(function (word) {
+    if (word.length < 3 || STOP[word]) return;
+    counts[word] = (counts[word] || 0) + 1;
+  });
+  var repeated = Object.keys(counts).filter(function (word) { return counts[word] >= 3; }).sort();
+  return {title: title, length: title.length, wordCount: words.length, repeated: repeated};
+}
+
+function addFlag(flags, code, rank, fix, tone, risk, plan) {
+  flags.push({code: code, rank: rank, fix: fix, tone: tone, risk: risk, plan: plan});
+}
+
+function classify(input) {
+  var titleInfo = analyzeTitle(input.title);
+  var photos = null;
+  var photoText = String(input.photos == null ? "" : input.photos).trim();
+  if (/^\d+$/.test(photoText)) photos = Number(photoText);
+  var primary = normPrimary(input.primary);
+  var variations = normVariations(input.variations);
+  var disclosure = normDisclosure(input.disclosure);
+  var flags = [];
+  if (!primary) {
+    addFlag(flags, "primary-unknown", 2, true, "warn",
+      "Primary photo was not set to an unedited real photo or a mockup/render.",
+      "Set the primary photo to an unedited photo of the finished physical item on a real background, or mark it as a mockup/render and replace it.");
+  } else if (primary === "mockup") {
+    addFlag(flags, "primary-mockup", 1, true, "warn",
+      "Primary photo is a mockup or render, not an unedited real photo of the finished physical item.",
+      "Make the first photo an unedited picture of the finished physical item against a real background. Etsy Help says the listing needs at least one unedited photo of the actual item (some exceptions may apply) and that the first photo should be the clearest realistic picture of what the buyer receives.");
+  }
+  if (!disclosure) {
+    addFlag(flags, "disclosure-unknown", 2, true, "warn",
+      "Disclosure choice was not set.",
+      "Mark whether a digital or print-on-demand production-partner disclosure is not needed, already in the listing, or still missing.");
+  } else if (disclosure === "missing") {
+    addFlag(flags, "disclosure-missing", 2, true, "warn",
+      "You marked that a digital or print-on-demand production-partner disclosure is needed and is not in the listing.",
+      "Add the disclosure before you rely on the listing. Etsy's Handmade policy says a production partner's name, location, and the work they do are disclosed in the listing flow. The location and a description of the work are shown to shoppers; some other detail can stay confidential. Do not invent a partner name.");
+  }
+  if (!variations) {
+    addFlag(flags, "variations-unknown", 3, true, "mid",
+      "Variation-photo choice was not set.",
+      "Mark no color/size options, photos linked to each option, or options missing linked photos.");
+  } else if (variations === "missing") {
+    addFlag(flags, "variations-missing", 3, true, "mid",
+      "You marked color or size options whose photos are not linked.",
+      "Link a photo of each finished option, or remove the option if you do not offer it. This page records your answer. It does not claim Etsy requires a linked variation photo.");
+  }
+  if (!titleInfo.title) {
+    addFlag(flags, "title-empty", 4, true, "mid",
+      "Title is empty.",
+      "Write a title that states what the item is, in 140 characters or fewer, without repeating a counted word 3 times.");
+  } else if (titleInfo.length > 140) {
+    addFlag(flags, "title-long", 4, true, "mid",
+      "Title is " + titleInfo.length + " characters after redaction. Etsy's listing help says a title can be up to 140 characters.",
+      "Shorten the title to 140 characters or fewer. State what the item is once.");
+  }
+  if (titleInfo.repeated.length) {
+    addFlag(flags, "title-repeat", 4, true, "mid",
+      "Repeated counted word" + (titleInfo.repeated.length > 1 ? "s" : "") + ": " + titleInfo.repeated.join(", ") + ". This page flags a word of 3 or more letters or digits, ignoring a short stop list, when it appears 3 or more times.",
+      "Remove the repeated words (" + titleInfo.repeated.join(", ") + "). Etsy's listing help says to avoid repetition.");
+  }
+  if (photos === null) {
+    addFlag(flags, "photos-range", 3, true, "mid",
+      "Photo count was not a whole number from 1 to 10.",
+      "Enter the number of photos this audit should score, from 1 to 10.");
+  } else if (photos < 1 || photos > 10) {
+    addFlag(flags, "photos-range", 3, true, "mid",
+      "Photo count is outside 1–10. This audit accepts a whole number from 1 to 10.",
+      "Enter a photo count from 1 to 10. Etsy's listing help says a listing can hold up to 20 photos; this page does not score photos 11–20.");
+  } else if (photos === 1) {
+    addFlag(flags, "photos-one", 5, false, "ok",
+      "Photo count is 1. A single photo is a note, not a failed check. Etsy Help still requires that the listing include at least one unedited photo of the actual item, with some exceptions.",
+      "Optional: add more unedited photos of scale, materials, and condition.");
+  }
+  if (titleInfo.wordCount >= 15) {
+    addFlag(flags, "title-words", 6, false, "ok",
+      "This title has " + titleInfo.wordCount + " words. Etsy's listing help says to consider fewer than 15 words. That line is a suggestion on the help page, not a failed check here.",
+      "Optional: try a shorter title if you want to follow that suggestion.");
+  }
+  flags.sort(function (a, b) { return a.rank - b.rank || (a.code < b.code ? -1 : a.code > b.code ? 1 : 0); });
+  return {
+    title: titleInfo.title,
+    titleLength: titleInfo.length,
+    wordCount: titleInfo.wordCount,
+    repeated: titleInfo.repeated,
+    photos: photos,
+    primary: primary,
+    variations: variations,
+    disclosure: disclosure,
+    flags: flags,
+    needsFix: flags.some(function (flag) { return flag.fix; })
+  };
+}
+
+function toneLabel(tone) {
+  if (tone === "warn") return "High";
+  if (tone === "mid") return "Medium";
+  return "Note";
+}
+
+function listingName(listing) {
+  return listing.title ? listing.title : "(no title)";
+}
+
+function buildTexts(model) {
+  var lines = [];
+  lines.push("Etsy Real-Photo & Listing Audit Check");
+  lines.push(model.note);
+  lines.push("Listings checked: " + model.listings.length);
+  lines.push("Listings with a fix: " + model.listings.filter(function (listing) { return listing.needsFix; }).length);
+  lines.push("");
+  model.listings.forEach(function (listing) {
+    lines.push("Listing " + listing.n + ": " + listingName(listing));
+    lines.push("Photo count: " + (listing.photos == null ? "(not a 1–10 whole number)" : String(listing.photos)));
+    lines.push("Primary: " + (listing.primary || "(not set)"));
+    lines.push("Variations: " + (listing.variations || "(not set)"));
+    lines.push("Disclosure: " + (listing.disclosure || "(not set)"));
+    lines.push("Current Listing Risk:");
+    if (!listing.flags.length) lines.push("- No risks or notes in these checks.");
+    listing.flags.forEach(function (flag) {
+      lines.push("- " + toneLabel(flag.tone) + ": " + flag.risk);
+    });
+    lines.push("Real-Photo Audit Fix Plan:");
+    var fixes = listing.flags.filter(function (flag) { return flag.fix; });
+    if (!fixes.length) lines.push("- No fixes in these checks.");
+    fixes.forEach(function (flag, idx) {
+      lines.push(String(idx + 1) + ". " + flag.plan);
+    });
+    lines.push("");
+  });
+  lines.push("General guidance, not legal, tax or IT advice.");
+  var checklist = redact(lines.join("\n"));
+  var prompt = [
+    "You are editing an Etsy listing from the checklist below. Use only those facts.",
+    "Do not invent shop statistics, review scores, policy quotes, or a production partner name.",
+    "Do not try to restore [redacted-email], [redacted-phone], [redacted-ssn], or [redacted-ein].",
+    "Tasks:",
+    "1. Rewrite each title in 140 characters or fewer. State what the item is. Do not repeat a counted word 3 times.",
+    "2. List the photos to shoot. If the checklist says the primary photo is a mockup or render, the first shot is an unedited photo of the finished physical item on a real background.",
+    "3. If a disclosure is missing, list the fields to fill (partner name, location, work performed) and leave the name blank.",
+    "",
+    checklist
+  ].join("\n");
+  return {checklist: checklist, prompt: redact(prompt)};
+}
+
+function auditRows(rows, meta) {
+  var listings = rows.map(function (row, idx) {
+    var listing = classify(row);
+    listing.n = idx + 1;
+    listing.line = row.line;
+    return listing;
+  });
+  var model = {
+    mode: meta.mode,
+    note: meta.note,
+    capped: meta.capped,
+    totalRows: meta.totalRows,
+    listings: listings
+  };
+  var texts = buildTexts(model);
+  model.checklist = texts.checklist;
+  model.prompt = texts.prompt;
+  return model;
+}
+
+function auditPaste(text) {
+  var original = String(text == null ? "" : text).replace(/^\uFEFF/, "");
+  var truncated = original.length > MAX;
+  if (truncated) original = original.slice(0, MAX);
+  var lines = [];
+  original.split(/\r?\n/).forEach(function (line, idx) {
+    if (line.trim() === "") return;
+    lines.push({line: idx + 1, text: line});
+  });
+  var delim = lines.length ? detectDelim(lines[0].text) : ",";
+  var parsed = lines.map(function (entry) {
+    return {line: entry.line, cells: parseLine(entry.text, delim)};
+  });
+  var header = parsed.length > 0 && isHeader(parsed[0].cells);
+  var map = header ? mapHeader(parsed[0].cells) : {title: 0, photos: 1, primary: 2, variations: 3, disclosure: 4};
+  var data = header ? parsed.slice(1) : parsed.slice();
+  var totalRows = data.length;
+  var capped = totalRows > MAX_ROWS;
+  var used = data.slice(0, MAX_ROWS);
+  function cell(cells, key) {
+    var idx = map[key];
+    if (idx == null || idx >= cells.length) return "";
+    return cells[idx];
+  }
+  var rows = used.map(function (entry) {
+    return {
+      line: entry.line,
+      title: cell(entry.cells, "title"),
+      photos: cell(entry.cells, "photos"),
+      primary: cell(entry.cells, "primary"),
+      variations: cell(entry.cells, "variations"),
+      disclosure: cell(entry.cells, "disclosure")
+    };
+  });
+  var delimName = delim === "\t" ? "tabs" : delim === ";" ? "semicolons" : "commas";
+  var note = rows.length ? "Read as columns separated by " + delimName + "." : "No data rows to check.";
+  if (header) note += " Header row skipped. Extra columns were ignored.";
+  else if (rows.length) note += " No header row. Columns are title, photo count, primary, variations, disclosure. Extra columns were ignored.";
+  if (capped) note += " You pasted " + totalRows + " data rows. This page checked the first " + MAX_ROWS + " only.";
+  if (truncated) note += " Only the first 500,000 characters were read.";
+  return auditRows(rows, {mode: "paste", note: note, capped: capped, totalRows: totalRows});
+}
+
+function auditSingle(input) {
+  return auditRows([input], {
+    mode: "single",
+    note: "Single-listing toggles were used. The paste box was empty.",
+    capped: false,
+    totalRows: 1
+  });
+}
+
+function el(tag, text, className) {
+  var node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text != null) node.textContent = text;
+  return node;
+}
+
+function render(model) {
+  byId("mode-note").textContent = model.note;
+  byId("n-checked").textContent = String(model.listings.length);
+  byId("n-fix").textContent = String(model.listings.filter(function (listing) { return listing.needsFix; }).length);
+  var pairs = byId("pairs");
+  pairs.textContent = "";
+  if (!model.listings.length) pairs.appendChild(el("p", "No data rows to check."));
+  model.listings.forEach(function (listing) {
+    var wrap = el("article", null, "card");
+    wrap.setAttribute("data-listing", String(listing.n));
+    wrap.setAttribute("data-fix", listing.needsFix ? "yes" : "no");
+    wrap.appendChild(el("h3", "Listing " + listing.n + ": " + listingName(listing)));
+    var pair = el("div", null, "pair");
+    var risk = el("section");
+    risk.appendChild(el("h3", "Current Listing Risk"));
+    if (!listing.flags.length) risk.appendChild(el("p", "No risks or notes in these checks."));
+    listing.flags.forEach(function (flag) {
+      var p = el("p");
+      p.appendChild(el("span", toneLabel(flag.tone), "tag " + flag.tone));
+      p.appendChild(document.createTextNode(flag.risk));
+      p.setAttribute("data-code", flag.code);
+      risk.appendChild(p);
+    });
+    var plan = el("section");
+    plan.appendChild(el("h3", "Real-Photo Audit Fix Plan"));
+    var fixes = listing.flags.filter(function (flag) { return flag.fix; });
+    if (!fixes.length) plan.appendChild(el("p", "No fixes in these checks."));
+    else {
+      var ol = document.createElement("ol");
+      fixes.forEach(function (flag) {
+        var li = el("li", flag.plan);
+        li.setAttribute("data-code", flag.code);
+        ol.appendChild(li);
+      });
+      plan.appendChild(ol);
+    }
+    pair.appendChild(risk);
+    pair.appendChild(plan);
+    wrap.appendChild(pair);
+    pairs.appendChild(wrap);
+  });
+  byId("checklist").textContent = model.checklist;
+  byId("agent-prompt").textContent = model.prompt;
+  byId("copystate").textContent = "";
+  var box = byId("results");
+  box.hidden = false;
+  box.setAttribute("data-mode", model.mode);
+  box.setAttribute("data-checked", String(model.listings.length));
+  box.setAttribute("data-fixes", String(model.listings.filter(function (listing) { return listing.needsFix; }).length));
+  return model;
+}
+
+function checked(name) {
+  var node = document.querySelector('input[name="' + name + '"]:checked');
+  return node ? node.value : "";
+}
+
+function fromDom() {
+  var pasted = byId("inp").value;
+  if (pasted.trim() !== "") return auditPaste(pasted);
+  return auditSingle({
+    title: byId("f-title").value,
+    photos: byId("f-photos").value,
+    primary: checked("primary"),
+    variations: checked("variations"),
+    disclosure: checked("disclosure")
+  });
+}
+
+function copyText(preId) {
+  var text = byId(preId).textContent;
+  var state = byId("copystate");
+  if (!text) {
+    state.textContent = "Build the audit first. Text is copied only when you press this button.";
+    return;
+  }
+  if (!navigator.clipboard || !navigator.clipboard.writeText) {
+    state.textContent = "Select the box above and copy it from there.";
+    return;
+  }
+  navigator.clipboard.writeText(text).then(function () {
+    state.textContent = "Copied.";
+  }, function () {
+    state.textContent = "Select the box above and copy it from there.";
+  });
+}
+
+window.FMP_ETSY = {
+  redact: redact,
+  classify: classify,
+  auditPaste: auditPaste,
+  auditSingle: auditSingle,
+  render: render,
+  fromDom: fromDom,
+  EXAMPLE: EXAMPLE,
+  MAX_ROWS: MAX_ROWS
+};
+
+byId("go").addEventListener("click", function () { render(fromDom()); });
+byId("example").addEventListener("click", function () {
+  byId("inp").value = EXAMPLE;
+  render(auditPaste(EXAMPLE));
+});
+byId("clear").addEventListener("click", function () {
+  byId("inp").value = "";
+  byId("f-title").value = "";
+  byId("f-photos").value = "";
+  document.querySelectorAll('input[type="radio"]').forEach(function (node) { node.checked = false; });
+  byId("results").hidden = true;
+  byId("pairs").textContent = "";
+  byId("checklist").textContent = "";
+  byId("agent-prompt").textContent = "";
+  byId("copystate").textContent = "";
+});
+byId("copy-checklist").addEventListener("click", function () { copyText("checklist"); });
+byId("copy-prompt").addEventListener("click", function () { copyText("agent-prompt"); });
+})();
+</script>
+</body>
+</html>
