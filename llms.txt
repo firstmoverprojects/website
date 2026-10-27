@@ -28,7 +28,7 @@ Run by First Mover Projects, PO Box 98, Firth, NE 68358. Contact: firstmoverproj
 - [Tools and templates](https://firstmoverprojects.com/tools/): Offline CSV review tools, checklists, kits and workbooks sold on Gumroad.
 - [Shopify QuickBooks connector migration problems](https://firstmoverprojects.com/help/shopify-quickbooks-connector-migration-problems.html): Common problems and checks.
 - [Deadline Finder](https://firstmoverprojects.com/deadlines/finder/): Filter deadlines by the tools you use.
-- [Games](https://firstmoverprojects.com/games/): Small browser games by First Mover Projects, starting with Shutter Cats (free on itch.io).
+- [Games](https://firstmoverprojects.com/games/): Five free browser puzzle games by First Mover Projects: Shutter Cats, Chalkfair, Dippenmoor, Bunkhollow, and Quirebrook (on itch.io).
 
 ## Feeds
 - [Calendar file (.ics)](https://firstmoverprojects.com/deadlines/deadlines.ics)
