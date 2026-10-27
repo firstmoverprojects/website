@@ -28,7 +28,8 @@
     var links = document.querySelectorAll('a[href*="sibforms.com"], a[href*="gumroad.com"]');
     for (var i = 0; i < links.length; i++) {
       var a = links[i], kind = a.href.indexOf("sibforms.com") > -1 ? "signup-click" : "gumroad-click";
-      a.classList.add("btn", "btn--primary", "ab-cta");
+      var lockedSignup = a.classList.contains("signup-cta") || (a.closest && a.closest("#signup"));
+      if (!lockedSignup) a.classList.add("btn", "btn--primary", "ab-cta");
       a.addEventListener("click", (function (k, node) {
         return function () {
           track(k);
