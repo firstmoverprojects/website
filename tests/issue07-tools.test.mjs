@@ -11,7 +11,7 @@ import { pathToFileURL } from "node:url";
 let chromium;
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
-const CSP = "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; form-action 'none'; base-uri 'none'";
+const CSP = "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; form-action 'none'; base-uri 'none'";
 const FOOTER = [
   "General guidance, not legal, tax or IT advice.",
   "Not affiliated with Etsy, Inc., Atlassian/Loom, or any third-party platform."
@@ -23,16 +23,16 @@ const PAGES = {
   loom: "tools/loom-seat-audit-calculator/index.html"
 };
 const GUMROAD = {
-  etsy: "https://firstmoverprojects.gumroad.com/l/lnfgc?utm_source=firstmoverprojects&utm_medium=etsy-photo-check&utm_campaign=7day-nov2&utm_content=footer",
-  etsyResult: "https://firstmoverprojects.gumroad.com/l/lnfgc?utm_source=firstmoverprojects&utm_medium=etsy-photo-check&utm_campaign=7day-nov2&utm_content=result-card",
-  hvac: "https://firstmoverprojects.gumroad.com/l/afwbvt?utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  intake: "https://firstmoverprojects.gumroad.com/l/fretzy?utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  roofing: "https://firstmoverprojects.gumroad.com/l/wymols?utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  plumbing: "https://firstmoverprojects.gumroad.com/l/unjou?utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  electrical: "https://firstmoverprojects.gumroad.com/l/lykya?utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  garage: "https://firstmoverprojects.gumroad.com/l/cybqmi?utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  water: "https://firstmoverprojects.gumroad.com/l/ykxxot?utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  loom: "https://firstmoverprojects.gumroad.com/l/fguyxn?utm_source=fmp_site&utm_medium=loom_audit_check&utm_campaign=issue07_multi"
+  etsy: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=firstmoverprojects&utm_medium=etsy-photo-check&utm_campaign=7day-nov2&utm_content=footer",
+  etsyResult: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=firstmoverprojects&utm_medium=etsy-photo-check&utm_campaign=7day-nov2&utm_content=result-card",
+  hvac: "https://firstmoverprojects.gumroad.com/l/afwbvt?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
+  intake: "https://firstmoverprojects.gumroad.com/l/fretzy?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
+  roofing: "https://firstmoverprojects.gumroad.com/l/wymols?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
+  plumbing: "https://firstmoverprojects.gumroad.com/l/unjou?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
+  electrical: "https://firstmoverprojects.gumroad.com/l/lykya?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
+  garage: "https://firstmoverprojects.gumroad.com/l/cybqmi?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
+  water: "https://firstmoverprojects.gumroad.com/l/ykxxot?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
+  loom: "https://firstmoverprojects.gumroad.com/l/fguyxn?wanted=true&utm_source=fmp_site&utm_medium=loom_audit_check&utm_campaign=issue07_multi"
 };
 
 function read(rel) {
