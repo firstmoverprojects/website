@@ -11,7 +11,7 @@ import { pathToFileURL } from "node:url";
 let chromium;
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
-const CSP = "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; form-action 'none'; base-uri 'none'";
+const CSP = "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; form-action 'none'; base-uri 'none'";
 const FOOTER = [
   "General guidance, not legal, tax or IT advice.",
   "Not affiliated with Etsy, Inc., Atlassian/Loom, or any third-party platform."
@@ -23,15 +23,16 @@ const PAGES = {
   loom: "tools/loom-seat-audit-calculator/index.html"
 };
 const GUMROAD = {
-  etsy: "https://firstmoverprojects.gumroad.com/l/lnfgc?utm_source=fmp_site&utm_medium=etsy_photo_check&utm_campaign=issue07_multi",
-  hvac: "https://firstmoverprojects.gumroad.com/l/afwbvt?utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  intake: "https://firstmoverprojects.gumroad.com/l/fretzy?utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  roofing: "https://firstmoverprojects.gumroad.com/l/wymols?utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  plumbing: "https://firstmoverprojects.gumroad.com/l/unjou?utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  electrical: "https://firstmoverprojects.gumroad.com/l/lykya?utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  garage: "https://firstmoverprojects.gumroad.com/l/cybqmi?utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  water: "https://firstmoverprojects.gumroad.com/l/ykxxot?utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  loom: "https://firstmoverprojects.gumroad.com/l/fguyxn?utm_source=fmp_site&utm_medium=loom_audit_check&utm_campaign=issue07_multi"
+  etsy: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=firstmoverprojects&utm_medium=etsy-photo-check&utm_campaign=7day-nov2&utm_content=footer",
+  etsyResult: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=firstmoverprojects&utm_medium=etsy-photo-check&utm_campaign=7day-nov2&utm_content=result-card",
+  hvac: "https://firstmoverprojects.gumroad.com/l/afwbvt?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
+  intake: "https://firstmoverprojects.gumroad.com/l/fretzy?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
+  roofing: "https://firstmoverprojects.gumroad.com/l/wymols?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
+  plumbing: "https://firstmoverprojects.gumroad.com/l/unjou?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
+  electrical: "https://firstmoverprojects.gumroad.com/l/lykya?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
+  garage: "https://firstmoverprojects.gumroad.com/l/cybqmi?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
+  water: "https://firstmoverprojects.gumroad.com/l/ykxxot?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
+  loom: "https://firstmoverprojects.gumroad.com/l/fguyxn?wanted=true&utm_source=fmp_site&utm_medium=loom_audit_check&utm_campaign=issue07_multi"
 };
 
 function read(rel) {
@@ -133,6 +134,7 @@ test("static CSP, privacy, nav, and footer guards", () => {
   const loom = read(PAGES.loom);
   const encoded = (url) => url.replace(/&/g, "&amp;");
   assert.ok(etsy.includes(encoded(GUMROAD.etsy)));
+  assert.ok(etsy.includes(encoded(GUMROAD.etsyResult)));
   for (const key of ["hvac", "intake", "roofing", "plumbing", "electrical", "garage", "water"]) {
     assert.ok(after.includes(encoded(GUMROAD[key])), key);
   }
@@ -153,6 +155,7 @@ test("Etsy checks, redaction, cap, and 390px layout", async () => {
   await assertNoHScroll(page);
   const paid = await page.getAttribute("#paid-link", "href");
   assert.equal(paid, GUMROAD.etsy);
+  assert.equal(await page.getAttribute("#kit-result", "href"), GUMROAD.etsyResult);
 
   const redacted = await page.evaluate(() => {
     const samples = [
@@ -231,6 +234,10 @@ test("Etsy checks, redaction, cap, and 390px layout", async () => {
   const pii = "Call 555-010-1999 or pat@secret.test SSN 123-45-6789 EIN 12-3456789";
   await page.fill("#inp", pii + ",4,real,linked,not-needed");
   await page.click("#go");
+  assert.equal(await page.getAttribute("#results", "hidden"), null);
+  assert.equal(await page.locator("#result-cta").isVisible(), true);
+  assert.match(await page.innerText("#result-problem"), /listing|photo|problem|checked/i);
+  assert.equal(await page.locator("#result-cta a.btn").count(), 1);
   const shown = await page.innerText("#results");
   assert.equal(shown.includes("555-010-1999"), false);
   assert.equal(shown.includes("pat@secret.test"), false);

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; form-action 'none'; base-uri 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; form-action 'none'; base-uri 'none'">
 <meta name="referrer" content="no-referrer">
 <link rel="canonical" href="https://firstmoverprojects.com/tools/amazon-coi-check/">
 <title>Amazon Nov 2 Insurance Certificate (COI) Pre-Check (free, runs in your browser)</title>
@@ -29,6 +29,9 @@ button.sec{background:#e4e8ee;color:#1b1f24}
 .warn{background:#fde8e6;color:#8a1c12}
 .ok{background:#e3f4e6;color:#1d6b2c}
 .cta{background:#fff8e6;border-color:#f0d58a}
+.lead-cta{background:#fff8e6;border:1px solid #f0d58a;border-radius:10px;padding:16px;margin:0 0 16px}
+a.btn{display:inline-block;max-width:100%;box-sizing:border-box;font-weight:700;line-height:1.3;text-decoration:none;background:#1f5fbf;color:#fff;padding:12px 18px;border-radius:8px;margin:12px 0 0}
+a.btn:hover{background:#174a94;color:#fff}
 a{color:#1f5fbf}
 a:focus,button:focus,textarea:focus,input:focus,pre:focus{outline:3px solid #1f5fbf;outline-offset:2px}
 table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0;table-layout:fixed}
@@ -47,6 +50,20 @@ legend{font-weight:600;padding:0 4px}
 blockquote{margin:.4em 0 .8em;padding:4px 0 4px 10px;border-left:3px solid #c5ccd6}
 a,p,li,td,th,label,legend,h1,h2,blockquote{overflow-wrap:anywhere}
 [hidden]{display:none !important}
+
+.kit-conv-box{background:linear-gradient(135deg,#fffbeb 0%,#f0fdf4 100%);border:2px solid #15803d;border-radius:12px;padding:16px;margin:16px 0}
+.kit-conv-badge{display:inline-block;background:#15803d;color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.03em;padding:3px 10px;border-radius:999px;margin-bottom:6px}
+.kit-conv-title{font-size:1.2rem;font-weight:800;margin:4px 0 8px;color:#0f172a}
+.kit-preview-img{display:block;width:100%;max-width:100%;height:auto;border-radius:10px;border:1px solid #cbd5e1;box-shadow:0 6px 18px rgba(15,23,42,.10);margin:10px 0 12px;background:#fff}
+.kit-bullets{margin:8px 0 14px;padding-left:1.25em}
+.kit-bullets li{margin:6px 0;font-weight:600;color:#1e293b}
+.kit-btn-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0;min-width:0;max-width:100%}
+.btn-buy-now{display:inline-block;max-width:100%;box-sizing:border-box;background:#15803d;color:#fff !important;font-weight:800;font-size:1rem;padding:12px 20px;border-radius:9px;text-decoration:none;box-shadow:0 4px 12px rgba(21,128,61,.28);white-space:normal;overflow-wrap:anywhere;text-align:center}
+.btn-buy-now:hover{background:#166534}
+.email-cap-box{background:#f0f9ff;border:2px solid #0284c7;border-radius:10px;padding:14px 16px;margin:14px 0 6px}
+.email-cap-title{font-size:1.02rem;font-weight:800;margin:0 0 6px;color:#0c4a6e}
+.btn-email-cap{display:inline-block;max-width:100%;box-sizing:border-box;background:#0284c7;color:#fff !important;font-weight:700;padding:10px 16px;border-radius:8px;text-decoration:none;margin:6px 8px 6px 0;white-space:normal;overflow-wrap:anywhere}
+
 </style>
 </head>
 <body>
@@ -127,6 +144,15 @@ a,p,li,td,th,label,legend,h1,h2,blockquote{overflow-wrap:anywhere}
 </section>
 
 <section class="card" id="results" hidden aria-live="polite">
+<!-- Result card. Nov 2, 2026 is the date in Amazon's seller announcement, already linked in Sources.
+     Gumroad product amazon-1m-insurance-readiness-kit ($29). Short id zasjos redirects to that URL and keeps the query string.
+     utm_source, utm_medium, and utm_campaign are all required or Gumroad does not count the click. utm_content=result-card. -->
+<div class="lead-cta" id="result-cta">
+<h2 id="result-problem">Your certificate still needs a look before Amazon's rule starts.</h2>
+<p id="result-deadline">Amazon's extra rule starts Nov 2, 2026. Sellers in higher-safety categories need $1 million of coverage for each incident, and $1 million in total, even if sales are low.</p>
+<p><a class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=7day-nov2&amp;utm_content=result-card" rel="noopener noreferrer">Get the $29 insurance kit</a></p>
+<p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
+</div>
 <h2>Results</h2>
 <div class="cd">
  <div>
@@ -164,6 +190,27 @@ a,p,li,td,th,label,legend,h1,h2,blockquote{overflow-wrap:anywhere}
 <pre id="fixlist" tabindex="0"></pre>
 <button id="copy" class="sec" type="button">Copy fix list</button>
 <p id="copystate" class="muted" role="status"></p>
+
+<div class="email-cap-box" id="signup">
+  <div class="email-cap-title">Email me my free check results + deadline reminders</div>
+  <p class="muted" style="margin:0 0 6px">Save your checklist above, then join our weekly deadline alert list so cutoff changes never catch you off guard:</p>
+  <p style="margin:0"><a class="btn-email-cap" href="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" target="_blank" rel="noopener">Email me deadline reminders (1-click sign-up) →</a> <span class="muted">(opens Brevo's sign-up page · double opt-in, unsubscribe anytime · <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>)</span></p>
+</div>
+<div class="kit-conv-box">
+  <span class="kit-conv-badge">INSTANT DOWNLOAD · 7-TAB EXCEL WORKBOOK + 17-FIELD CHECKER + BROKER EMAIL · $29</span>
+  <h3 class="kit-conv-title">See What's Inside the $29 Amazon $1M Insurance Readiness Kit</h3>
+  <img class="kit-preview-img" src="/assets/previews/amazon-coi-kit-preview-1280x720.png" alt="See What's Inside the $29 Amazon $1M Insurance Readiness Kit: 17-field policy checklist, 7-tab Excel COI checker workbook, and copy-paste broker email" width="1280" height="720" loading="lazy">
+  <ul class="kit-bullets">
+    <li>Stops bounce-backs at upload: checks all 17 policy & COI fields in Amazon's G200386300 help page side-by-side in a 7-tab Excel workbook (.xlsx + .csv).</li>
+<li>Saves broker back-and-forth: includes a copy-paste Broker Fix Email with Amazon's exact 'Amazon.com Services LLC and its affiliates and assignees' Additional Insured wording.</li>
+<li>Includes a secondary Category Screen across Amazon's named enhanced-safety examples so you can organize your product list before Nov 2, 2026.</li>
+  </ul>
+  <div class="kit-btn-row">
+    <a class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=7day-nov2&amp;utm_content=result-card" rel="noopener noreferrer">Get the $29 Amazon $1M COI Readiness Kit (1-Click Checkout) →</a>
+  </div>
+  <p class="muted" style="margin:4px 0 0">Free deadline page: <a href="/deadlines/amazon-insurance-nov-2.html">Amazon commercial liability insurance changes start Nov 2, 2026</a></p>
+</div>
+
 <h2>Text checked</h2>
 <pre id="checked" tabindex="0"></pre>
 </section>
@@ -177,9 +224,18 @@ a,p,li,td,th,label,legend,h1,h2,blockquote{overflow-wrap:anywhere}
 </section>
 
 <section class="card cta" id="paid-tool" aria-labelledby="paid-h">
-<h2 id="paid-h"><a href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?utm_source=fmp-tool&amp;utm_medium=amazon-coi-check" rel="noopener noreferrer">FMP's own paid kit: $1M Insurance Readiness Kit: Amazon Enhanced-Safety Categories, Nov 2 ($29)</a></h2>
-<p>A 17-field COI pre-submission checker, a category screen (Amazon's named examples plus how to check your own products), a broker email and an Excel workbook.</p>
-<p>Free deadline page: <a href="/deadlines/amazon-insurance-nov-2.html">Amazon commercial liability insurance changes start Nov 2, 2026</a></p>
+<!-- Footer kit link. Same product. utm_content=footer. The old link had no utm_campaign, so Gumroad did not count those clicks. -->
+<span class="kit-conv-badge">INSTANT DOWNLOAD · 7-TAB EXCEL WORKBOOK + 17-FIELD CHECKER + BROKER EMAIL · $29</span>
+<h2 id="paid-h">A fuller kit to send your broker</h2>
+<img class="kit-preview-img" src="/assets/previews/amazon-coi-kit-preview-1280x720.png" alt="See What's Inside the $29 Amazon $1M Insurance Readiness Kit: 17-field policy checklist, 7-tab Excel COI checker workbook, and copy-paste broker email" width="1280" height="720" loading="lazy">
+<ul class="kit-bullets">
+<li>Stops bounce-backs at upload: checks all 17 policy &amp; COI fields in Amazon's G200386300 help page side-by-side in a 7-tab Excel workbook (.xlsx + .csv).</li>
+<li>Saves broker back-and-forth: includes a copy-paste Broker Fix Email with Amazon's exact 'Amazon.com Services LLC and its affiliates and assignees' Additional Insured wording.</li>
+<li>Includes a secondary Category Screen across Amazon's named enhanced-safety examples so you can organize your product list before Nov 2, 2026.</li>
+</ul>
+<p>The $29 kit is a file you download. It checks more certificate fields, lists the higher-safety categories, includes an email for your broker, and includes a spreadsheet. This page does not send your certificate there.</p>
+<p><a class="btn" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=7day-nov2&amp;utm_content=footer" rel="noopener noreferrer">Get the $29 insurance kit</a></p>
+<p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>. Free deadline page: <a href="/deadlines/amazon-insurance-nov-2.html">Amazon insurance changes start Nov 2, 2026</a>.</p>
 </section>
 
 <section class="card" aria-labelledby="src-h">
@@ -657,6 +713,9 @@ function paint(result) {
   setText("n-ok", String(nOk));
   setText("n-fix", String(nFix));
   setText("n-check", String(nCheck));
+  if (nFix > 0) setText("result-problem", "Your certificate has " + nFix + (nFix === 1 ? " item" : " items") + " to fix before you send it to Amazon.");
+  else if (nCheck > 0) setText("result-problem", "Some lines on your certificate still need a check by hand.");
+  else setText("result-problem", "The seven key terms on your certificate look right.");
   var cap = byId("cap");
   if (cap) {
     cap.hidden = !result.truncated;

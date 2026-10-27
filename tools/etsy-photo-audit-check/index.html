@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; form-action 'none'; base-uri 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; form-action 'none'; base-uri 'none'">
 <meta name="referrer" content="no-referrer">
 <link rel="canonical" href="https://firstmoverprojects.com/tools/etsy-photo-audit-check/">
 <title>Etsy Real-Photo &amp; Listing Audit Check (Free, Runs in Your Browser)</title>
@@ -37,6 +37,9 @@ button.sec{background:#e4e8ee;color:#1b1f24}
 .ok{background:#e3f4e6;color:#1d6b2c}
 .mid{background:#fff3d6;color:#7a5200}
 .cta{background:#fff8e6;border-color:#f0d58a}
+.lead-cta{background:#fff8e6;border:1px solid #f0d58a;border-radius:10px;padding:16px;margin:0 0 16px}
+a.btn{display:inline-block;max-width:100%;box-sizing:border-box;font-weight:700;line-height:1.3;text-decoration:none;background:#1f5fbf;color:#fff;padding:12px 18px;border-radius:8px;margin:12px 0 0}
+a.btn:hover{background:#174a94;color:#fff}
 a{color:#1f5fbf}
 a:focus,button:focus,textarea:focus,input:focus,select:focus{outline:3px solid #1f5fbf;outline-offset:2px}
 table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0}
@@ -53,6 +56,20 @@ footer{margin:8px 0 24px}
   .noprint{display:none !important}
   .card,.pair>section{break-inside:avoid}
 }
+
+.kit-conv-box{background:linear-gradient(135deg,#fffbeb 0%,#f0fdf4 100%);border:2px solid #15803d;border-radius:12px;padding:16px;margin:16px 0}
+.kit-conv-badge{display:inline-block;background:#15803d;color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.03em;padding:3px 10px;border-radius:999px;margin-bottom:6px}
+.kit-conv-title{font-size:1.2rem;font-weight:800;margin:4px 0 8px;color:#0f172a}
+.kit-preview-img{display:block;width:100%;max-width:100%;height:auto;border-radius:10px;border:1px solid #cbd5e1;box-shadow:0 6px 18px rgba(15,23,42,.10);margin:10px 0 12px;background:#fff}
+.kit-bullets{margin:8px 0 14px;padding-left:1.25em}
+.kit-bullets li{margin:6px 0;font-weight:600;color:#1e293b}
+.kit-btn-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0;min-width:0;max-width:100%}
+.btn-buy-now{display:inline-block;max-width:100%;box-sizing:border-box;background:#15803d;color:#fff !important;font-weight:800;font-size:1rem;padding:12px 20px;border-radius:9px;text-decoration:none;box-shadow:0 4px 12px rgba(21,128,61,.28);white-space:normal;overflow-wrap:anywhere;text-align:center}
+.btn-buy-now:hover{background:#166534}
+.email-cap-box{background:#f0f9ff;border:2px solid #0284c7;border-radius:10px;padding:14px 16px;margin:14px 0 6px}
+.email-cap-title{font-size:1.02rem;font-weight:800;margin:0 0 6px;color:#0c4a6e}
+.btn-email-cap{display:inline-block;max-width:100%;box-sizing:border-box;background:#0284c7;color:#fff !important;font-weight:700;padding:10px 16px;border-radius:8px;text-decoration:none;margin:6px 8px 6px 0;white-space:normal;overflow-wrap:anywhere}
+
 </style>
 </head>
 <body>
@@ -71,7 +88,7 @@ footer{margin:8px 0 24px}
 <section class="card" aria-labelledby="rules-h">
 <h2 id="rules-h">Checks this page runs</h2>
 <ul>
-<li><strong>Primary photo.</strong> Etsy Help says a listing must include at least one unedited photo of the actual item against a real background (some exceptions may apply), and that the first photo should be the clearest realistic picture of what the buyer receives. You mark whether the primary photo is that unedited real photo of the finished physical item, or a mockup or render.</li>
+<li><strong>Primary photo.</strong> Etsy Help says a listing must include at least one unedited photo of the actual item against a real background. Some exceptions may apply. Etsy also says the first photo should be the clearest realistic picture of what the buyer receives. That first-photo line does not say the unedited photo has to be first. You mark whether the first photo is an unedited photo of the real item, or a mockup or render.</li>
 <li><strong>Photo count.</strong> Enter a whole number from 1 to 10, the photos you want this audit to score. Etsy's listing help says a listing can hold up to 20 photos and 2 short videos. This page does not score photos 11–20. A count of 1 is a note, not a failed rule.</li>
 <li><strong>Variation photos.</strong> You mark whether each color or size option has a linked photo. This page does not claim Etsy requires that link. It records your answer.</li>
 <li><strong>Disclosure.</strong> You mark whether a digital item or a print-on-demand production partner still needs a disclosure. Etsy's Handmade policy says a seller who uses a production partner must disclose the partner's name, location, and the work they do. Some of that detail can be kept confidential to shoppers. Check the current policy for your item.</li>
@@ -134,6 +151,15 @@ footer{margin:8px 0 24px}
 </section>
 
 <section class="card" id="results" hidden aria-live="polite">
+<!-- Result card. Etsy did not name a last day. Announcement dated 22 October 2026: https://www.etsy.com/seller-handbook/article/1522733284810
+     Help text checked Oct 27, 2026: https://help.etsy.com/hc/en-us/articles/115015663347-Requirements-and-Best-Practices-for-Images-in-Your-Etsy-Shop
+     Gumroad product lnfgc. utm_content=result-card. Gumroad counts the click only when utm_source, utm_medium, and utm_campaign are all set. -->
+<div class="lead-cta" id="result-cta">
+<h2 id="result-problem">Your listing photos may not match Etsy's real-photo rule.</h2>
+<p id="result-deadline">Etsy posted this rule on Oct 22, 2026. They did not name a last day. If the photos are wrong and a buyer opens a case, you may have to give a refund.</p>
+<p><a class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=7day-nov2&amp;utm_content=result-card" rel="noopener noreferrer">Get the $9 photo checklist</a></p>
+<p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
+</div>
 <h2>Current Listing Risk vs. Real-Photo Audit Fix Plan</h2>
 <p id="mode-note"></p>
 <div class="cd" aria-label="Summary">
@@ -149,22 +175,53 @@ footer{margin:8px 0 24px}
 <pre id="agent-prompt" tabindex="0"></pre>
 <button id="copy-prompt" class="sec noprint" type="button">Copy AI prompt</button>
 <p id="copystate" class="muted" role="status"></p>
+
+<div class="email-cap-box" id="signup">
+  <div class="email-cap-title">Email me my free check results + deadline reminders</div>
+  <p class="muted" style="margin:0 0 6px">Save your checklist above, then join our weekly deadline alert list so cutoff changes never catch you off guard:</p>
+  <p style="margin:0"><a class="btn-email-cap" href="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" target="_blank" rel="noopener">Email me deadline reminders (1-click sign-up) →</a> <span class="muted">(opens Brevo's sign-up page · double opt-in, unsubscribe anytime · <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>)</span></p>
+</div>
+<div class="kit-conv-box">
+  <span class="kit-conv-badge">INSTANT DOWNLOAD · 2-PAGE PDF SHOT LIST + CSV LISTING AUDIT SHEET · $9</span>
+  <h3 class="kit-conv-title">See What's Inside the $9 Etsy Real-Photo Listing Audit Kit</h3>
+  <img class="kit-preview-img" src="/assets/previews/etsy-photo-audit-kit-preview-1280x720.png" alt="See What's Inside the $9 Unedited Photo Checklist for Etsy Sellers: 2-page PDF shot list by craft category and CSV listing audit spreadsheet" width="1280" height="720" loading="lazy">
+  <ul class="kit-bullets">
+    <li>Audit your whole shop in one pass: includes a one-row-per-listing CSV spreadsheet (Excel, Google Sheets, Numbers) to mark which listings already have an unedited real-background photo.</li>
+<li>Takes the guesswork out of reshoots: 2-page printable PDF with real-background shot ideas for jewelry, ceramics, clothing, home decor, craft supplies, and custom items.</li>
+<li>Includes a camera-settings safe-default checklist (turning off portrait blur, beauty mode, and AI background swaps) plus Etsy's exact Oct 22 policy quotes.</li>
+  </ul>
+  <div class="kit-btn-row">
+    <a class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=7day-nov2&amp;utm_content=result-card" rel="noopener noreferrer">Get the $9 Etsy Real-Photo Audit Kit (1-Click Checkout) →</a>
+  </div>
+  <p class="muted" style="margin:4px 0 0"><span class="muted">The $9 kit is a separate file on Gumroad. This page does not send your listings there.</span></p>
+</div>
+
 </section>
 
 <section class="card cta" aria-labelledby="paid-h">
-<h2 id="paid-h">Paid kit</h2>
-<p><a id="paid-link" href="https://firstmoverprojects.gumroad.com/l/lnfgc?utm_source=fmp_site&amp;utm_medium=etsy_photo_check&amp;utm_campaign=issue07_multi" rel="noopener noreferrer">Unedited Photo Checklist for Etsy Sellers: Real-Photo Listing Audit Kit ($9)</a></p>
-<p class="muted">The $9 kit is a separate file on Gumroad. This page does not send your listings there.</p>
+<!-- Footer kit link. Same product lnfgc. utm_content=footer so it is separate from the result card. -->
+<span class="kit-conv-badge">INSTANT DOWNLOAD · 2-PAGE PDF SHOT LIST + CSV LISTING AUDIT SHEET · $9</span>
+<h2 id="paid-h">A photo list for the rest of your shop</h2>
+<img class="kit-preview-img" src="/assets/previews/etsy-photo-audit-kit-preview-1280x720.png" alt="See What's Inside the $9 Unedited Photo Checklist for Etsy Sellers: 2-page PDF shot list by craft category and CSV listing audit spreadsheet" width="1280" height="720" loading="lazy">
+<ul class="kit-bullets">
+<li>Audit your whole shop in one pass: includes a one-row-per-listing CSV spreadsheet (Excel, Google Sheets, Numbers) to mark which listings already have an unedited real-background photo.</li>
+<li>Takes the guesswork out of reshoots: 2-page printable PDF with real-background shot ideas for jewelry, ceramics, clothing, home decor, craft supplies, and custom items.</li>
+<li>Includes a camera-settings safe-default checklist (turning off portrait blur, beauty mode, and AI background swaps) plus Etsy's exact Oct 22 policy quotes.</li>
+</ul>
+<p>The $9 checklist is a file you download. It lists which photos to take for each kind of item, plus a sheet with one row per listing. This page does not send your listings there.</p>
+<p><a class="btn" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=7day-nov2&amp;utm_content=footer" rel="noopener noreferrer">Get the $9 photo checklist</a></p>
+<p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
 </section>
 
 <section class="card" aria-labelledby="src-h">
 <h2 id="src-h">Sources</h2>
 <ul>
+<li><a href="https://www.etsy.com/seller-handbook/article/1522733284810" rel="noopener noreferrer">Etsy Seller Handbook, Oct 22, 2026: Important updates to AI use on Etsy</a> (the handbook tells sellers to update listings that do not meet the photo rule. It does not name a last day.)</li>
 <li><a href="https://help.etsy.com/hc/en-us/articles/115015663347-Requirements-and-Best-Practices-for-Images-in-Your-Etsy-Shop" rel="noopener noreferrer">Etsy Help: Requirements and Best Practices for Images in Your Etsy Shop</a></li>
-<li><a href="https://help.etsy.com/hc/en-us/articles/115015628707-How-to-Create-a-Listing" rel="noopener noreferrer">Etsy Help: How to Create a Listing</a> (title length, photo slots, production-partner disclosure)</li>
+<li><a href="https://help.etsy.com/hc/en-us/articles/115015628707-How-to-Create-a-Listing" rel="noopener noreferrer">Etsy Help: How to Create a Listing</a> (title up to 140 characters, consider fewer than 15 words, up to 20 photos and 2 videos)</li>
 <li><a href="https://www.etsy.com/legal/handmade/" rel="noopener noreferrer">Etsy Handmade Policy</a> (production partners)</li>
 </ul>
-<p class="muted">Help pages checked October 26, 2026. Etsy can change them. Confirm the current page before you edit a listing.</p>
+<p class="muted">Help pages checked October 27, 2026. Etsy can change them. Confirm the current page before you edit a listing.</p>
 </section>
 
 <p>Related: <a href="/tools/">Tools and kits</a> · <a href="/deadlines/">Deadlines</a></p>
@@ -310,11 +367,11 @@ function classify(input) {
   if (!primary) {
     addFlag(flags, "primary-unknown", 2, true, "warn",
       "Primary photo was not set to an unedited real photo or a mockup/render.",
-      "Set the primary photo to an unedited photo of the finished physical item on a real background, or mark it as a mockup/render and replace it.");
+      "Say whether the first photo is an unedited photo of the real item, or a mockup. Etsy requires at least one unedited photo of the actual item on a real background. Some exceptions may apply.");
   } else if (primary === "mockup") {
     addFlag(flags, "primary-mockup", 1, true, "warn",
       "Primary photo is a mockup or render, not an unedited real photo of the finished physical item.",
-      "Make the first photo an unedited picture of the finished physical item against a real background. Etsy Help says the listing needs at least one unedited photo of the actual item (some exceptions may apply) and that the first photo should be the clearest realistic picture of what the buyer receives.");
+      "You marked the first photo as a mockup or render. Add at least one unedited photo of the real item on a real background. Etsy Help requires that photo in the listing. Some exceptions may apply. Etsy also says the first photo should be the clearest realistic picture of what the buyer gets.");
   }
   if (!disclosure) {
     addFlag(flags, "disclosure-unknown", 2, true, "warn",
@@ -512,7 +569,27 @@ function el(tag, text, className) {
   return node;
 }
 
+function resultLead(model) {
+  var mockup = false;
+  var missingDisc = false;
+  var needs = false;
+  model.listings.forEach(function (listing) {
+    if (listing.needsFix) needs = true;
+    listing.flags.forEach(function (flag) {
+      if (flag.code === "primary-mockup") mockup = true;
+      if (flag.code === "disclosure-missing") missingDisc = true;
+    });
+  });
+  if (!model.listings.length) return "No listing rows were checked.";
+  if (mockup) return "You marked a first photo as a mockup or a computer picture.";
+  if (missingDisc) return "You marked a production partner as not disclosed on the listing.";
+  if (needs) return "This check found something to fix on your listing.";
+  return "These checks did not find a problem on the rows you entered.";
+}
+
 function render(model) {
+  var problem = byId("result-problem");
+  if (problem) problem.textContent = resultLead(model);
   byId("mode-note").textContent = model.note;
   byId("n-checked").textContent = String(model.listings.length);
   byId("n-fix").textContent = String(model.listings.filter(function (listing) { return listing.needsFix; }).length);

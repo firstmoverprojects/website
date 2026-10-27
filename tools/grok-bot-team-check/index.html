@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="data:,">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/grok-bot-team-check/">
+<title>Free 60-Second AI Agent Team &amp; 12-Routine Savings Calculator (Runs in Your Browser)</title>
+<meta name="description" content="Check which of 12 practical AI agent routines (missed refunds, unused subscriptions, late-delivery credits, tax receipts, contract red-flags, inbox triage, deadline radar) save your business the most hours and money per week. Free, runs in your browser.">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1b1f24;background:#f6f7f9;overflow-wrap:anywhere}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.1em 0 .4em}
+h3{font-size:1.05rem;margin:.8em 0 .3em}
+.card{background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:16px;margin:12px 0}
+.cd{display:flex;flex-wrap:wrap;gap:12px}
+.cd>div{flex:1 1 220px;background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:12px;min-width:0}
+.big{font-size:1.45rem;font-weight:800;color:#0f172a;margin:4px 0}
+.muted{color:#5a636e;font-size:.9rem}
+label{display:block;font-weight:600;margin-top:10px}
+input[type=number],input[type=text],select{width:100%;max-width:100%;font:15px/1.4 system-ui,-apple-system,sans-serif;padding:8px 10px;border:1px solid #b9c0c8;border-radius:6px;background:#fff;color:inherit}
+pre{font:13.5px/1.45 ui-monospace,Menlo,Consolas,monospace;background:#eef1f5;padding:12px;border-radius:6px;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;margin:.4em 0;min-width:0;max-width:100%}
+button{font:inherit;font-weight:600;padding:10px 16px;border-radius:8px;border:0;background:#1f5fbf;color:#fff;cursor:pointer;margin:10px 8px 0 0;white-space:normal;max-width:100%}
+button.sec{background:#e4e8ee;color:#1b1f24}
+.preset-row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 4px}
+.preset-row button{margin:0;padding:8px 12px;font-size:.9rem}
+.routine-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin-top:10px}
+.r-item{display:flex;align-items:flex-start;gap:10px;background:#f8fafc;border:1px solid #dde1e6;border-radius:8px;padding:10px;font-weight:500;margin:0;cursor:pointer}
+.r-item input{margin-top:4px;flex:0 0 auto;width:18px;height:18px}
+.r-meta{display:block;font-size:.82rem;color:#5a636e;font-weight:400;margin-top:2px}
+.tag{display:inline-block;font-size:.78rem;font-weight:700;padding:2px 8px;border-radius:9px;margin:0 4px 4px 0;background:#e4e8ee}
+.ok{background:#e3f4e6;color:#1d6b2c}
+.mid{background:#fff3d6;color:#7a5200}
+.warn{background:#fde8e6;color:#8a1c12}
+.cta{background:#fff8e6;border-color:#f0d58a}
+a{color:#1f5fbf}
+a:focus,button:focus,input:focus,select:focus{outline:3px solid #1f5fbf;outline-offset:2px}
+table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0}
+th,td{border:1px solid #dde1e6;padding:6px 8px;text-align:left;vertical-align:top;overflow-wrap:anywhere;font-size:.92rem}
+caption{text-align:left;font-weight:600;padding:4px 0}
+.table-wrap{overflow-x:auto;max-width:100%}
+ul,ol{margin:.4em 0;padding-left:1.2em}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:8px;top:8px;background:#fff;padding:8px 12px;z-index:2}
+footer{margin:8px 0 24px}
+[hidden]{display:none !important}
+.kit-conv-box{background:linear-gradient(135deg,#fffbeb 0%,#f0fdf4 100%);border:2px solid #15803d;border-radius:12px;padding:16px;margin:16px 0}
+.kit-conv-badge{display:inline-block;background:#15803d;color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.03em;padding:3px 10px;border-radius:999px;margin-bottom:6px}
+.kit-conv-title{font-size:1.2rem;font-weight:800;margin:4px 0 8px;color:#0f172a}
+.kit-preview-img{display:block;width:100%;max-width:100%;height:auto;border-radius:10px;border:1px solid #cbd5e1;box-shadow:0 6px 18px rgba(15,23,42,.10);margin:10px 0 12px;background:#fff}
+.kit-bullets{margin:8px 0 14px;padding-left:1.25em}
+.kit-bullets li{margin:6px 0;font-weight:600;color:#1e293b}
+.kit-btn-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.btn-buy-now{display:inline-block;background:#15803d;color:#fff !important;font-weight:800;font-size:1rem;padding:12px 20px;border-radius:9px;text-decoration:none;box-shadow:0 4px 12px rgba(21,128,61,.28)}
+.btn-buy-now:hover{background:#166534}
+.email-cap-box{background:#f0f9ff;border:2px solid #0284c7;border-radius:10px;padding:14px 16px;margin:14px 0 6px}
+.email-cap-title{font-size:1.02rem;font-weight:800;margin:0 0 6px;color:#0c4a6e}
+.btn-email-cap{display:inline-block;background:#0284c7;color:#fff !important;font-weight:700;padding:10px 16px;border-radius:8px;text-decoration:none;margin:6px 8px 6px 0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<header>
+<nav aria-label="Site">
+<p class="muted"><a href="https://firstmoverprojects.com/">First Mover Projects</a> · <a href="/tools/">Tools</a> · <a href="/deadlines/">Deadlines</a></p>
+</nav>
+</header>
+
+<h1>Free 60-Second AI Agent Team &amp; 12-Routine Savings Calculator</h1>
+<p><strong>Check which of 12 practical AI routines and 5 agent roles save you the most hours and money per week.</strong> Free. Runs 100% in your browser. Nothing is uploaded.</p>
+<p id="who"><strong>Who it's for:</strong> a solo owner, operator, or small-business team deciding which weekly and monthly tasks to hand to a human-in-the-loop AI team first (`Chief`, `Scout`, `Builder`, `Risk`, `Sales`) without runaway token spend or unsafe auto-sending.</p>
+<p class="muted"><strong>100% in-browser calculator:</strong> Nothing is uploaded or stored on any server. Built from real daily multi-agent operations. Not affiliated with xAI or Cursor.</p>
+
+<section class="card" aria-labelledby="inputs-h">
+<h2 id="inputs-h">1. Load a preset or enter your weekly numbers (≤8 inputs)</h2>
+<p class="muted">Pick a business preset to fill realistic sample numbers immediately, or adjust any box below:</p>
+<div class="preset-row">
+  <button type="button" id="preset-solo" class="sec">Preset 1: Solo Owner / Creator</button>
+  <button type="button" id="preset-shop" class="sec">Preset 2: 5-Person Local Service Shop</button>
+  <button type="button" id="preset-ecom" class="sec">Preset 3: E-Commerce / Multi-Channel Seller</button>
+</div>
+
+<div class="cd" style="margin-top:10px">
+  <div>
+    <label for="biz-type">Business type</label>
+    <select id="biz-type">
+      <option value="solo">Solo Owner / Creator / Operator</option>
+      <option value="service">Local Service / Trade / Agency</option>
+      <option value="ecom">E-Commerce / Marketplace Seller</option>
+    </select>
+    <label for="team-size">Team size (people)</label>
+    <input id="team-size" type="number" min="1" max="500" value="2">
+    <label for="hourly-rate">Value of your time ($/hour)</label>
+    <input id="hourly-rate" type="number" min="10" max="1000" value="50">
+    <label for="subs-count">Active paid software subscriptions (#)</label>
+    <input id="subs-count" type="number" min="0" max="500" value="12">
+  </div>
+  <div>
+    <label for="hrs-inbox">Hours/week on inbox &amp; spam sorting</label>
+    <input id="hrs-inbox" type="number" min="0" max="80" step="0.5" value="4">
+    <label for="hrs-book">Hours/week on receipts, bills &amp; compliance</label>
+    <input id="hrs-book" type="number" min="0" max="80" step="0.5" value="2.5">
+    <label for="hrs-leads">Hours/week on lead research &amp; quote follow-up</label>
+    <input id="hrs-leads" type="number" min="0" max="80" step="0.5" value="3.5">
+    <label for="orders-mo">Packages / supplier orders per month (#)</label>
+    <input id="orders-mo" type="number" min="0" max="10000" value="25">
+  </div>
+</div>
+
+<h2>2. Check the routines you want to evaluate (12 routines)</h2>
+<p class="muted">Conservative math: 25%–45% time reduction on selected admin tasks plus modest monthly leak detection (unused seats, post-cancellation billings, late-delivery credits).</p>
+<div class="routine-grid" id="routine-list">
+  <label class="r-item"><input type="checkbox" data-id="1" checked><span><strong>1. Missed Refund &amp; Overcharge Sweep</strong><span class="r-meta">Scout + Risk · Weekly (`0 8 * * 1`) · Catches post-cancel charges &amp; duplicates</span></span></label>
+  <label class="r-item"><input type="checkbox" data-id="2" checked><span><strong>2. Subscription &amp; Seat Leak Audit</strong><span class="r-meta">Scout + Builder · Monthly (`0 7 1 * *`) · Flags 0-activity paid seats before renewal</span></span></label>
+  <label class="r-item"><input type="checkbox" data-id="3" checked><span><strong>3. Late-Package &amp; Carrier Credit Check</strong><span class="r-meta">Scout · Tue/Fri (`0 9 * * 2,5`) · Flags late guaranteed shipments</span></span></label>
+  <label class="r-item"><input type="checkbox" data-id="4" checked><span><strong>4. Tax-Deduction &amp; Receipt Logger</strong><span class="r-meta">Builder + Scout · Friday (`0 8 * * 5`) · Categorizes weekly receipts &amp; 1099 flags</span></span></label>
+  <label class="r-item"><input type="checkbox" data-id="5" checked><span><strong>5. Contract Auto-Renewal Red-Flag Scan</strong><span class="r-meta">Risk · Monthly (`0 8 15 * *`) · Catches 30/60-day cancellation lock-ins</span></span></label>
+  <label class="r-item"><input type="checkbox" data-id="6"><span><strong>6. Credit-Report &amp; Billing Profile Check</strong><span class="r-meta">Scout + Risk · Monthly (`0 9 1 * *`) · Checks entity name &amp; address mismatches</span></span></label>
+  <label class="r-item"><input type="checkbox" data-id="7" checked><span><strong>7. Spam-Call &amp; Morning Inbox Triage</strong><span class="r-meta">Chief + Scout · Weekdays (`0 8 * * 1-5`) · Separates customer quotes from noise</span></span></label>
+  <label class="r-item"><input type="checkbox" data-id="8" checked><span><strong>8. Daily Warm Lead &amp; Signal Scout</strong><span class="r-meta">Scout · Weekdays (`30 7 * * 1-5`) · Surfaces high-intent buyer questions</span></span></label>
+  <label class="r-item"><input type="checkbox" data-id="9" checked><span><strong>9. Filing &amp; Compliance Deadline Radar</strong><span class="r-meta">Scout + Risk · Monday (`0 7 * * 1`) · Tracks 30/60-day tax &amp; platform cutoffs</span></span></label>
+  <label class="r-item"><input type="checkbox" data-id="10"><span><strong>10. Content Draft &amp; Pre-Publish QA</strong><span class="r-meta">Builder + Risk · M/W/F (`0 10 * * 1,3,5`) · Plain-English educational drafts</span></span></label>
+  <label class="r-item"><input type="checkbox" data-id="11" checked><span><strong>11. Customer Follow-Up &amp; Quote Nudges</strong><span class="r-meta">Sales · Weekdays (`0 9 * * 1-5`) · 48-hour &amp; 7-day open-quote follow-up drafts</span></span></label>
+  <label class="r-item"><input type="checkbox" data-id="12" checked><span><strong>12. Weekly Money &amp; Token Budget Guard</strong><span class="r-meta">Chief + Risk · Friday (`0 16 * * 5`) · Compares banked savings vs. AI tool cost</span></span></label>
+</div>
+
+<button id="go" type="button">Calculate My Top 3 Routines &amp; 5-Bot Plan</button>
+<button id="select-all" class="sec" type="button">Check All 12</button>
+<button id="reset-btn" class="sec" type="button">Reset Defaults</button>
+</section>
+
+<section class="card" id="results" hidden aria-live="polite">
+<h2>Your Conservative AI Agent Team &amp; Routine Breakdown</h2>
+<p id="basis-note" class="muted"></p>
+
+<div class="cd">
+  <div>
+    <div class="muted">Estimated Weekly Time Saved</div>
+    <div id="out-hrs-wk" class="big">0.0 hrs/wk</div>
+    <div id="out-hrs-mo" class="muted">~0.0 hrs/month</div>
+  </div>
+  <div>
+    <div class="muted">Monthly Time Value + Leak Recovery</div>
+    <div id="out-total-mo" class="big">$0/mo</div>
+    <div id="out-split-mo" class="muted">$0 time value + $0 direct cash/leak recovery</div>
+  </div>
+  <div>
+    <div class="muted">Recommended Starter Team</div>
+    <div id="out-starter-bots" class="big" style="font-size:1.15rem">Chief + Scout + Risk</div>
+    <div class="muted">Start with 3 bots &amp; top 3 routines first</div>
+  </div>
+</div>
+
+<h2>Top 3 Routines to Turn On First (Ranked by Monthly Impact)</h2>
+<div id="top3-cards" class="cd"></div>
+
+<h2>Full 12-Routine Breakdown &amp; Cron Schedule Table</h2>
+<div class="table-wrap">
+  <table>
+    <caption>Conservative hours saved, direct monthly recovery estimate, assigned bot role, and cron schedule</caption>
+    <thead>
+      <tr>
+        <th scope="col">Rank &amp; Routine</th>
+        <th scope="col">Bot Role</th>
+        <th scope="col">Cron Schedule</th>
+        <th scope="col">Hrs/Wk</th>
+        <th scope="col">Est. $/Mo</th>
+      </tr>
+    </thead>
+    <tbody id="routine-tbody"></tbody>
+  </table>
+</div>
+
+<h2>Recommended 5-Bot Team Blueprint (Human-in-the-Loop)</h2>
+<ul>
+  <li><strong>Chief of Staff (Front Door):</strong> Runs your 8:00 AM 4-line weekday briefing and queues drafts for your 1-click approval.</li>
+  <li><strong>Scout (Read-Only Auditor):</strong> Scans receipts, subscriptions, carrier tracking, and compliance deadlines without changing or sending anything.</li>
+  <li><strong>Builder (Templates &amp; Sheets):</strong> Maintains your expense CSVs, seat audit sheets, and checklists with backup-before-edit safety.</li>
+  <li><strong>Risk &amp; QA Gate (Safety Wall):</strong> Verifies invoice numbers, checks contract auto-renewal windows, and redacts SSN/EIN/card digits before you approve.</li>
+  <li><strong>Sales &amp; Follow-Up (Quote Tracker):</strong> Drafts 48-hour and 7-day follow-ups on open customer inquiries so warm leads never go cold.</li>
+</ul>
+
+<h2>Copyable Setup Plan &amp; Starter Cron Schedule</h2>
+<pre id="plan-text" tabindex="0"></pre>
+<button id="copy-plan" class="sec" type="button">Copy My Setup Plan</button>
+<button id="dl-csv" class="sec" type="button">Download My ROI Plan (.CSV)</button>
+<p id="copy-status" class="muted" role="status"></p>
+
+<div class="email-cap-box" id="signup">
+  <div class="email-cap-title">Email me my free check results + deadline reminders</div>
+  <p class="muted" style="margin:0 0 6px">Save your setup plan above, then join our free weekly alert list for small-business deadline reminders and practical AI workflow checklists:</p>
+  <p style="margin:0"><a class="btn-email-cap" href="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" target="_blank" rel="noopener">Email me the setup checklist &amp; weekly alerts (1-click) →</a> <span class="muted">(opens Brevo's sign-up page · double opt-in, unsubscribe anytime · <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>)</span></p>
+</div>
+
+<div class="kit-conv-box">
+  <span class="kit-conv-badge">EARLY-ACCESS WAITLIST · 5 BOT PROMPTS + 12 ROUTINE SCHEDULES + ROI TRACKER CSV · $19</span>
+  <h3 class="kit-conv-title">See What's Inside the $19 5-Bot Executive Team &amp; 12-Routine Starter Pack</h3>
+  <img class="kit-preview-img" src="/assets/previews/ai-agent-team-kit-preview-1280x720.png" alt="See What's Inside the $19 5-Bot Executive Team and 12 Money-Saving Routines Starter Pack: 5 copy-paste bot role prompts, 12 cron-scheduled routine templates, human-wall safety checklist, and ROI tracker CSV" width="1280" height="720" loading="lazy">
+  <ul class="kit-bullets">
+    <li>Copy-paste system prompts for all 5 roles (Chief of Staff, Scout, Builder, Risk Gate, Sales) with the structured OBJECTIVE / WHY / FACTS / ACTION handoff protocol.</li>
+    <li>All 12 money-saving routine prompts with exact cron schedules (`0 8 * * 1-5`, `0 8 * * 1`, `0 7 1 * *`), quiet-hours token budget guards, and pre-send human approval checklists.</li>
+    <li>Ready-to-use Agent Team ROI &amp; Savings Tracker (.CSV for Excel / Google Sheets) plus pre-publish linter and handoff validator helper scripts.</li>
+  </ul>
+  <div class="kit-btn-row">
+    <a class="btn-buy-now" href="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" target="_blank" rel="noopener" data-goatcounter-click="demand-test-ai-agent-team-kit-19" data-goatcounter-title="Demand Test: $19 AI Agent Team Starter Pack">Request the $19 5-Bot &amp; 12-Routine Starter Pack (Early-Access Waitlist) →</a>
+  </div>
+  <p class="muted" style="margin:4px 0 0">Early-access demand test: join the waitlist to get first access when the $19 Starter Pack launches. Not affiliated with xAI or Cursor.</p>
+</div>
+</section>
+
+<section class="card cta" id="paid-tool" aria-labelledby="paid-h">
+  <span class="kit-conv-badge">EARLY-ACCESS WAITLIST · 5 BOT PROMPTS + 12 ROUTINE SCHEDULES + ROI TRACKER CSV · $19</span>
+  <h2 id="paid-h">See What's Inside the $19 5-Bot Executive Team &amp; 12-Routine Starter Pack</h2>
+  <img class="kit-preview-img" src="/assets/previews/ai-agent-team-kit-preview-1280x720.png" alt="See What's Inside the $19 5-Bot Executive Team and 12 Money-Saving Routines Starter Pack: 5 copy-paste bot role prompts, 12 cron-scheduled routine templates, human-wall safety checklist, and ROI tracker CSV" width="1280" height="720" loading="lazy">
+  <ul class="kit-bullets">
+    <li>Copy-paste system prompts for all 5 roles (Chief of Staff, Scout, Builder, Risk Gate, Sales) with the structured OBJECTIVE / WHY / FACTS / ACTION handoff protocol.</li>
+    <li>All 12 money-saving routine prompts with exact cron schedules, quiet-hours token budget guards, and pre-send human approval checklists.</li>
+    <li>Ready-to-use Agent Team ROI &amp; Savings Tracker (.CSV for Excel / Google Sheets) plus pre-publish linter and handoff validator helper scripts.</li>
+  </ul>
+  <div class="kit-btn-row">
+    <a id="paid-link" class="btn-buy-now" href="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" target="_blank" rel="noopener" data-goatcounter-click="demand-test-ai-agent-team-kit-19" data-goatcounter-title="Demand Test: $19 AI Agent Team Starter Pack">Request the $19 5-Bot &amp; 12-Routine Starter Pack (Early-Access Waitlist) →</a>
+  </div>
+  <p class="muted" style="margin:4px 0 0">Early-access demand test: join the waitlist to get first access when the $19 Starter Pack launches. Not affiliated with xAI or Cursor.</p>
+</section>
+
+<p>Related: <a href="/tools/">Tools and kits</a> · <a href="/deadlines/">Deadlines</a> · <a href="/tools/loom-seat-audit-calculator/">Free Loom Seat Audit Calculator</a> · <a href="/tools/fire-to-iris-check/">Free IRS FIRE to IRIS Check</a></p>
+<footer>
+<p>General guidance, not legal, tax or IT advice.</p>
+<p>Not affiliated with xAI or Cursor. Estimates only; not financial advice.</p>
+<p>Made by First Mover Projects with AI coding tools.</p>
+<p class="muted">This page reads only what you type or toggle in your browser. Nothing is uploaded.</p>
+</footer>
+</main>
+<noscript><p>This calculator requires JavaScript in your browser. Nothing is uploaded.</p></noscript>
+<script>
+(function () {
+  "use strict";
+  function byId(id) { return document.getElementById(id); }
+  function numVal(id, fallback, maxVal) {
+    var el = byId(id);
+    if (!el) return fallback;
+    var n = parseFloat(String(el.value || "").replace(/,/g, ""));
+    if (!isFinite(n) || n < 0) return fallback;
+    return Math.min(n, maxVal || 100000);
+  }
+  function fmtMoney(n) {
+    var rounded = Math.round(n);
+    return "$" + rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  var ROUTINE_DEFS = [
+    { id: 1, name: "Missed Refund & Overcharge Sweep", role: "Scout + Risk", cron: "0 8 * * 1", freq: "Weekly (Mon 8am)", calc: function(inp) {
+      var hrs = Math.max(0.2, inp.hrsBook * 0.14);
+      var direct = Math.round(inp.subs * 0.08 * 15);
+      return { hrs: hrs, direct: direct, note: "Scans receipts for post-cancellation charges & duplicate vendor billings" };
+    }},
+    { id: 2, name: "Unused Subscription & Seat Leak Audit", role: "Scout + Builder", cron: "0 7 1 * *", freq: "Monthly (1st 7am)", calc: function(inp) {
+      var hrs = Math.max(0.15, inp.hrsBook * 0.12);
+      var seatFactor = inp.team > 1 ? Math.min(inp.team * 0.35, 8) : 0.6;
+      var direct = Math.round((inp.subs * 1.8) + (seatFactor * 12));
+      return { hrs: hrs, direct: direct, note: "Flags 0-activity paid seats and expiring trials before renewal day" };
+    }},
+    { id: 3, name: "Late-Package & Carrier Credit Check", role: "Scout", cron: "0 9 * * 2,5", freq: "Tue & Fri (9am)", calc: function(inp) {
+      var hrs = Math.min(1.5, Math.max(0.1, (inp.orders / 40) * 0.35));
+      var direct = Math.round(inp.orders * 0.025 * 14);
+      return { hrs: hrs, direct: direct, note: "Checks guaranteed shipments for late-delivery refund eligibility" };
+    }},
+    { id: 4, name: "Tax-Deduction & Receipt Logger", role: "Builder + Scout", cron: "0 8 * * 5", freq: "Weekly (Fri 8am)", calc: function(inp) {
+      var hrs = inp.hrsBook * 0.32;
+      var direct = Math.round(Math.min(45, inp.subs * 1.2));
+      return { hrs: hrs, direct: direct, note: "Logs weekly software/domain/supply receipts & flags 1099-NEC vendor thresholds" };
+    }},
+    { id: 5, name: "Contract Auto-Renewal Red-Flag Scan", role: "Risk", cron: "0 8 15 * *", freq: "Monthly (15th 8am)", calc: function(inp) {
+      var hrs = Math.max(0.15, inp.hrsBook * 0.10);
+      var direct = inp.subs >= 6 ? 20 : 8;
+      return { hrs: hrs, direct: direct, note: "Quotes auto-renewal notice windows (30/60/90 days) & price-escalator clauses" };
+    }},
+    { id: 6, name: "Credit-Report & Billing Profile Check", role: "Scout + Risk", cron: "0 9 1 * *", freq: "Monthly (1st 9am)", calc: function(inp) {
+      return { hrs: 0.2, direct: 0, note: "Checks legal entity name & address alignment across billing profiles" };
+    }},
+    { id: 7, name: "Spam-Call & Morning Inbox Triage", role: "Chief + Scout", cron: "0 8 * * 1-5", freq: "Weekdays (8am)", calc: function(inp) {
+      var hrs = inp.hrsInbox * 0.38;
+      return { hrs: hrs, direct: 0, note: "Separates urgent customer quotes & official notices from promo noise" };
+    }},
+    { id: 8, name: "Daily Warm Lead & Signal Scout", role: "Scout", cron: "30 7 * * 1-5", freq: "Weekdays (7:30am)", calc: function(inp) {
+      var hrs = inp.hrsLeads * 0.28;
+      return { hrs: hrs, direct: 0, note: "Surfaces deduplicated buyer questions & rule changes with source links" };
+    }},
+    { id: 9, name: "Filing & Compliance Deadline Radar", role: "Scout + Risk", cron: "0 7 * * 1", freq: "Weekly (Mon 7am)", calc: function(inp) {
+      var hrs = Math.max(0.2, inp.hrsBook * 0.14);
+      var direct = 15;
+      return { hrs: hrs, direct: direct, note: "Tracks 30/60-day federal, state & marketplace compliance cutoffs" };
+    }},
+    { id: 10, name: "Content Draft & Pre-Publish QA Gate", role: "Builder + Risk", cron: "0 10 * * 1,3,5", freq: "Mon/Wed/Fri (10am)", calc: function(inp) {
+      var hrs = Math.max(0.3, inp.hrsLeads * 0.18);
+      return { hrs: hrs, direct: 0, note: "Drafts plain-English educational posts & runs pre-publish fact/house-line QA" };
+    }},
+    { id: 11, name: "Customer Follow-Up & Quote Nudges", role: "Sales", cron: "0 9 * * 1-5", freq: "Weekdays (9am)", calc: function(inp) {
+      var hrs = inp.hrsLeads * 0.32;
+      var direct = inp.hrsLeads >= 2 ? 40 : 15;
+      return { hrs: hrs, direct: direct, note: "Drafts 48-hour & 7-day follow-ups on open quotes (human approves before send)" };
+    }},
+    { id: 12, name: "Weekly Money & Token Budget Guard", role: "Chief + Risk", cron: "0 16 * * 5", freq: "Weekly (Fri 4pm)", calc: function(inp) {
+      return { hrs: 0.3, direct: 10, note: "Compares weekly banked savings vs. AI tool spend & pauses noisy routines" };
+    }}
+  ];
+
+  var lastCsvContent = "";
+
+  function calculate() {
+    var inp = {
+      biz: byId("biz-type").value,
+      team: numVal("team-size", 2, 500),
+      rate: numVal("hourly-rate", 50, 1000),
+      subs: numVal("subs-count", 12, 500),
+      hrsInbox: numVal("hrs-inbox", 4, 80),
+      hrsBook: numVal("hrs-book", 2.5, 80),
+      hrsLeads: numVal("hrs-leads", 3.5, 80),
+      orders: numVal("orders-mo", 25, 10000)
+    };
+
+    var checks = document.querySelectorAll("#routine-list input[type=checkbox]");
+    var selectedIds = {};
+    for (var i = 0; i < checks.length; i++) {
+      if (checks[i].checked) selectedIds[Number(checks[i].getAttribute("data-id"))] = true;
+    }
+
+    var rows = [];
+    var totalHrsWk = 0;
+    var totalDirectMo = 0;
+
+    ROUTINE_DEFS.forEach(function (def) {
+      if (!selectedIds[def.id]) return;
+      var r = def.calc(inp);
+      var hrsWk = Math.round(r.hrs * 100) / 100;
+      var timeValMo = hrsWk * inp.rate * 4.33;
+      var totalMo = timeValMo + r.direct;
+      totalHrsWk += hrsWk;
+      totalDirectMo += r.direct;
+      rows.push({
+        id: def.id,
+        name: def.name,
+        role: def.role,
+        cron: def.cron,
+        freq: def.freq,
+        hrsWk: hrsWk,
+        directMo: r.direct,
+        timeValMo: timeValMo,
+        totalMo: totalMo,
+        note: r.note
+      });
+    });
+
+    rows.sort(function (a, b) { return b.totalMo - a.totalMo; });
+
+    var totalTimeValMo = totalHrsWk * inp.rate * 4.33;
+    var grandTotalMo = totalTimeValMo + totalDirectMo;
+
+    byId("out-hrs-wk").textContent = totalHrsWk.toFixed(1) + " hrs/wk";
+    byId("out-hrs-mo").textContent = "~" + (totalHrsWk * 4.33).toFixed(1) + " hrs/month across " + rows.length + " selected routines";
+    byId("out-total-mo").textContent = fmtMoney(grandTotalMo) + "/mo";
+    byId("out-split-mo").textContent = fmtMoney(totalTimeValMo) + "/mo time value (@ $" + inp.rate + "/hr) + " + fmtMoney(totalDirectMo) + "/mo estimated leak/refund recovery";
+    byId("basis-note").textContent = "Calculated from your inputs (" + inp.team + " team size, $" + inp.rate + "/hr time value, " + inp.subs + " subscriptions, " + inp.orders + " monthly packages). Conservative estimates only; actual savings depend on your bills and workflow.";
+
+    var top3El = byId("top3-cards");
+    top3El.innerHTML = "";
+    rows.slice(0, 3).forEach(function (item, idx) {
+      var d = document.createElement("div");
+      d.innerHTML =
+        "<span class='tag ok'>#" + (idx + 1) + " Highest ROI · " + item.role + "</span>" +
+        "<h3 style='margin:4px 0'>" + item.name + "</h3>" +
+        "<div class='big' style='font-size:1.25rem;color:#15803d'>" + fmtMoney(item.totalMo) + "/mo est.</div>" +
+        "<div class='muted'>" + item.hrsWk.toFixed(2) + " hrs/wk saved + $" + item.directMo + "/mo direct · Cron: <code>" + item.cron + "</code></div>" +
+        "<p class='muted' style='margin:6px 0 0'>" + item.note + "</p>";
+      top3El.appendChild(d);
+    });
+
+    var tbody = byId("routine-tbody");
+    tbody.innerHTML = "";
+    rows.forEach(function (item, idx) {
+      var tr = document.createElement("tr");
+      tr.innerHTML =
+        "<td><strong>#" + (idx + 1) + " — " + item.name + "</strong><br><span class='muted'>" + item.note + "</span></td>" +
+        "<td>" + item.role + "</td>" +
+        "<td><code>" + item.cron + "</code><br><span class='muted'>" + item.freq + "</span></td>" +
+        "<td>" + item.hrsWk.toFixed(2) + "</td>" +
+        "<td><strong>" + fmtMoney(item.totalMo) + "</strong><br><span class='muted'>($" + item.directMo + " direct)</span></td>";
+      tbody.appendChild(tr);
+    });
+
+    var planLines = [
+      "AI AGENT TEAM & 12-ROUTINE SETUP PLAN (CONSERVATIVE ESTIMATE)",
+      "Generated locally in your browser at firstmoverprojects.com/tools/grok-bot-team-check/",
+      "Inputs: Team=" + inp.team + " | Time Value=$" + inp.rate + "/hr | Active Subscriptions=" + inp.subs + " | Packages/Mo=" + inp.orders,
+      "Estimated Weekly Time Saved: " + totalHrsWk.toFixed(1) + " hrs/wk (~" + (totalHrsWk * 4.33).toFixed(1) + " hrs/mo)",
+      "Estimated Monthly Value: " + fmtMoney(grandTotalMo) + "/mo (" + fmtMoney(totalTimeValMo) + " time value + " + fmtMoney(totalDirectMo) + " direct recovery)",
+      "",
+      "STEP 1 — START WITH THESE TOP 3 ROUTINES FIRST:"
+    ];
+    rows.slice(0, 3).forEach(function (item, idx) {
+      planLines.push("  " + (idx + 1) + ". " + item.name + " [" + item.role + "] — Cron: " + item.cron + " (" + item.freq + ") -> ~" + fmtMoney(item.totalMo) + "/mo");
+    });
+    planLines.push("");
+    planLines.push("STEP 2 — LOCK YOUR 4 HUMAN-WALL SAFETY RULES:");
+    planLines.push("  - Draft-Only External Messages: Bots never send emails, forms, or posts without owner approval.");
+    planLines.push("  - $0 Auto-Spend: Bots never enter payment cards or buy/upgrade plans.");
+    planLines.push("  - Privacy Redaction: Drop or mask SSNs, EINs, and full card numbers before summarizing.");
+    planLines.push("  - Quiet Hours Guard: Run scheduled jobs only between 7:00 AM and 11:00 PM local time.");
+    planLines.push("");
+    planLines.push("General guidance, not legal, tax or IT advice. Not affiliated with xAI or Cursor.");
+    byId("plan-text").textContent = planLines.join("\n");
+
+    var topSlug = rows.length ? "r" + rows[0].id : "default";
+    var buyLinks = document.querySelectorAll(".btn-buy-now");
+    for (var bIdx = 0; bIdx < buyLinks.length; bIdx++) {
+      buyLinks[bIdx].setAttribute("data-goatcounter-click", "demand-test-ai-agent-team-kit-19-" + topSlug);
+    }
+
+    var csvLines = [
+      "Routine_or_Bot_Name,Category,Frequency,Hours_Saved_Per_Week,Hourly_Value_USD,Monthly_Direct_Dollars_Recovered_USD,Monthly_Tool_Cost_USD,Net_Monthly_ROI_USD,Status,Notes"
+    ];
+    rows.forEach(function (item, idx) {
+      var rowNum = idx + 2;
+      var safeName = '"' + item.name.replace(/"/g, '""') + '"';
+      var safeNote = '"' + item.note.replace(/"/g, '""') + '"';
+      csvLines.push([
+        safeName,
+        '"' + item.role + '"',
+        '"' + item.freq + ' (' + item.cron + ')"',
+        item.hrsWk.toFixed(2),
+        inp.rate,
+        item.directMo.toFixed(2),
+        "2.00",
+        '"=D' + rowNum + '*E' + rowNum + '*4.33+F' + rowNum + '-G' + rowNum + '"',
+        idx < 3 ? "START_FIRST" : "QUEUED",
+        safeNote
+      ].join(","));
+    });
+    lastCsvContent = csvLines.join("\n");
+
+    byId("results").hidden = false;
+  }
+
+  function applyPreset(kind) {
+    if (kind === "solo") {
+      byId("biz-type").value = "solo";
+      byId("team-size").value = "1";
+      byId("hourly-rate").value = "50";
+      byId("subs-count").value = "9";
+      byId("hrs-inbox").value = "3.5";
+      byId("hrs-book").value = "2";
+      byId("hrs-leads").value = "3";
+      byId("orders-mo").value = "12";
+    } else if (kind === "shop") {
+      byId("biz-type").value = "service";
+      byId("team-size").value = "5";
+      byId("hourly-rate").value = "65";
+      byId("subs-count").value = "16";
+      byId("hrs-inbox").value = "6";
+      byId("hrs-book").value = "4";
+      byId("hrs-leads").value = "5.5";
+      byId("orders-mo").value = "35";
+    } else if (kind === "ecom") {
+      byId("biz-type").value = "ecom";
+      byId("team-size").value = "3";
+      byId("hourly-rate").value = "55";
+      byId("subs-count").value = "18";
+      byId("hrs-inbox").value = "5";
+      byId("hrs-book").value = "3.5";
+      byId("hrs-leads").value = "3";
+      byId("orders-mo").value = "140";
+    }
+    calculate();
+  }
+
+  byId("go").addEventListener("click", calculate);
+  byId("preset-solo").addEventListener("click", function () { applyPreset("solo"); });
+  byId("preset-shop").addEventListener("click", function () { applyPreset("shop"); });
+  byId("preset-ecom").addEventListener("click", function () { applyPreset("ecom"); });
+
+  byId("select-all").addEventListener("click", function () {
+    var checks = document.querySelectorAll("#routine-list input[type=checkbox]");
+    for (var i = 0; i < checks.length; i++) checks[i].checked = true;
+    calculate();
+  });
+
+  byId("reset-btn").addEventListener("click", function () {
+    var defaultOn = {1:1, 2:1, 3:1, 4:1, 5:1, 7:1, 8:1, 9:1, 11:1, 12:1};
+    var checks = document.querySelectorAll("#routine-list input[type=checkbox]");
+    for (var i = 0; i < checks.length; i++) {
+      var id = Number(checks[i].getAttribute("data-id"));
+      checks[i].checked = !!defaultOn[id];
+    }
+    applyPreset("solo");
+  });
+
+  byId("copy-plan").addEventListener("click", function () {
+    var txt = byId("plan-text").textContent || "";
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).then(function () {
+        byId("copy-status").textContent = "Copied setup plan to clipboard.";
+      }, function () {
+        byId("copy-status").textContent = "Select the box above and press Ctrl+C / Cmd+C to copy.";
+      });
+    } else {
+      byId("copy-status").textContent = "Select the box above and press Ctrl+C / Cmd+C to copy.";
+    }
+  });
+
+  byId("dl-csv").addEventListener("click", function () {
+    if (!lastCsvContent) calculate();
+    var blob = new Blob([lastCsvContent], { type: "text/csv;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "my-ai-agent-team-roi-plan.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    byId("copy-status").textContent = "Downloaded my-ai-agent-team-roi-plan.csv.";
+  });
+})();
+</script>
+</body>
+</html>
