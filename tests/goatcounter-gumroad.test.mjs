@@ -8,7 +8,7 @@ import vm from "node:vm";
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const CSP = "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action 'none'; base-uri 'none'";
 const COUNT = '<script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>';
-const BANNED = ["fetch(", "XMLHttpRequest", "sendBeacon", "localStorage", "sessionStorage", "indexedDB"];
+const BANNED = ["XMLHttpRequest", "localStorage", "sessionStorage", "indexedDB"];
 
 function read(rel) {
   return readFileSync(path.join(ROOT, rel), "utf8");
@@ -33,6 +33,14 @@ function trackingPages() {
     "deadlines/finder/index.html",
     ...deadlines
   ].sort();
+}
+
+function withoutHelper(html) {
+  const marker = html.indexOf("function trackGumroadClick");
+  if (marker === -1) return html;
+  const start = html.lastIndexOf("<script>", marker);
+  const end = html.indexOf("</script>", marker);
+  return html.slice(0, start) + html.slice(end + "</script>".length);
 }
 
 function helperBody(html) {
@@ -85,6 +93,9 @@ test("every individual tool page allows GoatCounter and sends an origin referrer
     assert.equal(html.includes('<meta name="referrer" content="strict-origin-when-cross-origin">'), true, rel);
     assert.equal(html.includes('content="no-referrer"'), false, rel);
     for (const token of BANNED) assert.equal(html.includes(token), false, rel + " " + token);
+    const rest = withoutHelper(html);
+    assert.equal(rest.includes("fetch("), false, rel + " fetch outside helper");
+    assert.equal(rest.includes("sendBeacon"), false, rel + " sendBeacon outside helper");
   }
 });
 
@@ -92,6 +103,9 @@ test("tracking pages load the test-exclude helper before count.js", () => {
   const canonical = helperBody(read("tools/amazon-coi-check/index.html"));
   assert.match(canonical, /window\.goatcounter = \{ path: function \(p\) \{ return "TEST-EXCLUDE" \+ p; \} \}/);
   assert.match(canonical, /gumroad-click\//);
+  assert.match(canonical, /var gcCountUrl = "https:\/\/firstmoverprojects\.goatcounter\.com\/count\?p="/);
+  assert.match(canonical, /fetch\(gcCountUrl, \{ keepalive: true, mode: "no-cors" \}\)/);
+  assert.match(canonical, /navigator\.sendBeacon\(gcCountUrl\)/);
   for (const rel of trackingPages()) {
     const html = read(rel);
     assert.equal(helperBody(html), canonical, rel);
@@ -132,7 +146,25 @@ test("wanted=true Gumroad anchors keep an origin referrer", () => {
 test("checkout clicks record gumroad-click/slug and test visits stay under TEST-EXCLUDE", () => {
   const href = "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance-readiness-kit&utm_content=result-card";
   const live = loadHelper("");
+  const fetches = [];
+  const beacons = [];
+  live.sandbox.fetch = (url, opts) => {
+    fetches.push({ url, opts });
+    return Promise.resolve();
+  };
+  live.sandbox.navigator = {
+    sendBeacon(url) {
+      beacons.push(url);
+      return true;
+    }
+  };
   click(live.listeners, href);
+  assert.equal(fetches.length, 1);
+  assert.equal(fetches[0].opts.keepalive, true);
+  assert.equal(fetches[0].opts.mode, "no-cors");
+  assert.match(fetches[0].url, /^https:\/\/firstmoverprojects\.goatcounter\.com\/count\?/);
+  assert.match(fetches[0].url, /p=gumroad-click%2Famazon-1m-insurance-readiness-kit/);
+  assert.deepEqual(beacons, fetches.map((item) => item.url));
   assert.deepEqual(live.counts, [{
     path: "gumroad-click/amazon-1m-insurance-readiness-kit",
     title: "Gumroad checkout click: amazon-1m-insurance-readiness-kit",
@@ -143,8 +175,24 @@ test("checkout clicks record gumroad-click/slug and test visits stay under TEST-
   for (const search of ["?fmp_test=1", "?utm_source=fmp_test_exclude", "?utm_campaign=kit&fmp_test=1"]) {
     const testVisit = loadHelper(search);
     assert.equal(testVisit.sandbox.goatcounter.path("/tools/amazon-coi-check/?fmp_test=1"), "TEST-EXCLUDE/tools/amazon-coi-check/?fmp_test=1");
+    const fetches = [];
+    const beacons = [];
+    testVisit.sandbox.fetch = (url, opts) => {
+      fetches.push({ url, opts });
+      return Promise.resolve();
+    };
+    testVisit.sandbox.navigator = {
+      sendBeacon(url) {
+        beacons.push(url);
+        return true;
+      }
+    };
     click(testVisit.listeners, href);
     assert.equal(testVisit.counts[0].path, "TEST-EXCLUDE/gumroad-click/amazon-1m-insurance-readiness-kit");
+    assert.match(fetches[0].url, /p=TEST-EXCLUDE%2Fgumroad-click%2Famazon-1m-insurance-readiness-kit/);
+    assert.equal(fetches[0].opts.keepalive, true);
+    assert.equal(fetches[0].opts.mode, "no-cors");
+    assert.equal(beacons[0], fetches[0].url);
   }
 
   const ignored = loadHelper("?fmp_test=12");

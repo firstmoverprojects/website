@@ -136,6 +136,7 @@
       var a = document.createElement("a");
       a.className = "btn-buy-now";
       a.href = it.kit.href;
+      a.target = "_blank";
       a.rel = "noopener";
       a.referrerPolicy = "strict-origin-when-cross-origin";
       a.textContent = it.kit.cta;

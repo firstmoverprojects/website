@@ -147,7 +147,7 @@ footer{margin:8px 0 24px}
 <li>Outputs a ready-to-work fix_list.csv + Excel workbook (template.xlsx) with variant-by-variant suggested fixes and code Y081 notes.</li>
   </ul>
   <div class="kit-btn-row">
-    <a class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=eu-product-id-check&amp;utm_campaign=fetwsm&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 EU Customs Product Data Checker (1-Click Checkout) →</a>
+    <a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=eu-product-id-check&amp;utm_campaign=fetwsm&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 EU Customs Product Data Checker (1-Click Checkout) →</a>
   </div>
   <p class="muted" style="margin:4px 0 0">Free background, dates and sources: <a href="/deadlines/eu-product-identifiers-nov-1.html">EU product identifiers become mandatory for low-value e-commerce imports (Nov 1, 2026)</a></p>
 </div>
@@ -164,7 +164,7 @@ footer{margin:8px 0 24px}
 <li>Outputs a ready-to-work fix_list.csv + Excel workbook (template.xlsx) with variant-by-variant suggested fixes and code Y081 notes.</li>
 </ul>
 <div class="kit-btn-row">
-  <a id="paid-link" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=eu-product-id-check&amp;utm_campaign=fetwsm&amp;utm_content=bottom-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 EU Customs Product Data Checker (1-Click Checkout) →</a>
+  <a target="_blank" id="paid-link" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=eu-product-id-check&amp;utm_campaign=fetwsm&amp;utm_content=bottom-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 EU Customs Product Data Checker (1-Click Checkout) →</a>
 </div>
 <p>Free background, dates and sources: <a href="/deadlines/eu-product-identifiers-nov-1.html">EU product identifiers become mandatory for low-value e-commerce imports (Nov 1, 2026)</a></p>
 </section>
@@ -444,6 +444,7 @@ function render(text) {
     cap.appendChild(document.createTextNode(result.capMessage + " "));
     var paid = document.createElement("a");
     paid.href = PAID;
+    paid.target = "_blank";
     paid.rel = "noopener";
     paid.referrerPolicy = "strict-origin-when-cross-origin";
     paid.textContent = "EU Customs Product Data Checker ($29)";
@@ -584,14 +585,27 @@ showDays(new Date());
     var cut = slug.search(/[?#]/);
     if (cut !== -1) slug = slug.slice(0, cut);
     if (!slug) return;
+    if (node.target !== "_blank") node.target = "_blank";
+    if (typeof node.setAttribute === "function") {
+      var rel = node.getAttribute("rel") || "";
+      if (rel.indexOf("noopener") === -1) node.setAttribute("rel", (rel ? rel + " " : "") + "noopener");
+    }
     var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+    var title = "Gumroad checkout click: " + slug;
     if (window.goatcounter && typeof window.goatcounter.count === "function") {
       window.goatcounter.count({
         path: path,
-        title: "Gumroad checkout click: " + slug,
+        title: title,
         event: true
       });
     }
+    var gcCountUrl = "https://firstmoverprojects.goatcounter.com/count?p=" + encodeURIComponent(path) + "&t=" + encodeURIComponent(title) + "&e=true";
+    try {
+      if (typeof fetch === "function") fetch(gcCountUrl, { keepalive: true, mode: "no-cors" });
+    } catch (fetchErr) {}
+    try {
+      if (typeof navigator !== "undefined" && navigator && typeof navigator.sendBeacon === "function") navigator.sendBeacon(gcCountUrl);
+    } catch (beaconErr) {}
   }
   document.addEventListener("click", trackGumroadClick);
   document.addEventListener("auxclick", trackGumroadClick);

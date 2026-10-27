@@ -220,13 +220,20 @@ var allowed = [
   "https://sellercentral.amazon.com/help/hub/reference/external/G200386300",
   "https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT",
   "https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408",
+  "https://schema.org",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance-readiness-kit&utm_content=above-fold",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance-readiness-kit&utm_content=comparison",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance-readiness-kit&utm_content=product-demo",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance-readiness-kit&utm_content=post-check",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance-readiness-kit&utm_content=faq",
   "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance-readiness-kit&utm_content=result-card",
   "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance-readiness-kit&utm_content=footer",
   "https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==",
   "https://gc.zgo.at",
   "https://gc.zgo.at/count.js",
   "https://firstmoverprojects.goatcounter.com",
-  "https://firstmoverprojects.goatcounter.com/count"
+  "https://firstmoverprojects.goatcounter.com/count",
+  "https://firstmoverprojects.goatcounter.com/count?p="
 ];
 var foundList = Object.keys(found).sort();
 var allowedSorted = allowed.slice().sort();
@@ -242,9 +249,17 @@ assert(html.indexOf('name="referrer" content="strict-origin-when-cross-origin"')
 ].forEach(function (line) {
   assert(html.indexOf(line) !== -1, "T6 house line: " + line);
 });
-["fetch(", "XMLHttpRequest", "localStorage", "sessionStorage", "indexedDB", "sendBeacon"].forEach(function (token) {
+["XMLHttpRequest", "localStorage", "sessionStorage", "indexedDB"].forEach(function (token) {
   assert(html.indexOf(token) === -1, "T6 no " + token);
 });
+var helperAt = html.indexOf("function trackGumroadClick");
+var helperStart = html.lastIndexOf("<script>", helperAt);
+var helperEnd = html.indexOf("</script>", helperAt);
+var outsideHelper = html.slice(0, helperStart) + html.slice(helperEnd + "</script>".length);
+assert(outsideHelper.indexOf("fetch(") === -1, "T6 fetch only inside the Gumroad click helper");
+assert(outsideHelper.indexOf("sendBeacon") === -1, "T6 sendBeacon only inside the Gumroad click helper");
+assert(html.indexOf('fetch(gcCountUrl, { keepalive: true, mode: "no-cors" })') !== -1, "T6 keepalive fetch alongside GoatCounter");
+assert(html.indexOf("navigator.sendBeacon(gcCountUrl)") !== -1, "T6 sendBeacon alongside GoatCounter");
 
 console.log("Countdown and scope copy");
 assertEq(FMP.daysText(new Date(2026, 9, 26)), "7 days until Nov 2, 2026", "Oct 26, 2026 is 7 days until Nov 2");
@@ -306,6 +321,17 @@ assert(sitemap.indexOf("<loc>https://firstmoverprojects.com/tools/amazon-coi-che
 assert(sitemap.indexOf("<lastmod>2026-10-26</lastmod>") !== -1, "sitemap lastmod");
 var deadline = fs.readFileSync(path.join(root, "deadlines", "amazon-insurance-nov-2.html"), "utf8");
 assert(deadline.indexOf('<p>Free: <a href="/tools/amazon-coi-check/">paste your certificate text and check it against Amazon\'s criteria</a> (runs in your browser, nothing uploaded).</p>') !== -1, "deadline page free-tool line");
+assert(deadline.indexOf("Amazon Insurance Certificate Checklist: What to Review Before Uploading") !== -1, "deadline checklist heading");
+assert(deadline.indexOf("Why did I receive the Nov 2, 2026 Commercial Liability Insurance email when my sales are under $10,000/month (even $1,500/month)?") !== -1, "deadline sales question");
+assert(deadline.indexOf("SAMPLE SCENARIO — FICTIONAL DATA") !== -1, "deadline fictional sample label");
+assert(deadline.indexOf('src="/assets/previews/amazon-coi-kit-preview-1280x720.png"') !== -1, "deadline kit preview");
+assert(html.indexOf("Free Browser Check vs. $29 Readiness Kit") !== -1, "comparison heading");
+assert(html.indexOf("Before you upload your Amazon insurance certificate, here is how to organize the questions you need to ask your broker") !== -1, "demo hook");
+assert(html.indexOf("SAMPLE SCENARIO — FICTIONAL DATA") !== -1, "fictional sample label");
+assert(html.indexOf("PRODUCT DEMONSTRATION — SAMPLE SCENARIO") !== -1, "product demonstration label");
+assert(html.indexOf("cannot guarantee Amazon acceptance or prevent all upload rejections") !== -1, "no-guarantee line");
+assert(html.indexOf("Box 101") === -1, "never mention Box 101");
+assert(deadline.indexOf("Box 101") === -1, "deadline never mentions Box 101");
 
 var dba = checkCOI("Insured: Trade Name Goods\nEach occurrence $1,000,000", "Sample Goods LLC", true, "", "2026-10-26");
 var named = dba.extras.filter(function (e) { return e.id === "Named insured"; })[0];

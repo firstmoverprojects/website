@@ -147,7 +147,7 @@ table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0}th,td{bor
 <li>Prints a clean PDF Readiness Report for team or Enterprise sign-off before the Dec 11, 2026 Custom GPT retirement.</li>
   </ul>
   <div class="kit-btn-row">
-    <a class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/iqnssc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=custom-gpt-retirement-checker&amp;utm_campaign=iqnssc&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $39 Plugin Migration Planner (1-Click Checkout) →</a>
+    <a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/iqnssc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=custom-gpt-retirement-checker&amp;utm_campaign=iqnssc&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $39 Plugin Migration Planner (1-Click Checkout) →</a>
   </div>
   <p class="muted" style="margin:4px 0 0"><a href="/deadlines/custom-gpt-retirement-dec-11.html">Read the Custom GPT Dec 11 retirement deadline page (free)</a></p>
 </div>
@@ -205,7 +205,7 @@ table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0}th,td{bor
 <li>Prints a clean PDF Readiness Report for team or Enterprise sign-off before the Dec 11, 2026 Custom GPT retirement.</li>
 </ul>
 <div class="kit-btn-row">
-  <a id="paid-link" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/iqnssc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=custom-gpt-retirement-checker&amp;utm_campaign=iqnssc&amp;utm_content=bottom-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $39 Plugin Migration Planner (1-Click Checkout) →</a>
+  <a target="_blank" id="paid-link" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/iqnssc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=custom-gpt-retirement-checker&amp;utm_campaign=iqnssc&amp;utm_content=bottom-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $39 Plugin Migration Planner (1-Click Checkout) →</a>
 </div>
 <p><a href="/deadlines/custom-gpt-retirement-dec-11.html">Read the Custom GPT Dec 11 retirement deadline page (free)</a></p>
 </section>
@@ -304,14 +304,27 @@ document.getElementById("clear").addEventListener("click",function(){["f-instr",
     var cut = slug.search(/[?#]/);
     if (cut !== -1) slug = slug.slice(0, cut);
     if (!slug) return;
+    if (node.target !== "_blank") node.target = "_blank";
+    if (typeof node.setAttribute === "function") {
+      var rel = node.getAttribute("rel") || "";
+      if (rel.indexOf("noopener") === -1) node.setAttribute("rel", (rel ? rel + " " : "") + "noopener");
+    }
     var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+    var title = "Gumroad checkout click: " + slug;
     if (window.goatcounter && typeof window.goatcounter.count === "function") {
       window.goatcounter.count({
         path: path,
-        title: "Gumroad checkout click: " + slug,
+        title: title,
         event: true
       });
     }
+    var gcCountUrl = "https://firstmoverprojects.goatcounter.com/count?p=" + encodeURIComponent(path) + "&t=" + encodeURIComponent(title) + "&e=true";
+    try {
+      if (typeof fetch === "function") fetch(gcCountUrl, { keepalive: true, mode: "no-cors" });
+    } catch (fetchErr) {}
+    try {
+      if (typeof navigator !== "undefined" && navigator && typeof navigator.sendBeacon === "function") navigator.sendBeacon(gcCountUrl);
+    } catch (beaconErr) {}
   }
   document.addEventListener("click", trackGumroadClick);
   document.addEventListener("auxclick", trackGumroadClick);
