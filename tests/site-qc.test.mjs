@@ -11,8 +11,7 @@ const LINEUP = [
   "free 60-second browser checks",
   "ready-to-use kits",
   "compliance deadlines",
-  "cozy browser puzzle games",
-  "books"
+  "cozy browser puzzle games"
 ];
 
 function walk(dir, out) {

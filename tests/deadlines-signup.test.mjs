@@ -12,7 +12,7 @@ const MARKERS = [
   'class="signup-cta"',
   'target="_blank" rel="noopener"',
   ">Sign up for the weekly FMP email (1-click)</a>",
-  "One short weekly email covering our newest free 60-second browser checks, ready-to-use kits, small-business tech &amp; compliance deadlines, cozy browser puzzle games, and books. Double opt-in; unsubscribe anytime. See our",
+  "One short weekly email covering our newest free 60-second browser checks, ready-to-use kits, small-business tech &amp; compliance deadlines, and cozy browser puzzle games. Double opt-in; unsubscribe anytime. See our",
   "</section>"
 ];
 
