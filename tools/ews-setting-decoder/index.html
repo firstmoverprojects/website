@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; form-action 'none'; base-uri 'none'">
-<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>EWS Setting Decoder: paste your EWSEnabled output, see what happens next (free, in your browser)</title>
 <link rel="canonical" href="https://firstmoverprojects.com/tools/ews-setting-decoder/">
 <meta name="description" content="Paste the output of a read-only Exchange Online PowerShell command and see what Microsoft's phased EWS switch-off means for your tenant, plus a dated checklist. Runs in your browser; nothing is uploaded.">
@@ -91,7 +91,7 @@ EwsBlockList               :"></textarea>
 <li>Includes an EWS-to-Microsoft Graph migration map, validation checklist, and a plain-English Client Notice Email template for IT teams and MSPs before Apr 1, 2027.</li>
   </ul>
   <div class="kit-btn-row">
-    <a class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/ews-cutover-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=ews-setting-decoder&amp;utm_campaign=ews-cutover-kit&amp;utm_content=result-cta" rel="noopener noreferrer">Get the $39 EWS Cutover Kit (1-Click Checkout) →</a>
+    <a class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/ews-cutover-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=ews-setting-decoder&amp;utm_campaign=ews-cutover-kit&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $39 EWS Cutover Kit (1-Click Checkout) →</a>
   </div>
   <p class="muted" style="margin:4px 0 0"><a href="https://firstmoverprojects.com/deadlines/exchange-online-ews-retirement-apr-1.html">Read the full EWS deadline page (free)</a></p>
 </div>
@@ -108,7 +108,7 @@ EwsBlockList               :"></textarea>
 <li>Includes an EWS-to-Microsoft Graph migration map, validation checklist, and a plain-English Client Notice Email template for IT teams and MSPs before Apr 1, 2027.</li>
 </ul>
 <div class="kit-btn-row">
-  <a id="paid-link" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/ews-cutover-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=ews-setting-decoder&amp;utm_campaign=ews-cutover-kit&amp;utm_content=bottom-cta" rel="noopener noreferrer">Get the $39 EWS Cutover Kit (1-Click Checkout) →</a>
+  <a id="paid-link" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/ews-cutover-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=ews-setting-decoder&amp;utm_campaign=ews-cutover-kit&amp;utm_content=bottom-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $39 EWS Cutover Kit (1-Click Checkout) →</a>
 </div>
 <p><a href="https://firstmoverprojects.com/deadlines/exchange-online-ews-retirement-apr-1.html">Read the full EWS deadline page (free)</a></p>
 </section>
@@ -224,5 +224,38 @@ $('copyres').addEventListener('click',function(){
 var d=daysLeft(new Date());$('cd2s').textContent=d+' days left · "no exceptions past April 2027"';
 })();
 </script>
+<script>
+(function () {
+  var q = location.search || "";
+  var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(q);
+  if (testVisit) {
+    window.goatcounter = { path: function (p) { return "TEST-EXCLUDE" + p; } };
+  }
+  function trackGumroadClick(ev) {
+    if (ev.type === "auxclick" && ev.button !== 1) return;
+    var node = ev.target && ev.target.closest ? ev.target.closest("a") : null;
+    if (!node || !node.getAttribute) return;
+    var href = node.getAttribute("href") || "";
+    var parts = href.split("/");
+    if (parts[0] !== "https:" || parts[2] !== "firstmoverprojects.gumroad.com" || parts[3] !== "l") return;
+    if (href.indexOf("wanted=true") === -1) return;
+    var slug = parts[4] || "";
+    var cut = slug.search(/[?#]/);
+    if (cut !== -1) slug = slug.slice(0, cut);
+    if (!slug) return;
+    var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+    if (window.goatcounter && typeof window.goatcounter.count === "function") {
+      window.goatcounter.count({
+        path: path,
+        title: "Gumroad checkout click: " + slug,
+        event: true
+      });
+    }
+  }
+  document.addEventListener("click", trackGumroadClick);
+  document.addEventListener("auxclick", trackGumroadClick);
+})();
+</script>
+<script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

@@ -76,7 +76,7 @@
         <h1>Agent prompt: track this deadline — IRS FIRE e-file system retires (last filing day Nov 19)</h1>
         <p class="lead">Anyone who e-files Forms 1099 or other information returns through the IRS FIRE system themselves.</p>
         <!-- REMOVE Nov 20, 2026: FIRE kit unpublishes (hero CTA too) -->
-        <p class="kit-cta"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadline_irs_fire_nov_19&amp;utm_campaign=fire-to-iris-switch-checklist&amp;utm_content=top-cta">Get the $9 FIRE→IRIS checklist on Gumroad</a></p>
+        <p class="kit-cta"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadline_irs_fire_nov_19&amp;utm_campaign=fire-to-iris-switch-checklist&amp;utm_content=top-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $9 FIRE→IRIS checklist on Gumroad</a></p>
         <p class="kit-cta__note">Optional paid kit. Or use the <a href="/tools/fire-to-iris-check/">free in-browser FIRE to IRIS readiness &amp; 1099 CSV header check</a> (no sign-up, nothing uploaded). The free checklist prompt and source links are below.</p>
       </section>
 
@@ -116,7 +116,7 @@ When you state any deadline or date, quote the exact line from the IRS's own pag
 
       <!-- REMOVE Nov 20, 2026: FIRE kit unpublishes -->
       <p class="kit-link">Want this as a printable checklist?</p>
-      <p class="kit-link"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadline_irs_fire_nov_19&amp;utm_campaign=fire-to-iris-switch-checklist&amp;utm_content=bottom-cta">Get the $9 FIRE→IRIS checklist on Gumroad</a></p>
+      <p class="kit-link"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadline_irs_fire_nov_19&amp;utm_campaign=fire-to-iris-switch-checklist&amp;utm_content=bottom-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $9 FIRE→IRIS checklist on Gumroad</a></p>
 
       <p class="related">More: <a href="/tools/fire-to-iris-check/">Free FIRE to IRIS Readiness Check</a> · <a href="/deadlines/">All deadlines</a> · <a href="finder/">Deadline Finder</a> · <a href="/tools/">Tools and kits</a></p>
 
@@ -148,6 +148,38 @@ When you state any deadline or date, quote the exact line from the IRS's own pag
           });
         }
       })();
+    </script>
+    <script>
+    (function () {
+      var q = location.search || "";
+      var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(q);
+      if (testVisit) {
+        window.goatcounter = { path: function (p) { return "TEST-EXCLUDE" + p; } };
+      }
+      function trackGumroadClick(ev) {
+        if (ev.type === "auxclick" && ev.button !== 1) return;
+        var node = ev.target && ev.target.closest ? ev.target.closest("a") : null;
+        if (!node || !node.getAttribute) return;
+        var href = node.getAttribute("href") || "";
+        var parts = href.split("/");
+        if (parts[0] !== "https:" || parts[2] !== "firstmoverprojects.gumroad.com" || parts[3] !== "l") return;
+        if (href.indexOf("wanted=true") === -1) return;
+        var slug = parts[4] || "";
+        var cut = slug.search(/[?#]/);
+        if (cut !== -1) slug = slug.slice(0, cut);
+        if (!slug) return;
+        var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+        if (window.goatcounter && typeof window.goatcounter.count === "function") {
+          window.goatcounter.count({
+            path: path,
+            title: "Gumroad checkout click: " + slug,
+            event: true
+          });
+        }
+      }
+      document.addEventListener("click", trackGumroadClick);
+      document.addEventListener("auxclick", trackGumroadClick);
+    })();
     </script>
     <script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
       <script src="/deadlines/assets/ab-cta.js" defer></script>

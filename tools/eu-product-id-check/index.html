@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; form-action 'none'; base-uri 'none'">
-<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="canonical" href="https://firstmoverprojects.com/tools/eu-product-id-check/">
 <title>EU Nov 1 Product ID Quick Check (free, runs in your browser)</title>
 <meta name="description" content="Paste up to 25 rows of merchant SKU, manufacturer product code and barcode. Free in-browser check for the EU product identifiers the European Commission says become mandatory on 1 November 2026. Nothing is uploaded.">
@@ -147,7 +147,7 @@ footer{margin:8px 0 24px}
 <li>Outputs a ready-to-work fix_list.csv + Excel workbook (template.xlsx) with variant-by-variant suggested fixes and code Y081 notes.</li>
   </ul>
   <div class="kit-btn-row">
-    <a class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=eu-product-id-check&amp;utm_campaign=fetwsm&amp;utm_content=result-cta" rel="noopener noreferrer">Get the $29 EU Customs Product Data Checker (1-Click Checkout) →</a>
+    <a class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=eu-product-id-check&amp;utm_campaign=fetwsm&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 EU Customs Product Data Checker (1-Click Checkout) →</a>
   </div>
   <p class="muted" style="margin:4px 0 0">Free background, dates and sources: <a href="/deadlines/eu-product-identifiers-nov-1.html">EU product identifiers become mandatory for low-value e-commerce imports (Nov 1, 2026)</a></p>
 </div>
@@ -164,7 +164,7 @@ footer{margin:8px 0 24px}
 <li>Outputs a ready-to-work fix_list.csv + Excel workbook (template.xlsx) with variant-by-variant suggested fixes and code Y081 notes.</li>
 </ul>
 <div class="kit-btn-row">
-  <a id="paid-link" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=eu-product-id-check&amp;utm_campaign=fetwsm&amp;utm_content=bottom-cta" rel="noopener noreferrer">Get the $29 EU Customs Product Data Checker (1-Click Checkout) →</a>
+  <a id="paid-link" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=eu-product-id-check&amp;utm_campaign=fetwsm&amp;utm_content=bottom-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 EU Customs Product Data Checker (1-Click Checkout) →</a>
 </div>
 <p>Free background, dates and sources: <a href="/deadlines/eu-product-identifiers-nov-1.html">EU product identifiers become mandatory for low-value e-commerce imports (Nov 1, 2026)</a></p>
 </section>
@@ -444,7 +444,8 @@ function render(text) {
     cap.appendChild(document.createTextNode(result.capMessage + " "));
     var paid = document.createElement("a");
     paid.href = PAID;
-    paid.rel = "noopener noreferrer";
+    paid.rel = "noopener";
+    paid.referrerPolicy = "strict-origin-when-cross-origin";
     paid.textContent = "EU Customs Product Data Checker ($29)";
     cap.appendChild(paid);
   }
@@ -564,5 +565,38 @@ byId("copy").addEventListener("click", function () {
 showDays(new Date());
 })();
 </script>
+<script>
+(function () {
+  var q = location.search || "";
+  var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(q);
+  if (testVisit) {
+    window.goatcounter = { path: function (p) { return "TEST-EXCLUDE" + p; } };
+  }
+  function trackGumroadClick(ev) {
+    if (ev.type === "auxclick" && ev.button !== 1) return;
+    var node = ev.target && ev.target.closest ? ev.target.closest("a") : null;
+    if (!node || !node.getAttribute) return;
+    var href = node.getAttribute("href") || "";
+    var parts = href.split("/");
+    if (parts[0] !== "https:" || parts[2] !== "firstmoverprojects.gumroad.com" || parts[3] !== "l") return;
+    if (href.indexOf("wanted=true") === -1) return;
+    var slug = parts[4] || "";
+    var cut = slug.search(/[?#]/);
+    if (cut !== -1) slug = slug.slice(0, cut);
+    if (!slug) return;
+    var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+    if (window.goatcounter && typeof window.goatcounter.count === "function") {
+      window.goatcounter.count({
+        path: path,
+        title: "Gumroad checkout click: " + slug,
+        event: true
+      });
+    }
+  }
+  document.addEventListener("click", trackGumroadClick);
+  document.addEventListener("auxclick", trackGumroadClick);
+})();
+</script>
+<script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

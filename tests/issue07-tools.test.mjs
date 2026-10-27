@@ -11,7 +11,7 @@ import { pathToFileURL } from "node:url";
 let chromium;
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
-const CSP = "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; form-action 'none'; base-uri 'none'";
+const CSP = "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action 'none'; base-uri 'none'";
 const FOOTER = [
   "General guidance, not legal, tax or IT advice.",
   "Not affiliated with Etsy, Inc., Atlassian/Loom, or any third-party platform."
@@ -37,6 +37,10 @@ const GUMROAD = {
 
 function read(rel) {
   return readFileSync(path.join(ROOT, rel), "utf8");
+}
+
+function toolNetwork(urls) {
+  return urls.filter((url) => !/^https:\/\/(?:gc\.zgo\.at|firstmoverprojects\.goatcounter\.com)(?:[/?#]|$)/.test(url));
 }
 
 function usd(n) {
@@ -116,17 +120,18 @@ test("static CSP, privacy, nav, and footer guards", () => {
   for (const rel of Object.values(PAGES)) {
     const html = read(rel);
     assert.match(html, new RegExp(`content="${CSP.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
-    assert.match(html, /<meta name="referrer" content="no-referrer">/);
+    assert.match(html, /<meta name="referrer" content="strict-origin-when-cross-origin">/);
     assert.match(html, /href="\/tools\/"/);
     assert.match(html, /href="\/deadlines\/"/);
     for (const line of FOOTER) assert.ok(html.includes(line), rel + " missing footer line");
     for (const banned of BANNED) assert.equal(html.includes(banned), false, rel + " contains " + banned);
     assert.equal(/<form[\s>]/i.test(html), false, rel);
-    assert.equal(/<script[^>]+src=/i.test(html), false, rel);
+    const httpsSrc = [...html.matchAll(/\ssrc\s*=\s*["'](https?:[^"']+)["']/gi)].map((match) => match[1]);
+    assert.deepEqual(httpsSrc, ["https://gc.zgo.at/count.js"], rel);
+    assert.match(html, /data-goatcounter="https:\/\/firstmoverprojects\.goatcounter\.com\/count"/);
     assert.equal(/<link[^>]+stylesheet/i.test(html), false, rel);
     assert.equal(/@font-face/i.test(html), false, rel);
     assert.equal(/fonts\.google/i.test(html), false, rel);
-    assert.equal(/src\s*=\s*["']https?:/i.test(html), false, rel);
     assert.equal(/url\(\s*["']?https?:/i.test(html), false, rel);
   }
   const etsy = read(PAGES.etsy);
@@ -265,9 +270,9 @@ test("Etsy checks, redaction, cap, and 390px layout", async () => {
   await page.fill("#f-title", wide);
   await page.click("#go");
   await assertNoHScroll(page);
-  assert.deepEqual(hits, []);
+  assert.deepEqual(toolNetwork(hits), []);
   const resources = await page.evaluate(() => performance.getEntriesByType("resource").map((entry) => entry.name));
-  assert.deepEqual(resources.filter((name) => /^https?:/i.test(name)), []);
+  assert.deepEqual(toolNetwork(resources.filter((name) => /^https?:/i.test(name))), []);
   await page.close();
 });
 
@@ -360,7 +365,7 @@ test("After-hours profiles, arithmetic, trade kits, and 390px layout", async () 
   assert.equal(await page.locator("#current-list [data-gap='yes']").count(), 0);
   assert.equal(await page.getAttribute("#intake-wrap", "hidden"), null);
   await assertNoHScroll(page);
-  assert.deepEqual(hits, []);
+  assert.deepEqual(toolNetwork(hits), []);
   await page.close();
 });
 
@@ -460,6 +465,6 @@ test("Loom reclassification, savings, CSV redaction, and 390px layout", async ()
   await page.click("#go");
   assert.equal(await page.getAttribute("#results", "data-math"), "no");
   assert.equal(await page.locator("td[data-bucket='keep']").count(), 0);
-  assert.deepEqual(hits, []);
+  assert.deepEqual(toolNetwork(hits), []);
   await page.close();
 });

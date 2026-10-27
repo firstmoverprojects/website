@@ -2,9 +2,15 @@
 (function () {
   var v = Math.random() < 0.5 ? "green" : "cyan";
   document.documentElement.setAttribute("data-ab-cta", v);
+  function testVisit() {
+    var q = location.search || "";
+    return /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(q);
+  }
   function track(name) {
     if (window.goatcounter && window.goatcounter.count) {
-      window.goatcounter.count({ path: "ab-cta/" + v + "/" + name, title: name, event: true });
+      var path = "ab-cta/" + v + "/" + name;
+      if (testVisit()) path = "TEST-EXCLUDE/" + path;
+      window.goatcounter.count({ path: path, title: name, event: true });
     }
   }
   function spotPath(href) {

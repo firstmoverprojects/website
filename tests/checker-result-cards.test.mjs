@@ -25,6 +25,10 @@ after(async () => {
   if (browser) await browser.close();
 });
 
+function toolNetwork(urls) {
+  return urls.filter((url) => !/^https:\/\/(?:gc\.zgo\.at|firstmoverprojects\.goatcounter\.com)(?:[/?#]|$)/.test(url));
+}
+
 async function open(rel) {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const errors = [];
@@ -98,7 +102,7 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
     assert.equal(new URL(footerHref).searchParams.get("utm_content"), "footer");
     assert.match(await page.innerText("#result-cta"), /free weekly deadline email/);
     assert.deepEqual(errors, [], item.rel);
-    assert.deepEqual(nets, [], item.rel);
+    assert.deepEqual(toolNetwork(nets), [], item.rel);
     await assertNoHScroll(page);
     await page.setViewportSize({ width: 1280, height: 900 });
     await assertNoHScroll(page);

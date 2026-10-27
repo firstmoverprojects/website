@@ -140,6 +140,38 @@ When you state any deadline or date, quote the exact line from the official sour
         }
       })();
     </script>
+    <script>
+    (function () {
+      var q = location.search || "";
+      var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(q);
+      if (testVisit) {
+        window.goatcounter = { path: function (p) { return "TEST-EXCLUDE" + p; } };
+      }
+      function trackGumroadClick(ev) {
+        if (ev.type === "auxclick" && ev.button !== 1) return;
+        var node = ev.target && ev.target.closest ? ev.target.closest("a") : null;
+        if (!node || !node.getAttribute) return;
+        var href = node.getAttribute("href") || "";
+        var parts = href.split("/");
+        if (parts[0] !== "https:" || parts[2] !== "firstmoverprojects.gumroad.com" || parts[3] !== "l") return;
+        if (href.indexOf("wanted=true") === -1) return;
+        var slug = parts[4] || "";
+        var cut = slug.search(/[?#]/);
+        if (cut !== -1) slug = slug.slice(0, cut);
+        if (!slug) return;
+        var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+        if (window.goatcounter && typeof window.goatcounter.count === "function") {
+          window.goatcounter.count({
+            path: path,
+            title: "Gumroad checkout click: " + slug,
+            event: true
+          });
+        }
+      }
+      document.addEventListener("click", trackGumroadClick);
+      document.addEventListener("auxclick", trackGumroadClick);
+    })();
+    </script>
     <script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
       <script src="/deadlines/assets/ab-cta.js" defer></script>
 </body>

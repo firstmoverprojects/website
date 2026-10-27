@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; form-action 'none'; base-uri 'none'">
-<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="canonical" href="https://firstmoverprojects.com/tools/amazon-coi-check/">
 <title>Amazon Nov 2 Insurance Certificate (COI) Pre-Check (free, runs in your browser)</title>
 <meta name="description" content="Paste your certificate of insurance text. Free in-browser check against Amazon's published insurance criteria: $1M per occurrence and aggregate, deductible no more than $10,000, exact additional insured wording, 30 days' notice. Nothing is uploaded.">
@@ -150,7 +150,7 @@ a,p,li,td,th,label,legend,h1,h2,blockquote{overflow-wrap:anywhere}
 <div class="lead-cta" id="result-cta">
 <h2 id="result-problem">Your certificate still needs a look before Amazon's rule starts.</h2>
 <p id="result-deadline">Amazon's extra rule starts Nov 2, 2026. Sellers in higher-safety categories need $1 million of coverage for each incident, and $1 million in total, even if sales are low.</p>
-<p><a class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=amazon-1m-insurance-readiness-kit&amp;utm_content=result-card" rel="noopener noreferrer">Get the $29 insurance kit</a></p>
+<p><a class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=amazon-1m-insurance-readiness-kit&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 insurance kit</a></p>
 <p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
 </div>
 <h2>Results</h2>
@@ -206,7 +206,7 @@ a,p,li,td,th,label,legend,h1,h2,blockquote{overflow-wrap:anywhere}
 <li>Includes a secondary Category Screen across Amazon's named enhanced-safety examples so you can organize your product list before Nov 2, 2026.</li>
   </ul>
   <div class="kit-btn-row">
-    <a class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=amazon-1m-insurance-readiness-kit&amp;utm_content=result-card" rel="noopener noreferrer">Get the $29 Amazon $1M COI Readiness Kit (1-Click Checkout) →</a>
+    <a class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=amazon-1m-insurance-readiness-kit&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 Amazon $1M COI Readiness Kit (1-Click Checkout) →</a>
   </div>
   <p class="muted" style="margin:4px 0 0">Free deadline page: <a href="/deadlines/amazon-insurance-nov-2.html">Amazon commercial liability insurance changes start Nov 2, 2026</a></p>
 </div>
@@ -234,7 +234,7 @@ a,p,li,td,th,label,legend,h1,h2,blockquote{overflow-wrap:anywhere}
 <li>Includes a secondary Category Screen across Amazon's named enhanced-safety examples so you can organize your product list before Nov 2, 2026.</li>
 </ul>
 <p>The $29 kit is a file you download. It checks more certificate fields, lists the higher-safety categories, includes an email for your broker, and includes a spreadsheet. This page does not send your certificate there.</p>
-<p><a class="btn" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=amazon-1m-insurance-readiness-kit&amp;utm_content=footer" rel="noopener noreferrer">Get the $29 insurance kit</a></p>
+<p><a class="btn" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=amazon-1m-insurance-readiness-kit&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 insurance kit</a></p>
 <p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>. Free deadline page: <a href="/deadlines/amazon-insurance-nov-2.html">Amazon insurance changes start Nov 2, 2026</a>.</p>
 </section>
 
@@ -894,5 +894,38 @@ window.FMP_COI = {
 boot();
 })();
 </script>
+<script>
+(function () {
+  var q = location.search || "";
+  var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(q);
+  if (testVisit) {
+    window.goatcounter = { path: function (p) { return "TEST-EXCLUDE" + p; } };
+  }
+  function trackGumroadClick(ev) {
+    if (ev.type === "auxclick" && ev.button !== 1) return;
+    var node = ev.target && ev.target.closest ? ev.target.closest("a") : null;
+    if (!node || !node.getAttribute) return;
+    var href = node.getAttribute("href") || "";
+    var parts = href.split("/");
+    if (parts[0] !== "https:" || parts[2] !== "firstmoverprojects.gumroad.com" || parts[3] !== "l") return;
+    if (href.indexOf("wanted=true") === -1) return;
+    var slug = parts[4] || "";
+    var cut = slug.search(/[?#]/);
+    if (cut !== -1) slug = slug.slice(0, cut);
+    if (!slug) return;
+    var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+    if (window.goatcounter && typeof window.goatcounter.count === "function") {
+      window.goatcounter.count({
+        path: path,
+        title: "Gumroad checkout click: " + slug,
+        event: true
+      });
+    }
+  }
+  document.addEventListener("click", trackGumroadClick);
+  document.addEventListener("auxclick", trackGumroadClick);
+})();
+</script>
+<script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
