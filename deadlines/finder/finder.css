@@ -6,6 +6,12 @@
 .item .kd{padding-left:18px}.item .kd li.past{color:#64748b}
 .item .tag{display:inline-block;font-size:.85em;background:#f1f5f9;border-radius:6px;padding:1px 6px}
 .item .kit.none{color:#64748b}
+a.btn-buy-now{display:inline-block;max-width:100%;box-sizing:border-box;background:#15803d;color:#fff !important;font-weight:800;font-size:1rem;padding:12px 20px;border-radius:9px;text-decoration:none !important;box-shadow:0 4px 12px rgba(21,128,61,.28);white-space:normal;overflow-wrap:anywhere;text-align:center}
+a.btn-buy-now:hover{background:#166534;color:#fff !important}
+a.btn-buy-now:focus-visible{outline:3px solid #00d8ff;outline-offset:2px}
+.kit-cta{margin:10px 0}
+.kit-free{margin:6px 0 0}
+.result-card{border-color:#15803d}
 .empty{color:#475569}
 #combined{white-space:pre-wrap;max-height:22em;overflow:auto}
 @media (max-width:480px){.item{padding:12px}.tools{grid-template-columns:1fr}}

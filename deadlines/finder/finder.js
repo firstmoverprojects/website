@@ -95,12 +95,13 @@
       var t = a.getAttribute("data-tools").split(" ");
       var on = !p.length || t.some(function (x) { return p.indexOf(x) !== -1; });
       a.hidden = !on;
-      if (on && p.length) shown.push(byId[a.id]);
+      if (on && p.length && byId[a.id]) shown.push(byId[a.id]);
     });
     count.textContent = p.length ? shown.length : arts.length;
     empty.hidden = !!p.length;
     btn.disabled = !shown.length;
     copied.textContent = "";
+    renderKits(p, shown);
     if (!shown.length) { pre.hidden = true; pre.textContent = ""; return; }
     var parts = ["I run a small business. Below are dated changes for tools we use, each with its source. For each one, help me check whether it affects us and what I should look at. " + D.quote_rule];
     shown.forEach(function (it, i) {
@@ -112,6 +113,43 @@
     parts.push("Do not buy, install, file or change anything, and do not log in to any account. Only list what I should check and I will decide.");
     pre.textContent = parts.join("\n\n");
     pre.hidden = false;
+  }
+  function renderKits(picked, shown) {
+    var box = document.getElementById("kit-results");
+    if (!box) return;
+    while (box.firstChild) box.removeChild(box.firstChild);
+    var cards = picked.length ? shown.filter(function (it) {
+      if (!it || !it.kit || !it.kit.href) return false;
+      if (it.id === "amazon-insurance" && !D.amazon_kit) return false;
+      return true;
+    }) : [];
+    if (!cards.length) { box.hidden = true; return; }
+    box.hidden = false;
+    cards.forEach(function (it) {
+      var card = document.createElement("article");
+      card.className = "item result-card";
+      card.setAttribute("data-result-for", it.id);
+      var h = document.createElement("h3");
+      h.textContent = it.tool;
+      var ctaP = document.createElement("p");
+      ctaP.className = "kit kit-cta";
+      var a = document.createElement("a");
+      a.className = "btn-buy-now";
+      a.href = it.kit.href;
+      a.rel = "noopener noreferrer";
+      a.textContent = it.kit.cta;
+      ctaP.appendChild(a);
+      var freeP = document.createElement("p");
+      freeP.className = "kit-free";
+      var f = document.createElement("a");
+      f.href = it.kit.free_href;
+      f.textContent = it.kit.free_label || "Free interactive checker";
+      freeP.appendChild(f);
+      card.appendChild(h);
+      card.appendChild(ctaP);
+      card.appendChild(freeP);
+      box.appendChild(card);
+    });
   }
   boxes.forEach(function (b) { b.addEventListener("change", update); });
   btn.addEventListener("click", function () {
