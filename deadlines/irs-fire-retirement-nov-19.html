@@ -76,7 +76,7 @@
         <h1>Agent prompt: track this deadline — IRS FIRE e-file system retires (last filing day Nov 19)</h1>
         <p class="lead">Anyone who e-files Forms 1099 or other information returns through the IRS FIRE system themselves.</p>
         <!-- REMOVE Nov 20, 2026: FIRE kit unpublishes (hero CTA too) -->
-        <p class="kit-cta"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadline_irs_fire_nov_19&amp;utm_campaign=fire-to-iris-switch-checklist&amp;utm_content=top-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $9 FIRE→IRIS checklist on Gumroad</a></p>
+        <p class="kit-cta"><a rel="noopener" target="_blank" class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadline_irs_fire_nov_19&amp;utm_campaign=fire-to-iris-switch-checklist&amp;utm_content=top-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $9 FIRE→IRIS checklist on Gumroad</a></p>
         <p class="kit-cta__note">Optional paid kit. Or use the <a href="/tools/fire-to-iris-check/">free in-browser FIRE to IRIS readiness &amp; 1099 CSV header check</a> (no sign-up, nothing uploaded). The free checklist prompt and source links are below.</p>
       </section>
 
@@ -116,7 +116,7 @@ When you state any deadline or date, quote the exact line from the IRS's own pag
 
       <!-- REMOVE Nov 20, 2026: FIRE kit unpublishes -->
       <p class="kit-link">Want this as a printable checklist?</p>
-      <p class="kit-link"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadline_irs_fire_nov_19&amp;utm_campaign=fire-to-iris-switch-checklist&amp;utm_content=bottom-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $9 FIRE→IRIS checklist on Gumroad</a></p>
+      <p class="kit-link"><a rel="noopener" target="_blank" class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadline_irs_fire_nov_19&amp;utm_campaign=fire-to-iris-switch-checklist&amp;utm_content=bottom-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $9 FIRE→IRIS checklist on Gumroad</a></p>
 
       <p class="related">More: <a href="/tools/fire-to-iris-check/">Free FIRE to IRIS Readiness Check</a> · <a href="/deadlines/">All deadlines</a> · <a href="finder/">Deadline Finder</a> · <a href="/tools/">Tools and kits</a></p>
 
@@ -168,14 +168,27 @@ When you state any deadline or date, quote the exact line from the IRS's own pag
         var cut = slug.search(/[?#]/);
         if (cut !== -1) slug = slug.slice(0, cut);
         if (!slug) return;
+        if (node.target !== "_blank") node.target = "_blank";
+        if (typeof node.setAttribute === "function") {
+          var rel = node.getAttribute("rel") || "";
+          if (rel.indexOf("noopener") === -1) node.setAttribute("rel", (rel ? rel + " " : "") + "noopener");
+        }
         var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+        var title = "Gumroad checkout click: " + slug;
         if (window.goatcounter && typeof window.goatcounter.count === "function") {
           window.goatcounter.count({
             path: path,
-            title: "Gumroad checkout click: " + slug,
+            title: title,
             event: true
           });
         }
+        var gcCountUrl = "https://firstmoverprojects.goatcounter.com/count?p=" + encodeURIComponent(path) + "&t=" + encodeURIComponent(title) + "&e=true";
+        try {
+          if (typeof fetch === "function") fetch(gcCountUrl, { keepalive: true, mode: "no-cors" });
+        } catch (fetchErr) {}
+        try {
+          if (typeof navigator !== "undefined" && navigator && typeof navigator.sendBeacon === "function") navigator.sendBeacon(gcCountUrl);
+        } catch (beaconErr) {}
       }
       document.addEventListener("click", trackGumroadClick);
       document.addEventListener("auxclick", trackGumroadClick);

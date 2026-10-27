@@ -152,7 +152,7 @@ footer{margin:8px 0 24px}
 <li>Includes ready-to-use Video Backup Inventory (.csv), Embedded Link Inventory (.csv for Notion/Zendesk/SOPs), and pilot-seat Cutover & Rollback worksheets.</li>
   </ul>
   <div class="kit-btn-row">
-    <a class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/fguyxn?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=loom-seat-audit-calculator&amp;utm_campaign=fguyxn&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $79 Loom Seat Audit & Exit Pack (1-Click Checkout) →</a>
+    <a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/fguyxn?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=loom-seat-audit-calculator&amp;utm_campaign=fguyxn&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $79 Loom Seat Audit & Exit Pack (1-Click Checkout) →</a>
   </div>
   <p class="muted" style="margin:4px 0 0"><span class="muted">The $79 pack is a separate file on Gumroad. This page does not send your CSV there.</span></p>
 </div>
@@ -169,7 +169,7 @@ footer{margin:8px 0 24px}
 <li>Includes ready-to-use Video Backup Inventory (.csv), Embedded Link Inventory (.csv for Notion/Zendesk/SOPs), and pilot-seat Cutover & Rollback worksheets.</li>
 </ul>
 <div class="kit-btn-row">
-  <a id="paid-link" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/fguyxn?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=loom-seat-audit-calculator&amp;utm_campaign=fguyxn&amp;utm_content=bottom-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $79 Loom Seat Audit & Exit Pack (1-Click Checkout) →</a>
+  <a target="_blank" id="paid-link" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/fguyxn?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=loom-seat-audit-calculator&amp;utm_campaign=fguyxn&amp;utm_content=bottom-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $79 Loom Seat Audit & Exit Pack (1-Click Checkout) →</a>
 </div>
 <p><span class="muted">The $79 pack is a separate file on Gumroad. This page does not send your CSV there.</span></p>
 </section>
@@ -678,14 +678,27 @@ byId("copy").addEventListener("click", function () {
     var cut = slug.search(/[?#]/);
     if (cut !== -1) slug = slug.slice(0, cut);
     if (!slug) return;
+    if (node.target !== "_blank") node.target = "_blank";
+    if (typeof node.setAttribute === "function") {
+      var rel = node.getAttribute("rel") || "";
+      if (rel.indexOf("noopener") === -1) node.setAttribute("rel", (rel ? rel + " " : "") + "noopener");
+    }
     var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+    var title = "Gumroad checkout click: " + slug;
     if (window.goatcounter && typeof window.goatcounter.count === "function") {
       window.goatcounter.count({
         path: path,
-        title: "Gumroad checkout click: " + slug,
+        title: title,
         event: true
       });
     }
+    var gcCountUrl = "https://firstmoverprojects.goatcounter.com/count?p=" + encodeURIComponent(path) + "&t=" + encodeURIComponent(title) + "&e=true";
+    try {
+      if (typeof fetch === "function") fetch(gcCountUrl, { keepalive: true, mode: "no-cors" });
+    } catch (fetchErr) {}
+    try {
+      if (typeof navigator !== "undefined" && navigator && typeof navigator.sendBeacon === "function") navigator.sendBeacon(gcCountUrl);
+    } catch (beaconErr) {}
   }
   document.addEventListener("click", trackGumroadClick);
   document.addEventListener("auxclick", trackGumroadClick);

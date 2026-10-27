@@ -126,7 +126,7 @@ footer{margin:8px 0 24px}
 <div class="lead-cta" id="result-cta">
 <h2 id="result-problem">You may still be on the IRS system that is closing.</h2>
 <p id="result-deadline">Test files stop on Nov 1, 2026. Changes to an old IRS application stop on Nov 9, 2026. The last day to file on the old system is Nov 19, 2026, at 3 p.m. Eastern Time. On Jan 1, 2027, the new system is the only way to file.</p>
-<p><a class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=fire-to-iris-check&amp;utm_campaign=fire-to-iris-switch-checklist&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 switch checklist</a></p>
+<p><a target="_blank" class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=fire-to-iris-check&amp;utm_campaign=fire-to-iris-switch-checklist&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 switch checklist</a></p>
 <p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
 </div>
 <h2>2. Your FIRE to IRIS readiness checklist</h2>
@@ -160,7 +160,7 @@ footer{margin:8px 0 24px}
 <li>Includes a printable 1099-NEC prep sheet & Responsible Official sign-in check so your bookkeeper or team can verify everything offline.</li>
   </ul>
   <div class="kit-btn-row">
-    <a class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=fire-to-iris-check&amp;utm_campaign=fire-to-iris-switch-checklist&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 FIRE→IRIS Switch Checklist (1-Click Checkout) →</a>
+    <a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=fire-to-iris-check&amp;utm_campaign=fire-to-iris-switch-checklist&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 FIRE→IRIS Switch Checklist (1-Click Checkout) →</a>
   </div>
   <p class="muted" style="margin:4px 0 0"><a href="/deadlines/irs-fire-retirement-nov-19.html">Read the full IRS FIRE retirement deadline page (free)</a></p>
 </div>
@@ -178,7 +178,7 @@ footer{margin:8px 0 24px}
 <li>Includes a printable 1099-NEC prep sheet &amp; Responsible Official sign-in check so your bookkeeper or team can verify everything offline.</li>
 </ul>
 <p>The $9 checklist is a 3-page file. It covers the Nov 1, Nov 9, and Nov 19, 2026 dates, the new filing code, and a sheet for Form 1099-NEC. This page does not send your files there.</p>
-<p><a class="btn" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=fire-to-iris-check&amp;utm_campaign=fire-to-iris-switch-checklist&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 switch checklist</a></p>
+<p><a target="_blank" class="btn" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=fire-to-iris-check&amp;utm_campaign=fire-to-iris-switch-checklist&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 switch checklist</a></p>
 <p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>. <a href="/deadlines/irs-fire-retirement-nov-19.html">Read the free IRS deadline page</a>.</p>
 </section>
 
@@ -419,14 +419,27 @@ updateDays(new Date());
     var cut = slug.search(/[?#]/);
     if (cut !== -1) slug = slug.slice(0, cut);
     if (!slug) return;
+    if (node.target !== "_blank") node.target = "_blank";
+    if (typeof node.setAttribute === "function") {
+      var rel = node.getAttribute("rel") || "";
+      if (rel.indexOf("noopener") === -1) node.setAttribute("rel", (rel ? rel + " " : "") + "noopener");
+    }
     var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+    var title = "Gumroad checkout click: " + slug;
     if (window.goatcounter && typeof window.goatcounter.count === "function") {
       window.goatcounter.count({
         path: path,
-        title: "Gumroad checkout click: " + slug,
+        title: title,
         event: true
       });
     }
+    var gcCountUrl = "https://firstmoverprojects.goatcounter.com/count?p=" + encodeURIComponent(path) + "&t=" + encodeURIComponent(title) + "&e=true";
+    try {
+      if (typeof fetch === "function") fetch(gcCountUrl, { keepalive: true, mode: "no-cors" });
+    } catch (fetchErr) {}
+    try {
+      if (typeof navigator !== "undefined" && navigator && typeof navigator.sendBeacon === "function") navigator.sendBeacon(gcCountUrl);
+    } catch (beaconErr) {}
   }
   document.addEventListener("click", trackGumroadClick);
   document.addEventListener("auxclick", trackGumroadClick);

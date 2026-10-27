@@ -157,7 +157,7 @@ footer{margin:8px 0 24px}
 <div class="lead-cta" id="result-cta">
 <h2 id="result-problem">Your listing photos may not match Etsy's real-photo rule.</h2>
 <p id="result-deadline">Etsy posted this rule on Oct 22, 2026. They did not name a last day. If the photos are wrong and a buyer opens a case, you may have to give a refund.</p>
-<p><a class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=lnfgc&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 photo checklist</a></p>
+<p><a target="_blank" class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=lnfgc&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 photo checklist</a></p>
 <p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
 </div>
 <h2>Current Listing Risk vs. Real-Photo Audit Fix Plan</h2>
@@ -191,7 +191,7 @@ footer{margin:8px 0 24px}
 <li>Includes a camera-settings safe-default checklist (turning off portrait blur, beauty mode, and AI background swaps) plus Etsy's exact Oct 22 policy quotes.</li>
   </ul>
   <div class="kit-btn-row">
-    <a class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=lnfgc&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 Etsy Real-Photo Audit Kit (1-Click Checkout) →</a>
+    <a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=lnfgc&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 Etsy Real-Photo Audit Kit (1-Click Checkout) →</a>
   </div>
   <p class="muted" style="margin:4px 0 0"><span class="muted">The $9 kit is a separate file on Gumroad. This page does not send your listings there.</span></p>
 </div>
@@ -209,7 +209,7 @@ footer{margin:8px 0 24px}
 <li>Includes a camera-settings safe-default checklist (turning off portrait blur, beauty mode, and AI background swaps) plus Etsy's exact Oct 22 policy quotes.</li>
 </ul>
 <p>The $9 checklist is a file you download. It lists which photos to take for each kind of item, plus a sheet with one row per listing. This page does not send your listings there.</p>
-<p><a class="btn" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=lnfgc&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 photo checklist</a></p>
+<p><a target="_blank" class="btn" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=lnfgc&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 photo checklist</a></p>
 <p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
 </section>
 
@@ -726,14 +726,27 @@ byId("copy-prompt").addEventListener("click", function () { copyText("agent-prom
     var cut = slug.search(/[?#]/);
     if (cut !== -1) slug = slug.slice(0, cut);
     if (!slug) return;
+    if (node.target !== "_blank") node.target = "_blank";
+    if (typeof node.setAttribute === "function") {
+      var rel = node.getAttribute("rel") || "";
+      if (rel.indexOf("noopener") === -1) node.setAttribute("rel", (rel ? rel + " " : "") + "noopener");
+    }
     var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+    var title = "Gumroad checkout click: " + slug;
     if (window.goatcounter && typeof window.goatcounter.count === "function") {
       window.goatcounter.count({
         path: path,
-        title: "Gumroad checkout click: " + slug,
+        title: title,
         event: true
       });
     }
+    var gcCountUrl = "https://firstmoverprojects.goatcounter.com/count?p=" + encodeURIComponent(path) + "&t=" + encodeURIComponent(title) + "&e=true";
+    try {
+      if (typeof fetch === "function") fetch(gcCountUrl, { keepalive: true, mode: "no-cors" });
+    } catch (fetchErr) {}
+    try {
+      if (typeof navigator !== "undefined" && navigator && typeof navigator.sendBeacon === "function") navigator.sendBeacon(gcCountUrl);
+    } catch (beaconErr) {}
   }
   document.addEventListener("click", trackGumroadClick);
   document.addEventListener("auxclick", trackGumroadClick);

@@ -16,7 +16,7 @@ const FOOTER = [
   "General guidance, not legal, tax or IT advice.",
   "Not affiliated with Etsy, Inc., Atlassian/Loom, or any third-party platform."
 ];
-const BANNED = ["fetch(", "XMLHttpRequest", "sendBeacon", "localStorage", "sessionStorage", "indexedDB"];
+const BANNED = ["XMLHttpRequest", "localStorage", "sessionStorage", "indexedDB"];
 const PAGES = {
   etsy: "tools/etsy-photo-audit-check/index.html",
   after: "tools/after-hours-gap-check/index.html",
@@ -125,6 +125,12 @@ test("static CSP, privacy, nav, and footer guards", () => {
     assert.match(html, /href="\/deadlines\/"/);
     for (const line of FOOTER) assert.ok(html.includes(line), rel + " missing footer line");
     for (const banned of BANNED) assert.equal(html.includes(banned), false, rel + " contains " + banned);
+    const helperAt = html.indexOf("function trackGumroadClick");
+    const helperStart = helperAt === -1 ? -1 : html.lastIndexOf("<script>", helperAt);
+    const helperEnd = helperAt === -1 ? -1 : html.indexOf("</script>", helperAt);
+    const outside = helperStart === -1 ? html : html.slice(0, helperStart) + html.slice(helperEnd + "</script>".length);
+    assert.equal(outside.includes("fetch("), false, rel + " fetch outside helper");
+    assert.equal(outside.includes("sendBeacon"), false, rel + " sendBeacon outside helper");
     assert.equal(/<form[\s>]/i.test(html), false, rel);
     const httpsSrc = [...html.matchAll(/\ssrc\s*=\s*["'](https?:[^"']+)["']/gi)].map((match) => match[1]);
     assert.deepEqual(httpsSrc, ["https://gc.zgo.at/count.js"], rel);

@@ -159,14 +159,27 @@ When you state any deadline or date, quote the exact line from the official sour
         var cut = slug.search(/[?#]/);
         if (cut !== -1) slug = slug.slice(0, cut);
         if (!slug) return;
+        if (node.target !== "_blank") node.target = "_blank";
+        if (typeof node.setAttribute === "function") {
+          var rel = node.getAttribute("rel") || "";
+          if (rel.indexOf("noopener") === -1) node.setAttribute("rel", (rel ? rel + " " : "") + "noopener");
+        }
         var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+        var title = "Gumroad checkout click: " + slug;
         if (window.goatcounter && typeof window.goatcounter.count === "function") {
           window.goatcounter.count({
             path: path,
-            title: "Gumroad checkout click: " + slug,
+            title: title,
             event: true
           });
         }
+        var gcCountUrl = "https://firstmoverprojects.goatcounter.com/count?p=" + encodeURIComponent(path) + "&t=" + encodeURIComponent(title) + "&e=true";
+        try {
+          if (typeof fetch === "function") fetch(gcCountUrl, { keepalive: true, mode: "no-cors" });
+        } catch (fetchErr) {}
+        try {
+          if (typeof navigator !== "undefined" && navigator && typeof navigator.sendBeacon === "function") navigator.sendBeacon(gcCountUrl);
+        } catch (beaconErr) {}
       }
       document.addEventListener("click", trackGumroadClick);
       document.addEventListener("auxclick", trackGumroadClick);

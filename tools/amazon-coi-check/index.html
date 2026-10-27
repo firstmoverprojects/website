@@ -7,7 +7,40 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="canonical" href="https://firstmoverprojects.com/tools/amazon-coi-check/">
 <title>Amazon Nov 2 Insurance Certificate (COI) Pre-Check (free, runs in your browser)</title>
-<meta name="description" content="Paste your certificate of insurance text. Free in-browser check against Amazon's published insurance criteria: $1M per occurrence and aggregate, deductible no more than $10,000, exact additional insured wording, 30 days' notice. Nothing is uploaded.">
+<meta name="description" content="Paste your certificate of insurance text. Free in-browser check against Amazon's published insurance criteria: $1M per occurrence and aggregate, deductible no more than $10,000, exact additional insured wording, 30 days' notice. Nothing is uploaded. The free check and the optional $29 kit cannot guarantee Amazon acceptance.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "dateModified": "2026-10-27",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why did I receive the Nov 2, 2026 Commercial Liability Insurance email when my sales are under $10,000/month (even $1,500/month)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Under Amazon's Nov 2, 2026 update (Policy G200386300), enhanced-safety product categories require $1,000,000 commercial general liability insurance regardless of monthly sales volume. Amazon's examples include children's products, cosmetic and ingestible products, and lithium battery products, and Amazon says that list is not complete. Sellers also see the notice on topicals, cosmetics, supplements, and other dietary or safety-regulated items. Even a single old or inactive listing in Manage Inventory can trigger the notice, including when sales are under $10,000 a month or about $1,500 a month. Free decision rule: if the notice was triggered by an old discontinued or inactive ASIN you no longer sell, permanently deleting that listing from Manage Inventory, rather than only closing it, can remove the category trigger at $0 cost. If you actively sell in that category, you must upload a compliant ACORD 25 certificate of insurance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do individual / sole-proprietor sellers using an offline insurance broker pass Amazon's review without Amazon Insurance Accelerator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Amazon's Insurance Accelerator requirement on Policy G200386300 is for sellers based in Mainland China, unless Amazon agrees otherwise in writing. An individual or sole proprietor elsewhere can ask an offline broker to issue an ACORD 25 that meets Amazon's published checklist: the insured name matches the Seller Central Legal Entity character for character, except the single-member LLC trade-name case Amazon states; additional insured is Amazon.com Services LLC and its affiliates and assignees; at least $1,000,000 per occurrence and $1,000,000 aggregate covering products, products/completed operations, and bodily injury; deductible no greater than $10,000 and listed on the certificate; the policy covers all sales on Amazon.com; no sunset clause; and at least 30 days' notice of cancellation. Amazon's Business Insurance verification decides whether the certificate is accepted."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can the free browser check or the $29 kit guarantee Amazon will accept my certificate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The free tool and $29 kit help sellers spot common ACORD 25 mismatches and organize broker questions before uploading, and cannot guarantee Amazon acceptance or prevent all upload rejections."
+      }
+    }
+  ]
+}
+</script>
 <style>
 *{box-sizing:border-box}
 body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1b1f24;background:#f6f7f9}
@@ -30,8 +63,8 @@ button.sec{background:#e4e8ee;color:#1b1f24}
 .ok{background:#e3f4e6;color:#1d6b2c}
 .cta{background:#fff8e6;border-color:#f0d58a}
 .lead-cta{background:#fff8e6;border:1px solid #f0d58a;border-radius:10px;padding:16px;margin:0 0 16px}
-a.btn{display:inline-block;max-width:100%;box-sizing:border-box;font-weight:700;line-height:1.3;text-decoration:none;background:#1f5fbf;color:#fff;padding:12px 18px;border-radius:8px;margin:12px 0 0}
-a.btn:hover{background:#174a94;color:#fff}
+a.btn{display:inline-block;max-width:100%;box-sizing:border-box;font-weight:800;line-height:1.3;text-decoration:none;background:linear-gradient(135deg,#22c55e 0%,#4ade80 100%);color:#052e16;padding:12px 18px;border-radius:8px;margin:12px 0 0;text-align:center}
+a.btn:hover{background:#16a34a;color:#052e16}
 a{color:#1f5fbf}
 a:focus,button:focus,textarea:focus,input:focus,pre:focus{outline:3px solid #1f5fbf;outline-offset:2px}
 table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0;table-layout:fixed}
@@ -58,8 +91,17 @@ a,p,li,td,th,label,legend,h1,h2,blockquote{overflow-wrap:anywhere}
 .kit-bullets{margin:8px 0 14px;padding-left:1.25em}
 .kit-bullets li{margin:6px 0;font-weight:600;color:#1e293b}
 .kit-btn-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0;min-width:0;max-width:100%}
-.btn-buy-now{display:inline-block;max-width:100%;box-sizing:border-box;background:#15803d;color:#fff !important;font-weight:800;font-size:1rem;padding:12px 20px;border-radius:9px;text-decoration:none;box-shadow:0 4px 12px rgba(21,128,61,.28);white-space:normal;overflow-wrap:anywhere;text-align:center}
-.btn-buy-now:hover{background:#166534}
+.btn-buy-now{display:inline-block;max-width:100%;box-sizing:border-box;background:linear-gradient(135deg,#22c55e 0%,#4ade80 100%);color:#052e16 !important;font-weight:800;font-size:1rem;padding:12px 20px;border-radius:9px;text-decoration:none;box-shadow:0 4px 12px rgba(34,197,94,.28);white-space:normal;overflow-wrap:anywhere;text-align:center}
+.btn-buy-now:hover{background:#16a34a;color:#052e16 !important}
+.price-lg{font-size:2rem;font-weight:800;margin:.2em 0;color:#052e16}
+.file-list{margin:8px 0 14px;padding-left:1.25em}
+.file-list li{margin:8px 0}
+.demo-kicker,.sample-kicker{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.03em;padding:3px 10px;border-radius:999px;margin:0 8px 8px 0}
+.demo-kicker{background:#052e16;color:#4ade80}
+.sample-kicker{background:#fff7ed;color:#9a3412;border:1px solid #fdba74}
+.kit-caption{font-size:.92rem;color:#3f4a56;margin:0 0 12px}
+.limit-note{background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:10px 12px;margin:12px 0}
+figure{margin:10px 0}
 .email-cap-box{background:#f0f9ff;border:2px solid #0284c7;border-radius:10px;padding:14px 16px;margin:14px 0 6px}
 .email-cap-title{font-size:1.02rem;font-weight:800;margin:0 0 6px;color:#0c4a6e}
 .btn-email-cap{display:inline-block;max-width:100%;box-sizing:border-box;background:#0284c7;color:#fff !important;font-weight:700;padding:10px 16px;border-radius:8px;text-decoration:none;margin:6px 8px 6px 0;white-space:normal;overflow-wrap:anywhere}
@@ -78,6 +120,108 @@ a,p,li,td,th,label,legend,h1,h2,blockquote{overflow-wrap:anywhere}
 <li>7 key terms checked in seconds</li>
 </ul>
 <p id="who"><strong>Who it's for:</strong> Amazon.com sellers (US store) whose broker has sent a COI, or who are getting quotes.</p>
+
+<section class="kit-conv-box" id="kit-offer" aria-labelledby="kit-offer-h">
+<span class="kit-conv-badge">$29 · INSTANT DOWNLOAD · 1-CLICK CHECKOUT</span>
+<h2 id="kit-offer-h">Exactly what buyers receive in the $29 Amazon $1M Insurance Readiness Kit</h2>
+<p class="price-lg">$29</p>
+<p>One-time price. Checkout opens on Gumroad and the download starts after payment. This page does not send your certificate there.</p>
+<figure>
+<img class="kit-preview-img" src="/assets/previews/amazon-coi-kit-preview-1280x720.png" alt="Inside the $29 Amazon $1M Insurance Readiness Kit: interactive 7-point ACORD 25 pre-upload audit workbook, broker email correction scripts, and Seller Central upload walkthrough" width="1280" height="720">
+<figcaption class="kit-caption">Inside the kit: the interactive 7-point ACORD 25 pre-upload audit workbook, the copy-paste broker email correction scripts, and the step-by-step Seller Central Account Health upload walkthrough.</figcaption>
+</figure>
+<ol class="file-list">
+<li><strong>Interactive 7-point ACORD 25 pre-upload audit workbook.</strong> Work through Amazon Policy G200386300 before you upload: character-for-character Legal Entity Name match with your Seller Central Legal Entity page (with the single-member LLC trade-name exception Amazon states), additional insured wording, $1,000,000 per occurrence and $1,000,000 aggregate, deductible of $10,000 or less listed on the certificate, coverage of all Amazon.com sales, no sunset clause, and 30 days' cancellation notice.</li>
+<li><strong>Copy-paste broker email correction scripts</strong> for these errors: Legal Entity Name, Additional Insured, $1M occurrence, a deductible above $10,000, a sunset clause, and a missing 30-day cancellation notice.</li>
+<li><strong>Step-by-step Seller Central Account Health upload walkthrough</strong> so you know where the corrected ACORD 25 goes after your broker reissues it.</li>
+</ol>
+<p class="limit-note"><strong>What this page and the kit can and cannot do.</strong> The free tool and $29 kit help sellers spot common ACORD 25 mismatches and organize broker questions before uploading, and cannot guarantee Amazon acceptance or prevent all upload rejections.</p>
+<div class="kit-btn-row">
+<a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=amazon-1m-insurance-readiness-kit&amp;utm_content=above-fold" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 Amazon $1M Insurance Readiness Kit (1-Click Checkout) →</a>
+</div>
+</section>
+
+<section class="card" id="compare" aria-labelledby="compare-h">
+<h2 id="compare-h">Free Browser Check vs. $29 Readiness Kit</h2>
+<div class="table-wrap">
+<table class="compare">
+<caption>Free Browser Check vs. $29 Readiness Kit</caption>
+<thead>
+<tr>
+<th scope="col"> </th>
+<th scope="col">Free browser check</th>
+<th scope="col">$29 Readiness Kit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">Price</th>
+<td>$0, on this page</td>
+<td>$29, one-time download</td>
+</tr>
+<tr>
+<th scope="row">What you do</th>
+<td>Paste certificate text. The check runs in this browser tab. Nothing is uploaded.</td>
+<td>Fill in the workbook, copy a broker email script, then follow the Account Health upload steps.</td>
+</tr>
+<tr>
+<th scope="row">What it helps you spot</th>
+<td>Common ACORD 25 mismatches in the text you paste: additional insured, $1,000,000 per occurrence, $1,000,000 aggregate, deductible over $10,000, occurrence basis, sunset wording, and 30-day notice. If you type your Seller Central legal entity, it also looks for that name.</td>
+<td>The same kinds of mismatches, organized as broker questions and correction scripts before you upload.</td>
+</tr>
+<tr>
+<th scope="row">What it cannot establish</th>
+<td>It cannot see Seller Central, Account Health, or the insurer's copy of the policy. It cannot guarantee Amazon acceptance or prevent all upload rejections.</td>
+<td>It cannot submit the certificate for you. It cannot guarantee Amazon acceptance or prevent all upload rejections.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The free tool and $29 kit help sellers spot common ACORD 25 mismatches and organize broker questions before uploading, and cannot guarantee Amazon acceptance or prevent all upload rejections.</p>
+<p><a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=amazon-1m-insurance-readiness-kit&amp;utm_content=comparison" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 kit (1-Click Checkout) →</a></p>
+</section>
+
+<section class="card" id="demo" aria-labelledby="demo-h">
+<p><span class="demo-kicker">PRODUCT DEMONSTRATION — SAMPLE SCENARIO</span> <span class="sample-kicker">SAMPLE SCENARIO — FICTIONAL DATA</span></p>
+<h2 id="demo-h">Before you upload your Amazon insurance certificate, here is how to organize the questions you need to ask your broker</h2>
+<p>This is a product demonstration with fictional sample data. It is not a customer result, not a real policy, and not a promise that Amazon accepted a certificate.</p>
+<div class="table-wrap">
+<table>
+<caption>Fictional sample used only for this demonstration</caption>
+<thead>
+<tr><th scope="col">Sample field</th><th scope="col">Fictional value</th></tr>
+</thead>
+<tbody>
+<tr><th scope="row">Seller Central Legal Entity</th><td>Jordan Lee</td></tr>
+<tr><th scope="row">How this sample seller is set up</th><td>Individual sole proprietor. Not a single-member LLC.</td></tr>
+<tr><th scope="row">Insured name printed on the sample COI</th><td>Lee Home Goods (a trade name)</td></tr>
+<tr><th scope="row">Deductible printed on the sample COI</th><td>$25,000</td></tr>
+<tr><th scope="row">Additional insured printed on the sample COI</th><td>Amazon.com Services LLC, as certificate holder only</td></tr>
+</tbody>
+</table>
+</div>
+<p>Before anything is uploaded to Seller Central, the pre-check spots two mismatches:</p>
+<ol>
+<li><strong>Legal entity name.</strong> Seller Central says Jordan Lee. The certificate says Lee Home Goods. Amazon's G200386300 page says the insured name must match the legal entity in Account Info, except for a single-member LLC whose trade name Amazon allows. This sample seller is a sole proprietor, so the trade name is not that exception. The names do not match character for character.</li>
+<li><strong>Deductible.</strong> The sample certificate lists $25,000. Amazon says the deductible must not be greater than $10,000 and that the amount must be listed on the certificate.</li>
+</ol>
+<p>The kit's broker email script is the message this sample seller copies to an offline broker before submission. Sample script:</p>
+<pre>Subject: Please reissue the ACORD 25 before I upload it to Amazon
+
+Please reissue my certificate with these corrections:
+1. Named insured must read exactly: Jordan Lee
+   Seller Central Legal Entity is Jordan Lee. The certificate shows Lee Home Goods.
+   I am a sole proprietor, not a single-member LLC, so the trade name is not a substitute.
+2. Name "Amazon.com Services LLC and its affiliates and assignees" as additional insured.
+3. Show at least $1,000,000 each occurrence and $1,000,000 aggregate.
+4. Replace the $25,000 deductible with $10,000 or less, and list that amount on the certificate.
+5. Confirm in writing: no sunset clause, and the policy covers all sales on Amazon.com.
+6. Give Amazon at least 30 days' notice of cancellation, modification, or non-renewal.</pre>
+<p>After the broker reissues the certificate, the kit's upload walkthrough is the step-by-step path through Seller Central Account Health. The free check on this page can flag the same two sample problems if you paste that fictional certificate text. Neither the free tool nor the $29 kit can guarantee Amazon acceptance or prevent all upload rejections.</p>
+<div class="kit-btn-row">
+<a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=amazon-1m-insurance-readiness-kit&amp;utm_content=product-demo" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 kit with the broker email scripts (1-Click Checkout) →</a>
+</div>
+</section>
 
 <div class="cd" aria-label="Date and checks">
  <div>
@@ -150,7 +294,7 @@ a,p,li,td,th,label,legend,h1,h2,blockquote{overflow-wrap:anywhere}
 <div class="lead-cta" id="result-cta">
 <h2 id="result-problem">Your certificate still needs a look before Amazon's rule starts.</h2>
 <p id="result-deadline">Amazon's extra rule starts Nov 2, 2026. Sellers in higher-safety categories need $1 million of coverage for each incident, and $1 million in total, even if sales are low.</p>
-<p><a class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=amazon-1m-insurance-readiness-kit&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 insurance kit</a></p>
+<p><a target="_blank" class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=amazon-1m-insurance-readiness-kit&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 insurance kit</a></p>
 <p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
 </div>
 <h2>Results</h2>
@@ -197,16 +341,25 @@ a,p,li,td,th,label,legend,h1,h2,blockquote{overflow-wrap:anywhere}
   <p style="margin:0"><a class="btn-email-cap" href="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" target="_blank" rel="noopener">Email me deadline reminders (1-click sign-up) →</a> <span class="muted">(opens Brevo's sign-up page · double opt-in, unsubscribe anytime · <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>)</span></p>
 </div>
 <div class="kit-conv-box">
-  <span class="kit-conv-badge">INSTANT DOWNLOAD · 7-TAB EXCEL WORKBOOK + 17-FIELD CHECKER + BROKER EMAIL · $29</span>
-  <h3 class="kit-conv-title">See What's Inside the $29 Amazon $1M Insurance Readiness Kit</h3>
-  <img class="kit-preview-img" src="/assets/previews/amazon-coi-kit-preview-1280x720.png" alt="See What's Inside the $29 Amazon $1M Insurance Readiness Kit: 17-field policy checklist, 7-tab Excel COI checker workbook, and copy-paste broker email" width="1280" height="720" loading="lazy">
-  <ul class="kit-bullets">
-    <li>Stops bounce-backs at upload: checks all 17 policy & COI fields in Amazon's G200386300 help page side-by-side in a 7-tab Excel workbook (.xlsx + .csv).</li>
-<li>Saves broker back-and-forth: includes a copy-paste Broker Fix Email with Amazon's exact 'Amazon.com Services LLC and its affiliates and assignees' Additional Insured wording.</li>
-<li>Includes a secondary Category Screen across Amazon's named enhanced-safety examples so you can organize your product list before Nov 2, 2026.</li>
-  </ul>
+  <span class="kit-conv-badge">$29 · INSTANT DOWNLOAD · 1-CLICK CHECKOUT</span>
+  <h3 class="kit-conv-title">Exactly what buyers receive in the $29 Amazon $1M Insurance Readiness Kit</h3>
+  <p class="price-lg">$29</p>
+  <figure>
+  <img class="kit-preview-img" src="/assets/previews/amazon-coi-kit-preview-1280x720.png" alt="Inside the $29 Amazon $1M Insurance Readiness Kit: interactive 7-point ACORD 25 pre-upload audit workbook, broker email correction scripts, and Seller Central upload walkthrough" width="1280" height="720" loading="lazy">
+  <figcaption class="kit-caption">Inside the kit: the interactive 7-point ACORD 25 pre-upload audit workbook, the copy-paste broker email correction scripts, and the step-by-step Seller Central Account Health upload walkthrough.</figcaption>
+  </figure>
+  <ol class="file-list">
+    <li><strong>Interactive 7-point ACORD 25 pre-upload audit workbook.</strong> Legal Entity Name, Additional Insured, $1,000,000 per occurrence, $1,000,000 aggregate, deductible of $10,000 or less, all Amazon.com sales, no sunset clause, and 30 days' cancellation notice.</li>
+    <li><strong>Copy-paste broker email correction scripts</strong> for Legal Entity Name, Additional Insured, $1M occurrence, a deductible above $10,000, a sunset clause, and a missing 30-day cancellation notice.</li>
+    <li><strong>Step-by-step Seller Central Account Health upload walkthrough.</strong></li>
+  </ol>
+  <h3 class="kit-conv-title">Free Browser Check vs. $29 Readiness Kit</h3>
+  <p>The free check you just ran stays in this browser tab and flags common ACORD 25 mismatches in the text you pasted. The $29 kit is the workbook, the broker email scripts, and the upload walkthrough you use to organize the questions for your broker before you upload. The free tool and $29 kit help sellers spot common ACORD 25 mismatches and organize broker questions before uploading, and cannot guarantee Amazon acceptance or prevent all upload rejections.</p>
+  <p><span class="demo-kicker">PRODUCT DEMONSTRATION — SAMPLE SCENARIO</span> <span class="sample-kicker">SAMPLE SCENARIO — FICTIONAL DATA</span></p>
+  <h3 class="kit-conv-title">Before you upload your Amazon insurance certificate, here is how to organize the questions you need to ask your broker</h3>
+  <p>Fictional sample, not a customer result. Seller Central Legal Entity: Jordan Lee, an individual sole proprietor. The sample certificate shows the trade name Lee Home Goods and a $25,000 deductible. The pre-check spots both before upload. The kit's broker email script asks the broker to reissue the ACORD 25 with the insured name Jordan Lee, "Amazon.com Services LLC and its affiliates and assignees" as additional insured, at least $1,000,000 per occurrence and aggregate, and a deductible of $10,000 or less listed on the certificate, with no sunset clause and 30 days' cancellation notice. Then the upload walkthrough follows Account Health. This sample does not mean Amazon accepted a certificate.</p>
   <div class="kit-btn-row">
-    <a class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=amazon-1m-insurance-readiness-kit&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 Amazon $1M COI Readiness Kit (1-Click Checkout) →</a>
+    <a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=amazon-1m-insurance-readiness-kit&amp;utm_content=post-check" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 Amazon $1M Insurance Readiness Kit (1-Click Checkout) →</a>
   </div>
   <p class="muted" style="margin:4px 0 0">Free deadline page: <a href="/deadlines/amazon-insurance-nov-2.html">Amazon commercial liability insurance changes start Nov 2, 2026</a></p>
 </div>
@@ -225,16 +378,20 @@ a,p,li,td,th,label,legend,h1,h2,blockquote{overflow-wrap:anywhere}
 
 <section class="card cta" id="paid-tool" aria-labelledby="paid-h">
 <!-- Footer kit link. Same product. utm_content=footer. The old link had no utm_campaign, so Gumroad did not count those clicks. -->
-<span class="kit-conv-badge">INSTANT DOWNLOAD · 7-TAB EXCEL WORKBOOK + 17-FIELD CHECKER + BROKER EMAIL · $29</span>
+<span class="kit-conv-badge">$29 · INSTANT DOWNLOAD · 1-CLICK CHECKOUT</span>
 <h2 id="paid-h">A fuller kit to send your broker</h2>
-<img class="kit-preview-img" src="/assets/previews/amazon-coi-kit-preview-1280x720.png" alt="See What's Inside the $29 Amazon $1M Insurance Readiness Kit: 17-field policy checklist, 7-tab Excel COI checker workbook, and copy-paste broker email" width="1280" height="720" loading="lazy">
-<ul class="kit-bullets">
-<li>Stops bounce-backs at upload: checks all 17 policy &amp; COI fields in Amazon's G200386300 help page side-by-side in a 7-tab Excel workbook (.xlsx + .csv).</li>
-<li>Saves broker back-and-forth: includes a copy-paste Broker Fix Email with Amazon's exact 'Amazon.com Services LLC and its affiliates and assignees' Additional Insured wording.</li>
-<li>Includes a secondary Category Screen across Amazon's named enhanced-safety examples so you can organize your product list before Nov 2, 2026.</li>
-</ul>
-<p>The $29 kit is a file you download. It checks more certificate fields, lists the higher-safety categories, includes an email for your broker, and includes a spreadsheet. This page does not send your certificate there.</p>
-<p><a class="btn" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=amazon-1m-insurance-readiness-kit&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 insurance kit</a></p>
+<p class="price-lg">$29</p>
+<figure>
+<img class="kit-preview-img" src="/assets/previews/amazon-coi-kit-preview-1280x720.png" alt="Inside the $29 Amazon $1M Insurance Readiness Kit: interactive 7-point ACORD 25 pre-upload audit workbook, broker email correction scripts, and Seller Central upload walkthrough" width="1280" height="720" loading="lazy">
+<figcaption class="kit-caption">Inside the kit: the interactive 7-point ACORD 25 pre-upload audit workbook, the copy-paste broker email correction scripts, and the step-by-step Seller Central Account Health upload walkthrough.</figcaption>
+</figure>
+<ol class="file-list">
+<li><strong>Interactive 7-point ACORD 25 pre-upload audit workbook.</strong></li>
+<li><strong>Copy-paste broker email correction scripts</strong> for Legal Entity Name, Additional Insured, $1M occurrence, a deductible above $10,000, a sunset clause, and a missing 30-day cancellation notice.</li>
+<li><strong>Step-by-step Seller Central Account Health upload walkthrough.</strong></li>
+</ol>
+<p>The $29 kit is a file you download. It helps you spot common ACORD 25 mismatches and organize broker questions before uploading. It cannot guarantee Amazon acceptance or prevent all upload rejections. This page does not send your certificate there.</p>
+<p><a target="_blank" class="btn" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=amazon-1m-insurance-readiness-kit&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 insurance kit</a></p>
 <p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>. Free deadline page: <a href="/deadlines/amazon-insurance-nov-2.html">Amazon insurance changes start Nov 2, 2026</a>.</p>
 </section>
 
@@ -249,6 +406,28 @@ a,p,li,td,th,label,legend,h1,h2,blockquote{overflow-wrap:anywhere}
 <h2 id="criteria-h">Amazon's criteria, quoted</h2>
 <p>Copied from Amazon's Commercial Liability Insurance Requirements page. This page does not reword these lines.</p>
 <ol id="criteria"></ol>
+</section>
+
+<section class="card" id="faq" aria-labelledby="faq-h">
+<h2 id="faq-h">Questions sellers are asking</h2>
+<h3>Why did I receive the Nov 2, 2026 Commercial Liability Insurance email when my sales are under $10,000/month (even $1,500/month)?</h3>
+<p>Under Amazon's Nov 2, 2026 update (Policy G200386300), enhanced-safety product categories require $1,000,000 commercial general liability insurance regardless of monthly sales volume. Amazon's examples include children's products, cosmetic and ingestible products, and lithium battery products, and Amazon says that list is not complete. Sellers also see the notice on topicals, cosmetics, supplements, and other dietary or safety-regulated items. Even a single old or inactive listing in Manage Inventory can trigger the notice, including when sales are under $10,000 a month or about $1,500 a month.</p>
+<p><strong>Free decision rule:</strong> if the notice was triggered by an old discontinued or inactive ASIN you no longer sell, permanently deleting that listing from Manage Inventory, rather than only closing it, can remove the category trigger at $0 cost. If you actively sell in that category, you must upload a compliant ACORD 25 certificate of insurance. This page cannot see your catalog. Confirm the listing in Manage Inventory and the notice in Account Health.</p>
+<h3>How do individual / sole-proprietor sellers using an offline insurance broker pass Amazon's review without Amazon Insurance Accelerator?</h3>
+<p>Amazon's Insurance Accelerator requirement on Policy G200386300 is for sellers based in Mainland China, unless Amazon agrees otherwise in writing. An individual or sole proprietor elsewhere can ask an offline broker for an ACORD 25 that meets this checklist:</p>
+<ol>
+<li>Insured name matches the Seller Central Legal Entity character for character. Amazon's exception is for a single-member LLC whose trade name Amazon allows, not for every sole proprietor using a DBA.</li>
+<li>Additional insured reads "Amazon.com Services LLC and its affiliates and assignees".</li>
+<li>At least $1,000,000 per occurrence and $1,000,000 aggregate, covering products, products/completed operations, and bodily injury. A commercial general liability form also addresses personal injury. The limit Amazon states is $1,000,000 per occurrence and in aggregate.</li>
+<li>Deductible no greater than $10,000, and the amount is listed on the certificate.</li>
+<li>The policy covers all sales on Amazon.com.</li>
+<li>No sunset clause.</li>
+<li>At least 30 days' notice of cancellation, modification, or non-renewal.</li>
+</ol>
+<p>Amazon's Business Insurance verification decides whether the certificate is accepted. The free tool and $29 kit help sellers spot common ACORD 25 mismatches and organize broker questions before uploading, and cannot guarantee Amazon acceptance or prevent all upload rejections.</p>
+<h3>Can the free browser check or the $29 kit guarantee Amazon will accept my certificate?</h3>
+<p>No. The free tool and $29 kit help sellers spot common ACORD 25 mismatches and organize broker questions before uploading, and cannot guarantee Amazon acceptance or prevent all upload rejections.</p>
+<p><a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=amazon-1m-insurance-readiness-kit&amp;utm_content=faq" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 Amazon $1M Insurance Readiness Kit (1-Click Checkout) →</a></p>
 </section>
 
 <p>Related: <a href="/deadlines/amazon-insurance-nov-2.html">Amazon insurance, Nov 2, 2026</a> · <a href="/deadlines/">All deadlines</a> · <a href="/tools/">Tools and kits</a></p>
@@ -913,14 +1092,27 @@ boot();
     var cut = slug.search(/[?#]/);
     if (cut !== -1) slug = slug.slice(0, cut);
     if (!slug) return;
+    if (node.target !== "_blank") node.target = "_blank";
+    if (typeof node.setAttribute === "function") {
+      var rel = node.getAttribute("rel") || "";
+      if (rel.indexOf("noopener") === -1) node.setAttribute("rel", (rel ? rel + " " : "") + "noopener");
+    }
     var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+    var title = "Gumroad checkout click: " + slug;
     if (window.goatcounter && typeof window.goatcounter.count === "function") {
       window.goatcounter.count({
         path: path,
-        title: "Gumroad checkout click: " + slug,
+        title: title,
         event: true
       });
     }
+    var gcCountUrl = "https://firstmoverprojects.goatcounter.com/count?p=" + encodeURIComponent(path) + "&t=" + encodeURIComponent(title) + "&e=true";
+    try {
+      if (typeof fetch === "function") fetch(gcCountUrl, { keepalive: true, mode: "no-cors" });
+    } catch (fetchErr) {}
+    try {
+      if (typeof navigator !== "undefined" && navigator && typeof navigator.sendBeacon === "function") navigator.sendBeacon(gcCountUrl);
+    } catch (beaconErr) {}
   }
   document.addEventListener("click", trackGumroadClick);
   document.addEventListener("auxclick", trackGumroadClick);
