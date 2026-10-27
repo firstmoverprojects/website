@@ -219,7 +219,8 @@ var allowed = [
   "https://sellercentral.amazon.com/help/hub/reference/external/G200386300",
   "https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT",
   "https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408",
-  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?utm_source=fmp-tool&utm_medium=amazon-coi-check"
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=7day-nov2&utm_content=result-card",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=7day-nov2&utm_content=footer"
 ];
 var foundList = Object.keys(found).sort();
 var allowedSorted = allowed.slice().sort();

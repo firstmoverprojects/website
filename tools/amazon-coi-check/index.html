@@ -29,6 +29,9 @@ button.sec{background:#e4e8ee;color:#1b1f24}
 .warn{background:#fde8e6;color:#8a1c12}
 .ok{background:#e3f4e6;color:#1d6b2c}
 .cta{background:#fff8e6;border-color:#f0d58a}
+.lead-cta{background:#fff8e6;border:1px solid #f0d58a;border-radius:10px;padding:16px;margin:0 0 16px}
+a.btn{display:inline-block;max-width:100%;box-sizing:border-box;font-weight:700;line-height:1.3;text-decoration:none;background:#1f5fbf;color:#fff;padding:12px 18px;border-radius:8px;margin:12px 0 0}
+a.btn:hover{background:#174a94;color:#fff}
 a{color:#1f5fbf}
 a:focus,button:focus,textarea:focus,input:focus,pre:focus{outline:3px solid #1f5fbf;outline-offset:2px}
 table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0;table-layout:fixed}
@@ -127,6 +130,15 @@ a,p,li,td,th,label,legend,h1,h2,blockquote{overflow-wrap:anywhere}
 </section>
 
 <section class="card" id="results" hidden aria-live="polite">
+<!-- Result card. Nov 2, 2026 is the date in Amazon's seller announcement, already linked in Sources.
+     Gumroad product amazon-1m-insurance-readiness-kit ($29). Short id zasjos redirects to that URL and keeps the query string.
+     utm_source, utm_medium, and utm_campaign are all required or Gumroad does not count the click. utm_content=result-card. -->
+<div class="lead-cta" id="result-cta">
+<h2 id="result-problem">Your certificate still needs a look before Amazon's rule starts.</h2>
+<p id="result-deadline">Amazon's extra rule starts Nov 2, 2026. Sellers in higher-safety categories need $1 million of coverage for each incident, and $1 million in total, even if sales are low.</p>
+<p><a class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=7day-nov2&amp;utm_content=result-card" rel="noopener noreferrer">Get the $29 insurance kit</a></p>
+<p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
+</div>
 <h2>Results</h2>
 <div class="cd">
  <div>
@@ -177,9 +189,11 @@ a,p,li,td,th,label,legend,h1,h2,blockquote{overflow-wrap:anywhere}
 </section>
 
 <section class="card cta" id="paid-tool" aria-labelledby="paid-h">
-<h2 id="paid-h"><a href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?utm_source=fmp-tool&amp;utm_medium=amazon-coi-check" rel="noopener noreferrer">FMP's own paid kit: $1M Insurance Readiness Kit: Amazon Enhanced-Safety Categories, Nov 2 ($29)</a></h2>
-<p>A 17-field COI pre-submission checker, a category screen (Amazon's named examples plus how to check your own products), a broker email and an Excel workbook.</p>
-<p>Free deadline page: <a href="/deadlines/amazon-insurance-nov-2.html">Amazon commercial liability insurance changes start Nov 2, 2026</a></p>
+<!-- Footer kit link. Same product. utm_content=footer. The old link had no utm_campaign, so Gumroad did not count those clicks. -->
+<h2 id="paid-h">A fuller kit to send your broker</h2>
+<p>The $29 kit is a file you download. It checks more certificate fields, lists the higher-safety categories, includes an email for your broker, and includes a spreadsheet. This page does not send your certificate there.</p>
+<p><a class="btn" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=7day-nov2&amp;utm_content=footer" rel="noopener noreferrer">Get the $29 insurance kit</a></p>
+<p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>. Free deadline page: <a href="/deadlines/amazon-insurance-nov-2.html">Amazon insurance changes start Nov 2, 2026</a>.</p>
 </section>
 
 <section class="card" aria-labelledby="src-h">
@@ -657,6 +671,9 @@ function paint(result) {
   setText("n-ok", String(nOk));
   setText("n-fix", String(nFix));
   setText("n-check", String(nCheck));
+  if (nFix > 0) setText("result-problem", "Your certificate has " + nFix + (nFix === 1 ? " item" : " items") + " to fix before you send it to Amazon.");
+  else if (nCheck > 0) setText("result-problem", "Some lines on your certificate still need a check by hand.");
+  else setText("result-problem", "The seven key terms on your certificate look right.");
   var cap = byId("cap");
   if (cap) {
     cap.hidden = !result.truncated;
