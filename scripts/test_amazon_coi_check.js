@@ -222,13 +222,17 @@ var allowed = [
   "https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408",
   "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance-readiness-kit&utm_content=result-card",
   "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance-readiness-kit&utm_content=footer",
-  "https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A=="
+  "https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==",
+  "https://gc.zgo.at",
+  "https://gc.zgo.at/count.js",
+  "https://firstmoverprojects.goatcounter.com",
+  "https://firstmoverprojects.goatcounter.com/count"
 ];
 var foundList = Object.keys(found).sort();
 var allowedSorted = allowed.slice().sort();
 assertEq(foundList.join("\n"), allowedSorted.join("\n"), "T6 http(s) URLs are only the canonical, privacy policy, 3 Amazon sources, Gumroad checkout, and Brevo signup");
-assert(html.indexOf("default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; form-action 'none'; base-uri 'none'") !== -1, "T6 CSP meta present");
-assert(html.indexOf('name="referrer" content="no-referrer"') !== -1, "T6 referrer meta present");
+assert(html.indexOf("default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action 'none'; base-uri 'none'") !== -1, "T6 CSP meta present");
+assert(html.indexOf('name="referrer" content="strict-origin-when-cross-origin"') !== -1, "T6 referrer meta present");
 [
   "General guidance, not legal, tax or IT advice.",
   "This is not insurance advice. Talk to your insurance broker. Amazon's Business Insurance verification decides whether a certificate is accepted.",

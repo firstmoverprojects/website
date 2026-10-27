@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; form-action 'none'; base-uri 'none'">
-<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="canonical" href="https://firstmoverprojects.com/tools/etsy-photo-audit-check/">
 <title>Etsy Real-Photo &amp; Listing Audit Check (Free, Runs in Your Browser)</title>
 <meta name="description" content="Paste up to 10 Etsy listing rows, or toggle one listing's photos, variations, disclosure and title. Get a side-by-side risk list and real-photo fix plan. Runs in your browser. Nothing is uploaded.">
@@ -157,7 +157,7 @@ footer{margin:8px 0 24px}
 <div class="lead-cta" id="result-cta">
 <h2 id="result-problem">Your listing photos may not match Etsy's real-photo rule.</h2>
 <p id="result-deadline">Etsy posted this rule on Oct 22, 2026. They did not name a last day. If the photos are wrong and a buyer opens a case, you may have to give a refund.</p>
-<p><a class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=lnfgc&amp;utm_content=result-card" rel="noopener noreferrer">Get the $9 photo checklist</a></p>
+<p><a class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=lnfgc&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 photo checklist</a></p>
 <p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
 </div>
 <h2>Current Listing Risk vs. Real-Photo Audit Fix Plan</h2>
@@ -191,7 +191,7 @@ footer{margin:8px 0 24px}
 <li>Includes a camera-settings safe-default checklist (turning off portrait blur, beauty mode, and AI background swaps) plus Etsy's exact Oct 22 policy quotes.</li>
   </ul>
   <div class="kit-btn-row">
-    <a class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=lnfgc&amp;utm_content=result-card" rel="noopener noreferrer">Get the $9 Etsy Real-Photo Audit Kit (1-Click Checkout) →</a>
+    <a class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=lnfgc&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 Etsy Real-Photo Audit Kit (1-Click Checkout) →</a>
   </div>
   <p class="muted" style="margin:4px 0 0"><span class="muted">The $9 kit is a separate file on Gumroad. This page does not send your listings there.</span></p>
 </div>
@@ -209,7 +209,7 @@ footer{margin:8px 0 24px}
 <li>Includes a camera-settings safe-default checklist (turning off portrait blur, beauty mode, and AI background swaps) plus Etsy's exact Oct 22 policy quotes.</li>
 </ul>
 <p>The $9 checklist is a file you download. It lists which photos to take for each kind of item, plus a sheet with one row per listing. This page does not send your listings there.</p>
-<p><a class="btn" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=lnfgc&amp;utm_content=footer" rel="noopener noreferrer">Get the $9 photo checklist</a></p>
+<p><a class="btn" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=lnfgc&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 photo checklist</a></p>
 <p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
 </section>
 
@@ -707,5 +707,38 @@ byId("copy-checklist").addEventListener("click", function () { copyText("checkli
 byId("copy-prompt").addEventListener("click", function () { copyText("agent-prompt"); });
 })();
 </script>
+<script>
+(function () {
+  var q = location.search || "";
+  var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(q);
+  if (testVisit) {
+    window.goatcounter = { path: function (p) { return "TEST-EXCLUDE" + p; } };
+  }
+  function trackGumroadClick(ev) {
+    if (ev.type === "auxclick" && ev.button !== 1) return;
+    var node = ev.target && ev.target.closest ? ev.target.closest("a") : null;
+    if (!node || !node.getAttribute) return;
+    var href = node.getAttribute("href") || "";
+    var parts = href.split("/");
+    if (parts[0] !== "https:" || parts[2] !== "firstmoverprojects.gumroad.com" || parts[3] !== "l") return;
+    if (href.indexOf("wanted=true") === -1) return;
+    var slug = parts[4] || "";
+    var cut = slug.search(/[?#]/);
+    if (cut !== -1) slug = slug.slice(0, cut);
+    if (!slug) return;
+    var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+    if (window.goatcounter && typeof window.goatcounter.count === "function") {
+      window.goatcounter.count({
+        path: path,
+        title: "Gumroad checkout click: " + slug,
+        event: true
+      });
+    }
+  }
+  document.addEventListener("click", trackGumroadClick);
+  document.addEventListener("auxclick", trackGumroadClick);
+})();
+</script>
+<script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

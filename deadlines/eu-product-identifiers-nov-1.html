@@ -75,7 +75,7 @@
         <p><span class="chip">Nov 1, 2026</span></p>
         <h1>EU product identifiers become mandatory for low-value e-commerce imports (Nov 1, 2026)</h1>
         <p class="lead">Sellers outside the EU who ship online orders to consumers in the EU, and the platforms, carriers and customs agents who declare those parcels.</p>
-        <p class="kit-cta"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadline_eu_product_id_nov_1&amp;utm_campaign=fetwsm&amp;utm_content=top-cta">Get the $29 EU Customs Product Data Checker on Gumroad</a></p>
+        <p class="kit-cta"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadline_eu_product_id_nov_1&amp;utm_campaign=fetwsm&amp;utm_content=top-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $29 EU Customs Product Data Checker on Gumroad</a></p>
         <p class="kit-cta__note">Optional paid tool for Shopify product CSV exports. The free checklist prompt and source links are below.</p>
       </section>
 
@@ -125,7 +125,7 @@ When you state any deadline or date, quote the exact line from the European Comm
 
       <p class="kit-link">Use Shopify? Check your product export's SKUs and barcodes in one pass:</p>
       <p class="kit-link"><a href="/tools/eu-product-id-check/">Free quick check: paste up to 25 SKUs</a></p>
-      <p class="kit-link"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadline_eu_product_id_nov_1&amp;utm_campaign=fetwsm&amp;utm_content=bottom-cta">Get the $29 EU Customs Product Data Checker on Gumroad</a></p>
+      <p class="kit-link"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadline_eu_product_id_nov_1&amp;utm_campaign=fetwsm&amp;utm_content=bottom-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $29 EU Customs Product Data Checker on Gumroad</a></p>
 
       <p class="related">More: <a href="/deadlines/">All deadlines</a> · <a href="finder/">Deadline Finder</a> · <a href="/tools/">Tools and kits</a></p>
 
@@ -157,6 +157,38 @@ When you state any deadline or date, quote the exact line from the European Comm
           });
         }
       })();
+    </script>
+    <script>
+    (function () {
+      var q = location.search || "";
+      var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(q);
+      if (testVisit) {
+        window.goatcounter = { path: function (p) { return "TEST-EXCLUDE" + p; } };
+      }
+      function trackGumroadClick(ev) {
+        if (ev.type === "auxclick" && ev.button !== 1) return;
+        var node = ev.target && ev.target.closest ? ev.target.closest("a") : null;
+        if (!node || !node.getAttribute) return;
+        var href = node.getAttribute("href") || "";
+        var parts = href.split("/");
+        if (parts[0] !== "https:" || parts[2] !== "firstmoverprojects.gumroad.com" || parts[3] !== "l") return;
+        if (href.indexOf("wanted=true") === -1) return;
+        var slug = parts[4] || "";
+        var cut = slug.search(/[?#]/);
+        if (cut !== -1) slug = slug.slice(0, cut);
+        if (!slug) return;
+        var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+        if (window.goatcounter && typeof window.goatcounter.count === "function") {
+          window.goatcounter.count({
+            path: path,
+            title: "Gumroad checkout click: " + slug,
+            event: true
+          });
+        }
+      }
+      document.addEventListener("click", trackGumroadClick);
+      document.addEventListener("auxclick", trackGumroadClick);
+    })();
     </script>
     <script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
       <script src="/deadlines/assets/ab-cta.js" defer></script>

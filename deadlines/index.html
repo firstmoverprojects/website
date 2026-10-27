@@ -125,15 +125,15 @@
         <!-- REMOVE Nov 20, 2026: FIRE kit unpublishes -->
         <p class="kit-link">Optional printable kits on Gumroad:</p>
         <!-- Kit links for the 7-day test. Gumroad product ids: lnfgc; wzxbmp (live permalink fire-to-iris-switch-checklist); amazon-1m-insurance-readiness-kit (short id zasjos redirects and keeps the query). utm_content=deadlines. -->
-        <p class="kit-link"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadlines_hub&amp;utm_campaign=lnfgc">Get the $9 Etsy photo checklist</a></p>
+        <p class="kit-link"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadlines_hub&amp;utm_campaign=lnfgc" referrerpolicy="strict-origin-when-cross-origin">Get the $9 Etsy photo checklist</a></p>
         <p>Etsy posted the real-photo rule on Oct 22, 2026. They did not name a last day. <a href="/tools/etsy-photo-audit-check/">Free photo check</a>.</p>
-        <p class="kit-link"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadlines_hub&amp;utm_campaign=fire-to-iris-switch-checklist">Get the $9 IRS filing checklist</a></p>
+        <p class="kit-link"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadlines_hub&amp;utm_campaign=fire-to-iris-switch-checklist" referrerpolicy="strict-origin-when-cross-origin">Get the $9 IRS filing checklist</a></p>
         <p>Last day to file on the old IRS system: Nov 19, 2026, at 3 p.m. Eastern Time. <a href="/tools/fire-to-iris-check/">Free filing check</a>.</p>
-        <p class="kit-link"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadlines_hub&amp;utm_campaign=amazon-1m-insurance-readiness-kit">Get the $29 Amazon insurance kit</a></p>
+        <p class="kit-link"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadlines_hub&amp;utm_campaign=amazon-1m-insurance-readiness-kit" referrerpolicy="strict-origin-when-cross-origin">Get the $29 Amazon insurance kit</a></p>
         <p>Amazon's extra $1 million rule starts Nov 2, 2026. <a href="/tools/amazon-coi-check/">Free certificate check</a>.</p>
-        <p class="kit-link"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadlines_hub&amp;utm_campaign=fetwsm">$29 EU Customs Product Data Checker (EU product identifiers, Nov 1)</a></p>
-        <p class="kit-link"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/iqnssc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadlines_hub&amp;utm_campaign=iqnssc">$39 Plugin Migration Planner (ChatGPT custom GPTs, Dec 11)</a></p>
-        <p class="kit-link"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/ews-cutover-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadlines_hub&amp;utm_campaign=ews-cutover-kit">$39 EWS Cutover Kit (Exchange Online EWS, Apr 1, 2027)</a></p>
+        <p class="kit-link"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadlines_hub&amp;utm_campaign=fetwsm" referrerpolicy="strict-origin-when-cross-origin">$29 EU Customs Product Data Checker (EU product identifiers, Nov 1)</a></p>
+        <p class="kit-link"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/iqnssc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadlines_hub&amp;utm_campaign=iqnssc" referrerpolicy="strict-origin-when-cross-origin">$39 Plugin Migration Planner (ChatGPT custom GPTs, Dec 11)</a></p>
+        <p class="kit-link"><a class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/ews-cutover-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadlines_hub&amp;utm_campaign=ews-cutover-kit" referrerpolicy="strict-origin-when-cross-origin">$39 EWS Cutover Kit (Exchange Online EWS, Apr 1, 2027)</a></p>
         <p class="related">More: <a href="finder/">Deadline Finder</a> · <a href="/tools/">All tools and kits</a> · <a href="feed.xml">RSS feed</a> · <a href="deadlines.ics">Calendar file (.ics)</a></p>
         <p class="notadvice">General guidance, not legal, tax or IT advice. Check each source's own page (the IRS's own pages or the vendors' own help pages) for your case.</p>
       </section>
@@ -161,6 +161,38 @@
           });
         }
       })();
+    </script>
+    <script>
+    (function () {
+      var q = location.search || "";
+      var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(q);
+      if (testVisit) {
+        window.goatcounter = { path: function (p) { return "TEST-EXCLUDE" + p; } };
+      }
+      function trackGumroadClick(ev) {
+        if (ev.type === "auxclick" && ev.button !== 1) return;
+        var node = ev.target && ev.target.closest ? ev.target.closest("a") : null;
+        if (!node || !node.getAttribute) return;
+        var href = node.getAttribute("href") || "";
+        var parts = href.split("/");
+        if (parts[0] !== "https:" || parts[2] !== "firstmoverprojects.gumroad.com" || parts[3] !== "l") return;
+        if (href.indexOf("wanted=true") === -1) return;
+        var slug = parts[4] || "";
+        var cut = slug.search(/[?#]/);
+        if (cut !== -1) slug = slug.slice(0, cut);
+        if (!slug) return;
+        var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+        if (window.goatcounter && typeof window.goatcounter.count === "function") {
+          window.goatcounter.count({
+            path: path,
+            title: "Gumroad checkout click: " + slug,
+            event: true
+          });
+        }
+      }
+      document.addEventListener("click", trackGumroadClick);
+      document.addEventListener("auxclick", trackGumroadClick);
+    })();
     </script>
     <script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
       <script src="/deadlines/assets/ab-cta.js" defer></script>

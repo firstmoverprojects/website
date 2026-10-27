@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; form-action 'none'; base-uri 'none'">
-<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="canonical" href="https://firstmoverprojects.com/tools/custom-gpt-retirement-checker/">
 <title>Custom GPT Retirement Checker (free, runs in your browser)</title>
 <style>
@@ -147,7 +147,7 @@ table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0}th,td{bor
 <li>Prints a clean PDF Readiness Report for team or Enterprise sign-off before the Dec 11, 2026 Custom GPT retirement.</li>
   </ul>
   <div class="kit-btn-row">
-    <a class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/iqnssc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=custom-gpt-retirement-checker&amp;utm_campaign=iqnssc&amp;utm_content=result-cta" rel="noopener noreferrer">Get the $39 Plugin Migration Planner (1-Click Checkout) →</a>
+    <a class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/iqnssc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=custom-gpt-retirement-checker&amp;utm_campaign=iqnssc&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $39 Plugin Migration Planner (1-Click Checkout) →</a>
   </div>
   <p class="muted" style="margin:4px 0 0"><a href="/deadlines/custom-gpt-retirement-dec-11.html">Read the Custom GPT Dec 11 retirement deadline page (free)</a></p>
 </div>
@@ -205,7 +205,7 @@ table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0}th,td{bor
 <li>Prints a clean PDF Readiness Report for team or Enterprise sign-off before the Dec 11, 2026 Custom GPT retirement.</li>
 </ul>
 <div class="kit-btn-row">
-  <a id="paid-link" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/iqnssc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=custom-gpt-retirement-checker&amp;utm_campaign=iqnssc&amp;utm_content=bottom-cta" rel="noopener noreferrer">Get the $39 Plugin Migration Planner (1-Click Checkout) →</a>
+  <a id="paid-link" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/iqnssc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=custom-gpt-retirement-checker&amp;utm_campaign=iqnssc&amp;utm_content=bottom-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $39 Plugin Migration Planner (1-Click Checkout) →</a>
 </div>
 <p><a href="/deadlines/custom-gpt-retirement-dec-11.html">Read the Custom GPT Dec 11 retirement deadline page (free)</a></p>
 </section>
@@ -285,5 +285,38 @@ document.getElementById("go").addEventListener("click",build);
 document.getElementById("clear").addEventListener("click",function(){["f-instr","f-actions","f-knowledge","f-caps"].forEach(function(i){document.getElementById(i).value="";});["c-created","c-drafts","c-shared","c-ent"].forEach(function(i){document.getElementById(i).checked=false;});document.getElementById("results").hidden=true;});
 })();
 </script>
+<script>
+(function () {
+  var q = location.search || "";
+  var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(q);
+  if (testVisit) {
+    window.goatcounter = { path: function (p) { return "TEST-EXCLUDE" + p; } };
+  }
+  function trackGumroadClick(ev) {
+    if (ev.type === "auxclick" && ev.button !== 1) return;
+    var node = ev.target && ev.target.closest ? ev.target.closest("a") : null;
+    if (!node || !node.getAttribute) return;
+    var href = node.getAttribute("href") || "";
+    var parts = href.split("/");
+    if (parts[0] !== "https:" || parts[2] !== "firstmoverprojects.gumroad.com" || parts[3] !== "l") return;
+    if (href.indexOf("wanted=true") === -1) return;
+    var slug = parts[4] || "";
+    var cut = slug.search(/[?#]/);
+    if (cut !== -1) slug = slug.slice(0, cut);
+    if (!slug) return;
+    var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+    if (window.goatcounter && typeof window.goatcounter.count === "function") {
+      window.goatcounter.count({
+        path: path,
+        title: "Gumroad checkout click: " + slug,
+        event: true
+      });
+    }
+  }
+  document.addEventListener("click", trackGumroadClick);
+  document.addEventListener("auxclick", trackGumroadClick);
+})();
+</script>
+<script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
