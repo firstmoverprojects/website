@@ -91,7 +91,8 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       assert.equal(url.pathname.endsWith(item.slug), true, href);
       assert.equal(url.searchParams.get("utm_source"), "firstmoverprojects", href);
       assert.equal(url.searchParams.get("utm_medium"), item.medium, href);
-      assert.equal(url.searchParams.get("utm_campaign"), "7day-nov2", href);
+      assert.equal(url.searchParams.get("wanted"), "true", href);
+      assert.equal(url.searchParams.get("utm_campaign"), url.pathname.split("/").pop(), href);
     }
     assert.equal(new URL(resultHref).searchParams.get("utm_content"), "result-card");
     assert.equal(new URL(footerHref).searchParams.get("utm_content"), "footer");

@@ -23,16 +23,16 @@ const PAGES = {
   loom: "tools/loom-seat-audit-calculator/index.html"
 };
 const GUMROAD = {
-  etsy: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=firstmoverprojects&utm_medium=etsy-photo-check&utm_campaign=7day-nov2&utm_content=footer",
-  etsyResult: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=firstmoverprojects&utm_medium=etsy-photo-check&utm_campaign=7day-nov2&utm_content=result-card",
-  hvac: "https://firstmoverprojects.gumroad.com/l/afwbvt?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  intake: "https://firstmoverprojects.gumroad.com/l/fretzy?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  roofing: "https://firstmoverprojects.gumroad.com/l/wymols?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  plumbing: "https://firstmoverprojects.gumroad.com/l/unjou?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  electrical: "https://firstmoverprojects.gumroad.com/l/lykya?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  garage: "https://firstmoverprojects.gumroad.com/l/cybqmi?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  water: "https://firstmoverprojects.gumroad.com/l/ykxxot?wanted=true&utm_source=fmp_site&utm_medium=after_hours_check&utm_campaign=issue07_multi",
-  loom: "https://firstmoverprojects.gumroad.com/l/fguyxn?wanted=true&utm_source=fmp_site&utm_medium=loom_audit_check&utm_campaign=issue07_multi"
+  etsy: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=firstmoverprojects&utm_medium=etsy-photo-check&utm_campaign=lnfgc&utm_content=footer",
+  etsyResult: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=firstmoverprojects&utm_medium=etsy-photo-check&utm_campaign=lnfgc&utm_content=result-card",
+  hvac: "https://firstmoverprojects.gumroad.com/l/afwbvt?wanted=true&utm_source=firstmoverprojects&utm_medium=after-hours-gap-check&utm_campaign=afwbvt&utm_content=trade-pill",
+  intake: "https://firstmoverprojects.gumroad.com/l/fretzy?wanted=true&utm_source=firstmoverprojects&utm_medium=after-hours-gap-check&utm_campaign=fretzy&utm_content=trade-pill",
+  roofing: "https://firstmoverprojects.gumroad.com/l/wymols?wanted=true&utm_source=firstmoverprojects&utm_medium=after-hours-gap-check&utm_campaign=wymols&utm_content=trade-pill",
+  plumbing: "https://firstmoverprojects.gumroad.com/l/unjou?wanted=true&utm_source=firstmoverprojects&utm_medium=after-hours-gap-check&utm_campaign=unjou&utm_content=trade-pill",
+  electrical: "https://firstmoverprojects.gumroad.com/l/lykya?wanted=true&utm_source=firstmoverprojects&utm_medium=after-hours-gap-check&utm_campaign=lykya&utm_content=trade-pill",
+  garage: "https://firstmoverprojects.gumroad.com/l/cybqmi?wanted=true&utm_source=firstmoverprojects&utm_medium=after-hours-gap-check&utm_campaign=cybqmi&utm_content=trade-pill",
+  water: "https://firstmoverprojects.gumroad.com/l/ykxxot?wanted=true&utm_source=firstmoverprojects&utm_medium=after-hours-gap-check&utm_campaign=ykxxot&utm_content=trade-pill",
+  loom: "https://firstmoverprojects.gumroad.com/l/fguyxn?wanted=true&utm_source=firstmoverprojects&utm_medium=loom-seat-audit-calculator&utm_campaign=fguyxn&utm_content=bottom-cta"
 };
 
 function read(rel) {
