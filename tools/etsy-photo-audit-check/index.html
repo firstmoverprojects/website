@@ -69,7 +69,29 @@ footer{margin:8px 0 24px}
 .email-cap-box{background:#f0f9ff;border:2px solid #0284c7;border-radius:10px;padding:14px 16px;margin:14px 0 6px}
 .email-cap-title{font-size:1.02rem;font-weight:800;margin:0 0 6px;color:#0c4a6e}
 .btn-email-cap{display:inline-block;max-width:100%;box-sizing:border-box;background:#0284c7;color:#fff !important;font-weight:700;padding:10px 16px;border-radius:8px;text-decoration:none;margin:6px 8px 6px 0;white-space:normal;overflow-wrap:anywhere}
+a.runway-pill{display:inline-block;max-width:100%;box-sizing:border-box;margin:4px 0 12px;padding:8px 14px;border-radius:999px;background:#01060b;color:#f4f7fa !important;border:1px solid #00d8ff;font-weight:700;font-size:.92rem;line-height:1.35;text-decoration:none;white-space:normal;overflow-wrap:anywhere;text-align:center}
+a.runway-pill:hover,a.runway-pill:focus{background:#0c1520;color:#00d8ff !important;outline:3px solid #00d8ff;outline-offset:2px}
+.gtin-card{background:#01060b;color:#f4f7fa;border:1px solid #00d8ff;overflow-wrap:anywhere}
+.gtin-card h2,.gtin-card label{color:#f4f7fa}
+.gtin-card .muted{color:#c2d0dc}
+.gtin-card a{color:#00d8ff}
+.gtin-card input{background:#0c1520;color:#f4f7fa;border:1px solid #243b55}
+.gtin-card button{display:block;width:100%;max-width:100%;margin:12px 0 0;white-space:normal;overflow-wrap:anywhere;background:linear-gradient(135deg,#22c55e 0%,#4ade80 100%);color:#01060b;font-weight:800}
+.gtin-card button:hover{background:#16a34a;color:#01060b}
+.gtin-card button:focus,.gtin-card input:focus,a.gtin-checkout:focus{outline:3px solid #00d8ff;outline-offset:2px}
+a.gtin-checkout{display:inline-block;max-width:100%;box-sizing:border-box;margin:12px 0 0;padding:12px 20px;border-radius:9px;background:linear-gradient(135deg,#22c55e 0%,#4ade80 100%);color:#01060b !important;font-weight:800;font-size:1rem;line-height:1.3;text-align:center;text-decoration:none;white-space:normal;overflow-wrap:anywhere}
+a.gtin-checkout:hover,a.gtin-checkout:focus{background:#16a34a;color:#01060b !important}
+.gtin-card .big{color:#00d8ff}
 
+
+.follow-bar{background:#01060b;color:#f4f7fa;border:1px solid #00d8ff;border-radius:12px;padding:12px;margin:12px 0 0;max-width:100%;box-sizing:border-box}
+.follow-bar-title{margin:0 0 8px;font-weight:800;font-size:.95rem;line-height:1.35;color:#f4f7fa}
+.follow-bar-actions{display:flex;flex-wrap:wrap;gap:8px;min-width:0}
+.follow-tiktok,.follow-email{flex:1 1 220px;min-width:0;max-width:100%;box-sizing:border-box;display:inline-block;padding:8px 12px;border-radius:999px;font-weight:800;font-size:.92rem;line-height:1.35;text-decoration:none !important;text-align:center;white-space:normal;overflow-wrap:anywhere}
+.follow-tiktok{background:#0c1520;color:#f4f7fa !important;border:1px solid #00d8ff}
+.follow-tiktok:hover,.follow-tiktok:focus{color:#00d8ff !important;outline:3px solid #00d8ff;outline-offset:2px}
+.follow-email{background:linear-gradient(135deg,#22c55e 0%,#4ade80 100%);color:#01060b !important;border:0}
+.follow-email:hover,.follow-email:focus{background:#16a34a;color:#01060b !important;outline:3px solid #00d8ff;outline-offset:2px}
 </style>
 </head>
 <body>
@@ -81,6 +103,7 @@ footer{margin:8px 0 24px}
 </nav>
 </header>
 <h1>Etsy Real-Photo &amp; Listing Audit Check</h1>
+<p><a class="runway-pill" href="https://launchfree.io/listings/etsy-real-photo-and-listing-audit-check.html" target="_blank" rel="noopener noreferrer">Listed on The Runway (LaunchFree.io) — Upvote This Free Tool</a></p>
 <p><strong>Paste your listing, get a ranked fix plan.</strong> Free. Runs in your browser. Nothing is uploaded.</p>
 <p id="who"><strong>Who it's for:</strong> an Etsy seller checking a physical, digital, or print-on-demand listing before a buyer sees the photos and title.</p>
 <p class="muted">This page applies the checks written below to the text and toggles you enter. It cannot see your shop. It does not score a listing with a percent, and it does not estimate sales.</p>
@@ -150,6 +173,31 @@ footer{margin:8px 0 24px}
 </fieldset>
 </section>
 
+<section class="card gtin-card" id="gtin-fee" aria-labelledby="gtin-h">
+<h2 id="gtin-h">Quick GTIN / Barcode Check-Digit &amp; Break-Even Fee Calculator</h2>
+<p>Check a UPC, EAN, or GTIN-14 beside this page's compliance pre-check. The check digit follows the GS1 mod-10 rule. The fee line uses only the numbers you type. Nothing is uploaded.</p>
+<label for="gtin-code">Barcode (UPC-A, EAN-13, or GTIN-14)</label>
+<input id="gtin-code" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="036000291452">
+<label for="gtin-price">Sale price</label>
+<input id="gtin-price" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="24.00">
+<label for="gtin-cost">Unit cost</label>
+<input id="gtin-cost" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="8.50">
+<label for="gtin-fee-pct">Marketplace fee percent of the sale price</label>
+<input id="gtin-fee-pct" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="15">
+<label for="gtin-fixed">Fixed fee per order (optional)</label>
+<input id="gtin-fixed" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="0.00">
+<button id="gtin-go" type="button">Check barcode and break-even</button>
+<div id="gtin-out" hidden>
+<p id="gtin-code-line"></p>
+<p id="gtin-fee-line"></p>
+<p id="gtin-net-line"></p>
+<p id="gtin-be-line" class="big"></p>
+<p id="gtin-note" class="muted"></p>
+</div>
+<p><a target="_blank" class="gtin-checkout" id="gtin-checkout" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=lnfgc&amp;utm_content=gtin-helper" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 Etsy Real-Photo Audit Kit (1-Click Checkout) →</a></p>
+<p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
+</section>
+
 <section class="card" id="results" hidden aria-live="polite">
 <!-- Result card. Etsy did not name a last day. Announcement dated 22 October 2026: https://www.etsy.com/seller-handbook/article/1522733284810
      Help text checked Oct 27, 2026: https://help.etsy.com/hc/en-us/articles/115015663347-Requirements-and-Best-Practices-for-Images-in-Your-Etsy-Shop
@@ -158,6 +206,14 @@ footer{margin:8px 0 24px}
 <h2 id="result-problem">Your listing photos may not match Etsy's real-photo rule.</h2>
 <p id="result-deadline">Etsy posted this rule on Oct 22, 2026. They did not name a last day. If the photos are wrong and a buyer opens a case, you may have to give a refund.</p>
 <p><a target="_blank" class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=lnfgc&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 photo checklist</a></p>
+<div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
+<p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
+<div class="follow-bar-actions">
+<a class="follow-tiktok" data-tool-slug="etsy-photo-audit-check" target="_blank" rel="noopener" href="https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&amp;utm_medium=tool_result&amp;utm_campaign=follower_growth">Follow @firstmoverprojects on TikTok (Daily 60-Sec Checklists)</a>
+<a class="follow-email" href="#signup">Get Free Email Deadline Reminders</a>
+</div>
+</div>
+
 <p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
 </div>
 <h2>Current Listing Risk vs. Real-Photo Audit Fix Plan</h2>
@@ -210,6 +266,14 @@ footer{margin:8px 0 24px}
 </ul>
 <p>The $9 checklist is a file you download. It lists which photos to take for each kind of item, plus a sheet with one row per listing. This page does not send your listings there.</p>
 <p><a target="_blank" class="btn" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=lnfgc&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 photo checklist</a></p>
+<div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
+<p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
+<div class="follow-bar-actions">
+<a class="follow-tiktok" data-tool-slug="etsy-photo-audit-check" target="_blank" rel="noopener" href="https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&amp;utm_medium=tool_result&amp;utm_campaign=follower_growth">Follow @firstmoverprojects on TikTok (Daily 60-Sec Checklists)</a>
+<a class="follow-email" href="/deadlines/#signup">Get Free Email Deadline Reminders</a>
+</div>
+</div>
+
 <p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
 </section>
 
@@ -708,6 +772,239 @@ byId("copy-prompt").addEventListener("click", function () { copyText("agent-prom
 })();
 </script>
 <script>
+/* FMP_GTIN */
+(function () {
+  function gs1CheckDigit(body) {
+    var sum = 0;
+    var i;
+    for (i = 0; i < body.length; i++) {
+      var digit = body.charCodeAt(body.length - 1 - i) - 48;
+      sum += digit * (i % 2 === 0 ? 3 : 1);
+    }
+    return (10 - (sum % 10)) % 10;
+  }
+
+  function checkCode(raw) {
+    var cleaned = String(raw == null ? "" : raw).replace(/[\s-]+/g, "");
+    if (!cleaned) return { state: "empty", reason: "", digits: "", length: 0 };
+    if (!/^\d+$/.test(cleaned)) {
+      return { state: "invalid", reason: "chars", digits: cleaned, length: cleaned.length };
+    }
+    var kinds = { 12: "UPC-A (GTIN-12)", 13: "EAN-13 (GTIN-13)", 14: "GTIN-14" };
+    var kind = kinds[cleaned.length];
+    if (!kind) {
+      return { state: "invalid", reason: "length", digits: cleaned, length: cleaned.length };
+    }
+    var body = cleaned.slice(0, -1);
+    var expect = gs1CheckDigit(body);
+    var got = cleaned.charCodeAt(cleaned.length - 1) - 48;
+    var corrected = body + String(expect);
+    if (got !== expect) {
+      return { state: "invalid", reason: "check", digits: cleaned, length: cleaned.length, kind: kind, expect: expect, corrected: corrected };
+    }
+    return { state: "valid", reason: "", digits: cleaned, length: cleaned.length, kind: kind, expect: expect, corrected: corrected };
+  }
+
+  function dollarsToCents(raw) {
+    var s = String(raw == null ? "" : raw).replace(/\$/g, "").replace(/,/g, "").replace(/\s/g, "");
+    if (!s) return null;
+    if (!/^\d+(?:\.\d{1,2})?$/.test(s) && !/^\.\d{1,2}$/.test(s)) return NaN;
+    var parts = s.split(".");
+    var whole = parseInt(parts[0] || "0", 10);
+    var frac = ((parts[1] || "") + "00").slice(0, 2);
+    return whole * 100 + parseInt(frac, 10);
+  }
+
+  function percentToBps(raw) {
+    var s = String(raw == null ? "" : raw).replace(/%/g, "").replace(/\s/g, "");
+    if (!s) return null;
+    if (!/^\d+(?:\.\d{1,2})?$/.test(s)) return NaN;
+    var parts = s.split(".");
+    var whole = parseInt(parts[0], 10);
+    var frac = ((parts[1] || "") + "00").slice(0, 2);
+    return whole * 100 + parseInt(frac, 10);
+  }
+
+  function formatMoney(cents) {
+    var neg = cents < 0;
+    var abs = Math.abs(cents);
+    var whole = Math.floor(abs / 100);
+    var frac = abs % 100;
+    var s = String(whole);
+    var out = "";
+    while (s.length > 3) {
+      out = "," + s.slice(-3) + out;
+      s = s.slice(0, -3);
+    }
+    var fracText = frac < 10 ? "0" + frac : String(frac);
+    return (neg ? "-$" : "$") + s + out + "." + fracText;
+  }
+
+  function formatPercent(bps) {
+    var whole = Math.floor(bps / 100);
+    var frac = bps % 100;
+    if (frac === 0) return String(whole) + "%";
+    if (frac % 10 === 0) return whole + "." + String(frac / 10) + "%";
+    var fracText = frac < 10 ? "0" + frac : String(frac);
+    return whole + "." + fracText + "%";
+  }
+
+  function feeOn(priceCents, bps, fixedCents) {
+    return Math.round(priceCents * bps / 10000) + fixedCents;
+  }
+
+  function netOn(priceCents, costCents, bps, fixedCents) {
+    return priceCents - costCents - feeOn(priceCents, bps, fixedCents);
+  }
+
+  function breakEvenCents(costCents, bps, fixedCents) {
+    if (bps >= 10000) return null;
+    var guess = Math.ceil((costCents + fixedCents) * 10000 / (10000 - bps));
+    if (guess < 0) guess = 0;
+    var guard = 0;
+    while (guess > 0 && netOn(guess - 1, costCents, bps, fixedCents) >= 0 && guard < 20) {
+      guess -= 1;
+      guard += 1;
+    }
+    guard = 0;
+    while (netOn(guess, costCents, bps, fixedCents) < 0 && guard < 20) {
+      guess += 1;
+      guard += 1;
+    }
+    return guess;
+  }
+
+  function linesFor(code, money) {
+    var lines = { codeLine: "", feeLine: "", netLine: "", beLine: "", note: "" };
+    if (code.state === "valid") {
+      lines.codeLine = "Check digit matches. " + code.digits + " is " + (code.kind.charAt(0) === "E" ? "an " : "a ") + code.kind + ".";
+    } else if (code.state === "invalid" && code.reason === "chars") {
+      lines.codeLine = "Use digits only. Spaces and hyphens are ignored.";
+    } else if (code.state === "invalid" && code.reason === "length") {
+      lines.codeLine = code.length + " digits is not a UPC-A (12), EAN-13 (13), or GTIN-14 (14).";
+    } else if (code.state === "invalid") {
+      lines.codeLine = "Check digit does not match. " + (code.kind.charAt(0) === "E" ? "An " : "A ") + code.kind + " should end in " + code.expect + ". Corrected code: " + code.corrected + ".";
+    }
+    if (money.state === "error") {
+      lines.note = money.message;
+    } else if (money.state === "ok") {
+      if (money.priceCents != null) {
+        lines.feeLine = "Fee on " + formatMoney(money.priceCents) + " at " + formatPercent(money.bps) + " plus " + formatMoney(money.fixedCents) + " fixed is " + formatMoney(money.feeCents) + ".";
+        lines.netLine = "After the " + formatMoney(money.costCents) + " unit cost, " + formatMoney(money.netCents) + " remains.";
+      }
+      if (money.breakEvenCents == null) {
+        lines.beLine = "A 100% fee has no break-even sale price.";
+        lines.note = lines.beLine;
+      } else {
+        lines.beLine = "Break-even sale price: " + formatMoney(money.breakEvenCents) + ".";
+        if (money.clears === true) lines.note = "This sale price covers the unit cost and the fee.";
+        else if (money.clears === false) lines.note = "This sale price is below the break-even price.";
+        else if (code.state === "empty") lines.note = "Add a barcode to check the GS1 check digit.";
+      }
+    } else if (code.state === "empty") {
+      lines.note = "Enter a barcode, a sale price, or both.";
+    } else {
+      lines.note = "Add a unit cost and fee percent to see the break-even sale price.";
+    }
+    return lines;
+  }
+
+  function quote(input) {
+    input = input || {};
+    var code = checkCode(input.code);
+    var priceRaw = String(input.price == null ? "" : input.price).trim();
+    var costRaw = String(input.cost == null ? "" : input.cost).trim();
+    var pctRaw = String(input.percent == null ? "" : input.percent).trim();
+    var fixedRaw = String(input.fixed == null ? "" : input.fixed).trim();
+    var anyMoney = priceRaw !== "" || costRaw !== "" || pctRaw !== "" || fixedRaw !== "";
+    var money = { state: "skipped" };
+    if (anyMoney) {
+      var priceCents = priceRaw === "" ? null : dollarsToCents(priceRaw);
+      var costCents = costRaw === "" ? null : dollarsToCents(costRaw);
+      var bps = pctRaw === "" ? null : percentToBps(pctRaw);
+      var fixedCents = fixedRaw === "" ? 0 : dollarsToCents(fixedRaw);
+      if (priceCents !== priceCents) money = { state: "error", message: "Enter the sale price in dollars and cents, such as 24.00." };
+      else if (costCents !== costCents) money = { state: "error", message: "Enter the unit cost in dollars and cents, such as 8.50." };
+      else if (fixedCents !== fixedCents) money = { state: "error", message: "Enter the fixed fee in dollars and cents, such as 0.30, or leave it blank." };
+      else if (bps !== bps) money = { state: "error", message: "Enter the fee percent as a number, such as 15 or 6.5." };
+      else if (bps != null && bps > 10000) money = { state: "error", message: "Enter a fee percent from 0 to 100." };
+      else if (costCents == null) money = { state: "error", message: "Enter the unit cost to calculate the break-even price." };
+      else if (bps == null) money = { state: "error", message: "Enter the marketplace fee percent to calculate the break-even price." };
+      else {
+        var be = bps === 10000 ? null : breakEvenCents(costCents, bps, fixedCents);
+        var feeCents = null;
+        var netCents = null;
+        var clears = null;
+        if (priceCents != null) {
+          feeCents = feeOn(priceCents, bps, fixedCents);
+          netCents = priceCents - costCents - feeCents;
+          clears = netCents >= 0;
+        }
+        money = {
+          state: "ok",
+          priceCents: priceCents,
+          costCents: costCents,
+          fixedCents: fixedCents,
+          bps: bps,
+          feeCents: feeCents,
+          netCents: netCents,
+          breakEvenCents: be,
+          clears: clears
+        };
+      }
+    }
+    return { code: code, money: money, lines: linesFor(code, money) };
+  }
+
+  function setLine(id, text) {
+    var node = document.getElementById(id);
+    if (!node) return;
+    node.hidden = !text;
+    node.textContent = text || "";
+  }
+
+  function paint(result) {
+    var out = document.getElementById("gtin-out");
+    if (!out) return;
+    out.hidden = false;
+    var codeLine = document.getElementById("gtin-code-line");
+    if (codeLine) {
+      codeLine.hidden = !result.lines.codeLine;
+      codeLine.textContent = result.lines.codeLine;
+      codeLine.className = result.code.state === "valid" ? "ok" : (result.code.state === "invalid" ? "warn" : "");
+    }
+    setLine("gtin-fee-line", result.lines.feeLine);
+    setLine("gtin-net-line", result.lines.netLine);
+    setLine("gtin-be-line", result.lines.beLine);
+    setLine("gtin-note", result.lines.note);
+  }
+
+  function boot() {
+    if (typeof document === "undefined" || !document.getElementById) return;
+    var go = document.getElementById("gtin-go");
+    if (!go || !go.addEventListener) return;
+    go.addEventListener("click", function () {
+      var codeEl = document.getElementById("gtin-code");
+      var priceEl = document.getElementById("gtin-price");
+      var costEl = document.getElementById("gtin-cost");
+      var pctEl = document.getElementById("gtin-fee-pct");
+      var fixedEl = document.getElementById("gtin-fixed");
+      paint(quote({
+        code: codeEl ? codeEl.value : "",
+        price: priceEl ? priceEl.value : "",
+        cost: costEl ? costEl.value : "",
+        percent: pctEl ? pctEl.value : "",
+        fixed: fixedEl ? fixedEl.value : ""
+      }));
+    });
+  }
+
+  var api = { gs1CheckDigit: gs1CheckDigit, checkCode: checkCode, quote: quote };
+  if (typeof window !== "undefined") window.FMP_GTIN = api;
+  boot();
+})();
+</script>
+<script>
 (function () {
   var q = location.search || "";
   var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(q);
@@ -719,20 +1016,35 @@ byId("copy-prompt").addEventListener("click", function () { copyText("agent-prom
     var node = ev.target && ev.target.closest ? ev.target.closest("a") : null;
     if (!node || !node.getAttribute) return;
     var href = node.getAttribute("href") || "";
-    var parts = href.split("/");
-    if (parts[0] !== "https:" || parts[2] !== "firstmoverprojects.gumroad.com" || parts[3] !== "l") return;
-    if (href.indexOf("wanted=true") === -1) return;
-    var slug = parts[4] || "";
-    var cut = slug.search(/[?#]/);
-    if (cut !== -1) slug = slug.slice(0, cut);
-    if (!slug) return;
-    if (node.target !== "_blank") node.target = "_blank";
-    if (typeof node.setAttribute === "function") {
-      var rel = node.getAttribute("rel") || "";
-      if (rel.indexOf("noopener") === -1) node.setAttribute("rel", (rel ? rel + " " : "") + "noopener");
+    var toolSlug = node.getAttribute("data-tool-slug") || "";
+    var className = node.getAttribute("class") || "";
+    var path = "";
+    var title = "";
+    if (className.indexOf("follow-tiktok") !== -1) {
+      if (!/^[a-z0-9-]{1,80}$/.test(toolSlug)) return;
+      if (node.target !== "_blank") node.target = "_blank";
+      if (typeof node.setAttribute === "function") {
+        var tiktokRel = node.getAttribute("rel") || "";
+        if (tiktokRel.indexOf("noopener") === -1) node.setAttribute("rel", (tiktokRel ? tiktokRel + " " : "") + "noopener");
+      }
+      path = (testVisit ? "TEST-EXCLUDE-" : "") + "/event/tiktok-follow-click-" + toolSlug;
+      title = "TikTok follow click: " + toolSlug;
+    } else {
+      var parts = href.split("/");
+      if (parts[0] !== "https:" || parts[2] !== "firstmoverprojects.gumroad.com" || parts[3] !== "l") return;
+      if (href.indexOf("wanted=true") === -1) return;
+      var slug = parts[4] || "";
+      var cut = slug.search(/[?#]/);
+      if (cut !== -1) slug = slug.slice(0, cut);
+      if (!slug) return;
+      if (node.target !== "_blank") node.target = "_blank";
+      if (typeof node.setAttribute === "function") {
+        var rel = node.getAttribute("rel") || "";
+        if (rel.indexOf("noopener") === -1) node.setAttribute("rel", (rel ? rel + " " : "") + "noopener");
+      }
+      path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+      title = "Gumroad checkout click: " + slug;
     }
-    var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
-    var title = "Gumroad checkout click: " + slug;
     if (window.goatcounter && typeof window.goatcounter.count === "function") {
       window.goatcounter.count({
         path: path,

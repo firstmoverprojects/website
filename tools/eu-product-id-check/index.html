@@ -52,6 +52,15 @@ footer{margin:8px 0 24px}
 .email-cap-title{font-size:1.02rem;font-weight:800;margin:0 0 6px;color:#0c4a6e}
 .btn-email-cap{display:inline-block;max-width:100%;box-sizing:border-box;background:#0284c7;color:#fff !important;font-weight:700;padding:10px 16px;border-radius:8px;text-decoration:none;margin:6px 8px 6px 0;white-space:normal;overflow-wrap:anywhere}
 
+
+.follow-bar{background:#01060b;color:#f4f7fa;border:1px solid #00d8ff;border-radius:12px;padding:12px;margin:12px 0 0;max-width:100%;box-sizing:border-box}
+.follow-bar-title{margin:0 0 8px;font-weight:800;font-size:.95rem;line-height:1.35;color:#f4f7fa}
+.follow-bar-actions{display:flex;flex-wrap:wrap;gap:8px;min-width:0}
+.follow-tiktok,.follow-email{flex:1 1 220px;min-width:0;max-width:100%;box-sizing:border-box;display:inline-block;padding:8px 12px;border-radius:999px;font-weight:800;font-size:.92rem;line-height:1.35;text-decoration:none !important;text-align:center;white-space:normal;overflow-wrap:anywhere}
+.follow-tiktok{background:#0c1520;color:#f4f7fa !important;border:1px solid #00d8ff}
+.follow-tiktok:hover,.follow-tiktok:focus{color:#00d8ff !important;outline:3px solid #00d8ff;outline-offset:2px}
+.follow-email{background:linear-gradient(135deg,#22c55e 0%,#4ade80 100%);color:#01060b !important;border:0}
+.follow-email:hover,.follow-email:focus{background:#16a34a;color:#01060b !important;outline:3px solid #00d8ff;outline-offset:2px}
 </style>
 </head>
 <body>
@@ -149,6 +158,14 @@ footer{margin:8px 0 24px}
   <div class="kit-btn-row">
     <a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=eu-product-id-check&amp;utm_campaign=fetwsm&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 EU Customs Product Data Checker (1-Click Checkout) →</a>
   </div>
+<div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
+<p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
+<div class="follow-bar-actions">
+<a class="follow-tiktok" data-tool-slug="eu-product-id-check" target="_blank" rel="noopener" href="https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&amp;utm_medium=tool_result&amp;utm_campaign=follower_growth">Follow @firstmoverprojects on TikTok (Daily 60-Sec Checklists)</a>
+<a class="follow-email" href="#signup">Get Free Email Deadline Reminders</a>
+</div>
+</div>
+
   <p class="muted" style="margin:4px 0 0">Free background, dates and sources: <a href="/deadlines/eu-product-identifiers-nov-1.html">EU product identifiers become mandatory for low-value e-commerce imports (Nov 1, 2026)</a></p>
 </div>
 
@@ -166,6 +183,14 @@ footer{margin:8px 0 24px}
 <div class="kit-btn-row">
   <a target="_blank" id="paid-link" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=eu-product-id-check&amp;utm_campaign=fetwsm&amp;utm_content=bottom-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 EU Customs Product Data Checker (1-Click Checkout) →</a>
 </div>
+<div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
+<p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
+<div class="follow-bar-actions">
+<a class="follow-tiktok" data-tool-slug="eu-product-id-check" target="_blank" rel="noopener" href="https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&amp;utm_medium=tool_result&amp;utm_campaign=follower_growth">Follow @firstmoverprojects on TikTok (Daily 60-Sec Checklists)</a>
+<a class="follow-email" href="/deadlines/#signup">Get Free Email Deadline Reminders</a>
+</div>
+</div>
+
 <p>Free background, dates and sources: <a href="/deadlines/eu-product-identifiers-nov-1.html">EU product identifiers become mandatory for low-value e-commerce imports (Nov 1, 2026)</a></p>
 </section>
 
@@ -578,20 +603,35 @@ showDays(new Date());
     var node = ev.target && ev.target.closest ? ev.target.closest("a") : null;
     if (!node || !node.getAttribute) return;
     var href = node.getAttribute("href") || "";
-    var parts = href.split("/");
-    if (parts[0] !== "https:" || parts[2] !== "firstmoverprojects.gumroad.com" || parts[3] !== "l") return;
-    if (href.indexOf("wanted=true") === -1) return;
-    var slug = parts[4] || "";
-    var cut = slug.search(/[?#]/);
-    if (cut !== -1) slug = slug.slice(0, cut);
-    if (!slug) return;
-    if (node.target !== "_blank") node.target = "_blank";
-    if (typeof node.setAttribute === "function") {
-      var rel = node.getAttribute("rel") || "";
-      if (rel.indexOf("noopener") === -1) node.setAttribute("rel", (rel ? rel + " " : "") + "noopener");
+    var toolSlug = node.getAttribute("data-tool-slug") || "";
+    var className = node.getAttribute("class") || "";
+    var path = "";
+    var title = "";
+    if (className.indexOf("follow-tiktok") !== -1) {
+      if (!/^[a-z0-9-]{1,80}$/.test(toolSlug)) return;
+      if (node.target !== "_blank") node.target = "_blank";
+      if (typeof node.setAttribute === "function") {
+        var tiktokRel = node.getAttribute("rel") || "";
+        if (tiktokRel.indexOf("noopener") === -1) node.setAttribute("rel", (tiktokRel ? tiktokRel + " " : "") + "noopener");
+      }
+      path = (testVisit ? "TEST-EXCLUDE-" : "") + "/event/tiktok-follow-click-" + toolSlug;
+      title = "TikTok follow click: " + toolSlug;
+    } else {
+      var parts = href.split("/");
+      if (parts[0] !== "https:" || parts[2] !== "firstmoverprojects.gumroad.com" || parts[3] !== "l") return;
+      if (href.indexOf("wanted=true") === -1) return;
+      var slug = parts[4] || "";
+      var cut = slug.search(/[?#]/);
+      if (cut !== -1) slug = slug.slice(0, cut);
+      if (!slug) return;
+      if (node.target !== "_blank") node.target = "_blank";
+      if (typeof node.setAttribute === "function") {
+        var rel = node.getAttribute("rel") || "";
+        if (rel.indexOf("noopener") === -1) node.setAttribute("rel", (rel ? rel + " " : "") + "noopener");
+      }
+      path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+      title = "Gumroad checkout click: " + slug;
     }
-    var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
-    var title = "Gumroad checkout click: " + slug;
     if (window.goatcounter && typeof window.goatcounter.count === "function") {
       window.goatcounter.count({
         path: path,
