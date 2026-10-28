@@ -103,6 +103,8 @@ test("tracking pages load the test-exclude helper before count.js", () => {
   const canonical = helperBody(read("tools/amazon-coi-check/index.html"));
   assert.match(canonical, /window\.goatcounter = \{ path: function \(p\) \{ return "TEST-EXCLUDE" \+ p; \} \}/);
   assert.match(canonical, /gumroad-click\//);
+  assert.match(canonical, /\/event\/tiktok-follow-click-/);
+  assert.match(canonical, /TEST-EXCLUDE-/);
   assert.match(canonical, /var gcCountUrl = "https:\/\/firstmoverprojects\.goatcounter\.com\/count\?p="/);
   assert.match(canonical, /fetch\(gcCountUrl, \{ keepalive: true, mode: "no-cors" \}\)/);
   assert.match(canonical, /navigator\.sendBeacon\(gcCountUrl\)/);
@@ -202,4 +204,59 @@ test("checkout clicks record gumroad-click/slug and test visits stay under TEST-
   click(ignored.listeners, href, "auxclick", 2);
   click(ignored.listeners, href, "auxclick", 1);
   assert.deepEqual(ignored.counts.map((item) => item.path), ["gumroad-click/amazon-1m-insurance-readiness-kit"]);
+});
+
+function clickTikTok(listeners, slug, type = "click", button = 0) {
+  const anchor = {
+    target: "_blank",
+    getAttribute(name) {
+      if (name === "href") return "https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&utm_medium=tool_result&utm_campaign=follower_growth";
+      if (name === "class") return "follow-tiktok";
+      if (name === "data-tool-slug") return slug;
+      if (name === "rel") return "noopener";
+      return null;
+    },
+    setAttribute() {}
+  };
+  listeners[type]({
+    type,
+    button,
+    target: { closest: () => anchor }
+  });
+}
+
+test("TikTok follow clicks record /event/tiktok-follow-click and test visits use TEST-EXCLUDE-", () => {
+  const live = loadHelper("");
+  const fetches = [];
+  live.sandbox.fetch = (url, opts) => {
+    fetches.push({ url, opts });
+    return Promise.resolve();
+  };
+  live.sandbox.navigator = { sendBeacon(url) { return url; } };
+  clickTikTok(live.listeners, "amazon-coi-check");
+  assert.deepEqual(live.counts, [{
+    path: "/event/tiktok-follow-click-amazon-coi-check",
+    title: "TikTok follow click: amazon-coi-check",
+    event: true
+  }]);
+  assert.match(fetches[0].url, /p=%2Fevent%2Ftiktok-follow-click-amazon-coi-check/);
+  assert.equal(fetches[0].opts.keepalive, true);
+  assert.equal(fetches[0].opts.mode, "no-cors");
+
+  const testVisit = loadHelper("?fmp_test=1");
+  const testFetches = [];
+  testVisit.sandbox.fetch = (url, opts) => {
+    testFetches.push({ url, opts });
+    return Promise.resolve();
+  };
+  testVisit.sandbox.navigator = { sendBeacon() { return true; } };
+  clickTikTok(testVisit.listeners, "etsy-photo-audit-check");
+  assert.equal(testVisit.counts[0].path, "TEST-EXCLUDE-/event/tiktok-follow-click-etsy-photo-audit-check");
+  assert.match(testFetches[0].url, /p=TEST-EXCLUDE-%2Fevent%2Ftiktok-follow-click-etsy-photo-audit-check/);
+
+  const bad = loadHelper("");
+  bad.sandbox.fetch = () => Promise.resolve();
+  bad.sandbox.navigator = { sendBeacon() { return true; } };
+  clickTikTok(bad.listeners, "../secret");
+  assert.deepEqual(bad.counts, []);
 });

@@ -58,6 +58,15 @@ footer{margin:8px 0 24px}
 a.runway-pill{display:inline-block;max-width:100%;box-sizing:border-box;margin:4px 0 12px;padding:8px 14px;border-radius:999px;background:#01060b;color:#f4f7fa !important;border:1px solid #00d8ff;font-weight:700;font-size:.92rem;line-height:1.35;text-decoration:none;white-space:normal;overflow-wrap:anywhere;text-align:center}
 a.runway-pill:hover,a.runway-pill:focus{background:#0c1520;color:#00d8ff !important;outline:3px solid #00d8ff;outline-offset:2px}
 
+
+.follow-bar{background:#01060b;color:#f4f7fa;border:1px solid #00d8ff;border-radius:12px;padding:12px;margin:12px 0 0;max-width:100%;box-sizing:border-box}
+.follow-bar-title{margin:0 0 8px;font-weight:800;font-size:.95rem;line-height:1.35;color:#f4f7fa}
+.follow-bar-actions{display:flex;flex-wrap:wrap;gap:8px;min-width:0}
+.follow-tiktok,.follow-email{flex:1 1 220px;min-width:0;max-width:100%;box-sizing:border-box;display:inline-block;padding:8px 12px;border-radius:999px;font-weight:800;font-size:.92rem;line-height:1.35;text-decoration:none !important;text-align:center;white-space:normal;overflow-wrap:anywhere}
+.follow-tiktok{background:#0c1520;color:#f4f7fa !important;border:1px solid #00d8ff}
+.follow-tiktok:hover,.follow-tiktok:focus{color:#00d8ff !important;outline:3px solid #00d8ff;outline-offset:2px}
+.follow-email{background:linear-gradient(135deg,#22c55e 0%,#4ade80 100%);color:#01060b !important;border:0}
+.follow-email:hover,.follow-email:focus{background:#16a34a;color:#01060b !important;outline:3px solid #00d8ff;outline-offset:2px}
 </style>
 </head>
 <body>
@@ -130,6 +139,14 @@ a.runway-pill:hover,a.runway-pill:focus{background:#0c1520;color:#00d8ff !import
 <h2 id="result-problem">You may still be on the IRS system that is closing.</h2>
 <p id="result-deadline">Test files stop on Nov 1, 2026. Changes to an old IRS application stop on Nov 9, 2026. The last day to file on the old system is Nov 19, 2026, at 3 p.m. Eastern Time. On Jan 1, 2027, the new system is the only way to file.</p>
 <p><a target="_blank" class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=fire-to-iris-check&amp;utm_campaign=fire-to-iris-switch-checklist&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 switch checklist</a></p>
+<div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
+<p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
+<div class="follow-bar-actions">
+<a class="follow-tiktok" data-tool-slug="fire-to-iris-check" target="_blank" rel="noopener" href="https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&amp;utm_medium=tool_result&amp;utm_campaign=follower_growth">Follow @firstmoverprojects on TikTok (Daily 60-Sec Checklists)</a>
+<a class="follow-email" href="#signup">Get Free Email Deadline Reminders</a>
+</div>
+</div>
+
 <p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
 </div>
 <h2>2. Your FIRE to IRIS readiness checklist</h2>
@@ -182,6 +199,14 @@ a.runway-pill:hover,a.runway-pill:focus{background:#0c1520;color:#00d8ff !import
 </ul>
 <p>The $9 checklist is a 3-page file. It covers the Nov 1, Nov 9, and Nov 19, 2026 dates, the new filing code, and a sheet for Form 1099-NEC. This page does not send your files there.</p>
 <p><a target="_blank" class="btn" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=fire-to-iris-check&amp;utm_campaign=fire-to-iris-switch-checklist&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 switch checklist</a></p>
+<div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
+<p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
+<div class="follow-bar-actions">
+<a class="follow-tiktok" data-tool-slug="fire-to-iris-check" target="_blank" rel="noopener" href="https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&amp;utm_medium=tool_result&amp;utm_campaign=follower_growth">Follow @firstmoverprojects on TikTok (Daily 60-Sec Checklists)</a>
+<a class="follow-email" href="/deadlines/#signup">Get Free Email Deadline Reminders</a>
+</div>
+</div>
+
 <p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>. <a href="/deadlines/irs-fire-retirement-nov-19.html">Read the free IRS deadline page</a>.</p>
 </section>
 
@@ -415,20 +440,35 @@ updateDays(new Date());
     var node = ev.target && ev.target.closest ? ev.target.closest("a") : null;
     if (!node || !node.getAttribute) return;
     var href = node.getAttribute("href") || "";
-    var parts = href.split("/");
-    if (parts[0] !== "https:" || parts[2] !== "firstmoverprojects.gumroad.com" || parts[3] !== "l") return;
-    if (href.indexOf("wanted=true") === -1) return;
-    var slug = parts[4] || "";
-    var cut = slug.search(/[?#]/);
-    if (cut !== -1) slug = slug.slice(0, cut);
-    if (!slug) return;
-    if (node.target !== "_blank") node.target = "_blank";
-    if (typeof node.setAttribute === "function") {
-      var rel = node.getAttribute("rel") || "";
-      if (rel.indexOf("noopener") === -1) node.setAttribute("rel", (rel ? rel + " " : "") + "noopener");
+    var toolSlug = node.getAttribute("data-tool-slug") || "";
+    var className = node.getAttribute("class") || "";
+    var path = "";
+    var title = "";
+    if (className.indexOf("follow-tiktok") !== -1) {
+      if (!/^[a-z0-9-]{1,80}$/.test(toolSlug)) return;
+      if (node.target !== "_blank") node.target = "_blank";
+      if (typeof node.setAttribute === "function") {
+        var tiktokRel = node.getAttribute("rel") || "";
+        if (tiktokRel.indexOf("noopener") === -1) node.setAttribute("rel", (tiktokRel ? tiktokRel + " " : "") + "noopener");
+      }
+      path = (testVisit ? "TEST-EXCLUDE-" : "") + "/event/tiktok-follow-click-" + toolSlug;
+      title = "TikTok follow click: " + toolSlug;
+    } else {
+      var parts = href.split("/");
+      if (parts[0] !== "https:" || parts[2] !== "firstmoverprojects.gumroad.com" || parts[3] !== "l") return;
+      if (href.indexOf("wanted=true") === -1) return;
+      var slug = parts[4] || "";
+      var cut = slug.search(/[?#]/);
+      if (cut !== -1) slug = slug.slice(0, cut);
+      if (!slug) return;
+      if (node.target !== "_blank") node.target = "_blank";
+      if (typeof node.setAttribute === "function") {
+        var rel = node.getAttribute("rel") || "";
+        if (rel.indexOf("noopener") === -1) node.setAttribute("rel", (rel ? rel + " " : "") + "noopener");
+      }
+      path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+      title = "Gumroad checkout click: " + slug;
     }
-    var path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
-    var title = "Gumroad checkout click: " + slug;
     if (window.goatcounter && typeof window.goatcounter.count === "function") {
       window.goatcounter.count({
         path: path,
