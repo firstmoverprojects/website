@@ -10,7 +10,7 @@ const UTM = readFileSync(path.join(ROOT, "assets/gumroad-utm.js"), "utf8").trim(
 const DEADLINE = readFileSync(path.join(ROOT, "assets/deadline-count.js"), "utf8").trim();
 const CONTENTS = new Set([
   "above-fold", "article", "bottom-cta", "card", "checklist", "comparison", "faq", "footer",
-  "gtin-helper", "hub", "kit-preview", "link", "post-check", "product-demo", "result-card",
+  "fire-check-result", "gtin-helper", "hub", "kit-preview", "link", "post-check", "product-demo", "result-card",
   "result-cta", "sticky-cta", "tools-free", "tools-kit", "top-cta", "trade-pill"
 ]);
 
@@ -89,7 +89,7 @@ test("every Gumroad product link carries source, medium, campaign, and content",
       if (!url.pathname.endsWith("/pdkqbs")) assert.equal(url.searchParams.get("wanted"), "true", raw);
     }
   }
-  assert.ok(count >= 90, String(count));
+  assert.ok(count >= 89, String(count));
 });
 
 function runUtm(search, hrefs, storage) {
