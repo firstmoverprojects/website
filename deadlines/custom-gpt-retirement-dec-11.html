@@ -238,7 +238,7 @@ When you state any deadline or date, quote the exact line from OpenAI's own Help
 
       <p class="kit-link">Optional: track every GPT, save before-and-after answers and print a readiness report with an offline workbook. It does not migrate anything or connect to ChatGPT; you run the migration in your own account.</p>
       <p class="kit-link"><a href="/tools/custom-gpt-retirement-checker/">Free: check your custom GPT in your browser (no sign-up)</a></p>
-      <p class="kit-link"><a rel="noopener" target="_blank" class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/iqnssc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadline_custom_gpt_dec_11&amp;utm_campaign=iqnssc" referrerpolicy="strict-origin-when-cross-origin">Get the $39 Plugin Migration Planner on Gumroad</a></p>
+      <p class="kit-link"><a rel="noopener" target="_blank" class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/iqnssc?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=custom-gpt-retirement-dec-11&amp;utm_content=bottom-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $39 Plugin Migration Planner on Gumroad</a></p>
 
       <p class="related">More: <a href="/tools/custom-gpt-retirement-checker/">Custom GPT Retirement Checker</a> · <a href="/deadlines/irs-fire-retirement-nov-19.html">IRS FIRE retirement (Nov 19)</a> · <a href="/deadlines/amazon-ads-legacy-reports-dec-31.html">Amazon Ads legacy reports (Dec 31)</a> · <a href="/deadlines/">All deadlines</a> · <a href="finder/">Deadline Finder</a> · <a href="/tools/">Tools and kits</a></p>
 
@@ -333,5 +333,68 @@ When you state any deadline or date, quote the exact line from OpenAI's own Help
     </script>
     <script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
       <script src="/deadlines/assets/ab-cta.js" defer></script>
+<script id="fmp-utm">
+(function () {
+  "use strict";
+  var KEY = "fmp_utm_source";
+  var FALLBACK = "site";
+
+  function clean(value) {
+    if (value == null) return "";
+    var s = String(value).replace(/\+/g, " ").trim().toLowerCase();
+    try { s = decodeURIComponent(s); } catch (e) { /* keep the raw token */ }
+    s = s.trim().toLowerCase().replace(/[^a-z0-9\-_]/g, "-").slice(0, 200).replace(/^-+|-+$/g, "");
+    if (!/^[a-z0-9][a-z0-9_-]*$/.test(s) || s === FALLBACK) return "";
+    return s;
+  }
+
+  function fromLocation() {
+    var q = "";
+    try { q = location.search || ""; } catch (e) { q = ""; }
+    var m = /(?:^|[?&])utm_source=([^&#]*)/.exec(q);
+    return m ? clean(m[1]) : "";
+  }
+
+  function landingSource() {
+    var fromUrl = fromLocation();
+    var saved = "";
+    try {
+      saved = clean(sessionStorage.getItem(KEY));
+      if (!saved && fromUrl) {
+        sessionStorage.setItem(KEY, fromUrl);
+        saved = fromUrl;
+      }
+    } catch (e) {
+      saved = fromUrl;
+    }
+    return saved || FALLBACK;
+  }
+
+  function patchHref(anchor, source) {
+    if (!anchor || !source || source === FALLBACK || !anchor.getAttribute) return;
+    var href = anchor.getAttribute("href");
+    if (!href || href.indexOf("firstmoverprojects.gumroad.com/l/") === -1) return;
+    if (href.indexOf("utm_source=") === -1) return;
+    var next = href.replace(/([?&]utm_source=)[^&#]*/, "$1" + source);
+    if (next !== href) anchor.setAttribute("href", next);
+  }
+
+  function patchAll(source) {
+    if (!document.querySelectorAll) return;
+    var links = document.querySelectorAll('a[href*="firstmoverprojects.gumroad.com/l/"]');
+    for (var i = 0; i < links.length; i++) patchHref(links[i], source);
+  }
+
+  function onClick(ev) {
+    var t = ev.target;
+    if (!t || !t.closest) return;
+    patchHref(t.closest("a"), landingSource());
+  }
+
+  patchAll(landingSource());
+  document.addEventListener("click", onClick, true);
+  document.addEventListener("auxclick", onClick, true);
+})();
+</script>
 </body>
 </html>

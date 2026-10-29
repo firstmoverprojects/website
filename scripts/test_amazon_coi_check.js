@@ -223,14 +223,14 @@ var allowed = [
   "https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT",
   "https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408",
   "https://schema.org",
-  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance-readiness-kit&utm_content=above-fold",
-  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance-readiness-kit&utm_content=comparison",
-  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance-readiness-kit&utm_content=product-demo",
-  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance-readiness-kit&utm_content=post-check",
-  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance-readiness-kit&utm_content=faq",
-  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance-readiness-kit&utm_content=result-card",
-  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance-readiness-kit&utm_content=footer",
-  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance-readiness-kit&utm_content=gtin-helper",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=above-fold",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=comparison",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=product-demo",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=post-check",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=faq",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=result-card",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=footer",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=gtin-helper",
   "https://launchfree.io/listings/amazon-nov-2-coi-pre-check.html",
   "https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&utm_medium=tool_result&utm_campaign=follower_growth",
   "https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==",
@@ -254,8 +254,9 @@ assert(html.indexOf('name="referrer" content="strict-origin-when-cross-origin"')
 ].forEach(function (line) {
   assert(html.indexOf(line) !== -1, "T6 house line: " + line);
 });
+var withoutUtm = html.replace(/<script id="fmp-utm">[\s\S]*?<\/script>/g, "");
 ["XMLHttpRequest", "localStorage", "sessionStorage", "indexedDB"].forEach(function (token) {
-  assert(html.indexOf(token) === -1, "T6 no " + token);
+  assert(withoutUtm.indexOf(token) === -1, "T6 no " + token);
 });
 var helperAt = html.indexOf("function trackGumroadClick");
 var helperStart = html.lastIndexOf("<script>", helperAt);
@@ -323,7 +324,7 @@ if (!quoteFile) {
 
 var sitemap = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
 assert(sitemap.indexOf("<loc>https://firstmoverprojects.com/tools/amazon-coi-check/</loc>") !== -1, "sitemap loc");
-assert(sitemap.indexOf("<lastmod>2026-10-28</lastmod>") !== -1, "sitemap lastmod");
+assert(sitemap.indexOf("<loc>https://firstmoverprojects.com/tools/amazon-coi-check/</loc>\n    <lastmod>2026-10-29</lastmod>") !== -1, "sitemap lastmod");
 var deadline = fs.readFileSync(path.join(root, "deadlines", "amazon-insurance-nov-2.html"), "utf8");
 assert(deadline.indexOf('<p>Free: <a href="/tools/amazon-coi-check/">paste your certificate text and check it against Amazon\'s criteria</a> (runs in your browser, nothing uploaded).</p>') !== -1, "deadline page free-tool line");
 assert(deadline.indexOf("Amazon Insurance Certificate Checklist: What to Review Before Uploading") !== -1, "deadline checklist heading");

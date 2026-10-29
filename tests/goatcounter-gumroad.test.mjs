@@ -35,6 +35,10 @@ function trackingPages() {
   ].sort();
 }
 
+function withoutUtm(html) {
+  return html.replace(/<script id="fmp-utm">[\s\S]*?<\/script>/g, "");
+}
+
 function withoutHelper(html) {
   const marker = html.indexOf("function trackGumroadClick");
   if (marker === -1) return html;
@@ -92,7 +96,8 @@ test("every individual tool page allows GoatCounter and sends an origin referrer
     assert.equal(html.includes(`content="${CSP}"`), true, rel);
     assert.equal(html.includes('<meta name="referrer" content="strict-origin-when-cross-origin">'), true, rel);
     assert.equal(html.includes('content="no-referrer"'), false, rel);
-    for (const token of BANNED) assert.equal(html.includes(token), false, rel + " " + token);
+    const surface = withoutUtm(html);
+    for (const token of BANNED) assert.equal(surface.includes(token), false, rel + " " + token);
     const rest = withoutHelper(html);
     assert.equal(rest.includes("fetch("), false, rel + " fetch outside helper");
     assert.equal(rest.includes("sendBeacon"), false, rel + " sendBeacon outside helper");

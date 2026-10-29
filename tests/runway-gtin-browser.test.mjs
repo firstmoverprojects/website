@@ -24,9 +24,9 @@ const LISTINGS = {
 };
 const CHECKOUT = {
   "tools/amazon-coi-check/index.html":
-    "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance-readiness-kit&utm_content=gtin-helper",
+    "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=gtin-helper",
   "tools/etsy-photo-audit-check/index.html":
-    "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=firstmoverprojects&utm_medium=etsy-photo-check&utm_campaign=lnfgc&utm_content=gtin-helper"
+    "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=site&utm_campaign=etsy-photo-audit-check&utm_content=gtin-helper"
 };
 
 let chromium;
