@@ -69,12 +69,30 @@ footer{margin:8px 0 24px}
 .follow-tiktok:hover,.follow-tiktok:focus{color:#00d8ff !important;outline:3px solid #00d8ff;outline-offset:2px}
 .follow-email{background:linear-gradient(135deg,#22c55e 0%,#4ade80 100%);color:#01060b !important;border:0}
 .follow-email:hover,.follow-email:focus{background:#16a34a;color:#01060b !important;outline:3px solid #00d8ff;outline-offset:2px}
+
+html.fmp-embed .site-nav{display:none !important}
+.fmp-share{background:#fff;border:1px solid #dde1e6;border-radius:10px;margin:12px 0;padding:0;max-width:100%}
+.fmp-share summary{cursor:pointer;font-weight:800;padding:14px 16px;list-style:none}
+.fmp-share summary::-webkit-details-marker{display:none}
+.fmp-share summary:focus{outline:3px solid #1f5fbf;outline-offset:2px}
+.fmp-share-body{padding:0 16px 16px}
+textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:border-box;font:13px/1.45 ui-monospace,Menlo,Consolas,monospace;padding:10px;border:1px solid #b9c0c8;border-radius:8px;background:#eef1f5;color:#1b1f24;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word}
+.fmp-license{margin:14px 0 0;padding-top:12px;border-top:1px solid #dde1e6}
+.fmp-powered{margin:8px 0 16px;font-size:.95rem}
+@media print{.fmp-share{display:none !important}}
 </style>
+<script id="fmp-embed-boot">
+(function () {
+  if (/(?:^|[?&])embed=1(?:&|$)/.test(location.search || "")) {
+    document.documentElement.classList.add("fmp-embed");
+  }
+})();
+</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to main content</a>
 <main id="main">
-<header>
+<header class="site-nav">
 <nav aria-label="Site">
 <p class="muted"><a href="https://firstmoverprojects.com/">First Mover Projects</a> · <a href="/tools/">Tools</a> · <a href="/deadlines/">Deadlines</a></p>
 </nav>
@@ -229,6 +247,20 @@ footer{margin:8px 0 24px}
   <p class="muted" style="margin:4px 0 0">Early-access demand test: join the waitlist to get first access when the $19 Starter Pack launches. Not affiliated with xAI or Cursor.</p>
 </div>
 </section>
+<details class="fmp-share" id="fmp-share">
+<summary>Share, Embed, or License This Tool</summary>
+<div class="fmp-share-body">
+<p><strong>Free embed snippet.</strong> Bookkeepers, CPAs, seller communities, and newsletters can place this free 60-second checker on their site. The check still runs in the visitor's browser.</p>
+<label for="fmp-embed-snippet">Copy this embed code</label>
+<textarea id="fmp-embed-snippet" class="fmp-snippet" readonly rows="6">&lt;iframe src=&quot;https://firstmoverprojects.com/tools/grok-bot-team-check/?embed=1&quot; title=&quot;AI agent team savings calculator&quot; width=&quot;100%&quot; height=&quot;720&quot; style=&quot;border:0;max-width:100%&quot; loading=&quot;lazy&quot;&gt;&lt;/iframe&gt;
+&lt;p&gt;Powered by &lt;a href=&quot;https://firstmoverprojects.com/tools/grok-bot-team-check/&quot;&gt;First Mover Projects&lt;/a&gt;&lt;/p&gt;</textarea>
+<button type="button" class="sec" id="fmp-copy-embed">Copy embed snippet</button>
+<p id="fmp-copy-status" class="muted" role="status"></p>
+<p class="fmp-license">Commercial white-label / agency license: CPAs, agencies, and trade newsletters can license a custom-branded or white-label copy of this calculator for their clients. <a href="mailto:firstmoverprojects@gmail.com?subject=White-Label%20Tool%20License">Request a white-label tool license</a>.</p>
+</div>
+</details>
+<p class="fmp-powered">Powered by <a href="https://firstmoverprojects.com/">First Mover Projects</a></p>
+
 
 <section class="card cta" id="paid-tool" aria-labelledby="paid-h">
   <span class="kit-conv-badge">EARLY-ACCESS WAITLIST · 5 BOT PROMPTS + 12 ROUTINE SCHEDULES + ROI TRACKER CSV · $19</span>
@@ -674,6 +706,38 @@ footer{margin:8px 0 24px}
   patchAll(landingSource());
   document.addEventListener("click", onClick, true);
   document.addEventListener("auxclick", onClick, true);
+})();
+</script>
+<script>
+(function () {
+  var btn = document.getElementById("fmp-copy-embed");
+  var box = document.getElementById("fmp-embed-snippet");
+  var status = document.getElementById("fmp-copy-status");
+  if (!btn || !box) return;
+  function showFallback() {
+    box.focus();
+    if (status) status.textContent = "Select the snippet above and copy it from there.";
+  }
+  btn.addEventListener("click", function () {
+    var text = box.value || "";
+    var clip = navigator.clipboard;
+    if (!clip || !clip.writeText) {
+      showFallback();
+      return;
+    }
+    try {
+      var pending = clip.writeText(text);
+      if (!pending || !pending.then) {
+        if (status) status.textContent = "Embed snippet copied.";
+        return;
+      }
+      pending.then(function () {
+        if (status) status.textContent = "Embed snippet copied.";
+      }, showFallback);
+    } catch (err) {
+      showFallback();
+    }
+  });
 })();
 </script>
 </body>

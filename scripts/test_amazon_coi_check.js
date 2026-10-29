@@ -211,11 +211,13 @@ var urlRe = /https?:\/\/[^\s"'<>]+/g;
 var found = {};
 var um;
 while ((um = urlRe.exec(html))) {
-  var u = um[0].replace(/&amp;/g, "&").replace(/[),.;]+$/g, "");
+  var u = um[0].replace(/&amp;/g, "&").replace(/&quot;?/g, "").replace(/&(?:gt|lt);?.*$/, "").replace(/[),.;]+$/g, "");
   found[u] = true;
 }
 var allowed = [
+  "https://firstmoverprojects.com/",
   "https://firstmoverprojects.com/tools/amazon-coi-check/",
+  "https://firstmoverprojects.com/tools/amazon-coi-check/?embed=1",
   "https://firstmoverprojects.com/privacy.html",
   "https://sellercentral.amazon.com/help/hub/reference/external/G200386300",
   "https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT",
@@ -322,7 +324,7 @@ if (!quoteFile) {
 
 var sitemap = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
 assert(sitemap.indexOf("<loc>https://firstmoverprojects.com/tools/amazon-coi-check/</loc>") !== -1, "sitemap loc");
-assert(sitemap.indexOf("<lastmod>2026-10-28</lastmod>") !== -1, "sitemap lastmod");
+assert(sitemap.indexOf("<loc>https://firstmoverprojects.com/tools/amazon-coi-check/</loc>\n    <lastmod>2026-10-29</lastmod>") !== -1, "sitemap lastmod");
 var deadline = fs.readFileSync(path.join(root, "deadlines", "amazon-insurance-nov-2.html"), "utf8");
 assert(deadline.indexOf('<p>Free: <a href="/tools/amazon-coi-check/">paste your certificate text and check it against Amazon\'s criteria</a> (runs in your browser, nothing uploaded).</p>') !== -1, "deadline page free-tool line");
 assert(deadline.indexOf("Amazon Insurance Certificate Checklist: What to Review Before Uploading") !== -1, "deadline checklist heading");
