@@ -194,7 +194,7 @@ a.gtin-checkout:hover,a.gtin-checkout:focus{background:#16a34a;color:#01060b !im
 <p id="gtin-be-line" class="big"></p>
 <p id="gtin-note" class="muted"></p>
 </div>
-<p><a target="_blank" class="gtin-checkout" id="gtin-checkout" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=lnfgc&amp;utm_content=gtin-helper" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 Etsy Real-Photo Audit Kit (1-Click Checkout) →</a></p>
+<p><a target="_blank" class="gtin-checkout" id="gtin-checkout" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=gtin-helper" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 Etsy Real-Photo Audit Kit (1-Click Checkout) →</a></p>
 <p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
 </section>
 
@@ -205,7 +205,7 @@ a.gtin-checkout:hover,a.gtin-checkout:focus{background:#16a34a;color:#01060b !im
 <div class="lead-cta" id="result-cta">
 <h2 id="result-problem">Your listing photos may not match Etsy's real-photo rule.</h2>
 <p id="result-deadline">Etsy posted this rule on Oct 22, 2026. They did not name a last day. If the photos are wrong and a buyer opens a case, you may have to give a refund.</p>
-<p><a target="_blank" class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=lnfgc&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 photo checklist</a></p>
+<p><a target="_blank" class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 photo checklist</a></p>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
 <div class="follow-bar-actions">
@@ -247,7 +247,7 @@ a.gtin-checkout:hover,a.gtin-checkout:focus{background:#16a34a;color:#01060b !im
 <li>Includes a camera-settings safe-default checklist (turning off portrait blur, beauty mode, and AI background swaps) plus Etsy's exact Oct 22 policy quotes.</li>
   </ul>
   <div class="kit-btn-row">
-    <a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=lnfgc&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 Etsy Real-Photo Audit Kit (1-Click Checkout) →</a>
+    <a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=kit-preview" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 Etsy Real-Photo Audit Kit (1-Click Checkout) →</a>
   </div>
   <p class="muted" style="margin:4px 0 0"><span class="muted">The $9 kit is a separate file on Gumroad. This page does not send your listings there.</span></p>
 </div>
@@ -265,7 +265,7 @@ a.gtin-checkout:hover,a.gtin-checkout:focus{background:#16a34a;color:#01060b !im
 <li>Includes a camera-settings safe-default checklist (turning off portrait blur, beauty mode, and AI background swaps) plus Etsy's exact Oct 22 policy quotes.</li>
 </ul>
 <p>The $9 checklist is a file you download. It lists which photos to take for each kind of item, plus a sheet with one row per listing. This page does not send your listings there.</p>
-<p><a target="_blank" class="btn" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=etsy-photo-check&amp;utm_campaign=lnfgc&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 photo checklist</a></p>
+<p><a target="_blank" class="btn" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 photo checklist</a></p>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
 <div class="follow-bar-actions">
@@ -1065,5 +1065,68 @@ byId("copy-prompt").addEventListener("click", function () { copyText("agent-prom
 })();
 </script>
 <script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script id="fmp-utm">
+(function () {
+  "use strict";
+  var KEY = "fmp_utm_source";
+  var FALLBACK = "site";
+
+  function clean(value) {
+    if (value == null) return "";
+    var s = String(value).replace(/\+/g, " ").trim().toLowerCase();
+    try { s = decodeURIComponent(s); } catch (e) { /* keep the raw token */ }
+    s = s.trim().toLowerCase().replace(/[^a-z0-9\-_]/g, "-").slice(0, 200).replace(/^-+|-+$/g, "");
+    if (!/^[a-z0-9][a-z0-9_-]*$/.test(s) || s === FALLBACK) return "";
+    return s;
+  }
+
+  function fromLocation() {
+    var q = "";
+    try { q = location.search || ""; } catch (e) { q = ""; }
+    var m = /(?:^|[?&])utm_source=([^&#]*)/.exec(q);
+    return m ? clean(m[1]) : "";
+  }
+
+  function landingSource() {
+    var fromUrl = fromLocation();
+    var saved = "";
+    try {
+      saved = clean(sessionStorage.getItem(KEY));
+      if (!saved && fromUrl) {
+        sessionStorage.setItem(KEY, fromUrl);
+        saved = fromUrl;
+      }
+    } catch (e) {
+      saved = fromUrl;
+    }
+    return saved || FALLBACK;
+  }
+
+  function patchHref(anchor, source) {
+    if (!anchor || !source || source === FALLBACK || !anchor.getAttribute) return;
+    var href = anchor.getAttribute("href");
+    if (!href || href.indexOf("firstmoverprojects.gumroad.com/l/") === -1) return;
+    if (href.indexOf("utm_source=") === -1) return;
+    var next = href.replace(/([?&]utm_source=)[^&#]*/, "$1" + source);
+    if (next !== href) anchor.setAttribute("href", next);
+  }
+
+  function patchAll(source) {
+    if (!document.querySelectorAll) return;
+    var links = document.querySelectorAll('a[href*="firstmoverprojects.gumroad.com/l/"]');
+    for (var i = 0; i < links.length; i++) patchHref(links[i], source);
+  }
+
+  function onClick(ev) {
+    var t = ev.target;
+    if (!t || !t.closest) return;
+    patchHref(t.closest("a"), landingSource());
+  }
+
+  patchAll(landingSource());
+  document.addEventListener("click", onClick, true);
+  document.addEventListener("auxclick", onClick, true);
+})();
+</script>
 </body>
 </html>

@@ -16,7 +16,7 @@
             <a href="/tools/">Tools</a>
           </p>
           <h1>Privacy Policy</h1>
-          <p>Last updated: October 13, 2026</p>
+          <p>Last updated: October 29, 2026</p>
           <p>
             First Mover Projects collects only the information reasonably needed
             to operate its website, digital products, communications,
@@ -64,6 +64,7 @@
           </p>
           <h2>Site analytics</h2>
           <p>We count page visits with GoatCounter, a privacy-friendly analytics service. It does not use cookies or store anything on your device, does not store your IP address or full browser details, and keeps only aggregate counts (such as page, referrer, browser, screen size and country). We use these counts only to see which pages are useful. We also count clicks on our sign-up and shop buttons, and we may show those buttons in one of two colours, picked at random each time a page loads, to see which works better. Nothing is stored on your device for this, and the counts are not linked to you. GoatCounter&#x27;s servers are in the EU (Finland and Germany).</p>
+          <p>If you arrive from a link that includes utm_source, we keep that value in this tab's sessionStorage (not a cookie) and add it to Gumroad checkout links so we can see which visit led to the click, and it is removed when the tab closes.</p>
 
           <h2>Data retention</h2>
           <p>
@@ -92,5 +93,68 @@
         </div>
       </section>
     </main>
-  </body>
+  <script id="fmp-utm">
+(function () {
+  "use strict";
+  var KEY = "fmp_utm_source";
+  var FALLBACK = "site";
+
+  function clean(value) {
+    if (value == null) return "";
+    var s = String(value).replace(/\+/g, " ").trim().toLowerCase();
+    try { s = decodeURIComponent(s); } catch (e) { /* keep the raw token */ }
+    s = s.trim().toLowerCase().replace(/[^a-z0-9\-_]/g, "-").slice(0, 200).replace(/^-+|-+$/g, "");
+    if (!/^[a-z0-9][a-z0-9_-]*$/.test(s) || s === FALLBACK) return "";
+    return s;
+  }
+
+  function fromLocation() {
+    var q = "";
+    try { q = location.search || ""; } catch (e) { q = ""; }
+    var m = /(?:^|[?&])utm_source=([^&#]*)/.exec(q);
+    return m ? clean(m[1]) : "";
+  }
+
+  function landingSource() {
+    var fromUrl = fromLocation();
+    var saved = "";
+    try {
+      saved = clean(sessionStorage.getItem(KEY));
+      if (!saved && fromUrl) {
+        sessionStorage.setItem(KEY, fromUrl);
+        saved = fromUrl;
+      }
+    } catch (e) {
+      saved = fromUrl;
+    }
+    return saved || FALLBACK;
+  }
+
+  function patchHref(anchor, source) {
+    if (!anchor || !source || source === FALLBACK || !anchor.getAttribute) return;
+    var href = anchor.getAttribute("href");
+    if (!href || href.indexOf("firstmoverprojects.gumroad.com/l/") === -1) return;
+    if (href.indexOf("utm_source=") === -1) return;
+    var next = href.replace(/([?&]utm_source=)[^&#]*/, "$1" + source);
+    if (next !== href) anchor.setAttribute("href", next);
+  }
+
+  function patchAll(source) {
+    if (!document.querySelectorAll) return;
+    var links = document.querySelectorAll('a[href*="firstmoverprojects.gumroad.com/l/"]');
+    for (var i = 0; i < links.length; i++) patchHref(links[i], source);
+  }
+
+  function onClick(ev) {
+    var t = ev.target;
+    if (!t || !t.closest) return;
+    patchHref(t.closest("a"), landingSource());
+  }
+
+  patchAll(landingSource());
+  document.addEventListener("click", onClick, true);
+  document.addEventListener("auxclick", onClick, true);
+})();
+</script>
+</body>
 </html>

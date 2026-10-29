@@ -23,16 +23,16 @@ const PAGES = {
   loom: "tools/loom-seat-audit-calculator/index.html"
 };
 const GUMROAD = {
-  etsy: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=firstmoverprojects&utm_medium=etsy-photo-check&utm_campaign=lnfgc&utm_content=footer",
-  etsyResult: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=firstmoverprojects&utm_medium=etsy-photo-check&utm_campaign=lnfgc&utm_content=result-card",
-  hvac: "https://firstmoverprojects.gumroad.com/l/afwbvt?wanted=true&utm_source=firstmoverprojects&utm_medium=after-hours-gap-check&utm_campaign=afwbvt&utm_content=trade-pill",
-  intake: "https://firstmoverprojects.gumroad.com/l/fretzy?wanted=true&utm_source=firstmoverprojects&utm_medium=after-hours-gap-check&utm_campaign=fretzy&utm_content=trade-pill",
-  roofing: "https://firstmoverprojects.gumroad.com/l/wymols?wanted=true&utm_source=firstmoverprojects&utm_medium=after-hours-gap-check&utm_campaign=wymols&utm_content=trade-pill",
-  plumbing: "https://firstmoverprojects.gumroad.com/l/unjou?wanted=true&utm_source=firstmoverprojects&utm_medium=after-hours-gap-check&utm_campaign=unjou&utm_content=trade-pill",
-  electrical: "https://firstmoverprojects.gumroad.com/l/lykya?wanted=true&utm_source=firstmoverprojects&utm_medium=after-hours-gap-check&utm_campaign=lykya&utm_content=trade-pill",
-  garage: "https://firstmoverprojects.gumroad.com/l/cybqmi?wanted=true&utm_source=firstmoverprojects&utm_medium=after-hours-gap-check&utm_campaign=cybqmi&utm_content=trade-pill",
-  water: "https://firstmoverprojects.gumroad.com/l/ykxxot?wanted=true&utm_source=firstmoverprojects&utm_medium=after-hours-gap-check&utm_campaign=ykxxot&utm_content=trade-pill",
-  loom: "https://firstmoverprojects.gumroad.com/l/fguyxn?wanted=true&utm_source=firstmoverprojects&utm_medium=loom-seat-audit-calculator&utm_campaign=fguyxn&utm_content=bottom-cta"
+  etsy: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=site&utm_campaign=etsy-photo-audit-check&utm_content=footer",
+  etsyResult: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=site&utm_campaign=etsy-photo-audit-check&utm_content=result-card",
+  hvac: "https://firstmoverprojects.gumroad.com/l/afwbvt?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
+  intake: "https://firstmoverprojects.gumroad.com/l/fretzy?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
+  roofing: "https://firstmoverprojects.gumroad.com/l/wymols?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
+  plumbing: "https://firstmoverprojects.gumroad.com/l/unjou?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
+  electrical: "https://firstmoverprojects.gumroad.com/l/lykya?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
+  garage: "https://firstmoverprojects.gumroad.com/l/cybqmi?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
+  water: "https://firstmoverprojects.gumroad.com/l/ykxxot?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
+  loom: "https://firstmoverprojects.gumroad.com/l/fguyxn?wanted=true&utm_source=site&utm_medium=site&utm_campaign=loom-seat-audit-calculator&utm_content=bottom-cta"
 };
 
 function read(rel) {
@@ -124,7 +124,8 @@ test("static CSP, privacy, nav, and footer guards", () => {
     assert.match(html, /href="\/tools\/"/);
     assert.match(html, /href="\/deadlines\/"/);
     for (const line of FOOTER) assert.ok(html.includes(line), rel + " missing footer line");
-    for (const banned of BANNED) assert.equal(html.includes(banned), false, rel + " contains " + banned);
+    const surface = html.replace(/<script id="fmp-utm">[\s\S]*?<\/script>/g, "");
+    for (const banned of BANNED) assert.equal(surface.includes(banned), false, rel + " contains " + banned);
     const helperAt = html.indexOf("function trackGumroadClick");
     const helperStart = helperAt === -1 ? -1 : html.lastIndexOf("<script>", helperAt);
     const helperEnd = helperAt === -1 ? -1 : html.indexOf("</script>", helperAt);

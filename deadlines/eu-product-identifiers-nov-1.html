@@ -75,7 +75,7 @@
         <p><span class="chip">Nov 1, 2026</span></p>
         <h1>EU product identifiers become mandatory for low-value e-commerce imports (Nov 1, 2026)</h1>
         <p class="lead">Sellers outside the EU who ship online orders to consumers in the EU, and the platforms, carriers and customs agents who declare those parcels.</p>
-        <p class="kit-cta"><a rel="noopener" target="_blank" class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadline_eu_product_id_nov_1&amp;utm_campaign=fetwsm&amp;utm_content=top-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $29 EU Customs Product Data Checker on Gumroad</a></p>
+        <p class="kit-cta"><a rel="noopener" target="_blank" class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=eu-product-identifiers-nov-1&amp;utm_content=top-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $29 EU Customs Product Data Checker on Gumroad</a></p>
         <p class="kit-cta__note">Optional paid tool for Shopify product CSV exports. The free checklist prompt and source links are below.</p>
       </section>
 
@@ -125,7 +125,7 @@ When you state any deadline or date, quote the exact line from the European Comm
 
       <p class="kit-link">Use Shopify? Check your product export's SKUs and barcodes in one pass:</p>
       <p class="kit-link"><a href="/tools/eu-product-id-check/">Free quick check: paste up to 25 SKUs</a></p>
-      <p class="kit-link"><a rel="noopener" target="_blank" class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=deadline_eu_product_id_nov_1&amp;utm_campaign=fetwsm&amp;utm_content=bottom-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $29 EU Customs Product Data Checker on Gumroad</a></p>
+      <p class="kit-link"><a rel="noopener" target="_blank" class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=eu-product-identifiers-nov-1&amp;utm_content=bottom-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $29 EU Customs Product Data Checker on Gumroad</a></p>
 
       <p class="related">More: <a href="/deadlines/">All deadlines</a> · <a href="finder/">Deadline Finder</a> · <a href="/tools/">Tools and kits</a></p>
 
@@ -220,5 +220,68 @@ When you state any deadline or date, quote the exact line from the European Comm
     </script>
     <script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
       <script src="/deadlines/assets/ab-cta.js" defer></script>
+<script id="fmp-utm">
+(function () {
+  "use strict";
+  var KEY = "fmp_utm_source";
+  var FALLBACK = "site";
+
+  function clean(value) {
+    if (value == null) return "";
+    var s = String(value).replace(/\+/g, " ").trim().toLowerCase();
+    try { s = decodeURIComponent(s); } catch (e) { /* keep the raw token */ }
+    s = s.trim().toLowerCase().replace(/[^a-z0-9\-_]/g, "-").slice(0, 200).replace(/^-+|-+$/g, "");
+    if (!/^[a-z0-9][a-z0-9_-]*$/.test(s) || s === FALLBACK) return "";
+    return s;
+  }
+
+  function fromLocation() {
+    var q = "";
+    try { q = location.search || ""; } catch (e) { q = ""; }
+    var m = /(?:^|[?&])utm_source=([^&#]*)/.exec(q);
+    return m ? clean(m[1]) : "";
+  }
+
+  function landingSource() {
+    var fromUrl = fromLocation();
+    var saved = "";
+    try {
+      saved = clean(sessionStorage.getItem(KEY));
+      if (!saved && fromUrl) {
+        sessionStorage.setItem(KEY, fromUrl);
+        saved = fromUrl;
+      }
+    } catch (e) {
+      saved = fromUrl;
+    }
+    return saved || FALLBACK;
+  }
+
+  function patchHref(anchor, source) {
+    if (!anchor || !source || source === FALLBACK || !anchor.getAttribute) return;
+    var href = anchor.getAttribute("href");
+    if (!href || href.indexOf("firstmoverprojects.gumroad.com/l/") === -1) return;
+    if (href.indexOf("utm_source=") === -1) return;
+    var next = href.replace(/([?&]utm_source=)[^&#]*/, "$1" + source);
+    if (next !== href) anchor.setAttribute("href", next);
+  }
+
+  function patchAll(source) {
+    if (!document.querySelectorAll) return;
+    var links = document.querySelectorAll('a[href*="firstmoverprojects.gumroad.com/l/"]');
+    for (var i = 0; i < links.length; i++) patchHref(links[i], source);
+  }
+
+  function onClick(ev) {
+    var t = ev.target;
+    if (!t || !t.closest) return;
+    patchHref(t.closest("a"), landingSource());
+  }
+
+  patchAll(landingSource());
+  document.addEventListener("click", onClick, true);
+  document.addEventListener("auxclick", onClick, true);
+})();
+</script>
 </body>
 </html>

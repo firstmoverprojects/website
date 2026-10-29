@@ -58,7 +58,7 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       deadline: /Oct 22, 2026/,
       button: "Get the $9 photo checklist",
       slug: "/l/lnfgc",
-      medium: "etsy-photo-check"
+      campaign: "etsy-photo-audit-check"
     },
     {
       rel: "tools/fire-to-iris-check/index.html",
@@ -67,7 +67,7 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       deadline: /Nov 19, 2026, at 3 p\.m\. Eastern Time/,
       button: "Get the $9 switch checklist",
       slug: "/l/fire-to-iris-switch-checklist",
-      medium: "fire-to-iris-check"
+      campaign: "fire-to-iris-check"
     },
     {
       rel: "tools/amazon-coi-check/index.html",
@@ -76,7 +76,7 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       deadline: /Nov 2, 2026/,
       button: "Get the $29 insurance kit",
       slug: "/l/amazon-1m-insurance-readiness-kit",
-      medium: "amazon-coi-check"
+      campaign: "amazon-coi-check"
     }
   ];
   for (const item of cases) {
@@ -93,10 +93,10 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
     for (const href of [resultHref, footerHref]) {
       const url = new URL(href);
       assert.equal(url.pathname.endsWith(item.slug), true, href);
-      assert.equal(url.searchParams.get("utm_source"), "firstmoverprojects", href);
-      assert.equal(url.searchParams.get("utm_medium"), item.medium, href);
+      assert.equal(url.searchParams.get("utm_source"), "site", href);
+      assert.equal(url.searchParams.get("utm_medium"), "site", href);
       assert.equal(url.searchParams.get("wanted"), "true", href);
-      assert.equal(url.searchParams.get("utm_campaign"), url.pathname.split("/").pop(), href);
+      assert.equal(url.searchParams.get("utm_campaign"), item.campaign, href);
     }
     assert.equal(new URL(resultHref).searchParams.get("utm_content"), "result-card");
     assert.equal(new URL(footerHref).searchParams.get("utm_content"), "footer");
