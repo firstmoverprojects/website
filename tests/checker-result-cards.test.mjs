@@ -67,7 +67,8 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       deadline: /Nov 19, 2026, at 3 p\.m\. Eastern Time/,
       button: "Get the $9 switch checklist",
       slug: "/l/fire-to-iris-switch-checklist",
-      campaign: "fire-to-iris-check"
+      campaign: "fire-to-iris-check",
+      resultContent: "fire-check-result"
     },
     {
       rel: "tools/amazon-coi-check/index.html",
@@ -98,8 +99,14 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       assert.equal(url.searchParams.get("wanted"), "true", href);
       assert.equal(url.searchParams.get("utm_campaign"), item.campaign, href);
     }
-    assert.equal(new URL(resultHref).searchParams.get("utm_content"), "result-card");
+    assert.equal(new URL(resultHref).searchParams.get("utm_content"), item.resultContent || "result-card");
     assert.equal(new URL(footerHref).searchParams.get("utm_content"), "footer");
+    if (item.resultContent) {
+      assert.equal(await page.locator("#results a[href*='gumroad.com']").count(), 1, item.rel);
+      assert.match(await page.innerText("#result-cta"), /General guidance, not legal, tax or IT advice/);
+      const steps = await page.locator("#next-steps li").count();
+      assert.ok(steps >= 2 && steps <= 3, item.rel + " steps " + steps);
+    }
     assert.match(await page.innerText("#result-cta"), /free weekly deadline email/);
     assert.deepEqual(errors, [], item.rel);
     assert.deepEqual(toolNetwork(nets), [], item.rel);
