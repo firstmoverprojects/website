@@ -211,11 +211,13 @@ var urlRe = /https?:\/\/[^\s"'<>]+/g;
 var found = {};
 var um;
 while ((um = urlRe.exec(html))) {
-  var u = um[0].replace(/&amp;/g, "&").replace(/[),.;]+$/g, "");
+  var u = um[0].replace(/&amp;/g, "&").replace(/&quot;?/g, "").replace(/&(?:gt|lt);?.*$/, "").replace(/[),.;]+$/g, "");
   found[u] = true;
 }
 var allowed = [
+  "https://firstmoverprojects.com/",
   "https://firstmoverprojects.com/tools/amazon-coi-check/",
+  "https://firstmoverprojects.com/tools/amazon-coi-check/?embed=1",
   "https://firstmoverprojects.com/privacy.html",
   "https://sellercentral.amazon.com/help/hub/reference/external/G200386300",
   "https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT",
