@@ -52,6 +52,14 @@
       .tiktok-hub-link:hover,.tiktok-hub-link:focus{color:#00d8ff !important;outline:3px solid #00d8ff;outline-offset:2px}
       .tiktok-hub-email{background:linear-gradient(135deg,#22c55e 0%,#4ade80 100%);color:#01060b !important;border:0}
       .tiktok-hub-email:hover,.tiktok-hub-email:focus{background:#16a34a;color:#01060b !important}
+      .tiktok-jump{padding:14px 0 10px;background:#04101f;border-bottom:1px solid rgba(255,255,255,.16)}
+      .tiktok-jump-label{margin:0 0 12px;color:#fff;font-size:1.05rem;font-weight:800;line-height:1.35}
+      .tiktok-jump-row{display:flex;flex-wrap:wrap;gap:8px;max-width:100%;min-width:0}
+      a.tiktok-chip{flex:1 1 100%;min-width:0;max-width:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;gap:2px;min-height:48px;padding:10px 16px;border-radius:999px;background:#f4c84a;color:#04101f !important;text-decoration:none !important;font-weight:800;line-height:1.25;border:2px solid #fff}
+      a.tiktok-chip:hover,a.tiktok-chip:focus-visible{background:#fff;color:#04101f !important;outline:3px solid #25d0d7;outline-offset:2px}
+      .tiktok-when{font-size:.72rem;letter-spacing:.04em;text-transform:uppercase}
+      .tiktok-what{font-size:.98rem;overflow-wrap:anywhere}
+      @media(min-width:720px){a.tiktok-chip{flex:1 1 240px}}
     </style>
   </head>
   <body>
@@ -71,6 +79,19 @@
       </div>
     </header>
     <main>
+      <section class="tiktok-jump" aria-labelledby="tiktok-jump-h">
+        <div class="wrap">
+          <p id="tiktok-jump-h" class="tiktok-jump-label">Came from TikTok, Reels, or Shorts? Tap the rule change you watched:</p>
+          <div class="tiktok-jump-row">
+            <a class="tiktok-chip" href="/tools/eu-product-id-check/"><span class="tiktok-when">Sun, Nov 1</span><span class="tiktok-what">EU &lt;= EUR 150 Product IDs</span></a>
+            <a class="tiktok-chip" href="/tools/fire-to-iris-check/"><span class="tiktok-when">Sun, Nov 1 / Nov 19</span><span class="tiktok-what">IRS FIRE-to-IRIS 1099 Cutoff</span></a>
+            <a class="tiktok-chip" href="/tools/amazon-coi-check/"><span class="tiktok-when">Mon, Nov 2</span><span class="tiktok-what">Amazon $1M Insurance (3-Month Rule)</span></a>
+            <a class="tiktok-chip" href="/tools/etsy-photo-audit-check/"><span class="tiktok-what">Etsy Unedited Real-Photo Rule</span></a>
+            <a class="tiktok-chip" href="/tools/custom-gpt-retirement-checker/"><span class="tiktok-when">Fri, Dec 11</span><span class="tiktok-what">OpenAI Custom GPT Retirement</span></a>
+            <a class="tiktok-chip" href="/tools/loom-seat-audit-calculator/"><span class="tiktok-what">Loom Creator Lite 5-Min Cap &amp; Seat Check</span></a>
+          </div>
+        </div>
+      </section>
       <section class="hero">
         <div class="wrap">
           <div class="eyebrow">Free browser checks &amp; live products</div>
