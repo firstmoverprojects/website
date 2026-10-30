@@ -24,7 +24,7 @@ const PAGES = {
 };
 const GUMROAD = {
   etsy: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=site&utm_campaign=etsy-photo-audit-check&utm_content=footer",
-  etsyResult: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=site&utm_campaign=etsy-photo-audit-check&utm_content=result-card",
+  etsyResult: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=site&utm_campaign=etsy-photo-audit-check&utm_content=etsy-check-result",
   hvac: "https://firstmoverprojects.gumroad.com/l/afwbvt?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
   intake: "https://firstmoverprojects.gumroad.com/l/fretzy?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
   roofing: "https://firstmoverprojects.gumroad.com/l/wymols?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
