@@ -254,4 +254,107 @@ DESCRIPTION:Exchange Online: EWS fully and permanently disabled
 TRIGGER:-P7D
 END:VALARM
 END:VEVENT
+BEGIN:VEVENT
+UID:form-941-q3-20261102@firstmoverprojects.com
+DTSTAMP:20261030T200000Z
+DTSTART;VALUE=DATE:20261102
+DTEND;VALUE=DATE:20261103
+SUMMARY:File Form 941 for the third quarter of 2026
+DESCRIPTION:Who: Employers who file Form 941\nWhat to check: File by Nov 2\
+ , 2026\, or Nov 10 if deposits were on time and in full. Deposit FUTA owe
+ d through September if more than $500.\nOfficial source: https://www.irs.
+ gov/publications/p509\nDetails: https://firstmoverprojects.com/deadlines/
+ form-941-q3-due-nov-2.html\nGeneral guidance\, not legal\, tax or IT advi
+ ce.
+URL:https://firstmoverprojects.com/deadlines/form-941-q3-due-nov-2.html
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:File Form 941 for the third quarter of 2026
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:form-941-q3-extended-20261110@firstmoverprojects.com
+DTSTAMP:20261030T200000Z
+DTSTART;VALUE=DATE:20261110
+DTEND;VALUE=DATE:20261111
+SUMMARY:Form 941 third quarter file-by date if deposits were in full
+DESCRIPTION:Who: Employers who deposited third-quarter 2026 Form 941 tax on
+  time and in full\nWhat to check: Publication 509 allows filing on Nov 10
+ \, 2026 only in that case.\nOfficial source: https://www.irs.gov/publicat
+ ions/p509\nDetails: https://firstmoverprojects.com/deadlines/form-941-q3-
+ due-nov-2.html\nGeneral guidance\, not legal\, tax or IT advice.
+URL:https://firstmoverprojects.com/deadlines/form-941-q3-due-nov-2.html
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Form 941 third quarter file-by date if deposits were in full
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ebay-payments-terms-20261104@firstmoverprojects.com
+DTSTAMP:20261030T200000Z
+DTSTART;VALUE=DATE:20261104
+DTEND;VALUE=DATE:20261105
+SUMMARY:eBay Payments Terms of Use take effect for other sellers
+DESCRIPTION:Who: eBay Managed Payments sellers who have not already accepte
+ d the October 21\, 2026 terms\nWhat to check: Read the PDF\, finish ident
+ ity verification if you use eBay balance\, and confirm the payout schedul
+ e in Seller Hub.\nOfficial source: https://ir.ebaystatic.com/cr/v/c01/us-
+ payments-terms-of-use-2026-10-21b.pdf\nDetails: https://firstmoverproject
+ s.com/deadlines/ebay-payments-terms-nov-4.html\nGeneral guidance\, not le
+ gal\, tax or IT advice.
+URL:https://firstmoverprojects.com/deadlines/ebay-payments-terms-nov-4.html
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:eBay Payments Terms of Use take effect for other sellers
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:amazon-holiday-returns-20261101@firstmoverprojects.com
+DTSTAMP:20261030T200000Z
+DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261102
+SUMMARY:Amazon.com holiday return window starts
+DESCRIPTION:Who: Amazon.com sellers\, FBA and FBM\nWhat to check: Purchases
+  from Nov 1 through Dec 31\, 2026 can be returned until Jan 31\, 2027. Ap
+ ple brand products until Jan 15\, 2027.\nOfficial source: https://sellerc
+ entral.amazon.com/seller-forums/discussions/t/fcc4e6f3-5e86-4b04-be84-82f
+ 9bcc2558a\nDetails: https://firstmoverprojects.com/deadlines/amazon-holid
+ ay-returns-2026.html\nGeneral guidance\, not legal\, tax or IT advice.
+URL:https://firstmoverprojects.com/deadlines/amazon-holiday-returns-2026.ht
+ ml
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Amazon.com holiday return window starts
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:federal-tax-payments-20261215@firstmoverprojects.com
+DTSTAMP:20261030T200000Z
+DTSTART;VALUE=DATE:20261215
+DTEND;VALUE=DATE:20261216
+SUMMARY:Federal small-business tax payments due
+DESCRIPTION:Who: Calendar-year corporations\, partnerships that file Form 8
+ 813\, and monthly employment-tax depositors\nWhat to check: December 15\,
+  2026 is the corporate fourth estimated-tax installment. It is not the so
+ le proprietor's Form 1040-ES date.\nOfficial source: https://www.irs.gov/
+ publications/p509\nDetails: https://firstmoverprojects.com/deadlines/fede
+ ral-tax-payments-dec-15.html\nGeneral guidance\, not legal\, tax or IT ad
+ vice.
+URL:https://firstmoverprojects.com/deadlines/federal-tax-payments-dec-15.ht
+ ml
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Federal small-business tax payments due
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
 END:VCALENDAR
