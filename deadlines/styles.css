@@ -344,6 +344,16 @@ li {
   display: none;
 }
 
+.faq summary::before {
+  content: "+ ";
+  color: var(--color-accent-cyan);
+  font-weight: 800;
+}
+
+.faq details[open] summary::before {
+  content: "- ";
+}
+
 .site-footer {
   max-width: 56rem;
   margin: 0 auto;
@@ -667,4 +677,31 @@ html[data-ab-cta="green"] .ab-cta.btn--primary:hover { background: #16a34a; filt
 }
 @media (max-width: 480px) {
   .draft-banner { position: static; font-size: 0.75rem; padding: 0.375rem 0.75rem; line-height: 1.3; }
+}
+
+/* Answer-engine lead: dark text on a light panel, above the dark page. */
+.direct-answer {
+  background: #f4f7fa;
+  color: #01060b;
+  border: 3px solid #01060b;
+  border-radius: var(--radius);
+  padding: 1rem 1.15rem;
+  margin: 0 0 1rem;
+}
+.direct-answer p,
+.direct-answer li,
+.direct-answer strong {
+  color: #01060b;
+}
+.direct-answer p:last-child {
+  margin-bottom: 0;
+}
+.direct-answer a:not(.btn),
+.direct-answer a:not(.btn):hover,
+.direct-answer a:not(.btn):focus {
+  color: #052e6b;
+  font-weight: 700;
+}
+.hero .signup {
+  margin-bottom: 0;
 }
