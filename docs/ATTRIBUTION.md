@@ -11,7 +11,7 @@ The referrer Gumroad stores is only `https://firstmoverprojects.com`. Checkout l
 | `utm_source` | The `utm_source` on the visit that opened the tab, or `site` | The channel. A social reply tagged `utm_source=tiktok` stays `tiktok` through later pages in that tab. |
 | `utm_medium` | `site` | The click happened on this website. |
 | `utm_campaign` | Page slug, such as `fire-to-iris-check` or `amazon-insurance-nov-2` | Which page the button was on. |
-| `utm_content` | Button position, such as `footer`, `result-card`, `fire-check-result`, `above-fold`, `tools-kit` | Which button on that page. Open the link row to see Content. |
+| `utm_content` | Button position, such as `footer`, `result-card`, `fire-check-result`, `coi-check-result`, `above-fold`, `tools-kit` | Which button on that page. Open the link row to see Content. |
 
 Gumroad counts the visit only when source, medium, and campaign are all present. It lowercases them and turns other characters into hyphens. The site script does that before it writes `utm_source`, so the href matches the row Gumroad stores. Product links attribute sales of that product only.
 

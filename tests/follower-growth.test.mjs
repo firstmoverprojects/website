@@ -55,11 +55,13 @@ test("every tool checker has a follow bar under the result kit button and the ma
   for (const rel of pages) {
     const slug = rel.split("/")[1];
     const html = read(rel);
+    const singleResultCta = rel === "tools/amazon-coi-check/index.html";
     const bars = html.match(/<div class="follow-bar"/g) || [];
-    assert.equal(bars.length, 2, rel);
-    assert.equal(html.split(`data-tool-slug="${slug}"`).length - 1, 2, rel);
-    assert.equal(html.split(TIKTOK_LABEL).length - 1, 2, rel);
-    assert.equal(html.split(EMAIL_LABEL).length - 1, 2, rel);
+    const copies = singleResultCta ? 1 : 2;
+    assert.equal(bars.length, copies, rel);
+    assert.equal(html.split(`data-tool-slug="${slug}"`).length - 1, copies, rel);
+    assert.equal(html.split(TIKTOK_LABEL).length - 1, copies, rel);
+    assert.equal(html.split(EMAIL_LABEL).length - 1, copies, rel);
     assert.ok(html.includes(TIKTOK.replace(/&/g, "&amp;")), rel);
     assert.match(html, /\.follow-tiktok\{[^}]*background:#0c1520/, rel);
     assert.match(html, /\.follow-tiktok\{[^}]*border:1px solid #00d8ff/, rel);
@@ -67,7 +69,7 @@ test("every tool checker has a follow bar under the result kit button and the ma
     assert.match(html, /\.follow-email\{[^}]*color:#01060b !important/, rel);
     assert.match(html, /\.follow-bar\{[^}]*background:#01060b/, rel);
     const tags = [...html.matchAll(/<a\b[^>]*class="follow-tiktok"[^>]*>/g)].map((match) => match[0]);
-    assert.equal(tags.length, 2, rel);
+    assert.equal(tags.length, copies, rel);
     for (const tag of tags) {
       assert.match(tag, /target="_blank"/, rel);
       assert.match(tag, /rel="noopener"/, rel);
@@ -75,9 +77,15 @@ test("every tool checker has a follow bar under the result kit button and the ma
     }
     const resultId = html.includes('id="results"') ? "results" : "res";
     const result = element(html, resultId);
-    assert.equal(result.split('class="follow-bar"').length - 1, 1, rel + " result");
-    assert.match(result, /class="follow-email" href="#signup"/, rel);
     const outside = html.replace(result, "");
+    if (singleResultCta) {
+      assert.equal(result.split('class="follow-bar"').length - 1, 0, rel + " result");
+      assert.equal(/class="follow-email"/.test(result), false, rel + " result");
+      assert.equal((result.match(/gumroad\.com/g) || []).length, 1, rel + " result");
+    } else {
+      assert.equal(result.split('class="follow-bar"').length - 1, 1, rel + " result");
+      assert.match(result, /class="follow-email" href="#signup"/, rel);
+    }
     assert.match(outside, /class="follow-email" href="\/deadlines\/#signup"/, rel);
     assert.equal(/C\.?\s*J\.?\s*Crispin|CurioFinch/i.test(html), false, rel);
   }
