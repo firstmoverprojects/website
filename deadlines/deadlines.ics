@@ -28,24 +28,25 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-custom-gpt-creation-20261026@firstmoverprojects.com
-DTSTAMP:20261021T082000Z
+DTSTAMP:20261030T120000Z
 DTSTART;VALUE=DATE:20261026
 DTEND;VALUE=DATE:20261027
-SUMMARY:ChatGPT Enterprise: creation of new custom GPTs planned to end
-DESCRIPTION:Who: Affected ChatGPT Enterprise workspaces (planned date\; fol
- low your workspace notice)\nWhat to check: Publish any drafts you need to 
- migrate before this cutoff. Edits to existing\, unmigrated GPTs are not pr
- evented.\nOfficial source: https://help.openai.com/en/articles/20001519-cu
- stom-gpt-retirement-and-migration-faq\nDetails: https://firstmoverprojects
- .com/deadlines/custom-gpt-retirement-dec-11.html\nGeneral guidance\, not l
- egal\, tax or IT advice. Dates from the official source\; re-check it befo
- re you act.
+SUMMARY:ChatGPT Enterprise: new GPT creation ended (FedRAMP exempt)
+DESCRIPTION:Who: Affected ChatGPT Enterprise workspaces. FedRAMP workspaces
+  are exempt.\nWhat to check: New GPT creation ended on Oct 26\, 2026. Edit
+ s to existing\, unmigrated GPTs are still allowed. For new reusable workfl
+ ows\, OpenAI says to use Plugin Creator. A deferral alone does not preserv
+ e eligibility to create new GPTs.\nOfficial source: https://help.openai.co
+ m/en/articles/20001519-custom-gpt-retirement-and-migration-faq\nDetails: h
+ ttps://firstmoverprojects.com/deadlines/custom-gpt-retirement-dec-11.html\
+ nGeneral guidance\, not legal\, tax or IT advice. Dates from the official 
+ source\; re-check it before you act.
 URL:https://firstmoverprojects.com/deadlines/custom-gpt-retirement-dec-11.h
  tml
 TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:ChatGPT Enterprise: creation of new custom GPTs planned to end
+DESCRIPTION:ChatGPT Enterprise: new GPT creation ended (FedRAMP exempt)
 TRIGGER:-P2D
 END:VALARM
 END:VEVENT
@@ -209,18 +210,21 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:openai-custom-gpt-retirement-20261211@firstmoverprojects.com
-DTSTAMP:20261021T082000Z
+DTSTAMP:20261030T120000Z
 DTSTART;VALUE=DATE:20261211
 DTEND;VALUE=DATE:20261212
 SUMMARY:ChatGPT custom GPTs scheduled to retire
-DESCRIPTION:Who: Anyone who created or relies on a custom GPT (Enterprise w
- orkspaces with an approved deferral: Feb 11\, 2027)\nWhat to check: List y
- our GPTs\, publish essential edits\, migrate the ones you created to plugi
- ns and test them. Custom actions do not transfer.\nOfficial source: https:
- //help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration
- -faq\nDetails: https://firstmoverprojects.com/deadlines/custom-gpt-retirem
- ent-dec-11.html\nGeneral guidance\, not legal\, tax or IT advice. Dates fr
- om the official source\; re-check it before you act.
+DESCRIPTION:Who: Anyone who created or relies on a custom GPT (FedRAMP work
+ spaces and affected Enterprise workspaces with a qualifying\, approved def
+ erral: Feb 11\, 2027). A deferral alone does not preserve eligibility to c
+ reate new GPTs.\nWhat to check: List your GPTs\, publish essential edits\,
+  migrate the ones you created to plugins and test them. Custom actions do 
+ not transfer. In a managed workspace\, Share Plugin can prefill the origin
+ al GPT audience.\nOfficial source: https://help.openai.com/en/articles/200
+ 01519-custom-gpt-retirement-and-migration-faq\nDetails: https://firstmover
+ projects.com/deadlines/custom-gpt-retirement-dec-11.html\nGeneral guidance
+ \, not legal\, tax or IT advice. Dates from the official source\; re-check
+  it before you act.
 URL:https://firstmoverprojects.com/deadlines/custom-gpt-retirement-dec-11.h
  tml
 TRANSP:TRANSPARENT

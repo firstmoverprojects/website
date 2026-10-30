@@ -62,14 +62,14 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
 {
  "@context": "https://schema.org",
  "@type": "FAQPage",
- "dateModified": "2026-10-21",
+ "dateModified": "2026-10-30",
  "mainEntity": [
   {
    "@type": "Question",
    "name": "When do ChatGPT custom GPTs retire?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "OpenAI's FAQ says: \"Custom GPTs are scheduled to retire on Dec 11, 2026.\" Affected Enterprise workspaces with a qualified, approved deferral retire Feb 11, 2027. OpenAI notes that the dates are subject to change."
+    "text": "OpenAI's FAQ says: \"Custom GPTs are scheduled to retire on Dec 11, 2026.\" FedRAMP workspaces and affected Enterprise workspaces with a qualifying, approved deferral have a retirement date of Feb 11, 2027. OpenAI says this later date does not apply to every workspace. A retirement deferral by itself does not preserve eligibility to create new GPTs."
    }
   },
   {
@@ -77,7 +77,7 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
    "name": "Is there an earlier date for Enterprise workspaces?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Yes. For affected Enterprise workspaces, creation of new custom GPTs is planned to end Oct 26, 2026. OpenAI says this creation freeze does not prevent edits to existing, unmigrated GPTs."
+    "text": "Yes. New GPT creation ended on October 26, 2026 for affected Enterprise workspaces, with the exception of FedRAMP workspaces. OpenAI says this creation freeze does not prevent edits to existing, unmigrated GPTs. A deferral alone does not preserve eligibility to create new GPTs."
    }
   },
   {
@@ -111,6 +111,30 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
     "@type": "Answer",
     "text": "OpenAI says migration may not be available to your account yet, or plugin access may be disabled. Check the notice in your account and make sure you are in the account or workspace where the GPT was created."
    }
+  },
+  {
+   "@type": "Question",
+   "name": "Why can't I create a new GPT in my Enterprise workspace?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "OpenAI says new GPT creation ended on October 26, 2026 for affected Enterprise workspaces, with the exception of FedRAMP workspaces. This is separate from retirement of existing GPTs. The creation cutoff does not prevent edits to an existing unmigrated GPT, but a GPT that has already been migrated is read-only. For new reusable workflows, OpenAI says to use Plugin Creator."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can we migrate multiple GPTs at once?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "OpenAI says bulk migration is available through the ChatGPT Admin plugin. Retrieving the full workspace GPT inventory currently requires a workspace Owner. Bulk migration runs asynchronously, in the background. Starting the task does not confirm that every GPT migrated successfully. Review the results, test the replacement plugins, and confirm access before asking users to switch."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can Share Plugin keep the same audience?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "OpenAI says an individual migration starts with a private plugin, and existing GPT users do not gain access automatically. In a managed workspace, Share Plugin can prefill the original GPT's users, groups, or workspace audience. Review the audience and select Save before asking people to switch."
+   }
   }
  ]
 }
@@ -128,16 +152,16 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
 <p class="muted site-nav"><a href="https://firstmoverprojects.com/">First Mover Projects</a> · <a href="/tools/">Tools</a> · <a href="/deadlines/">Deadlines</a></p>
 <h1>Custom GPT Retirement Checker</h1>
 <p><a class="runway-pill" href="https://launchfree.io/listings/custom-gpt-retirement-checker.html" target="_blank" rel="noopener noreferrer">Listed on The Runway (LaunchFree.io) — Upvote This Free Tool</a></p>
-<p id="answer">OpenAI says ChatGPT custom GPTs are scheduled to retire on Dec 11, 2026, and creators can migrate each GPT to a plugin when migration is available for their account. For affected Enterprise workspaces, creation of new custom GPTs is planned to end Oct 26, 2026. Custom actions, the selected model, sharing settings and unpublished edits do not carry over, so check those first. [1]</p>
+<p id="answer">OpenAI says ChatGPT custom GPTs are scheduled to retire on Dec 11, 2026, and creators can migrate each GPT to a plugin when migration is available for their account. For affected Enterprise workspaces, new GPT creation ended on Oct 26, 2026. FedRAMP workspaces are exempt from that cutoff. Custom actions, the selected model, sharing settings and unpublished edits do not carry over, so check those first. [1]</p>
 <p id="who"><strong>Who it's for:</strong> anyone who created a custom GPT or relies on one for work, on any ChatGPT plan, including admins of Enterprise workspaces.</p>
-<p class="muted" id="updated"><strong>Last updated Oct 21, 2026.</strong> Current dates: Oct 26, 2026 (planned, affected Enterprise workspaces), Dec 11, 2026 (standard retirement), Feb 11, 2027 (only with an approved deferral). Dates are subject to change.</p>
+<p class="muted" id="updated"><strong>Last updated Oct 30, 2026.</strong> Current dates: Oct 26, 2026 (ended for affected Enterprise workspaces; FedRAMP workspaces exempt), Dec 11, 2026 (standard retirement), Feb 11, 2027 (FedRAMP workspaces and affected Enterprise workspaces with a qualifying, approved deferral). A deferral alone does not preserve eligibility to create new GPTs.</p>
 <p>Paste your custom GPT's settings and get a migration checklist. <strong>Free, no sign-up, nothing uploaded:</strong> everything runs in this page and nothing you paste leaves your browser.</p>
 
 <section class="cd" aria-label="Countdowns">
  <div id="cd-dec11"><div class="muted">Standard scheduled retirement</div><div class="big" data-k="t">Dec 11, 2026</div><div data-k="v"></div><div class="muted">OpenAI says: <q>Custom GPTs are scheduled to retire on Dec 11, 2026.</q> [1]</div></div>
- <div id="cd-oct26"><div class="muted">Affected Enterprise workspaces (planned)</div><div class="big" data-k="t">Oct 26, 2026</div><div data-k="v"></div><div class="muted">Creation of new custom GPTs ends. OpenAI says: <q>This creation freeze does not prevent edits to existing, unmigrated GPTs.</q> [1]</div></div>
+ <div id="cd-oct26"><div class="muted">Affected Enterprise workspaces (ended; FedRAMP exempt)</div><div class="big" data-k="t">Oct 26, 2026</div><div data-k="v"></div><div class="muted">New GPT creation ended. OpenAI says: <q>This creation freeze does not prevent edits to existing, unmigrated GPTs.</q> [1]</div></div>
 </section>
-<p class="muted">Countdowns run to the start of each date in your device's time zone; OpenAI's FAQ gives dates only. OpenAI notes that <q>the dates are subject to change</q> and says to follow the notice for your own account or workspace. [1]</p>
+<p class="muted">Countdowns run to the start of each date in your device's time zone; OpenAI's FAQ gives dates only. Follow the notice for your own account or workspace. [1]</p>
 
 <section class="card">
 <h2>1. Paste your GPT settings</h2>
@@ -218,7 +242,7 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
 <tr><td>Knowledge files</td><td>Copied into reference files</td></tr>
 <tr><td>Custom actions</td><td>Do not transfer; may need an available app or a custom MCP server</td></tr>
 <tr><td>Selected model</td><td>Does not carry over</td></tr>
-<tr><td>Sharing settings</td><td>Do not carry over; the plugin starts private</td></tr>
+<tr><td>Sharing settings</td><td>Do not carry over automatically; the plugin starts private. In a managed workspace, Share Plugin can prefill the original GPT audience</td></tr>
 <tr><td>Drafts and unpublished edits</td><td>Do not transfer; migration uses the latest published version</td></tr>
 <tr><td>The original GPT</td><td>Stays usable until retirement but becomes read-only</td></tr>
 </tbody></table>
@@ -235,9 +259,9 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
 <section class="card" aria-labelledby="faq-h" id="faq">
 <h2 id="faq-h">FAQ</h2>
 <h3>When do ChatGPT custom GPTs retire?</h3>
-<p>OpenAI's FAQ says: "Custom GPTs are scheduled to retire on Dec 11, 2026." Affected Enterprise workspaces with a qualified, approved deferral retire Feb 11, 2027. OpenAI notes that the dates are subject to change.</p>
+<p>OpenAI's FAQ says: "Custom GPTs are scheduled to retire on Dec 11, 2026." FedRAMP workspaces and affected Enterprise workspaces with a qualifying, approved deferral have a retirement date of Feb 11, 2027. OpenAI says this later date does not apply to every workspace. A retirement deferral by itself does not preserve eligibility to create new GPTs.</p>
 <h3>Is there an earlier date for Enterprise workspaces?</h3>
-<p>Yes. For affected Enterprise workspaces, creation of new custom GPTs is planned to end Oct 26, 2026. OpenAI says this creation freeze does not prevent edits to existing, unmigrated GPTs.</p>
+<p>Yes. New GPT creation ended on October 26, 2026 for affected Enterprise workspaces, with the exception of FedRAMP workspaces. OpenAI says this creation freeze does not prevent edits to existing, unmigrated GPTs. A deferral alone does not preserve eligibility to create new GPTs.</p>
 <h3>What happens to my custom GPT after Dec 11, 2026?</h3>
 <p>OpenAI says custom GPTs and their GPT pages become inaccessible at the applicable retirement date. Your existing conversations with custom GPTs will remain accessible after retirement.</p>
 <h3>What carries over when I migrate a GPT to a plugin?</h3>
@@ -246,6 +270,12 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
 <p>No. OpenAI says you do not need to migrate a GPT you only use, and permission to use it does not let you migrate it yourself. Check the creator's guidance about a replacement.</p>
 <h3>Why don&#x27;t I see Migrate to plugin?</h3>
 <p>OpenAI says migration may not be available to your account yet, or plugin access may be disabled. Check the notice in your account and make sure you are in the account or workspace where the GPT was created.</p>
+<h3>Why can&#x27;t I create a new GPT in my Enterprise workspace?</h3>
+<p>OpenAI says new GPT creation ended on October 26, 2026 for affected Enterprise workspaces, with the exception of FedRAMP workspaces. This is separate from retirement of existing GPTs. The creation cutoff does not prevent edits to an existing unmigrated GPT, but a GPT that has already been migrated is read-only. For new reusable workflows, OpenAI says to use Plugin Creator.</p>
+<h3>Can we migrate multiple GPTs at once?</h3>
+<p>OpenAI says bulk migration is available through the ChatGPT Admin plugin. Retrieving the full workspace GPT inventory currently requires a workspace Owner. Bulk migration runs asynchronously, in the background. Starting the task does not confirm that every GPT migrated successfully. Review the results, test the replacement plugins, and confirm access before asking users to switch.</p>
+<h3>Can Share Plugin keep the same audience?</h3>
+<p>OpenAI says an individual migration starts with a private plugin, and existing GPT users do not gain access automatically. In a managed workspace, Share Plugin can prefill the original GPT&#x27;s users, groups, or workspace audience. Review the audience and select Save before asking people to switch.</p>
 </section>
 
 <section class="card cta" id="paid-tool" aria-labelledby="paid-h">
@@ -273,7 +303,7 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
 
 <section class="card">
 <h2>Sources</h2>
-<ol><li id="src1"><a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq" rel="noopener noreferrer" target="_blank">OpenAI Help Center: Custom GPT retirement and migration FAQ</a>, as quoted on <a href="https://firstmoverprojects.com/deadlines/custom-gpt-retirement-dec-11.html" rel="noopener noreferrer" target="_blank">First Mover Projects: ChatGPT custom GPTs retire Dec 11, 2026</a> (checked Oct 21, 2026).</li></ol>
+<ol><li id="src1"><a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq" rel="noopener noreferrer" target="_blank">OpenAI Help Center: Custom GPT retirement and migration FAQ</a>, as quoted on <a href="https://firstmoverprojects.com/deadlines/custom-gpt-retirement-dec-11.html" rel="noopener noreferrer" target="_blank">First Mover Projects: ChatGPT custom GPTs retire Dec 11, 2026</a> (checked Oct 30, 2026).</li></ol>
 <p class="muted">General guidance, not legal, tax or IT advice. Check OpenAI's own FAQ and the notice in your account or workspace for your case. No promise is made that any GPT will migrate successfully or behave the same after migration. This checker only reads the text you paste; it cannot see your GPT. OpenAI, ChatGPT and GPTs are trademarks of OpenAI, named only to describe what this page covers. First Mover Projects is independent and is not affiliated with, endorsed or sponsored by OpenAI.</p>
 </section>
 <section class="card" id="related">
@@ -330,11 +360,11 @@ function build(){
  add("model","warn","The GPT's selected model does not carry over. Re-check answers on the plugin.","Some things do not carry over: custom actions, the GPT's selected model, its sharing settings, and drafts or unpublished edits.");
  if(drafts){add("drafts","warn","You have drafts or unpublished edits. Finish and publish essential edits first: migration uses the latest published version. Publishing does not require sharing it publicly.","Migration uses the GPT's latest published version. Drafts and unpublished edits do not transfer.");}
  else{add("publish","todo","Make sure every edit you need is published before migrating.","Migration uses the GPT's latest published version. Drafts and unpublished edits do not transfer.");}
- if(ent){add("enterprise","warn","Enterprise workspace: creation of new custom GPTs is planned to end Oct 26, 2026 for affected workspaces. Publish any drafts you need to migrate before then.","Publish any drafts you need to migrate before this cutoff; public sharing is not required.");}
+ if(ent){add("enterprise","warn","Enterprise workspace: new GPT creation ended on Oct 26, 2026 for affected workspaces. FedRAMP workspaces are exempt. This freeze does not stop edits to an existing, unmigrated GPT. A deferral alone does not preserve eligibility to create new GPTs. For new reusable workflows, OpenAI says to use Plugin Creator. Standard retirement is Dec 11, 2026. FedRAMP workspaces and affected Enterprise workspaces with a qualifying, approved deferral retire Feb 11, 2027.","New GPT creation ended on October 26, 2026 for affected Enterprise workspaces, with the exception of FedRAMP workspaces.");}
  add("prompts","todo","Save a few familiar prompts, plus at least one harder case, and keep the GPT's current answers so you can compare.","Save a few familiar prompts, plus at least one harder case, and keep the GPT's current answers so you can compare.");
  add("migrate","todo","When migration is available for your account, go to My GPTs, select Migrate to plugin, and follow the instructions. If you don't see it, check the notice in your account and that you are in the workspace where the GPT was created.","OpenAI says migration may not be available to your account yet, or plugin access may be disabled.");
  add("test","todo","Run the same prompts on the plugin: right skill, expected reference material, complete answers or files in the required format.","checking that it selects the right skill and follows your instructions, uses the expected reference material, produces complete answers or files in the required format");
- add("share",shared?"warn":"todo","The new plugin starts private"+(shared?" and migration does not give your existing users access. Share it with them and ask one to confirm they can install and use it.":". Share it with anyone who needs it."),"it starts private and migration does not give existing users access");
+ add("share",shared?"warn":"todo","The new plugin starts private, and existing users do not gain access automatically. In a managed workspace, Share Plugin can prefill the original GPT's users, groups, or workspace audience. Review the audience and select Save"+(shared?" before asking people to switch, and ask one person to confirm they can install and use it.":" when you share it."),"In a managed workspace, Share Plugin can prefill the original GPT's users, groups, or workspace audience.");
  var ol=document.getElementById("out");ol.textContent="";
  items.forEach(function(it){var li=document.createElement("li");li.setAttribute("data-id",it.id);var t=document.createElement("span");t.className="tag "+(it.kind==="warn"?"warn":it.kind==="ok"?"ok":"");t.textContent=it.kind==="warn"?"Action needed":it.kind==="ok"?"Carries over (planned)":it.kind==="info"?"Note":"To do";
   li.appendChild(t);li.appendChild(document.createTextNode(it.text+" "));var s=document.createElement("span");s.className="muted";s.textContent="Source [1]: \u201c"+it.quote+"\u201d";li.appendChild(s);ol.appendChild(li);});

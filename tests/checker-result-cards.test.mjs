@@ -58,7 +58,12 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       deadline: /Oct 22, 2026/,
       button: "Get the $9 photo checklist",
       slug: "/l/lnfgc",
-      campaign: "etsy-photo-audit-check"
+      campaign: "etsy-photo-audit-check",
+      resultContent: "etsy-check-result",
+      stepMatch: /unedited photo of the real item/,
+      skipWeeklyEmail: true,
+      thanks: true,
+      contrast: true
     },
     {
       rel: "tools/fire-to-iris-check/index.html",
@@ -110,6 +115,39 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       const steps = await page.locator("#next-steps li").count();
       assert.ok(steps >= 2 && steps <= 3, item.rel + " steps " + steps);
       if (item.nameStep) assert.match(await page.innerText("#next-steps"), item.nameStep, item.rel);
+      if (item.stepMatch) assert.match(await page.innerText("#next-steps"), item.stepMatch, item.rel);
+    }
+    if (item.thanks) {
+      const cardText = await page.innerText("#result-cta");
+      assert.match(cardText, /Thank you for your time/);
+      assert.match(cardText, /Share it with someone it could help/);
+      const kitTop = await page.locator("#kit-result").boundingBox();
+      const thanksTop = await page.locator("#result-cta .thanks").boundingBox();
+      const shareTop = await page.locator("#result-cta .share-line").boundingBox();
+      assert.ok(kitTop && thanksTop && shareTop && kitTop.y < thanksTop.y && thanksTop.y < shareTop.y, item.rel);
+    }
+    if (item.contrast) {
+      const colors = await page.evaluate(() => {
+        const card = document.querySelector("#result-cta");
+        const heading = document.querySelector("#result-problem");
+        const btn = document.querySelector("#kit-result");
+        return {
+          bg: getComputedStyle(card).backgroundColor,
+          text: getComputedStyle(heading).color,
+          thanks: getComputedStyle(document.querySelector("#result-cta .thanks")).color,
+          share: getComputedStyle(document.querySelector("#result-cta .share-line")).color,
+          btnBg: getComputedStyle(btn).backgroundColor,
+          btnColor: getComputedStyle(btn).color,
+          btnH: btn.getBoundingClientRect().height
+        };
+      });
+      assert.equal(colors.bg, "rgb(255, 255, 255)", item.rel);
+      assert.equal(colors.text, "rgb(7, 27, 49)", item.rel);
+      assert.equal(colors.thanks, "rgb(7, 27, 49)", item.rel);
+      assert.equal(colors.share, "rgb(7, 27, 49)", item.rel);
+      assert.equal(colors.btnBg, "rgb(0, 85, 255)", item.rel);
+      assert.equal(colors.btnColor, "rgb(255, 255, 255)", item.rel);
+      assert.ok(colors.btnH >= 44, item.rel + " button " + colors.btnH);
     }
     if (item.skipWeeklyEmail) {
       assert.equal(/free weekly deadline email/.test(await page.innerText("#result-cta")), false, item.rel);

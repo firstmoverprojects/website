@@ -6,7 +6,7 @@
   <atom:link href="https://firstmoverprojects.com/deadlines/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Dated vendor and system changes small businesses should check, each with its official source. General guidance, not legal, tax or IT advice.</description>
   <language>en-us</language>
-  <lastBuildDate>Thu, 22 Oct 2026 08:30:00 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 30 Oct 2026 12:00:00 +0000</lastBuildDate>
   <item>
     <title>Oct 16: Old Microsoft Whiteboards still in Azure are deleted</title>
     <link>https://firstmoverprojects.com/deadlines/whiteboard-azure-oct-16.html</link>
@@ -15,11 +15,11 @@
     <description><![CDATA[<p><b>Date:</b> Oct 16, 2026<br/><b>Who:</b> Work or school accounts with Whiteboards not migrated to OneDrive<br/><b>What to check:</b> Check the &#x27;Not migrated&#x27; section in Whiteboard and export what you need.<br/><b>Official source:</b> <a href="https://support.microsoft.com/en-us/whiteboard/migration-of-whiteboards-from-azure-to-onedrive">https://support.microsoft.com/en-us/whiteboard/migration-of-whiteboards-from-azure-to-onedrive</a></p><p>General guidance, not legal, tax or IT advice.</p>]]></description>
   </item>
   <item>
-    <title>Oct 26: ChatGPT Enterprise: creation of new custom GPTs planned to end</title>
+    <title>Oct 26: ChatGPT Enterprise: new GPT creation ended (FedRAMP exempt)</title>
     <link>https://firstmoverprojects.com/deadlines/custom-gpt-retirement-dec-11.html</link>
     <guid isPermaLink="false">openai-custom-gpt-creation-20261026@firstmoverprojects.com</guid>
-    <pubDate>Wed, 21 Oct 2026 08:20:00 +0000</pubDate>
-    <description><![CDATA[<p><b>Date:</b> Oct 26, 2026 (planned)<br/><b>Who:</b> Affected ChatGPT Enterprise workspaces<br/><b>What to check:</b> Publish any drafts you need to migrate before this cutoff. Edits to existing, unmigrated GPTs are not prevented.<br/><b>Official source:</b> <a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq">https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq</a></p><p>General guidance, not legal, tax or IT advice.</p>]]></description>
+    <pubDate>Fri, 30 Oct 2026 12:00:00 +0000</pubDate>
+    <description><![CDATA[<p><b>Date:</b> Oct 26, 2026 (ended)<br/><b>Who:</b> Affected ChatGPT Enterprise workspaces. FedRAMP workspaces are exempt.<br/><b>What to check:</b> New GPT creation has ended. Edits to existing, unmigrated GPTs are still allowed. For new reusable workflows, OpenAI says to use Plugin Creator. A deferral alone does not preserve eligibility to create new GPTs.<br/><b>Official source:</b> <a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq">https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq</a></p><p>General guidance, not legal, tax or IT advice.</p>]]></description>
   </item>
   <item>
     <title>Nov 1: EU product identifiers become mandatory for low-value e-commerce imports</title>
@@ -74,8 +74,8 @@
     <title>Dec 11: ChatGPT custom GPTs scheduled to retire</title>
     <link>https://firstmoverprojects.com/deadlines/custom-gpt-retirement-dec-11.html</link>
     <guid isPermaLink="false">openai-custom-gpt-retirement-20261211@firstmoverprojects.com</guid>
-    <pubDate>Wed, 21 Oct 2026 08:20:00 +0000</pubDate>
-    <description><![CDATA[<p><b>Date:</b> Dec 11, 2026<br/><b>Who:</b> Anyone who created or relies on a custom GPT (Enterprise workspaces with an approved deferral: Feb 11, 2027)<br/><b>What to check:</b> List your GPTs, publish essential edits, migrate the ones you created to plugins and test them. Custom actions do not transfer.<br/><b>Official source:</b> <a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq">https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq</a></p><p>General guidance, not legal, tax or IT advice.</p>]]></description>
+    <pubDate>Fri, 30 Oct 2026 12:00:00 +0000</pubDate>
+    <description><![CDATA[<p><b>Date:</b> Dec 11, 2026<br/><b>Who:</b> Anyone who created or relies on a custom GPT (FedRAMP workspaces and affected Enterprise workspaces with a qualifying, approved deferral: Feb 11, 2027). A deferral alone does not preserve eligibility to create new GPTs.<br/><b>What to check:</b> List your GPTs, publish essential edits, migrate the ones you created to plugins and test them. Custom actions do not transfer. In a managed workspace, Share Plugin can prefill the original GPT audience.<br/><b>Official source:</b> <a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq">https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq</a></p><p>General guidance, not legal, tax or IT advice.</p>]]></description>
   </item>
   <item>
     <title>Nov 2: Form 941 for the third quarter of 2026</title>
