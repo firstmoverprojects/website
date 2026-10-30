@@ -13,8 +13,7 @@ let chromium;
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const CSP = "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action 'none'; base-uri 'none'";
 const FOOTER = [
-  "General guidance, not legal, tax or IT advice.",
-  "Not affiliated with Etsy, Inc., Atlassian/Loom, or any third-party platform."
+  "General guidance, not legal, tax or IT advice."
 ];
 const BANNED = ["XMLHttpRequest", "localStorage", "sessionStorage", "indexedDB"];
 const PAGES = {
@@ -24,7 +23,7 @@ const PAGES = {
 };
 const GUMROAD = {
   etsy: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=site&utm_campaign=etsy-photo-audit-check&utm_content=footer",
-  etsyResult: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=site&utm_campaign=etsy-photo-audit-check&utm_content=result-card",
+  etsyResult: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=site&utm_campaign=etsy-photo-audit-check&utm_content=etsy-check-result",
   hvac: "https://firstmoverprojects.gumroad.com/l/afwbvt?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
   intake: "https://firstmoverprojects.gumroad.com/l/fretzy?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
   roofing: "https://firstmoverprojects.gumroad.com/l/wymols?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
@@ -124,6 +123,10 @@ test("static CSP, privacy, nav, and footer guards", () => {
     assert.match(html, /href="\/tools\/"/);
     assert.match(html, /href="\/deadlines\/"/);
     for (const line of FOOTER) assert.ok(html.includes(line), rel + " missing footer line");
+    const affiliation = rel === PAGES.etsy
+      ? "Not affiliated with or endorsed by Etsy."
+      : "Not affiliated with Etsy, Inc., Atlassian/Loom, or any third-party platform.";
+    assert.ok(html.includes(affiliation), rel + " missing footer line");
     const surface = html.replace(/<script id="fmp-utm">[\s\S]*?<\/script>/g, "");
     for (const banned of BANNED) assert.equal(surface.includes(banned), false, rel + " contains " + banned);
     const helperAt = html.indexOf("function trackGumroadClick");

@@ -55,7 +55,7 @@ test("every tool checker has a follow bar under the result kit button and the ma
   for (const rel of pages) {
     const slug = rel.split("/")[1];
     const html = read(rel);
-    const singleResultCta = rel === "tools/amazon-coi-check/index.html";
+    const singleResultCta = rel === "tools/amazon-coi-check/index.html" || rel === "tools/etsy-photo-audit-check/index.html";
     const bars = html.match(/<div class="follow-bar"/g) || [];
     const copies = singleResultCta ? 1 : 2;
     assert.equal(bars.length, copies, rel);

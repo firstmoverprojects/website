@@ -30,17 +30,26 @@ textarea,input[type=text],select{width:100%;max-width:100%;font:14px/1.4 ui-mono
 textarea{min-height:160px}
 input[type=radio]{margin-top:.35em;flex:0 0 auto}
 pre{font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;background:#eef1f5;padding:10px;border-radius:6px;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;margin:.4em 0;min-width:0;max-width:100%}
-button{font:inherit;padding:10px 18px;border-radius:8px;border:0;background:#1f5fbf;color:#fff;cursor:pointer;margin:12px 8px 0 0;white-space:normal;max-width:100%}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:0;background:#1f5fbf;color:#fff;cursor:pointer;margin:12px 8px 0 0;white-space:normal;max-width:100%;min-height:44px}
 button.sec{background:#e4e8ee;color:#1b1f24}
 .tag{display:inline-block;font-size:.8rem;padding:2px 8px;border-radius:9px;margin:0 6px 6px 0;background:#e4e8ee}
 .warn{background:#fde8e6;color:#8a1c12}
 .ok{background:#e3f4e6;color:#1d6b2c}
 .mid{background:#fff3d6;color:#7a5200}
-.cta{background:#fff8e6;border-color:#f0d58a}
-.lead-cta{background:#fff8e6;border:1px solid #f0d58a;border-radius:10px;padding:16px;margin:0 0 16px}
-a.btn{display:inline-block;max-width:100%;box-sizing:border-box;font-weight:700;line-height:1.3;text-decoration:none;background:#1f5fbf;color:#fff;padding:12px 18px;border-radius:8px;margin:12px 0 0}
-a.btn:hover{background:#174a94;color:#fff}
-a{color:#1f5fbf}
+.cta{background:#fff;border-color:#dde1e6}
+.lead-cta{background:#fff;border:2px solid #071b31;border-radius:10px;padding:16px;margin:0 0 16px;color:#071b31}
+a.btn{display:inline-block;max-width:100%;box-sizing:border-box;font-weight:800;line-height:1.3;text-decoration:none;background:#0055ff;color:#fff;padding:12px 18px;border-radius:8px;margin:12px 0 0;text-align:center}
+a.btn:hover{background:#0044cc;color:#fff}
+a{color:#0055ff}
+#result-cta h2,#result-cta h3,#result-cta .next-steps,#result-cta .disclaimer,#result-cta #result-deadline,#result-cta .thanks,#result-cta .share-line{color:#071b31}
+#result-cta h3{font-size:1rem;margin:1em 0 .3em}
+.next-steps{margin:.2em 0 .6em;padding-left:1.25em}
+.next-steps li{margin:8px 0}
+.disclaimer,.thanks,.share-line{font-weight:700;margin:12px 0 0}
+#kit-result{display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;box-sizing:border-box;min-height:48px;padding:14px 18px;margin:12px 0 0;background:#0055ff;color:#fff;font-weight:800;line-height:1.3;text-align:center;text-decoration:none;border-radius:8px;white-space:normal;overflow-wrap:anywhere}
+#kit-result:hover,#kit-result:focus{background:#0044cc;color:#fff}
+a.paid-quiet{display:inline-block;max-width:100%;box-sizing:border-box;min-height:44px;padding:12px 0;color:#0055ff;font-weight:700;line-height:1.3;text-decoration:underline;white-space:normal;overflow-wrap:anywhere}
+#results,#result-cta{overflow-wrap:anywhere;max-width:100%}
 a:focus,button:focus,textarea:focus,input:focus,select:focus{outline:3px solid #1f5fbf;outline-offset:2px}
 table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0}
 th,td{border:1px solid #dde1e6;padding:6px 8px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
@@ -219,20 +228,18 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
 <section class="card" id="results" hidden aria-live="polite">
 <!-- Result card. Etsy did not name a last day. Announcement dated 22 October 2026: https://www.etsy.com/seller-handbook/article/1522733284810
      Help text checked Oct 27, 2026: https://help.etsy.com/hc/en-us/articles/115015663347-Requirements-and-Best-Practices-for-Images-in-Your-Etsy-Shop
-     Gumroad product lnfgc. utm_content=result-card. Gumroad counts the click only when utm_source, utm_medium, and utm_campaign are all set. -->
+     Gumroad product lnfgc. The post-answer button uses utm_content=etsy-check-result.
+     Gumroad counts the click only when utm_source, utm_medium, and utm_campaign are all set. -->
 <div class="lead-cta" id="result-cta">
 <h2 id="result-problem">Your listing photos may not match Etsy's real-photo rule.</h2>
+<h3>Next steps</h3>
+<ol class="next-steps" id="next-steps"></ol>
+<h3>Date</h3>
 <p id="result-deadline">Etsy posted this rule on Oct 22, 2026. They did not name a last day. If the photos are wrong and a buyer opens a case, you may have to give a refund.</p>
-<p><a target="_blank" class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 photo checklist</a></p>
-<div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
-<p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
-<div class="follow-bar-actions">
-<a class="follow-tiktok" data-tool-slug="etsy-photo-audit-check" target="_blank" rel="noopener" href="https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&amp;utm_medium=tool_result&amp;utm_campaign=follower_growth">Follow @firstmoverprojects on TikTok (Daily 60-Sec Checklists)</a>
-<a class="follow-email" href="#signup">Get Free Email Deadline Reminders</a>
-</div>
-</div>
-
-<p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
+<p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
+<p><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/etsy-check-result" data-goatcounter-title="Etsy photo check result" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=etsy-check-result" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 photo checklist</a></p>
+<p class="thanks">Thank you for your time.</p>
+<p class="share-line">Share it with someone it could help.</p>
 </div>
 <h2>Current Listing Risk vs. Real-Photo Audit Fix Plan</h2>
 <p id="mode-note"></p>
@@ -249,26 +256,7 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
 <pre id="agent-prompt" tabindex="0"></pre>
 <button id="copy-prompt" class="sec noprint" type="button">Copy AI prompt</button>
 <p id="copystate" class="muted" role="status"></p>
-
-<div class="email-cap-box" id="signup">
-  <div class="email-cap-title">Email me my free check results + deadline reminders</div>
-  <p class="muted" style="margin:0 0 6px">Save your checklist above, then join our weekly deadline alert list so cutoff changes never catch you off guard:</p>
-  <p style="margin:0"><a class="btn-email-cap" href="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" target="_blank" rel="noopener">Email me deadline reminders (1-click sign-up) →</a> <span class="muted">(opens Brevo's sign-up page · double opt-in, unsubscribe anytime · <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>)</span></p>
-</div>
-<div class="kit-conv-box">
-  <span class="kit-conv-badge">INSTANT DOWNLOAD · 2-PAGE PDF SHOT LIST + CSV LISTING AUDIT SHEET · $9</span>
-  <h3 class="kit-conv-title">See What's Inside the $9 Etsy Real-Photo Listing Audit Kit</h3>
-  <img class="kit-preview-img" src="/assets/previews/etsy-photo-audit-kit-preview-1280x720.png" alt="See What's Inside the $9 Unedited Photo Checklist for Etsy Sellers: 2-page PDF shot list by craft category and CSV listing audit spreadsheet" width="1280" height="720" loading="lazy">
-  <ul class="kit-bullets">
-    <li>Audit your whole shop in one pass: includes a one-row-per-listing CSV spreadsheet (Excel, Google Sheets, Numbers) to mark which listings already have an unedited real-background photo.</li>
-<li>Takes the guesswork out of reshoots: 2-page printable PDF with real-background shot ideas for jewelry, ceramics, clothing, home decor, craft supplies, and custom items.</li>
-<li>Includes a camera-settings safe-default checklist (turning off portrait blur, beauty mode, and AI background swaps) plus Etsy's exact Oct 22 policy quotes.</li>
-  </ul>
-  <div class="kit-btn-row">
-    <a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=kit-preview" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 Etsy Real-Photo Audit Kit (1-Click Checkout) →</a>
-  </div>
-  <p class="muted" style="margin:4px 0 0"><span class="muted">The $9 kit is a separate file on Gumroad. This page does not send your listings there.</span></p>
-</div>
+<p class="muted">The checklist button is at the top of this result. The $9 kit is a separate file on Gumroad. This page does not send your listings there.</p>
 
 </section>
 <details class="fmp-share" id="fmp-share">
@@ -286,7 +274,7 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
 <p class="fmp-powered">Powered by <a href="https://firstmoverprojects.com/">First Mover Projects</a></p>
 
 
-<section class="card cta" aria-labelledby="paid-h">
+<section class="card" aria-labelledby="paid-h">
 <!-- Footer kit link. Same product lnfgc. utm_content=footer so it is separate from the result card. -->
 <span class="kit-conv-badge">INSTANT DOWNLOAD · 2-PAGE PDF SHOT LIST + CSV LISTING AUDIT SHEET · $9</span>
 <h2 id="paid-h">A photo list for the rest of your shop</h2>
@@ -297,7 +285,7 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
 <li>Includes a camera-settings safe-default checklist (turning off portrait blur, beauty mode, and AI background swaps) plus Etsy's exact Oct 22 policy quotes.</li>
 </ul>
 <p>The $9 checklist is a file you download. It lists which photos to take for each kind of item, plus a sheet with one row per listing. This page does not send your listings there.</p>
-<p><a target="_blank" class="btn" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 photo checklist</a></p>
+<p><a target="_blank" class="paid-quiet" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Optional: $9 photo checklist on Gumroad</a></p>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
 <div class="follow-bar-actions">
@@ -323,7 +311,7 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
 <p>Related: <a href="/tools/">Tools and kits</a> · <a href="/deadlines/">Deadlines</a></p>
 <footer>
 <p>General guidance, not legal, tax or IT advice.</p>
-<p>Not affiliated with Etsy, Inc., Atlassian/Loom, or any third-party platform.</p>
+<p>Not affiliated with or endorsed by Etsy.</p>
 <p class="muted">This page reads only what you type or paste. Nothing is uploaded.</p>
 </footer>
 </main>
@@ -683,9 +671,61 @@ function resultLead(model) {
   return "These checks did not find a problem on the rows you entered.";
 }
 
+var STEP_TEXT = {
+  "primary-mockup": "Replace the mockup or computer picture with an unedited photo of the real item on a real background.",
+  "primary-unknown": "Say whether the first photo is an unedited photo of the real item, or a mockup.",
+  "disclosure-missing": "Add the production-partner disclosure before you rely on the listing.",
+  "disclosure-unknown": "Mark whether a production-partner disclosure is needed, already in the listing, or still missing.",
+  "variations-missing": "Link a photo to each color or size, or remove the option you do not offer.",
+  "variations-unknown": "Mark whether color or size options have a linked photo.",
+  "title-empty": "Write a title that says what the item is, in 140 characters or fewer.",
+  "title-long": "Shorten the title to 140 characters or fewer.",
+  "title-repeat": "Take the repeated words out of the title.",
+  "photos-range": "Enter a photo count from 1 to 10."
+};
+
+function collectSteps(model) {
+  if (!model.listings.length) {
+    return [
+      "Paste up to 10 listing rows, or fill in one listing with the toggles.",
+      "Etsy posted the real-photo rule on Oct 22, 2026. They did not name a last day."
+    ];
+  }
+  var seen = {};
+  var fixes = [];
+  model.listings.forEach(function (listing) {
+    listing.flags.forEach(function (flag) {
+      if (!flag.fix || seen[flag.code] || !STEP_TEXT[flag.code]) return;
+      seen[flag.code] = true;
+      fixes.push(flag);
+    });
+  });
+  fixes.sort(function (a, b) { return a.rank - b.rank || (a.code < b.code ? -1 : a.code > b.code ? 1 : 0); });
+  var steps = [];
+  fixes.forEach(function (flag) {
+    if (steps.length >= 3) return;
+    steps.push(STEP_TEXT[flag.code]);
+  });
+  if (steps.length < 2) steps.push("Keep at least one unedited photo of the real item on a real background.");
+  if (steps.length < 2) steps.push("Etsy did not name a last day. Recheck the help page before you edit a listing.");
+  return steps.slice(0, 3);
+}
+
+function paintSteps(steps) {
+  var stepList = byId("next-steps");
+  if (!stepList) return;
+  stepList.textContent = "";
+  steps.forEach(function (text) {
+    var li = document.createElement("li");
+    li.textContent = text;
+    stepList.appendChild(li);
+  });
+}
+
 function render(model) {
   var problem = byId("result-problem");
   if (problem) problem.textContent = resultLead(model);
+  paintSteps(collectSteps(model));
   byId("mode-note").textContent = model.note;
   byId("n-checked").textContent = String(model.listings.length);
   byId("n-fix").textContent = String(model.listings.filter(function (listing) { return listing.needsFix; }).length);
@@ -772,21 +812,31 @@ function copyText(preId) {
   });
 }
 
+function showResult(model) {
+  render(model);
+  var box = byId("results");
+  if (box && box.scrollIntoView) {
+    try { box.scrollIntoView({ block: "start" }); } catch (e) {}
+  }
+  return model;
+}
+
 window.FMP_ETSY = {
   redact: redact,
   classify: classify,
   auditPaste: auditPaste,
   auditSingle: auditSingle,
+  collectSteps: collectSteps,
   render: render,
   fromDom: fromDom,
   EXAMPLE: EXAMPLE,
   MAX_ROWS: MAX_ROWS
 };
 
-byId("go").addEventListener("click", function () { render(fromDom()); });
+byId("go").addEventListener("click", function () { showResult(fromDom()); });
 byId("example").addEventListener("click", function () {
   byId("inp").value = EXAMPLE;
-  render(auditPaste(EXAMPLE));
+  showResult(auditPaste(EXAMPLE));
 });
 byId("clear").addEventListener("click", function () {
   byId("inp").value = "";
@@ -798,6 +848,8 @@ byId("clear").addEventListener("click", function () {
   byId("checklist").textContent = "";
   byId("agent-prompt").textContent = "";
   byId("copystate").textContent = "";
+  var steps = byId("next-steps");
+  if (steps) steps.textContent = "";
 });
 byId("copy-checklist").addEventListener("click", function () { copyText("checklist"); });
 byId("copy-prompt").addEventListener("click", function () { copyText("agent-prompt"); });
