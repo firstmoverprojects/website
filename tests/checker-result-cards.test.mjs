@@ -77,7 +77,10 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       deadline: /Nov 2, 2026/,
       button: "Get the $29 insurance kit",
       slug: "/l/amazon-1m-insurance-readiness-kit",
-      campaign: "amazon-coi-check"
+      campaign: "amazon-coi-check",
+      resultContent: "coi-check-result",
+      nameStep: /insured name|legal business name/i,
+      skipWeeklyEmail: true
     }
   ];
   for (const item of cases) {
@@ -106,8 +109,14 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       assert.match(await page.innerText("#result-cta"), /General guidance, not legal, tax or IT advice/);
       const steps = await page.locator("#next-steps li").count();
       assert.ok(steps >= 2 && steps <= 3, item.rel + " steps " + steps);
+      if (item.nameStep) assert.match(await page.innerText("#next-steps"), item.nameStep, item.rel);
     }
-    assert.match(await page.innerText("#result-cta"), /free weekly deadline email/);
+    if (item.skipWeeklyEmail) {
+      assert.equal(/free weekly deadline email/.test(await page.innerText("#result-cta")), false, item.rel);
+      assert.equal(await page.locator("#results .follow-bar, #results .kit-conv-box, #results .email-cap-box, #results .btn-buy-now").count(), 0, item.rel);
+    } else {
+      assert.match(await page.innerText("#result-cta"), /free weekly deadline email/);
+    }
     assert.deepEqual(errors, [], item.rel);
     assert.deepEqual(toolNetwork(nets), [], item.rel);
     await assertNoHScroll(page);

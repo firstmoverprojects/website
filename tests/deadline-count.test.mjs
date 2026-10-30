@@ -84,7 +84,7 @@ test("both tool pages mark the real deadline and start hidden", () => {
   const fire = readFileSync(path.join(ROOT, "tools/fire-to-iris-check/index.html"), "utf8");
   const amazon = readFileSync(path.join(ROOT, "tools/amazon-coi-check/index.html"), "utf8");
   assert.equal(fire.split('data-deadline="2026-11-01"').length - 1, 3);
-  assert.equal(amazon.split('data-deadline="2026-11-02"').length - 1, 4);
+  assert.equal(amazon.split('data-deadline="2026-11-02"').length - 1, 3);
   assert.equal(fire.includes('data-deadline-label="Nov 1, 2026 IRS FIRE test-file cutoff"'), true);
   assert.equal(amazon.includes('data-deadline-label="Nov 2, 2026 Amazon COI deadline"'), true);
   assert.match(fire, /\.deadline-count\{[^}]*color:#1b1f24/);

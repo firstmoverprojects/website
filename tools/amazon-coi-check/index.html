@@ -56,16 +56,25 @@ label{display:block;font-weight:600;margin-top:12px}
 textarea{width:100%;min-height:180px;font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;padding:8px;border:1px solid #b9c0c8;border-radius:6px}
 input[type=text],input[type=date]{width:100%;max-width:100%;font:inherit;padding:8px;border:1px solid #b9c0c8;border-radius:6px}
 pre{font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;background:#eef1f5;padding:10px;border-radius:6px;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;margin:.4em 0;max-width:100%}
-button{font:inherit;padding:10px 18px;border-radius:8px;border:0;background:#1f5fbf;color:#fff;cursor:pointer;margin:12px 8px 0 0}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:0;background:#1f5fbf;color:#fff;cursor:pointer;margin:12px 8px 0 0;min-height:44px}
 button.sec{background:#e4e8ee;color:#1b1f24}
 .tag{display:inline-block;font-size:.8rem;padding:2px 8px;border-radius:9px;margin:0 0 6px;background:#e4e8ee}
 .warn{background:#fde8e6;color:#8a1c12}
 .ok{background:#e3f4e6;color:#1d6b2c}
-.cta{background:#fff8e6;border-color:#f0d58a}
-.lead-cta{background:#fff8e6;border:1px solid #f0d58a;border-radius:10px;padding:16px;margin:0 0 16px}
-a.btn{display:inline-block;max-width:100%;box-sizing:border-box;font-weight:800;line-height:1.3;text-decoration:none;background:linear-gradient(135deg,#22c55e 0%,#4ade80 100%);color:#052e16;padding:12px 18px;border-radius:8px;margin:12px 0 0;text-align:center}
-a.btn:hover{background:#16a34a;color:#052e16}
-a{color:#1f5fbf}
+.cta{background:#fff;border-color:#dde1e6}
+.lead-cta{background:#fff;border:2px solid #071b31;border-radius:10px;padding:16px;margin:0 0 16px;color:#071b31}
+a.btn{display:inline-block;max-width:100%;box-sizing:border-box;font-weight:800;line-height:1.3;text-decoration:none;background:#0055ff;color:#fff;padding:12px 18px;border-radius:8px;margin:12px 0 0;text-align:center}
+a.btn:hover{background:#0044cc;color:#fff}
+a{color:#0055ff}
+#result-cta h2,#result-cta h3,#result-cta .next-steps,#result-cta .disclaimer,#result-cta #result-deadline{color:#071b31}
+#result-cta h3{font-size:1rem;margin:1em 0 .3em}
+.next-steps{margin:.2em 0 .6em;padding-left:1.25em}
+.next-steps li{margin:8px 0}
+.disclaimer{font-weight:700;margin:12px 0 0}
+#kit-result{display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;box-sizing:border-box;min-height:48px;padding:14px 18px;margin:12px 0 0;background:#0055ff;color:#fff;font-weight:800;line-height:1.3;text-align:center;text-decoration:none;border-radius:8px;white-space:normal;overflow-wrap:anywhere}
+#kit-result:hover,#kit-result:focus{background:#0044cc;color:#fff}
+a.paid-quiet{display:inline-block;max-width:100%;box-sizing:border-box;min-height:44px;padding:12px 0;color:#0055ff;font-weight:700;line-height:1.3;text-decoration:underline;white-space:normal;overflow-wrap:anywhere}
+#results,#result-cta{overflow-wrap:anywhere;max-width:100%}
 a:focus,button:focus,textarea:focus,input:focus,pre:focus{outline:3px solid #1f5fbf;outline-offset:2px}
 table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0;table-layout:fixed}
 th,td{border:1px solid #dde1e6;padding:6px 8px;text-align:left;vertical-align:top;word-break:break-word;overflow-wrap:anywhere}
@@ -360,21 +369,17 @@ Please reissue my certificate with these corrections:
 <section class="card" id="results" hidden aria-live="polite">
 <!-- Result card. Nov 2, 2026 is the date in Amazon's seller announcement, already linked in Sources.
      Gumroad product amazon-1m-insurance-readiness-kit ($29). Short id zasjos redirects to that URL and keeps the query string.
-     utm_source, utm_medium, and utm_campaign are all required or Gumroad does not count the click. utm_content=result-card. -->
+     utm_source, utm_medium, and utm_campaign are all required or Gumroad does not count the click.
+     The post-answer button uses utm_content=coi-check-result. -->
 <div class="lead-cta" id="result-cta">
-<h2 id="result-problem">Your certificate still needs a look before Amazon's rule starts.</h2>
+<h2 id="result-problem">Your certificate still needs a look before Nov 2, 2026.</h2>
+<h3>Next steps</h3>
+<ol class="next-steps" id="next-steps"></ol>
+<h3>Date</h3>
 <p id="result-deadline">Amazon's extra rule starts Nov 2, 2026. Sellers in higher-safety categories need $1 million of coverage for each incident, and $1 million in total, even if sales are low.</p>
 <p class="deadline-count" data-deadline="2026-11-02" data-deadline-label="Nov 2, 2026 Amazon COI deadline" hidden></p>
-<p><a target="_blank" class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=amazon-coi-check&amp;utm_content=result-card" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 insurance kit</a></p>
-<div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
-<p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
-<div class="follow-bar-actions">
-<a class="follow-tiktok" data-tool-slug="amazon-coi-check" target="_blank" rel="noopener" href="https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&amp;utm_medium=tool_result&amp;utm_campaign=follower_growth">Follow @firstmoverprojects on TikTok (Daily 60-Sec Checklists)</a>
-<a class="follow-email" href="#signup">Get Free Email Deadline Reminders</a>
-</div>
-</div>
-
-<p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
+<p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
+<p><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/coi-check-result" data-goatcounter-title="Amazon COI check result" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=amazon-coi-check&amp;utm_content=coi-check-result" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 insurance kit</a></p>
 </div>
 <h2>Results</h2>
 <div class="cd">
@@ -413,36 +418,7 @@ Please reissue my certificate with these corrections:
 <pre id="fixlist" tabindex="0"></pre>
 <button id="copy" class="sec" type="button">Copy fix list</button>
 <p id="copystate" class="muted" role="status"></p>
-
-<div class="email-cap-box" id="signup">
-  <div class="email-cap-title">Email me my free check results + deadline reminders</div>
-  <p class="muted" style="margin:0 0 6px">Save your checklist above, then join our weekly deadline alert list so cutoff changes never catch you off guard:</p>
-  <p style="margin:0"><a class="btn-email-cap" href="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" target="_blank" rel="noopener">Email me deadline reminders (1-click sign-up) →</a> <span class="muted">(opens Brevo's sign-up page · double opt-in, unsubscribe anytime · <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>)</span></p>
-</div>
-<div class="kit-conv-box">
-  <span class="kit-conv-badge">$29 · INSTANT DOWNLOAD · 1-CLICK CHECKOUT</span>
-  <h3 class="kit-conv-title">Exactly what buyers receive in the $29 Amazon $1M Insurance Readiness Kit</h3>
-  <p class="price-lg">$29</p>
-  <figure>
-  <img class="kit-preview-img" src="/assets/previews/amazon-coi-kit-preview-1280x720.png" alt="Inside the $29 Amazon $1M Insurance Readiness Kit: interactive 7-point ACORD 25 pre-upload audit workbook, broker email correction scripts, and Seller Central upload walkthrough" width="1280" height="720" loading="lazy">
-  <figcaption class="kit-caption">Inside the kit: the interactive 7-point ACORD 25 pre-upload audit workbook, the copy-paste broker email correction scripts, and the step-by-step Seller Central Account Health upload walkthrough.</figcaption>
-  </figure>
-  <ol class="file-list">
-    <li><strong>Interactive 7-point ACORD 25 pre-upload audit workbook.</strong> Legal Entity Name, Additional Insured, $1,000,000 per occurrence, $1,000,000 aggregate, deductible of $10,000 or less, all Amazon.com sales, no sunset clause, and 30 days' cancellation notice.</li>
-    <li><strong>Copy-paste broker email correction scripts</strong> for Legal Entity Name, Additional Insured, $1M occurrence, a deductible above $10,000, a sunset clause, and a missing 30-day cancellation notice.</li>
-    <li><strong>Step-by-step Seller Central Account Health upload walkthrough.</strong></li>
-  </ol>
-  <h3 class="kit-conv-title">Free Browser Check vs. $29 Readiness Kit</h3>
-  <p>The free check you just ran stays in this browser tab and flags common ACORD 25 mismatches in the text you pasted. The $29 kit is the workbook, the broker email scripts, and the upload walkthrough you use to organize the questions for your broker before you upload. The free tool and $29 kit help sellers spot common ACORD 25 mismatches and organize broker questions before uploading, and cannot guarantee Amazon acceptance or prevent all upload rejections.</p>
-  <p><span class="demo-kicker">PRODUCT DEMONSTRATION — SAMPLE SCENARIO</span> <span class="sample-kicker">SAMPLE SCENARIO — FICTIONAL DATA</span></p>
-  <h3 class="kit-conv-title">Before you upload your Amazon insurance certificate, here is how to organize the questions you need to ask your broker</h3>
-  <p>Fictional sample, not a customer result. Seller Central Legal Entity: Jordan Lee, an individual sole proprietor. The sample certificate shows the trade name Lee Home Goods and a $25,000 deductible. The pre-check spots both before upload. The kit's broker email script asks the broker to reissue the ACORD 25 with the insured name Jordan Lee, "Amazon.com Services LLC and its affiliates and assignees" as additional insured, at least $1,000,000 per occurrence and aggregate, and a deductible of $10,000 or less listed on the certificate, with no sunset clause and 30 days' cancellation notice. Then the upload walkthrough follows Account Health. This sample does not mean Amazon accepted a certificate.</p>
-  <div class="kit-btn-row">
-    <p class="deadline-count" data-deadline="2026-11-02" data-deadline-label="Nov 2, 2026 Amazon COI deadline" hidden></p>
-    <a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=amazon-coi-check&amp;utm_content=post-check" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 Amazon $1M Insurance Readiness Kit (1-Click Checkout) →</a>
-  </div>
-  <p class="muted" style="margin:4px 0 0">Free deadline page: <a href="/deadlines/amazon-insurance-nov-2.html">Amazon commercial liability insurance changes start Nov 2, 2026</a></p>
-</div>
+<p class="muted">The kit button is at the top of this result. Free deadline page: <a href="/deadlines/amazon-insurance-nov-2.html">Amazon commercial liability insurance changes start Nov 2, 2026</a></p>
 
 <h2>Text checked</h2>
 <pre id="checked" tabindex="0"></pre>
@@ -470,7 +446,7 @@ Please reissue my certificate with these corrections:
 <p id="prompt-state" class="muted" role="status"></p>
 </section>
 
-<section class="card cta" id="paid-tool" aria-labelledby="paid-h">
+<section class="card" id="paid-tool" aria-labelledby="paid-h">
 <!-- Footer kit link. Same product. utm_content=footer. The old link had no utm_campaign, so Gumroad did not count those clicks. -->
 <span class="kit-conv-badge">$29 · INSTANT DOWNLOAD · 1-CLICK CHECKOUT</span>
 <h2 id="paid-h">A fuller kit to send your broker</h2>
@@ -486,7 +462,7 @@ Please reissue my certificate with these corrections:
 </ol>
 <p>The $29 kit is a file you download. It helps you spot common ACORD 25 mismatches and organize broker questions before uploading. It cannot guarantee Amazon acceptance or prevent all upload rejections. This page does not send your certificate there.</p>
 <p class="deadline-count" data-deadline="2026-11-02" data-deadline-label="Nov 2, 2026 Amazon COI deadline" hidden></p>
-<p><a target="_blank" class="btn" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=amazon-coi-check&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 insurance kit</a></p>
+<p><a target="_blank" class="paid-quiet" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=amazon-coi-check&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Optional: $29 insurance kit on Gumroad</a></p>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
 <div class="follow-bar-actions">
@@ -541,6 +517,7 @@ Please reissue my certificate with these corrections:
 <p>Not affiliated with or endorsed by Amazon.</p>
 <p>Made by First Mover Projects with AI coding tools.</p>
 <p>Your certificate text stays in this browser tab. Nothing is uploaded or saved.</p>
+<p><a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a></p>
 </footer>
 </main>
 <noscript><p>This check needs JavaScript in your browser. Nothing is uploaded.</p></noscript>
@@ -975,12 +952,90 @@ function scopeLines(q1, q2, q3) {
   return out;
 }
 
+function refreshOpenResult() {
+  var box = byId("results");
+  if (box && !box.hidden) run();
+}
+
 function setText(id, value) {
   var el = byId(id);
   if (el) el.textContent = value;
 }
 
-function paint(result) {
+function applicableDate(q1, q2) {
+  if (q1 === "yes") {
+    return {
+      when: "Nov 2, 2026",
+      line: "From Nov 2, 2026, Amazon's page says you need USD 1 million coverage for those products regardless of sales."
+    };
+  }
+  if (q2 === "yes") {
+    return {
+      when: "the 30-day window in Amazon's existing rule",
+      line: "Amazon's existing rule already applies: insurance within 30 days after exceeding USD 10,000 in gross proceeds in one month."
+    };
+  }
+  return {
+    when: "Nov 2, 2026",
+    line: "Amazon's extra rule starts Nov 2, 2026. Sellers in higher-safety categories need $1 million of coverage for each incident, and $1 million in total, even if sales are low."
+  };
+}
+
+function namedStep(item) {
+  var action = "Check that the insured name on the certificate matches the seller's legal business name in Seller Central.";
+  if (item.status === "ok") {
+    return "The legal entity name you entered appears in the certificate text. " + action + " " + NAMED_BASE;
+  }
+  if (item.detail && item.detail.indexOf("was not found") !== -1) {
+    return "The legal entity name you entered was not found in the certificate text. " + action + " " + NAMED_BASE;
+  }
+  return action + " " + NAMED_BASE;
+}
+
+function collectSteps(result, q3) {
+  var steps = [];
+  var named = null;
+  var i;
+  for (i = 0; i < result.extras.length; i++) {
+    if (result.extras[i].id === "Named insured") named = result.extras[i];
+  }
+  if (named) {
+    var step = namedStep(named);
+    if (named.detail && named.detail.indexOf("single-member LLC using a trade name/DBA") !== -1) step += TRADE;
+    steps.push(step);
+  }
+  if (q3 === "yes") {
+    steps.push("Amazon's page says Mainland China sellers must get the policy through the Amazon Insurance Accelerator (AIA) program unless Amazon agrees otherwise in writing.");
+  }
+  function take(status) {
+    var j;
+    for (j = 0; j < result.rows.length; j++) {
+      if (steps.length >= 3) return;
+      var item = result.rows[j];
+      if (item.id === "Named insured") continue;
+      if (item.status !== status) continue;
+      steps.push(item.title + ": " + oneLine(item.detail));
+    }
+  }
+  take("fix");
+  take("check");
+  if (steps.length < 2) take("ok");
+  if (steps.length > 3) steps = steps.slice(0, 3);
+  return steps;
+}
+
+function paintSteps(steps) {
+  var stepList = byId("next-steps");
+  if (!stepList) return;
+  stepList.textContent = "";
+  steps.forEach(function (text) {
+    var li = document.createElement("li");
+    li.textContent = text;
+    stepList.appendChild(li);
+  });
+}
+
+function paint(result, opts) {
   var box = byId("results");
   if (!box) return;
   box.hidden = false;
@@ -995,9 +1050,15 @@ function paint(result) {
   setText("n-ok", String(nOk));
   setText("n-fix", String(nFix));
   setText("n-check", String(nCheck));
-  if (nFix > 0) setText("result-problem", "Your certificate has " + nFix + (nFix === 1 ? " item" : " items") + " to fix before you send it to Amazon.");
-  else if (nCheck > 0) setText("result-problem", "Some lines on your certificate still need a check by hand.");
-  else setText("result-problem", "The seven key terms on your certificate look right.");
+  var q1 = groupValue("q1");
+  var q2 = groupValue("q2");
+  var q3 = groupValue("q3");
+  var date = applicableDate(q1, q2);
+  if (nFix > 0) setText("result-problem", "Your certificate has " + nFix + (nFix === 1 ? " item" : " items") + " to fix before " + date.when + ".");
+  else if (nCheck > 0) setText("result-problem", "Some lines on your certificate still need a check by hand before " + date.when + ".");
+  else setText("result-problem", "The seven key terms on your certificate look right for " + date.when + ".");
+  setText("result-deadline", date.line);
+  paintSteps(collectSteps(result, q3));
   var cap = byId("cap");
   if (cap) {
     cap.hidden = !result.truncated;
@@ -1032,15 +1093,18 @@ function paint(result) {
   setText("fixlist", result.fixList);
   setText("checked", result.checkedText);
   setText("copystate", "");
+  if (opts && opts.scroll && box.scrollIntoView) {
+    try { box.scrollIntoView({ block: "start" }); } catch (e) {}
+  }
 }
 
-function run() {
+function run(opts) {
   var text = byId("coi") ? byId("coi").value : "";
   var entity = byId("entity") ? byId("entity").value : "";
   var dba = byId("dba") ? !!byId("dba").checked : false;
   var expiry = byId("expiry") ? byId("expiry").value : "";
   var result = checkCOI(text, entity, dba, expiry, new Date());
-  paint(result);
+  paint(result, opts);
   return result;
 }
 
@@ -1074,6 +1138,7 @@ function paintScope() {
       out.appendChild(bq);
     }
   });
+  refreshOpenResult();
 }
 
 function paintCriteria() {
@@ -1120,11 +1185,11 @@ function boot() {
   if (daysEl) daysEl.textContent = daysText(new Date());
   var go = byId("go");
   if (!go || !go.addEventListener) return;
-  go.addEventListener("click", function () { run(); });
+  go.addEventListener("click", function () { run({ scroll: true }); });
   var sample = byId("sample");
   if (sample) sample.addEventListener("click", function () {
     if (byId("coi")) byId("coi").value = SAMPLE;
-    run();
+    run({ scroll: true });
   });
   var clear = byId("clear");
   if (clear) clear.addEventListener("click", function () {
