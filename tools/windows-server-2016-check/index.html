@@ -79,7 +79,7 @@ a,p,li,label,legend,h1,h2{overflow-wrap:anywhere}
 [hidden]{display:none !important}
 #sib-form{position:relative;display:grid;gap:12px;margin-top:8px}
 #sib-form label{margin-top:0}
-#sib-form input[type="text"]{width:100%;max-width:28rem;min-height:44px;margin-top:6px;font:inherit;padding:8px;border:2px solid #1b2838;border-radius:6px;background:#fff;color:#12161c}
+#sib-form input[type="email"]{width:100%;max-width:28rem;min-height:44px;margin-top:6px;font:inherit;padding:8px;border:2px solid #1b2838;border-radius:6px;background:#fff;color:#12161c}
 .sib-optin{display:flex;align-items:flex-start;gap:8px;font-weight:400}
 #sib-form .input--hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 pre{font:15px/1.45 ui-monospace,Menlo,Consolas,monospace;background:#fff;color:#12161c;border:2px solid #1b2838;padding:10px;border-radius:6px;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;margin:.4em 0;max-width:100%}
@@ -89,6 +89,12 @@ pre{font:15px/1.45 ui-monospace,Menlo,Consolas,monospace;background:#fff;color:#
   .choices{flex-direction:column}
   .choices label,.actions button,button{flex-basis:auto;width:100%;margin-right:0}
 }
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,textarea{font-size:16px}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,button{min-height:44px}
+nav a,.site-nav a{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:44px;min-width:44px;padding:8px 6px}
+label:has(> input[type="checkbox"]),label:has(> input[type="radio"]){min-height:44px;box-sizing:border-box}
+.follow-tiktok,.follow-email{box-sizing:border-box;min-height:44px}
+picture{display:block;max-width:100%}
 </style>
 </head>
 <body>
@@ -198,7 +204,7 @@ pre{font:15px/1.45 ui-monospace,Menlo,Consolas,monospace;background:#fff;color:#
 <form id="sib-form" method="POST" action="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" data-type="subscription" autocomplete="off">
 <p>
 <label for="EMAIL">Enter your email address to subscribe</label>
-<input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" value="" placeholder="EMAIL" required>
+<input class="input" type="email" id="EMAIL" name="EMAIL" autocomplete="email" inputmode="email" value="" placeholder="EMAIL" required>
 </p>
 <p>
 <label class="sib-optin" for="OPT_IN">

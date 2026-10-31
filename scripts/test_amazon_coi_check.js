@@ -216,7 +216,7 @@ while ((um = urlRe.exec(html))) {
 }
 var allowed = [
   "https://firstmoverprojects.com/",
-  "https://firstmoverprojects.com/assets/previews/amazon-coi-kit-preview-1280x720.png",
+  "https://firstmoverprojects.com/assets/previews/amazon-coi-kit-preview-1280x720.webp",
   "https://firstmoverprojects.com/privacy.html",
   "https://firstmoverprojects.com/tools/amazon-coi-check/",
   "https://firstmoverprojects.com/tools/amazon-coi-check/?embed=1",

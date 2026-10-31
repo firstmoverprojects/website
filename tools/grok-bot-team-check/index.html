@@ -13,11 +13,11 @@
 <meta property="og:description" content="Check which of 12 practical AI agent routines (missed refunds, unused subscriptions, late-delivery credits, tax receipts, contract red-flags, inbox triage, deadline radar) save your business the most hours and money per week. Free, runs in your browser.">
 <meta property="og:url" content="https://firstmoverprojects.com/tools/grok-bot-team-check/">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://firstmoverprojects.com/assets/previews/ai-agent-team-kit-preview-1280x720.png">
+<meta property="og:image" content="https://firstmoverprojects.com/assets/previews/ai-agent-team-kit-preview-1280x720.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Free 60-Second AI Agent Team &amp; 12-Routine Savings Calculator (Runs in Your Browser)">
 <meta name="twitter:description" content="Check which of 12 practical AI agent routines (missed refunds, unused subscriptions, late-delivery credits, tax receipts, contract red-flags, inbox triage, deadline radar) save your business the most hours and money per week. Free, runs in your browser.">
-<meta name="twitter:image" content="https://firstmoverprojects.com/assets/previews/ai-agent-team-kit-preview-1280x720.png">
+<meta name="twitter:image" content="https://firstmoverprojects.com/assets/previews/ai-agent-team-kit-preview-1280x720.webp">
 
 <style>
 *{box-sizing:border-box}
@@ -90,6 +90,12 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
 .fmp-license{margin:14px 0 0;padding-top:12px;border-top:1px solid #dde1e6}
 .fmp-powered{margin:8px 0 16px;font-size:.95rem}
 @media print{.fmp-share{display:none !important}}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,textarea,#fmp-embed-snippet{font-size:16px}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,button{min-height:44px}
+nav a,.site-nav a{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:44px;min-width:44px;padding:8px 6px}
+label:has(> input[type="checkbox"]),label:has(> input[type="radio"]){min-height:44px;box-sizing:border-box}
+.follow-tiktok,.follow-email,a.btn,a.btn-buy-now,a.btn-email-cap{box-sizing:border-box;min-height:44px}
+picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 </style>
 <script id="fmp-embed-boot">
 (function () {
@@ -163,21 +169,21 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
       <option value="ecom">E-Commerce / Marketplace Seller</option>
     </select>
     <label for="team-size">Team size (people)</label>
-    <input id="team-size" type="number" min="1" max="500" value="2">
+    <input id="team-size" type="number" inputmode="numeric" min="1" max="500" value="2">
     <label for="hourly-rate">Value of your time ($/hour)</label>
-    <input id="hourly-rate" type="number" min="10" max="1000" value="50">
+    <input id="hourly-rate" type="number" inputmode="decimal" min="10" max="1000" value="50">
     <label for="subs-count">Active paid software subscriptions (#)</label>
-    <input id="subs-count" type="number" min="0" max="500" value="12">
+    <input id="subs-count" type="number" inputmode="numeric" min="0" max="500" value="12">
   </div>
   <div>
     <label for="hrs-inbox">Hours/week on inbox &amp; spam sorting</label>
-    <input id="hrs-inbox" type="number" min="0" max="80" step="0.5" value="4">
+    <input id="hrs-inbox" type="number" inputmode="decimal" min="0" max="80" step="0.5" value="4">
     <label for="hrs-book">Hours/week on receipts, bills &amp; compliance</label>
-    <input id="hrs-book" type="number" min="0" max="80" step="0.5" value="2.5">
+    <input id="hrs-book" type="number" inputmode="decimal" min="0" max="80" step="0.5" value="2.5">
     <label for="hrs-leads">Hours/week on lead research &amp; quote follow-up</label>
-    <input id="hrs-leads" type="number" min="0" max="80" step="0.5" value="3.5">
+    <input id="hrs-leads" type="number" inputmode="decimal" min="0" max="80" step="0.5" value="3.5">
     <label for="orders-mo">Packages / supplier orders per month (#)</label>
-    <input id="orders-mo" type="number" min="0" max="10000" value="25">
+    <input id="orders-mo" type="number" inputmode="numeric" min="0" max="10000" value="25">
   </div>
 </div>
 
@@ -269,7 +275,7 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
 <div class="kit-conv-box">
   <span class="kit-conv-badge">EARLY-ACCESS WAITLIST · 5 BOT PROMPTS + 12 ROUTINE SCHEDULES + ROI TRACKER CSV · $19</span>
   <h3 class="kit-conv-title">See What's Inside the $19 5-Bot Executive Team &amp; 12-Routine Starter Pack</h3>
-  <img class="kit-preview-img" src="/assets/previews/ai-agent-team-kit-preview-1280x720.png" alt="See What's Inside the $19 5-Bot Executive Team and 12 Money-Saving Routines Starter Pack: 5 copy-paste bot role prompts, 12 cron-scheduled routine templates, human-wall safety checklist, and ROI tracker CSV" width="1280" height="720" loading="lazy">
+  <picture><source type="image/webp" srcset="/assets/previews/ai-agent-team-kit-preview-1280x720.webp"><img class="kit-preview-img" src="/assets/previews/ai-agent-team-kit-preview-1280x720.png" alt="See What's Inside the $19 5-Bot Executive Team and 12 Money-Saving Routines Starter Pack: 5 copy-paste bot role prompts, 12 cron-scheduled routine templates, human-wall safety checklist, and ROI tracker CSV" width="1280" height="720" loading="lazy"></picture>
   <ul class="kit-bullets">
     <li>Copy-paste system prompts for all 5 roles (Chief of Staff, Scout, Builder, Risk Gate, Sales) with the structured OBJECTIVE / WHY / FACTS / ACTION handoff protocol.</li>
     <li>All 12 money-saving routine prompts with exact cron schedules (`0 8 * * 1-5`, `0 8 * * 1`, `0 7 1 * *`), quiet-hours token budget guards, and pre-send human approval checklists.</li>
@@ -307,7 +313,7 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
 <section class="card cta" id="paid-tool" aria-labelledby="paid-h">
   <span class="kit-conv-badge">EARLY-ACCESS WAITLIST · 5 BOT PROMPTS + 12 ROUTINE SCHEDULES + ROI TRACKER CSV · $19</span>
   <h2 id="paid-h">See What's Inside the $19 5-Bot Executive Team &amp; 12-Routine Starter Pack</h2>
-  <img class="kit-preview-img" src="/assets/previews/ai-agent-team-kit-preview-1280x720.png" alt="See What's Inside the $19 5-Bot Executive Team and 12 Money-Saving Routines Starter Pack: 5 copy-paste bot role prompts, 12 cron-scheduled routine templates, human-wall safety checklist, and ROI tracker CSV" width="1280" height="720" loading="lazy">
+  <picture><source type="image/webp" srcset="/assets/previews/ai-agent-team-kit-preview-1280x720.webp"><img class="kit-preview-img" src="/assets/previews/ai-agent-team-kit-preview-1280x720.png" alt="See What's Inside the $19 5-Bot Executive Team and 12 Money-Saving Routines Starter Pack: 5 copy-paste bot role prompts, 12 cron-scheduled routine templates, human-wall safety checklist, and ROI tracker CSV" width="1280" height="720" loading="lazy"></picture>
   <ul class="kit-bullets">
     <li>Copy-paste system prompts for all 5 roles (Chief of Staff, Scout, Builder, Risk Gate, Sales) with the structured OBJECTIVE / WHY / FACTS / ACTION handoff protocol.</li>
     <li>All 12 money-saving routine prompts with exact cron schedules, quiet-hours token budget guards, and pre-send human approval checklists.</li>
