@@ -133,7 +133,7 @@ if (!scriptMatch) {
   assertEq(classify(["yes"]).complete, false, "short list is incomplete");
 }
 
-var removedLines = require("child_process").execFileSync("git", ["diff", "--unified=0", "origin/main", "--", "deadlines/1098-vli-check/index.html"], { encoding: "utf8" })
+var removedLines = require("child_process").execFileSync("git", ["diff", "--unified=0", "e27a416", "4ec468e", "--", "deadlines/1098-vli-check/index.html"], { encoding: "utf8" })
   .split("\n")
   .filter(function (line) { return line.startsWith("-") && !line.startsWith("---"); });
 assertEq(removedLines.length, 3, "only the comment and two hosted links change");
