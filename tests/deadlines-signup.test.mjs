@@ -20,7 +20,7 @@ test("every top-level deadlines page has the full FMP signup and a green pill bu
   const dir = path.join(ROOT, "deadlines");
   const files = readdirSync(dir).filter((name) => name.endsWith(".html")).sort();
   assert.ok(files.includes("index.html"));
-  assert.equal(files.length, 14);
+  assert.equal(files.length, 15);
   for (const name of files) {
     const html = readFileSync(path.join(dir, name), "utf8");
     assert.equal(html.toLowerCase().includes("free weekly email"), false, name);
