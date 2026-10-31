@@ -1,9 +1,10 @@
 {
   "boi": {
     "requiredForUsCompanies": false,
-    "summary": "Beneficial ownership (BOI) reports are not listed. FinCEN's final rule, effective August 14, 2026, keeps companies created in the United States out of the reporting rule. A foreign company registered to do business in the United States can still have a report. This app does not list that foreign-company case.",
-    "sourceUrl": "https://www.federalregister.gov/documents/2026/08/14/2026-16576/beneficial-ownership-information-reporting-requirement-revision",
-    "sourceLabel": "FinCEN final rule, Federal Register, August 14, 2026"
+    "requiredForUsPersons": false,
+    "summary": "Companies formed in the United States, including U.S. LLCs, do not file beneficial ownership (BOI) reports. U.S. persons are exempt too: they do not give BOI to a reporting company, and a FinCEN ID does not have to be updated. FinCEN's final rule took effect on August 14, 2026, and made the March 26, 2025 interim final rule exemption permanent. A company formed outside the United States and registered to do business here may still have to file. This list has no BOI date.",
+    "sourceUrl": "https://www.fincen.gov/boi",
+    "sourceLabel": "FinCEN: Beneficial ownership information"
   },
   "states": [
     {
