@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action https://05279842.sibforms.com; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/windows-server-2016-check/">
+<title>Windows Server 2016 check (free, runs in your browser)</title>
+<meta name="description" content="Four questions. This page counts days until Jan 12, 2027, the extended support end date Microsoft lists for Windows Server 2016, and names one Microsoft article to open. Nothing is uploaded. Not affiliated with or endorsed by Microsoft.">
+<meta property="og:title" content="Windows Server 2016 check (free, runs in your browser)">
+<meta property="og:description" content="Four questions. This page counts days until Jan 12, 2027, the extended support end date Microsoft lists for Windows Server 2016, and names one Microsoft article to open. Nothing is uploaded. Not affiliated with or endorsed by Microsoft.">
+<meta property="og:url" content="https://firstmoverprojects.com/tools/windows-server-2016-check/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Windows Server 2016 check (free, runs in your browser)">
+<meta name="twitter:description" content="Four questions. This page counts days until Jan 12, 2027, the extended support end date Microsoft lists for Windows Server 2016, and names one Microsoft article to open. Nothing is uploaded. Not affiliated with or endorsed by Microsoft.">
+<!-- UNLISTED: noindex. Do not add this URL to sitemap.xml, tools/index.html, deadlines/feed.xml, deadlines/deadlines.ics, or deadlines/finder/. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "dateModified": "2026-10-30",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "When does extended support for Windows Server 2016 end?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Microsoft's Windows Server release information lists the extended support end date for Windows Server 2016 as 2027-01-12. The product lifecycle page lists the Extended End Date as 1/13/2027 6:59:59 AM Pacific Time. This page counts days until Jan 12, 2027."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does Microsoft say about Remote Web Access on Windows Server 2016 Essentials?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Microsoft support for Remote Web Access and remotewebaccess.com ends Jan 12, 2027."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this page from Microsoft?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Not affiliated with or endorsed by Microsoft."
+      }
+    }
+  ]
+}
+</script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#12161c;background:#f4f6f8}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;line-height:1.25;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.2em 0 .4em}
+.card{background:#fff;border:2px solid #1b2838;border-radius:10px;padding:16px;margin:12px 0}
+.big{font-size:1.75rem;font-weight:800;color:#12161c}
+.muted{color:#1b2838;font-size:.95rem}
+label{display:block;font-weight:600;margin-top:12px}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:2px solid #08306b;background:#08306b;color:#fff;cursor:pointer;margin:12px 8px 0 0;min-height:44px}
+button.sec{background:#fff;color:#12161c;border-color:#12161c}
+a{color:#08306b}
+a:hover,a:focus{color:#041e42}
+#ws-result{overflow-wrap:anywhere;max-width:100%}
+a:focus,button:focus,input:focus{outline:3px solid #08306b;outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:8px;top:8px;background:#fff;color:#12161c;padding:8px 12px;z-index:2}
+footer{margin:8px 0 24px}
+fieldset{border:2px solid #1b2838;border-radius:8px;margin:12px 0;padding:8px 12px;min-width:0}
+legend{font-weight:700;padding:0 4px}
+.choices{display:flex;flex-wrap:wrap;gap:8px}
+.choices label{font-weight:600;display:flex;gap:8px;align-items:center;margin:0;flex:1 1 9rem;min-width:0;min-height:44px;padding:8px 10px;border:2px solid #1b2838;border-radius:8px;background:#fff;color:#12161c}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.actions button{margin:0;flex:1 1 12rem}
+a,p,li,label,legend,h1,h2{overflow-wrap:anywhere}
+[hidden]{display:none !important}
+#sib-form{position:relative;display:grid;gap:12px;margin-top:8px}
+#sib-form label{margin-top:0}
+#sib-form input[type="text"]{width:100%;max-width:28rem;min-height:44px;margin-top:6px;font:inherit;padding:8px;border:2px solid #1b2838;border-radius:6px;background:#fff;color:#12161c}
+.sib-optin{display:flex;align-items:flex-start;gap:8px;font-weight:400}
+#sib-form .input--hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+pre{font:15px/1.45 ui-monospace,Menlo,Consolas,monospace;background:#fff;color:#12161c;border:2px solid #1b2838;padding:10px;border-radius:6px;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;margin:.4em 0;max-width:100%}
+@media (max-width:480px){
+  main{padding:12px}
+  h1{font-size:1.35rem}
+  .choices{flex-direction:column}
+  .choices label,.actions button,button{flex-basis:auto;width:100%;margin-right:0}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<p class="muted site-nav"><a href="/">First Mover Projects</a> · free tool</p>
+<h1>Windows Server 2016 check</h1>
+<p>Four plain questions. They run in this browser. The answers are not saved and are not sent.</p>
+<p>Microsoft's <a href="https://learn.microsoft.com/en-us/windows-server/get-started/windows-server-release-info">Windows Server release information</a> lists the extended support end date for Windows Server 2016 (version 1607) as 2027-01-12. The <a href="https://learn.microsoft.com/en-us/lifecycle/products/windows-server-2016">product lifecycle page</a> lists the Extended End Date as 1/13/2027 6:59:59 AM Pacific Time (Redmond, WA, USA). This page counts days until Jan 12, 2027.</p>
+<p>The lifecycle page says Windows Server 2016 follows the Fixed Lifecycle Policy. The editions listed there are Datacenter, Essentials, MultiPoint Premium, and Standard. The release information row lists Datacenter, Essentials, and Standard.</p>
+<p>Microsoft support for Remote Web Access and remotewebaccess.com ends Jan 12, 2027.</p>
+<p>Microsoft's <a href="https://support.microsoft.com/en-us/servicing/os/windows/docs/2026/09/windows-server-2016-essentials-end-support">Windows Server 2016 Essentials end of support</a> page says: "Microsoft support for Remote Web Access and remotewebaccess.com as part of Windows Server 2016 Essentials ends on January 12, 2027." That page also says support for Windows Server 2016 Essentials ends on January 12, 2027, and that Windows Server 2016 Essentials is the last version that includes the full classic Windows Server Essentials experience. It lists Remote Web Access (RWA) and the remotewebaccess.com domain and dynamic DNS integration as supported only through January 12, 2027.</p>
+<p>Not affiliated with or endorsed by Microsoft.</p>
+<p>Checked October 30, 2026.</p>
+
+<section class="card" id="check" aria-labelledby="check-h">
+<h2 id="check-h">Four questions</h2>
+<p>How this page picks one article to open first: it is a reading order from your answers, not a verdict about your servers.</p>
+<ul>
+<li>No: this is not Windows Server 2016, so the page does not pick a move. It points you to Microsoft's lifecycle search.</li>
+<li>Not sure of the version: confirm the version, then answer again.</li>
+<li>Yes, and about 6 or more servers: move to cloud.</li>
+<li>Yes, and Essentials or staff use Remote Web Access, and not 6 or more servers: migrate to a newer server.</li>
+<li>Yes, one server, edition Standard, Datacenter, or not sure, and Remote Web Access is not Yes: upgrade in place.</li>
+<li>Other Yes answers (2 to 5 servers, or the server count is not sure, and not the Essentials or Remote Web Access case): migrate to a newer server.</li>
+</ul>
+<form id="ws-form" autocomplete="off">
+<fieldset>
+<legend>Do you run Windows Server 2016?</legend>
+<div class="choices">
+<label><input type="radio" name="run" value="yes"> Yes</label>
+<label><input type="radio" name="run" value="no"> No</label>
+<label><input type="radio" name="run" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Which edition?</legend>
+<div class="choices">
+<label><input type="radio" name="edition" value="essentials"> Essentials</label>
+<label><input type="radio" name="edition" value="standard"> Standard</label>
+<label><input type="radio" name="edition" value="datacenter"> Datacenter</label>
+<label><input type="radio" name="edition" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Do staff use Remote Web Access?</legend>
+<div class="choices">
+<label><input type="radio" name="rwa" value="yes"> Yes</label>
+<label><input type="radio" name="rwa" value="no"> No</label>
+<label><input type="radio" name="rwa" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Roughly how many servers?</legend>
+<div class="choices">
+<label><input type="radio" name="count" value="1"> 1</label>
+<label><input type="radio" name="count" value="2-5"> 2 to 5</label>
+<label><input type="radio" name="count" value="6+"> 6 or more</label>
+<label><input type="radio" name="count" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<div class="actions">
+<button type="button" id="ws-go">Show days left</button>
+<button type="button" class="sec" id="ws-clear">Clear answers</button>
+</div>
+</form>
+</section>
+
+<section class="card" id="ws-result" aria-live="polite">
+<h2>Result</h2>
+<p id="ws-lead">Answer all four questions, then use Show days left.</p>
+<p class="big" id="ws-days" hidden></p>
+<pre id="ws-plain" hidden></pre>
+</section>
+
+<section class="card" id="paths" aria-labelledby="paths-h">
+<h2 id="paths-h">Three Microsoft articles</h2>
+<p>These descriptions use Microsoft's own wording for what each article is about. This page does not rank them as better or worse for every shop. The result above names one article to open first.</p>
+<h3>Upgrade in place</h3>
+<p>Microsoft's <a href="https://learn.microsoft.com/en-us/windows-server/get-started/install-upgrade-migrate">upgrade plan page</a> says an in-place upgrade installs a newer version of Windows Server over the existing one, keeping your settings, server roles, features, and data. That page's installation-media table lists Windows Server 2016 as Yes to Windows Server 2019, Windows Server 2022, and Windows Server 2025. The steps are in <a href="https://learn.microsoft.com/en-us/windows-server/get-started/upgrade-in-place">Upgrade Windows Server in Place</a>. This page does not know your roles or whether that table row applies to your edition.</p>
+<h3>Migrate to a newer server</h3>
+<p>Microsoft's <a href="https://learn.microsoft.com/en-us/windows-server/get-started/install-upgrade-migrate">upgrade plan page</a> says migration moves roles or features from a source server to a different destination server running Windows Server. The <a href="https://learn.microsoft.com/en-us/windows-server/get-started/upgrade-migrate-roles-features">roles and features article</a> says migration moves roles and features to a new server running a newer version of Windows Server. This page does not know which roles you run.</p>
+<h3>Move to cloud</h3>
+<p>Microsoft's <a href="https://learn.microsoft.com/en-us/azure/migrate/migrate-services-overview">Azure Migrate overview</a> says Azure Migrate is a service that helps you decide on, plan, and execute your migration to Azure. That overview says you can migrate physical servers to Azure. This page does not know whether a cloud move fits the workloads on your servers.</p>
+</section>
+
+<section class="card" id="sources" aria-labelledby="src-h">
+<h2 id="src-h">Sources</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/lifecycle/products/windows-server-2016">Microsoft Learn: Windows Server 2016 lifecycle</a></li>
+<li><a href="https://learn.microsoft.com/en-us/windows-server/get-started/windows-server-release-info">Microsoft Learn: Windows Server release information</a></li>
+<li><a href="https://support.microsoft.com/en-us/servicing/os/windows/docs/2026/09/windows-server-2016-essentials-end-support">Microsoft Support: Windows Server 2016 Essentials end of support</a></li>
+<li><a href="https://learn.microsoft.com/en-us/windows-server/get-started/install-upgrade-migrate">Microsoft Learn: Plan your Windows Server upgrade path</a></li>
+<li><a href="https://learn.microsoft.com/en-us/windows-server/get-started/upgrade-in-place">Microsoft Learn: Upgrade Windows Server in place</a></li>
+<li><a href="https://learn.microsoft.com/en-us/windows-server/get-started/upgrade-migrate-roles-features">Microsoft Learn: Upgrade and migrate roles and features</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/migrate/migrate-services-overview">Microsoft Learn: Azure Migrate overview</a></li>
+</ul>
+<p>Checked October 30, 2026.</p>
+<p>Not affiliated with or endorsed by Microsoft. Information only, from the Microsoft pages linked above. General guidance, not IT advice.</p>
+</section>
+
+<section class="card signup" id="signup" aria-labelledby="signup-h">
+<h2 id="signup-h">Free weekly email</h2>
+<!-- Embedded #sib-form posts SIGNUP_SOURCE (default ws2016). Create the text contact attribute SIGNUP_SOURCE in the existing Brevo account before relying on it; until then Brevo may ignore or reject it. -->
+<p>One short weekly email about new free browser checks and small-business tech deadlines. Double opt-in. Unsubscribe any time. See our <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>.</p>
+<form id="sib-form" method="POST" action="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" data-type="subscription" autocomplete="off">
+<p>
+<label for="EMAIL">Enter your email address to subscribe</label>
+<input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" value="" placeholder="EMAIL" required>
+</p>
+<p>
+<label class="sib-optin" for="OPT_IN">
+<input type="checkbox" value="1" id="OPT_IN" name="OPT_IN" required>
+<span>By subscribing you agree to get this weekly email from First Mover Projects. We'll send a confirmation first. Unsubscribe any time with one click. We don't sell or share your email. See our Privacy Policy: firstmoverprojects.com/privacy.html</span>
+</label>
+</p>
+<p><button type="submit">Sign up for the weekly FMP email</button></p>
+<input type="text" name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off">
+<input type="hidden" name="locale" value="en">
+<input type="hidden" name="SIGNUP_SOURCE" value="ws2016">
+</form>
+<script id="signup-source-script">
+(function () {
+  "use strict";
+  var form = document.getElementById("sib-form");
+  if (!form) return;
+  var input = form.querySelector('input[name="SIGNUP_SOURCE"]');
+  if (!input) return;
+  var match = /(?:^|[?&])SIGNUP_SOURCE=([^&#]*)/.exec(window.location.search || "");
+  if (!match) return;
+  var raw = match[1].replace(/\+/g, " ");
+  try { raw = decodeURIComponent(raw); } catch (err) { raw = match[1]; }
+  var clean = String(raw).toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+  if (clean) input.value = clean;
+})();
+</script>
+</section>
+</main>
+<footer>
+<p>First Mover Projects, PO Box 98, Firth, NE 68358. firstmoverprojects@gmail.com. Information only, from the Microsoft pages linked on this page. General guidance, not IT advice. Not affiliated with or endorsed by Microsoft.</p>
+</footer>
+<noscript>
+<p>The day count needs JavaScript in your browser. Nothing is uploaded. The Microsoft dates, article links, and email form above still work.</p>
+</noscript>
+<script id="ws2016-check">
+(function () {
+  "use strict";
+
+  var DEADLINE = "2027-01-12";
+  var ESSENTIALS_LINE = "Microsoft support for Remote Web Access and remotewebaccess.com ends Jan 12, 2027.";
+  var AFFILIATION = "Not affiliated with or endorsed by Microsoft.";
+  var CHECKED = "Checked October 30, 2026.";
+  var INCOMPLETE = "Answer all four questions, then use Show days left.";
+  var RUN = { yes: 1, no: 1, unsure: 1 };
+  var EDITION = { essentials: 1, standard: 1, datacenter: 1, unsure: 1 };
+  var RWA = { yes: 1, no: 1, unsure: 1 };
+  var COUNT = { "1": 1, "2-5": 1, "6+": 1, unsure: 1 };
+  var URLS = {
+    lifecycle: "https://learn.microsoft.com/en-us/lifecycle/products/windows-server-2016",
+    release: "https://learn.microsoft.com/en-us/windows-server/get-started/windows-server-release-info",
+    essentials: "https://support.microsoft.com/en-us/servicing/os/windows/docs/2026/09/windows-server-2016-essentials-end-support",
+    search: "https://learn.microsoft.com/en-us/lifecycle/products/",
+    plan: "https://learn.microsoft.com/en-us/windows-server/get-started/install-upgrade-migrate",
+    inplace: "https://learn.microsoft.com/en-us/windows-server/get-started/upgrade-in-place",
+    roles: "https://learn.microsoft.com/en-us/windows-server/get-started/upgrade-migrate-roles-features",
+    cloud: "https://learn.microsoft.com/en-us/azure/migrate/migrate-services-overview"
+  };
+
+  function chicagoYmd(date) {
+    var parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Chicago",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).formatToParts(date);
+    var map = { year: "", month: "", day: "" };
+    for (var i = 0; i < parts.length; i++) {
+      if (Object.prototype.hasOwnProperty.call(map, parts[i].type)) map[parts[i].type] = parts[i].value;
+    }
+    return map.year + "-" + map.month + "-" + map.day;
+  }
+
+  function daysUntil(deadline, now) {
+    function utc(ymd) {
+      var p = String(ymd).split("-");
+      return Date.UTC(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+    }
+    return Math.round((utc(deadline) - utc(chicagoYmd(now))) / 86400000);
+  }
+
+  function daysLeft(now) {
+    return daysUntil(DEADLINE, now || new Date());
+  }
+
+  function pathFor(a) {
+    if (!a || !RUN[a.run] || !EDITION[a.edition] || !RWA[a.rwa] || !COUNT[a.count]) return "";
+    if (a.run === "no") return "not-2016";
+    if (a.run === "unsure") return "confirm";
+    if (a.count === "6+") return "cloud";
+    if (a.edition === "essentials" || a.rwa === "yes") return "migrate";
+    if (a.count === "1") return "upgrade";
+    return "migrate";
+  }
+
+  function pathBlock(path) {
+    if (path === "upgrade") {
+      return [
+        "Path to look at: upgrade in place.",
+        "Microsoft's upgrade plan page says an in-place upgrade installs a newer version of Windows Server over the existing one, keeping your settings, server roles, features, and data. That page's installation-media table lists Windows Server 2016 as Yes to Windows Server 2019, Windows Server 2022, and Windows Server 2025.",
+        "Open: " + URLS.plan,
+        "Open: " + URLS.inplace,
+        "This page does not know your roles or whether that table row applies to your edition."
+      ];
+    }
+    if (path === "migrate") {
+      return [
+        "Path to look at: migrate to a newer server.",
+        "Microsoft's upgrade plan page says migration moves roles or features from a source server to a different destination server running Windows Server. The roles article says migration moves roles and features to a new server running a newer version of Windows Server.",
+        "Open: " + URLS.plan,
+        "Open: " + URLS.roles,
+        "This page does not know which roles you run."
+      ];
+    }
+    if (path === "cloud") {
+      return [
+        "Path to look at: move to cloud.",
+        "Microsoft's Azure Migrate overview says Azure Migrate is a service that helps you decide on, plan, and execute your migration to Azure. That overview says you can migrate physical servers to Azure.",
+        "Open: " + URLS.cloud,
+        "This page does not know whether a cloud move fits the workloads on your servers."
+      ];
+    }
+    if (path === "not-2016") {
+      return [
+        "Path to look at: confirm which product you run.",
+        "These answers say this is not Windows Server 2016. The day count on this page uses the extended support end date Microsoft lists for Windows Server 2016.",
+        "Open: " + URLS.search,
+        "Windows Server 2016 lifecycle page: " + URLS.lifecycle
+      ];
+    }
+    if (path === "confirm") {
+      return [
+        "Path to look at: confirm the version first.",
+        "These answers do not confirm Windows Server 2016. On the server, open System properties, or run winver, and read the version line. Then answer these questions again.",
+        "After you confirm it is Windows Server 2016, the articles to read are upgrade in place, migrate to a newer server, and move to cloud.",
+        "Open: " + URLS.plan,
+        "Open: " + URLS.roles,
+        "Open: " + URLS.cloud
+      ];
+    }
+    return [];
+  }
+
+  function buildResult(answers, now) {
+    var days = daysLeft(now);
+    var path = pathFor(answers);
+    if (!path) {
+      return { complete: false, days: days, path: "", essentials: false, text: INCOMPLETE };
+    }
+    var essentials = answers.edition === "essentials" || answers.rwa === "yes";
+    var lines = [
+      "Days left until Jan 12, 2027 (America/Chicago): " + days + ".",
+      "Microsoft's Windows Server release information lists the extended support end date for Windows Server 2016 as 2027-01-12.",
+      "The product lifecycle page lists the Extended End Date as 1/13/2027 6:59:59 AM Pacific Time.",
+      "This page counts days until Jan 12, 2027."
+    ];
+    if (days < 0) {
+      lines.push("Jan 12, 2027 is in the past in America/Chicago. This page does not say what a server will do after that date.");
+    }
+    if (essentials) lines.push(ESSENTIALS_LINE);
+    lines = lines.concat(pathBlock(path));
+    lines.push(AFFILIATION);
+    lines.push(CHECKED);
+    return { complete: true, days: days, path: path, essentials: essentials, text: lines.join("\n") };
+  }
+
+  function readAnswers(form) {
+    function picked(name) {
+      var nodes = form.elements[name];
+      var j;
+      if (!nodes) return "";
+      if (typeof nodes.length === "number") {
+        for (j = 0; j < nodes.length; j++) {
+          if (nodes[j].checked) return nodes[j].value;
+        }
+        return "";
+      }
+      return nodes.checked ? nodes.value : "";
+    }
+    return {
+      run: picked("run"),
+      edition: picked("edition"),
+      rwa: picked("rwa"),
+      count: picked("count")
+    };
+  }
+
+  function show(result) {
+    var lead = document.getElementById("ws-lead");
+    var daysEl = document.getElementById("ws-days");
+    var plain = document.getElementById("ws-plain");
+    if (!lead || !daysEl || !plain) return;
+    if (!result.complete) {
+      lead.hidden = false;
+      lead.textContent = result.text;
+      daysEl.hidden = true;
+      daysEl.textContent = "";
+      plain.hidden = true;
+      plain.textContent = "";
+      return;
+    }
+    lead.hidden = true;
+    lead.textContent = "";
+    daysEl.hidden = false;
+    daysEl.textContent = "Days left until Jan 12, 2027 (America/Chicago): " + result.days + ".";
+    plain.hidden = false;
+    plain.textContent = result.text;
+  }
+
+  var api = {
+    DEADLINE: DEADLINE,
+    ESSENTIALS_LINE: ESSENTIALS_LINE,
+    AFFILIATION: AFFILIATION,
+    CHECKED: CHECKED,
+    URLS: URLS,
+    chicagoYmd: chicagoYmd,
+    daysUntil: daysUntil,
+    daysLeft: daysLeft,
+    pathFor: pathFor,
+    buildResult: buildResult
+  };
+  if (typeof window !== "undefined") window.FMP_WS2016 = api;
+
+  function boot() {
+    var form = document.getElementById("ws-form");
+    var go = document.getElementById("ws-go");
+    var clear = document.getElementById("ws-clear");
+    if (!form || !go || !clear) return;
+    go.addEventListener("click", function () {
+      show(buildResult(readAnswers(form), new Date()));
+    });
+    clear.addEventListener("click", function () {
+      var names = ["run", "edition", "rwa", "count"];
+      var i, nodes, j;
+      for (i = 0; i < names.length; i++) {
+        nodes = form.elements[names[i]];
+        if (!nodes) continue;
+        if (typeof nodes.length === "number") {
+          for (j = 0; j < nodes.length; j++) nodes[j].checked = false;
+        } else {
+          nodes.checked = false;
+        }
+      }
+      show({ complete: false, text: INCOMPLETE });
+    });
+  }
+
+  if (typeof document !== "undefined" && document.getElementById) boot();
+})();
+</script>
+<script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
