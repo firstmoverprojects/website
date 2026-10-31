@@ -197,7 +197,7 @@ test("EU product ID checker shows one result, the November 1 rule, and one kit b
   assert.equal(url.searchParams.get("utm_content"), "result-cta");
   assert.equal(url.searchParams.get("utm_campaign"), "eu-product-id-check");
   const cardText = await page.innerText("#result-cta");
-  assert.match(cardText, /Thanks for your time\. If this isn't for you, share it with someone it could help\./);
+  assert.match(cardText, /Thanks for your time\. If this isn't right for you, please share it with someone it could help\./);
   assert.match(cardText, /General guidance, not legal, tax or IT advice/);
   assert.match(await page.innerText("footer"), /Not affiliated with the European Commission or any customs authority/);
   const colors = await page.evaluate(() => {
