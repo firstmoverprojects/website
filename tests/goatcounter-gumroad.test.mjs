@@ -148,8 +148,8 @@ test("wanted=true Gumroad anchors keep an origin referrer", () => {
   assert.match(finder, /a\.referrerPolicy = "strict-origin-when-cross-origin"/);
   assert.equal(finder.includes('a.rel = "noopener noreferrer"'), false);
   const eu = read("tools/eu-product-id-check/index.html");
-  assert.match(eu, /paid\.rel = "noopener"/);
-  assert.match(eu, /paid\.referrerPolicy = "strict-origin-when-cross-origin"/);
+  assert.equal(/paid\.rel\s*=/.test(eu), false);
+  assert.match(eu, /id="kit-result"[\s\S]{0,400}referrerpolicy="strict-origin-when-cross-origin"/);
 });
 
 test("checkout clicks record gumroad-click/slug and test visits stay under TEST-EXCLUDE", () => {

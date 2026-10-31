@@ -21,7 +21,7 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1b1f24;background:#f6f7f9}
-main{max-width:860px;margin:0 auto;padding:16px}
+main{max-width:860px;margin:0 auto;padding:16px;min-width:0}
 h1{font-size:1.6rem;margin:.4em 0}
 h2{font-size:1.15rem;margin:1.2em 0 .4em}
 .card{background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:16px;margin:12px 0}
@@ -32,18 +32,33 @@ h2{font-size:1.15rem;margin:1.2em 0 .4em}
 label{display:block;font-weight:600;margin-top:12px}
 textarea{width:100%;min-height:180px;font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;padding:8px;border:1px solid #b9c0c8;border-radius:6px}
 pre{font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;background:#eef1f5;padding:10px;border-radius:6px;white-space:pre-wrap;word-break:break-word;margin:.4em 0}
-button{font:inherit;padding:10px 18px;border-radius:8px;border:0;background:#1f5fbf;color:#fff;cursor:pointer;margin:12px 8px 0 0}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:0;background:#1f5fbf;color:#fff;cursor:pointer;margin:12px 8px 0 0;white-space:normal;max-width:100%;box-sizing:border-box}
 button.sec{background:#e4e8ee;color:#1b1f24}
+.lead-cta{background:#fff;border:2px solid #071b31;border-radius:10px;padding:16px;margin:0 0 16px;color:#071b31}
+a.btn{display:inline-block;max-width:100%;box-sizing:border-box;font-weight:800;line-height:1.3;text-decoration:none;background:#0055ff;color:#fff;padding:12px 18px;border-radius:8px;margin:12px 0 0;text-align:center}
+a.btn:hover{background:#0044cc;color:#fff}
+#result-cta h2,#result-cta h3,#result-cta .next-steps,#result-cta .disclaimer,#result-cta #result-deadline,#result-cta .thanks{color:#071b31}
+#result-cta h2{font-size:1.25rem;margin:.2em 0 .4em}
+#result-cta h3{font-size:1rem;margin:1em 0 .3em}
+.next-steps{margin:.2em 0 .6em;padding-left:1.25em}
+.next-steps li{margin:8px 0}
+.disclaimer,.thanks{font-weight:700;margin:12px 0 0}
+#kit-result{display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;box-sizing:border-box;min-height:48px;padding:14px 18px;margin:12px 0 0;background:#0055ff;color:#fff;font-weight:800;line-height:1.3;text-align:center;text-decoration:none;border-radius:8px;white-space:normal;overflow-wrap:anywhere}
+#kit-result:hover,#kit-result:focus{background:#0044cc;color:#fff}
+#results,#result-cta{overflow-wrap:anywhere;max-width:100%}
+[hidden]{display:none !important}
 .tag{display:inline-block;font-size:.8rem;padding:2px 8px;border-radius:9px;margin:0 0 6px;background:#e4e8ee}
 .warn{background:#fde8e6;color:#8a1c12}
 .ok{background:#e3f4e6;color:#1d6b2c}
 .cta{background:#fff8e6;border-color:#f0d58a}
 a{color:#1f5fbf}
 a:focus,button:focus,textarea:focus{outline:3px solid #1f5fbf;outline-offset:2px}
-table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0}
-th,td{border:1px solid #dde1e6;padding:6px 8px;text-align:left;vertical-align:top;word-break:break-word}
+table{border-collapse:collapse;width:100%;min-width:40rem;background:#fff;margin:8px 0}
+th,td{border:1px solid #dde1e6;padding:6px 8px;text-align:left;vertical-align:top;word-break:normal;overflow-wrap:break-word}
+th{white-space:nowrap}
+#results th:last-child,#results td:last-child{min-width:22rem}
 caption{text-align:left;font-weight:600;padding:4px 0}
-.table-wrap{overflow-x:auto}
+.table-wrap{overflow-x:auto;max-width:100%;min-width:0;-webkit-overflow-scrolling:touch}
 td ul{margin:.2em 0 0;padding-left:1.1em}
 .skip{position:absolute;left:-999px;top:0}
 .skip:focus{left:8px;top:8px;background:#fff;padding:8px 12px;z-index:2}
@@ -86,7 +101,8 @@ input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input
 input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,button{min-height:44px}
 nav a,.site-nav a{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:44px;min-width:44px;padding:8px 6px}
 label:has(> input[type="checkbox"]),label:has(> input[type="radio"]){min-height:44px;box-sizing:border-box}
-.follow-tiktok,.follow-email,a.btn,a.btn-buy-now,a.btn-email-cap{box-sizing:border-box;min-height:44px}
+.follow-tiktok,.follow-email,a.btn,a.btn-buy-now,a.btn-email-cap{box-sizing:border-box;min-height:48px}
+#go,#example,#clear,#copy,#fmp-share button{min-height:48px}
 picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 </style>
 <script id="fmp-embed-boot">
@@ -135,7 +151,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <main id="main">
 <p class="muted site-nav"><a href="https://firstmoverprojects.com/">First Mover Projects</a> · free tool</p>
 <h1>EU Nov 1 Product ID Quick Check</h1>
-<p><strong>Paste 3 columns, get a fix list in seconds.</strong></p>
+<p id="what">This is a free checker that tells you which of up to 25 product rows are missing a merchant SKU, a manufacturer product code, or a valid barcode. The European Commission says those product identifiers become mandatory on November 1, 2026 for distance sales of imported goods with an intrinsic value not exceeding EUR 150.</p>
 <p>Runs in your browser. Nothing is uploaded.</p>
 <p id="who"><strong>Who it's for:</strong> sellers outside the EU who ship online orders to consumers in the EU, and the platforms, carriers and customs agents who declare those parcels.</p>
 
@@ -174,6 +190,19 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 </section>
 
 <section class="card" id="results" hidden aria-live="polite">
+<!-- Result card. November 1, 2026 and the EUR 150 distance-sale rule are already stated on this page from the European Commission guidance.
+     Gumroad product fetwsm. The post-answer button keeps utm_content=result-cta.
+     Gumroad counts the click only when utm_source, utm_medium, and utm_campaign are all set. -->
+<div class="lead-cta" id="result-cta">
+<h2 id="result-problem">Paste rows to see which product identifiers are missing.</h2>
+<h3>Next steps</h3>
+<ol class="next-steps" id="next-steps"></ol>
+<h3>The rule and the date</h3>
+<p id="result-deadline">The European Commission says product identifiers become mandatory on November 1, 2026. Its guidance (Version of 5 October 2026) says the requirement applies to all goods sold in distance sales of imported goods with an intrinsic value not exceeding EUR 150 as from 1 November 2026, mainly goods sold to consumers (B2C). Business-to-business shipments are in principle not concerned.</p>
+<p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
+<p><a target="_blank" class="btn" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=eu-product-id-check&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 EU Customs Product Data Checker</a></p>
+<p class="thanks">Thanks for your time. If this isn't for you, share it with someone it could help.</p>
+</div>
 <h2>2. Summary</h2>
 <div class="cd">
  <div>
@@ -207,35 +236,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <pre id="fixlist" tabindex="0"></pre>
 <button id="copy" class="sec" type="button">Copy fix list</button>
 <p id="copystate" class="muted" role="status"></p>
-
-<div class="email-cap-box" id="signup">
-  <div class="email-cap-title">Email me my free check results + deadline reminders</div>
-  <p class="muted" style="margin:0 0 6px">Save your checklist above, then join our weekly deadline alert list so cutoff changes never catch you off guard:</p>
-  <p style="margin:0"><a class="btn-email-cap" href="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" target="_blank" rel="noopener">Email me deadline reminders (1-click sign-up) →</a> <span class="muted">(opens Brevo's sign-up page · double opt-in, unsubscribe anytime · <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>)</span></p>
-</div>
-<div class="kit-conv-box">
-  <span class="kit-conv-badge">INSTANT DOWNLOAD · OFFLINE PYTHON CSV CHECKER + EXCEL FIX WORKBOOK · $29</span>
-  <h3 class="kit-conv-title">See What's Inside the $29 EU Customs Product Data Checker</h3>
-  <picture><source type="image/webp" srcset="/assets/previews/eu-product-id-kit-preview-1280x720.webp"><img class="kit-preview-img" src="/assets/previews/eu-product-id-kit-preview-1280x720.png" alt="See What's Inside the $29 EU Customs Product Data Checker: offline Python CSV script, Excel Fix List workbook, and GS1 barcode & Y081 check" width="1280" height="720" loading="lazy"></picture>
-  <ul class="kit-bullets">
-    <li>Checks your entire Shopify product CSV export offline (not just 25 rows): flags missing or duplicate SKUs, invalid GTIN check digits, and barcodes mangled into '5.01E+12' scientific notation.</li>
-<li>Catches customs hold triggers before Nov 1, 2026: checks blank or 6-digit HS codes and non-ISO country-of-origin values (like 'USA' instead of 'US' or 'UK' instead of 'GB').</li>
-<li>Outputs a ready-to-work fix_list.csv + Excel workbook (template.xlsx) with variant-by-variant suggested fixes and code Y081 notes.</li>
-  </ul>
-  <div class="kit-btn-row">
-    <a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=eu-product-id-check&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 EU Customs Product Data Checker (1-Click Checkout) →</a>
-  </div>
-<div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
-<p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
-<div class="follow-bar-actions">
-<a class="follow-tiktok" data-tool-slug="eu-product-id-check" target="_blank" rel="noopener" href="https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&amp;utm_medium=tool_result&amp;utm_campaign=follower_growth">Follow @firstmoverprojects on TikTok (Daily 60-Sec Checklists)</a>
-<a class="follow-email" href="#signup">Get Free Email Deadline Reminders</a>
-</div>
-</div>
-
-  <p class="muted" style="margin:4px 0 0">Free background, dates and sources: <a href="/deadlines/eu-product-identifiers-nov-1.html">EU product identifiers become mandatory for low-value e-commerce imports (Nov 1, 2026)</a></p>
-</div>
-
+<p class="muted">The kit button is at the top of this result. Free deadline page: <a href="/deadlines/eu-product-identifiers-nov-1.html">EU product identifiers become mandatory for low-value e-commerce imports (Nov 1, 2026)</a></p>
 </section>
 <details class="fmp-share" id="fmp-share">
 <summary>Share, Embed, or License This Tool</summary>
@@ -305,7 +306,6 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 (function () {
 "use strict";
 var PDF = "https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en";
-var PAID = "https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&utm_source=site&utm_medium=site&utm_campaign=eu-product-id-check&utm_content=sticky-cta";
 var MAX = 500000;
 var HEADERS = {
   "sku": 1,
@@ -548,6 +548,39 @@ function analyze(text) {
 
 function dash(s) { return s ? s : "\u2014"; }
 
+function leadFor(result) {
+  var n = result.processed;
+  var problem;
+  if (!n) {
+    problem = "No rows were checked. Product identifiers become mandatory on November 1, 2026.";
+  } else if (result.needsFix) {
+    var rowWord = n === 1 ? "row" : "rows";
+    var verb = result.needsFix === 1 ? "needs" : "need";
+    problem = result.needsFix + " of " + n + " " + rowWord + " " + verb + " a fix before November 1, 2026.";
+  } else {
+    problem = "No problems found in these checks. Product identifiers still become mandatory on November 1, 2026.";
+  }
+  var steps = [];
+  if (!n) {
+    steps.push("Paste up to 25 rows: merchant SKU, manufacturer product code, and barcode (optional).");
+    steps.push("This page checks a missing merchant SKU, a merchant SKU repeated on another row, a missing manufacturer product code, and a barcode that is present but not a GTIN-8, GTIN-12, GTIN-13 or GTIN-14 with a correct GS1 mod-10 check digit. An empty barcode is a note, not a failed length check.");
+  } else if (result.needsFix) {
+    steps.push("Fix each row marked Needs a fix: a missing merchant SKU, a merchant SKU repeated on another row (each variant needs its own code), a missing manufacturer product code, or a barcode that is present but not a GTIN-8, GTIN-12, GTIN-13 or GTIN-14 with a correct GS1 mod-10 check digit.");
+  } else {
+    steps.push("Keep the merchant SKU and manufacturer product code on each row. An empty barcode is a note, not a failed length check.");
+  }
+  if (result.y081) {
+    steps.push((result.y081 === 1 ? "1 row has" : result.y081 + " rows have") + " no barcode. Declare with code Y081 only if no standardised identifier exists, per the guidance.");
+  }
+  if (result.capped) {
+    steps.push("You pasted " + result.totalDataRows + " data rows. This page checked the first 25 only.");
+  }
+  if (steps.length < 3) {
+    steps.push("Whoever lodges the customs declaration must provide the product identifiers to customs. If a carrier or customs agent declares for you, ask them what product data they need and in what format. This page can't see what they need.");
+  }
+  return { problem: problem, steps: steps.slice(0, 3) };
+}
+
 function render(text) {
   var result = analyze(text);
   byId("n-ok").textContent = String(result.ready);
@@ -555,17 +588,16 @@ function render(text) {
   byId("read-as").textContent = result.readAs;
   var cap = byId("cap");
   cap.hidden = !result.capped;
-  cap.textContent = "";
-  if (result.capped) {
-    cap.appendChild(document.createTextNode(result.capMessage + " "));
-    var paid = document.createElement("a");
-    paid.href = PAID;
-    paid.target = "_blank";
-    paid.rel = "noopener";
-    paid.referrerPolicy = "strict-origin-when-cross-origin";
-    paid.textContent = "EU Customs Product Data Checker ($29)";
-    cap.appendChild(paid);
-  }
+  cap.textContent = result.capped ? result.capMessage : "";
+  var lead = leadFor(result);
+  byId("result-problem").textContent = lead.problem;
+  var stepList = byId("next-steps");
+  stepList.textContent = "";
+  lead.steps.forEach(function (text) {
+    var li = document.createElement("li");
+    li.textContent = text;
+    stepList.appendChild(li);
+  });
   var notes = byId("notes");
   notes.textContent = "";
   if (result.y081) {
@@ -625,6 +657,10 @@ function render(text) {
   byId("copystate").textContent = "";
   var box = byId("results");
   box.hidden = false;
+  var card = byId("result-cta");
+  if (card && card.scrollIntoView) {
+    try { card.scrollIntoView({ block: "start" }); } catch (e) {}
+  }
   box.setAttribute("data-delimiter", result.delimiter === "\t" ? "tab" : result.delimiter);
   box.setAttribute("data-capped", result.capped ? "yes" : "no");
   box.setAttribute("data-header", result.headerSkipped ? "yes" : "no");
@@ -645,6 +681,7 @@ window.FMP_EU = {
   gtin: gtin,
   detectDelimiter: detectDelimiter,
   analyze: analyze,
+  leadFor: leadFor,
   daysUntilNov1: daysUntilNov1,
   render: render,
   EXAMPLE: EXAMPLE
@@ -661,6 +698,7 @@ byId("clear").addEventListener("click", function () {
   byId("tbody").textContent = "";
   byId("fixlist").textContent = "";
   byId("copystate").textContent = "";
+  byId("next-steps").textContent = "";
 });
 byId("copy").addEventListener("click", function () {
   var text = byId("fixlist").textContent;

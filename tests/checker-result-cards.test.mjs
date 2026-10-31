@@ -163,3 +163,77 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
     await page.close();
   }
 });
+
+test("EU product ID checker shows one result, the November 1 rule, and one kit button", async () => {
+  const { page, errors, nets } = await open("tools/eu-product-id-check/index.html");
+  assert.match(await page.locator("#what").innerText(), /^This is a free checker that tells you /);
+  const targets = await page.evaluate(() => {
+    return ["#go", "#example", "#clear"].map((sel) => {
+      const el = document.querySelector(sel);
+      const box = el.getBoundingClientRect();
+      return { sel, h: box.height, w: box.width };
+    });
+  });
+  for (const target of targets) {
+    assert.ok(target.h >= 48, target.sel + " height " + target.h);
+    assert.ok(target.w >= 44, target.sel + " width " + target.w);
+  }
+
+  await page.click("#example");
+  assert.equal(await page.locator("#results").isVisible(), true);
+  assert.equal(await page.locator("#result-cta").isVisible(), true);
+  assert.equal(await page.locator("#result-cta a").count(), 1);
+  assert.equal(await page.locator("#results a[href*='gumroad.com']").count(), 1);
+  assert.equal(await page.locator("#results .follow-bar, #results .kit-conv-box, #results .email-cap-box, #results .btn-buy-now").count(), 0);
+  assert.match(await page.innerText("#result-problem"), /4 of 6 rows need a fix before November 1, 2026/);
+  assert.match(await page.innerText("#result-deadline"), /November 1, 2026/);
+  assert.match(await page.innerText("#result-deadline"), /EUR 150/);
+  assert.match(await page.innerText("#next-steps"), /Y081/);
+  assert.equal(await page.locator("#next-steps li").count(), 3);
+  assert.equal(await page.innerText("#kit-result"), "Get the $29 EU Customs Product Data Checker");
+  const href = await page.getAttribute("#kit-result", "href");
+  const url = new URL(href);
+  assert.equal(url.pathname, "/l/fetwsm");
+  assert.equal(url.searchParams.get("utm_content"), "result-cta");
+  assert.equal(url.searchParams.get("utm_campaign"), "eu-product-id-check");
+  const cardText = await page.innerText("#result-cta");
+  assert.match(cardText, /Thanks for your time\. If this isn't for you, share it with someone it could help\./);
+  assert.match(cardText, /General guidance, not legal, tax or IT advice/);
+  assert.match(await page.innerText("footer"), /Not affiliated with the European Commission or any customs authority/);
+  const colors = await page.evaluate(() => {
+    const btn = document.querySelector("#kit-result");
+    return {
+      bg: getComputedStyle(document.querySelector("#result-cta")).backgroundColor,
+      text: getComputedStyle(document.querySelector("#result-problem")).color,
+      thanks: getComputedStyle(document.querySelector("#result-cta .thanks")).color,
+      btnBg: getComputedStyle(btn).backgroundColor,
+      btnColor: getComputedStyle(btn).color,
+      btnH: btn.getBoundingClientRect().height
+    };
+  });
+  assert.equal(colors.bg, "rgb(255, 255, 255)");
+  assert.equal(colors.text, "rgb(7, 27, 49)");
+  assert.equal(colors.thanks, "rgb(7, 27, 49)");
+  assert.equal(colors.btnBg, "rgb(0, 85, 255)");
+  assert.equal(colors.btnColor, "rgb(255, 255, 255)");
+  assert.ok(colors.btnH >= 48, "button " + colors.btnH);
+  assert.deepEqual(errors, []);
+  assert.deepEqual(toolNetwork(nets), []);
+  await assertNoHScroll(page);
+
+  await page.fill("#inp", "FAKE-MUG-BLUE,NOT-A-REAL-MFR-200,4006381333931");
+  await page.click("#go");
+  assert.match(await page.innerText("#result-problem"), /No problems found in these checks/);
+  assert.match(await page.innerText("#result-problem"), /November 1, 2026/);
+  assert.equal(await page.locator("#result-cta a").count(), 1);
+
+  await page.fill("#inp", "");
+  await page.click("#go");
+  assert.match(await page.innerText("#result-problem"), /No rows were checked/);
+  await page.click("#clear");
+  assert.equal(await page.locator("#results").isVisible(), false);
+
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await assertNoHScroll(page);
+  await page.close();
+});
