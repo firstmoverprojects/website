@@ -14,6 +14,7 @@
       .amazon-buy{display:inline-flex;align-items:center;justify-content:center;max-width:28rem;width:100%;box-sizing:border-box;margin:.35rem 0;padding:.875rem 1.15rem;border-radius:8px;font-weight:800;text-align:center;text-decoration:none;line-height:1.3;background:linear-gradient(135deg,#22c55e 0%,#4ade80 100%) !important;color:#052e16 !important;white-space:normal}
       .amazon-buy:hover{background:#16a34a !important;color:#052e16 !important}
       .kit-preview-img{display:block;width:100%;max-width:100%;height:auto;border-radius:10px;border:1px solid #243b55;background:#fff}
+      picture:has(> .kit-preview-img){display:block;max-width:100%}
       .kit-caption{color:#c2d0dc;font-size:.95rem;margin:.5rem 0 1rem}
       .demo-kicker,.sample-kicker{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.03em;padding:.2rem .6rem;border-radius:999px;margin:0 .4rem .4rem 0}
       .demo-kicker{background:#052e16;color:#4ade80;border:1px solid #22c55e}
@@ -194,7 +195,7 @@
         <p class="deliverables">You get a 12-file ZIP: policy checklist quoting Amazon word for word, COI pre-check, category screen, broker email, Excel workbook.</p>
         <!-- TODO: two real preview images of the checklist and the workbook are not in this repo. sales/gumroad_previews/ is missing. assets/previews/amazon-coi-kit-preview-1280x720.png is one marketing composite, not two screenshots. Do not invent images. -->
         <figure>
-          <img class="kit-preview-img" src="/assets/previews/amazon-coi-kit-preview-1280x720.png" alt="Inside the $29 Amazon $1M Insurance Readiness Kit: interactive 7-point ACORD 25 pre-upload audit workbook, broker email correction scripts, and Seller Central upload walkthrough" width="1280" height="720" />
+          <picture><source type="image/webp" srcset="/assets/previews/amazon-coi-kit-preview-1280x720.webp"><img class="kit-preview-img" src="/assets/previews/amazon-coi-kit-preview-1280x720.png" alt="Inside the $29 Amazon $1M Insurance Readiness Kit: interactive 7-point ACORD 25 pre-upload audit workbook, broker email correction scripts, and Seller Central upload walkthrough" width="1280" height="720" /></picture>
           <figcaption class="kit-caption">Inside the kit: the interactive 7-point ACORD 25 pre-upload audit workbook, the copy-paste broker email correction scripts, and the step-by-step Seller Central Account Health upload walkthrough.</figcaption>
         </figure>
         <p class="kit-cta"><a target="_blank" class="btn btn--primary amazon-buy" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-insurance-nov-2&amp;utm_campaign=amazon-1m-insurance&amp;utm_content=checklist" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the full kit, $29</a></p>

@@ -492,6 +492,10 @@ a:not(.btn):not(.brand-link) {
   border-color: #ffb800;
   color: #ffd566;
   background: rgba(255, 184, 0, 0.12);
+  white-space: normal;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  box-sizing: border-box;
 }
 
 .crumbs {
