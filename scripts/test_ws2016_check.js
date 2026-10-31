@@ -190,6 +190,8 @@ assert(html.indexOf('<meta name="robots" content="noindex">') !== -1, "meta robo
 assert(html.indexOf(ESSENTIALS) !== -1, "page has the Essentials sentence");
 assert(html.indexOf("Not affiliated with or endorsed by Microsoft.") !== -1, "affiliation line");
 assert(html.indexOf("Checked October 30, 2026.") !== -1, "checked line");
+assert(html.indexOf("Thanks for your time. If this isn't right for you, please share it with someone it could help.") !== -1, "thanks line near the Brevo form");
+assert(html.indexOf("Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>\n<form id=\"sib-form\"") !== -1, "thanks line sits directly above the Brevo form");
 assert(html.indexOf('name="SIGNUP_SOURCE" value="ws2016"') !== -1, "hidden SIGNUP_SOURCE=ws2016");
 assert(html.split('<input type="hidden" name="SIGNUP_SOURCE" value="ws2016">').length - 1 === 1, "one hidden SIGNUP_SOURCE input");
 assert(html.indexOf('id="sib-form"') !== -1, "Brevo form id");
