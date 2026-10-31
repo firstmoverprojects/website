@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action https://05279842.sibforms.com; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/ct-paid-sick-leave-check/">
+<title>Connecticut paid sick leave check for January 1, 2027 (free, runs in your browser)</title>
+<meta name="description" content="Free in-browser check: does Connecticut paid sick leave apply on January 1, 2027, and how many hours accrue. 1 or more employees on the payroll week that contains January 1. 1 hour per 30 hours worked, capped at 40. Nothing is uploaded.">
+<meta property="og:title" content="Connecticut paid sick leave check for January 1, 2027 (free, runs in your browser)">
+<meta property="og:description" content="Free in-browser check: does Connecticut paid sick leave apply on January 1, 2027, and how many hours accrue. 1 or more employees on the payroll week that contains January 1. 1 hour per 30 hours worked, capped at 40. Nothing is uploaded.">
+<meta property="og:url" content="https://firstmoverprojects.com/tools/ct-paid-sick-leave-check/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "dateModified": "2026-10-30",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does Connecticut paid sick leave apply on January 1, 2027 if the payroll week has one employee?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, if that person is on the Connecticut payroll for the week that contains January 1. Public Act 24-8 and the CT DOL FAQ both set January 1, 2027 at 1 or more employees in the state. The count is that payroll week, each year. A self-employed individual is not an employer under the act. An employer in the construction multiemployer health plan described in the act is also outside the definition. A seasonal employee, someone who works 120 days or less in a year, is not a covered employee."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many paid sick hours accrue?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "1 hour for every 30 hours worked, up to 40 hours in the year. Count hours actually worked. Paid or unpaid time off does not count. Public Act 24-8 states the accrual in one hour increments, so this page counts a whole hour only after each block of 30 hours and stops at 40."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When can accrued paid sick leave be used, and who must give notice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Public Act 24-8 says an employee may use accrued paid sick leave on and after the 120th calendar day of employment. The CT DOL FAQ says use starts 120 calendar days after the date of hire, one time for that employer. Covered employers must display the English and Spanish poster and give each employee written notice. The FAQ says the law does not require the employee to give advance notice before using leave. When calling out, the FAQ says to give notice as soon as practicable under the employer's regular call-out policy."
+      }
+    }
+  ]
+}
+</script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1b1f24;background:#f6f7f9}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.2em 0 .4em}
+h3{font-size:1.05rem;margin:1em 0 .3em}
+.card{background:#fff;border:1px solid #c5ccd4;border-radius:10px;padding:16px;margin:12px 0}
+.cd{display:flex;flex-wrap:wrap;gap:12px}
+.cd>div{flex:1 1 200px;background:#fff;border:1px solid #c5ccd4;border-radius:10px;padding:12px;min-width:0}
+.big{font-size:1.75rem;font-weight:800;line-height:1.2}
+.muted{color:#243044;font-size:.95rem}
+label{display:block;font-weight:700;margin-top:12px}
+input[type=text]{width:100%;max-width:100%;font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:10px;border:2px solid #1b1f24;border-radius:6px;background:#fff;color:#1b1f24;min-height:44px}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:0;background:#0b3f9c;color:#fff;cursor:pointer;margin:12px 8px 0 0;min-height:44px;font-weight:700}
+button.sec{background:#e4e8ee;color:#1b1f24;border:2px solid #1b1f24}
+.yes{background:#d8f5df;color:#062e14;display:inline-block;padding:4px 12px;border-radius:8px;border:2px solid #062e14}
+.no{background:#ffd9d4;color:#4d0d09;display:inline-block;padding:4px 12px;border-radius:8px;border:2px solid #4d0d09}
+.err{font-weight:800;color:#4d0d09}
+a{color:#0b3f9c}
+a:focus,button:focus,input:focus{outline:3px solid #0b3f9c;outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:8px;top:8px;background:#fff;padding:8px 12px;z-index:2;color:#1b1f24}
+footer{margin:8px 0 24px}
+.hooks{list-style:none;padding:0;margin:8px 0 12px}
+.hooks li{display:inline-block;max-width:100%;font-size:.85rem;font-weight:700;padding:4px 8px;border-radius:9px;margin:0 8px 8px 0;background:#e4e8ee;color:#1b1f24}
+blockquote{margin:.4em 0 .8em;padding:4px 0 4px 10px;border-left:4px solid #0b3f9c}
+a,p,li,h1,h2,h3,label,blockquote{overflow-wrap:anywhere}
+[hidden]{display:none !important}
+#results,#sib-form{overflow-wrap:anywhere;max-width:100%}
+#sib-form{position:relative;display:grid;gap:12px;margin-top:12px}
+#sib-form label{margin-top:0}
+#sib-form .sib-optin{display:flex;align-items:flex-start;gap:8px;font-weight:400}
+#sib-form .sib-optin input{margin-top:4px;min-width:20px;min-height:20px}
+#sib-form .input--hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.follow-bar{background:#01060b;color:#f4f7fa;border:1px solid #00d8ff;border-radius:12px;padding:12px;margin:12px 0 0;max-width:100%;box-sizing:border-box}
+.follow-bar-title{margin:0 0 8px;font-weight:800;font-size:.95rem;line-height:1.35;color:#f4f7fa}
+.follow-bar-actions{display:flex;flex-wrap:wrap;gap:8px;min-width:0}
+.follow-tiktok,.follow-email{flex:1 1 220px;min-width:0;max-width:100%;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border-radius:999px;font-weight:800;font-size:.92rem;line-height:1.35;text-decoration:none !important;text-align:center;white-space:normal;overflow-wrap:anywhere;min-height:44px}
+.follow-tiktok{background:#0c1520;color:#f4f7fa !important;border:1px solid #00d8ff}
+.follow-tiktok:hover,.follow-tiktok:focus{color:#00d8ff !important;outline:3px solid #00d8ff;outline-offset:2px}
+.follow-email{background:linear-gradient(135deg,#22c55e 0%,#4ade80 100%);color:#01060b !important;border:0}
+.follow-email:hover,.follow-email:focus{background:#16a34a;color:#01060b !important;outline:3px solid #00d8ff;outline-offset:2px}
+@media (max-width:420px){
+  main{padding:12px}
+  h1{font-size:1.35rem}
+  button{display:block;width:100%;margin-right:0}
+  .cd>div{flex-basis:100%}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<p class="muted site-nav"><a href="/">First Mover Projects</a> · free tool</p>
+<h1>Connecticut paid sick leave check</h1>
+<p>On January 1, 2027, Connecticut paid sick leave covers an employer with 1 or more employees in the state. Count the people on the Connecticut payroll for the week that contains January 1. Then enter hours one employee worked. This page turns those hours into accrued paid sick leave: 1 hour per 30 hours worked, capped at 40.</p>
+<ul class="hooks">
+<li>No account. The check runs in this browser tab.</li>
+<li>Plain yes or no for January 1, 2027</li>
+<li>Accrued hours, capped at 40</li>
+</ul>
+<p id="who"><strong>Who it's for:</strong> an employer checking the January 1, 2027 headcount line, and the accrual math for one employee's hours.</p>
+<p>General guidance, not legal, tax or IT advice. Check with CT DOL.</p>
+<p>Checked October 30, 2026.</p>
+
+<section class="card" aria-labelledby="rules-h">
+<h2 id="rules-h">The rule this page uses</h2>
+<h3>Headcount by year</h3>
+<ul>
+<li><strong>January 1, 2025:</strong> 25 or more employees in Connecticut. Public Act 24-8. The CT DOL FAQ updated September 23, 2026 does not restate this 2025 line.</li>
+<li><strong>January 1, 2026:</strong> 11 or more employees in Connecticut. Public Act 24-8 and the CT DOL FAQ.</li>
+<li><strong>January 1, 2027:</strong> 1 or more employees in Connecticut. Public Act 24-8 and the CT DOL FAQ. This is the yes or no below.</li>
+</ul>
+<p>The number of employees is the employer's payroll for the week containing January 1, each year. Both the FAQ and Public Act 24-8 say that.</p>
+<h3>Accrual</h3>
+<p>Employees accrue 1 hour of paid sick leave for every 30 hours worked, up to 40 hours in the year. These are hours actually worked. Paid or unpaid time off does not count. Public Act 24-8 states that accrual in one hour increments, so this page counts a whole hour only after each block of 30 hours, then stops at 40.</p>
+<p>An overtime-exempt employee is presumed to work 40 hours each work week and does not accrue for hours over 40 in that week. If the normal week is under 40 hours, accrual uses the hours in that normal week. Type the hours the law counts. This page does not guess exempt status.</p>
+<h3>When leave can be used</h3>
+<p>Public Act 24-8 says an employee may use accrued paid sick leave on and after the 120th calendar day of employment. The CT DOL FAQ says 120 calendar days after the date of hire, and that this wait is one time for that employer. This check does not ask for a hire date. Calendar day 119 of employment is not yet the 120th day. Calendar day 120 is.</p>
+<p>That use rule is separate from the seasonal-employee test. A seasonal employee works 120 days or less in any year and is not a covered employee.</p>
+<h3>Notice</h3>
+<p>Covered employers must tell employees about paid sick leave. Display the poster in English and Spanish, and give written notice no later than January 1, 2025, or the employee's first day, whichever is later. The CT DOL FAQ says the same.</p>
+<p>The law does not require the employee to give advance notice before using paid sick leave. The FAQ says that when calling out, employees should give notice as soon as practicable under the employer's regular call-out policy.</p>
+<p>A yes on headcount is not the whole test. A self-employed individual is not an employer under the act. An employer in the construction multiemployer health plan described in the act is not an employer under the act. The CT DOL FAQ's employer definition also includes municipalities and the state, once the headcount line is met.</p>
+</section>
+
+<section class="card" aria-labelledby="calc-h">
+<h2 id="calc-h">Check January 1, 2027</h2>
+<p id="how">Use the payroll for the week that contains January 1. Hours are for one employee. Nothing is uploaded.</p>
+<label for="employees">Employees on the Connecticut payroll that week</label>
+<input id="employees" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" aria-describedby="how employees-hint">
+<p id="employees-hint" class="muted">Whole number, 0 or more. For January 1, 2027, the line is 1 or more.</p>
+<label for="hours">Hours that employee worked</label>
+<input id="hours" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="hours-hint">
+<p id="hours-hint" class="muted">Hours actually worked. 30 hours accrue 1 hour. 1,200 hours accrue 40. More than that stays at 40.</p>
+<button id="go" type="button">Check January 1, 2027</button>
+<button id="clear" class="sec" type="button">Clear</button>
+</section>
+
+<section class="card" id="results" hidden aria-live="polite">
+<h2>Result</h2>
+<p id="out-question">Does this apply to me on Jan 1, 2027?</p>
+<p id="out-answer" class="big"></p>
+<p id="out-error" class="err" hidden></p>
+<p class="muted">Accrued hours</p>
+<p id="out-hours" class="big"></p>
+<p id="out-note"></p>
+<p>General guidance, not legal, tax or IT advice. Check with CT DOL.</p>
+<p>Checked October 30, 2026.</p>
+<div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
+<p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
+<div class="follow-bar-actions">
+<a class="follow-tiktok" data-tool-slug="ct-paid-sick-leave-check" target="_blank" rel="noopener" href="https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&amp;utm_medium=tool_result&amp;utm_campaign=follower_growth">Follow @firstmoverprojects on TikTok (Daily 60-Sec Checklists)</a>
+<a class="follow-email" href="#signup">Get Free Email Deadline Reminders</a>
+</div>
+</div>
+</section>
+
+<section class="card" id="signup" aria-labelledby="signup-h">
+<h2 id="signup-h">Get the First Mover Projects Weekly Update</h2>
+<!-- Embedded #sib-form posts SIGNUP_SOURCE (default ct-psl). Chief: create text contact attribute SIGNUP_SOURCE in the existing Brevo account before relying on it; until then Brevo may ignore or reject it. -->
+<p>One short weekly email covering our newest free 60-second browser checks, small-business tech and compliance deadlines, and cozy browser puzzle games. Double opt-in. Unsubscribe anytime. See our <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>.</p>
+<form id="sib-form" method="POST" action="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" data-type="subscription" autocomplete="off">
+<p>
+<label for="EMAIL">Enter your email address to subscribe</label>
+<input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" value="" placeholder="EMAIL" required>
+</p>
+<p>
+<label class="sib-optin" for="OPT_IN">
+<input type="checkbox" value="1" id="OPT_IN" name="OPT_IN" required>
+<span>By subscribing you agree to get this weekly email from First Mover Projects. We'll send a confirmation first. Unsubscribe any time with one click. We don't sell or share your email. See our Privacy Policy: firstmoverprojects.com/privacy.html</span>
+</label>
+</p>
+<p><button type="submit">Sign up for the weekly FMP email</button></p>
+<input type="text" name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off">
+<input type="hidden" name="locale" value="en">
+<input type="hidden" name="SIGNUP_SOURCE" value="ct-psl">
+</form>
+<script id="signup-source-script">
+(function () {
+  "use strict";
+  var form = document.getElementById("sib-form");
+  if (!form) return;
+  var input = form.querySelector('input[name="SIGNUP_SOURCE"]');
+  if (!input) return;
+  var match = /(?:^|[?&])SIGNUP_SOURCE=([^&#]*)/.exec(window.location.search || "");
+  if (!match) return;
+  var raw = match[1].replace(/\+/g, " ");
+  try { raw = decodeURIComponent(raw); } catch (err) { raw = match[1]; }
+  var clean = String(raw).toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+  if (clean) input.value = clean;
+})();
+</script>
+</section>
+
+<div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
+<p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
+<div class="follow-bar-actions">
+<a class="follow-tiktok" data-tool-slug="ct-paid-sick-leave-check" target="_blank" rel="noopener" href="https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&amp;utm_medium=tool_result&amp;utm_campaign=follower_growth">Follow @firstmoverprojects on TikTok (Daily 60-Sec Checklists)</a>
+<a class="follow-email" href="/deadlines/#signup">Get Free Email Deadline Reminders</a>
+</div>
+</div>
+
+<section class="card" aria-labelledby="src-h">
+<h2 id="src-h">Sources</h2>
+<ol>
+<li>Connecticut Department of Labor, Paid Sick Leave FAQs, updated September 23, 2026: <a href="https://portal.ct.gov/dol/divisions/legal/connecticut-leave-programs/paid-sick-leave-faqs">https://portal.ct.gov/dol/divisions/legal/connecticut-leave-programs/paid-sick-leave-faqs</a></li>
+<li>Connecticut Department of Labor, Wage and Workplace Standards, Paid Sick Leave: <a href="https://portal.ct.gov/dol/knowledge-base/articles/wage-and-workplace-standards/paid-sick-leave">https://portal.ct.gov/dol/knowledge-base/articles/wage-and-workplace-standards/paid-sick-leave</a></li>
+<li>Connecticut Public Act 24-8 (Substitute House Bill No. 5005): <a href="https://cga.ct.gov/2024/ACT/PA/PDF/2024PA-00008-R00HB-05005-PA.PDF">https://cga.ct.gov/2024/ACT/PA/PDF/2024PA-00008-R00HB-05005-PA.PDF</a></li>
+</ol>
+<h3>From the CT DOL FAQ</h3>
+<blockquote>January 1, 2026 - employers with 11 or more employees in CT</blockquote>
+<blockquote>January 1, 2027 - employers with 1 or more employees in CT</blockquote>
+<blockquote>Number of employees is based on employer's payroll for the week containing January 1st, annually.</blockquote>
+<blockquote>Employees must accrue 1 hour of leave for every 30 hours worked.</blockquote>
+<blockquote>An employee can accrue a maximum of 40 hours per year.</blockquote>
+<blockquote>120 calendar days after their date of hire.</blockquote>
+<blockquote>The law does not require the employee to provide their employer advance notice of their need to use paid sick leave.</blockquote>
+<h3>From the CT DOL knowledge base</h3>
+<p>That page is dated August 21, 2023, and it says the guidance and poster apply to the paid sick leave law effective January 1, 2025, and expanded on January 1, 2026. It also says the poster satisfies an employer's notice obligation for employers with 11 or more employees. It points to the FAQ amended September 23, 2026. It does not itself state the January 1, 2027 line of 1 or more employees.</p>
+<h3>From Public Act 24-8</h3>
+<p>The enacted text sets the employer headcount at 25 or more individuals in the state on and after January 1, 2025, 11 or more on and after January 1, 2026, and 1 or more on and after January 1, 2027. The count is the payroll for the week containing January 1, annually. Paid sick leave accrues at 1 hour for each 30 hours worked, in one hour increments, up to 40 hours per year. Use starts on and after the 120th calendar day of employment. Each employer subject to that section must give notice with an English and Spanish poster and with written notice no later than January 1, 2025, or at hire, whichever is later.</p>
+</section>
+
+<section class="card" aria-labelledby="diff-h">
+<h2 id="diff-h">Where these sources are not the same</h2>
+<ul>
+<li><strong>January 1, 2025.</strong> Public Act 24-8 says 25 or more employees. The September 23, 2026 FAQ lists 2026 and 2027 and does not restate 2025. The yes or no on this page is only January 1, 2027, where the act and the FAQ both say 1 or more.</li>
+<li><strong>January 1, 2027 on the knowledge base page.</strong> That page describes the law as effective January 1, 2025 and expanded on January 1, 2026. It does not state the 2027 drop to 1 employee. The FAQ linked from that page does. This page follows the FAQ and the act for 2027.</li>
+<li><strong>The 120-day use rule.</strong> The act says on and after the 120th calendar day of employment. The FAQ says 120 calendar days after the date of hire. Those sentences can land on different calendar dates. This page does not ask for a hire date. The day check in the page script follows the act: calendar day 120 is usable, and calendar day 119 is not.</li>
+<li><strong>Notice.</strong> The act and the FAQ require the employer to notify employees. The FAQ says the law does not require the employee to give advance notice before using leave. The knowledge base says the poster satisfies the notice obligation for employers with 11 or more employees. It does not say a covered 1-employee employer in 2027 is excused. For January 1, 2027, follow the act and the FAQ.</li>
+</ul>
+</section>
+
+<section class="card" id="faq" aria-labelledby="faq-h">
+<h2 id="faq-h">Questions</h2>
+<h3>Does Connecticut paid sick leave apply on January 1, 2027 if the payroll week has one employee?</h3>
+<p>Yes, if that person is on the Connecticut payroll for the week that contains January 1. Public Act 24-8 and the CT DOL FAQ both set January 1, 2027 at 1 or more employees in the state. The count is that payroll week, each year. A self-employed individual is not an employer under the act. An employer in the construction multiemployer health plan described in the act is also outside the definition. A seasonal employee, someone who works 120 days or less in a year, is not a covered employee.</p>
+<h3>How many paid sick hours accrue?</h3>
+<p>1 hour for every 30 hours worked, up to 40 hours in the year. Count hours actually worked. Paid or unpaid time off does not count. Public Act 24-8 states the accrual in one hour increments, so this page counts a whole hour only after each block of 30 hours and stops at 40.</p>
+<h3>When can accrued paid sick leave be used, and who must give notice?</h3>
+<p>Public Act 24-8 says an employee may use accrued paid sick leave on and after the 120th calendar day of employment. The CT DOL FAQ says use starts 120 calendar days after the date of hire, one time for that employer. Covered employers must display the English and Spanish poster and give each employee written notice. The FAQ says the law does not require the employee to give advance notice before using leave. When calling out, the FAQ says to give notice as soon as practicable under the employer's regular call-out policy.</p>
+</section>
+
+<p>Thank you for your time.</p>
+<p>If this isn't right for you, please share it with someone it could help.</p>
+
+<footer>
+<p>General guidance, not legal, tax or IT advice. Check with CT DOL.</p>
+<p>Checked October 30, 2026.</p>
+<p>Not affiliated with or endorsed by the Connecticut Department of Labor.</p>
+<p>Made by First Mover Projects with AI coding tools.</p>
+<p>The headcount and hours stay in this browser tab. Nothing from the check is uploaded or saved. The email box is a separate signup.</p>
+<p><a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a></p>
+</footer>
+</main>
+<noscript><p>This check needs JavaScript in your browser. Nothing from the check is uploaded. The source links and the email signup still work.</p></noscript>
+<script id="ct-psl-script">
+(function () {
+  "use strict";
+
+  function asCount(value) {
+    if (typeof value === "number") {
+      if (!isFinite(value) || value < 0 || Math.floor(value) !== value || value > 9007199254740991) return null;
+      return value;
+    }
+    if (typeof value !== "string") return null;
+    var raw = value.trim();
+    if (!/^\d{1,15}$/.test(raw)) return null;
+    var n = Number(raw);
+    if (!isFinite(n) || Math.floor(n) !== n) return null;
+    return n;
+  }
+
+  function asHours(value) {
+    if (typeof value === "number") {
+      if (!isFinite(value) || value < 0) return null;
+      return value;
+    }
+    if (typeof value !== "string") return null;
+    var raw = value.trim();
+    if (!/^\d{1,12}(\.\d{1,4})?$/.test(raw)) return null;
+    var n = Number(raw);
+    if (!isFinite(n) || n < 0) return null;
+    return n;
+  }
+
+  function minimumEmployees(year) {
+    var y = asCount(year);
+    if (y === null) return null;
+    if (y >= 2027) return 1;
+    if (y === 2026) return 11;
+    if (y === 2025) return 25;
+    return null;
+  }
+
+  function employerCovered(employees, year) {
+    var count = asCount(employees);
+    var y = asCount(year);
+    if (count === null || y === null) return { ok: false, covered: false, minimum: null, employees: null, year: null };
+    var minimum = minimumEmployees(y);
+    if (minimum === null) return { ok: true, covered: false, minimum: null, employees: count, year: y };
+    return { ok: true, covered: count >= minimum, minimum: minimum, employees: count, year: y };
+  }
+
+  function accruedHours(hours) {
+    var n = asHours(hours);
+    if (n === null) return { ok: false, hours: null, capped: false, raw: null };
+    var raw = Math.floor(n / 30);
+    var capped = raw >= 40;
+    return { ok: true, hours: capped ? 40 : raw, capped: capped, raw: raw };
+  }
+
+  function canUsePaidSickLeave(calendarDay) {
+    var day = asCount(calendarDay);
+    if (day === null) return { ok: false, usable: false, calendarDay: null };
+    return { ok: true, usable: day >= 120, calendarDay: day };
+  }
+
+  function checkCtPsl(employees, hours) {
+    var cover = employerCovered(employees, 2027);
+    var accrual = accruedHours(hours);
+    var question = "Does this apply to me on Jan 1, 2027?";
+    if (!cover.ok || !accrual.ok) {
+      return { ok: false, applies: false, answer: "", question: question, accruedHours: null, capped: false };
+    }
+    return {
+      ok: true,
+      applies: cover.covered,
+      answer: cover.covered ? "Yes" : "No",
+      question: question,
+      accruedHours: accrual.hours,
+      capped: accrual.capped,
+      employees: cover.employees,
+      minimum: cover.minimum,
+      year: 2027
+    };
+  }
+
+  function showResult(result) {
+    var box = document.getElementById("results");
+    var answer = document.getElementById("out-answer");
+    var hoursEl = document.getElementById("out-hours");
+    var note = document.getElementById("out-note");
+    var error = document.getElementById("out-error");
+    if (!box || !answer || !hoursEl || !note || !error) return;
+    box.hidden = false;
+    if (!result.ok) {
+      answer.textContent = "";
+      answer.className = "big";
+      hoursEl.textContent = "";
+      note.textContent = "";
+      error.hidden = false;
+      error.textContent = "Enter a whole number of employees (0 or more) and hours worked (0 or more).";
+      return;
+    }
+    error.hidden = true;
+    error.textContent = "";
+    answer.textContent = result.answer;
+    answer.className = result.applies ? "big yes" : "big no";
+    hoursEl.textContent = String(result.accruedHours);
+    if (!result.applies) {
+      note.textContent = "This headcount is under 1, so the January 1, 2027 line does not apply. The hour figure is still 1 hour per 30 hours worked, capped at 40.";
+    } else if (result.capped) {
+      note.textContent = "Capped at 40. The yearly accrual maximum is 40 hours.";
+    } else {
+      note.textContent = "Whole hours only: 1 hour once 30 hours are worked, up to 40 in the year.";
+    }
+  }
+
+  function readAndCheck() {
+    var employees = document.getElementById("employees");
+    var hours = document.getElementById("hours");
+    if (!employees || !hours) return;
+    showResult(checkCtPsl(employees.value, hours.value));
+  }
+
+  function onKey(ev) {
+    if (ev.key === "Enter") {
+      ev.preventDefault();
+      readAndCheck();
+    }
+  }
+
+  var go = document.getElementById("go");
+  if (go) go.addEventListener("click", readAndCheck);
+  var employeesInput = document.getElementById("employees");
+  var hoursInput = document.getElementById("hours");
+  if (employeesInput) employeesInput.addEventListener("keydown", onKey);
+  if (hoursInput) hoursInput.addEventListener("keydown", onKey);
+  var clearBtn = document.getElementById("clear");
+  if (clearBtn) clearBtn.addEventListener("click", function () {
+    var box = document.getElementById("results");
+    if (employeesInput) employeesInput.value = "";
+    if (hoursInput) hoursInput.value = "";
+    if (box) box.hidden = true;
+  });
+
+  window.checkCtPsl = checkCtPsl;
+  window.employerCovered = employerCovered;
+  window.accruedHours = accruedHours;
+  window.canUsePaidSickLeave = canUsePaidSickLeave;
+  window.minimumEmployees = minimumEmployees;
+})();
+</script>
+<script>
+(function () {
+  var q = location.search || "";
+  var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(q);
+  if (testVisit) {
+    window.goatcounter = { path: function (p) { return "TEST-EXCLUDE" + p; } };
+  }
+  function trackGumroadClick(ev) {
+    if (ev.type === "auxclick" && ev.button !== 1) return;
+    var node = ev.target && ev.target.closest ? ev.target.closest("a") : null;
+    if (!node || !node.getAttribute) return;
+    var href = node.getAttribute("href") || "";
+    var toolSlug = node.getAttribute("data-tool-slug") || "";
+    var className = node.getAttribute("class") || "";
+    var path = "";
+    var title = "";
+    if (className.indexOf("follow-tiktok") !== -1) {
+      if (!/^[a-z0-9-]{1,80}$/.test(toolSlug)) return;
+      if (node.target !== "_blank") node.target = "_blank";
+      if (typeof node.setAttribute === "function") {
+        var tiktokRel = node.getAttribute("rel") || "";
+        if (tiktokRel.indexOf("noopener") === -1) node.setAttribute("rel", (tiktokRel ? tiktokRel + " " : "") + "noopener");
+      }
+      path = (testVisit ? "TEST-EXCLUDE-" : "") + "/event/tiktok-follow-click-" + toolSlug;
+      title = "TikTok follow click: " + toolSlug;
+    } else {
+      var parts = href.split("/");
+      if (parts[0] !== "https:" || parts[2] !== "firstmoverprojects.gumroad.com" || parts[3] !== "l") return;
+      if (href.indexOf("wanted=true") === -1) return;
+      var slug = parts[4] || "";
+      var cut = slug.search(/[?#]/);
+      if (cut !== -1) slug = slug.slice(0, cut);
+      if (!slug) return;
+      if (node.target !== "_blank") node.target = "_blank";
+      if (typeof node.setAttribute === "function") {
+        var rel = node.getAttribute("rel") || "";
+        if (rel.indexOf("noopener") === -1) node.setAttribute("rel", (rel ? rel + " " : "") + "noopener");
+      }
+      path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+      title = "Gumroad checkout click: " + slug;
+    }
+    if (window.goatcounter && typeof window.goatcounter.count === "function") {
+      window.goatcounter.count({
+        path: path,
+        title: title,
+        event: true
+      });
+    }
+    var gcCountUrl = "https://firstmoverprojects.goatcounter.com/count?p=" + encodeURIComponent(path) + "&t=" + encodeURIComponent(title) + "&e=true";
+    try {
+      if (typeof fetch === "function") fetch(gcCountUrl, { keepalive: true, mode: "no-cors" });
+    } catch (fetchErr) {}
+    try {
+      if (typeof navigator !== "undefined" && navigator && typeof navigator.sendBeacon === "function") navigator.sendBeacon(gcCountUrl);
+    } catch (beaconErr) {}
+  }
+  document.addEventListener("click", trackGumroadClick);
+  document.addEventListener("auxclick", trackGumroadClick);
+})();
+</script>
+<script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script id="fmp-utm">
+(function () {
+  "use strict";
+  var KEY = "fmp_utm_source";
+  var FALLBACK = "site";
+
+  function clean(value) {
+    if (value == null) return "";
+    var s = String(value).replace(/\+/g, " ").trim().toLowerCase();
+    try { s = decodeURIComponent(s); } catch (e) { /* keep the raw token */ }
+    s = s.trim().toLowerCase().replace(/[^a-z0-9\-_]/g, "-").slice(0, 200).replace(/^-+|-+$/g, "");
+    if (!/^[a-z0-9][a-z0-9_-]*$/.test(s) || s === FALLBACK) return "";
+    return s;
+  }
+
+  function fromLocation() {
+    var q = "";
+    try { q = location.search || ""; } catch (e) { q = ""; }
+    var m = /(?:^|[?&])utm_source=([^&#]*)/.exec(q);
+    return m ? clean(m[1]) : "";
+  }
+
+  function landingSource() {
+    var fromUrl = fromLocation();
+    var saved = "";
+    try {
+      saved = clean(sessionStorage.getItem(KEY));
+      if (!saved && fromUrl) {
+        sessionStorage.setItem(KEY, fromUrl);
+        saved = fromUrl;
+      }
+    } catch (e) {
+      saved = fromUrl;
+    }
+    return saved || FALLBACK;
+  }
+
+  function patchHref(anchor, source) {
+    if (!anchor || !source || source === FALLBACK || !anchor.getAttribute) return;
+    var href = anchor.getAttribute("href");
+    if (!href || href.indexOf("firstmoverprojects.gumroad.com/l/") === -1) return;
+    if (href.indexOf("utm_source=") === -1) return;
+    var next = href.replace(/([?&]utm_source=)[^&#]*/, "$1" + source);
+    if (next !== href) anchor.setAttribute("href", next);
+  }
+
+  function patchAll(source) {
+    if (!document.querySelectorAll) return;
+    var links = document.querySelectorAll('a[href*="firstmoverprojects.gumroad.com/l/"]');
+    for (var i = 0; i < links.length; i++) patchHref(links[i], source);
+  }
+
+  function onClick(ev) {
+    var t = ev.target;
+    if (!t || !t.closest) return;
+    patchHref(t.closest("a"), landingSource());
+  }
+
+  patchAll(landingSource());
+  document.addEventListener("click", onClick, true);
+  document.addEventListener("auxclick", onClick, true);
+})();
+</script>
+</body>
+</html>

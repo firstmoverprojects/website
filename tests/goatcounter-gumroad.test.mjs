@@ -7,6 +7,7 @@ import vm from "node:vm";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const CSP = "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action 'none'; base-uri 'none'";
+const CT_PSL_CSP = CSP.replace("form-action 'none'", "form-action https://05279842.sibforms.com");
 const COUNT = '<script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>';
 const BANNED = ["XMLHttpRequest", "localStorage", "sessionStorage", "indexedDB"];
 
@@ -93,7 +94,8 @@ test("every individual tool page allows GoatCounter and sends an origin referrer
   assert.ok(pages.length >= 9, pages.join(","));
   for (const rel of pages) {
     const html = read(rel);
-    assert.equal(html.includes(`content="${CSP}"`), true, rel);
+    const expectedCsp = rel === "tools/ct-paid-sick-leave-check/index.html" ? CT_PSL_CSP : CSP;
+    assert.equal(html.includes(`content="${expectedCsp}"`), true, rel);
     assert.equal(html.includes('<meta name="referrer" content="strict-origin-when-cross-origin">'), true, rel);
     assert.equal(html.includes('content="no-referrer"'), false, rel);
     const surface = withoutUtm(html);
