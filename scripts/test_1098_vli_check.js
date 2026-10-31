@@ -39,7 +39,7 @@ assert(html.indexOf(BUTTON) !== -1, "waitlist button text");
 assert(html.indexOf(DATES) !== -1, "plain due-date line");
 assert(html.indexOf(INFO) !== -1, "information-only line");
 assert(html.indexOf(AFFIL) !== -1, "not affiliated or endorsed line");
-assert(html.indexOf("Not affiliated with the IRS.") !== -1, "footer affiliation phrase");
+assert(html.indexOf("Not affiliated with the IRS.") === -1, "short affiliation sentence removed");
 assert(html.indexOf(THANKS) !== -1, "thanks line");
 assert(html.indexOf(SHARE) !== -1, "share line");
 assert(html.indexOf("https://www.irs.gov/instructions/i1098vli") !== -1, "instructions URL");
@@ -64,7 +64,12 @@ assert(/mailchimp|convertkit|klaviyo|buttondown|beehiiv/i.test(html) === false, 
 assert(html.indexOf("gumroad.com") === -1, "no kit checkout");
 
 var footer = html.slice(html.indexOf('<footer class="site-footer">'), html.indexOf("</footer>"));
-assert(footer.indexOf("Not affiliated with the IRS.") !== -1, "affiliation is in the footer");
+assert(footer.indexOf(AFFIL) !== -1, "affiliation is in the footer");
+assert(footer.indexOf("Not affiliated with the IRS.") === -1, "short affiliation sentence not in footer");
+
+var signup = html.slice(html.indexOf('id="signup"'), html.indexOf("</section>", html.indexOf('id="signup"')));
+assert(signup.indexOf("Sign up for the weekly FMP email (1-click)") === -1, "no duplicate weekly signup link");
+assert(signup.indexOf(BUTTON) !== -1, "waitlist button remains in signup");
 
 var result = html.slice(html.indexOf('id="vli-result"'), html.indexOf("</section>", html.indexOf('id="vli-result"')));
 assert(result.indexOf(DATES) !== -1, "dates near result");
