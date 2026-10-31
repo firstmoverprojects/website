@@ -60,9 +60,43 @@
       #vli-result,
       .direct-answer,
       .kit-cta,
-      .site-footer {
+      .site-footer,
+      #sib-form {
         overflow-wrap: anywhere;
         max-width: 100%;
+      }
+      #sib-form {
+        position: relative;
+        display: grid;
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+      #sib-form label {
+        display: block;
+        font-weight: 600;
+      }
+      #sib-form input[type="text"] {
+        width: 100%;
+        max-width: 28rem;
+        min-height: 44px;
+        margin-top: 0.35rem;
+      }
+      #sib-form .sib-optin {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        font-weight: 400;
+      }
+      #sib-form .input--hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
       }
       @media (max-width: 480px) {
         .vli-choices {
@@ -229,13 +263,43 @@
 
       <section class="signup" id="signup" aria-labelledby="signup-h">
         <h2 id="signup-h">Get the First Mover Projects Weekly Update</h2>
-        <!-- TODO: These waitlist clicks are not tagged 1098-VLI. The live Brevo form at the sibforms URL below only posts EMAIL, OPT_IN, and locale. Checked 2026-10-31: the hosted page ignores SOURCE, source, utm_source, and utm_campaign query parameters, and the form script does not read the query string. Do not add a source parameter until the field exists in Brevo. A parameter with no field does not tag the contact.
-Chief, in the existing Brevo account (no new account, no API key): create a text contact attribute named SIGNUP_SOURCE. On the existing form titled "FMP Deadlines sign-up" (this same sibforms URL), add SIGNUP_SOURCE as a hidden field with URL parameter SIGNUP_SOURCE and an empty default. Do not hard-code 1098-VLI on this shared form, because the rest of the site uses the same URL. If this classic form cannot store a URL parameter, do not use a fixed hidden value. Create a separate form or list for 1098-VLI and replace only the two waitlist links on this page. After it works, append ?SIGNUP_SOURCE=1098-VLI to those two links and confirm a test contact stores SIGNUP_SOURCE as 1098-VLI. -->
+        <!-- Embedded #sib-form posts SIGNUP_SOURCE (default 1098-vli). Chief: create text contact attribute SIGNUP_SOURCE in the existing Brevo account before relying on it; until then Brevo may ignore or reject it. The two waitlist links remain untagged. -->
         <p class="kit-cta"><a class="btn btn--primary" href="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" target="_blank" rel="noopener">Join the free waitlist for the $29 kit</a></p>
         <p>The $29 kit is a waitlist on this page. The button opens the same First Mover Projects email sign-up used on the rest of this site. It asks for an email address. This page does not ask for a VIN, SSN, TIN, or loan amount.</p>
         <p>One short weekly email covering our newest free 60-second browser checks, ready-to-use kits, small-business tech &amp; compliance deadlines, and cozy browser puzzle games. Double opt-in; unsubscribe anytime. See our <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>.</p>
         <p>Thank you for your time.</p>
         <p>Share it with someone it could help.</p>
+        <form id="sib-form" method="POST" action="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" data-type="subscription" autocomplete="off">
+          <p>
+            <label for="EMAIL">Enter your email address to subscribe</label>
+            <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" value="" placeholder="EMAIL" required>
+          </p>
+          <p>
+            <label class="sib-optin" for="OPT_IN">
+              <input type="checkbox" value="1" id="OPT_IN" name="OPT_IN" required>
+              <span>By subscribing you agree to get this weekly email from First Mover Projects. We'll send a confirmation first. Unsubscribe any time with one click. We don't sell or share your email. See our Privacy Policy: firstmoverprojects.com/privacy.html</span>
+            </label>
+          </p>
+          <p><button class="btn btn--primary" type="submit">Sign up for the weekly FMP email</button></p>
+          <input type="text" name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off">
+          <input type="hidden" name="locale" value="en">
+          <input type="hidden" name="SIGNUP_SOURCE" value="1098-vli">
+        </form>
+        <script id="signup-source-script">
+(function () {
+  "use strict";
+  var form = document.getElementById("sib-form");
+  if (!form) return;
+  var input = form.querySelector('input[name="SIGNUP_SOURCE"]');
+  if (!input) return;
+  var match = /(?:^|[?&])SIGNUP_SOURCE=([^&#]*)/.exec(window.location.search || "");
+  if (!match) return;
+  var raw = match[1].replace(/\+/g, " ");
+  try { raw = decodeURIComponent(raw); } catch (err) { raw = match[1]; }
+  var clean = String(raw).toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+  if (clean) input.value = clean;
+})();
+        </script>
       </section>
     </main>
 
