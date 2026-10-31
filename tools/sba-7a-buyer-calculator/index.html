@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; form-action https://05279842.sibforms.com; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/sba-7a-buyer-calculator/">
+<title>SBA 7(a) buyer calculator (free, runs in your browser)</title>
+<meta name="description" content="A free web check of estimates under SBA SOP 50 10 8.1: debt service coverage, equity above valuation, and the half cap on limited sources. Your lender decides. Nothing is uploaded.">
+<meta property="og:title" content="SBA 7(a) buyer calculator (free, runs in your browser)">
+<meta property="og:description" content="A free web check of estimates under SBA SOP 50 10 8.1: debt service coverage, equity above valuation, and the half cap on limited sources. Your lender decides. Nothing is uploaded.">
+<meta property="og:url" content="https://firstmoverprojects.com/tools/sba-7a-buyer-calculator/">
+<meta property="og:type" content="website">
+<!-- UNLISTED: noindex. Do not add this URL to sitemap.xml, tools/index.html, index.html, deadlines/index.html, deadlines/feed.xml, deadlines/deadlines.ics, or deadlines/finder/. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "dateModified": "2026-10-31",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which debt service coverage ratios does this page use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Appendix 15, paragraph C.2.b of SBA SOP 50 10 8.1: 1.25:1 for initial acquisition, owner buyout, and ESOP and cooperative. 1.15:1 for business expansion. Every figure this page returns is an estimate. Your lender decides."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if the purchase price is above the valuation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Appendix 15, paragraph C.1.b says the difference must be made up by equity. This page estimates that difference. Your lender decides. Ask them to confirm."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much of the equity can come from limited sources?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Limited equity sources may provide no more than half of the required equity injection. This page estimates that half from the required equity amount you enter."
+      }
+    }
+  ]
+}
+</script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#12161c;background:#f4f6f8}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;line-height:1.25;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.2em 0 .4em}
+.topline{font-size:1.05rem;margin:0 0 8px}
+.card{background:#fff;border:2px solid #1b2838;border-radius:10px;padding:16px;margin:12px 0}
+.big{font-size:1.45rem;font-weight:800;color:#12161c;line-height:1.3;margin:.2em 0}
+.muted{color:#1b2838;font-size:.95rem}
+label{display:block;font-weight:600;margin-top:12px}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:2px solid #08306b;background:#08306b;color:#fff;cursor:pointer;margin:12px 8px 0 0;min-height:44px;font-weight:700}
+button.sec{background:#fff;color:#12161c;border-color:#12161c}
+a{color:#08306b}
+a:hover,a:focus{color:#041e42}
+a:focus,button:focus,input:focus,select:focus{outline:3px solid #08306b;outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:8px;top:8px;background:#fff;color:#12161c;padding:8px 12px;z-index:2}
+footer{margin:8px 0 24px}
+fieldset{border:2px solid #1b2838;border-radius:8px;margin:12px 0;padding:8px 12px;min-width:0}
+legend{font-weight:800;padding:0 4px}
+.choices{display:flex;flex-wrap:wrap;gap:8px}
+.choices label{font-weight:600;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:center;margin:0;flex:1 1 16rem;min-width:0;max-width:100%;min-height:44px;padding:8px 10px;border:2px solid #1b2838;border-radius:8px;background:#fff;color:#12161c;cursor:pointer}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.actions button{margin:0;flex:1 1 12rem}
+input[type="text"],input[type="email"],select{width:100%;max-width:100%;font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:10px;border:2px solid #1b2838;border-radius:6px;background:#fff;color:#12161c;min-height:44px}
+blockquote{margin:.4em 0 .8em;padding:8px 12px;border-left:4px solid #08306b;background:#eef3f8}
+a,p,li,label,legend,h1,h2,blockquote{overflow-wrap:anywhere}
+[hidden]{display:none !important}
+.result-grid{display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+.result-grid > *{min-width:0}
+.note{background:#eef3f8;border:2px solid #1b2838;border-radius:8px;padding:12px;margin:0}
+.err{font-weight:800;color:#4d0d09}
+#sba-lines{margin:.4em 0;padding-left:1.2em}
+#sba-lines li{margin:.45em 0}
+#sib-form{position:relative;display:grid;gap:12px;margin-top:8px}
+#sib-form label{margin-top:0}
+.sib-optin{display:flex;align-items:flex-start;gap:8px;font-weight:400;min-height:44px;min-width:0;max-width:100%}
+.sib-optin span{min-width:0;overflow-wrap:anywhere}
+#sib-form .input--hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.sources a{display:block;min-height:44px;padding:10px 0;max-width:100%}
+main,.card,fieldset,form,blockquote{max-width:100%;min-width:0}
+@media (min-width:720px){
+  .result-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:start}
+}
+@media (max-width:480px){
+  main{padding:12px}
+  h1{font-size:1.35rem}
+  .choices{flex-direction:column}
+  .choices label,.actions button,button{flex-basis:auto;width:100%;margin-right:0}
+}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,textarea{font-size:16px}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,button{min-height:44px}
+nav a,.site-nav a{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:44px;min-width:44px;padding:8px 6px}
+label:has(> input[type="checkbox"]),label:has(> input[type="radio"]){min-height:44px;box-sizing:border-box}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<p class="topline">A free web check of estimates under SBA SOP 50 10 8.1 for SBA loan numbers issued on or after October 1, 2026. It runs in this browser. Nothing is uploaded.</p>
+<p class="muted site-nav"><a href="/">First Mover Projects</a></p>
+<h1>SBA 7(a) buyer calculator</h1>
+<p>This page estimates three figures: debt service coverage by transaction type, the equity gap when the purchase price is above the valuation, and the half-of-equity cap on limited sources. Every figure is an estimate.</p>
+<p>Your lender decides. Ask them to confirm.</p>
+<p>Checked October 31, 2026.</p>
+
+<section class="card" aria-labelledby="rules-h">
+<h2 id="rules-h">What this page uses</h2>
+<p>SBA SOP 50 10 8.1, "Lender and Development Company Loan Programs with Technical Policy Updates." The cover says "Published: September 25, 2026." It replaces SOP 50 10 8. The file named on the <a href="https://legacy.sba.gov/document/sop-50-10-lender-development-company-loan-programs">SBA SOP 50 10 page</a> is "SOP 50 10 8.1 Technical Policy Updates effective 10.1.2026.docx".</p>
+<p><a href="https://legacy.sba.gov/sites/default/files/2026-08/SBA%20Information%20Notice%205000-880695%20-%20Issuance%20of%20SOP%2050%2010%208.1.pdf">Information Notice 5000-880695</a> (published August 14, 2026) says the SOP is "effective October 1, 2026, and will apply to all applications that are issued an SBA loan number on or after that date." Change-of-ownership rules are in Appendix 15. The table of contents starts that appendix on page 362.</p>
+<h3>Debt service coverage, Appendix 15, paragraph C.2.b</h3>
+<blockquote>The Debt Service Coverage (DSC) ratio must be satisfied using either the last fiscal year-end or an average of the last two fiscal year-end statements on either a historical or adjusted basis based on the transaction type: Initial Acquisition: 1.25:1 / Business Expansion: 1.15:1 / Owner Buyout: 1.25:1 / ESOP and Cooperative: 1.25:1</blockquote>
+<p>The same paragraph says projections may satisfy coverage only for owner-occupied Special Purpose Property acquisitions where the appraisal fully collateralizes the loan. This page does not test that case.</p>
+<p>Enter a partner buyout as an owner buyout if that is the category you will ask your lender to use. Owner buyout is the SOP category at 1.25:1.</p>
+<p>Owner compensation "must be sufficient to support their current obligations and living expenses" when coverage is on an adjusted basis. This page does not calculate living expenses or owner pay.</p>
+<h3>Price above valuation, Appendix 15, paragraph C.1.b</h3>
+<blockquote>The business valuation must support the Business Purchase Price ... regardless of how the debt is structured. If the amount paid for the business exceeds the business valuation, the difference must be made up by equity.</blockquote>
+<p>A quality of earnings report is required for business expansion and initial acquisition at a purchase price of $3 million or more. It must be "conducted for the benefit of the Lender" and "must not be prepared by or for the seller."</p>
+<h3>Limited equity sources, Appendix 15</h3>
+<p>Limited equity sources "may provide no more than half of the required Equity Injection." The cap is on all limited sources combined. Full-standby seller debt "may be considered as equity."</p>
+<blockquote>Additional Limited Equity Sources may be used when ... the sales price exceeds the value supported by the Business Valuation and Quality of Earnings report. In this situation, any additional funds provided must be on full standby.</blockquote>
+<p>Appendix 15 states an equity minimum of 10 percent for an initial acquisition, and that minimum cannot be reduced or eliminated. For business expansion, owner buyout, and ESOP and cooperative it is 10 percent. For business expansion and owner buyout only, the lender may reduce or eliminate it. This page does not convert 10 percent into dollars. Type the required equity injection you are asking your lender about.</p>
+</section>
+
+<section class="card" id="calc" aria-labelledby="calc-h">
+<h2 id="calc-h">Estimate</h2>
+<p id="how">Dollars and cents. Zero is allowed except for debt service, which must be greater than zero. This page divides the numbers you type. It does not build a loan payment.</p>
+<form id="sba-form" autocomplete="off">
+<label for="sba-type">Transaction type</label>
+<select id="sba-type" name="type">
+<option value="">Choose a transaction type</option>
+<option value="initial-acquisition">Initial acquisition (1.25:1)</option>
+<option value="business-expansion">Business expansion (1.15:1)</option>
+<option value="owner-buyout">Owner buyout (1.25:1)</option>
+<option value="esop-cooperative">ESOP and cooperative (1.25:1)</option>
+</select>
+<fieldset>
+<legend>Which statements are you testing?</legend>
+<p>Paragraph C.2.b says the ratio uses either the last fiscal year-end or an average of the last two fiscal year-end statements, on a historical or adjusted basis. If you choose the average, this page takes an arithmetic mean and rounds a half cent up. It does not adjust the statements.</p>
+<div class="choices">
+<label><input type="radio" name="basis" value="last" checked> Last fiscal year-end</label>
+<label><input type="radio" name="basis" value="average"> Average of the last two fiscal year-end statements</label>
+</div>
+</fieldset>
+<div id="basis-last">
+<label for="sba-cash">Coverage numerator, last fiscal year-end (dollars)</label>
+<input id="sba-cash" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="cash-hint">
+<p id="cash-hint" class="muted">The numerator in the coverage ratio you are testing. Paragraph C.2.b does not name the line items in the quote above. Use the figure in your lender packet.</p>
+<label for="sba-debt">Debt service for that same test (dollars)</label>
+<input id="sba-debt" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="debt-hint">
+<p id="debt-hint" class="muted">The denominator paired with that numerator. Greater than zero.</p>
+</div>
+<div id="basis-average" hidden>
+<label for="sba-cash-1">Coverage numerator, most recent fiscal year-end (dollars)</label>
+<input id="sba-cash-1" type="text" inputmode="decimal" autocomplete="off" spellcheck="false">
+<label for="sba-cash-2">Coverage numerator, the fiscal year before that (dollars)</label>
+<input id="sba-cash-2" type="text" inputmode="decimal" autocomplete="off" spellcheck="false">
+<label for="sba-debt-1">Debt service, most recent fiscal year-end (dollars)</label>
+<input id="sba-debt-1" type="text" inputmode="decimal" autocomplete="off" spellcheck="false">
+<label for="sba-debt-2">Debt service, the fiscal year before that (dollars)</label>
+<input id="sba-debt-2" type="text" inputmode="decimal" autocomplete="off" spellcheck="false">
+</div>
+<label for="sba-price">Business purchase price (dollars)</label>
+<input id="sba-price" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="price-hint">
+<p id="price-hint" class="muted">If this is above the valuation, paragraph C.1.b says the difference must be made up by equity.</p>
+<label for="sba-valuation">Business valuation (dollars)</label>
+<input id="sba-valuation" type="text" inputmode="decimal" autocomplete="off" spellcheck="false">
+<label for="sba-equity">Required equity injection (dollars)</label>
+<input id="sba-equity" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="equity-hint">
+<p id="equity-hint" class="muted">Type the required equity injection you will ask the lender about. This page does not turn the 10 percent minimum into dollars.</p>
+<label for="sba-limited">Limited equity sources, combined (dollars)</label>
+<input id="sba-limited" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="limited-hint">
+<p id="limited-hint" class="muted">Add every limited source together, including a full-standby seller note if you are counting it in that group. The cap is no more than half of the required equity injection.</p>
+<div class="actions">
+<button type="submit" id="sba-go">Show the estimate</button>
+<button type="button" class="sec" id="sba-sample">Fill sample figures</button>
+<button type="button" class="sec" id="sba-clear">Clear</button>
+</div>
+</form>
+</section>
+
+<section class="card" id="sba-result" aria-live="polite">
+<h2 class="big" id="sba-label">Estimate</h2>
+<div class="result-grid">
+<div>
+<p id="sba-error" class="err" hidden></p>
+<p id="sba-lead">Enter the figures. Then this page shows an estimate.</p>
+<ul id="sba-lines" hidden></ul>
+</div>
+<div class="note">
+<p id="sba-lender">Your lender decides. Ask them to confirm.</p>
+<p id="sba-disclaimer">General information about SBA SOP 50 10 8.1, not financial or lending advice. Not affiliated with or endorsed by the U.S. Small Business Administration.</p>
+</div>
+</div>
+</section>
+
+<section class="card sources" id="sources" aria-labelledby="src-h">
+<h2 id="src-h">Sources</h2>
+<ul>
+<li><a href="https://legacy.sba.gov/document/sop-50-10-lender-development-company-loan-programs">SBA: SOP 50 10, Lender and Development Company Loan Programs</a></li>
+<li><a href="https://legacy.sba.gov/sites/default/files/2026-08/SBA%20Information%20Notice%205000-880695%20-%20Issuance%20of%20SOP%2050%2010%208.1.pdf">SBA Information Notice 5000-880695 (PDF)</a></li>
+</ul>
+<p>Checked October 31, 2026.</p>
+<p>General information about SBA SOP 50 10 8.1, not financial or lending advice. Not affiliated with or endorsed by the U.S. Small Business Administration.</p>
+</section>
+
+<section class="card" id="signup" aria-labelledby="signup-h">
+<h2 id="signup-h">Free weekly email</h2>
+<!-- Embedded #sib-form posts SIGNUP_SOURCE (default sba-8-1). Create the text contact attribute SIGNUP_SOURCE in the existing Brevo account before relying on it; until then Brevo may ignore or reject it. -->
+<p>One short weekly email about new free browser checks. Double opt-in. Unsubscribe any time. See our <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>.</p>
+<form id="sib-form" method="POST" action="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" data-type="subscription" autocomplete="off">
+<p>
+<label for="EMAIL">Enter your email address to subscribe</label>
+<input class="input" type="email" id="EMAIL" name="EMAIL" autocomplete="email" inputmode="email" value="" placeholder="EMAIL" required>
+</p>
+<p>
+<label class="sib-optin" for="OPT_IN">
+<input type="checkbox" value="1" id="OPT_IN" name="OPT_IN" required>
+<span>By subscribing you agree to get this weekly email from First Mover Projects. We'll send a confirmation first. Unsubscribe any time with one click. We don't sell or share your email. See our Privacy Policy: firstmoverprojects.com/privacy.html</span>
+</label>
+</p>
+<p><button type="submit">Sign up for the weekly FMP email</button></p>
+<input type="text" name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off">
+<input type="hidden" name="locale" value="en">
+<input type="hidden" name="SIGNUP_SOURCE" value="sba-8-1">
+</form>
+<script id="signup-source-script">
+(function () {
+  "use strict";
+  var form = document.getElementById("sib-form");
+  if (!form) return;
+  var input = form.querySelector('input[name="SIGNUP_SOURCE"]');
+  if (!input) return;
+  var match = /(?:^|[?&])SIGNUP_SOURCE=([^&#]*)/.exec(window.location.search || "");
+  if (!match) return;
+  var raw = match[1].replace(/\+/g, " ");
+  try { raw = decodeURIComponent(raw); } catch (err) { raw = match[1]; }
+  var clean = String(raw).toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+  if (clean) input.value = clean;
+})();
+</script>
+</section>
+</main>
+<footer>
+<p>Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
+<p>First Mover Projects, PO Box 98, Firth, NE 68358. firstmoverprojects@gmail.com. General information about SBA SOP 50 10 8.1, not financial or lending advice. Not affiliated with or endorsed by the U.S. Small Business Administration.</p>
+</footer>
+<noscript>
+<p>The estimate needs JavaScript in your browser. Nothing is uploaded. The SOP links and the email form above still work.</p>
+</noscript>
+<script id="sba-7a-calculator">
+(function () {
+  "use strict";
+
+  var DISCLAIMER = "General information about SBA SOP 50 10 8.1, not financial or lending advice. Not affiliated with or endorsed by the U.S. Small Business Administration.";
+  var LENDER = "Your lender decides. Ask them to confirm.";
+  var LABEL = "Estimate";
+  var MAX_CENTS = 100000000000000;
+  var QOE_CENTS = 300000000;
+  var TYPES = {
+    "initial-acquisition": { name: "an initial acquisition", ratio: "1.25:1", num: 5, den: 4, qoe: true },
+    "business-expansion": { name: "a business expansion", ratio: "1.15:1", num: 23, den: 20, qoe: true },
+    "owner-buyout": { name: "an owner buyout", ratio: "1.25:1", num: 5, den: 4, qoe: false },
+    "esop-cooperative": { name: "an ESOP and cooperative", ratio: "1.25:1", num: 5, den: 4, qoe: false }
+  };
+
+  function isCents(n) {
+    return typeof n === "number" && n === n && n >= 0 && n <= MAX_CENTS && Math.floor(n) === n;
+  }
+
+  function fail(message) {
+    return { ok: false, label: LABEL, lines: [], error: message, lender: LENDER, disclaimer: DISCLAIMER };
+  }
+
+  function parseCents(raw) {
+    if (raw == null) return { ok: false };
+    var s = String(raw).trim().replace(/\$/g, "").replace(/,/g, "").replace(/\s+/g, "");
+    var matched = /^(\d+)(?:\.(\d{1,2}))?$/.exec(s);
+    if (!matched) return { ok: false };
+    if (matched[1].length > 13) return { ok: false };
+    var dollars = Number(matched[1]);
+    var frac = matched[2] || "";
+    if (frac.length === 1) frac = frac + "0";
+    if (!frac) frac = "00";
+    var cents = dollars * 100 + Number(frac);
+    if (!isCents(cents)) return { ok: false };
+    return { ok: true, cents: cents };
+  }
+
+  function formatDollars(cents) {
+    var n = Math.abs(Math.round(cents));
+    var dollars = Math.floor(n / 100);
+    var c = n % 100;
+    var body = String(dollars).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    var coin = c < 10 ? "0" + c : String(c);
+    return "$" + body + "." + coin;
+  }
+
+  function arithmeticMeanCents(a, b) {
+    if (!isCents(a) || !isCents(b)) return { ok: false };
+    return { ok: true, cents: Math.round((a + b) / 2) };
+  }
+
+  function coverageEstimate(type, cash, debt) {
+    var spec = TYPES[type];
+    if (!spec || !isCents(cash) || !isCents(debt) || debt === 0) return { ok: false };
+    var left = cash * spec.den;
+    var right = debt * spec.num;
+    var under = left < right;
+    var atTarget = left === right;
+    var need = Math.floor((right + spec.den - 1) / spec.den);
+    var shortfall = need > cash ? need - cash : 0;
+    var maxDebt = Math.floor(left / spec.num);
+    return {
+      ok: true,
+      under: under,
+      atTarget: atTarget,
+      shortfall: shortfall,
+      maxDebt: maxDebt,
+      ratio: spec.ratio
+    };
+  }
+
+  function equityGapEstimate(price, valuation) {
+    if (!isCents(price) || !isCents(valuation)) return { ok: false };
+    var above = price > valuation;
+    return { ok: true, above: above, gap: above ? price - valuation : 0 };
+  }
+
+  function limitedSourcesEstimate(required, limited) {
+    if (!isCents(required) || !isCents(limited)) return { ok: false };
+    var half = Math.floor(required / 2);
+    var above = limited * 2 > required;
+    return {
+      ok: true,
+      half: half,
+      above: above,
+      atHalf: limited * 2 === required,
+      over: above ? limited - half : 0
+    };
+  }
+
+  function qoeLine(type, price) {
+    var spec = TYPES[type];
+    if (spec.qoe && price >= QOE_CENTS) {
+      return "Estimate: a quality of earnings report is required for " + spec.name + " at a purchase price of $3 million or more. Paragraph C.1.b says it must be \"conducted for the benefit of the Lender\" and \"must not be prepared by or for the seller.\"";
+    }
+    if (spec.qoe) {
+      return "Estimate: this purchase price is under $3 million. The quality of earnings line in paragraph C.1.b, for initial acquisition and business expansion at $3 million or more, is not reached by this price.";
+    }
+    return "Estimate: the $3 million quality of earnings line on this page is stated for business expansion and initial acquisition. This page does not apply that line to " + spec.name + ".";
+  }
+
+  function buildEstimate(input) {
+    if (!input || !TYPES[input.type]) return fail("Enter a transaction type.");
+    if (input.basis !== "last" && input.basis !== "average") return fail("Choose last fiscal year-end or an average of the last two.");
+    var spec = TYPES[input.type];
+    var cash;
+    var debt;
+    var lines = [];
+    if (input.basis === "last") {
+      if (!isCents(input.cash)) return fail("Enter the coverage numerator as dollars and cents.");
+      if (!isCents(input.debt) || input.debt === 0) return fail("Enter debt service greater than zero.");
+      cash = input.cash;
+      debt = input.debt;
+    } else {
+      if (!isCents(input.cash1) || !isCents(input.cash2)) return fail("Enter both coverage numerators as dollars and cents.");
+      if (!isCents(input.debt1) || !isCents(input.debt2)) return fail("Enter both debt service amounts as dollars and cents.");
+      var meanCash = arithmeticMeanCents(input.cash1, input.cash2);
+      var meanDebt = arithmeticMeanCents(input.debt1, input.debt2);
+      if (!meanCash.ok || !meanDebt.ok) return fail("Enter both years as dollars and cents.");
+      if (meanDebt.cents === 0) return fail("The average debt service is zero. This page does not divide by zero.");
+      cash = meanCash.cents;
+      debt = meanDebt.cents;
+      lines.push("Estimate: arithmetic mean of the two coverage numerators, with a half cent rounded up, is " + formatDollars(cash) + ".");
+      lines.push("Estimate: arithmetic mean of the two debt service amounts, with a half cent rounded up, is " + formatDollars(debt) + ".");
+      lines.push("Estimate: the coverage figure below uses those means. Appendix 15, paragraph C.2.b allows an average of the last two fiscal year-end statements. This page does not adjust the statements.");
+    }
+    if (!isCents(input.price) || !isCents(input.valuation) || !isCents(input.requiredEquity) || !isCents(input.limited)) {
+      return fail("Enter purchase price, valuation, required equity, and limited sources as dollars and cents. Zero is allowed.");
+    }
+    var cov = coverageEstimate(input.type, cash, debt);
+    var gap = equityGapEstimate(input.price, input.valuation);
+    var lim = limitedSourcesEstimate(input.requiredEquity, input.limited);
+    if (!cov.ok || !gap.ok || !lim.ok) return fail("Check the amounts and try again.");
+    lines.push("Estimate: the debt service coverage ratio for " + spec.name + " in Appendix 15, paragraph C.2.b is " + spec.ratio + ".");
+    lines.push("Estimate: numerator " + formatDollars(cash) + " divided by debt service " + formatDollars(debt) + ".");
+    if (cov.atTarget) {
+      lines.push("Estimate: these figures are at the " + spec.ratio + " ratio on this page's exact cent math.");
+    } else if (cov.under) {
+      lines.push("Estimate: these figures are under the " + spec.ratio + " ratio on this page's exact cent math.");
+    } else {
+      lines.push("Estimate: these figures are above the " + spec.ratio + " ratio on this page's exact cent math.");
+    }
+    lines.push("Estimate: cash still needed to reach " + spec.ratio + ", rounded up to the cent, is " + formatDollars(cov.shortfall) + ".");
+    lines.push("Estimate: debt service these figures can cover at " + spec.ratio + ", in whole cents, is " + formatDollars(cov.maxDebt) + ".");
+    if (gap.above) {
+      lines.push("Estimate: the purchase price is above the business valuation by " + formatDollars(gap.gap) + ". Appendix 15, paragraph C.1.b says that difference must be made up by equity.");
+    } else {
+      lines.push("Estimate: the purchase price is not above the business valuation. This page's equity difference for paragraph C.1.b is " + formatDollars(0) + ".");
+    }
+    lines.push("Estimate: the most that is not more than half of the required equity injection, in whole cents, is " + formatDollars(lim.half) + ". Limited sources may provide no more than half of the required equity injection.");
+    if (lim.above) {
+      lines.push("Estimate: the limited sources entered are above that half by " + formatDollars(lim.over) + ".");
+    } else if (lim.atHalf) {
+      lines.push("Estimate: the limited sources entered equal half of the required equity injection. The SOP says limited sources may provide no more than half.");
+    } else {
+      lines.push("Estimate: the limited sources entered are not more than half of the required equity injection.");
+    }
+    lines.push(qoeLine(input.type, input.price));
+    lines.push("Estimate: full-standby seller debt \"may be considered as equity.\" Additional limited equity sources may be used when the sales price exceeds the value supported by the business valuation and quality of earnings report. \"In this situation, any additional funds provided must be on full standby.\"");
+    lines.push("Estimate: \"Projections may satisfy coverage only for owner-occupied Special Purpose Property acquisitions where the appraisal fully collateralizes the loan\" (Appendix 15, paragraph C.2.b). This page does not test that case.");
+    lines.push("Estimate: Appendix 15 states an equity minimum of 10 percent for an initial acquisition, and that minimum cannot be reduced or eliminated. For business expansion, owner buyout, and ESOP and cooperative, it is 10 percent. For business expansion and owner buyout only, the lender may reduce or eliminate it. This page does not convert 10 percent into dollars.");
+    lines.push("Estimate: owner compensation \"must be sufficient to support their current obligations and living expenses\" on an adjusted basis. This page does not calculate living expenses or owner pay.");
+    return {
+      ok: true,
+      label: LABEL,
+      lines: lines,
+      error: "",
+      lender: LENDER,
+      disclaimer: DISCLAIMER,
+      coverage: cov,
+      equity: gap,
+      limited: lim
+    };
+  }
+
+  function picked(form, name) {
+    var nodes = form.elements[name];
+    var j;
+    if (!nodes) return "";
+    if (typeof nodes.length === "number") {
+      for (j = 0; j < nodes.length; j++) {
+        if (nodes[j].checked) return nodes[j].value;
+      }
+      return "";
+    }
+    return nodes.checked ? nodes.value : "";
+  }
+
+  function fieldCents(id) {
+    var el = document.getElementById(id);
+    if (!el) return { ok: false };
+    return parseCents(el.value);
+  }
+
+  function buildFromForm(form) {
+    var typeEl = document.getElementById("sba-type");
+    var basis = picked(form, "basis");
+    var price = fieldCents("sba-price");
+    var valuation = fieldCents("sba-valuation");
+    var equity = fieldCents("sba-equity");
+    var limited = fieldCents("sba-limited");
+    var input = {
+      type: typeEl ? typeEl.value : "",
+      basis: basis,
+      price: price.ok ? price.cents : null,
+      valuation: valuation.ok ? valuation.cents : null,
+      requiredEquity: equity.ok ? equity.cents : null,
+      limited: limited.ok ? limited.cents : null
+    };
+    if (!price.ok || !valuation.ok || !equity.ok || !limited.ok) {
+      return fail("Enter purchase price, valuation, required equity, and limited sources as dollars and cents. Zero is allowed.");
+    }
+    if (basis === "average") {
+      var cash1 = fieldCents("sba-cash-1");
+      var cash2 = fieldCents("sba-cash-2");
+      var debt1 = fieldCents("sba-debt-1");
+      var debt2 = fieldCents("sba-debt-2");
+      if (!cash1.ok || !cash2.ok || !debt1.ok || !debt2.ok) {
+        return fail("Enter both years as dollars and cents.");
+      }
+      input.cash1 = cash1.cents;
+      input.cash2 = cash2.cents;
+      input.debt1 = debt1.cents;
+      input.debt2 = debt2.cents;
+    } else {
+      var cash = fieldCents("sba-cash");
+      var debt = fieldCents("sba-debt");
+      if (!cash.ok) return fail("Enter the coverage numerator as dollars and cents.");
+      if (!debt.ok) return fail("Enter debt service greater than zero.");
+      input.cash = cash.cents;
+      input.debt = debt.cents;
+    }
+    return buildEstimate(input);
+  }
+
+  function show(result) {
+    var lead = document.getElementById("sba-lead");
+    var list = document.getElementById("sba-lines");
+    var err = document.getElementById("sba-error");
+    var lender = document.getElementById("sba-lender");
+    var note = document.getElementById("sba-disclaimer");
+    var label = document.getElementById("sba-label");
+    if (lender) lender.textContent = LENDER;
+    if (note) note.textContent = DISCLAIMER;
+    if (label) label.textContent = LABEL;
+    if (!lead || !list || !err) return;
+    if (!result.ok) {
+      err.hidden = false;
+      err.textContent = result.error;
+      lead.hidden = true;
+      list.hidden = true;
+      list.textContent = "";
+      return;
+    }
+    err.hidden = true;
+    err.textContent = "";
+    lead.hidden = true;
+    list.hidden = false;
+    list.textContent = "";
+    var i, li;
+    for (i = 0; i < result.lines.length; i++) {
+      li = document.createElement("li");
+      li.textContent = result.lines[i];
+      list.appendChild(li);
+    }
+  }
+
+  function syncBasis(form) {
+    var basis = picked(form, "basis");
+    var last = document.getElementById("basis-last");
+    var avg = document.getElementById("basis-average");
+    if (last) last.hidden = basis === "average";
+    if (avg) avg.hidden = basis !== "average";
+  }
+
+  function setValue(id, value) {
+    var el = document.getElementById(id);
+    if (el) el.value = value;
+  }
+
+  function fillSample(form) {
+    setValue("sba-type", "initial-acquisition");
+    var nodes = form.elements.basis;
+    var j;
+    if (nodes && typeof nodes.length === "number") {
+      for (j = 0; j < nodes.length; j++) nodes[j].checked = nodes[j].value === "last";
+    }
+    setValue("sba-cash", "125000");
+    setValue("sba-debt", "100000");
+    setValue("sba-price", "500000");
+    setValue("sba-valuation", "400000");
+    setValue("sba-equity", "50000");
+    setValue("sba-limited", "25000");
+    syncBasis(form);
+    show(buildFromForm(form));
+  }
+
+  function clearForm(form) {
+    setValue("sba-type", "");
+    var nodes = form.elements.basis;
+    var j;
+    if (nodes && typeof nodes.length === "number") {
+      for (j = 0; j < nodes.length; j++) nodes[j].checked = nodes[j].value === "last";
+    }
+    setValue("sba-cash", "");
+    setValue("sba-debt", "");
+    setValue("sba-cash-1", "");
+    setValue("sba-cash-2", "");
+    setValue("sba-debt-1", "");
+    setValue("sba-debt-2", "");
+    setValue("sba-price", "");
+    setValue("sba-valuation", "");
+    setValue("sba-equity", "");
+    setValue("sba-limited", "");
+    syncBasis(form);
+    var lead = document.getElementById("sba-lead");
+    var list = document.getElementById("sba-lines");
+    var err = document.getElementById("sba-error");
+    if (lead) {
+      lead.hidden = false;
+      lead.textContent = "Enter the figures. Then this page shows an estimate.";
+    }
+    if (list) {
+      list.hidden = true;
+      list.textContent = "";
+    }
+    if (err) {
+      err.hidden = true;
+      err.textContent = "";
+    }
+  }
+
+  var api = {
+    DISCLAIMER: DISCLAIMER,
+    LENDER: LENDER,
+    LABEL: LABEL,
+    MAX_CENTS: MAX_CENTS,
+    QOE_CENTS: QOE_CENTS,
+    TYPES: TYPES,
+    parseCents: parseCents,
+    formatDollars: formatDollars,
+    arithmeticMeanCents: arithmeticMeanCents,
+    coverageEstimate: coverageEstimate,
+    equityGapEstimate: equityGapEstimate,
+    limitedSourcesEstimate: limitedSourcesEstimate,
+    buildEstimate: buildEstimate
+  };
+  if (typeof window !== "undefined") window.FMP_SBA = api;
+
+  function boot() {
+    var form = document.getElementById("sba-form");
+    var sample = document.getElementById("sba-sample");
+    var clear = document.getElementById("sba-clear");
+    if (!form || !sample || !clear) return;
+    syncBasis(form);
+    form.addEventListener("change", function (event) {
+      if (event.target && event.target.name === "basis") syncBasis(form);
+    });
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      show(buildFromForm(form));
+    });
+    sample.addEventListener("click", function () { fillSample(form); });
+    clear.addEventListener("click", function () { clearForm(form); });
+  }
+
+  if (typeof document !== "undefined" && document.getElementById) boot();
+})();
+</script>
+</body>
+</html>

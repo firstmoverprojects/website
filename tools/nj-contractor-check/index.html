@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; form-action https://05279842.sibforms.com; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/nj-contractor-check/">
+<title>New Jersey contractor check (free, runs in your browser)</title>
+<meta name="description" content="A free web check of points to review under N.J.A.C. 12:11. It does not decide worker status. Nothing is uploaded.">
+<meta property="og:title" content="New Jersey contractor check (free, runs in your browser)">
+<meta property="og:description" content="A free web check of points to review under N.J.A.C. 12:11. It does not decide worker status. Nothing is uploaded.">
+<meta property="og:url" content="https://firstmoverprojects.com/tools/nj-contractor-check/">
+<meta property="og:type" content="website">
+<!-- UNLISTED: noindex. Do not add this URL to sitemap.xml, tools/index.html, index.html, deadlines/index.html, deadlines/feed.xml, deadlines/deadlines.ics, or deadlines/finder/. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "dateModified": "2026-10-31",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does this page do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A free web check that lists points to review under N.J.A.C. 12:11. It runs in the browser. It does not decide worker status. It is general information, not legal advice."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does an LLC by itself meet Prong C?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "N.J.A.C. 12:11-1.5(f) says a business registration, including a sole proprietorship, LLC or corp, is not alone sufficient to meet Prong C."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the worker's own insurance by itself meet Prong C?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "N.J.A.C. 12:11-1.5(g) says the worker's own liability or workers' comp insurance is not alone sufficient."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a Form 1099 decide worker status?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "N.J.A.C. 12:11-1.6(b) says one cannot transform an individual into an independent contractor by reporting the earnings using a Federal Form 1099. A 1099 alone does not prove contractor status."
+      }
+    }
+  ]
+}
+</script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#12161c;background:#f4f6f8}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;line-height:1.25;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.2em 0 .4em}
+.topline{font-size:1.05rem;margin:0 0 8px}
+.card{background:#fff;border:2px solid #1b2838;border-radius:10px;padding:16px;margin:12px 0}
+.big{font-size:1.45rem;font-weight:800;color:#12161c;line-height:1.3;margin:.2em 0}
+.muted{color:#1b2838;font-size:.95rem}
+label{display:block;font-weight:600;margin-top:12px}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:2px solid #08306b;background:#08306b;color:#fff;cursor:pointer;margin:12px 8px 0 0;min-height:44px;font-weight:700}
+button.sec{background:#fff;color:#12161c;border-color:#12161c}
+a{color:#08306b}
+a:hover,a:focus{color:#041e42}
+a:focus,button:focus,input:focus,select:focus{outline:3px solid #08306b;outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:8px;top:8px;background:#fff;color:#12161c;padding:8px 12px;z-index:2}
+footer{margin:8px 0 24px}
+fieldset{border:2px solid #1b2838;border-radius:8px;margin:12px 0;padding:8px 12px;min-width:0}
+legend{font-weight:800;padding:0 4px}
+.choices{display:flex;flex-wrap:wrap;gap:8px}
+.choices label{font-weight:600;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:center;margin:0;flex:1 1 12rem;min-width:0;max-width:100%;min-height:44px;padding:8px 10px;border:2px solid #1b2838;border-radius:8px;background:#fff;color:#12161c;cursor:pointer}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.actions button{margin:0;flex:1 1 12rem}
+a,p,li,label,legend,h1,h2{overflow-wrap:anywhere}
+[hidden]{display:none !important}
+.result-grid{display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+.result-grid > *{min-width:0}
+.note{background:#eef3f8;border:2px solid #1b2838;border-radius:8px;padding:12px;margin:0}
+#nj-points{margin:.4em 0;padding-left:1.2em}
+#nj-points li{margin:.45em 0}
+#sib-form{position:relative;display:grid;gap:12px;margin-top:8px}
+#sib-form label{margin-top:0}
+#sib-form input[type="email"]{width:100%;max-width:100%;min-height:44px;font:inherit;font-size:16px;padding:8px;border:2px solid #1b2838;border-radius:6px;background:#fff;color:#12161c}
+.sib-optin{display:flex;align-items:flex-start;gap:8px;font-weight:400;min-height:44px;min-width:0;max-width:100%}
+.sib-optin span{min-width:0;overflow-wrap:anywhere}
+#sib-form .input--hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.sources a{display:block;min-height:44px;padding:10px 0;max-width:100%}
+main,.card,fieldset,form,blockquote{max-width:100%;min-width:0}
+@media (min-width:720px){
+  .result-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:start}
+}
+@media (max-width:480px){
+  main{padding:12px}
+  h1{font-size:1.35rem}
+  .choices{flex-direction:column}
+  .choices label,.actions button,button{flex-basis:auto;width:100%;margin-right:0}
+}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,textarea{font-size:16px}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,button{min-height:44px}
+nav a,.site-nav a{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:44px;min-width:44px;padding:8px 6px}
+label:has(> input[type="checkbox"]),label:has(> input[type="radio"]){min-height:44px;box-sizing:border-box}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<p class="topline">A free web check of points to review under N.J.A.C. 12:11 (operative October 1, 2026). It applies the ABC test in N.J.S.A. 43:21-19(i)(6). It runs in this browser. Nothing is uploaded.</p>
+<p class="muted site-nav"><a href="/">First Mover Projects</a></p>
+<h1>New Jersey contractor check</h1>
+<p>Answer for one worker. The page lists points to review. It does not decide worker status.</p>
+<p>Checked October 31, 2026.</p>
+
+<section class="card" aria-labelledby="rules-h">
+<h2 id="rules-h">What this page uses</h2>
+<p>N.J.A.C. 12:11 is titled "ABC Test; Independent Contractors." It was proposed at 57 N.J.R. 894(a) and adopted May 5, 2026. The <a href="https://www.nj.gov/labor/assets/PDFs/Legal%20Notices/Rule%20Adoptions/NJAC_12_11_(notice_of_adoption)_FILED.pdf">notice of adoption</a> states an operative date of October 1, 2026. The <a href="https://www.nj.gov/labor/lwdhome/press/2026/20260505_ABC.shtml">NJDOL release dated May 5, 2026</a> gives an anticipated June 1, 2026 publication and effective date.</p>
+<p>The NJDOL release says the rule sets out how the department applies the ABC test in N.J.S.A. 43:21-19(i)(6), and that the rule does not change that test. The release says the hiring business has the burden of proof and must meet all three prongs. The prongs are in section 12:11-1.3 (A), section 12:11-1.4 (B), and section 12:11-1.5 (C). Section 12:11-1.6(b) addresses Federal Form 1099.</p>
+<p>The NJDOL release describes the laws this rule applies under: Unemployment Compensation, TDB, Wage and Hour, Wage Payment and Earned Sick Leave laws, and the Call Center Jobs Act.</p>
+<ul>
+<li>Section 12:11-1.5(f): a business registration (sole proprietorship, LLC or corp) is "not alone sufficient to meet Prong C" (notice of adoption, page 172). An LLC alone does not prove contractor status.</li>
+<li>Section 12:11-1.5(g): the worker's own liability or workers' comp insurance is "not alone sufficient" (notice of adoption, page 172). The contractor's own insurance alone does not prove contractor status.</li>
+<li>A professional license alone is not sufficient (adoption discussion, pages 171 to 172).</li>
+<li>Section 12:11-1.6(b): "One cannot transform an individual into an independent contractor ... by reporting the earnings ... using a Federal Form 1099" (notice of adoption, pages 176 to 177). A 1099 alone does not prove contractor status.</li>
+<li>The rule lists the number of customers as a Prong C factor. This page does not score that number.</li>
+<li>Proposed section 12:11-1.5(e), the free to work for others provision, was deleted on adoption (notice of adoption, page 205).</li>
+</ul>
+<p>The questions ask whether each cited section has been reviewed, and whether a fact the notice says is not enough on its own is the only fact in use. This page does not restate other factors in the notice.</p>
+</section>
+
+<section class="card" id="check" aria-labelledby="check-h">
+<h2 id="check-h">Questions</h2>
+<p id="how">One worker. The answers stay in this tab.</p>
+<form id="nj-form" autocomplete="off">
+<fieldset>
+<legend>Prong A, N.J.A.C. 12:11-1.3</legend>
+<p>Have you reviewed section 12:11-1.3 for this worker?</p>
+<div class="choices">
+<label><input type="radio" name="prongA" value="reviewed"> Reviewed the section</label>
+<label><input type="radio" name="prongA" value="not-yet"> Not yet</label>
+<label><input type="radio" name="prongA" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Prong B, N.J.A.C. 12:11-1.4</legend>
+<p>Have you reviewed section 12:11-1.4 for this worker?</p>
+<div class="choices">
+<label><input type="radio" name="prongB" value="reviewed"> Reviewed the section</label>
+<label><input type="radio" name="prongB" value="not-yet"> Not yet</label>
+<label><input type="radio" name="prongB" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Prong C, N.J.A.C. 12:11-1.5</legend>
+<p>Have you reviewed section 12:11-1.5 for this worker?</p>
+<div class="choices">
+<label><input type="radio" name="prongC" value="reviewed"> Reviewed the section</label>
+<label><input type="radio" name="prongC" value="not-yet"> Not yet</label>
+<label><input type="radio" name="prongC" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Number of customers, a Prong C factor in N.J.A.C. 12:11-1.5</legend>
+<p>Have you reviewed the number of customers? The rule lists that number as a Prong C factor. This page does not score it.</p>
+<div class="choices">
+<label><input type="radio" name="customers" value="reviewed"> Reviewed that factor</label>
+<label><input type="radio" name="customers" value="not-yet"> Not yet</label>
+<label><input type="radio" name="customers" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Business registration, N.J.A.C. 12:11-1.5(f)</legend>
+<p>Is a sole proprietorship, LLC, or corp registration the only Prong C fact you are using? The notice says that registration is not alone sufficient to meet Prong C. An LLC alone does not prove contractor status.</p>
+<div class="choices">
+<label><input type="radio" name="llcOnly" value="yes"> Yes, that is the only fact</label>
+<label><input type="radio" name="llcOnly" value="no"> No, there are other facts</label>
+<label><input type="radio" name="llcOnly" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Insurance, N.J.A.C. 12:11-1.5(g)</legend>
+<p>Is the worker's own liability insurance, or the worker's own workers' comp insurance, the only Prong C fact you are using? The notice says that insurance is not alone sufficient. The contractor's own insurance alone does not prove contractor status.</p>
+<div class="choices">
+<label><input type="radio" name="insuranceOnly" value="yes"> Yes, that is the only fact</label>
+<label><input type="radio" name="insuranceOnly" value="no"> No, there are other facts</label>
+<label><input type="radio" name="insuranceOnly" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Professional license, adoption discussion at pages 171 to 172</legend>
+<p>Is a professional license the only fact you are using? The adoption discussion says a professional license alone is not sufficient.</p>
+<div class="choices">
+<label><input type="radio" name="licenseOnly" value="yes"> Yes, that is the only fact</label>
+<label><input type="radio" name="licenseOnly" value="no"> No, there are other facts</label>
+<label><input type="radio" name="licenseOnly" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Federal Form 1099, N.J.A.C. 12:11-1.6(b)</legend>
+<p>Are you using a Federal Form 1099 as the fact that settles worker status? Section 12:11-1.6(b) says one cannot transform an individual into an independent contractor by reporting the earnings using a Federal Form 1099. A 1099 alone does not prove contractor status.</p>
+<div class="choices">
+<label><input type="radio" name="form1099" value="yes"> Yes</label>
+<label><input type="radio" name="form1099" value="no"> No</label>
+<label><input type="radio" name="form1099" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<div class="actions">
+<button type="submit" id="nj-go">Show points to review</button>
+<button type="button" class="sec" id="nj-clear">Clear answers</button>
+</div>
+</form>
+</section>
+
+<section class="card" id="nj-result" aria-live="polite">
+<h2 class="big">Points to review</h2>
+<div class="result-grid">
+<div>
+<p id="nj-lead">Answer every question. Then this page lists points to review.</p>
+<ul id="nj-points" hidden></ul>
+</div>
+<div class="note">
+<p id="nj-disclaimer">This is general information about N.J.A.C. 12:11, not legal advice. Whether someone is an employee depends on the facts. Talk to an employment lawyer or the NJ Department of Labor before you decide.</p>
+<p id="nj-affiliation">Not affiliated with or endorsed by the State of New Jersey.</p>
+</div>
+</div>
+</section>
+
+<section class="card sources" id="sources" aria-labelledby="src-h">
+<h2 id="src-h">Sources</h2>
+<ul>
+<li><a href="https://www.nj.gov/labor/assets/PDFs/Legal%20Notices/Rule%20Adoptions/NJAC_12_11_(notice_of_adoption)_FILED.pdf">Notice of adoption, N.J.A.C. 12:11 (PDF)</a></li>
+<li><a href="https://www.nj.gov/labor/lwdhome/press/2026/20260505_ABC.shtml">NJDOL release, May 5, 2026</a></li>
+</ul>
+<p>Checked October 31, 2026.</p>
+<p>Not affiliated with or endorsed by the State of New Jersey.</p>
+</section>
+
+<section class="card" id="signup" aria-labelledby="signup-h">
+<h2 id="signup-h">Free weekly email</h2>
+<!-- Embedded #sib-form posts SIGNUP_SOURCE (default nj-abc). Create the text contact attribute SIGNUP_SOURCE in the existing Brevo account before relying on it; until then Brevo may ignore or reject it. -->
+<p>One short weekly email about new free browser checks. Double opt-in. Unsubscribe any time. See our <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>.</p>
+<form id="sib-form" method="POST" action="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" data-type="subscription" autocomplete="off">
+<p>
+<label for="EMAIL">Enter your email address to subscribe</label>
+<input class="input" type="email" id="EMAIL" name="EMAIL" autocomplete="email" inputmode="email" value="" placeholder="EMAIL" required>
+</p>
+<p>
+<label class="sib-optin" for="OPT_IN">
+<input type="checkbox" value="1" id="OPT_IN" name="OPT_IN" required>
+<span>By subscribing you agree to get this weekly email from First Mover Projects. We'll send a confirmation first. Unsubscribe any time with one click. We don't sell or share your email. See our Privacy Policy: firstmoverprojects.com/privacy.html</span>
+</label>
+</p>
+<p><button type="submit">Sign up for the weekly FMP email</button></p>
+<input type="text" name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off">
+<input type="hidden" name="locale" value="en">
+<input type="hidden" name="SIGNUP_SOURCE" value="nj-abc">
+</form>
+<script id="signup-source-script">
+(function () {
+  "use strict";
+  var form = document.getElementById("sib-form");
+  if (!form) return;
+  var input = form.querySelector('input[name="SIGNUP_SOURCE"]');
+  if (!input) return;
+  var match = /(?:^|[?&])SIGNUP_SOURCE=([^&#]*)/.exec(window.location.search || "");
+  if (!match) return;
+  var raw = match[1].replace(/\+/g, " ");
+  try { raw = decodeURIComponent(raw); } catch (err) { raw = match[1]; }
+  var clean = String(raw).toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+  if (clean) input.value = clean;
+})();
+</script>
+</section>
+</main>
+<footer>
+<p>Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
+<p>First Mover Projects, PO Box 98, Firth, NE 68358. firstmoverprojects@gmail.com. This is general information about N.J.A.C. 12:11, not legal advice. Not affiliated with or endorsed by the State of New Jersey.</p>
+</footer>
+<noscript>
+<p>The points to review need JavaScript in your browser. Nothing is uploaded. The rule links and the email form above still work.</p>
+</noscript>
+<script id="nj-contractor-check">
+(function () {
+  "use strict";
+
+  var DISCLAIMER = "This is general information about N.J.A.C. 12:11, not legal advice. Whether someone is an employee depends on the facts. Talk to an employment lawyer or the NJ Department of Labor before you decide.";
+  var AFFILIATION = "Not affiliated with or endorsed by the State of New Jersey.";
+  var LABEL = "Points to review";
+  var NEED = "Answer every question. Then this page lists points to review.";
+  var PRONG_KEYS = ["prongA", "prongB", "prongC", "customers"];
+  var YN_KEYS = ["llcOnly", "insuranceOnly", "licenseOnly", "form1099"];
+  var PRONG_OK = { reviewed: 1, "not-yet": 1, unsure: 1 };
+  var YN_OK = { yes: 1, no: 1, unsure: 1 };
+  var PRONGS = [
+    { key: "prongA", name: "Prong A", section: "N.J.A.C. 12:11-1.3" },
+    { key: "prongB", name: "Prong B", section: "N.J.A.C. 12:11-1.4" },
+    { key: "prongC", name: "Prong C", section: "N.J.A.C. 12:11-1.5" }
+  ];
+
+  function incomplete() {
+    return { ok: false, label: LABEL, items: [], message: NEED, disclaimer: DISCLAIMER, affiliation: AFFILIATION };
+  }
+
+  function prongLine(spec, value) {
+    if (value === "reviewed") {
+      return spec.name + " is " + spec.section + ". Marking the section as reviewed does not decide worker status.";
+    }
+    if (value === "not-yet") {
+      return spec.name + ", " + spec.section + ", is not marked as reviewed.";
+    }
+    return spec.name + ", " + spec.section + ", is marked not sure.";
+  }
+
+  function ynLine(value, yesText, noText, unsureText) {
+    if (value === "yes") return yesText;
+    if (value === "no") return noText;
+    return unsureText;
+  }
+
+  function pointsToReview(answers) {
+    var i;
+    if (!answers || typeof answers !== "object") return incomplete();
+    for (i = 0; i < PRONG_KEYS.length; i++) {
+      if (!PRONG_OK[answers[PRONG_KEYS[i]]]) return incomplete();
+    }
+    for (i = 0; i < YN_KEYS.length; i++) {
+      if (!YN_OK[answers[YN_KEYS[i]]]) return incomplete();
+    }
+    var items = [];
+    function add(text) { items.push("Point to review: " + text); }
+
+    add("the hiring business has the burden of proof and must meet all three prongs. The NJDOL release says N.J.A.C. 12:11 sets out how the department applies the ABC test in N.J.S.A. 43:21-19(i)(6), and that the rule does not change that test.");
+    for (i = 0; i < PRONGS.length; i++) add(prongLine(PRONGS[i], answers[PRONGS[i].key]));
+    if (answers.customers === "reviewed") {
+      add("the rule lists the number of customers as a Prong C factor in N.J.A.C. 12:11-1.5. This page does not score that number. Marking it as reviewed does not decide worker status.");
+    } else if (answers.customers === "not-yet") {
+      add("the number of customers is not marked as reviewed. The rule lists that number as a Prong C factor in N.J.A.C. 12:11-1.5. This page does not score it.");
+    } else {
+      add("the number of customers is marked not sure. The rule lists that number as a Prong C factor in N.J.A.C. 12:11-1.5. This page does not score it.");
+    }
+    add(ynLine(
+      answers.llcOnly,
+      "the answer says a business registration is the only Prong C fact in use. N.J.A.C. 12:11-1.5(f) says a business registration (sole proprietorship, LLC or corp) is not alone sufficient to meet Prong C. An LLC alone does not prove contractor status (notice of adoption, page 172).",
+      "the answer says a business registration is not the only Prong C fact in use. N.J.A.C. 12:11-1.5(f) says a business registration (sole proprietorship, LLC or corp) is not alone sufficient to meet Prong C. An LLC alone does not prove contractor status. This answer does not decide worker status.",
+      "it is marked not sure whether a business registration is the only Prong C fact in use. N.J.A.C. 12:11-1.5(f) says a business registration (sole proprietorship, LLC or corp) is not alone sufficient to meet Prong C. An LLC alone does not prove contractor status (notice of adoption, page 172)."
+    ));
+    add(ynLine(
+      answers.insuranceOnly,
+      "the answer says the worker's own insurance is the only Prong C fact in use. N.J.A.C. 12:11-1.5(g) says the worker's own liability or workers' comp insurance is not alone sufficient (notice of adoption, page 172). The contractor's own insurance alone does not prove contractor status.",
+      "the answer says the worker's own insurance is not the only Prong C fact in use. N.J.A.C. 12:11-1.5(g) says that insurance is not alone sufficient. The contractor's own insurance alone does not prove contractor status. This answer does not decide worker status.",
+      "it is marked not sure whether the worker's own insurance is the only Prong C fact in use. N.J.A.C. 12:11-1.5(g) says the worker's own liability or workers' comp insurance is not alone sufficient. The contractor's own insurance alone does not prove contractor status."
+    ));
+    add(ynLine(
+      answers.licenseOnly,
+      "the answer says a professional license is the only fact in use. A professional license alone is not sufficient (adoption discussion, pages 171 to 172 of the notice of adoption).",
+      "the answer says a professional license is not the only fact in use. A professional license alone is not sufficient (adoption discussion, pages 171 to 172). This answer does not decide worker status.",
+      "it is marked not sure whether a professional license is the only fact in use. A professional license alone is not sufficient (adoption discussion, pages 171 to 172)."
+    ));
+    add(ynLine(
+      answers.form1099,
+      "the answer says a Federal Form 1099 is being used to settle worker status. N.J.A.C. 12:11-1.6(b) says: \"One cannot transform an individual into an independent contractor ... by reporting the earnings ... using a Federal Form 1099\" (notice of adoption, pages 176 to 177). A 1099 alone does not prove contractor status.",
+      "the answer says a Federal Form 1099 is not being used to settle worker status. N.J.A.C. 12:11-1.6(b) still says a 1099 cannot transform an individual into an independent contractor. A 1099 alone does not prove contractor status. This answer does not decide worker status.",
+      "it is marked not sure whether a Federal Form 1099 is being used to settle worker status. N.J.A.C. 12:11-1.6(b) says a 1099 cannot transform an individual into an independent contractor. A 1099 alone does not prove contractor status."
+    ));
+    add("proposed N.J.A.C. 12:11-1.5(e), the free to work for others provision, was deleted on adoption (notice of adoption, page 205). This page does not treat the deleted text as a current rule.");
+    return { ok: true, label: LABEL, items: items, message: "", disclaimer: DISCLAIMER, affiliation: AFFILIATION };
+  }
+
+  function picked(form, name) {
+    var nodes = form.elements[name];
+    var j;
+    if (!nodes) return "";
+    if (typeof nodes.length === "number") {
+      for (j = 0; j < nodes.length; j++) {
+        if (nodes[j].checked) return nodes[j].value;
+      }
+      return "";
+    }
+    return nodes.checked ? nodes.value : "";
+  }
+
+  function readAnswers(form) {
+    return {
+      prongA: picked(form, "prongA"),
+      prongB: picked(form, "prongB"),
+      prongC: picked(form, "prongC"),
+      customers: picked(form, "customers"),
+      llcOnly: picked(form, "llcOnly"),
+      insuranceOnly: picked(form, "insuranceOnly"),
+      licenseOnly: picked(form, "licenseOnly"),
+      form1099: picked(form, "form1099")
+    };
+  }
+
+  function show(result) {
+    var lead = document.getElementById("nj-lead");
+    var list = document.getElementById("nj-points");
+    var box = document.getElementById("nj-disclaimer");
+    var aff = document.getElementById("nj-affiliation");
+    if (box) box.textContent = DISCLAIMER;
+    if (aff) aff.textContent = AFFILIATION;
+    if (!lead || !list) return;
+    if (!result.ok) {
+      lead.hidden = false;
+      lead.textContent = result.message;
+      list.hidden = true;
+      list.textContent = "";
+      return;
+    }
+    lead.hidden = true;
+    lead.textContent = "";
+    list.hidden = false;
+    list.textContent = "";
+    var i, li;
+    for (i = 0; i < result.items.length; i++) {
+      li = document.createElement("li");
+      li.textContent = result.items[i];
+      list.appendChild(li);
+    }
+  }
+
+  function clearAnswers(form) {
+    var names = PRONG_KEYS.concat(YN_KEYS);
+    var i, nodes, j;
+    for (i = 0; i < names.length; i++) {
+      nodes = form.elements[names[i]];
+      if (!nodes) continue;
+      if (typeof nodes.length === "number") {
+        for (j = 0; j < nodes.length; j++) nodes[j].checked = false;
+      } else {
+        nodes.checked = false;
+      }
+    }
+  }
+
+  var api = {
+    DISCLAIMER: DISCLAIMER,
+    AFFILIATION: AFFILIATION,
+    LABEL: LABEL,
+    pointsToReview: pointsToReview
+  };
+  if (typeof window !== "undefined") window.FMP_NJ = api;
+
+  function boot() {
+    var form = document.getElementById("nj-form");
+    var clear = document.getElementById("nj-clear");
+    if (!form || !clear) return;
+    show(incomplete());
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      show(pointsToReview(readAnswers(form)));
+    });
+    clear.addEventListener("click", function () {
+      clearAnswers(form);
+      show(incomplete());
+    });
+  }
+
+  if (typeof document !== "undefined" && document.getElementById) boot();
+})();
+</script>
+</body>
+</html>
