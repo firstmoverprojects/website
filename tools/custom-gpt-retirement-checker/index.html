@@ -20,6 +20,13 @@ button.sec{background:#e4e8ee;color:#1b1f24}
 #out li{margin:8px 0}.tag{display:inline-block;font-size:.75rem;padding:1px 7px;border-radius:9px;margin-right:6px;background:#e4e8ee}
 .warn{background:#fde8e6;color:#8a1c12}.ok{background:#e3f4e6;color:#1d6b2c}q{font-style:italic}
 .cta{background:#fff8e6;border-color:#f0d58a}a{color:#1f5fbf}
+.lead-cta{background:#fff;border:2px solid #071b31;border-radius:10px;padding:16px;margin:0 0 16px;color:#071b31}
+#result-cta h2,#result-cta #result-deadline,#result-cta .thanks,#result-cta .share-line{color:#071b31}
+#result-cta h2{font-size:1.25rem;margin:.2em 0 .4em}
+.thanks,.share-line{font-weight:700;margin:12px 0 0}
+#kit-result{display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;box-sizing:border-box;min-height:48px;padding:14px 18px;margin:12px 0 0;background:#0055ff;color:#fff;font-weight:800;line-height:1.3;text-align:center;text-decoration:none;border-radius:8px;white-space:normal;overflow-wrap:anywhere}
+#kit-result:hover,#kit-result:focus{background:#0044cc;color:#fff;outline:3px solid #071b31;outline-offset:2px}
+#results,#result-cta{overflow-wrap:anywhere;max-width:100%}
 table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0}th,td{border:1px solid #dde1e6;padding:6px 8px;text-align:left;vertical-align:top}caption{text-align:left;font-weight:600;padding:4px 0}
 
 .kit-conv-box{background:linear-gradient(135deg,#fffbeb 0%,#f0fdf4 100%);border:2px solid #15803d;border-radius:12px;padding:16px;margin:16px 0}
@@ -31,9 +38,6 @@ table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0}th,td{bor
 .kit-btn-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0;min-width:0;max-width:100%}
 .btn-buy-now{display:inline-block;max-width:100%;box-sizing:border-box;background:#15803d;color:#fff !important;font-weight:800;font-size:1rem;padding:12px 20px;border-radius:9px;text-decoration:none;box-shadow:0 4px 12px rgba(21,128,61,.28);white-space:normal;overflow-wrap:anywhere;text-align:center}
 .btn-buy-now:hover{background:#166534}
-.email-cap-box{background:#f0f9ff;border:2px solid #0284c7;border-radius:10px;padding:14px 16px;margin:14px 0 6px}
-.email-cap-title{font-size:1.02rem;font-weight:800;margin:0 0 6px;color:#0c4a6e}
-.btn-email-cap{display:inline-block;max-width:100%;box-sizing:border-box;background:#0284c7;color:#fff !important;font-weight:700;padding:10px 16px;border-radius:8px;text-decoration:none;margin:6px 8px 6px 0;white-space:normal;overflow-wrap:anywhere}
 a.runway-pill{display:inline-block;max-width:100%;box-sizing:border-box;margin:4px 0 12px;padding:8px 14px;border-radius:999px;background:#01060b;color:#f4f7fa !important;border:1px solid #00d8ff;font-weight:700;font-size:.92rem;line-height:1.35;text-decoration:none;white-space:normal;overflow-wrap:anywhere;text-align:center}
 a.runway-pill:hover,a.runway-pill:focus{background:#0c1520;color:#00d8ff !important;outline:3px solid #00d8ff;outline-offset:2px}
 
@@ -151,7 +155,7 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
 <main>
 <p class="muted site-nav"><a href="https://firstmoverprojects.com/">First Mover Projects</a> · <a href="/tools/">Tools</a> · <a href="/deadlines/">Deadlines</a></p>
 <h1>Custom GPT Retirement Checker</h1>
-<p><a class="runway-pill" href="https://launchfree.io/listings/custom-gpt-retirement-checker.html" target="_blank" rel="noopener noreferrer">Listed on The Runway (LaunchFree.io) — Upvote This Free Tool</a></p>
+<p><a class="runway-pill" href="https://launchfree.io/listings/custom-gpt-retirement-checker.html" target="_blank" rel="noopener noreferrer">Listed on The Runway (LaunchFree.io): Upvote This Free Tool</a></p>
 <p id="answer">OpenAI says ChatGPT custom GPTs are scheduled to retire on Dec 11, 2026, and creators can migrate each GPT to a plugin when migration is available for their account. For affected Enterprise workspaces, new GPT creation ended on Oct 26, 2026. FedRAMP workspaces are exempt from that cutoff. Custom actions, the selected model, sharing settings and unpublished edits do not carry over, so check those first. [1]</p>
 <p id="who"><strong>Who it's for:</strong> anyone who created a custom GPT or relies on one for work, on any ChatGPT plan, including admins of Enterprise workspaces.</p>
 <p class="muted" id="updated"><strong>Last updated Oct 30, 2026.</strong> Current dates: Oct 26, 2026 (ended for affected Enterprise workspaces; FedRAMP workspaces exempt), Dec 11, 2026 (standard retirement), Feb 11, 2027 (FedRAMP workspaces and affected Enterprise workspaces with a qualifying, approved deferral). A deferral alone does not preserve eligibility to create new GPTs.</p>
@@ -182,39 +186,21 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
 <button id="go" type="button">Build my checklist</button> <button id="clear" class="sec" type="button">Clear</button>
 </section>
 
-<section class="card" id="results" hidden>
+<section class="card" id="results" hidden aria-live="polite">
+<!-- Result card. Dec 11, 2026 is the standard date in OpenAI's Custom GPT FAQ.
+     Gumroad product iqnssc. The post-answer button keeps utm_content=result-cta.
+     Gumroad counts the click only when utm_source, utm_medium, and utm_campaign are all set. -->
+<div class="lead-cta" id="result-cta">
+<h2 id="result-problem">If you only use this GPT, you do not need to migrate it.</h2>
+<p id="result-deadline">OpenAI's FAQ says custom GPTs are scheduled to retire on Dec 11, 2026. The GPT and its page become inaccessible then. Check the creator's guidance about a replacement.</p>
+<p><a target="_blank" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/iqnssc?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=custom-gpt-retirement-checker&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $39 Plugin Migration Planner</a></p>
+<p class="thanks">Thank you for your time.</p>
+<p class="share-line">Share it with someone it could help.</p>
+</div>
 <h2>2. Your migration checklist</h2>
 <p id="summary"></p>
 <ol id="out"></ol>
-
-<div class="email-cap-box" id="signup">
-  <div class="email-cap-title">Email me my free check results + deadline reminders</div>
-  <p class="muted" style="margin:0 0 6px">Save your checklist above, then join our weekly deadline alert list so cutoff changes never catch you off guard:</p>
-  <p style="margin:0"><a class="btn-email-cap" href="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" target="_blank" rel="noopener">Email me deadline reminders (1-click sign-up) →</a> <span class="muted">(opens Brevo's sign-up page · double opt-in, unsubscribe anytime · <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>)</span></p>
-</div>
-<div class="kit-conv-box">
-  <span class="kit-conv-badge">INSTANT DOWNLOAD · OFFLINE HTML WORKBOOK + 3 CSV TEMPLATES · $39</span>
-  <h3 class="kit-conv-title">See What's Inside the $39 Plugin Migration Planner</h3>
-  <img class="kit-preview-img" src="/assets/previews/custom-gpt-migration-kit-preview-1280x720.png" alt="See What's Inside the $39 Plugin Migration Planner: offline HTML workbench, GPT inventory CSV, and before-and-after prompt parity scorecard" width="1280" height="720" loading="lazy">
-  <ul class="kit-bullets">
-    <li>Never lose a Custom GPT during cutover: tracks every workspace GPT, owner, custom action (OpenAPI), knowledge file, and sharing setting in one offline HTML/CSV workbook.</li>
-<li>Catches broken answers before users notice: includes a Before-and-After Parity Test sheet to score 5–10 baseline prompts across instructions, files, format, and tools.</li>
-<li>Prints a clean PDF Readiness Report for team or Enterprise sign-off before the Dec 11, 2026 Custom GPT retirement.</li>
-  </ul>
-  <div class="kit-btn-row">
-    <a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/iqnssc?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=custom-gpt-retirement-checker&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $39 Plugin Migration Planner (1-Click Checkout) →</a>
-  </div>
-<div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
-<p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
-<div class="follow-bar-actions">
-<a class="follow-tiktok" data-tool-slug="custom-gpt-retirement-checker" target="_blank" rel="noopener" href="https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&amp;utm_medium=tool_result&amp;utm_campaign=follower_growth">Follow @firstmoverprojects on TikTok (Daily 60-Sec Checklists)</a>
-<a class="follow-email" href="#signup">Get Free Email Deadline Reminders</a>
-</div>
-</div>
-
-  <p class="muted" style="margin:4px 0 0"><a href="/deadlines/custom-gpt-retirement-dec-11.html">Read the Custom GPT Dec 11 retirement deadline page (free)</a></p>
-</div>
-
+<p class="muted">The kit button is at the top of this result. Free deadline page: <a href="/deadlines/custom-gpt-retirement-dec-11.html">Custom GPTs retire Dec 11, 2026</a></p>
 </section>
 <details class="fmp-share" id="fmp-share">
 <summary>Share, Embed, or License This Tool</summary>
@@ -343,6 +329,28 @@ function parseActions(raw){
 function parseList(raw){return clip(raw).split(/\r?\n|,/).map(function(s){return s.trim();}).filter(function(s){return s.length>0;}).slice(0,1000);}
 window.__checkerParse={actions:parseActions,list:parseList};
 
+function leadFor(created, ent, actionsPresent){
+ if(ent){
+  return {
+   problem:"This Enterprise GPT's retirement date depends on the workspace.",
+   deadline:"Standard retirement is Dec 11, 2026. FedRAMP workspaces and affected Enterprise workspaces with a qualifying, approved deferral retire on Feb 11, 2027. New GPT creation ended on Oct 26, 2026 for affected Enterprise workspaces. FedRAMP workspaces were exempt. A deferral alone does not preserve eligibility to create new GPTs."
+  };
+ }
+ if(created){
+  return {
+   problem:"You created this custom GPT. It is scheduled to retire on Dec 11, 2026.",
+   deadline:actionsPresent
+    ?"After Dec 11, 2026, OpenAI says the GPT and its page become inaccessible. Custom actions on it do not transfer, so plan a replacement and migrate it to a plugin before that date."
+    :"After Dec 11, 2026, OpenAI says the GPT and its page become inaccessible. Migrate it to a plugin before that date. Custom actions, the selected model, sharing settings, and unpublished edits do not carry over."
+  };
+ }
+ return {
+  problem:"If you only use this GPT, you do not need to migrate it.",
+  deadline:"OpenAI's FAQ says custom GPTs are scheduled to retire on Dec 11, 2026. The GPT and its page become inaccessible then. Check the creator's guidance about a replacement."
+ };
+}
+window.__checkerLead=leadFor;
+
 function build(){
  var instr=clip(document.getElementById("f-instr").value).trim();
  var A=parseActions(document.getElementById("f-actions").value);
@@ -370,7 +378,13 @@ function build(){
   li.appendChild(t);li.appendChild(document.createTextNode(it.text+" "));var s=document.createElement("span");s.className="muted";s.textContent="Source [1]: \u201c"+it.quote+"\u201d";li.appendChild(s);ol.appendChild(li);});
  var found=[instr?"instructions":null,K.length?K.length+" knowledge file(s)":null,A.present?"custom actions":null,capsRaw?"capabilities/apps":null].filter(Boolean);
  document.getElementById("summary").textContent=found.length?"Found: "+found.join(", ")+". "+items.length+" checklist items.":"Nothing pasted yet, so this is the general checklist ("+items.length+" items). Paste your settings for a tailored list.";
- var r=document.getElementById("results");r.hidden=false;return items.map(function(i){return i.id;});}
+ var lead=leadFor(created,ent,A.present);
+ document.getElementById("result-problem").textContent=lead.problem;
+ document.getElementById("result-deadline").textContent=lead.deadline;
+ var r=document.getElementById("results");r.hidden=false;
+ var card=document.getElementById("result-cta");
+ if(card&&card.scrollIntoView){try{card.scrollIntoView({block:"start"});}catch(e){}}
+ return items.map(function(i){return i.id;});}
 window.__checkerBuild=build;
 document.getElementById("go").addEventListener("click",build);
 document.getElementById("clear").addEventListener("click",function(){["f-instr","f-actions","f-knowledge","f-caps"].forEach(function(i){document.getElementById(i).value="";});["c-created","c-drafts","c-shared","c-ent"].forEach(function(i){document.getElementById(i).checked=false;});document.getElementById("results").hidden=true;});
