@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="description" content="A free web app that lists your business filing deadlines. Not tax or legal advice; confirm with the official source.">
+<title>Deadline Watch</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; overflow-x: hidden; }
+  body {
+    font: 16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    color: #1b1f24;
+    background: #f4f6f8;
+  }
+  a { color: #0b3f9c; }
+  a:focus, button:focus, select:focus, input:focus {
+    outline: 3px solid #0b3f9c;
+    outline-offset: 2px;
+  }
+  .wrap { max-width: 42rem; margin: 0 auto; padding: 16px; }
+  h1 { font-size: 1.75rem; line-height: 1.2; margin: 0.2em 0; }
+  h2 { font-size: 1.25rem; margin: 1.2em 0 0.4em; }
+  p { margin: 0.6em 0; overflow-wrap: anywhere; }
+  .lead { font-weight: 700; margin-top: 0; }
+  .warn {
+    background: #fff8e6;
+    border: 2px solid #1b1f24;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: 700;
+  }
+  label, legend { font-weight: 700; }
+  .field { margin: 12px 0; }
+  select {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 6px;
+    font: 16px/1.3 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    min-height: 44px;
+    padding: 8px 10px;
+    border: 2px solid #1b1f24;
+    border-radius: 8px;
+    background: #fff;
+    color: #1b1f24;
+  }
+  fieldset {
+    border: 2px solid #1b1f24;
+    border-radius: 8px;
+    margin: 12px 0;
+    padding: 8px 12px 12px;
+  }
+  .choice label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    font-size: 16px;
+  }
+  .choice input { width: 22px; height: 22px; }
+  button {
+    font: 16px/1.3 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    min-height: 44px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 2px solid #1b1f24;
+    background: #0b3f9c;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    max-width: 100%;
+  }
+  button.secondary { background: #fff; color: #1b1f24; }
+  button:disabled { opacity: 0.55; cursor: not-allowed; }
+  .card {
+    background: #fff;
+    border: 1px solid #c5ccd4;
+    border-radius: 10px;
+    padding: 12px;
+    margin: 10px 0;
+    max-width: 100%;
+  }
+  .card.off { background: #eef1f4; }
+  .when { font-weight: 800; font-size: 1.05rem; margin: 0; }
+  .title { font-weight: 700; margin: 0.2em 0; }
+  .tag {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: #e7eefc;
+    border: 1px solid #0b3f9c;
+    margin-right: 6px;
+  }
+  .tag.past { background: #fde8e4; border-color: #8a1f14; }
+  a.src, a.office {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    overflow-wrap: anywhere;
+  }
+  footer {
+    margin-top: 24px;
+    padding-top: 8px;
+    border-top: 1px solid #c5ccd4;
+  }
+  #load-error { font-weight: 700; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main class="wrap" id="app">
+  <p class="lead">A free web app that lists your business filing deadlines.</p>
+  <h1>Deadline Watch</h1>
+  <p class="warn">General guidance, not legal, tax or IT advice. Confirm each date with the official source before you file.</p>
+  <p>Not affiliated with or endorsed by the IRS, FinCEN, or any state agency named here, including the Arkansas Secretary of State, California Franchise Tax Board, Delaware Division of Corporations, Florida Division of Corporations, Georgia Secretary of State, Maryland SDAT, Michigan LARA, Minnesota Secretary of State, North Carolina Secretary of State, New York State Department of Taxation and Finance, Pennsylvania Department of State, Rhode Island Department of State, and Texas Comptroller.</p>
+  <p>Pick a state, a business type, and whether you have employees. The list is built in this browser. Nothing is uploaded, and there is no account.</p>
+  <div id="boi"></div>
+  <form id="filters">
+    <div class="field">
+      <label for="state">State</label>
+      <select id="state" name="state">
+        <option value="">Choose a state</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="type">Business type</label>
+      <select id="type" name="type">
+        <option value="sole">Sole proprietorship or single-member LLC</option>
+        <option value="mmllc">Multi-member LLC or partnership</option>
+        <option value="scorp">S corporation</option>
+        <option value="ccorp">C corporation</option>
+        <option value="nonprofit">Nonprofit</option>
+      </select>
+    </div>
+    <fieldset class="choice">
+      <legend id="emp-label">Do you have employees?</legend>
+      <label><input type="radio" name="employees" value="yes"> Yes</label>
+      <label><input type="radio" name="employees" value="no" checked> No</label>
+    </fieldset>
+  </form>
+  <p id="load-error" hidden>The deadline list did not load. Refresh the page. The file stays on this site. Nothing is sent elsewhere.</p>
+  <h2>Federal</h2>
+  <p id="draft-note" hidden>Dates marked draft are from the IRS draft 2027 tax calendar. Open the source link and confirm them before you rely on them.</p>
+  <div id="federal-list"></div>
+  <h2>State</h2>
+  <p>Some state dates fall on a weekend, and the state page does not say the date moves. File by the business day before to be safe.</p>
+  <div id="state-list"></div>
+  <p id="summary"></p>
+  <p><button type="button" id="export">Download calendar (.ics)</button></p>
+  <p id="export-status" role="status"></p>
+</main>
+<footer class="wrap">
+  <p>Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
+  <p><a href="/">First Mover Projects</a></p>
+</footer>
+<script src="deadline-watch.js"></script>
+</body>
+</html>

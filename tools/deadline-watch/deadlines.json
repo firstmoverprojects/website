@@ -1,0 +1,1955 @@
+{
+  "boi": {
+    "requiredForUsCompanies": false,
+    "summary": "Beneficial ownership (BOI) reports are not listed. FinCEN's final rule, effective August 14, 2026, keeps companies created in the United States out of the reporting rule. A foreign company registered to do business in the United States can still have a report. This app does not list that foreign-company case.",
+    "sourceUrl": "https://www.federalregister.gov/documents/2026/08/14/2026-16576/beneficial-ownership-information-reporting-requirement-revision",
+    "sourceLabel": "FinCEN final rule, Federal Register, August 14, 2026"
+  },
+  "states": [
+    {
+      "code": "AL",
+      "name": "Alabama",
+      "office": "Alabama Secretary of State",
+      "officeUrl": "https://www.sos.alabama.gov/"
+    },
+    {
+      "code": "AK",
+      "name": "Alaska",
+      "office": "Alaska Division of Corporations, Business and Professional Licensing",
+      "officeUrl": "https://www.commerce.alaska.gov/web/cbpl/Corporations.aspx"
+    },
+    {
+      "code": "AZ",
+      "name": "Arizona",
+      "office": "Arizona Corporation Commission",
+      "officeUrl": "https://azcc.gov/"
+    },
+    {
+      "code": "AR",
+      "name": "Arkansas",
+      "office": "Arkansas Secretary of State",
+      "officeUrl": "https://www.sos.arkansas.gov/"
+    },
+    {
+      "code": "CA",
+      "name": "California",
+      "office": "California Secretary of State, business programs",
+      "officeUrl": "https://www.sos.ca.gov/business-programs"
+    },
+    {
+      "code": "CO",
+      "name": "Colorado",
+      "office": "Colorado Secretary of State",
+      "officeUrl": "https://www.coloradosos.gov/pubs/business/businessHome.html"
+    },
+    {
+      "code": "CT",
+      "name": "Connecticut",
+      "office": "Connecticut Secretary of the State",
+      "officeUrl": "https://portal.ct.gov/sots"
+    },
+    {
+      "code": "DE",
+      "name": "Delaware",
+      "office": "Delaware Division of Corporations",
+      "officeUrl": "https://corp.delaware.gov/"
+    },
+    {
+      "code": "DC",
+      "name": "District of Columbia",
+      "office": "DC Department of Licensing and Consumer Protection",
+      "officeUrl": "https://dlcp.dc.gov/"
+    },
+    {
+      "code": "FL",
+      "name": "Florida",
+      "office": "Florida Division of Corporations",
+      "officeUrl": "https://dos.fl.gov/sunbiz/"
+    },
+    {
+      "code": "GA",
+      "name": "Georgia",
+      "office": "Georgia Secretary of State",
+      "officeUrl": "https://sos.ga.gov/"
+    },
+    {
+      "code": "HI",
+      "name": "Hawaii",
+      "office": "Hawaii Business Registration Division",
+      "officeUrl": "https://cca.hawaii.gov/breg/"
+    },
+    {
+      "code": "ID",
+      "name": "Idaho",
+      "office": "Idaho Secretary of State",
+      "officeUrl": "https://sos.idaho.gov/"
+    },
+    {
+      "code": "IL",
+      "name": "Illinois",
+      "office": "Illinois Secretary of State",
+      "officeUrl": "https://www.ilsos.gov/"
+    },
+    {
+      "code": "IN",
+      "name": "Indiana",
+      "office": "Indiana Secretary of State, business services",
+      "officeUrl": "https://www.in.gov/sos/business/"
+    },
+    {
+      "code": "IA",
+      "name": "Iowa",
+      "office": "Iowa Secretary of State",
+      "officeUrl": "https://sos.iowa.gov/"
+    },
+    {
+      "code": "KS",
+      "name": "Kansas",
+      "office": "Kansas Secretary of State",
+      "officeUrl": "https://sos.ks.gov/"
+    },
+    {
+      "code": "KY",
+      "name": "Kentucky",
+      "office": "Kentucky Secretary of State",
+      "officeUrl": "https://www.sos.ky.gov/"
+    },
+    {
+      "code": "LA",
+      "name": "Louisiana",
+      "office": "Louisiana Secretary of State",
+      "officeUrl": "https://www.sos.la.gov/"
+    },
+    {
+      "code": "ME",
+      "name": "Maine",
+      "office": "Maine Secretary of State",
+      "officeUrl": "https://www.maine.gov/sos/"
+    },
+    {
+      "code": "MD",
+      "name": "Maryland",
+      "office": "Maryland Department of Assessments and Taxation",
+      "officeUrl": "https://dat.maryland.gov/businesses/Pages/default.aspx"
+    },
+    {
+      "code": "MA",
+      "name": "Massachusetts",
+      "office": "Massachusetts Corporations Division",
+      "officeUrl": "https://www.sec.state.ma.us/divisions/corporations.htm"
+    },
+    {
+      "code": "MI",
+      "name": "Michigan",
+      "office": "Michigan Department of Licensing and Regulatory Affairs",
+      "officeUrl": "https://www.michigan.gov/lara"
+    },
+    {
+      "code": "MN",
+      "name": "Minnesota",
+      "office": "Minnesota Secretary of State",
+      "officeUrl": "https://www.sos.mn.gov/"
+    },
+    {
+      "code": "MS",
+      "name": "Mississippi",
+      "office": "Mississippi Secretary of State",
+      "officeUrl": "https://www.sos.ms.gov/"
+    },
+    {
+      "code": "MO",
+      "name": "Missouri",
+      "office": "Missouri Secretary of State",
+      "officeUrl": "https://www.sos.mo.gov/"
+    },
+    {
+      "code": "MT",
+      "name": "Montana",
+      "office": "Montana Secretary of State",
+      "officeUrl": "https://sosmt.gov/"
+    },
+    {
+      "code": "NE",
+      "name": "Nebraska",
+      "office": "Nebraska Secretary of State",
+      "officeUrl": "https://sos.nebraska.gov/"
+    },
+    {
+      "code": "NV",
+      "name": "Nevada",
+      "office": "Nevada Secretary of State",
+      "officeUrl": "https://www.nvsos.gov/"
+    },
+    {
+      "code": "NH",
+      "name": "New Hampshire",
+      "office": "New Hampshire Secretary of State",
+      "officeUrl": "https://www.sos.nh.gov/"
+    },
+    {
+      "code": "NJ",
+      "name": "New Jersey",
+      "office": "New Jersey Division of Revenue and Enterprise Services",
+      "officeUrl": "https://www.nj.gov/treasury/revenue/"
+    },
+    {
+      "code": "NM",
+      "name": "New Mexico",
+      "office": "New Mexico Secretary of State",
+      "officeUrl": "https://www.sos.nm.gov/"
+    },
+    {
+      "code": "NY",
+      "name": "New York",
+      "office": "New York Department of State, Division of Corporations",
+      "officeUrl": "https://dos.ny.gov/"
+    },
+    {
+      "code": "NC",
+      "name": "North Carolina",
+      "office": "North Carolina Secretary of State",
+      "officeUrl": "https://www.sosnc.gov/"
+    },
+    {
+      "code": "ND",
+      "name": "North Dakota",
+      "office": "North Dakota Secretary of State",
+      "officeUrl": "https://www.sos.nd.gov/"
+    },
+    {
+      "code": "OH",
+      "name": "Ohio",
+      "office": "Ohio Secretary of State",
+      "officeUrl": "https://www.ohiosos.gov/"
+    },
+    {
+      "code": "OK",
+      "name": "Oklahoma",
+      "office": "Oklahoma Secretary of State",
+      "officeUrl": "https://www.sos.ok.gov/"
+    },
+    {
+      "code": "OR",
+      "name": "Oregon",
+      "office": "Oregon Secretary of State",
+      "officeUrl": "https://sos.oregon.gov/"
+    },
+    {
+      "code": "PA",
+      "name": "Pennsylvania",
+      "office": "Pennsylvania Department of State",
+      "officeUrl": "https://www.pa.gov/agencies/dos"
+    },
+    {
+      "code": "RI",
+      "name": "Rhode Island",
+      "office": "Rhode Island Department of State",
+      "officeUrl": "https://www.sos.ri.gov/"
+    },
+    {
+      "code": "SC",
+      "name": "South Carolina",
+      "office": "South Carolina Secretary of State",
+      "officeUrl": "https://sos.sc.gov/"
+    },
+    {
+      "code": "SD",
+      "name": "South Dakota",
+      "office": "South Dakota Secretary of State",
+      "officeUrl": "https://sdsos.gov/"
+    },
+    {
+      "code": "TN",
+      "name": "Tennessee",
+      "office": "Tennessee Secretary of State",
+      "officeUrl": "https://sos.tn.gov/"
+    },
+    {
+      "code": "TX",
+      "name": "Texas",
+      "office": "Texas Secretary of State",
+      "officeUrl": "https://www.sos.texas.gov/"
+    },
+    {
+      "code": "UT",
+      "name": "Utah",
+      "office": "Utah Division of Corporations and Commercial Code",
+      "officeUrl": "https://corporations.utah.gov/"
+    },
+    {
+      "code": "VT",
+      "name": "Vermont",
+      "office": "Vermont Secretary of State",
+      "officeUrl": "https://sos.vermont.gov/"
+    },
+    {
+      "code": "VA",
+      "name": "Virginia",
+      "office": "Virginia State Corporation Commission",
+      "officeUrl": "https://www.scc.virginia.gov/"
+    },
+    {
+      "code": "WA",
+      "name": "Washington",
+      "office": "Washington Secretary of State",
+      "officeUrl": "https://www.sos.wa.gov/"
+    },
+    {
+      "code": "WV",
+      "name": "West Virginia",
+      "office": "West Virginia Secretary of State",
+      "officeUrl": "https://sos.wv.gov/"
+    },
+    {
+      "code": "WI",
+      "name": "Wisconsin",
+      "office": "Wisconsin Department of Financial Institutions",
+      "officeUrl": "https://dfi.wi.gov/Pages/BusinessServices/BusinessEntities/FileOnline.aspx"
+    },
+    {
+      "code": "WY",
+      "name": "Wyoming",
+      "office": "Wyoming Secretary of State",
+      "officeUrl": "https://sos.wyo.gov/"
+    }
+  ],
+  "deadlines": [
+    {
+      "needsEmployees": false,
+      "id": "fed-1040-2025",
+      "date": "2026-04-15",
+      "title": "Form 1040 for the 2025 tax year",
+      "detail": "Calendar-year Form 1040 or Form 1040-SR. A sole proprietor, and a single-member LLC taxed as a disregarded entity, reports the business on this return.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "sourceLabel": "IRS Publication 509 (2026) PDF",
+      "types": [
+        "sole"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-1040-2026",
+      "date": "2027-04-15",
+      "title": "Form 1040 for the 2026 tax year",
+      "detail": "Calendar-year Form 1040 or Form 1040-SR. A sole proprietor, and a single-member LLC taxed as a disregarded entity, reports the business on this return.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf",
+      "sourceLabel": "IRS Publication 509 (2027 draft) PDF",
+      "types": [
+        "sole"
+      ],
+      "draft": true
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-1065-2025",
+      "date": "2026-03-16",
+      "title": "Form 1065 for the 2025 tax year",
+      "detail": "Calendar-year Form 1065. March 15, 2026 is a Sunday, and Publication 509 lists March 16. Give each partner Schedule K-1 by this date. A multi-member LLC taxed as a partnership uses this return.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "sourceLabel": "IRS Publication 509 (2026) PDF",
+      "types": [
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-1065-2026",
+      "date": "2027-03-15",
+      "title": "Form 1065 for the 2026 tax year",
+      "detail": "Calendar-year Form 1065. Give each partner Schedule K-1 by this date. A multi-member LLC taxed as a partnership uses this return.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf",
+      "sourceLabel": "IRS Publication 509 (2027 draft) PDF",
+      "types": [
+        "mmllc"
+      ],
+      "draft": true
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-1120s-2025",
+      "date": "2026-03-16",
+      "title": "Form 1120-S for the 2025 tax year",
+      "detail": "Calendar-year Form 1120-S. March 15, 2026 is a Sunday, and Publication 509 lists March 16. Give each shareholder Schedule K-1 by this date.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "sourceLabel": "IRS Publication 509 (2026) PDF",
+      "types": [
+        "scorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-1120s-2026",
+      "date": "2027-03-15",
+      "title": "Form 1120-S for the 2026 tax year",
+      "detail": "Calendar-year Form 1120-S. Give each shareholder Schedule K-1 by this date.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf",
+      "sourceLabel": "IRS Publication 509 (2027 draft) PDF",
+      "types": [
+        "scorp"
+      ],
+      "draft": true
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-1120-2025",
+      "date": "2026-04-15",
+      "title": "Form 1120 for the 2025 tax year",
+      "detail": "Calendar-year Form 1120 for a C corporation.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "sourceLabel": "IRS Publication 509 (2026) PDF",
+      "types": [
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-1120-2026",
+      "date": "2027-04-15",
+      "title": "Form 1120 for the 2026 tax year",
+      "detail": "Calendar-year Form 1120 for a C corporation.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf",
+      "sourceLabel": "IRS Publication 509 (2027 draft) PDF",
+      "types": [
+        "ccorp"
+      ],
+      "draft": true
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-990-2025",
+      "date": "2026-05-15",
+      "title": "Form 990 series for a year that ended December 31, 2025",
+      "detail": "The IRS table lists May 15 when the year ends December 31. May 15, 2026 is a Friday. Publication 509 for 2026 lists Memorial Day on May 25, so May 15 is not that holiday. This covers Form 990, 990-EZ, 990-PF, and 990-N for a calendar year.",
+      "sourceUrl": "https://www.irs.gov/charities-non-profits/return-due-dates-for-exempt-organizations-annual-return",
+      "sourceLabel": "IRS exempt organization annual return due dates",
+      "types": [
+        "nonprofit"
+      ],
+      "also": [
+        {
+          "label": "IRS Publication 509 (2026) PDF, holiday list",
+          "url": "https://www.irs.gov/pub/irs-pdf/p509.pdf"
+        }
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-990-2026",
+      "date": "2027-05-17",
+      "title": "Form 990 series for a year that ended December 31, 2026",
+      "detail": "The IRS table lists May 15 when the year ends December 31, and says a Saturday, Sunday, or legal holiday moves the date to the next business day. May 15, 2027 is a Saturday, so this row uses Monday, May 17, 2027. The IRS draft Publication 509 for 2027 lists Memorial Day on May 31, not May 17.",
+      "sourceUrl": "https://www.irs.gov/charities-non-profits/return-due-dates-for-exempt-organizations-annual-return",
+      "sourceLabel": "IRS exempt organization annual return due dates",
+      "types": [
+        "nonprofit"
+      ],
+      "also": [
+        {
+          "label": "IRS Publication 509 (2027 draft) PDF, holiday list",
+          "url": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf"
+        }
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-es-2025-q4",
+      "date": "2026-01-15",
+      "title": "Form 1040-ES final 2025 estimated tax",
+      "detail": "Publication 509 calls this the final installment date for 2025 estimated tax. You can skip it if you file the 2025 return and pay the tax by February 2, 2026. For a partnership or S corporation, this is the owner's personal estimated tax, not the business return. Turn this off if you do not pay it.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "sourceLabel": "IRS Publication 509 (2026) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp"
+      ],
+      "draft": false
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-es-2026-q1",
+      "date": "2026-04-15",
+      "title": "Form 1040-ES 2026 first estimated tax payment",
+      "detail": "First 2026 installment. Pay it if withholding will not cover the tax. For a partnership or S corporation, this is the owner's personal estimated tax, not the business return. Turn this off if you do not pay it.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "sourceLabel": "IRS Publication 509 (2026) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp"
+      ],
+      "draft": false
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-es-2026-q2",
+      "date": "2026-06-15",
+      "title": "Form 1040-ES 2026 second estimated tax payment",
+      "detail": "Second 2026 installment. For a partnership or S corporation, this is the owner's personal estimated tax, not the business return. Turn this off if you do not pay it.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "sourceLabel": "IRS Publication 509 (2026) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp"
+      ],
+      "draft": false
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-es-2026-q3",
+      "date": "2026-09-15",
+      "title": "Form 1040-ES 2026 third estimated tax payment",
+      "detail": "Third 2026 installment. For a partnership or S corporation, this is the owner's personal estimated tax, not the business return. Turn this off if you do not pay it.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "sourceLabel": "IRS Publication 509 (2026) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp"
+      ],
+      "draft": false
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-es-2026-q4",
+      "date": "2027-01-15",
+      "title": "Form 1040-ES final 2026 estimated tax",
+      "detail": "The draft calendar calls this the final installment date for 2026 estimated tax. You can skip it if you file the 2026 return and pay the tax by February 1, 2027. For a partnership or S corporation, this is the owner's personal estimated tax, not the business return. Turn this off if you do not pay it.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf",
+      "sourceLabel": "IRS Publication 509 (2027 draft) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp"
+      ],
+      "draft": true
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-es-2027-q1",
+      "date": "2027-04-15",
+      "title": "Form 1040-ES 2027 first estimated tax payment",
+      "detail": "First 2027 installment. Pay it if withholding will not cover the tax. For a partnership or S corporation, this is the owner's personal estimated tax, not the business return. Turn this off if you do not pay it.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf",
+      "sourceLabel": "IRS Publication 509 (2027 draft) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp"
+      ],
+      "draft": true
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-es-2027-q2",
+      "date": "2027-06-15",
+      "title": "Form 1040-ES 2027 second estimated tax payment",
+      "detail": "Second 2027 installment. For a partnership or S corporation, this is the owner's personal estimated tax, not the business return. Turn this off if you do not pay it.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf",
+      "sourceLabel": "IRS Publication 509 (2027 draft) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp"
+      ],
+      "draft": true
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-es-2027-q3",
+      "date": "2027-09-15",
+      "title": "Form 1040-ES 2027 third estimated tax payment",
+      "detail": "Third 2027 installment. The fourth 2027 installment falls in January 2028, so it is not on this list. For a partnership or S corporation, this is the owner's personal estimated tax, not the business return. Turn this off if you do not pay it.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf",
+      "sourceLabel": "IRS Publication 509 (2027 draft) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp"
+      ],
+      "draft": true
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-1120es-2026-q1",
+      "date": "2026-04-15",
+      "title": "C corporation 2026 first estimated tax deposit",
+      "detail": "Calendar-year C corporation estimated income tax. Publication 509 lists these deposits on April 15, June 15, September 15, and December 15. This is not Form 1040-ES.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "sourceLabel": "IRS Publication 509 (2026) PDF",
+      "types": [
+        "ccorp"
+      ],
+      "draft": false
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-1120es-2026-q2",
+      "date": "2026-06-15",
+      "title": "C corporation 2026 second estimated tax deposit",
+      "detail": "Calendar-year C corporation estimated income tax. Publication 509 lists these deposits on April 15, June 15, September 15, and December 15. This is not Form 1040-ES.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "sourceLabel": "IRS Publication 509 (2026) PDF",
+      "types": [
+        "ccorp"
+      ],
+      "draft": false
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-1120es-2026-q3",
+      "date": "2026-09-15",
+      "title": "C corporation 2026 third estimated tax deposit",
+      "detail": "Calendar-year C corporation estimated income tax. Publication 509 lists these deposits on April 15, June 15, September 15, and December 15. This is not Form 1040-ES.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "sourceLabel": "IRS Publication 509 (2026) PDF",
+      "types": [
+        "ccorp"
+      ],
+      "draft": false
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-1120es-2026-q4",
+      "date": "2026-12-15",
+      "title": "C corporation 2026 fourth estimated tax deposit",
+      "detail": "Calendar-year C corporation estimated income tax. Publication 509 lists these deposits on April 15, June 15, September 15, and December 15. This is not Form 1040-ES.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "sourceLabel": "IRS Publication 509 (2026) PDF",
+      "types": [
+        "ccorp"
+      ],
+      "draft": false
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-1120es-2027-q1",
+      "date": "2027-04-15",
+      "title": "C corporation 2027 first estimated tax deposit",
+      "detail": "Calendar-year C corporation estimated income tax. Publication 509 lists these deposits on April 15, June 15, September 15, and December 15. This is not Form 1040-ES.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf",
+      "sourceLabel": "IRS Publication 509 (2027 draft) PDF",
+      "types": [
+        "ccorp"
+      ],
+      "draft": true
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-1120es-2027-q2",
+      "date": "2027-06-15",
+      "title": "C corporation 2027 second estimated tax deposit",
+      "detail": "Calendar-year C corporation estimated income tax. Publication 509 lists these deposits on April 15, June 15, September 15, and December 15. This is not Form 1040-ES.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf",
+      "sourceLabel": "IRS Publication 509 (2027 draft) PDF",
+      "types": [
+        "ccorp"
+      ],
+      "draft": true
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-1120es-2027-q3",
+      "date": "2027-09-15",
+      "title": "C corporation 2027 third estimated tax deposit",
+      "detail": "Calendar-year C corporation estimated income tax. Publication 509 lists these deposits on April 15, June 15, September 15, and December 15. This is not Form 1040-ES.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf",
+      "sourceLabel": "IRS Publication 509 (2027 draft) PDF",
+      "types": [
+        "ccorp"
+      ],
+      "draft": true
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-1120es-2027-q4",
+      "date": "2027-12-15",
+      "title": "C corporation 2027 fourth estimated tax deposit",
+      "detail": "Calendar-year C corporation estimated income tax. Publication 509 lists these deposits on April 15, June 15, September 15, and December 15. This is not Form 1040-ES.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf",
+      "sourceLabel": "IRS Publication 509 (2027 draft) PDF",
+      "types": [
+        "ccorp"
+      ],
+      "draft": true
+    },
+    {
+      "needsEmployees": true,
+      "id": "fed-w2-2025",
+      "date": "2026-02-02",
+      "title": "Form W-2 for 2025 wages",
+      "detail": "Give employees their 2025 Forms W-2 and file Copy A with Form W-3. January 31, 2026 is a Saturday, and Publication 509 lists February 2.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "sourceLabel": "IRS Publication 509 (2026) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ]
+    },
+    {
+      "needsEmployees": true,
+      "id": "fed-w2-2026",
+      "date": "2027-02-01",
+      "title": "Form W-2 for 2026 wages",
+      "detail": "Give employees their 2026 Forms W-2 and file Copy A with Form W-3. January 31, 2027 is a Sunday, and the draft calendar lists February 1.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf",
+      "sourceLabel": "IRS Publication 509 (2027 draft) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ],
+      "draft": true
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-1099nec-2025",
+      "date": "2026-02-02",
+      "title": "Form 1099-NEC for 2025 nonemployee compensation",
+      "detail": "File Form 1099-NEC if you paid nonemployee compensation in 2025. Publication 509 lists February 2, 2026. Turn this off if you did not pay nonemployee compensation.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "sourceLabel": "IRS Publication 509 (2026) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "id": "fed-1099nec-2026",
+      "date": "2027-02-01",
+      "title": "Form 1099-NEC for 2026 nonemployee compensation",
+      "detail": "File Form 1099-NEC if you paid nonemployee compensation in 2026. The draft calendar lists February 1, 2027. Turn this off if you did not pay nonemployee compensation.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf",
+      "sourceLabel": "IRS Publication 509 (2027 draft) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ],
+      "draft": true
+    },
+    {
+      "needsEmployees": true,
+      "id": "fed-941-2025-q4",
+      "date": "2026-02-02",
+      "title": "Form 941 for the fourth quarter of 2025",
+      "detail": "Regular Form 941 due date from the employer calendar. If you deposited the tax for the quarter in full and on time, Publication 509 gives a later date to file the return. The fourth quarter of 2027 is due in 2028, so it is not on this list.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "sourceLabel": "IRS Publication 509 (2026) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ],
+      "draft": false
+    },
+    {
+      "needsEmployees": true,
+      "id": "fed-941-2026-q1",
+      "date": "2026-04-30",
+      "title": "Form 941 for the first quarter of 2026",
+      "detail": "Regular Form 941 due date from the employer calendar. If you deposited the tax for the quarter in full and on time, Publication 509 gives a later date to file the return. The fourth quarter of 2027 is due in 2028, so it is not on this list.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "sourceLabel": "IRS Publication 509 (2026) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ],
+      "draft": false
+    },
+    {
+      "needsEmployees": true,
+      "id": "fed-941-2026-q2",
+      "date": "2026-07-31",
+      "title": "Form 941 for the second quarter of 2026",
+      "detail": "Regular Form 941 due date from the employer calendar. If you deposited the tax for the quarter in full and on time, Publication 509 gives a later date to file the return. The fourth quarter of 2027 is due in 2028, so it is not on this list.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "sourceLabel": "IRS Publication 509 (2026) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ],
+      "draft": false
+    },
+    {
+      "needsEmployees": true,
+      "id": "fed-941-2026-q3",
+      "date": "2026-11-02",
+      "title": "Form 941 for the third quarter of 2026",
+      "detail": "Regular Form 941 due date from the employer calendar. If you deposited the tax for the quarter in full and on time, Publication 509 gives a later date to file the return. The fourth quarter of 2027 is due in 2028, so it is not on this list.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "sourceLabel": "IRS Publication 509 (2026) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ],
+      "draft": false
+    },
+    {
+      "needsEmployees": true,
+      "id": "fed-941-2026-q4",
+      "date": "2027-02-01",
+      "title": "Form 941 for the fourth quarter of 2026",
+      "detail": "Regular Form 941 due date from the employer calendar. If you deposited the tax for the quarter in full and on time, Publication 509 gives a later date to file the return. The fourth quarter of 2027 is due in 2028, so it is not on this list.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf",
+      "sourceLabel": "IRS Publication 509 (2027 draft) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ],
+      "draft": true
+    },
+    {
+      "needsEmployees": true,
+      "id": "fed-941-2027-q1",
+      "date": "2027-04-30",
+      "title": "Form 941 for the first quarter of 2027",
+      "detail": "Regular Form 941 due date from the employer calendar. If you deposited the tax for the quarter in full and on time, Publication 509 gives a later date to file the return. The fourth quarter of 2027 is due in 2028, so it is not on this list.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf",
+      "sourceLabel": "IRS Publication 509 (2027 draft) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ],
+      "draft": true
+    },
+    {
+      "needsEmployees": true,
+      "id": "fed-941-2027-q2",
+      "date": "2027-08-02",
+      "title": "Form 941 for the second quarter of 2027",
+      "detail": "Regular Form 941 due date from the employer calendar. If you deposited the tax for the quarter in full and on time, Publication 509 gives a later date to file the return. The fourth quarter of 2027 is due in 2028, so it is not on this list.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf",
+      "sourceLabel": "IRS Publication 509 (2027 draft) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ],
+      "draft": true
+    },
+    {
+      "needsEmployees": true,
+      "id": "fed-941-2027-q3",
+      "date": "2027-11-01",
+      "title": "Form 941 for the third quarter of 2027",
+      "detail": "Regular Form 941 due date from the employer calendar. If you deposited the tax for the quarter in full and on time, Publication 509 gives a later date to file the return. The fourth quarter of 2027 is due in 2028, so it is not on this list.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf",
+      "sourceLabel": "IRS Publication 509 (2027 draft) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ],
+      "draft": true
+    },
+    {
+      "needsEmployees": true,
+      "id": "fed-940-2025",
+      "date": "2026-02-02",
+      "title": "Form 940 for 2025",
+      "detail": "Annual federal unemployment (FUTA) return. Publication 509 lists February 2, 2026. If you deposited the tax for the year in full and on time, you may have until February 10 to file.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-pdf/p509.pdf",
+      "sourceLabel": "IRS Publication 509 (2026) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ]
+    },
+    {
+      "needsEmployees": true,
+      "id": "fed-940-2026",
+      "date": "2027-02-01",
+      "title": "Form 940 for 2026",
+      "detail": "Annual federal unemployment (FUTA) return. The draft calendar lists February 1, 2027. If you deposited the tax for the year in full and on time, you may have until February 10 to file.",
+      "sourceUrl": "https://www.irs.gov/pub/irs-dft/p509--dft.pdf",
+      "sourceLabel": "IRS Publication 509 (2027 draft) PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ],
+      "draft": true
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ar-franchise-2026",
+      "date": "2026-05-01",
+      "state": "AR",
+      "title": "Arkansas corporation franchise tax report for 2026",
+      "detail": "The 2026 corporation franchise tax report says reports and taxes are due on or before May 1, 2026. This row is for a corporation. An LLC uses a different form, and that form's date was not copied here.",
+      "sourceUrl": "https://www.sos.arkansas.gov/uploads/bcs/Corp1_FT_2026.pdf",
+      "sourceLabel": "Arkansas Secretary of State, 2026 corporation franchise tax report PDF",
+      "types": [
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-scorp-2025",
+      "date": "2026-03-16",
+      "state": "CA",
+      "title": "California S corporation return for the 2025 tax year",
+      "detail": "FTB lists a calendar-year 2025 S corporation return on March 16, 2026. The same page says a weekend or holiday moves the date to the next business day.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "scorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-scorp-2026",
+      "date": "2027-03-15",
+      "state": "CA",
+      "title": "California S corporation return for the 2026 tax year",
+      "detail": "FTB says an S corporation return is due the 15th day of the 3rd month after the tax year ends. For a calendar year that is March 15. March 15, 2027 is a Monday.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "scorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-ccorp-2025",
+      "date": "2026-04-15",
+      "state": "CA",
+      "title": "California C corporation return for the 2025 tax year",
+      "detail": "FTB says a C corporation return is due the 15th day of the 4th month after the tax year ends. For a calendar year that is April 15. April 15, 2026 is a Wednesday.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-ccorp-2026",
+      "date": "2027-04-15",
+      "state": "CA",
+      "title": "California C corporation return for the 2026 tax year",
+      "detail": "FTB says a C corporation return is due the 15th day of the 4th month after the tax year ends. For a calendar year that is April 15. April 15, 2027 is a Thursday.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-llc-tax-2026",
+      "date": "2026-04-15",
+      "state": "CA",
+      "title": "California LLC annual tax for 2026",
+      "detail": "The $800 LLC annual tax is due the 15th day of the 4th month after the tax year begins. For a calendar year that is April 15. Turn this off if you are a sole proprietor and not an LLC.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "sole",
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-llc-tax-2027",
+      "date": "2027-04-15",
+      "state": "CA",
+      "title": "California LLC annual tax for 2027",
+      "detail": "The $800 LLC annual tax is due the 15th day of the 4th month after the tax year begins. For a calendar year that is April 15. Turn this off if you are a sole proprietor and not an LLC.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "sole",
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-llc-fee-2026",
+      "date": "2026-06-15",
+      "state": "CA",
+      "title": "California LLC estimated fee for 2026",
+      "detail": "FTB says an LLC estimates and pays the fee by the 15th day of the 6th month of the current tax year, using Form 3536. For a calendar year that is June 15. Turn this off if you have no California LLC fee.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "sole",
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-llc-fee-2027",
+      "date": "2027-06-15",
+      "state": "CA",
+      "title": "California LLC estimated fee for 2027",
+      "detail": "FTB says an LLC estimates and pays the fee by the 15th day of the 6th month of the current tax year, using Form 3536. For a calendar year that is June 15. Turn this off if you have no California LLC fee.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "sole",
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-568-2025",
+      "date": "2026-03-16",
+      "state": "CA",
+      "title": "California LLC or partnership return for the 2025 tax year",
+      "detail": "FTB says an LLC taxed as a partnership, and a partnership, files the 15th day of the 3rd month after the tax year ends. March 15, 2026 is a Sunday. FTB says a weekend moves the date to the next business day, and its calendar-year S corporation example for that Sunday is March 16, 2026.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-568-2026",
+      "date": "2027-03-15",
+      "state": "CA",
+      "title": "California LLC or partnership return for the 2026 tax year",
+      "detail": "FTB says an LLC taxed as a partnership, and a partnership, files the 15th day of the 3rd month after the tax year ends. For a calendar year that is March 15. March 15, 2027 is a Monday.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-smllc-2025",
+      "date": "2026-04-15",
+      "state": "CA",
+      "title": "California single-member LLC return for the 2025 tax year",
+      "detail": "FTB says a single-member LLC owned by an individual files the 15th day of the 4th month after the tax year ends. For a calendar year that is April 15. Turn this off if you are not an LLC.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "sole"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-smllc-2026",
+      "date": "2027-04-15",
+      "state": "CA",
+      "title": "California single-member LLC return for the 2026 tax year",
+      "detail": "FTB says a single-member LLC owned by an individual files the 15th day of the 4th month after the tax year ends. For a calendar year that is April 15. Turn this off if you are not an LLC.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "sole"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-199-2025",
+      "date": "2026-05-15",
+      "state": "CA",
+      "title": "California Form 199 for a year that ended December 31, 2025",
+      "detail": "FTB says Form 199 is due the 15th day of the 5th month after the tax year ends. For a calendar year that is May 15. May 15, 2026 is a Friday.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "nonprofit"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-199-2026",
+      "date": "2027-05-17",
+      "state": "CA",
+      "title": "California Form 199 for a year that ended December 31, 2026",
+      "detail": "FTB says Form 199 is due the 15th day of the 5th month after the tax year ends, and a weekend or holiday moves the date to the next business day. May 15, 2027 is a Saturday, so this row uses May 17, 2027.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "nonprofit"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-100es-2026-q1",
+      "date": "2026-04-15",
+      "state": "CA",
+      "title": "California corporation estimated tax, first payment for 2026",
+      "detail": "FTB says corporation estimated tax is due the 15th day of the 4th, 6th, 9th, and 12th months. Its example says a year that starts January 1 has a first payment on April 15. Turn this off if you do not pay California estimated tax.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-100es-2026-q2",
+      "date": "2026-06-15",
+      "state": "CA",
+      "title": "California corporation estimated tax, second payment for 2026",
+      "detail": "FTB says corporation estimated tax is due the 15th day of the 4th, 6th, 9th, and 12th months. Its example says a year that starts January 1 has a first payment on April 15. Turn this off if you do not pay California estimated tax.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-100es-2026-q3",
+      "date": "2026-09-15",
+      "state": "CA",
+      "title": "California corporation estimated tax, third payment for 2026",
+      "detail": "FTB says corporation estimated tax is due the 15th day of the 4th, 6th, 9th, and 12th months. Its example says a year that starts January 1 has a first payment on April 15. Turn this off if you do not pay California estimated tax.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-100es-2026-q4",
+      "date": "2026-12-15",
+      "state": "CA",
+      "title": "California corporation estimated tax, fourth payment for 2026",
+      "detail": "FTB says corporation estimated tax is due the 15th day of the 4th, 6th, 9th, and 12th months. Its example says a year that starts January 1 has a first payment on April 15. Turn this off if you do not pay California estimated tax.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-100es-2027-q1",
+      "date": "2027-04-15",
+      "state": "CA",
+      "title": "California corporation estimated tax, first payment for 2027",
+      "detail": "FTB says corporation estimated tax is due the 15th day of the 4th, 6th, 9th, and 12th months. Its example says a year that starts January 1 has a first payment on April 15. Turn this off if you do not pay California estimated tax.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-100es-2027-q2",
+      "date": "2027-06-15",
+      "state": "CA",
+      "title": "California corporation estimated tax, second payment for 2027",
+      "detail": "FTB says corporation estimated tax is due the 15th day of the 4th, 6th, 9th, and 12th months. Its example says a year that starts January 1 has a first payment on April 15. Turn this off if you do not pay California estimated tax.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-100es-2027-q3",
+      "date": "2027-09-15",
+      "state": "CA",
+      "title": "California corporation estimated tax, third payment for 2027",
+      "detail": "FTB says corporation estimated tax is due the 15th day of the 4th, 6th, 9th, and 12th months. Its example says a year that starts January 1 has a first payment on April 15. Turn this off if you do not pay California estimated tax.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ca-100es-2027-q4",
+      "date": "2027-12-15",
+      "state": "CA",
+      "title": "California corporation estimated tax, fourth payment for 2027",
+      "detail": "FTB says corporation estimated tax is due the 15th day of the 4th, 6th, 9th, and 12th months. Its example says a year that starts January 1 has a first payment on April 15. Turn this off if you do not pay California estimated tax.",
+      "sourceUrl": "https://www.ftb.ca.gov/file/when-to-file/due-dates-business.html",
+      "sourceLabel": "California Franchise Tax Board, business due dates",
+      "types": [
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "de-corp-2026",
+      "date": "2026-03-01",
+      "state": "DE",
+      "title": "Delaware corporate annual report and franchise tax",
+      "detail": "Domestic corporation annual reports and franchise taxes are due on or before March 1. March 1, 2026 is a Sunday. The Division page we used does not say to move that date. Exempt domestic corporations file the report even when they do not pay the tax.",
+      "sourceUrl": "https://corp.delaware.gov/paytaxes/",
+      "sourceLabel": "Delaware Division of Corporations, annual report and franchise tax",
+      "types": [
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "de-corp-2027",
+      "date": "2027-03-01",
+      "state": "DE",
+      "title": "Delaware corporate annual report and franchise tax",
+      "detail": "Domestic corporation annual reports and franchise taxes are due on or before March 1 each year. Exempt domestic corporations file the report even when they do not pay the tax.",
+      "sourceUrl": "https://corp.delaware.gov/paytaxes/",
+      "sourceLabel": "Delaware Division of Corporations, annual report and franchise tax",
+      "types": [
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "de-llc-2026",
+      "date": "2026-06-01",
+      "state": "DE",
+      "title": "Delaware LLC, LP, or GP annual tax",
+      "detail": "The Division says LLCs, LPs, and GPs do not file an annual report. They pay the annual tax on or before June 1. Turn this off if you are a sole proprietor and not one of those entities.",
+      "sourceUrl": "https://corp.delaware.gov/alt-entitytaxinstructions/",
+      "sourceLabel": "Delaware Division of Corporations, LLC, LP, and GP tax",
+      "types": [
+        "sole",
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "de-llc-2027",
+      "date": "2027-06-01",
+      "state": "DE",
+      "title": "Delaware LLC, LP, or GP annual tax",
+      "detail": "The Division says LLCs, LPs, and GPs do not file an annual report. They pay the annual tax on or before June 1. Turn this off if you are a sole proprietor and not one of those entities.",
+      "sourceUrl": "https://corp.delaware.gov/alt-entitytaxinstructions/",
+      "sourceLabel": "Delaware Division of Corporations, LLC, LP, and GP tax",
+      "types": [
+        "sole",
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "fl-annual-2026",
+      "date": "2026-05-01",
+      "state": "FL",
+      "title": "Florida annual report late-fee date",
+      "detail": "Sunbiz says a profit corporation, LLC, limited partnership, or limited liability limited partnership has until 11:59 p.m. Eastern on Friday, May 1, 2026 before the $400 late fee. Turn this off if you are a sole proprietor and not one of those entities. A nonprofit is not on this row.",
+      "sourceUrl": "https://dos.fl.gov/sunbiz/manage-business/efile/annual-report/",
+      "sourceLabel": "Florida Division of Corporations, Sunbiz annual report",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "fl-llc-2027",
+      "date": "2027-05-01",
+      "state": "FL",
+      "title": "Florida LLC annual report",
+      "detail": "Section 605.0212 says a later LLC annual report is delivered between January 1 and May 1 of each calendar year. May 1, 2027 is a Saturday. That section does not say to move the date. Turn this off if you are not an LLC.",
+      "sourceUrl": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0600-0699/0605/Sections/0605.0212.html",
+      "sourceLabel": "Florida Statutes section 605.0212",
+      "types": [
+        "sole",
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "fl-corp-2027",
+      "date": "2027-05-01",
+      "state": "FL",
+      "title": "Florida corporation annual report",
+      "detail": "Section 607.1622 says a later corporation annual report is delivered between January 1 and May 1 of each calendar year. May 1, 2027 is a Saturday. That section does not say to move the date.",
+      "sourceUrl": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0600-0699/0607/Sections/0607.1622.html",
+      "sourceLabel": "Florida Statutes section 607.1622",
+      "types": [
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "fl-np-2026",
+      "date": "2026-05-01",
+      "state": "FL",
+      "title": "Florida nonprofit annual report",
+      "detail": "Section 617.1622 says the annual report is delivered between January 1 and May 1. Sunbiz says a nonprofit does not pay the $400 late fee that applies to profit entities.",
+      "sourceUrl": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0600-0699/0617/Sections/0617.1622.html",
+      "sourceLabel": "Florida Statutes section 617.1622",
+      "types": [
+        "nonprofit"
+      ],
+      "also": [
+        {
+          "label": "Florida Division of Corporations, Sunbiz annual report",
+          "url": "https://dos.fl.gov/sunbiz/manage-business/efile/annual-report/"
+        }
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "fl-np-2027",
+      "date": "2027-05-01",
+      "state": "FL",
+      "title": "Florida nonprofit annual report",
+      "detail": "Section 617.1622 says a later annual report is delivered between January 1 and May 1 of each calendar year. May 1, 2027 is a Saturday. That section does not say to move the date.",
+      "sourceUrl": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0600-0699/0617/Sections/0617.1622.html",
+      "sourceLabel": "Florida Statutes section 617.1622",
+      "types": [
+        "nonprofit"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "fl-dissolve-2026",
+      "date": "2026-09-18",
+      "state": "FL",
+      "title": "Florida annual report, administrative dissolution date",
+      "detail": "Sunbiz says annual reports are due by the third Friday in September to avoid administrative dissolution. In 2026 that Friday is September 18. The May 1 date above is the late-fee date for profit entities.",
+      "sourceUrl": "https://dos.fl.gov/sunbiz/manage-business/efile/annual-report/",
+      "sourceLabel": "Florida Division of Corporations, Sunbiz annual report",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "fl-dissolve-2027",
+      "date": "2027-09-17",
+      "state": "FL",
+      "title": "Florida annual report, administrative dissolution date",
+      "detail": "Sunbiz says annual reports are due by the third Friday in September to avoid administrative dissolution. In 2027 that Friday is September 17.",
+      "sourceUrl": "https://dos.fl.gov/sunbiz/manage-business/efile/annual-report/",
+      "sourceLabel": "Florida Division of Corporations, Sunbiz annual report",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ga-entity-2026",
+      "date": "2026-04-01",
+      "state": "GA",
+      "title": "Georgia annual registration",
+      "detail": "The Secretary of State says an LLC, limited partnership, or corporation files between January 1 and April 1. This row uses April 1, the last day of that window. Turn this off if you are a sole proprietor and not one of those entities. A new corporation can have a different first-year rule, described on the same pages.",
+      "sourceUrl": "https://sos.ga.gov/page/business-division-faq",
+      "sourceLabel": "Georgia Secretary of State, business division FAQ",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp"
+      ],
+      "also": [
+        {
+          "label": "Georgia Secretary of State, how to register a domestic entity",
+          "url": "https://sos.ga.gov/how-to-guide/how-guide-register-domestic-entity"
+        }
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ga-entity-2027",
+      "date": "2027-04-01",
+      "state": "GA",
+      "title": "Georgia annual registration",
+      "detail": "The Secretary of State says an LLC, limited partnership, or corporation files between January 1 and April 1 each year after the first registration. This row uses April 1, the last day of that window.",
+      "sourceUrl": "https://sos.ga.gov/page/business-division-faq",
+      "sourceLabel": "Georgia Secretary of State, business division FAQ",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ga-np-2026",
+      "date": "2026-04-01",
+      "state": "GA",
+      "title": "Georgia nonprofit annual registration",
+      "detail": "The Secretary of State how-to guide says a nonprofit corporation files later annual registrations between January 1 and April 1. This row uses April 1, the last day of that window.",
+      "sourceUrl": "https://sos.ga.gov/how-to-guide/how-guide-register-domestic-entity",
+      "sourceLabel": "Georgia Secretary of State, how to register a domestic entity",
+      "types": [
+        "nonprofit"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ga-np-2027",
+      "date": "2027-04-01",
+      "state": "GA",
+      "title": "Georgia nonprofit annual registration",
+      "detail": "The Secretary of State how-to guide says subsequent annual registrations are filed between January 1 and April 1. This row uses April 1, the last day of that window.",
+      "sourceUrl": "https://sos.ga.gov/how-to-guide/how-guide-register-domestic-entity",
+      "sourceLabel": "Georgia Secretary of State, how to register a domestic entity",
+      "types": [
+        "nonprofit"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "md-annual-2026",
+      "date": "2026-04-15",
+      "state": "MD",
+      "title": "Maryland annual report for 2026",
+      "detail": "SDAT says domestic and foreign business entities should file the 2026 report, or request a 60 day extension, on or before April 15, 2026. Turn this off if you are a sole proprietor and not a registered entity. Some religious and non-stock corporations are treated differently on the same page.",
+      "sourceUrl": "https://dat.maryland.gov/businesses/Pages/default.aspx",
+      "sourceLabel": "Maryland SDAT, businesses page",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "md-annual-2027",
+      "date": "2027-04-15",
+      "state": "MD",
+      "title": "Maryland annual report",
+      "detail": "SDAT's forfeiture FAQ says every entity that existed on January 1 files Form 1 by April 15, whether or not it owns property. The businesses page we checked names April 15, 2026 for the 2026 report. Confirm the 2027 date on that page before you rely on it.",
+      "sourceUrl": "https://dat.maryland.gov/businesses/Documents/Forfeiture%20FAQs.pdf",
+      "sourceLabel": "Maryland SDAT, forfeiture FAQ PDF",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ],
+      "also": [
+        {
+          "label": "Maryland SDAT, businesses page",
+          "url": "https://dat.maryland.gov/businesses/Pages/default.aspx"
+        }
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "mi-llc-2026",
+      "date": "2026-02-15",
+      "state": "MI",
+      "title": "Michigan LLC annual statement",
+      "detail": "LARA says an LLC annual statement is due February 15 each year after organization. February 15, 2026 is a Sunday. That page does not say to move the date. An LLC formed after September 30 skips the February 15 of the next year. Turn this off if you are not an LLC.",
+      "sourceUrl": "https://www.michigan.gov/lara/bureau-list/cscl/corps/michigan-business-roadmap/annual-reports-and-annual-statements",
+      "sourceLabel": "Michigan LARA, annual reports and annual statements",
+      "types": [
+        "sole",
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "mi-llc-2027",
+      "date": "2027-02-15",
+      "state": "MI",
+      "title": "Michigan LLC annual statement",
+      "detail": "LARA says an LLC annual statement is due February 15 each year after organization. An LLC formed after September 30 skips the February 15 of the next year. Turn this off if you are not an LLC.",
+      "sourceUrl": "https://www.michigan.gov/lara/bureau-list/cscl/corps/michigan-business-roadmap/annual-reports-and-annual-statements",
+      "sourceLabel": "Michigan LARA, annual reports and annual statements",
+      "types": [
+        "sole",
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "mi-corp-2026",
+      "date": "2026-05-15",
+      "state": "MI",
+      "title": "Michigan profit corporation annual report",
+      "detail": "LARA says a profit corporation annual report is due May 15 each year after incorporation.",
+      "sourceUrl": "https://www.michigan.gov/lara/bureau-list/cscl/corps/michigan-business-roadmap/annual-reports-and-annual-statements",
+      "sourceLabel": "Michigan LARA, annual reports and annual statements",
+      "types": [
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "mi-corp-2027",
+      "date": "2027-05-15",
+      "state": "MI",
+      "title": "Michigan profit corporation annual report",
+      "detail": "LARA says a profit corporation annual report is due May 15 each year after incorporation. May 15, 2027 is a Saturday. That page does not say to move the date.",
+      "sourceUrl": "https://www.michigan.gov/lara/bureau-list/cscl/corps/michigan-business-roadmap/annual-reports-and-annual-statements",
+      "sourceLabel": "Michigan LARA, annual reports and annual statements",
+      "types": [
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "mi-np-2026",
+      "date": "2026-10-01",
+      "state": "MI",
+      "title": "Michigan nonprofit annual report",
+      "detail": "LARA says a nonprofit corporation annual report is due October 1 each year after incorporation.",
+      "sourceUrl": "https://www.michigan.gov/lara/bureau-list/cscl/corps/michigan-business-roadmap/annual-reports-and-annual-statements",
+      "sourceLabel": "Michigan LARA, annual reports and annual statements",
+      "types": [
+        "nonprofit"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "mi-np-2027",
+      "date": "2027-10-01",
+      "state": "MI",
+      "title": "Michigan nonprofit annual report",
+      "detail": "LARA says a nonprofit corporation annual report is due October 1 each year after incorporation.",
+      "sourceUrl": "https://www.michigan.gov/lara/bureau-list/cscl/corps/michigan-business-roadmap/annual-reports-and-annual-statements",
+      "sourceLabel": "Michigan LARA, annual reports and annual statements",
+      "types": [
+        "nonprofit"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "mn-corp-2026",
+      "date": "2026-12-31",
+      "state": "MN",
+      "title": "Minnesota business corporation annual renewal",
+      "detail": "Minnesota Statutes section 302A.821 says a business corporation files a renewal by December 31 of each calendar year, starting the year after it incorporates.",
+      "sourceUrl": "https://www.revisor.mn.gov/statutes/cite/302A.821",
+      "sourceLabel": "Minnesota Statutes section 302A.821",
+      "types": [
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "mn-corp-2027",
+      "date": "2027-12-31",
+      "state": "MN",
+      "title": "Minnesota business corporation annual renewal",
+      "detail": "Minnesota Statutes section 302A.821 says a business corporation files a renewal by December 31 of each calendar year, starting the year after it incorporates.",
+      "sourceUrl": "https://www.revisor.mn.gov/statutes/cite/302A.821",
+      "sourceLabel": "Minnesota Statutes section 302A.821",
+      "types": [
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "nc-llc-2026",
+      "date": "2026-04-15",
+      "state": "NC",
+      "title": "North Carolina LLC annual report",
+      "detail": "The Secretary of State says an LLC report is due on April 15 of each year after the year of creation. Turn this off if you are a sole proprietor and not an LLC.",
+      "sourceUrl": "https://www.sosnc.gov/divisions/Business_Registration/annual_report_due_dates",
+      "sourceLabel": "North Carolina Secretary of State, annual report due dates",
+      "types": [
+        "sole",
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "nc-llc-2027",
+      "date": "2027-04-15",
+      "state": "NC",
+      "title": "North Carolina LLC annual report",
+      "detail": "The Secretary of State says an LLC report is due on April 15 of each year after the year of creation. Turn this off if you are a sole proprietor and not an LLC.",
+      "sourceUrl": "https://www.sosnc.gov/divisions/Business_Registration/annual_report_due_dates",
+      "sourceLabel": "North Carolina Secretary of State, annual report due dates",
+      "types": [
+        "sole",
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "nc-corp-2026",
+      "date": "2026-04-15",
+      "state": "NC",
+      "title": "North Carolina business corporation annual report",
+      "detail": "The Secretary of State says a business corporation report is due the 15th day of the fourth month after the fiscal year ends. For a calendar year that is April 15. If your year ends in another month, count four months on that page.",
+      "sourceUrl": "https://www.sosnc.gov/divisions/Business_Registration/annual_report_due_dates",
+      "sourceLabel": "North Carolina Secretary of State, annual report due dates",
+      "types": [
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "nc-corp-2027",
+      "date": "2027-04-15",
+      "state": "NC",
+      "title": "North Carolina business corporation annual report",
+      "detail": "The Secretary of State says a business corporation report is due the 15th day of the fourth month after the fiscal year ends. For a calendar year that is April 15. If your year ends in another month, count four months on that page.",
+      "sourceUrl": "https://www.sosnc.gov/divisions/Business_Registration/annual_report_due_dates",
+      "sourceLabel": "North Carolina Secretary of State, annual report due dates",
+      "types": [
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "nc-llp-2026",
+      "date": "2026-04-15",
+      "state": "NC",
+      "title": "North Carolina LLP annual report",
+      "detail": "The Secretary of State says an LLP or LLLP report is due the 15th day of the fourth month after the fiscal year ends. For a calendar year that is April 15. Turn this off if you are an LLC using the April 15 LLC row, or if your year does not end December 31.",
+      "sourceUrl": "https://www.sosnc.gov/divisions/Business_Registration/annual_report_due_dates",
+      "sourceLabel": "North Carolina Secretary of State, annual report due dates",
+      "types": [
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "nc-llp-2027",
+      "date": "2027-04-15",
+      "state": "NC",
+      "title": "North Carolina LLP annual report",
+      "detail": "The Secretary of State says an LLP or LLLP report is due the 15th day of the fourth month after the fiscal year ends. For a calendar year that is April 15. Turn this off if you are an LLC using the April 15 LLC row, or if your year does not end December 31.",
+      "sourceUrl": "https://www.sosnc.gov/divisions/Business_Registration/annual_report_due_dates",
+      "sourceLabel": "North Carolina Secretary of State, annual report due dates",
+      "types": [
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ny-ct3-2025",
+      "date": "2026-04-15",
+      "state": "NY",
+      "title": "New York general business corporation franchise tax",
+      "detail": "For a tax year that began in 2025, the Department of Taxation and Finance says a calendar-year Article 9-A return is due on or before April 15. A Saturday, Sunday, or legal holiday moves it to the next business day. April 15, 2026 is a Wednesday. That page does not cover a tax year that began in 2026.",
+      "sourceUrl": "https://www.tax.ny.gov/bus/ct/article9a.htm",
+      "sourceLabel": "New York Tax Department, Article 9-A franchise tax",
+      "types": [
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "pa-corp-2026",
+      "date": "2026-06-30",
+      "state": "PA",
+      "title": "Pennsylvania corporation annual report",
+      "detail": "The Department of State says a business or nonprofit corporation, domestic or foreign, files from January 1 through June 30 each year.",
+      "sourceUrl": "https://www.pa.gov/agencies/dos/programs/business/types-of-filings-and-registrations/annual-reports",
+      "sourceLabel": "Pennsylvania Department of State, annual reports",
+      "types": [
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "pa-corp-2027",
+      "date": "2027-06-30",
+      "state": "PA",
+      "title": "Pennsylvania corporation annual report",
+      "detail": "The Department of State says a business or nonprofit corporation, domestic or foreign, files from January 1 through June 30 each year.",
+      "sourceUrl": "https://www.pa.gov/agencies/dos/programs/business/types-of-filings-and-registrations/annual-reports",
+      "sourceLabel": "Pennsylvania Department of State, annual reports",
+      "types": [
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "pa-llc-2026",
+      "date": "2026-09-30",
+      "state": "PA",
+      "title": "Pennsylvania LLC annual report",
+      "detail": "The Department of State says a domestic or foreign LLC files from January 1 through September 30. Turn this off if you are a sole proprietor and not an LLC, or if you are a partnership using the December 31 row.",
+      "sourceUrl": "https://www.pa.gov/agencies/dos/programs/business/types-of-filings-and-registrations/annual-reports",
+      "sourceLabel": "Pennsylvania Department of State, annual reports",
+      "types": [
+        "sole",
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "pa-llc-2027",
+      "date": "2027-09-30",
+      "state": "PA",
+      "title": "Pennsylvania LLC annual report",
+      "detail": "The Department of State says a domestic or foreign LLC files from January 1 through September 30. Turn this off if you are a sole proprietor and not an LLC, or if you are a partnership using the December 31 row.",
+      "sourceUrl": "https://www.pa.gov/agencies/dos/programs/business/types-of-filings-and-registrations/annual-reports",
+      "sourceLabel": "Pennsylvania Department of State, annual reports",
+      "types": [
+        "sole",
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "pa-other-2026",
+      "date": "2026-12-31",
+      "state": "PA",
+      "title": "Pennsylvania annual report for a partnership or similar association",
+      "detail": "The Department of State says a limited partnership, limited liability partnership, business trust, or professional association files by December 31. Turn this off if you are an LLC using the September 30 row.",
+      "sourceUrl": "https://www.pa.gov/agencies/dos/programs/business/types-of-filings-and-registrations/annual-reports",
+      "sourceLabel": "Pennsylvania Department of State, annual reports",
+      "types": [
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "pa-other-2027",
+      "date": "2027-12-31",
+      "state": "PA",
+      "title": "Pennsylvania annual report for a partnership or similar association",
+      "detail": "The Department of State says a limited partnership, limited liability partnership, business trust, or professional association files by December 31. Turn this off if you are an LLC using the September 30 row.",
+      "sourceUrl": "https://www.pa.gov/agencies/dos/programs/business/types-of-filings-and-registrations/annual-reports",
+      "sourceLabel": "Pennsylvania Department of State, annual reports",
+      "types": [
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "pa-car-2026",
+      "date": "2026-04-15",
+      "state": "PA",
+      "title": "Pennsylvania certificate of annual registration",
+      "detail": "The Department of State says an LLP, LLLP, or restricted professional company still files a certificate of annual registration on or before April 15. This is separate from the annual report. Turn this off if you are not one of those entities.",
+      "sourceUrl": "https://www.pa.gov/agencies/dos/programs/business/types-of-filings-and-registrations/annual-reports",
+      "sourceLabel": "Pennsylvania Department of State, annual reports",
+      "types": [
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "pa-car-2027",
+      "date": "2027-04-15",
+      "state": "PA",
+      "title": "Pennsylvania certificate of annual registration",
+      "detail": "The Department of State says an LLP, LLLP, or restricted professional company still files a certificate of annual registration on or before April 15. This is separate from the annual report. Turn this off if you are not one of those entities.",
+      "sourceUrl": "https://www.pa.gov/agencies/dos/programs/business/types-of-filings-and-registrations/annual-reports",
+      "sourceLabel": "Pennsylvania Department of State, annual reports",
+      "types": [
+        "mmllc"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ri-annual-2026",
+      "date": "2026-05-01",
+      "state": "RI",
+      "title": "Rhode Island annual report",
+      "detail": "The Department of State lists a filing period of February 1 to May 1 for an LLC, business corporation, LP, or LLP. This row uses May 1, the last day of that period. Turn this off if you are a sole proprietor and not one of those entities.",
+      "sourceUrl": "https://www.sos.ri.gov/divisions/business-services/ri-business/file-your-annual-report",
+      "sourceLabel": "Rhode Island Department of State, annual report",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "ri-annual-2027",
+      "date": "2027-05-01",
+      "state": "RI",
+      "title": "Rhode Island annual report",
+      "detail": "The Department of State lists a filing period of February 1 to May 1 for an LLC, business corporation, LP, or LLP. May 1, 2027 is a Saturday. That page does not say to move the date. Turn this off if you are a sole proprietor and not one of those entities.",
+      "sourceUrl": "https://www.sos.ri.gov/divisions/business-services/ri-business/file-your-annual-report",
+      "sourceLabel": "Rhode Island Department of State, annual report",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "tx-franchise-2026",
+      "date": "2026-05-15",
+      "state": "TX",
+      "title": "Texas franchise tax report for 2026",
+      "detail": "The Comptroller says 2026 franchise tax reports are due May 15, 2026. A sole proprietorship does not file, except a single-member LLC does. A general partnership owned only by people does not file, except a limited liability partnership does. Turn this off if one of those exceptions is you. Publication 98-806 lists who files.",
+      "sourceUrl": "https://comptroller.texas.gov/taxinfo/franchise/",
+      "sourceLabel": "Texas Comptroller, franchise tax",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp"
+      ],
+      "also": [
+        {
+          "label": "Texas Comptroller publication 98-806",
+          "url": "https://comptroller.texas.gov/taxes/publications/98-806.php"
+        }
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "tx-franchise-2027",
+      "date": "2027-05-17",
+      "state": "TX",
+      "title": "Texas franchise tax report for 2027",
+      "detail": "The Comptroller says the report is due May 15, and if May 15 falls on a weekend or holiday the due date is the next business day. May 15, 2027 is a Saturday, so this row uses May 17, 2027. The same who-must-file exceptions as 2026 apply. Turn this off if you are in an exception.",
+      "sourceUrl": "https://comptroller.texas.gov/taxes/publications/98-806.php",
+      "sourceLabel": "Texas Comptroller publication 98-806",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp"
+      ],
+      "also": [
+        {
+          "label": "Texas Comptroller, franchise tax",
+          "url": "https://comptroller.texas.gov/taxinfo/franchise/"
+        }
+      ]
+    }
+  ]
+}
