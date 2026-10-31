@@ -25,7 +25,7 @@ check("json has no em dash or en dash", !dash.test(JSON.stringify(data)));
 check("html has no em dash or en dash", !dash.test(html));
 check("js has no em dash or en dash", !dash.test(js));
 check("page has the plain top line", html.includes("A free web app that lists your business filing deadlines."));
-check("page has the advice line", html.includes("Not tax or legal advice; confirm with the official source."));
+check("page has the advice line", html.includes("General guidance, not legal, tax or IT advice."));
 check("page has the footer", html.includes("Thanks for your time. If this isn't right for you, please share it with someone it could help."));
 check("page is noindex", /<meta\s+name="robots"\s+content="noindex"\s*>/.test(html));
 check("page has no goatcounter", !/goatcounter|gtag|google-analytics|plausible/i.test(html + js));

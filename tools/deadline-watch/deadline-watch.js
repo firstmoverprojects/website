@@ -111,13 +111,13 @@
     ];
     rows.forEach(function (row) {
       var description =
-        row.detail + " Official source: " + row.sourceLabel + " " + row.sourceUrl;
+        (row.draft ? "Draft IRS calendar. Confirm before filing. " : "") + row.detail + " Official source: " + row.sourceLabel + " " + row.sourceUrl;
       lines.push("BEGIN:VEVENT");
       lines.push("UID:" + row.id + "@deadline-watch.firstmoverprojects.com");
       lines.push("DTSTAMP:" + stamp);
       lines.push("DTSTART;VALUE=DATE:" + row.date.replace(/-/g, ""));
       lines.push("DTEND;VALUE=DATE:" + addDays(row.date, 1).replace(/-/g, ""));
-      lines.push("SUMMARY:" + icsEscape(row.title));
+      lines.push("SUMMARY:" + icsEscape((row.draft ? "[Draft IRS calendar] " : "") + row.title));
       lines.push("DESCRIPTION:" + icsEscape(description));
       lines.push("URL:" + row.sourceUrl);
       lines.push("BEGIN:VALARM");
@@ -191,7 +191,7 @@
     bits.push('<p class="when">' + esc(formatDate(row.date)) + "</p>");
     bits.push("<p>");
     if (past) bits.push('<span class="tag past">Passed</span> ');
-    if (row.draft) bits.push('<span class="tag">Draft calendar</span> ');
+    if (row.draft) bits.push('<span class="tag">Draft IRS calendar. Confirm before filing.</span> ');
     bits.push('<span class="title">' + esc(row.title) + "</span></p>");
     bits.push("<p>" + esc(row.detail) + "</p>");
     bits.push(
