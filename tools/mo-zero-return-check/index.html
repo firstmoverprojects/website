@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; form-action https://05279842.sibforms.com; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/mo-zero-return-check/">
+<title>Missouri zero sales tax return check (free, runs in your browser)</title>
+<meta name="description" content="A free web check of Missouri 12 CSR 10-103.185 when sales or liability are zero, the July 15, 2026 proposed amendment, and the due dates in 12 CSR 10-104.030. Nothing is uploaded.">
+<meta property="og:title" content="Missouri zero sales tax return check (free, runs in your browser)">
+<meta property="og:description" content="A free web check of Missouri 12 CSR 10-103.185 when sales or liability are zero, the July 15, 2026 proposed amendment, and the due dates in 12 CSR 10-104.030. Nothing is uploaded.">
+<meta property="og:url" content="https://firstmoverprojects.com/tools/mo-zero-return-check/">
+<meta property="og:type" content="website">
+<!-- UNLISTED: noindex. Do not add this URL to sitemap.xml, tools/index.html, index.html, deadlines/index.html, deadlines/feed.xml, deadlines/deadlines.ics, or deadlines/finder/. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "dateModified": "2026-10-31",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does the posted rule say about a zero sales return?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Code of State Regulations file dated September 30, 2026 still shows 12 CSR 10-103.185 section (1): every business making sales of tangible personal property or rendering a taxable service files a combined sales/use tax return even though no (zero) (0) sales were made during the period."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the July 15, 2026 proposed amendment say?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The proposed text, filed June 15, 2026, says a business registered for sales tax, consumer's use tax, or vendor's use tax files the return for that registration even when sales, liability, or Missouri destination sales are zero."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where does December 30, 2026 appear?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The October 1, 2026 Missouri Register publication schedule lists December 30, 2026 as the Code effective date for an order of rulemaking published on November 2, 2026 or November 16, 2026. In that October 1 index, 12 CSR 10-103.185 is proposed at 51 MoReg 879 and the order column is empty."
+      }
+    }
+  ]
+}
+</script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#12161c;background:#f4f6f8}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;line-height:1.25;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.2em 0 .4em}
+.topline{font-size:1.05rem;margin:0 0 8px}
+.card{background:#fff;border:2px solid #1b2838;border-radius:10px;padding:16px;margin:12px 0}
+.big{font-size:1.45rem;font-weight:800;color:#12161c;line-height:1.3;margin:.2em 0}
+.muted{color:#1b2838;font-size:.95rem}
+label{display:block;font-weight:600;margin-top:12px}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:2px solid #08306b;background:#08306b;color:#fff;cursor:pointer;margin:12px 8px 0 0;min-height:44px;font-weight:700}
+button.sec{background:#fff;color:#12161c;border-color:#12161c}
+a{color:#08306b}
+a:hover,a:focus{color:#041e42}
+a:focus,button:focus,input:focus,select:focus{outline:3px solid #08306b;outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:8px;top:8px;background:#fff;color:#12161c;padding:8px 12px;z-index:2}
+footer{margin:8px 0 24px}
+fieldset{border:2px solid #1b2838;border-radius:8px;margin:12px 0;padding:8px 12px;min-width:0}
+legend{font-weight:800;padding:0 4px}
+.choices{display:flex;flex-wrap:wrap;gap:8px}
+.choices label{font-weight:600;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:center;margin:0;flex:1 1 12rem;min-width:0;max-width:100%;min-height:44px;padding:8px 10px;border:2px solid #1b2838;border-radius:8px;background:#fff;color:#12161c;cursor:pointer}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.actions button{margin:0;flex:1 1 12rem}
+select{width:100%;max-width:100%;font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:10px;border:2px solid #1b2838;border-radius:6px;background:#fff;color:#12161c;min-height:44px}
+a,p,li,label,legend,h1,h2{overflow-wrap:anywhere}
+[hidden]{display:none !important}
+.result-grid{display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+.result-grid > *{min-width:0}
+.note{background:#eef3f8;border:2px solid #1b2838;border-radius:8px;padding:12px;margin:0}
+#mo-points{margin:.4em 0;padding-left:1.2em}
+#mo-points li{margin:.45em 0}
+#sib-form{position:relative;display:grid;gap:12px;margin-top:8px}
+#sib-form label{margin-top:0}
+#sib-form input[type="email"]{width:100%;max-width:100%;min-height:44px;font:inherit;font-size:16px;padding:8px;border:2px solid #1b2838;border-radius:6px;background:#fff;color:#12161c}
+.sib-optin{display:flex;align-items:flex-start;gap:8px;font-weight:400;min-height:44px;min-width:0;max-width:100%}
+.sib-optin span{min-width:0;overflow-wrap:anywhere}
+#sib-form .input--hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.sources a{display:block;min-height:44px;padding:10px 0;max-width:100%}
+main,.card,fieldset,form{max-width:100%;min-width:0}
+@media (min-width:720px){
+  .result-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:start}
+}
+@media (max-width:480px){
+  main{padding:12px}
+  h1{font-size:1.35rem}
+  .choices{flex-direction:column}
+  .choices label,.actions button,button{flex-basis:auto;width:100%;margin-right:0}
+}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,textarea{font-size:16px}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,button{min-height:44px}
+nav a,.site-nav a{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:44px;min-width:44px;padding:8px 6px}
+label:has(> input[type="checkbox"]),label:has(> input[type="radio"]){min-height:44px;box-sizing:border-box}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<p class="topline">A free web check of points to review under the Missouri Department of Revenue rule on a sales or use tax return when sales or liability are zero, including proposed 12 CSR 10-103.185 and the December 30, 2026 date on the Missouri Register publication schedule. It runs in this browser. Nothing is uploaded.</p>
+<p class="muted site-nav"><a href="/">First Mover Projects</a></p>
+<h1>Missouri zero sales tax return check</h1>
+<p>Answer for one business and one reporting period. The page lists points to review. Filing is done with the Missouri Department of Revenue.</p>
+<p>Checked October 31, 2026.</p>
+
+<section class="card" aria-labelledby="rules-h">
+<h2 id="rules-h">What this page uses</h2>
+<p>The <a href="https://www.sos.mo.gov/cmsimages/adrules/csr/current/12csr/12c10-103.pdf">Code of State Regulations file for 12 CSR 10-103</a>, dated September 30, 2026, shows 12 CSR 10-103.185 section (1) in these words: every business, making sales of tangible personal property or rendering a taxable service, is required to file a combined sales/use tax return even though no (zero) (0) sales were made during the period covered by the return. The Department of Revenue posts the same text in its <a href="https://dor.mo.gov/resources/official-final-rules/documents/12_CSR_10-103_185.pdf">official-final-rules PDF</a>.</p>
+<p>The Department of Revenue <a href="https://dor.mo.gov/faq/taxation/business/sales-tax-filing.html">sales tax FAQ</a> says: every business with a sales tax license is required to file a return even though no sales were made during the period covered by the return.</p>
+<p>A proposed amendment to 12 CSR 10-103.185 was filed June 15, 2026 and published in the <a href="https://www.sos.mo.gov/CMSImages/AdRules/moreg/2026/v51n14July15/v51n14.pdf">Missouri Register, Volume 51, Number 14, July 15, 2026</a>. The Department posts the same proposed text. The proposed sections read:</p>
+<ul>
+<li>Section (1): every business that is registered for sales tax is required to file a sales tax return even though no sales were made during the period covered by the return.</li>
+<li>Section (2): every business that is registered for consumer's use tax is required to file a consumer's use tax return even though no liability exists for the period covered by the return.</li>
+<li>Section (3): every business that is registered for vendor's use tax is required to file a vendor's use tax return even though no Missouri destination sales were made for the period covered by the return.</li>
+</ul>
+<p>The <a href="https://www.sos.mo.gov/CMSImages/AdRules/moreg/2026/v51n19Oct1/v51n19.pdf">October 1, 2026 Missouri Register</a> index lists 12 CSR 10-103.185 as proposed at 51 MoReg 879. The order column on that line is empty. The publication schedule in that issue lists December 30, 2026 as the Code effective date for an order of rulemaking published on November 2, 2026 or November 16, 2026.</p>
+<p><a href="https://dor.mo.gov/resources/official-final-rules/documents/12_CSR_10-104_030_Filing_Requirements_as_Defined_in_Section_144,_RSMo.pdf">12 CSR 10-104.030</a> sets the filing frequency from state sales tax, and the due dates. A monthly return is due on the last day of the following month. A quarterly return is due on the last day of the month following the quarter. An annual return is due on January 31 following the calendar year. A Saturday, Sunday, or Missouri state holiday moves that date to the next business day. State tax of $500 or more in a calendar month is filed monthly. Less than $500 in a calendar month, and $200 or more in a calendar quarter, is filed quarterly. Less than $200 in a quarter is filed annually. Local, conservation, and parks and soils taxes are left out of that frequency test.</p>
+</section>
+
+<section class="card" id="check" aria-labelledby="check-h">
+<h2 id="check-h">Questions</h2>
+<p id="how">One business. The answers stay in this tab.</p>
+<form id="mo-form" autocomplete="off">
+<fieldset>
+<legend>Sales tax registration</legend>
+<p>Is this business registered for Missouri sales tax?</p>
+<div class="choices">
+<label><input type="radio" name="sales" value="yes"> Yes</label>
+<label><input type="radio" name="sales" value="no"> No</label>
+<label><input type="radio" name="sales" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Consumer's use tax registration</legend>
+<p>Is this business registered for Missouri consumer's use tax?</p>
+<div class="choices">
+<label><input type="radio" name="consumer" value="yes"> Yes</label>
+<label><input type="radio" name="consumer" value="no"> No</label>
+<label><input type="radio" name="consumer" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Vendor's use tax registration</legend>
+<p>Is this business registered for Missouri vendor's use tax?</p>
+<div class="choices">
+<label><input type="radio" name="vendor" value="yes"> Yes</label>
+<label><input type="radio" name="vendor" value="no"> No</label>
+<label><input type="radio" name="vendor" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Filing frequency on the account</legend>
+<p>Which frequency is assigned for this account? This page uses the frequency you mark. The dollar tests in 12 CSR 10-104.030 are quoted in the result.</p>
+<div class="choices">
+<label><input type="radio" name="frequency" value="monthly"> Monthly</label>
+<label><input type="radio" name="frequency" value="quarterly"> Quarterly</label>
+<label><input type="radio" name="frequency" value="annual"> Annual</label>
+<label><input type="radio" name="frequency" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<div id="period-year">
+<label for="mo-year">Calendar year of the reporting period</label>
+<select id="mo-year" name="year">
+<option value="">Choose a year</option>
+<option value="2026">2026</option>
+<option value="2027">2027</option>
+<option value="2028">2028</option>
+<option value="2029">2029</option>
+<option value="2030">2030</option>
+<option value="2031">2031</option>
+<option value="2032">2032</option>
+</select>
+</div>
+<div id="period-month" hidden>
+<label for="mo-month">Month the reporting period ends</label>
+<select id="mo-month" name="month">
+<option value="">Choose a month</option>
+<option value="1">January</option>
+<option value="2">February</option>
+<option value="3">March</option>
+<option value="4">April</option>
+<option value="5">May</option>
+<option value="6">June</option>
+<option value="7">July</option>
+<option value="8">August</option>
+<option value="9">September</option>
+<option value="10">October</option>
+<option value="11">November</option>
+<option value="12">December</option>
+</select>
+</div>
+<div id="period-quarter" hidden>
+<label for="mo-quarter">Quarter</label>
+<select id="mo-quarter" name="quarter">
+<option value="">Choose a quarter</option>
+<option value="1">January through March</option>
+<option value="2">April through June</option>
+<option value="3">July through September</option>
+<option value="4">October through December</option>
+</select>
+</div>
+<div class="actions">
+<button type="submit" id="mo-go">Show points to review</button>
+<button type="button" class="sec" id="mo-clear">Clear answers</button>
+</div>
+</form>
+</section>
+
+<section class="card" id="mo-result" aria-live="polite">
+<h2 class="big">Points to review</h2>
+<div class="result-grid">
+<div>
+<p id="mo-lead">Answer every question. Then this page lists points to review.</p>
+<ul id="mo-points" hidden></ul>
+</div>
+<div class="note">
+<p id="mo-disclaimer">General guidance, not legal, tax or IT advice.</p>
+<p id="mo-affiliation">Not affiliated with or endorsed by the Missouri Department of Revenue.</p>
+</div>
+</div>
+</section>
+
+<section class="card sources" id="sources" aria-labelledby="src-h">
+<h2 id="src-h">Sources</h2>
+<ul>
+<li><a href="https://dor.mo.gov/resources/proposed-rules/documents/12_CSR_10-103_185_Proposed_Rule.pdf">Missouri DOR: proposed 12 CSR 10-103.185 (PDF)</a></li>
+<li><a href="https://dor.mo.gov/resources/official-final-rules/documents/12_CSR_10-103_185.pdf">Missouri DOR: posted 12 CSR 10-103.185 (PDF)</a></li>
+<li><a href="https://dor.mo.gov/faq/taxation/business/sales-tax-filing.html">Missouri DOR: sales tax filing FAQ</a></li>
+<li><a href="https://dor.mo.gov/resources/official-final-rules/documents/12_CSR_10-104_030_Filing_Requirements_as_Defined_in_Section_144,_RSMo.pdf">Missouri DOR: 12 CSR 10-104.030 (PDF)</a></li>
+<li><a href="https://www.sos.mo.gov/CMSImages/AdRules/moreg/2026/v51n14July15/v51n14.pdf">Missouri Register, July 15, 2026 (PDF)</a></li>
+<li><a href="https://www.sos.mo.gov/CMSImages/AdRules/moreg/2026/v51n19Oct1/v51n19.pdf">Missouri Register, October 1, 2026 (PDF)</a></li>
+</ul>
+<p>Checked October 31, 2026.</p>
+<p>Not affiliated with or endorsed by the Missouri Department of Revenue.</p>
+</section>
+
+<section class="card" id="signup" aria-labelledby="signup-h">
+<h2 id="signup-h">Free weekly email</h2>
+<!-- Embedded #sib-form posts SIGNUP_SOURCE (default mo-zero). Create the text contact attribute SIGNUP_SOURCE in the existing Brevo account before relying on it; until then Brevo may ignore or reject it. -->
+<p>One short weekly email about new free browser checks. Double opt-in. Unsubscribe any time. See our <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>.</p>
+<form id="sib-form" method="POST" action="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" data-type="subscription" autocomplete="off">
+<p>
+<label for="EMAIL">Enter your email address to subscribe</label>
+<input class="input" type="email" id="EMAIL" name="EMAIL" autocomplete="email" inputmode="email" value="" placeholder="EMAIL" required>
+</p>
+<p>
+<label class="sib-optin" for="OPT_IN">
+<input type="checkbox" value="1" id="OPT_IN" name="OPT_IN" required>
+<span>By subscribing you agree to get this weekly email from First Mover Projects. We'll send a confirmation first. Unsubscribe any time with one click. We don't sell or share your email. See our Privacy Policy: firstmoverprojects.com/privacy.html</span>
+</label>
+</p>
+<p><button type="submit">Sign up for the weekly FMP email</button></p>
+<input type="text" name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off">
+<input type="hidden" name="locale" value="en">
+<input type="hidden" name="SIGNUP_SOURCE" value="mo-zero">
+</form>
+<script id="signup-source-script">
+(function () {
+  "use strict";
+  var form = document.getElementById("sib-form");
+  if (!form) return;
+  var input = form.querySelector('input[name="SIGNUP_SOURCE"]');
+  if (!input) return;
+  var match = /(?:^|[?&])SIGNUP_SOURCE=([^&#]*)/.exec(window.location.search || "");
+  if (!match) return;
+  var raw = match[1].replace(/\+/g, " ");
+  try { raw = decodeURIComponent(raw); } catch (err) { raw = match[1]; }
+  var clean = String(raw).toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+  if (clean) input.value = clean;
+})();
+</script>
+</section>
+</main>
+<footer>
+<p>Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
+<p>First Mover Projects, PO Box 98, Firth, NE 68358. firstmoverprojects@gmail.com. General guidance, not legal, tax or IT advice. Not affiliated with or endorsed by the Missouri Department of Revenue.</p>
+</footer>
+<noscript>
+<p>The points to review need JavaScript in your browser. Nothing is uploaded. The rule links and the email form above still work.</p>
+</noscript>
+<script id="mo-zero-return-check">
+(function () {
+  "use strict";
+
+  var DISCLAIMER = "General guidance, not legal, tax or IT advice.";
+  var AFFILIATION = "Not affiliated with or endorsed by the Missouri Department of Revenue.";
+  var LABEL = "Points to review";
+  var NEED = "Answer every question. Then this page lists points to review.";
+  var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  var YN = { yes: 1, no: 1, unsure: 1 };
+  var FREQ = { monthly: 1, quarterly: 1, annual: 1, unsure: 1 };
+
+  function incomplete() {
+    return { ok: false, label: LABEL, items: [], message: NEED, disclaimer: DISCLAIMER, affiliation: AFFILIATION };
+  }
+
+  function isYear(n) {
+    return typeof n === "number" && n === Math.floor(n) && n >= 2026 && n <= 2032;
+  }
+
+  function lastDay(y, m) {
+    return new Date(Date.UTC(y, m, 0)).getUTCDate();
+  }
+
+  function weekday(y, m, d) {
+    return new Date(Date.UTC(y, m - 1, d)).getUTCDay();
+  }
+
+  function formatDate(part) {
+    return MONTHS[part.m - 1] + " " + part.d + ", " + part.y;
+  }
+
+  function shiftWeekend(part) {
+    var day = weekday(part.y, part.m, part.d);
+    if (day === 6) return addDays(part, 2);
+    if (day === 0) return addDays(part, 1);
+    return { y: part.y, m: part.m, d: part.d };
+  }
+
+  function addDays(part, n) {
+    var dt = new Date(Date.UTC(part.y, part.m - 1, part.d) + n * 86400000);
+    return { y: dt.getUTCFullYear(), m: dt.getUTCMonth() + 1, d: dt.getUTCDate() };
+  }
+
+  function same(a, b) {
+    return a.y === b.y && a.m === b.m && a.d === b.d;
+  }
+
+  function dueDate(frequency, year, month, quarter) {
+    var part;
+    if (frequency === "monthly") {
+      var m = month + 1;
+      var y = year;
+      if (m === 13) { m = 1; y = year + 1; }
+      part = { y: y, m: m, d: lastDay(y, m) };
+    } else if (frequency === "quarterly") {
+      if (quarter === 1) part = { y: year, m: 4, d: 30 };
+      else if (quarter === 2) part = { y: year, m: 7, d: 31 };
+      else if (quarter === 3) part = { y: year, m: 10, d: 31 };
+      else part = { y: year + 1, m: 1, d: 31 };
+    } else if (frequency === "annual") {
+      part = { y: year + 1, m: 1, d: 31 };
+    } else {
+      return null;
+    }
+    var shifted = shiftWeekend(part);
+    return {
+      nominal: part,
+      shifted: shifted,
+      moved: !same(part, shifted),
+      weekday: WEEKDAYS[weekday(part.y, part.m, part.d)]
+    };
+  }
+
+  function regLine(value, yesText, noText, unsureText) {
+    if (value === "yes") return yesText;
+    if (value === "no") return noText;
+    return unsureText;
+  }
+
+  function dueLine(row) {
+    var base = "12 CSR 10-104.030 sets that due date as " + formatDate(row.nominal) + ", a " + row.weekday + ".";
+    if (row.moved) {
+      return base + " The rule moves a Saturday, Sunday, or Missouri state holiday to the next business day, which is " + formatDate(row.shifted) + " before any holiday on that day is considered. Holiday dates are on the Missouri state calendar.";
+    }
+    return base + " The weekend clause in that rule leaves this date in place. A Missouri state holiday on that date moves it to the next business day. Holiday dates are on the Missouri state calendar.";
+  }
+
+  function pointsToReview(answers) {
+    if (!answers || typeof answers !== "object") return incomplete();
+    if (!YN[answers.sales] || !YN[answers.consumer] || !YN[answers.vendor] || !FREQ[answers.frequency]) return incomplete();
+    var year = answers.year;
+    var month = answers.month;
+    var quarter = answers.quarter;
+    if (answers.frequency === "monthly") {
+      if (!isYear(year) || typeof month !== "number" || month < 1 || month > 12 || month !== Math.floor(month)) return incomplete();
+    } else if (answers.frequency === "quarterly") {
+      if (!isYear(year) || (quarter !== 1 && quarter !== 2 && quarter !== 3 && quarter !== 4)) return incomplete();
+    } else if (answers.frequency === "annual") {
+      if (!isYear(year)) return incomplete();
+    }
+    var items = [];
+    function add(text) { items.push("Point to review: " + text); }
+    add("the Code of State Regulations file dated September 30, 2026 still shows 12 CSR 10-103.185 section (1): every business making sales of tangible personal property or rendering a taxable service is required to file a combined sales/use tax return even though no (zero) (0) sales were made during the period covered by the return.");
+    add("the Department of Revenue sales tax FAQ says every business with a sales tax license is required to file a return even though no sales were made during the period covered by the return.");
+    add(regLine(
+      answers.sales,
+      "the answer says this business is registered for sales tax. Proposed section (1), Missouri Register July 15, 2026, says every business that is registered for sales tax is required to file a sales tax return even though no sales were made during the period covered by the return.",
+      "the answer says this business is not registered for sales tax. Proposed section (1) is written for every business that is registered for sales tax.",
+      "registration for sales tax is marked not sure. Proposed section (1) is written for every business that is registered for sales tax."
+    ));
+    add(regLine(
+      answers.consumer,
+      "the answer says this business is registered for consumer's use tax. Proposed section (2) says every business that is registered for consumer's use tax is required to file a consumer's use tax return even though no liability exists for the period covered by the return.",
+      "the answer says this business is not registered for consumer's use tax. Proposed section (2) is written for every business that is registered for consumer's use tax.",
+      "registration for consumer's use tax is marked not sure. Proposed section (2) is written for every business that is registered for consumer's use tax."
+    ));
+    add(regLine(
+      answers.vendor,
+      "the answer says this business is registered for vendor's use tax. Proposed section (3) says every business that is registered for vendor's use tax is required to file a vendor's use tax return even though no Missouri destination sales were made for the period covered by the return.",
+      "the answer says this business is not registered for vendor's use tax. Proposed section (3) is written for every business that is registered for vendor's use tax.",
+      "registration for vendor's use tax is marked not sure. Proposed section (3) is written for every business that is registered for vendor's use tax."
+    ));
+    add("the October 1, 2026 Missouri Register index lists 12 CSR 10-103.185 as proposed at 51 MoReg 879, and the order column on that line is empty. The publication schedule in that issue lists December 30, 2026 as the Code effective date for an order of rulemaking published on November 2, 2026 or November 16, 2026.");
+    add("12 CSR 10-104.030 sets filing frequency from state sales tax: $500 or more in a calendar month is monthly; less than $500 in a calendar month and $200 or more in a calendar quarter is quarterly; less than $200 in a quarter is annual. Local, conservation, and parks and soils taxes are left out of that test. The frequency marked here is " + answers.frequency + ".");
+    if (answers.frequency === "unsure") {
+      add("a frequency is marked not sure, so a due date is listed after a frequency and a period are marked.");
+    } else {
+      var row = dueDate(answers.frequency, year, month, quarter);
+      var period = "the " + year + " annual period";
+      if (answers.frequency === "monthly") period = MONTHS[month - 1] + " " + year;
+      if (answers.frequency === "quarterly") period = "quarter " + quarter + " of " + year;
+      add("for " + period + ", " + dueLine(row));
+    }
+    return { ok: true, label: LABEL, items: items, message: "", disclaimer: DISCLAIMER, affiliation: AFFILIATION };
+  }
+
+  function picked(form, name) {
+    var nodes = form.elements[name];
+    var j;
+    if (!nodes) return "";
+    if (typeof nodes.length === "number") {
+      for (j = 0; j < nodes.length; j++) {
+        if (nodes[j].checked) return nodes[j].value;
+      }
+      return "";
+    }
+    return nodes.checked ? nodes.value : "";
+  }
+
+  function readNumber(id) {
+    var el = document.getElementById(id);
+    if (!el || el.value === "") return null;
+    var n = Number(el.value);
+    if (n !== Math.floor(n)) return null;
+    return n;
+  }
+
+  function readAnswers(form) {
+    var frequency = picked(form, "frequency");
+    return {
+      sales: picked(form, "sales"),
+      consumer: picked(form, "consumer"),
+      vendor: picked(form, "vendor"),
+      frequency: frequency,
+      year: frequency === "unsure" ? null : readNumber("mo-year"),
+      month: readNumber("mo-month"),
+      quarter: readNumber("mo-quarter")
+    };
+  }
+
+  function show(result) {
+    var lead = document.getElementById("mo-lead");
+    var list = document.getElementById("mo-points");
+    var box = document.getElementById("mo-disclaimer");
+    var aff = document.getElementById("mo-affiliation");
+    if (box) box.textContent = DISCLAIMER;
+    if (aff) aff.textContent = AFFILIATION;
+    if (!lead || !list) return;
+    if (!result.ok) {
+      lead.hidden = false;
+      lead.textContent = result.message;
+      list.hidden = true;
+      list.textContent = "";
+      return;
+    }
+    lead.hidden = true;
+    lead.textContent = "";
+    list.hidden = false;
+    list.textContent = "";
+    var i, li;
+    for (i = 0; i < result.items.length; i++) {
+      li = document.createElement("li");
+      li.textContent = result.items[i];
+      list.appendChild(li);
+    }
+  }
+
+  function syncFrequency(form) {
+    var frequency = picked(form, "frequency");
+    var yearBox = document.getElementById("period-year");
+    var monthBox = document.getElementById("period-month");
+    var quarterBox = document.getElementById("period-quarter");
+    if (yearBox) yearBox.hidden = frequency === "" || frequency === "unsure";
+    if (monthBox) monthBox.hidden = frequency !== "monthly";
+    if (quarterBox) quarterBox.hidden = frequency !== "quarterly";
+  }
+
+  function clearAnswers(form) {
+    var names = ["sales", "consumer", "vendor", "frequency"];
+    var i, nodes, j;
+    for (i = 0; i < names.length; i++) {
+      nodes = form.elements[names[i]];
+      if (!nodes) continue;
+      if (typeof nodes.length === "number") {
+        for (j = 0; j < nodes.length; j++) nodes[j].checked = false;
+      } else {
+        nodes.checked = false;
+      }
+    }
+    var year = document.getElementById("mo-year");
+    var month = document.getElementById("mo-month");
+    var quarter = document.getElementById("mo-quarter");
+    if (year) year.value = "";
+    if (month) month.value = "";
+    if (quarter) quarter.value = "";
+    syncFrequency(form);
+  }
+
+  var api = {
+    DISCLAIMER: DISCLAIMER,
+    AFFILIATION: AFFILIATION,
+    LABEL: LABEL,
+    formatDate: formatDate,
+    dueDate: dueDate,
+    pointsToReview: pointsToReview
+  };
+  if (typeof window !== "undefined") window.FMP_MO = api;
+
+  function boot() {
+    var form = document.getElementById("mo-form");
+    var clear = document.getElementById("mo-clear");
+    if (!form || !clear) return;
+    show(incomplete());
+    syncFrequency(form);
+    form.addEventListener("change", function (event) {
+      if (event.target && event.target.name === "frequency") syncFrequency(form);
+    });
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      show(pointsToReview(readAnswers(form)));
+    });
+    clear.addEventListener("click", function () {
+      clearAnswers(form);
+      show(incomplete());
+    });
+  }
+
+  if (typeof document !== "undefined" && document.getElementById) boot();
+})();
+</script>
+</body>
+</html>

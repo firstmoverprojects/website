@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; form-action https://05279842.sibforms.com; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/sba-surety-fee-check/">
+<title>SBA surety bond fee check (free, runs in your browser)</title>
+<meta name="description" content="A free web check of SBA Surety Bond Guarantee fees in Federal Register document 2026-22177, applicability date November 30, 2026. Nothing is uploaded.">
+<meta property="og:title" content="SBA surety bond fee check (free, runs in your browser)">
+<meta property="og:description" content="A free web check of SBA Surety Bond Guarantee fees in Federal Register document 2026-22177, applicability date November 30, 2026. Nothing is uploaded.">
+<meta property="og:url" content="https://firstmoverprojects.com/tools/sba-surety-fee-check/">
+<meta property="og:type" content="website">
+<!-- UNLISTED: noindex. Do not add this URL to sitemap.xml, tools/index.html, index.html, deadlines/index.html, deadlines/feed.xml, deadlines/deadlines.ics, or deadlines/finder/. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "dateModified": "2026-10-31",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which fees does Federal Register document 2026-22177 change?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For Prior Approval guarantees with an approval date on or after November 30, 2026, other than a bid bond and other than NAICS 31, 32, or 33 manufacturing, the surety fee is 26 percent of the bond premium and the contractor fee is $7.29 per thousand dollars of the contract amount."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which fees stay at 20 percent and $6.00?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The notice keeps the surety fee at 20 percent of the bond premium and the principal fee at $6.00 per thousand dollars of the contract amount for the Preferred Surety Bond program and for Prior Approval guarantees on manufacturing projects under NAICS 31, 32, or 33."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this page price a bid bond?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The notice describes the change for each guaranteed bond other than a bid bond. This page does not compute a bid-bond fee."
+      }
+    }
+  ]
+}
+</script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#12161c;background:#f4f6f8}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;line-height:1.25;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.2em 0 .4em}
+.topline{font-size:1.05rem;margin:0 0 8px}
+.card{background:#fff;border:2px solid #1b2838;border-radius:10px;padding:16px;margin:12px 0}
+.big{font-size:1.45rem;font-weight:800;color:#12161c;line-height:1.3;margin:.2em 0}
+.muted{color:#1b2838;font-size:.95rem}
+label{display:block;font-weight:600;margin-top:12px}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:2px solid #08306b;background:#08306b;color:#fff;cursor:pointer;margin:12px 8px 0 0;min-height:44px;font-weight:700}
+button.sec{background:#fff;color:#12161c;border-color:#12161c}
+a{color:#08306b}
+a:hover,a:focus{color:#041e42}
+a:focus,button:focus,input:focus,select:focus{outline:3px solid #08306b;outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:8px;top:8px;background:#fff;color:#12161c;padding:8px 12px;z-index:2}
+footer{margin:8px 0 24px}
+fieldset{border:2px solid #1b2838;border-radius:8px;margin:12px 0;padding:8px 12px;min-width:0}
+legend{font-weight:800;padding:0 4px}
+.choices{display:flex;flex-wrap:wrap;gap:8px}
+.choices label{font-weight:600;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:center;margin:0;flex:1 1 16rem;min-width:0;max-width:100%;min-height:44px;padding:8px 10px;border:2px solid #1b2838;border-radius:8px;background:#fff;color:#12161c;cursor:pointer}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.actions button{margin:0;flex:1 1 12rem}
+input[type="text"],input[type="email"]{width:100%;max-width:100%;font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:10px;border:2px solid #1b2838;border-radius:6px;background:#fff;color:#12161c;min-height:44px}
+a,p,li,label,legend,h1,h2{overflow-wrap:anywhere}
+[hidden]{display:none !important}
+.result-grid{display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+.result-grid > *{min-width:0}
+.note{background:#eef3f8;border:2px solid #1b2838;border-radius:8px;padding:12px;margin:0}
+.err{font-weight:800;color:#4d0d09}
+#sbg-lines{margin:.4em 0;padding-left:1.2em}
+#sbg-lines li{margin:.45em 0}
+#sib-form{position:relative;display:grid;gap:12px;margin-top:8px}
+#sib-form label{margin-top:0}
+.sib-optin{display:flex;align-items:flex-start;gap:8px;font-weight:400;min-height:44px;min-width:0;max-width:100%}
+.sib-optin span{min-width:0;overflow-wrap:anywhere}
+#sib-form .input--hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.sources a{display:block;min-height:44px;padding:10px 0;max-width:100%}
+main,.card,fieldset,form{max-width:100%;min-width:0}
+@media (min-width:720px){
+  .result-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:start}
+}
+@media (max-width:480px){
+  main{padding:12px}
+  h1{font-size:1.35rem}
+  .choices{flex-direction:column}
+  .choices label,.actions button,button{flex-basis:auto;width:100%;margin-right:0}
+}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,textarea{font-size:16px}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,button{min-height:44px}
+nav a,.site-nav a{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:44px;min-width:44px;padding:8px 6px}
+label:has(> input[type="checkbox"]),label:has(> input[type="radio"]){min-height:44px;box-sizing:border-box}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<p class="topline">A free web check of SBA Surety Bond Guarantee fee rates in Federal Register document 2026-22177, for an approval date on or after November 30, 2026. It runs in this browser. Nothing is uploaded.</p>
+<p class="muted site-nav"><a href="/">First Mover Projects</a></p>
+<h1>SBA surety bond fee check</h1>
+<p>This page estimates the surety fee and the contractor or principal fee from the rates in the notice. Every dollar figure is an estimate from the numbers you type.</p>
+<p>Your surety and SBA decide. Ask them to confirm.</p>
+<p>Checked October 31, 2026.</p>
+
+<section class="card" aria-labelledby="rules-h">
+<h2 id="rules-h">What this page uses</h2>
+<p><a href="https://www.federalregister.gov/documents/2026/10/30/2026-22177/surety-bond-guarantee-program-fees">Federal Register document 2026-22177</a>, 91 FR 68580, published October 30, 2026, is a notice of Prior Approval Surety Bond Guarantee program fee changes. The authority lines in the notice are 15 U.S.C. 694b(h), 13 CFR 115.32(b) and (c), and 13 CFR 115.66.</p>
+<p>The notice sets an applicability date of November 30, 2026. The fee change applies to SBA surety bond guarantees with an approval date on or after that day. The summary covers each guaranteed bond other than a bid bond, with a further exception for projects under NAICS Code 31, 32, 33, Manufacturing.</p>
+<p>Under 13 CFR 115.32, for the Prior Approval program, the notice says the surety fee moves from 20 percent of the bond premium to 26 percent of the bond premium, and the contractor fee moves from $6.00 per thousand dollars of the contract amount to $7.29 per thousand dollars of the contract amount. For NAICS 31, 32, or 33, the surety fee remains 20 percent of the bond premium and the principal fee remains $6.00 per thousand dollars of the contract amount.</p>
+<p>Under 13 CFR 115.66, for the Preferred Surety Bond program, the notice says the surety fee remains 20 percent of the bond premium and the principal fee remains $6.00 per thousand dollars of the contract amount.</p>
+<p>The notice says the earlier rates, in place since October 1, 2018, were 20 percent of the bond premium and $6.00 per thousand dollars of the contract amount. This page uses those rates when the answers place the guarantee before November 30, 2026.</p>
+<p>The dollar lines divide the premium by 100 and multiply by the percent, and multiply the contract amount by the per-thousand rate. A half cent rounds up. The notice states a rate per thousand dollars. It does not say to round the contract up to the next thousand.</p>
+</section>
+
+<section class="card" id="calc" aria-labelledby="calc-h">
+<h2 id="calc-h">Estimate</h2>
+<p id="how">Dollars and cents. Zero is allowed. The answers stay in this tab.</p>
+<form id="sbg-form" autocomplete="off">
+<fieldset>
+<legend>Program</legend>
+<div class="choices">
+<label><input type="radio" name="program" value="prior-approval"> Prior Approval (Plan A)</label>
+<label><input type="radio" name="program" value="preferred"> Preferred Surety Bond</label>
+<label><input type="radio" name="program" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Bond</legend>
+<div class="choices">
+<label><input type="radio" name="bond" value="other"> Payment or performance, or another final bond</label>
+<label><input type="radio" name="bond" value="bid"> Bid bond</label>
+<label><input type="radio" name="bond" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>NAICS 31, 32, or 33, Manufacturing</legend>
+<div class="choices">
+<label><input type="radio" name="manufacturing" value="yes"> Yes</label>
+<label><input type="radio" name="manufacturing" value="no"> No</label>
+<label><input type="radio" name="manufacturing" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Approval date</legend>
+<div class="choices">
+<label><input type="radio" name="when" value="before"> Before November 30, 2026</label>
+<label><input type="radio" name="when" value="on-or-after"> On or after November 30, 2026</label>
+<label><input type="radio" name="when" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<label for="sbg-premium">Bond premium (dollars)</label>
+<input id="sbg-premium" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="prem-hint">
+<p id="prem-hint" class="muted">The surety fee is a percent of this premium. Leave blank if you only want the rate branches.</p>
+<label for="sbg-contract">Contract amount (dollars)</label>
+<input id="sbg-contract" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="con-hint">
+<p id="con-hint" class="muted">The contractor or principal fee uses this amount at the per-thousand rate.</p>
+<div class="actions">
+<button type="submit" id="sbg-go">Show the estimate</button>
+<button type="button" class="sec" id="sbg-sample">Fill sample figures</button>
+<button type="button" class="sec" id="sbg-clear">Clear</button>
+</div>
+</form>
+</section>
+
+<section class="card" id="sbg-result" aria-live="polite">
+<h2 class="big" id="sbg-label">Estimate</h2>
+<div class="result-grid">
+<div>
+<p id="sbg-error" class="err" hidden></p>
+<p id="sbg-lead">Answer the questions. Then this page shows an estimate.</p>
+<ul id="sbg-lines" hidden></ul>
+</div>
+<div class="note">
+<p id="sbg-confirm">Your surety and SBA decide. Ask them to confirm.</p>
+<p id="sbg-disclaimer">General guidance, not legal, tax or IT advice. Not affiliated with or endorsed by the U.S. Small Business Administration.</p>
+</div>
+</div>
+</section>
+
+<section class="card sources" id="sources" aria-labelledby="src-h">
+<h2 id="src-h">Sources</h2>
+<ul>
+<li><a href="https://www.federalregister.gov/documents/2026/10/30/2026-22177/surety-bond-guarantee-program-fees">Federal Register document 2026-22177, Surety Bond Guarantee Program Fees</a></li>
+</ul>
+<p>Checked October 31, 2026.</p>
+<p>General guidance, not legal, tax or IT advice. Not affiliated with or endorsed by the U.S. Small Business Administration.</p>
+</section>
+
+<section class="card" id="signup" aria-labelledby="signup-h">
+<h2 id="signup-h">Free weekly email</h2>
+<!-- Embedded #sib-form posts SIGNUP_SOURCE (default sba-sbg). Create the text contact attribute SIGNUP_SOURCE in the existing Brevo account before relying on it; until then Brevo may ignore or reject it. -->
+<p>One short weekly email about new free browser checks. Double opt-in. Unsubscribe any time. See our <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>.</p>
+<form id="sib-form" method="POST" action="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" data-type="subscription" autocomplete="off">
+<p>
+<label for="EMAIL">Enter your email address to subscribe</label>
+<input class="input" type="email" id="EMAIL" name="EMAIL" autocomplete="email" inputmode="email" value="" placeholder="EMAIL" required>
+</p>
+<p>
+<label class="sib-optin" for="OPT_IN">
+<input type="checkbox" value="1" id="OPT_IN" name="OPT_IN" required>
+<span>By subscribing you agree to get this weekly email from First Mover Projects. We'll send a confirmation first. Unsubscribe any time with one click. We don't sell or share your email. See our Privacy Policy: firstmoverprojects.com/privacy.html</span>
+</label>
+</p>
+<p><button type="submit">Sign up for the weekly FMP email</button></p>
+<input type="text" name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off">
+<input type="hidden" name="locale" value="en">
+<input type="hidden" name="SIGNUP_SOURCE" value="sba-sbg">
+</form>
+<script id="signup-source-script">
+(function () {
+  "use strict";
+  var form = document.getElementById("sib-form");
+  if (!form) return;
+  var input = form.querySelector('input[name="SIGNUP_SOURCE"]');
+  if (!input) return;
+  var match = /(?:^|[?&])SIGNUP_SOURCE=([^&#]*)/.exec(window.location.search || "");
+  if (!match) return;
+  var raw = match[1].replace(/\+/g, " ");
+  try { raw = decodeURIComponent(raw); } catch (err) { raw = match[1]; }
+  var clean = String(raw).toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+  if (clean) input.value = clean;
+})();
+</script>
+</section>
+</main>
+<footer>
+<p>Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
+<p>First Mover Projects, PO Box 98, Firth, NE 68358. firstmoverprojects@gmail.com. General guidance, not legal, tax or IT advice. Not affiliated with or endorsed by the U.S. Small Business Administration.</p>
+</footer>
+<noscript>
+<p>The estimate needs JavaScript in your browser. Nothing is uploaded. The Federal Register link and the email form above still work.</p>
+</noscript>
+<script id="sba-surety-fee-check">
+(function () {
+  "use strict";
+
+  var DISCLAIMER = "General guidance, not legal, tax or IT advice. Not affiliated with or endorsed by the U.S. Small Business Administration.";
+  var CONFIRM = "Your surety and SBA decide. Ask them to confirm.";
+  var LABEL = "Estimate";
+  var MAX_CENTS = 100000000000000;
+  var PROGRAM = { "prior-approval": 1, preferred: 1, unsure: 1 };
+  var BOND = { other: 1, bid: 1, unsure: 1 };
+  var YN = { yes: 1, no: 1, unsure: 1 };
+  var WHEN = { before: 1, "on-or-after": 1, unsure: 1 };
+  var RATE_HIGH = { pct: 26, perM: 729, label: "26 percent of the bond premium and $7.29 per thousand dollars of the contract amount" };
+  var RATE_LOW = { pct: 20, perM: 600, label: "20 percent of the bond premium and $6.00 per thousand dollars of the contract amount" };
+
+  function isCents(n) {
+    return typeof n === "number" && n === n && n >= 0 && n <= MAX_CENTS && Math.floor(n) === n;
+  }
+
+  function fail(message) {
+    return { ok: false, label: LABEL, lines: [], error: message, confirm: CONFIRM, disclaimer: DISCLAIMER };
+  }
+
+  function parseCents(raw) {
+    if (raw == null) return { ok: false };
+    var s = String(raw).trim().replace(/\$/g, "").replace(/,/g, "").replace(/\s+/g, "");
+    if (!s) return { ok: false, empty: true };
+    var matched = /^(\d+)(?:\.(\d{1,2}))?$/.exec(s);
+    if (!matched) return { ok: false };
+    if (matched[1].length > 13) return { ok: false };
+    var dollars = Number(matched[1]);
+    var frac = matched[2] || "";
+    if (frac.length === 1) frac = frac + "0";
+    if (!frac) frac = "00";
+    var cents = dollars * 100 + Number(frac);
+    if (!isCents(cents)) return { ok: false };
+    return { ok: true, cents: cents };
+  }
+
+  function formatDollars(cents) {
+    var n = Math.abs(Math.round(cents));
+    var dollars = Math.floor(n / 100);
+    var c = n % 100;
+    var body = String(dollars).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    var coin = c < 10 ? "0" + c : String(c);
+    return "$" + body + "." + coin;
+  }
+
+  function classify(input) {
+    if (input.bond === "bid") return { kind: "bid" };
+    if (input.bond === "unsure") return { kind: "split", reason: "bond" };
+    if (input.program === "preferred") return { kind: "rate", rate: RATE_LOW, why: "preferred" };
+    if (input.program === "unsure") {
+      if (input.when === "before") return { kind: "rate", rate: RATE_LOW, why: "before" };
+      return { kind: "split", reason: "program" };
+    }
+    if (input.manufacturing === "yes") return { kind: "rate", rate: RATE_LOW, why: "manufacturing" };
+    if (input.when === "before") return { kind: "rate", rate: RATE_LOW, why: "before" };
+    if (input.manufacturing === "unsure" || input.when === "unsure") return { kind: "split", reason: "branch" };
+    return { kind: "rate", rate: RATE_HIGH, why: "increase" };
+  }
+
+  function roundMulDiv(n, num, den) {
+    var q = Math.floor(n / den);
+    var r = n % den;
+    var rem = r * num;
+    var extra = Math.floor(rem / den);
+    if ((rem % den) * 2 >= den) extra += 1;
+    return q * num + extra;
+  }
+
+  function feeCents(premium, contract, rate) {
+    return {
+      surety: roundMulDiv(premium, rate.pct, 100),
+      principal: roundMulDiv(contract, rate.perM, 100000)
+    };
+  }
+
+  function buildEstimate(input) {
+    if (!input || !PROGRAM[input.program] || !BOND[input.bond] || !YN[input.manufacturing] || !WHEN[input.when]) {
+      return fail("Answer every question. Then this page shows an estimate.");
+    }
+    var cls = classify(input);
+    var lines = [];
+    lines.push("Estimate: Federal Register document 2026-22177 sets an applicability date of November 30, 2026. The fee change applies to SBA surety bond guarantees with an approval date on or after that day.");
+    if (cls.kind === "bid") {
+      lines.push("Estimate: the notice describes the change for each guaranteed bond other than a bid bond. This page leaves a bid bond without a dollar fee.");
+      return { ok: true, label: LABEL, lines: lines, error: "", confirm: CONFIRM, disclaimer: DISCLAIMER, kind: "bid" };
+    }
+    if (cls.kind === "split") {
+      lines.push("Estimate: one set of answers still reaches two rates. The higher rate in the notice is " + RATE_HIGH.label + ", for a Prior Approval guarantee on or after November 30, 2026, other than a bid bond and other than NAICS 31, 32, or 33.");
+      lines.push("Estimate: the other rate in the notice is " + RATE_LOW.label + ". That rate remains for the Preferred program and for NAICS 31, 32, or 33, and it is the rate the notice describes as in place since October 1, 2018.");
+      return { ok: true, label: LABEL, lines: lines, error: "", confirm: CONFIRM, disclaimer: DISCLAIMER, kind: "split" };
+    }
+    var premium = input.premium;
+    var contract = input.contract;
+    if (!isCents(premium) || !isCents(contract)) {
+      return fail("Enter the bond premium and the contract amount as dollars and cents. Zero is allowed.");
+    }
+    var fees = feeCents(premium, contract, cls.rate);
+    if (cls.why === "increase") {
+      lines.push("Estimate: these answers match the Prior Approval increase in the notice: surety fee 26 percent of the bond premium, contractor fee $7.29 per thousand dollars of the contract amount.");
+    } else if (cls.why === "manufacturing") {
+      lines.push("Estimate: these answers match the NAICS 31, 32, 33 exception. The notice keeps the surety fee at 20 percent of the bond premium and the principal fee at $6.00 per thousand dollars of the contract amount.");
+    } else if (cls.why === "preferred") {
+      lines.push("Estimate: these answers match the Preferred Surety Bond program under 13 CFR 115.66. The notice keeps the surety fee at 20 percent of the bond premium and the principal fee at $6.00 per thousand dollars of the contract amount.");
+    } else {
+      lines.push("Estimate: these answers place the guarantee before November 30, 2026. The notice describes the rates in place since October 1, 2018 as 20 percent of the bond premium and $6.00 per thousand dollars of the contract amount.");
+    }
+    lines.push("Estimate: surety fee on premium " + formatDollars(premium) + ", rounded half up to the cent, is " + formatDollars(fees.surety) + ".");
+    lines.push("Estimate: contractor or principal fee on contract amount " + formatDollars(contract) + ", at the per-thousand rate and rounded half up to the cent, is " + formatDollars(fees.principal) + ".");
+    return {
+      ok: true,
+      label: LABEL,
+      lines: lines,
+      error: "",
+      confirm: CONFIRM,
+      disclaimer: DISCLAIMER,
+      kind: "rate",
+      why: cls.why,
+      surety: fees.surety,
+      principal: fees.principal
+    };
+  }
+
+  function picked(form, name) {
+    var nodes = form.elements[name];
+    var j;
+    if (!nodes) return "";
+    if (typeof nodes.length === "number") {
+      for (j = 0; j < nodes.length; j++) {
+        if (nodes[j].checked) return nodes[j].value;
+      }
+      return "";
+    }
+    return nodes.checked ? nodes.value : "";
+  }
+
+  function fieldCents(id) {
+    var el = document.getElementById(id);
+    if (!el) return { ok: false, empty: true };
+    return parseCents(el.value);
+  }
+
+  function buildFromForm(form) {
+    var premium = fieldCents("sbg-premium");
+    var contract = fieldCents("sbg-contract");
+    return buildEstimate({
+      program: picked(form, "program"),
+      bond: picked(form, "bond"),
+      manufacturing: picked(form, "manufacturing"),
+      when: picked(form, "when"),
+      premium: premium.ok ? premium.cents : null,
+      contract: contract.ok ? contract.cents : null
+    });
+  }
+
+  function show(result) {
+    var lead = document.getElementById("sbg-lead");
+    var list = document.getElementById("sbg-lines");
+    var err = document.getElementById("sbg-error");
+    var confirm = document.getElementById("sbg-confirm");
+    var note = document.getElementById("sbg-disclaimer");
+    var label = document.getElementById("sbg-label");
+    if (confirm) confirm.textContent = CONFIRM;
+    if (note) note.textContent = DISCLAIMER;
+    if (label) label.textContent = LABEL;
+    if (!lead || !list || !err) return;
+    if (!result.ok) {
+      err.hidden = false;
+      err.textContent = result.error;
+      lead.hidden = true;
+      list.hidden = true;
+      list.textContent = "";
+      return;
+    }
+    err.hidden = true;
+    err.textContent = "";
+    lead.hidden = true;
+    list.hidden = false;
+    list.textContent = "";
+    var i, li;
+    for (i = 0; i < result.lines.length; i++) {
+      li = document.createElement("li");
+      li.textContent = result.lines[i];
+      list.appendChild(li);
+    }
+  }
+
+  function setRadio(form, name, value) {
+    var nodes = form.elements[name];
+    var j;
+    if (!nodes) return;
+    for (j = 0; j < nodes.length; j++) nodes[j].checked = nodes[j].value === value;
+  }
+
+  function setValue(id, value) {
+    var el = document.getElementById(id);
+    if (el) el.value = value;
+  }
+
+  function fillSample(form) {
+    setRadio(form, "program", "prior-approval");
+    setRadio(form, "bond", "other");
+    setRadio(form, "manufacturing", "no");
+    setRadio(form, "when", "on-or-after");
+    setValue("sbg-premium", "1000");
+    setValue("sbg-contract", "100000");
+    show(buildFromForm(form));
+  }
+
+  function clearForm(form) {
+    var names = ["program", "bond", "manufacturing", "when"];
+    var i, nodes, j;
+    for (i = 0; i < names.length; i++) {
+      nodes = form.elements[names[i]];
+      if (!nodes) continue;
+      for (j = 0; j < nodes.length; j++) nodes[j].checked = false;
+    }
+    setValue("sbg-premium", "");
+    setValue("sbg-contract", "");
+    var lead = document.getElementById("sbg-lead");
+    var list = document.getElementById("sbg-lines");
+    var err = document.getElementById("sbg-error");
+    if (lead) {
+      lead.hidden = false;
+      lead.textContent = "Answer the questions. Then this page shows an estimate.";
+    }
+    if (list) {
+      list.hidden = true;
+      list.textContent = "";
+    }
+    if (err) {
+      err.hidden = true;
+      err.textContent = "";
+    }
+  }
+
+  var api = {
+    DISCLAIMER: DISCLAIMER,
+    CONFIRM: CONFIRM,
+    LABEL: LABEL,
+    parseCents: parseCents,
+    formatDollars: formatDollars,
+    classify: classify,
+    feeCents: feeCents,
+    buildEstimate: buildEstimate
+  };
+  if (typeof window !== "undefined") window.FMP_SBG = api;
+
+  function boot() {
+    var form = document.getElementById("sbg-form");
+    var sample = document.getElementById("sbg-sample");
+    var clear = document.getElementById("sbg-clear");
+    if (!form || !sample || !clear) return;
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      show(buildFromForm(form));
+    });
+    sample.addEventListener("click", function () { fillSample(form); });
+    clear.addEventListener("click", function () { clearForm(form); });
+  }
+
+  if (typeof document !== "undefined" && document.getElementById) boot();
+})();
+</script>
+</body>
+</html>

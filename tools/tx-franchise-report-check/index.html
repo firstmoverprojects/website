@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; form-action https://05279842.sibforms.com; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/tx-franchise-report-check/">
+<title>Texas franchise report check (free, runs in your browser)</title>
+<meta name="description" content="A free web check of the Texas Comptroller's May 15 franchise tax report, Public Information Report, and Ownership Information Report. Nothing is uploaded.">
+<meta property="og:title" content="Texas franchise report check (free, runs in your browser)">
+<meta property="og:description" content="A free web check of the Texas Comptroller's May 15 franchise tax report, Public Information Report, and Ownership Information Report. Nothing is uploaded.">
+<meta property="og:url" content="https://firstmoverprojects.com/tools/tx-franchise-report-check/">
+<meta property="og:type" content="website">
+<!-- UNLISTED: noindex. Do not add this URL to sitemap.xml, tools/index.html, index.html, deadlines/index.html, deadlines/feed.xml, deadlines/deadlines.ics, or deadlines/finder/. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "dateModified": "2026-10-31",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "When is the Texas annual franchise tax report due?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Comptroller says the annual franchise tax report is due May 15. If May 15 falls on a weekend or holiday, the due date is the next business day."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the no-tax-due threshold for the 2026 and 2027 reports?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Comptroller's table for 2026 and 2027 lists a no-tax-due threshold of $2,650,000. An entity at or below that threshold does not file a franchise tax report, and still files a Public Information Report or an Ownership Information Report, aside from the veteran-owned and passive categories the Comptroller describes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which information report does the Comptroller name?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Form 05-102, the Public Information Report, is for a corporation, limited liability company, limited partnership, professional association, or financial institution. Form 05-167, the Ownership Information Report, is for another taxable entity. The No Tax Due Report, Form 05-163, is not available for 2026 reports."
+      }
+    }
+  ]
+}
+</script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#12161c;background:#f4f6f8}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;line-height:1.25;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.2em 0 .4em}
+.topline{font-size:1.05rem;margin:0 0 8px}
+.card{background:#fff;border:2px solid #1b2838;border-radius:10px;padding:16px;margin:12px 0}
+.big{font-size:1.45rem;font-weight:800;color:#12161c;line-height:1.3;margin:.2em 0}
+.muted{color:#1b2838;font-size:.95rem}
+label{display:block;font-weight:600;margin-top:12px}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:2px solid #08306b;background:#08306b;color:#fff;cursor:pointer;margin:12px 8px 0 0;min-height:44px;font-weight:700}
+button.sec{background:#fff;color:#12161c;border-color:#12161c}
+a{color:#08306b}
+a:hover,a:focus{color:#041e42}
+a:focus,button:focus,input:focus,select:focus{outline:3px solid #08306b;outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:8px;top:8px;background:#fff;color:#12161c;padding:8px 12px;z-index:2}
+footer{margin:8px 0 24px}
+fieldset{border:2px solid #1b2838;border-radius:8px;margin:12px 0;padding:8px 12px;min-width:0}
+legend{font-weight:800;padding:0 4px}
+.choices{display:flex;flex-wrap:wrap;gap:8px}
+.choices label{font-weight:600;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:center;margin:0;flex:1 1 14rem;min-width:0;max-width:100%;min-height:44px;padding:8px 10px;border:2px solid #1b2838;border-radius:8px;background:#fff;color:#12161c;cursor:pointer}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.actions button{margin:0;flex:1 1 12rem}
+a,p,li,label,legend,h1,h2{overflow-wrap:anywhere}
+[hidden]{display:none !important}
+.result-grid{display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+.result-grid > *{min-width:0}
+.note{background:#eef3f8;border:2px solid #1b2838;border-radius:8px;padding:12px;margin:0}
+#tx-points{margin:.4em 0;padding-left:1.2em}
+#tx-points li{margin:.45em 0}
+#sib-form{position:relative;display:grid;gap:12px;margin-top:8px}
+#sib-form label{margin-top:0}
+#sib-form input[type="email"]{width:100%;max-width:100%;min-height:44px;font:inherit;font-size:16px;padding:8px;border:2px solid #1b2838;border-radius:6px;background:#fff;color:#12161c}
+.sib-optin{display:flex;align-items:flex-start;gap:8px;font-weight:400;min-height:44px;min-width:0;max-width:100%}
+.sib-optin span{min-width:0;overflow-wrap:anywhere}
+#sib-form .input--hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.sources a{display:block;min-height:44px;padding:10px 0;max-width:100%}
+main,.card,fieldset,form{max-width:100%;min-width:0}
+@media (min-width:720px){
+  .result-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:start}
+}
+@media (max-width:480px){
+  main{padding:12px}
+  h1{font-size:1.35rem}
+  .choices{flex-direction:column}
+  .choices label,.actions button,button{flex-basis:auto;width:100%;margin-right:0}
+}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,textarea{font-size:16px}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,button{min-height:44px}
+nav a,.site-nav a{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:44px;min-width:44px;padding:8px 6px}
+label:has(> input[type="checkbox"]),label:has(> input[type="radio"]){min-height:44px;box-sizing:border-box}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<p class="topline">A free web check of which Texas franchise tax report, Public Information Report, or Ownership Information Report the Comptroller of Public Accounts describes for the May 15 due date. It runs in this browser. Nothing is uploaded.</p>
+<p class="muted site-nav"><a href="/">First Mover Projects</a></p>
+<h1>Texas franchise report check</h1>
+<p>Answer for one taxable entity and one report year, 2026 or 2027. The page lists the filings the Comptroller describes for those answers. The rates are quoted. The margin math stays on the Comptroller forms.</p>
+<p>Checked October 31, 2026.</p>
+
+<section class="card" aria-labelledby="rules-h">
+<h2 id="rules-h">What this page uses</h2>
+<p>The <a href="https://comptroller.texas.gov/taxes/franchise/">Comptroller franchise tax page</a> says the annual franchise tax report is due May 15. If May 15 falls on a weekend or holiday, the due date is the next business day. The same page's table for 2026 and 2027 lists a no-tax-due threshold of $2,650,000, a retail or wholesale rate of 0.375 percent, a rate of 0.75 percent for a business other than retail or wholesale, a compensation deduction limit of $480,000, an E-Z computation total revenue threshold of $20 million, and an E-Z rate of 0.331 percent.</p>
+<p>The <a href="https://comptroller.texas.gov/taxes/franchise/forms/2026-franchise.php">2026 franchise tax forms page</a> says the No Tax Due Report is not available for 2026 reports. It was discontinued for reports due on or after January 1, 2024. An entity with annualized total revenue at or below the threshold does not file that report, and still files a Public Information Report (Form 05-102) or an Ownership Information Report (Form 05-167).</p>
+<p>The <a href="https://comptroller.texas.gov/taxes/tax-policy-news/2026-april.php">April 2026 Tax Policy News</a> describes five paths that used to meet the old No Tax Due Report:</p>
+<ul>
+<li>Annualized total revenue at or below the threshold: no franchise tax report, and still a Public Information Report or an Ownership Information Report.</li>
+<li>A new veteran-owned business under Texas Tax Code Section 171.0005, for its initial five-year period: no franchise tax report, and no Public Information Report or Ownership Information Report during that period.</li>
+<li>A passive entity under Texas Tax Code Section 171.0003: the long form or the E-Z Computation form, with the passive-entity circle darkened, and no Public Information Report or Ownership Information Report.</li>
+<li>A real estate investment trust meeting Texas Tax Code Section 171.0002(c)(4): the long form or the E-Z Computation form, and a Public Information Report or an Ownership Information Report.</li>
+<li>An entity above the threshold with zero Texas gross receipts: the long form or the E-Z Computation form, with zero on the Texas gross receipts line, and a Public Information Report or an Ownership Information Report.</li>
+</ul>
+<p>The <a href="https://comptroller.texas.gov/taxes/franchise/pir-oir-filing-req.php">Public Information Report and Ownership Information Report page</a> says Form 05-102 is for a corporation, limited liability company, limited partnership, professional association, or financial institution organized in Texas or with nexus in Texas. Form 05-167 is for another taxable entity in that same position. Each member of a combined group files its own report. The information report is due on the annual franchise tax report due date, including when no franchise tax report is required because revenue is at or below the threshold.</p>
+</section>
+
+<section class="card" id="check" aria-labelledby="check-h">
+<h2 id="check-h">Questions</h2>
+<p id="how">One entity. The answers stay in this tab.</p>
+<form id="tx-form" autocomplete="off">
+<fieldset>
+<legend>Report year</legend>
+<div class="choices">
+<label><input type="radio" name="year" value="2026"> 2026</label>
+<label><input type="radio" name="year" value="2027"> 2027</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Entity</legend>
+<div class="choices">
+<label><input type="radio" name="entity" value="corporation"> Corporation</label>
+<label><input type="radio" name="entity" value="llc"> Limited liability company</label>
+<label><input type="radio" name="entity" value="limited-partnership"> Limited partnership</label>
+<label><input type="radio" name="entity" value="professional-association"> Professional association</label>
+<label><input type="radio" name="entity" value="financial-institution"> Financial institution</label>
+<label><input type="radio" name="entity" value="other"> Another taxable entity</label>
+<label><input type="radio" name="entity" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Annualized total revenue</legend>
+<div class="choices">
+<label><input type="radio" name="revenue" value="at-or-below"> At or below $2,650,000</label>
+<label><input type="radio" name="revenue" value="above-to-20m"> Above $2,650,000 and at or under $20 million</label>
+<label><input type="radio" name="revenue" value="above-20m"> Above $20 million</label>
+<label><input type="radio" name="revenue" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>New veteran-owned business, initial five-year period</legend>
+<p>Texas Tax Code Section 171.0005, as the Comptroller describes it for this period.</p>
+<div class="choices">
+<label><input type="radio" name="veteran" value="yes"> Yes</label>
+<label><input type="radio" name="veteran" value="no"> No</label>
+<label><input type="radio" name="veteran" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Passive entity</legend>
+<p>Texas Tax Code Section 171.0003, as the Comptroller describes it.</p>
+<div class="choices">
+<label><input type="radio" name="passive" value="yes"> Yes</label>
+<label><input type="radio" name="passive" value="no"> No</label>
+<label><input type="radio" name="passive" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Real estate investment trust</legend>
+<p>Meeting Texas Tax Code Section 171.0002(c)(4), as the Comptroller describes it.</p>
+<div class="choices">
+<label><input type="radio" name="reit" value="yes"> Yes</label>
+<label><input type="radio" name="reit" value="no"> No</label>
+<label><input type="radio" name="reit" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Zero Texas gross receipts</legend>
+<div class="choices">
+<label><input type="radio" name="zeroReceipts" value="yes"> Yes</label>
+<label><input type="radio" name="zeroReceipts" value="no"> No</label>
+<label><input type="radio" name="zeroReceipts" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Combined group</legend>
+<p>Is this entity one member of a combined group?</p>
+<div class="choices">
+<label><input type="radio" name="combined" value="yes"> Yes</label>
+<label><input type="radio" name="combined" value="no"> No</label>
+<label><input type="radio" name="combined" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<div class="actions">
+<button type="submit" id="tx-go">Show points to review</button>
+<button type="button" class="sec" id="tx-clear">Clear answers</button>
+</div>
+</form>
+</section>
+
+<section class="card" id="tx-result" aria-live="polite">
+<h2 class="big">Points to review</h2>
+<div class="result-grid">
+<div>
+<p id="tx-lead">Answer every question. Then this page lists points to review.</p>
+<ul id="tx-points" hidden></ul>
+</div>
+<div class="note">
+<p id="tx-disclaimer">General guidance, not legal, tax or IT advice.</p>
+<p id="tx-affiliation">Not affiliated with or endorsed by the Texas Comptroller of Public Accounts.</p>
+</div>
+</div>
+</section>
+
+<section class="card sources" id="sources" aria-labelledby="src-h">
+<h2 id="src-h">Sources</h2>
+<ul>
+<li><a href="https://comptroller.texas.gov/taxes/franchise/">Texas Comptroller: franchise tax</a></li>
+<li><a href="https://comptroller.texas.gov/taxes/franchise/forms/2026-franchise.php">Texas Comptroller: 2026 franchise tax forms</a></li>
+<li><a href="https://comptroller.texas.gov/taxes/tax-policy-news/2026-april.php">Texas Comptroller: Tax Policy News, April 2026</a></li>
+<li><a href="https://comptroller.texas.gov/taxes/franchise/pir-oir-filing-req.php">Texas Comptroller: Public Information Report and Ownership Information Report</a></li>
+</ul>
+<p>Checked October 31, 2026.</p>
+<p>Not affiliated with or endorsed by the Texas Comptroller of Public Accounts.</p>
+</section>
+
+<section class="card" id="signup" aria-labelledby="signup-h">
+<h2 id="signup-h">Free weekly email</h2>
+<!-- Embedded #sib-form posts SIGNUP_SOURCE (default tx-franchise). Create the text contact attribute SIGNUP_SOURCE in the existing Brevo account before relying on it; until then Brevo may ignore or reject it. -->
+<p>One short weekly email about new free browser checks. Double opt-in. Unsubscribe any time. See our <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>.</p>
+<form id="sib-form" method="POST" action="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" data-type="subscription" autocomplete="off">
+<p>
+<label for="EMAIL">Enter your email address to subscribe</label>
+<input class="input" type="email" id="EMAIL" name="EMAIL" autocomplete="email" inputmode="email" value="" placeholder="EMAIL" required>
+</p>
+<p>
+<label class="sib-optin" for="OPT_IN">
+<input type="checkbox" value="1" id="OPT_IN" name="OPT_IN" required>
+<span>By subscribing you agree to get this weekly email from First Mover Projects. We'll send a confirmation first. Unsubscribe any time with one click. We don't sell or share your email. See our Privacy Policy: firstmoverprojects.com/privacy.html</span>
+</label>
+</p>
+<p><button type="submit">Sign up for the weekly FMP email</button></p>
+<input type="text" name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off">
+<input type="hidden" name="locale" value="en">
+<input type="hidden" name="SIGNUP_SOURCE" value="tx-franchise">
+</form>
+<script id="signup-source-script">
+(function () {
+  "use strict";
+  var form = document.getElementById("sib-form");
+  if (!form) return;
+  var input = form.querySelector('input[name="SIGNUP_SOURCE"]');
+  if (!input) return;
+  var match = /(?:^|[?&])SIGNUP_SOURCE=([^&#]*)/.exec(window.location.search || "");
+  if (!match) return;
+  var raw = match[1].replace(/\+/g, " ");
+  try { raw = decodeURIComponent(raw); } catch (err) { raw = match[1]; }
+  var clean = String(raw).toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+  if (clean) input.value = clean;
+})();
+</script>
+</section>
+</main>
+<footer>
+<p>Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
+<p>First Mover Projects, PO Box 98, Firth, NE 68358. firstmoverprojects@gmail.com. General guidance, not legal, tax or IT advice. Not affiliated with or endorsed by the Texas Comptroller of Public Accounts.</p>
+</footer>
+<noscript>
+<p>The points to review need JavaScript in your browser. Nothing is uploaded. The Comptroller links and the email form above still work.</p>
+</noscript>
+<script id="tx-franchise-report-check">
+(function () {
+  "use strict";
+
+  var DISCLAIMER = "General guidance, not legal, tax or IT advice.";
+  var AFFILIATION = "Not affiliated with or endorsed by the Texas Comptroller of Public Accounts.";
+  var LABEL = "Points to review";
+  var NEED = "Answer every question. Then this page lists points to review.";
+  var WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var ENTITY = {
+    corporation: 1,
+    llc: 1,
+    "limited-partnership": 1,
+    "professional-association": 1,
+    "financial-institution": 1,
+    other: 1,
+    unsure: 1
+  };
+  var PIR = { corporation: 1, llc: 1, "limited-partnership": 1, "professional-association": 1, "financial-institution": 1 };
+  var REV = { "at-or-below": 1, "above-to-20m": 1, "above-20m": 1, unsure: 1 };
+  var YN = { yes: 1, no: 1, unsure: 1 };
+
+  function incomplete() {
+    return { ok: false, label: LABEL, items: [], message: NEED, disclaimer: DISCLAIMER, affiliation: AFFILIATION };
+  }
+
+  function formatDate(part) {
+    return MONTHS[part.m - 1] + " " + part.d + ", " + part.y;
+  }
+
+  function may15(year) {
+    var day = new Date(Date.UTC(year, 4, 15)).getUTCDay();
+    var part = { y: year, m: 5, d: 15 };
+    var shifted = part;
+    if (day === 6) {
+      var sat = new Date(Date.UTC(year, 4, 17));
+      shifted = { y: sat.getUTCFullYear(), m: sat.getUTCMonth() + 1, d: sat.getUTCDate() };
+    } else if (day === 0) {
+      var sun = new Date(Date.UTC(year, 4, 16));
+      shifted = { y: sun.getUTCFullYear(), m: sun.getUTCMonth() + 1, d: sun.getUTCDate() };
+    }
+    return {
+      nominal: part,
+      shifted: shifted,
+      moved: day === 0 || day === 6,
+      weekday: WEEKDAYS[day]
+    };
+  }
+
+  function pointsToReview(answers) {
+    if (!answers || typeof answers !== "object") return incomplete();
+    var year = Number(answers.year);
+    if (year !== 2026 && year !== 2027) return incomplete();
+    if (!ENTITY[answers.entity] || !REV[answers.revenue]) return incomplete();
+    if (!YN[answers.veteran] || !YN[answers.passive] || !YN[answers.reit] || !YN[answers.zeroReceipts] || !YN[answers.combined]) return incomplete();
+    var items = [];
+    function add(text) { items.push("Point to review: " + text); }
+    var due = may15(year);
+    if (due.moved) {
+      add("the Comptroller says the annual franchise tax report is due May 15, and that a weekend or holiday moves that date to the next business day. May 15, " + year + " is a " + due.weekday + ". The next weekday is " + formatDate(due.shifted) + ". A Texas holiday on the due date moves it again. Holiday dates are on the Comptroller calendar.");
+    } else {
+      add("the Comptroller says the annual franchise tax report is due May 15, and that a weekend or holiday moves that date to the next business day. May 15, " + year + " is a " + due.weekday + ". The weekend move leaves " + formatDate(due.nominal) + " in place. A Texas holiday on that date moves it to the next business day. Holiday dates are on the Comptroller calendar.");
+    }
+    add("the Comptroller table for 2026 and 2027 lists a no-tax-due threshold of $2,650,000, a retail or wholesale rate of 0.375 percent, a rate of 0.75 percent for a business other than retail or wholesale, an E-Z computation total revenue threshold of $20 million, and an E-Z rate of 0.331 percent. This page quotes those rates and leaves the margin math on the Comptroller forms.");
+    add("the 2026 forms page says the No Tax Due Report (Form 05-163) is not available for 2026 reports. It was discontinued for reports due on or after January 1, 2024.");
+    var hits = 0;
+    if (answers.veteran === "yes") {
+      hits += 1;
+      add("the answer marks a new veteran-owned business in its initial five-year period under Texas Tax Code Section 171.0005. The April 2026 Tax Policy News says that business does not file a franchise tax report for that period, and does not file a Public Information Report or an Ownership Information Report for that period.");
+    } else if (answers.veteran === "unsure") {
+      add("the veteran-owned category is marked not sure. The five-year path in the April 2026 Tax Policy News drops both the franchise tax report and the information report for that period.");
+    }
+    if (answers.passive === "yes") {
+      hits += 1;
+      add("the answer marks a passive entity under Texas Tax Code Section 171.0003. The April 2026 Tax Policy News says that entity files the long form or the E-Z Computation form, darkens the passive-entity circle, and does not file a Public Information Report or an Ownership Information Report.");
+    } else if (answers.passive === "unsure") {
+      add("the passive-entity category is marked not sure. That path uses the long form or the E-Z Computation form and leaves off the information report.");
+    }
+    if (answers.reit === "yes") {
+      hits += 1;
+      add("the answer marks a real estate investment trust meeting Texas Tax Code Section 171.0002(c)(4). The April 2026 Tax Policy News says that entity files the long form or the E-Z Computation form and files a Public Information Report or an Ownership Information Report.");
+    } else if (answers.reit === "unsure") {
+      add("the real estate investment trust category is marked not sure. That path uses the long form or the E-Z Computation form and still files an information report.");
+    }
+    if (answers.zeroReceipts === "yes" && (answers.revenue === "above-to-20m" || answers.revenue === "above-20m")) {
+      hits += 1;
+      add("the answer marks zero Texas gross receipts and revenue above the no-tax-due threshold. The April 2026 Tax Policy News says that entity files the long form or the E-Z Computation form, reports zero on the Texas gross receipts line, and files a Public Information Report or an Ownership Information Report.");
+    } else if (answers.zeroReceipts === "yes" && answers.revenue === "at-or-below") {
+      add("zero Texas gross receipts is marked yes, and revenue is marked at or below $2,650,000. The Comptroller's separate zero-receipts path is written for an entity above the no-tax-due threshold. The at-or-below path is the one that matches the revenue answer.");
+    } else if (answers.zeroReceipts === "yes") {
+      add("zero Texas gross receipts is marked yes, and revenue is marked not sure. The zero-receipts path in the April 2026 Tax Policy News is written for an entity above the no-tax-due threshold.");
+    } else if (answers.zeroReceipts === "unsure") {
+      add("zero Texas gross receipts is marked not sure. Above the threshold, that fact selects the long form or the E-Z Computation form plus an information report.");
+    }
+    if (hits > 1) {
+      add("these answers name more than one Comptroller category. Read each category on the April 2026 Tax Policy News page for the entity.");
+    }
+    if (answers.revenue === "at-or-below" && answers.veteran !== "yes" && answers.passive !== "yes") {
+      add("annualized total revenue is marked at or below $2,650,000. The forms page says that entity does not file a franchise tax report, and still files a Public Information Report or an Ownership Information Report.");
+    } else if (answers.revenue === "above-to-20m" && answers.veteran !== "yes" && answers.passive !== "yes") {
+      add("annualized total revenue is marked above $2,650,000 and at or under $20 million. The Comptroller table lists the E-Z computation threshold at $20 million. The forms page names the long form and the E-Z Computation form for the categories it lists. This page leaves the form choice on those instructions.");
+    } else if (answers.revenue === "above-20m" && answers.veteran !== "yes" && answers.passive !== "yes") {
+      add("annualized total revenue is marked above $20 million. The Comptroller table lists the E-Z computation total revenue threshold at $20 million.");
+    } else if (answers.revenue === "unsure" && answers.veteran !== "yes" && answers.passive !== "yes") {
+      add("annualized total revenue is marked not sure against the $2,650,000 threshold and the $20 million E-Z threshold.");
+    }
+    if (PIR[answers.entity]) {
+      add("the entity marked here is one the Comptroller lists for Form 05-102, the Public Information Report: a corporation, limited liability company, limited partnership, professional association, or financial institution.");
+    } else if (answers.entity === "other") {
+      add("the entity marked here is the Comptroller's other taxable entity, which files Form 05-167, the Ownership Information Report.");
+    } else {
+      add("the entity type is marked not sure. Form 05-102 is the Public Information Report for a corporation, limited liability company, limited partnership, professional association, or financial institution. Form 05-167 is the Ownership Information Report for another taxable entity.");
+    }
+    if (answers.combined === "yes") {
+      add("the answer says this entity is a member of a combined group. The Comptroller says each member organized in Texas or with nexus in Texas files its own Public Information Report or Ownership Information Report.");
+    } else if (answers.combined === "unsure") {
+      add("combined-group membership is marked not sure. Each member organized in Texas or with nexus in Texas files its own information report.");
+    }
+    return { ok: true, label: LABEL, items: items, message: "", disclaimer: DISCLAIMER, affiliation: AFFILIATION, due: due };
+  }
+
+  function picked(form, name) {
+    var nodes = form.elements[name];
+    var j;
+    if (!nodes) return "";
+    if (typeof nodes.length === "number") {
+      for (j = 0; j < nodes.length; j++) {
+        if (nodes[j].checked) return nodes[j].value;
+      }
+      return "";
+    }
+    return nodes.checked ? nodes.value : "";
+  }
+
+  function readAnswers(form) {
+    return {
+      year: picked(form, "year"),
+      entity: picked(form, "entity"),
+      revenue: picked(form, "revenue"),
+      veteran: picked(form, "veteran"),
+      passive: picked(form, "passive"),
+      reit: picked(form, "reit"),
+      zeroReceipts: picked(form, "zeroReceipts"),
+      combined: picked(form, "combined")
+    };
+  }
+
+  function show(result) {
+    var lead = document.getElementById("tx-lead");
+    var list = document.getElementById("tx-points");
+    var box = document.getElementById("tx-disclaimer");
+    var aff = document.getElementById("tx-affiliation");
+    if (box) box.textContent = DISCLAIMER;
+    if (aff) aff.textContent = AFFILIATION;
+    if (!lead || !list) return;
+    if (!result.ok) {
+      lead.hidden = false;
+      lead.textContent = result.message;
+      list.hidden = true;
+      list.textContent = "";
+      return;
+    }
+    lead.hidden = true;
+    lead.textContent = "";
+    list.hidden = false;
+    list.textContent = "";
+    var i, li;
+    for (i = 0; i < result.items.length; i++) {
+      li = document.createElement("li");
+      li.textContent = result.items[i];
+      list.appendChild(li);
+    }
+  }
+
+  function clearAnswers(form) {
+    var names = ["year", "entity", "revenue", "veteran", "passive", "reit", "zeroReceipts", "combined"];
+    var i, nodes, j;
+    for (i = 0; i < names.length; i++) {
+      nodes = form.elements[names[i]];
+      if (!nodes) continue;
+      for (j = 0; j < nodes.length; j++) nodes[j].checked = false;
+    }
+  }
+
+  var api = {
+    DISCLAIMER: DISCLAIMER,
+    AFFILIATION: AFFILIATION,
+    LABEL: LABEL,
+    may15: may15,
+    formatDate: formatDate,
+    pointsToReview: pointsToReview
+  };
+  if (typeof window !== "undefined") window.FMP_TX = api;
+
+  function boot() {
+    var form = document.getElementById("tx-form");
+    var clear = document.getElementById("tx-clear");
+    if (!form || !clear) return;
+    show(incomplete());
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      show(pointsToReview(readAnswers(form)));
+    });
+    clear.addEventListener("click", function () {
+      clearAnswers(form);
+      show(incomplete());
+    });
+  }
+
+  if (typeof document !== "undefined" && document.getElementById) boot();
+})();
+</script>
+</body>
+</html>

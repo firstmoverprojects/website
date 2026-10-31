@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; form-action https://05279842.sibforms.com; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/ga-annual-registration-check/">
+<title>Georgia annual registration check (free, runs in your browser)</title>
+<meta name="description" content="A free web check of the Georgia annual registration window, January 1 through April 1, from the Secretary of State. Nothing is uploaded.">
+<meta property="og:title" content="Georgia annual registration check (free, runs in your browser)">
+<meta property="og:description" content="A free web check of the Georgia annual registration window, January 1 through April 1, from the Secretary of State. Nothing is uploaded.">
+<meta property="og:url" content="https://firstmoverprojects.com/tools/ga-annual-registration-check/">
+<meta property="og:type" content="website">
+<!-- UNLISTED: noindex. Do not add this URL to sitemap.xml, tools/index.html, index.html, deadlines/index.html, deadlines/feed.xml, deadlines/deadlines.ics, or deadlines/finder/. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "dateModified": "2026-10-31",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "When does the Georgia Secretary of State say an annual registration is filed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Secretary of State FAQ says Georgia corporations file the first annual registration within 90 days of incorporation, and between January 1 and April 1 each year thereafter. Limited liability companies, limited partnerships, and foreign corporations file the first annual registration between January 1 and April 1 of the year following the initial filing, and between January 1 and April 1 each year thereafter."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can a filing before January 1 count for the next period?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Secretary of State One Click Annual Registration page says an entity files between January 1 and April 1, and that filings made prior to January 1 will not be applied to the next annual registration period."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many years can one filing cover?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Secretary of State how-to page says an entity may file annual registrations in advance for a period up to and including 3 calendar years. Corporation Rule 590-7-4-.05 and LLC Rule 590-7-22-.10 say the next filing is due between January 1 and April 1 of the first calendar year after that designated period."
+      }
+    }
+  ]
+}
+</script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#12161c;background:#f4f6f8}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;line-height:1.25;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.2em 0 .4em}
+.topline{font-size:1.05rem;margin:0 0 8px}
+.card{background:#fff;border:2px solid #1b2838;border-radius:10px;padding:16px;margin:12px 0}
+.big{font-size:1.45rem;font-weight:800;color:#12161c;line-height:1.3;margin:.2em 0}
+.muted{color:#1b2838;font-size:.95rem}
+label{display:block;font-weight:600;margin-top:12px}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:2px solid #08306b;background:#08306b;color:#fff;cursor:pointer;margin:12px 8px 0 0;min-height:44px;font-weight:700}
+button.sec{background:#fff;color:#12161c;border-color:#12161c}
+a{color:#08306b}
+a:hover,a:focus{color:#041e42}
+a:focus,button:focus,input:focus,select:focus{outline:3px solid #08306b;outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:8px;top:8px;background:#fff;color:#12161c;padding:8px 12px;z-index:2}
+footer{margin:8px 0 24px}
+fieldset{border:2px solid #1b2838;border-radius:8px;margin:12px 0;padding:8px 12px;min-width:0}
+legend{font-weight:800;padding:0 4px}
+.choices{display:flex;flex-wrap:wrap;gap:8px}
+.choices label{font-weight:600;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:center;margin:0;flex:1 1 14rem;min-width:0;max-width:100%;min-height:44px;padding:8px 10px;border:2px solid #1b2838;border-radius:8px;background:#fff;color:#12161c;cursor:pointer}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.actions button{margin:0;flex:1 1 12rem}
+input[type="text"],select{width:100%;max-width:100%;font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:10px;border:2px solid #1b2838;border-radius:6px;background:#fff;color:#12161c;min-height:44px}
+a,p,li,label,legend,h1,h2{overflow-wrap:anywhere}
+[hidden]{display:none !important}
+.result-grid{display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+.result-grid > *{min-width:0}
+.note{background:#eef3f8;border:2px solid #1b2838;border-radius:8px;padding:12px;margin:0}
+#ga-points{margin:.4em 0;padding-left:1.2em}
+#ga-points li{margin:.45em 0}
+#sib-form{position:relative;display:grid;gap:12px;margin-top:8px}
+#sib-form label{margin-top:0}
+#sib-form input[type="email"]{width:100%;max-width:100%;min-height:44px;font:inherit;font-size:16px;padding:8px;border:2px solid #1b2838;border-radius:6px;background:#fff;color:#12161c}
+.sib-optin{display:flex;align-items:flex-start;gap:8px;font-weight:400;min-height:44px;min-width:0;max-width:100%}
+.sib-optin span{min-width:0;overflow-wrap:anywhere}
+#sib-form .input--hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.sources a{display:block;min-height:44px;padding:10px 0;max-width:100%}
+main,.card,fieldset,form{max-width:100%;min-width:0}
+@media (min-width:720px){
+  .result-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:start}
+}
+@media (max-width:480px){
+  main{padding:12px}
+  h1{font-size:1.35rem}
+  .choices{flex-direction:column}
+  .choices label,.actions button,button{flex-basis:auto;width:100%;margin-right:0}
+}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,textarea{font-size:16px}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,button{min-height:44px}
+nav a,.site-nav a{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:44px;min-width:44px;padding:8px 6px}
+label:has(> input[type="checkbox"]),label:has(> input[type="radio"]){min-height:44px;box-sizing:border-box}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<p class="topline">A free web check of the Georgia annual registration window, due April 1 and open to file from January 1, from the Georgia Secretary of State at sos.ga.gov. It runs in this browser. Nothing is uploaded.</p>
+<p class="muted site-nav"><a href="/">First Mover Projects</a></p>
+<h1>Georgia annual registration check</h1>
+<p>Answer for one entity and one calendar year. The page lists the window described by the Secretary of State. It reads the Secretary of State record only if you look it up there yourself.</p>
+<p>Checked October 31, 2026.</p>
+
+<section class="card" aria-labelledby="rules-h">
+<h2 id="rules-h">What this page uses</h2>
+<p>The <a href="https://sos.ga.gov/page/business-division-faq">Secretary of State business FAQ</a> says: Georgia corporations file the first annual registration within 90 days of the date of incorporation, and between January 1 and April 1 each year thereafter. Limited liability companies, limited partnerships, and foreign corporations file the first annual registration between January 1 and April 1 of the year following the initial filing, and between January 1 and April 1 each year thereafter.</p>
+<p>The <a href="https://sos.ga.gov/how-to-guide/how-file-annual-registration">how-to page for annual registration</a> says entity annual registrations are due by April 1 of each year the registration is due, and may be filed as early as January 1. The same page says an entity may file in advance for a period up to and including 3 calendar years.</p>
+<p><a href="https://rules.sos.ga.gov/gac/590-7-4">Rule 590-7-4-.03</a> says each corporation on file and registered to do business in Georgia shall, between January 1 and April 1 of each year, file an annual registration. The annual registration is due as of January 1 and may be paid between January 1 and April 1. Rule 590-7-4-.02 says a new domestic corporation files an initial annual registration within 90 days after its articles of incorporation are filed or become effective. If the articles are delivered for filing subsequent to October 1, the initial annual registration is filed between January 1 and April 1 of the year next succeeding the calendar year in which the certificate of incorporation is issued.</p>
+<p><a href="https://rules.sos.ga.gov/gac/590-7-22">Rule 590-7-22-.03</a> says each limited liability company registered to do business in Georgia shall, between January 1 and April 1 of each year, file an annual registration. Rule 590-7-22-.02 places a new domestic or foreign limited liability company's first annual registration between January 1 and April 1 of the year following the calendar year of the new registration filing.</p>
+<p>Rule 590-7-4-.05 and Rule 590-7-22-.10 say a corporation or limited liability company may file for a period up to and including three calendar years. The next annual registration is due between January 1 and April 1 of the first calendar year following the end of that designated period.</p>
+<p>The <a href="https://ecorp.sos.ga.gov/oneClickAR">One Click Annual Registration</a> page says an entity files each calendar year it is due between January 1 and April 1, and that annual registration filings made prior to January 1 will not be applied to the next annual registration period.</p>
+</section>
+
+<section class="card" id="check" aria-labelledby="check-h">
+<h2 id="check-h">Questions</h2>
+<p id="how">One entity. Dates use the form YYYY-MM-DD. Leave a date blank when you do not have it. The answers stay in this tab.</p>
+<form id="ga-form" autocomplete="off">
+<label for="ga-year">Calendar year you are asking about</label>
+<select id="ga-year" name="year">
+<option value="">Choose a year</option>
+<option value="2026">2026</option>
+<option value="2027">2027</option>
+<option value="2028">2028</option>
+<option value="2029">2029</option>
+<option value="2030">2030</option>
+<option value="2031">2031</option>
+<option value="2032">2032</option>
+</select>
+<fieldset>
+<legend>Entity</legend>
+<div class="choices">
+<label><input type="radio" name="entity" value="domestic-corporation"> Domestic corporation</label>
+<label><input type="radio" name="entity" value="foreign-corporation"> Foreign corporation</label>
+<label><input type="radio" name="entity" value="llc"> Limited liability company</label>
+<label><input type="radio" name="entity" value="limited-partnership"> Limited partnership</label>
+<label><input type="radio" name="entity" value="other"> Another entity on file</label>
+<label><input type="radio" name="entity" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Which filing is this?</legend>
+<div class="choices">
+<label><input type="radio" name="filing" value="first"> The first annual registration</label>
+<label><input type="radio" name="filing" value="later"> A later year</label>
+<label><input type="radio" name="filing" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Multi-year filing already on record</legend>
+<p>Does a filing already on record designate a one-year, two-year, or three-year period that includes this calendar year?</p>
+<div class="choices">
+<label><input type="radio" name="multiYear" value="yes"> Yes, it includes this year</label>
+<label><input type="radio" name="multiYear" value="no"> No</label>
+<label><input type="radio" name="multiYear" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<label for="ga-articles">Domestic corporation, first filing: date the articles were delivered (YYYY-MM-DD)</label>
+<input id="ga-articles" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="YYYY-MM-DD" aria-describedby="articles-hint">
+<p id="articles-hint" class="muted">Used when the entity is a domestic corporation and this is the first filing. October 1 itself is not "subsequent to October 1."</p>
+<label for="ga-formed">LLC, limited partnership, or foreign corporation, first filing: calendar year of the initial filing</label>
+<input id="ga-formed" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="Year" aria-describedby="formed-hint">
+<p id="formed-hint" class="muted">The FAQ places the first window in the year following that initial filing.</p>
+<label for="ga-fileon">A filing date you want compared with the window (YYYY-MM-DD)</label>
+<input id="ga-fileon" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="YYYY-MM-DD">
+<div class="actions">
+<button type="submit" id="ga-go">Show points to review</button>
+<button type="button" class="sec" id="ga-clear">Clear answers</button>
+</div>
+</form>
+</section>
+
+<section class="card" id="ga-result" aria-live="polite">
+<h2 class="big">Points to review</h2>
+<div class="result-grid">
+<div>
+<p id="ga-lead">Answer every question. Then this page lists points to review.</p>
+<ul id="ga-points" hidden></ul>
+</div>
+<div class="note">
+<p id="ga-disclaimer">General guidance, not legal, tax or IT advice.</p>
+<p id="ga-affiliation">Not affiliated with or endorsed by the Georgia Secretary of State.</p>
+</div>
+</div>
+</section>
+
+<section class="card sources" id="sources" aria-labelledby="src-h">
+<h2 id="src-h">Sources</h2>
+<ul>
+<li><a href="https://sos.ga.gov/how-to-guide/how-file-annual-registration">Georgia Secretary of State: how to file an annual registration</a></li>
+<li><a href="https://sos.ga.gov/page/business-division-faq">Georgia Secretary of State: business division FAQ</a></li>
+<li><a href="https://rules.sos.ga.gov/gac/590-7-4">Rules of the Georgia Secretary of State, 590-7-4, corporations</a></li>
+<li><a href="https://rules.sos.ga.gov/gac/590-7-22">Rules of the Georgia Secretary of State, 590-7-22, limited liability companies</a></li>
+<li><a href="https://ecorp.sos.ga.gov/oneClickAR">Georgia Secretary of State: One Click Annual Registration</a></li>
+</ul>
+<p>Checked October 31, 2026.</p>
+<p>Not affiliated with or endorsed by the Georgia Secretary of State.</p>
+</section>
+
+<section class="card" id="signup" aria-labelledby="signup-h">
+<h2 id="signup-h">Free weekly email</h2>
+<!-- Embedded #sib-form posts SIGNUP_SOURCE (default ga-ar). Create the text contact attribute SIGNUP_SOURCE in the existing Brevo account before relying on it; until then Brevo may ignore or reject it. -->
+<p>One short weekly email about new free browser checks. Double opt-in. Unsubscribe any time. See our <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>.</p>
+<form id="sib-form" method="POST" action="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" data-type="subscription" autocomplete="off">
+<p>
+<label for="EMAIL">Enter your email address to subscribe</label>
+<input class="input" type="email" id="EMAIL" name="EMAIL" autocomplete="email" inputmode="email" value="" placeholder="EMAIL" required>
+</p>
+<p>
+<label class="sib-optin" for="OPT_IN">
+<input type="checkbox" value="1" id="OPT_IN" name="OPT_IN" required>
+<span>By subscribing you agree to get this weekly email from First Mover Projects. We'll send a confirmation first. Unsubscribe any time with one click. We don't sell or share your email. See our Privacy Policy: firstmoverprojects.com/privacy.html</span>
+</label>
+</p>
+<p><button type="submit">Sign up for the weekly FMP email</button></p>
+<input type="text" name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off">
+<input type="hidden" name="locale" value="en">
+<input type="hidden" name="SIGNUP_SOURCE" value="ga-ar">
+</form>
+<script id="signup-source-script">
+(function () {
+  "use strict";
+  var form = document.getElementById("sib-form");
+  if (!form) return;
+  var input = form.querySelector('input[name="SIGNUP_SOURCE"]');
+  if (!input) return;
+  var match = /(?:^|[?&])SIGNUP_SOURCE=([^&#]*)/.exec(window.location.search || "");
+  if (!match) return;
+  var raw = match[1].replace(/\+/g, " ");
+  try { raw = decodeURIComponent(raw); } catch (err) { raw = match[1]; }
+  var clean = String(raw).toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+  if (clean) input.value = clean;
+})();
+</script>
+</section>
+</main>
+<footer>
+<p>Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
+<p>First Mover Projects, PO Box 98, Firth, NE 68358. firstmoverprojects@gmail.com. General guidance, not legal, tax or IT advice. Not affiliated with or endorsed by the Georgia Secretary of State.</p>
+</footer>
+<noscript>
+<p>The points to review need JavaScript in your browser. Nothing is uploaded. The Secretary of State links and the email form above still work.</p>
+</noscript>
+<script id="ga-annual-registration-check">
+(function () {
+  "use strict";
+
+  var DISCLAIMER = "General guidance, not legal, tax or IT advice.";
+  var AFFILIATION = "Not affiliated with or endorsed by the Georgia Secretary of State.";
+  var LABEL = "Points to review";
+  var NEED = "Answer every question. Then this page lists points to review.";
+  var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var ENTITY = { "domestic-corporation": 1, "foreign-corporation": 1, llc: 1, "limited-partnership": 1, other: 1, unsure: 1 };
+  var FILING = { first: 1, later: 1, unsure: 1 };
+  var YN = { yes: 1, no: 1, unsure: 1 };
+
+  function incomplete(message) {
+    return { ok: false, label: LABEL, items: [], message: message || NEED, disclaimer: DISCLAIMER, affiliation: AFFILIATION };
+  }
+
+  function parseISO(raw) {
+    if (raw == null) return null;
+    var s = String(raw).trim();
+    if (!s) return null;
+    var matched = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+    if (!matched) return null;
+    var y = Number(matched[1]);
+    var m = Number(matched[2]);
+    var d = Number(matched[3]);
+    var dt = new Date(Date.UTC(y, m - 1, d));
+    if (dt.getUTCFullYear() !== y || dt.getUTCMonth() !== m - 1 || dt.getUTCDate() !== d) return null;
+    return { y: y, m: m, d: d, utc: dt.getTime() };
+  }
+
+  function formatLong(part) {
+    return MONTHS[part.m - 1] + " " + part.d + ", " + part.y;
+  }
+
+  function addDays(part, n) {
+    var dt = new Date(part.utc + n * 86400000);
+    return parseISO(dt.getUTCFullYear() + "-" + pad(dt.getUTCMonth() + 1) + "-" + pad(dt.getUTCDate()));
+  }
+
+  function pad(n) {
+    return n < 10 ? "0" + n : String(n);
+  }
+
+  function isAfterOctober1(part) {
+    return part.m > 10 || (part.m === 10 && part.d > 1);
+  }
+
+  function windowText(year) {
+    return "January 1, " + year + " through April 1, " + year;
+  }
+
+  function compareToWindow(part, year) {
+    var start = Date.UTC(year, 0, 1);
+    var end = Date.UTC(year, 3, 1);
+    if (part.utc < start) return "before";
+    if (part.utc > end) return "after";
+    return "inside";
+  }
+
+  function isYear(n) {
+    return typeof n === "number" && n === Math.floor(n) && n >= 2026 && n <= 2032;
+  }
+
+  function formedYearOk(n) {
+    return typeof n === "number" && n === Math.floor(n) && n >= 1800 && n <= 2100;
+  }
+
+  function fileOnLine(part, year) {
+    var place = compareToWindow(part, year);
+    if (place === "inside") {
+      return "the date " + formatLong(part) + " falls in the January 1 through April 1 window for " + year + ".";
+    }
+    if (place === "before") {
+      return "the date " + formatLong(part) + " is before January 1, " + year + ". The One Click Annual Registration page says filings made prior to January 1 will not be applied to the next annual registration period.";
+    }
+    return "the date " + formatLong(part) + " is after April 1, " + year + ". The how-to page says the registration may be filed from January 1 and is due by April 1.";
+  }
+
+  function pointsToReview(answers) {
+    if (!answers || typeof answers !== "object") return incomplete();
+    if (!isYear(answers.year) || !ENTITY[answers.entity] || !FILING[answers.filing] || !YN[answers.multiYear]) return incomplete();
+    var articles = null;
+    if (answers.articlesDate) {
+      articles = parseISO(answers.articlesDate);
+      if (!articles) return incomplete("Enter the articles date as YYYY-MM-DD, or leave it blank.");
+    }
+    var fileOn = null;
+    if (answers.fileOn) {
+      fileOn = parseISO(answers.fileOn);
+      if (!fileOn) return incomplete("Enter the filing date as YYYY-MM-DD, or leave it blank.");
+    }
+    var formed = answers.formedYear;
+    if (formed != null && formed !== "") {
+      if (!formedYearOk(formed)) return incomplete("Enter the initial filing year as a four-digit year, or leave it blank.");
+    } else {
+      formed = null;
+    }
+    var year = answers.year;
+    var items = [];
+    function add(text) { items.push("Point to review: " + text); }
+    add("the Secretary of State how-to page says an annual registration is due by April 1 and may be filed as early as January 1. The window for calendar year " + year + " on that page is " + windowText(year) + ".");
+    add("the One Click Annual Registration page says filings made prior to January 1 will not be applied to the next annual registration period.");
+    if (answers.entity === "domestic-corporation") {
+      add("the business FAQ says a Georgia corporation files the first annual registration within 90 days of the date of incorporation, and between January 1 and April 1 each year thereafter.");
+    } else if (answers.entity === "foreign-corporation" || answers.entity === "llc" || answers.entity === "limited-partnership") {
+      add("the business FAQ says limited liability companies, limited partnerships, and foreign corporations file the first annual registration between January 1 and April 1 of the year following the initial filing, and between January 1 and April 1 each year thereafter.");
+    } else {
+      add("the entity is marked " + (answers.entity === "other" ? "as another entity on file" : "not sure") + ". The FAQ states the January 1 through April 1 window for corporations, limited liability companies, limited partnerships, and foreign corporations.");
+    }
+    if (answers.filing === "later" || answers.filing === "unsure") {
+      add("a later-year filing for " + year + " is the " + windowText(year) + " window in Rule 590-7-4-.03 for a corporation and Rule 590-7-22-.03 for a limited liability company.");
+    }
+    if (answers.filing === "first" || answers.filing === "unsure") {
+      if (answers.entity === "domestic-corporation" || answers.entity === "unsure") {
+        add("Rule 590-7-4-.02 says a new domestic corporation files within 90 days after its articles are filed or become effective. If the articles are delivered subsequent to October 1, the initial annual registration is filed between January 1 and April 1 of the year next succeeding the calendar year in which the certificate of incorporation is issued.");
+        if (articles && answers.entity === "domestic-corporation") {
+          if (isAfterOctober1(articles)) {
+            var nextYear = articles.y + 1;
+            add("the articles date " + formatLong(articles) + " is subsequent to October 1. Rule 590-7-4-.02 places that initial window at " + windowText(nextYear) + ".");
+            if (fileOn) add("against that initial window, " + fileOnLine(fileOn, nextYear));
+          } else {
+            var end = addDays(articles, 90);
+            add("the articles date " + formatLong(articles) + " is not subsequent to October 1. Ninety days after that date is " + formatLong(end) + ". The FAQ also says filings after the first one fall between January 1 and April 1 each year thereafter.");
+            if (fileOn) {
+              if (fileOn.utc < articles.utc) {
+                add("the filing date " + formatLong(fileOn) + " is before the articles date " + formatLong(articles) + ".");
+              } else if (fileOn.utc > end.utc) {
+                add("the filing date " + formatLong(fileOn) + " is after " + formatLong(end) + ", the date 90 days after the articles date.");
+              } else {
+                add("the filing date " + formatLong(fileOn) + " falls in the 90 days after " + formatLong(articles) + ", through " + formatLong(end) + ".");
+              }
+            }
+          }
+        }
+      }
+      if (answers.entity === "llc" || answers.entity === "limited-partnership" || answers.entity === "foreign-corporation" || answers.entity === "unsure") {
+        if (formed != null && answers.entity !== "unsure" && answers.entity !== "other") {
+          add("the initial filing year marked here is " + formed + ". The FAQ places the first window at " + windowText(formed + 1) + ".");
+        } else if (answers.entity !== "domestic-corporation") {
+          add("the first window for a limited liability company, limited partnership, or foreign corporation is January 1 through April 1 of the year following the initial filing. A formed year is listed here when one is entered.");
+        }
+      }
+    }
+    if (answers.multiYear === "yes") {
+      add("the answer says a multi-year filing already includes " + year + ". Rule 590-7-4-.05 and Rule 590-7-22-.10 say the next annual registration is due between January 1 and April 1 of the first calendar year following the end of the designated period. The how-to page allows a period up to and including 3 calendar years.");
+    } else if (answers.multiYear === "no") {
+      add("the answer says no multi-year filing already includes " + year + ". The how-to page still allows a filing in advance for a period up to and including 3 calendar years.");
+    } else {
+      add("it is marked not sure whether a multi-year filing already includes " + year + ". A period may run up to and including 3 calendar years, and the next window opens in the first calendar year after that period ends.");
+    }
+    if (fileOn) add(fileOnLine(fileOn, year));
+    return { ok: true, label: LABEL, items: items, message: "", disclaimer: DISCLAIMER, affiliation: AFFILIATION };
+  }
+
+  function picked(form, name) {
+    var nodes = form.elements[name];
+    var j;
+    if (!nodes) return "";
+    if (typeof nodes.length === "number") {
+      for (j = 0; j < nodes.length; j++) {
+        if (nodes[j].checked) return nodes[j].value;
+      }
+      return "";
+    }
+    return nodes.checked ? nodes.value : "";
+  }
+
+  function readYear(id) {
+    var el = document.getElementById(id);
+    if (!el) return null;
+    var s = String(el.value || "").trim();
+    if (!s) return null;
+    if (!/^\d{4}$/.test(s)) return s;
+    return Number(s);
+  }
+
+  function readAnswers(form) {
+    var yearEl = document.getElementById("ga-year");
+    var articles = document.getElementById("ga-articles");
+    var fileOn = document.getElementById("ga-fileon");
+    var formed = readYear("ga-formed");
+    return {
+      year: yearEl && yearEl.value ? Number(yearEl.value) : null,
+      entity: picked(form, "entity"),
+      filing: picked(form, "filing"),
+      multiYear: picked(form, "multiYear"),
+      articlesDate: articles ? articles.value.trim() : "",
+      formedYear: formed,
+      fileOn: fileOn ? fileOn.value.trim() : ""
+    };
+  }
+
+  function show(result) {
+    var lead = document.getElementById("ga-lead");
+    var list = document.getElementById("ga-points");
+    var box = document.getElementById("ga-disclaimer");
+    var aff = document.getElementById("ga-affiliation");
+    if (box) box.textContent = DISCLAIMER;
+    if (aff) aff.textContent = AFFILIATION;
+    if (!lead || !list) return;
+    if (!result.ok) {
+      lead.hidden = false;
+      lead.textContent = result.message;
+      list.hidden = true;
+      list.textContent = "";
+      return;
+    }
+    lead.hidden = true;
+    lead.textContent = "";
+    list.hidden = false;
+    list.textContent = "";
+    var i, li;
+    for (i = 0; i < result.items.length; i++) {
+      li = document.createElement("li");
+      li.textContent = result.items[i];
+      list.appendChild(li);
+    }
+  }
+
+  function clearAnswers(form) {
+    var names = ["entity", "filing", "multiYear"];
+    var i, nodes, j;
+    for (i = 0; i < names.length; i++) {
+      nodes = form.elements[names[i]];
+      if (!nodes) continue;
+      for (j = 0; j < nodes.length; j++) nodes[j].checked = false;
+    }
+    var year = document.getElementById("ga-year");
+    var articles = document.getElementById("ga-articles");
+    var formed = document.getElementById("ga-formed");
+    var fileOn = document.getElementById("ga-fileon");
+    if (year) year.value = "";
+    if (articles) articles.value = "";
+    if (formed) formed.value = "";
+    if (fileOn) fileOn.value = "";
+  }
+
+  var api = {
+    DISCLAIMER: DISCLAIMER,
+    AFFILIATION: AFFILIATION,
+    LABEL: LABEL,
+    parseISO: parseISO,
+    addDays: addDays,
+    isAfterOctober1: isAfterOctober1,
+    compareToWindow: compareToWindow,
+    formatLong: formatLong,
+    pointsToReview: pointsToReview
+  };
+  if (typeof window !== "undefined") window.FMP_GA = api;
+
+  function boot() {
+    var form = document.getElementById("ga-form");
+    var clear = document.getElementById("ga-clear");
+    if (!form || !clear) return;
+    show(incomplete());
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      show(pointsToReview(readAnswers(form)));
+    });
+    clear.addEventListener("click", function () {
+      clearAnswers(form);
+      show(incomplete());
+    });
+  }
+
+  if (typeof document !== "undefined" && document.getElementById) boot();
+})();
+</script>
+</body>
+</html>
