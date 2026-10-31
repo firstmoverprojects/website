@@ -24,7 +24,7 @@ function assertEq(actual, expected, msg) {
 }
 
 var EFILE = "If you file 10 or more information returns of any type in the year, you must e-file. For filing season 2027, IRS says IRIS is the only intake system.";
-var PAPER = "Filers with fewer than 10 information returns may file on paper. Paper due Mar 1, 2027.";
+var PAPER = "If you file fewer than 10 information returns of any type in the year, you may file on paper. IRS paper due Mar 1, 2027.";
 var ORIGINAL = "Did the vehicle's original use begin with the borrower (new, not previously used)?";
 var BUTTON = "Join the free waitlist for the $29 kit";
 var DATES = "Borrower statements due Jan 31, 2027. IRS e-file due Mar 31, 2027.";
