@@ -40,8 +40,50 @@ data.states.forEach((st) => {
 });
 
 check("BOI not required for US companies", data.boi && data.boi.requiredForUsCompanies === false);
-check("BOI has a source", /^https:\/\/[^\s]+$/.test(data.boi.sourceUrl));
-check("no BOI deadline row", !data.deadlines.some((row) => /boi|beneficial ownership/i.test(row.title + row.id)));
+check("BOI not required for US persons", data.boi && data.boi.requiredForUsPersons === false);
+check("BOI cites the FinCEN status page", data.boi.sourceUrl === "https://www.fincen.gov/boi");
+check("BOI source label names FinCEN", data.boi.sourceLabel === "FinCEN: Beneficial ownership information");
+check(
+  "BOI summary states the US exemption",
+  /Companies formed in the United States, including U\.S\. LLCs, do not file beneficial ownership \(BOI\) reports/.test(data.boi.summary) &&
+    /U\.S\. persons are exempt/.test(data.boi.summary) &&
+    /August 14, 2026/.test(data.boi.summary) &&
+    /March 26, 2025 interim final rule/.test(data.boi.summary)
+);
+check(
+  "BOI summary has no scare copy",
+  !/penalt|fine|prison|criminal|jail|\$\d|willful|failure to file|must file|required to file|or else/i.test(data.boi.summary)
+);
+check("no BOI deadline row", !data.deadlines.some((row) => /boi|beneficial ownership/i.test(row.title + " " + row.detail + " " + row.id)));
+
+const usMustFileBoi =
+  /(?:U\.S\.|United States|domestic).{0,80}(?:LLC|compan(?:y|ies)|person).{0,120}(?:must|required to|have to|need to)\s+file.{0,40}(?:BOI|beneficial ownership)/i;
+const fileBoiForUs =
+  /(?:must|required to|have to|need to)\s+file.{0,60}(?:BOI|beneficial ownership).{0,120}(?:U\.S\.|United States|domestic|LLC)/i;
+const directBoiOrder = [
+  /(?:must|required to|have to|need to)\s+file\s+(?:a |your |the )?(?:BOI|beneficial ownership)/i,
+  /(?:LLC|LLCs|compan(?:y|ies))\s+must\s+file/i,
+  /file your (?:BOI|beneficial ownership)/i,
+  /BOI reports? (?:is|are) due/i
+];
+function scanForStaleBoi(dir, acc) {
+  fs.readdirSync(dir).forEach((name) => {
+    if (name === ".git" || name === "node_modules") return;
+    const full = path.join(dir, name);
+    const stat = fs.statSync(full);
+    if (stat.isDirectory()) scanForStaleBoi(full, acc);
+    else if (/\.(html|xml|js|json|md|yml|txt|ics)$/.test(name)) acc.push(full);
+  });
+}
+const siteFiles = [];
+scanForStaleBoi(root, siteFiles);
+siteFiles.forEach((file) => {
+  const text = fs.readFileSync(file, "utf8");
+  const rel = path.relative(root, file);
+  if (usMustFileBoi.test(text) || fileBoiForUs.test(text) || directBoiOrder.some((pattern) => pattern.test(text))) {
+    failures.push("stale US BOI filing copy in " + rel);
+  }
+});
 
 const ids = new Set();
 const iso = /^\d{4}-\d{2}-\d{2}$/;
