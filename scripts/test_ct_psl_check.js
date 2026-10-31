@@ -24,7 +24,7 @@ function assertEq(actual, expected, msg) {
 }
 
 var QUESTION = "Does this apply to me on Jan 1, 2027?";
-var DISCLAIMER = "Not legal advice; check with CT DOL";
+var DISCLAIMER = "General guidance, not legal, tax or IT advice. Check with CT DOL.";
 var CHECKED = "Checked October 30, 2026.";
 var BREVO = "https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==";
 
