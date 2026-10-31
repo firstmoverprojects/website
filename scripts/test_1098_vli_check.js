@@ -36,7 +36,8 @@ var BREVO = "https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9
 
 assert(html.indexOf(EFILE) !== -1, "10-return e-file line");
 assert(html.split(PAPER).length - 1 === 2, "paper line in the answer and the result");
-assert(html.indexOf("TODO: These waitlist clicks are not tagged 1098-VLI.") !== -1, "Brevo tag TODO names the gap");
+assert(html.indexOf("TODO: These waitlist clicks are not tagged 1098-VLI.") === -1, "stale signup TODO removed");
+assert(html.indexOf("<!-- Embedded #sib-form posts SIGNUP_SOURCE (default 1098-vli). Chief: create text contact attribute SIGNUP_SOURCE in the existing Brevo account before relying on it; until then Brevo may ignore or reject it. The two waitlist links remain untagged. -->") !== -1, "Risk signup comment");
 assert(html.indexOf("SIGNUP_SOURCE") !== -1, "TODO names the Brevo attribute Chief must create");
 assert(html.indexOf(BREVO + "?") === -1, "Brevo URL has no query string");
 assert(html.indexOf(BREVO + "&") === -1, "Brevo URL has no extra parameter");
@@ -122,7 +123,10 @@ if (!scriptMatch) {
 var removedLines = require("child_process").execFileSync("git", ["diff", "--unified=0", "origin/main", "--", "deadlines/1098-vli-check/index.html"], { encoding: "utf8" })
   .split("\n")
   .filter(function (line) { return line.startsWith("-") && !line.startsWith("---"); });
-assert(removedLines.length === 1 && removedLines[0].indexOf(".site-footer {") !== -1, "no other page content removed");
+assert(removedLines.some(function (line) { return line.indexOf(".site-footer {") !== -1; }), "footer rule still only reflowed");
+assert(removedLines.every(function (line) {
+  return line.indexOf(".site-footer {") !== -1 || line.indexOf("TODO: These waitlist clicks are not tagged") !== -1 || line.indexOf("Chief, in the existing Brevo account") !== -1;
+}), "no other page content removed");
 
 function finish() {
   if (failed) {
