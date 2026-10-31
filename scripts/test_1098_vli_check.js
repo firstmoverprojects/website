@@ -37,7 +37,8 @@ var BREVO = "https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9
 assert(html.indexOf(EFILE) !== -1, "10-return e-file line");
 assert(html.split(PAPER).length - 1 === 2, "paper line in the answer and the result");
 assert(html.indexOf("TODO: These waitlist clicks are not tagged 1098-VLI.") === -1, "stale signup TODO removed");
-assert(html.indexOf("<!-- Embedded #sib-form posts SIGNUP_SOURCE (default 1098-vli). Chief: create text contact attribute SIGNUP_SOURCE in the existing Brevo account before relying on it; until then Brevo may ignore or reject it. The two waitlist links remain untagged. -->") !== -1, "Risk signup comment");
+assert(html.indexOf("<!-- Embedded #sib-form posts SIGNUP_SOURCE (default 1098-vli). Chief: create text contact attribute SIGNUP_SOURCE in the existing Brevo account before relying on it; until then Brevo may ignore or reject it. Waitlist links scroll to #sib-form. -->") !== -1, "signup comment");
+assert(html.indexOf("remain untagged") === -1, "comment does not say links are untagged");
 assert(html.indexOf("SIGNUP_SOURCE") !== -1, "TODO names the Brevo attribute Chief must create");
 assert(html.indexOf(BREVO + "?") === -1, "Brevo URL has no query string");
 assert(html.indexOf(BREVO + "&") === -1, "Brevo URL has no extra parameter");
@@ -51,7 +52,19 @@ assert(html.indexOf(THANKS) !== -1, "thanks line");
 assert(html.indexOf(SHARE) !== -1, "share line");
 assert(html.indexOf("https://www.irs.gov/instructions/i1098vli") !== -1, "instructions URL");
 assert(html.indexOf("https://www.irs.gov/publications/p1099") !== -1, "publication 1099 URL");
-assert(html.indexOf(BREVO) !== -1, "existing Brevo signup URL");
+assert(html.indexOf('action="' + BREVO + '"') !== -1, "form still posts to the Brevo action");
+assert(html.indexOf('name="SIGNUP_SOURCE"') !== -1, "hidden name is the SIGNUP_SOURCE attribute id");
+assert(html.indexOf('name="Signup_source"') === -1, "hidden name is not the display label");
+var hrefs = html.match(/href="[^"]*"/g) || [];
+assert(hrefs.length > 0, "page has hrefs");
+assert(hrefs.every(function (href) { return href.indexOf("sibforms.com") === -1; }), "no sibforms.com hrefs");
+var ctas = html.match(/<a\b[^>]*>Join the free waitlist for the \$29 kit<\/a>/g) || [];
+assertEq(ctas.length, 2, "two waitlist CTAs");
+ctas.forEach(function (tag, i) {
+  assert(tag.indexOf('href="#sib-form"') !== -1, "waitlist CTA " + i + " targets #sib-form");
+  assert(tag.indexOf("sibforms.com") === -1, "waitlist CTA " + i + " is not a hosted form link");
+  assert(tag.indexOf("target=") === -1, "waitlist CTA " + i + " stays on this page");
+});
 assert(html.indexOf('<input type="hidden" name="SIGNUP_SOURCE" value="1098-vli">') !== -1, "hidden SIGNUP_SOURCE default is 1098-vli");
 assert(html.split('<input type="hidden" name="SIGNUP_SOURCE" value="1098-vli">').length - 1 === 1, "one hidden SIGNUP_SOURCE input");
 assert(html.indexOf('id="sib-form"') !== -1, "embedded Brevo form");
@@ -123,9 +136,9 @@ if (!scriptMatch) {
 var removedLines = require("child_process").execFileSync("git", ["diff", "--unified=0", "origin/main", "--", "deadlines/1098-vli-check/index.html"], { encoding: "utf8" })
   .split("\n")
   .filter(function (line) { return line.startsWith("-") && !line.startsWith("---"); });
-assert(removedLines.some(function (line) { return line.indexOf(".site-footer {") !== -1; }), "footer rule still only reflowed");
+assertEq(removedLines.length, 3, "only the comment and two hosted links change");
 assert(removedLines.every(function (line) {
-  return line.indexOf(".site-footer {") !== -1 || line.indexOf("TODO: These waitlist clicks are not tagged") !== -1 || line.indexOf("Chief, in the existing Brevo account") !== -1;
+  return line.indexOf("The two waitlist links remain untagged.") !== -1 || line.indexOf("sibforms.com/serve/") !== -1;
 }), "no other page content removed");
 
 function finish() {
@@ -276,7 +289,11 @@ function runHeadless() {
               "    text: main.innerText.replace(/\\s+/g, ' ').trim(),\n" +
               "    submitted: window.__fmpSubmitBlocked || 0,\n" +
               "    scrollWidth: doc.scrollWidth,\n" +
-              "    clientWidth: doc.clientWidth\n" +
+              "    clientWidth: doc.clientWidth,\n" +
+              "    sibHrefs: document.querySelectorAll('a[href*=\"sibforms.com\"]').length,\n" +
+              "    ctaHrefs: Array.prototype.map.call(document.querySelectorAll('a'), function (a) {\n" +
+              "      return a.textContent.indexOf('Join the free waitlist') === -1 ? '' : a.getAttribute('href');\n" +
+              "    }).filter(Boolean)\n" +
               "  };\n" +
               "})()",
             returnByValue: true
@@ -328,6 +345,8 @@ function runHeadless() {
       assertEq(out.custom.submitted, 0, "query load did not submit");
       assertEq(posts.length, 0, "no live Brevo request");
       assertEq(out.baseline.scrollWidth, out.baseline.clientWidth, "375px has no sideways scroll");
+      assertEq(out.baseline.sibHrefs, 0, "headless page has no sibforms.com href");
+      assertEq(out.baseline.ctaHrefs.join(","), "#sib-form,#sib-form", "headless waitlist CTAs target #sib-form");
       console.log("FormData default: " + out.baseline.pairs.join("&"));
       console.log("FormData param: " + out.custom.pairs.join("&"));
       ws.close();
