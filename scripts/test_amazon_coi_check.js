@@ -318,7 +318,7 @@ if (!quoteFile) {
 
 var sitemap = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
 assert(sitemap.indexOf("<loc>https://firstmoverprojects.com/tools/amazon-coi-check/</loc>") !== -1, "sitemap loc");
-assert(sitemap.indexOf("<loc>https://firstmoverprojects.com/tools/amazon-coi-check/</loc>\n    <lastmod>2026-10-31</lastmod>") !== -1, "sitemap lastmod");
+assert(sitemap.indexOf("<loc>https://firstmoverprojects.com/tools/amazon-coi-check/</loc>\n    <lastmod>2026-10-30</lastmod>") !== -1, "sitemap lastmod");
 var deadline = fs.readFileSync(path.join(root, "deadlines", "amazon-insurance-nov-2.html"), "utf8");
 assert(deadline.indexOf('<p>Free: <a href="/tools/amazon-coi-check/">paste your certificate text and check it against Amazon\'s criteria</a> (runs in your browser, nothing uploaded).</p>') !== -1, "deadline page free-tool line");
 assert(deadline.indexOf("Amazon Insurance Certificate Checklist: What to Review Before Uploading") !== -1, "deadline checklist heading");
