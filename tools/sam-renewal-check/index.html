@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; form-action https://05279842.sibforms.com; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/sam-renewal-check/">
+<title>SAM.gov renewal check (free, runs in your browser)</title>
+<meta name="description" content="A free web check of the SAM.gov 365-day entity registration renewal interval and FAR 52.204-7 and 52.204-13. Nothing is uploaded.">
+<meta property="og:title" content="SAM.gov renewal check (free, runs in your browser)">
+<meta property="og:description" content="A free web check of the SAM.gov 365-day entity registration renewal interval and FAR 52.204-7 and 52.204-13. Nothing is uploaded.">
+<meta property="og:url" content="https://firstmoverprojects.com/tools/sam-renewal-check/">
+<meta property="og:type" content="website">
+<!-- UNLISTED: noindex. Do not add this URL to sitemap.xml, tools/index.html, index.html, deadlines/index.html, deadlines/feed.xml, deadlines/deadlines.ics, or deadlines/finder/. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "dateModified": "2026-10-31",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How often does SAM.gov say to renew an entity registration?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The SAM.gov entity registration page says you must renew your registration every 365 days to keep it active. This page counts 365 days after the date you enter."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does FAR 52.204-13 say about keeping the registration current?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "FAR 52.204-13 says the contractor maintains registration in SAM during contract performance and through final payment, and reviews and updates the information on an annual basis from the date of initial registration or a later update."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does SAM.gov say activation can take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The entity registration checklist says to allow at least ten business days after you submit the registration for it to become active. This page counts ten weekdays and skips Saturday and Sunday. It does not skip federal holidays."
+      }
+    }
+  ]
+}
+</script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#12161c;background:#f4f6f8}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;line-height:1.25;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.2em 0 .4em}
+.topline{font-size:1.05rem;margin:0 0 8px}
+.card{background:#fff;border:2px solid #1b2838;border-radius:10px;padding:16px;margin:12px 0}
+.big{font-size:1.45rem;font-weight:800;color:#12161c;line-height:1.3;margin:.2em 0}
+.muted{color:#1b2838;font-size:.95rem}
+label{display:block;font-weight:600;margin-top:12px}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:2px solid #08306b;background:#08306b;color:#fff;cursor:pointer;margin:12px 8px 0 0;min-height:44px;font-weight:700}
+button.sec{background:#fff;color:#12161c;border-color:#12161c}
+a{color:#08306b}
+a:hover,a:focus{color:#041e42}
+a:focus,button:focus,input:focus,select:focus{outline:3px solid #08306b;outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:8px;top:8px;background:#fff;color:#12161c;padding:8px 12px;z-index:2}
+footer{margin:8px 0 24px}
+fieldset{border:2px solid #1b2838;border-radius:8px;margin:12px 0;padding:8px 12px;min-width:0}
+legend{font-weight:800;padding:0 4px}
+.choices{display:flex;flex-wrap:wrap;gap:8px}
+.choices label{font-weight:600;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:center;margin:0;flex:1 1 14rem;min-width:0;max-width:100%;min-height:44px;padding:8px 10px;border:2px solid #1b2838;border-radius:8px;background:#fff;color:#12161c;cursor:pointer}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.actions button{margin:0;flex:1 1 12rem}
+input[type="text"],input[type="email"]{width:100%;max-width:100%;font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:10px;border:2px solid #1b2838;border-radius:6px;background:#fff;color:#12161c;min-height:44px}
+a,p,li,label,legend,h1,h2{overflow-wrap:anywhere}
+[hidden]{display:none !important}
+.result-grid{display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+.result-grid > *{min-width:0}
+.note{background:#eef3f8;border:2px solid #1b2838;border-radius:8px;padding:12px;margin:0}
+.err{font-weight:800;color:#4d0d09}
+#sam-lines{margin:.4em 0;padding-left:1.2em}
+#sam-lines li{margin:.45em 0}
+#sib-form{position:relative;display:grid;gap:12px;margin-top:8px}
+#sib-form label{margin-top:0}
+.sib-optin{display:flex;align-items:flex-start;gap:8px;font-weight:400;min-height:44px;min-width:0;max-width:100%}
+.sib-optin span{min-width:0;overflow-wrap:anywhere}
+#sib-form .input--hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.sources a{display:block;min-height:44px;padding:10px 0;max-width:100%}
+main,.card,fieldset,form{max-width:100%;min-width:0}
+@media (min-width:720px){
+  .result-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:start}
+}
+@media (max-width:480px){
+  main{padding:12px}
+  h1{font-size:1.35rem}
+  .choices{flex-direction:column}
+  .choices label,.actions button,button{flex-basis:auto;width:100%;margin-right:0}
+}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,textarea{font-size:16px}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,button{min-height:44px}
+nav a,.site-nav a{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:44px;min-width:44px;padding:8px 6px}
+label:has(> input[type="checkbox"]),label:has(> input[type="radio"]){min-height:44px;box-sizing:border-box}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<p class="topline">A free web check of the SAM.gov 365-day entity registration renewal interval, plus the registration lines in FAR 52.204-7 and FAR 52.204-13. It runs in this browser. Nothing is uploaded.</p>
+<p class="muted site-nav"><a href="/">First Mover Projects</a></p>
+<h1>SAM.gov renewal check</h1>
+<p>Enter the date the registration became active, or the date it was last updated. The page counts 365 days forward, the interval stated on SAM.gov. Confirm that date in the Entity Workspace. This page reads only the dates typed here.</p>
+<p>Checked October 31, 2026.</p>
+
+<section class="card" aria-labelledby="rules-h">
+<h2 id="rules-h">What this page uses</h2>
+<p>The <a href="https://sam.gov/entity-registration">SAM.gov entity registration page</a> says: you must renew your registration every 365 days to keep it active. Updates can be made at any time, or during renewal.</p>
+<p>The <a href="https://sam.gov/sites/default/files/2024-11/entity-checklist.pdf">entity registration checklist</a> (November 2024) says the same 365-day renewal, and says to allow at least ten business days after you submit the registration for it to become active in SAM.gov. This page counts ten weekdays after the submission date you enter. It skips Saturday and Sunday. It skips no federal holiday.</p>
+<p><a href="https://www.ecfr.gov/current/title-48/chapter-1/subchapter-H/part-52/subpart-52.2/section-52.204-7">FAR 52.204-7</a> (NOV 2024) says an offeror is required to be registered in SAM when submitting an offer or quotation and at time of award.</p>
+<p><a href="https://www.acquisition.gov/far/52.204-13">FAR 52.204-13</a> says the contractor maintains registration in SAM during contract performance and through final payment of any contract, basic agreement, basic ordering agreement, or blanket purchasing agreement. To remain registered after the initial registration, the contractor reviews and updates the information on an annual basis, from the date of initial registration or subsequent updates. The SAM.gov page states the interval as 365 days. This page counts 365 days.</p>
+<p>The <a href="https://www.gsa.gov/small-business/find-opportunities/register-your-business">GSA page on registering a business</a> says you do not need to pay a third party to complete your registration.</p>
+</section>
+
+<section class="card" id="calc" aria-labelledby="calc-h">
+<h2 id="calc-h">Estimate</h2>
+<p id="how">Dates use YYYY-MM-DD. The answers stay in this tab.</p>
+<form id="sam-form" autocomplete="off">
+<label for="sam-anchor">Date the registration became active, or was last updated</label>
+<input id="sam-anchor" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="YYYY-MM-DD" aria-describedby="anchor-hint">
+<p id="anchor-hint" class="muted">SAM.gov counts the renewal interval from this kind of date. Use the date shown in the Entity Workspace.</p>
+<label for="sam-submit">Date a registration or renewal was submitted (optional)</label>
+<input id="sam-submit" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="YYYY-MM-DD" aria-describedby="submit-hint">
+<p id="submit-hint" class="muted">Leave blank to skip the ten-weekday count from the checklist.</p>
+<fieldset>
+<legend>FAR 52.204-13 in a contract you are reviewing</legend>
+<div class="choices">
+<label><input type="radio" name="clause" value="yes"> Yes</label>
+<label><input type="radio" name="clause" value="no"> No</label>
+<label><input type="radio" name="clause" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Submitting an offer or quotation</legend>
+<div class="choices">
+<label><input type="radio" name="offer" value="yes"> Yes</label>
+<label><input type="radio" name="offer" value="no"> No</label>
+<label><input type="radio" name="offer" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<div class="actions">
+<button type="submit" id="sam-go">Show the estimate</button>
+<button type="button" class="sec" id="sam-sample">Fill sample dates</button>
+<button type="button" class="sec" id="sam-clear">Clear</button>
+</div>
+</form>
+</section>
+
+<section class="card" id="sam-result" aria-live="polite">
+<h2 class="big" id="sam-label">Estimate</h2>
+<div class="result-grid">
+<div>
+<p id="sam-error" class="err" hidden></p>
+<p id="sam-lead">Enter the date. Then this page shows an estimate.</p>
+<ul id="sam-lines" hidden></ul>
+</div>
+<div class="note">
+<p id="sam-disclaimer">General information about SAM.gov entity registration, not legal or contracting advice. Not affiliated with or endorsed by the U.S. General Services Administration or the System for Award Management.</p>
+</div>
+</div>
+</section>
+
+<section class="card sources" id="sources" aria-labelledby="src-h">
+<h2 id="src-h">Sources</h2>
+<ul>
+<li><a href="https://sam.gov/entity-registration">SAM.gov: entity registration</a></li>
+<li><a href="https://sam.gov/sites/default/files/2024-11/entity-checklist.pdf">SAM.gov: entity registration checklist (PDF)</a></li>
+<li><a href="https://www.ecfr.gov/current/title-48/chapter-1/subchapter-H/part-52/subpart-52.2/section-52.204-7">FAR 52.204-7, System for Award Management</a></li>
+<li><a href="https://www.acquisition.gov/far/52.204-13">FAR 52.204-13, System for Award Management Maintenance</a></li>
+<li><a href="https://www.gsa.gov/small-business/find-opportunities/register-your-business">GSA: register your business</a></li>
+</ul>
+<p>Checked October 31, 2026.</p>
+<p>General information about SAM.gov entity registration, not legal or contracting advice. Not affiliated with or endorsed by the U.S. General Services Administration or the System for Award Management.</p>
+</section>
+
+<section class="card" id="signup" aria-labelledby="signup-h">
+<h2 id="signup-h">Free weekly email</h2>
+<!-- Embedded #sib-form posts SIGNUP_SOURCE (default sam-365). Create the text contact attribute SIGNUP_SOURCE in the existing Brevo account before relying on it; until then Brevo may ignore or reject it. -->
+<p>One short weekly email about new free browser checks. Double opt-in. Unsubscribe any time. See our <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>.</p>
+<form id="sib-form" method="POST" action="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" data-type="subscription" autocomplete="off">
+<p>
+<label for="EMAIL">Enter your email address to subscribe</label>
+<input class="input" type="email" id="EMAIL" name="EMAIL" autocomplete="email" inputmode="email" value="" placeholder="EMAIL" required>
+</p>
+<p>
+<label class="sib-optin" for="OPT_IN">
+<input type="checkbox" value="1" id="OPT_IN" name="OPT_IN" required>
+<span>By subscribing you agree to get this weekly email from First Mover Projects. We'll send a confirmation first. Unsubscribe any time with one click. We don't sell or share your email. See our Privacy Policy: firstmoverprojects.com/privacy.html</span>
+</label>
+</p>
+<p><button type="submit">Sign up for the weekly FMP email</button></p>
+<input type="text" name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off">
+<input type="hidden" name="locale" value="en">
+<input type="hidden" name="SIGNUP_SOURCE" value="sam-365">
+</form>
+<script id="signup-source-script">
+(function () {
+  "use strict";
+  var form = document.getElementById("sib-form");
+  if (!form) return;
+  var input = form.querySelector('input[name="SIGNUP_SOURCE"]');
+  if (!input) return;
+  var match = /(?:^|[?&])SIGNUP_SOURCE=([^&#]*)/.exec(window.location.search || "");
+  if (!match) return;
+  var raw = match[1].replace(/\+/g, " ");
+  try { raw = decodeURIComponent(raw); } catch (err) { raw = match[1]; }
+  var clean = String(raw).toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+  if (clean) input.value = clean;
+})();
+</script>
+</section>
+</main>
+<footer>
+<p>Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
+<p>First Mover Projects, PO Box 98, Firth, NE 68358. firstmoverprojects@gmail.com. General information about SAM.gov entity registration, not legal or contracting advice. Not affiliated with or endorsed by the U.S. General Services Administration or the System for Award Management.</p>
+</footer>
+<noscript>
+<p>The estimate needs JavaScript in your browser. Nothing is uploaded. The source links and the email form above still work.</p>
+</noscript>
+<script id="sam-renewal-check">
+(function () {
+  "use strict";
+
+  var DISCLAIMER = "General information about SAM.gov entity registration, not legal or contracting advice. Not affiliated with or endorsed by the U.S. General Services Administration or the System for Award Management.";
+  var LABEL = "Estimate";
+  var NEED = "Enter the date. Then this page shows an estimate.";
+  var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var YN = { yes: 1, no: 1, unsure: 1 };
+
+  function fail(message) {
+    return { ok: false, label: LABEL, lines: [], error: message, disclaimer: DISCLAIMER };
+  }
+
+  function pad(n) {
+    return n < 10 ? "0" + n : String(n);
+  }
+
+  function parseISO(raw) {
+    if (raw == null) return null;
+    var s = String(raw).trim();
+    if (!s) return null;
+    var matched = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+    if (!matched) return null;
+    var y = Number(matched[1]);
+    var m = Number(matched[2]);
+    var d = Number(matched[3]);
+    if (y < 1900 || y > 2100) return null;
+    var dt = new Date(Date.UTC(y, m - 1, d));
+    if (dt.getUTCFullYear() !== y || dt.getUTCMonth() !== m - 1 || dt.getUTCDate() !== d) return null;
+    return { y: y, m: m, d: d, utc: dt.getTime(), iso: y + "-" + pad(m) + "-" + pad(d) };
+  }
+
+  function formatLong(part) {
+    return MONTHS[part.m - 1] + " " + part.d + ", " + part.y;
+  }
+
+  function fromUTC(ms) {
+    var dt = new Date(ms);
+    return parseISO(dt.getUTCFullYear() + "-" + pad(dt.getUTCMonth() + 1) + "-" + pad(dt.getUTCDate()));
+  }
+
+  function addDays(part, n) {
+    return fromUTC(part.utc + n * 86400000);
+  }
+
+  function addBusinessDays(part, n) {
+    var ms = part.utc;
+    var left = n;
+    while (left > 0) {
+      ms += 86400000;
+      var day = new Date(ms).getUTCDay();
+      if (day !== 0 && day !== 6) left -= 1;
+    }
+    return fromUTC(ms);
+  }
+
+  function buildEstimate(input) {
+    if (!input || !YN[input.clause] || !YN[input.offer]) return fail(NEED);
+    var anchor = parseISO(input.anchor);
+    if (!anchor) return fail("Enter the active or last-updated date as YYYY-MM-DD.");
+    var submit = null;
+    if (input.submit) {
+      submit = parseISO(input.submit);
+      if (!submit) return fail("Enter the submission date as YYYY-MM-DD, or leave it blank.");
+    }
+    var renew = addDays(anchor, 365);
+    var lines = [];
+    lines.push("Estimate: SAM.gov says you must renew your registration every 365 days to keep it active. Counting 365 days after " + formatLong(anchor) + " lands on " + formatLong(renew) + ".");
+    lines.push("Estimate: FAR 52.204-13 says the contractor reviews and updates information in SAM on an annual basis, from the date of initial registration or subsequent updates. This count is 365 days, the interval stated on the SAM.gov entity registration page.");
+    if (submit) {
+      var active = addBusinessDays(submit, 10);
+      lines.push("Estimate: the entity registration checklist says to allow at least ten business days after you submit your registration for it to become active in SAM.gov. Ten weekdays after " + formatLong(submit) + " lands on " + formatLong(active) + ". This count skips Saturday and Sunday. It skips no federal holiday.");
+    }
+    if (input.clause === "yes") {
+      lines.push("Estimate: FAR 52.204-13 says the contractor maintains registration in SAM during contract performance and through final payment of any contract, basic agreement, basic ordering agreement, or blanket purchasing agreement.");
+    } else if (input.clause === "no") {
+      lines.push("Estimate: the answer says FAR 52.204-13 is not in the contract being reviewed. FAR 52.204-7 still addresses registration when an offer or quotation is submitted and at time of award.");
+    } else {
+      lines.push("Estimate: it is marked not sure whether FAR 52.204-13 is in the contract being reviewed.");
+    }
+    if (input.offer === "yes") {
+      lines.push("Estimate: FAR 52.204-7 says an offeror is required to be registered in SAM when submitting an offer or quotation and at time of award.");
+    } else if (input.offer === "no") {
+      lines.push("Estimate: the answer says an offer or quotation is not being submitted. The 365-day count above is unchanged.");
+    } else {
+      lines.push("Estimate: it is marked not sure whether an offer or quotation is being submitted.");
+    }
+    lines.push("Estimate: the GSA page on registering a business says you do not need to pay a third party to complete your registration. Confirm the date in the Entity Workspace on SAM.gov.");
+    return {
+      ok: true,
+      label: LABEL,
+      lines: lines,
+      error: "",
+      disclaimer: DISCLAIMER,
+      renew: renew.iso,
+      active: submit ? addBusinessDays(submit, 10).iso : ""
+    };
+  }
+
+  function picked(form, name) {
+    var nodes = form.elements[name];
+    var j;
+    if (!nodes) return "";
+    if (typeof nodes.length === "number") {
+      for (j = 0; j < nodes.length; j++) {
+        if (nodes[j].checked) return nodes[j].value;
+      }
+      return "";
+    }
+    return nodes.checked ? nodes.value : "";
+  }
+
+  function buildFromForm(form) {
+    var anchor = document.getElementById("sam-anchor");
+    var submit = document.getElementById("sam-submit");
+    return buildEstimate({
+      anchor: anchor ? anchor.value : "",
+      submit: submit ? submit.value.trim() : "",
+      clause: picked(form, "clause"),
+      offer: picked(form, "offer")
+    });
+  }
+
+  function show(result) {
+    var lead = document.getElementById("sam-lead");
+    var list = document.getElementById("sam-lines");
+    var err = document.getElementById("sam-error");
+    var note = document.getElementById("sam-disclaimer");
+    var label = document.getElementById("sam-label");
+    if (note) note.textContent = DISCLAIMER;
+    if (label) label.textContent = LABEL;
+    if (!lead || !list || !err) return;
+    if (!result.ok) {
+      err.hidden = false;
+      err.textContent = result.error;
+      lead.hidden = true;
+      list.hidden = true;
+      list.textContent = "";
+      return;
+    }
+    err.hidden = true;
+    err.textContent = "";
+    lead.hidden = true;
+    list.hidden = false;
+    list.textContent = "";
+    var i, li;
+    for (i = 0; i < result.lines.length; i++) {
+      li = document.createElement("li");
+      li.textContent = result.lines[i];
+      list.appendChild(li);
+    }
+  }
+
+  function setRadio(form, name, value) {
+    var nodes = form.elements[name];
+    var j;
+    if (!nodes) return;
+    for (j = 0; j < nodes.length; j++) nodes[j].checked = nodes[j].value === value;
+  }
+
+  function setValue(id, value) {
+    var el = document.getElementById(id);
+    if (el) el.value = value;
+  }
+
+  function fillSample(form) {
+    setValue("sam-anchor", "2026-01-15");
+    setValue("sam-submit", "2026-10-30");
+    setRadio(form, "clause", "yes");
+    setRadio(form, "offer", "no");
+    show(buildFromForm(form));
+  }
+
+  function clearForm(form) {
+    setValue("sam-anchor", "");
+    setValue("sam-submit", "");
+    var names = ["clause", "offer"];
+    var i, nodes, j;
+    for (i = 0; i < names.length; i++) {
+      nodes = form.elements[names[i]];
+      if (!nodes) continue;
+      for (j = 0; j < nodes.length; j++) nodes[j].checked = false;
+    }
+    var lead = document.getElementById("sam-lead");
+    var list = document.getElementById("sam-lines");
+    var err = document.getElementById("sam-error");
+    if (lead) {
+      lead.hidden = false;
+      lead.textContent = "Enter the date. Then this page shows an estimate.";
+    }
+    if (list) {
+      list.hidden = true;
+      list.textContent = "";
+    }
+    if (err) {
+      err.hidden = true;
+      err.textContent = "";
+    }
+  }
+
+  var api = {
+    DISCLAIMER: DISCLAIMER,
+    LABEL: LABEL,
+    parseISO: parseISO,
+    addDays: addDays,
+    addBusinessDays: addBusinessDays,
+    formatLong: formatLong,
+    buildEstimate: buildEstimate
+  };
+  if (typeof window !== "undefined") window.FMP_SAM = api;
+
+  function boot() {
+    var form = document.getElementById("sam-form");
+    var sample = document.getElementById("sam-sample");
+    var clear = document.getElementById("sam-clear");
+    if (!form || !sample || !clear) return;
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      show(buildFromForm(form));
+    });
+    sample.addEventListener("click", function () { fillSample(form); });
+    clear.addEventListener("click", function () { clearForm(form); });
+  }
+
+  if (typeof document !== "undefined" && document.getElementById) boot();
+})();
+</script>
+</body>
+</html>
