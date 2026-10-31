@@ -82,7 +82,7 @@
    "headline": "Does this loan need a Form 1098-VLI?",
    "description": "Free in-browser check for whether one loan matches the IRS points asked here for Form 1098-VLI. Borrower statements due Jan 31, 2027. IRS e-file due Mar 31, 2027.",
    "url": "https://firstmoverprojects.com/deadlines/1098-vli-check/",
-   "dateModified": "2026-10-30",
+   "dateModified": "2026-10-31",
    "inLanguage": "en-US",
    "publisher": {
     "@type": "Organization",
@@ -143,6 +143,7 @@
           <p>The instructions cover that interest even if you are not in the business of lending money. For example, if you are a dealer.</p>
           <p>Borrower statements due Jan 31, 2027. IRS e-file due Mar 31, 2027.</p>
           <p>If you file 10 or more information returns of any type in the year, you must e-file. For filing season 2027, IRS says IRIS is the only intake system.</p>
+          <p>Filers with fewer than 10 information returns may file on paper. Paper due Mar 1, 2027.</p>
           <p><a href="https://www.irs.gov/publications/p1099">IRS Publication 1099</a> lists payee statements as January 31 for most returns, and says the due date is March 31 if filed electronically. Publication 1099 says a TCC is processed within 45 business days.</p>
         </div>
       </section>
@@ -204,10 +205,12 @@
           <p id="vli-verdict">Answer all six questions, then use Check this loan.</p>
           <p>Borrower statements due Jan 31, 2027. IRS e-file due Mar 31, 2027.</p>
           <p>If you file 10 or more information returns of any type in the year, you must e-file. For filing season 2027, IRS says IRIS is the only intake system.</p>
+          <p>Filers with fewer than 10 information returns may file on paper. Paper due Mar 1, 2027.</p>
           <p>Information only, from the IRS instructions for Form 1098-VLI. General guidance, not legal, tax or IT advice. Confirm with your tax professional.</p>
           <p>Not affiliated with or endorsed by the IRS.</p>
           <p>Thank you for your time.</p>
           <p>Share it with someone it could help.</p>
+          <!-- TODO: Brevo tag for 1098-VLI is not live. See the signup section TODO for what Chief must create. -->
           <p class="kit-cta"><a class="btn btn--primary" href="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" target="_blank" rel="noopener">Join the free waitlist for the $29 kit</a></p>
         </div>
       </section>
@@ -216,7 +219,7 @@
         <h2 id="src-h">Sources</h2>
         <p><a href="https://www.irs.gov/instructions/i1098vli">IRS Instructions for Form 1098-VLI</a></p>
         <p><a href="https://www.irs.gov/publications/p1099">IRS Publication 1099</a></p>
-        <p>Checked Oct 30, 2026.</p>
+        <p>Checked Oct 31, 2026.</p>
       </section>
 
       <section aria-labelledby="na-h">
@@ -226,6 +229,8 @@
 
       <section class="signup" id="signup" aria-labelledby="signup-h">
         <h2 id="signup-h">Get the First Mover Projects Weekly Update</h2>
+        <!-- TODO: These waitlist clicks are not tagged 1098-VLI. The live Brevo form at the sibforms URL below only posts EMAIL, OPT_IN, and locale. Checked 2026-10-31: the hosted page ignores SOURCE, source, utm_source, and utm_campaign query parameters, and the form script does not read the query string. Do not add a source parameter until the field exists in Brevo. A parameter with no field does not tag the contact.
+Chief, in the existing Brevo account (no new account, no API key): create a text contact attribute named SIGNUP_SOURCE. On the existing form titled "FMP Deadlines sign-up" (this same sibforms URL), add SIGNUP_SOURCE as a hidden field with URL parameter SIGNUP_SOURCE and an empty default. Do not hard-code 1098-VLI on this shared form, because the rest of the site uses the same URL. If this classic form cannot store a URL parameter, do not use a fixed hidden value. Create a separate form or list for 1098-VLI and replace only the two waitlist links on this page. After it works, append ?SIGNUP_SOURCE=1098-VLI to those two links and confirm a test contact stores SIGNUP_SOURCE as 1098-VLI. -->
         <p class="kit-cta"><a class="btn btn--primary" href="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" target="_blank" rel="noopener">Join the free waitlist for the $29 kit</a></p>
         <p>The $29 kit is a waitlist on this page. The button opens the same First Mover Projects email sign-up used on the rest of this site. It asks for an email address. This page does not ask for a VIN, SSN, TIN, or loan amount.</p>
         <p>One short weekly email covering our newest free 60-second browser checks, ready-to-use kits, small-business tech &amp; compliance deadlines, and cozy browser puzzle games. Double opt-in; unsubscribe anytime. See our <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>.</p>

@@ -24,6 +24,7 @@ function assertEq(actual, expected, msg) {
 }
 
 var EFILE = "If you file 10 or more information returns of any type in the year, you must e-file. For filing season 2027, IRS says IRIS is the only intake system.";
+var PAPER = "Filers with fewer than 10 information returns may file on paper. Paper due Mar 1, 2027.";
 var ORIGINAL = "Did the vehicle's original use begin with the borrower (new, not previously used)?";
 var BUTTON = "Join the free waitlist for the $29 kit";
 var DATES = "Borrower statements due Jan 31, 2027. IRS e-file due Mar 31, 2027.";
@@ -34,6 +35,11 @@ var SHARE = "Share it with someone it could help.";
 var BREVO = "https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==";
 
 assert(html.indexOf(EFILE) !== -1, "10-return e-file line");
+assert(html.split(PAPER).length - 1 === 2, "paper line in the answer and the result");
+assert(html.indexOf("TODO: These waitlist clicks are not tagged 1098-VLI.") !== -1, "Brevo tag TODO names the gap");
+assert(html.indexOf("SIGNUP_SOURCE") !== -1, "TODO names the Brevo attribute Chief must create");
+assert(html.indexOf(BREVO + "?") === -1, "Brevo URL has no query string");
+assert(html.indexOf(BREVO + "&") === -1, "Brevo URL has no extra parameter");
 assert(html.indexOf(ORIGINAL) !== -1, "original use question");
 assert(html.indexOf(BUTTON) !== -1, "waitlist button text");
 assert(html.indexOf(DATES) !== -1, "plain due-date line");
@@ -74,6 +80,7 @@ assert(signup.indexOf(BUTTON) !== -1, "waitlist button remains in signup");
 var result = html.slice(html.indexOf('id="vli-result"'), html.indexOf("</section>", html.indexOf('id="vli-result"')));
 assert(result.indexOf(DATES) !== -1, "dates near result");
 assert(result.indexOf(EFILE) !== -1, "e-file line near result");
+assert(result.indexOf(PAPER) !== -1, "paper line near result");
 assert(result.indexOf(INFO) !== -1, "disclaimer near result");
 assert(result.indexOf(AFFIL) !== -1, "affiliation near result");
 assert(result.indexOf(THANKS) !== -1, "thanks near result");
