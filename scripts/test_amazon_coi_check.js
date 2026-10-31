@@ -216,27 +216,23 @@ while ((um = urlRe.exec(html))) {
 }
 var allowed = [
   "https://firstmoverprojects.com/",
+  "https://firstmoverprojects.com/assets/previews/amazon-coi-kit-preview-1280x720.png",
+  "https://firstmoverprojects.com/privacy.html",
   "https://firstmoverprojects.com/tools/amazon-coi-check/",
   "https://firstmoverprojects.com/tools/amazon-coi-check/?embed=1",
-  "https://firstmoverprojects.com/privacy.html",
+  "https://firstmoverprojects.goatcounter.com",
+  "https://firstmoverprojects.goatcounter.com/count",
+  "https://firstmoverprojects.goatcounter.com/count?p=",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance&utm_content=footer",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance&utm_content=result",
+  "https://gc.zgo.at",
+  "https://gc.zgo.at/count.js",
+  "https://launchfree.io/listings/amazon-nov-2-coi-pre-check.html",
+  "https://schema.org",
   "https://sellercentral.amazon.com/help/hub/reference/external/G200386300",
   "https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT",
   "https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408",
-  "https://schema.org",
-  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=above-fold",
-  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=comparison",
-  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=product-demo",
-  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=faq",
-  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=coi-check-result",
-  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=footer",
-  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=gtin-helper",
-  "https://launchfree.io/listings/amazon-nov-2-coi-pre-check.html",
-  "https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&utm_medium=tool_result&utm_campaign=follower_growth",
-  "https://gc.zgo.at",
-  "https://gc.zgo.at/count.js",
-  "https://firstmoverprojects.goatcounter.com",
-  "https://firstmoverprojects.goatcounter.com/count",
-  "https://firstmoverprojects.goatcounter.com/count?p="
+  "https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&utm_medium=tool_result&utm_campaign=follower_growth"
 ];
 var foundList = Object.keys(found).sort();
 var allowedSorted = allowed.slice().sort();
@@ -327,12 +323,12 @@ var deadline = fs.readFileSync(path.join(root, "deadlines", "amazon-insurance-no
 assert(deadline.indexOf('<p>Free: <a href="/tools/amazon-coi-check/">paste your certificate text and check it against Amazon\'s criteria</a> (runs in your browser, nothing uploaded).</p>') !== -1, "deadline page free-tool line");
 assert(deadline.indexOf("Amazon Insurance Certificate Checklist: What to Review Before Uploading") !== -1, "deadline checklist heading");
 assert(deadline.indexOf("Why did I receive the Nov 2, 2026 Commercial Liability Insurance email when my sales are under $10,000/month (even $1,500/month)?") !== -1, "deadline sales question");
-assert(deadline.indexOf("SAMPLE SCENARIO — FICTIONAL DATA") !== -1, "deadline fictional sample label");
+assert(deadline.indexOf("SAMPLE SCENARIO: FICTIONAL DATA") !== -1, "deadline fictional sample label");
 assert(deadline.indexOf('src="/assets/previews/amazon-coi-kit-preview-1280x720.png"') !== -1, "deadline kit preview");
 assert(html.indexOf("Free Browser Check vs. $29 Readiness Kit") !== -1, "comparison heading");
 assert(html.indexOf("Before you upload your Amazon insurance certificate, here is how to organize the questions you need to ask your broker") !== -1, "demo hook");
-assert(html.indexOf("SAMPLE SCENARIO — FICTIONAL DATA") !== -1, "fictional sample label");
-assert(html.indexOf("PRODUCT DEMONSTRATION — SAMPLE SCENARIO") !== -1, "product demonstration label");
+assert(html.indexOf("SAMPLE SCENARIO: FICTIONAL DATA") !== -1, "fictional sample label");
+assert(html.indexOf("PRODUCT DEMONSTRATION: SAMPLE SCENARIO") !== -1, "product demonstration label");
 assert(html.indexOf("cannot guarantee Amazon acceptance or prevent all upload rejections") !== -1, "no-guarantee line");
 assert(html.indexOf("Box 101") === -1, "never mention Box 101");
 assert(deadline.indexOf("Box 101") === -1, "deadline never mentions Box 101");

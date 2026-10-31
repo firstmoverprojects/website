@@ -8,6 +8,16 @@
 <title>EWS Setting Decoder: paste your EWSEnabled output, see what happens next (free, in your browser)</title>
 <link rel="canonical" href="https://firstmoverprojects.com/tools/ews-setting-decoder/">
 <meta name="description" content="Paste the output of a read-only Exchange Online PowerShell command and see what Microsoft's phased EWS switch-off means for your tenant, plus a dated checklist. Runs in your browser; nothing is uploaded.">
+<meta property="og:title" content="EWS Setting Decoder: paste your EWSEnabled output, see what happens next (free, in your browser)">
+<meta property="og:description" content="Paste the output of a read-only Exchange Online PowerShell command and see what Microsoft's phased EWS switch-off means for your tenant, plus a dated checklist. Runs in your browser; nothing is uploaded.">
+<meta property="og:url" content="https://firstmoverprojects.com/tools/ews-setting-decoder/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://firstmoverprojects.com/assets/previews/ews-cutover-kit-preview-1280x720.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EWS Setting Decoder: paste your EWSEnabled output, see what happens next (free, in your browser)">
+<meta name="twitter:description" content="Paste the output of a read-only Exchange Online PowerShell command and see what Microsoft's phased EWS switch-off means for your tenant, plus a dated checklist. Runs in your browser; nothing is uploaded.">
+<meta name="twitter:image" content="https://firstmoverprojects.com/assets/previews/ews-cutover-kit-preview-1280x720.png">
+
 <style>
 *{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1b1f24;background:#f6f7f9}
 main{max-width:860px;margin:0 auto;padding:16px}h1{font-size:1.6rem;margin:.4em 0}h2{font-size:1.2rem;margin:1.2em 0 .4em}
@@ -64,6 +74,47 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
     document.documentElement.classList.add("fmp-embed");
   }
 })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "dateModified": "2026-10-22",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does the EWS Setting Decoder do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Paste the output of a read-only Exchange Online PowerShell command and see what Microsoft's phased EWS switch-off means for your tenant, plus a dated checklist. It runs in your browser. Nothing you paste leaves this page: no upload, no account, no AI call."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When does Microsoft say Exchange Online EWS is fully disabled?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The page lists the phased switch-off as started Oct 2026, tenant by tenant, \"on (or soon after) Oct 1, 2026.\" It lists EWS fully disabled on Apr 1, 2027, and quotes \"no exceptions past April 2027.\" From Apr 1, 2027, any EwsEnabled value means EWS is fully and permanently disabled."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does an empty EwsEnabled value mean on this page?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Microsoft's table on this page says an empty (Null, the default) value is changed to False during Microsoft's rollout, which blocks EWS for all apps. True with entries on the AppID list means only apps on the list can use EWS. True with the list missing or empty means no EWS allowed, except cross-tenant organization relationship traffic. False means all EWS blocked."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this page cover on-premises Exchange?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. EWS on on-premises Exchange is not being retired. This page is about Exchange Online."
+      }
+    }
+  ]
+}
 </script>
 </head>
 <body>
@@ -182,6 +233,18 @@ EwsBlockList               :"></textarea>
 </table>
 <p class="muted">Sources: <a href="https://techcommunity.microsoft.com/blog/exchange/exchange-online-ews-your-time-is-almost-up/4492361">Microsoft Exchange Team Blog: Exchange Online EWS, Your Time is Almost Up</a> · <a href="https://techcommunity.microsoft.com/blog/exchange/take-control-of-your-ewsallowedappids-list-before-ews-access-changes/4553534">Take control of your EWSAllowedAppIDs list</a> · <a href="https://learn.microsoft.com/en-us/exchange/client-developer/exchange-web-services/how-to-control-access-to-ews-in-exchange">Microsoft Learn: Control access to EWS in Exchange</a> · <a href="https://learn.microsoft.com/en-us/exchange/clients-and-mobile-in-exchange-online/deprecation-of-ews-exchange-online">Microsoft Learn: Deprecation of EWS in Exchange Online</a>. Checked Oct 22, 2026. Microsoft updates these posts often and dates can change; follow the Message Center posts for your own tenant.</p>
 </div>
+
+<section class="card" id="faq" aria-labelledby="faq-h" style="overflow-wrap:anywhere">
+<h2 id="faq-h">FAQ</h2>
+<h3>What does the EWS Setting Decoder do?</h3>
+<p>Paste the output of a read-only Exchange Online PowerShell command and see what Microsoft's phased EWS switch-off means for your tenant, plus a dated checklist. It runs in your browser. Nothing you paste leaves this page: no upload, no account, no AI call.</p>
+<h3>When does Microsoft say Exchange Online EWS is fully disabled?</h3>
+<p>The page lists the phased switch-off as started Oct 2026, tenant by tenant, "on (or soon after) Oct 1, 2026." It lists EWS fully disabled on Apr 1, 2027, and quotes "no exceptions past April 2027." From Apr 1, 2027, any EwsEnabled value means EWS is fully and permanently disabled.</p>
+<h3>What does an empty EwsEnabled value mean on this page?</h3>
+<p>Microsoft's table on this page says an empty (Null, the default) value is changed to False during Microsoft's rollout, which blocks EWS for all apps. True with entries on the AppID list means only apps on the list can use EWS. True with the list missing or empty means no EWS allowed, except cross-tenant organization relationship traffic. False means all EWS blocked.</p>
+<h3>Does this page cover on-premises Exchange?</h3>
+<p>No. EWS on on-premises Exchange is not being retired. This page is about Exchange Online.</p>
+</section>
 
 <p class="muted">General guidance, not legal, tax or IT advice. This page reads only the text you paste, keeps nothing, and can't see your tenant; it can't promise any app will keep working. Make changes only under your own change control. Not affiliated with or endorsed by Microsoft. Microsoft, Exchange and Microsoft 365 are trademarks of Microsoft Corporation. EWS on on-premises Exchange is not being retired; this page is about Exchange Online.</p>
 </main>

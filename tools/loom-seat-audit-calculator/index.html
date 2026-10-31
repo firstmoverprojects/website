@@ -8,6 +8,16 @@
 <link rel="canonical" href="https://firstmoverprojects.com/tools/loom-seat-audit-calculator/">
 <title>Loom Seat Audit &amp; Creator-Lite Migration Calculator (Free, Runs in Your Browser)</title>
 <meta name="description" content="Paste a seat-activity CSV or enter Creator seat counts and your per-seat rate. Get a Keep, Move, and Archive table plus annual arithmetic from your numbers. Name and email columns are dropped.">
+<meta property="og:title" content="Loom Seat Audit &amp; Creator-Lite Migration Calculator (Free, Runs in Your Browser)">
+<meta property="og:description" content="Paste a seat-activity CSV or enter Creator seat counts and your per-seat rate. Get a Keep, Move, and Archive table plus annual arithmetic from your numbers. Name and email columns are dropped.">
+<meta property="og:url" content="https://firstmoverprojects.com/tools/loom-seat-audit-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://firstmoverprojects.com/assets/previews/loom-seat-audit-kit-preview-1280x720.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Loom Seat Audit &amp; Creator-Lite Migration Calculator (Free, Runs in Your Browser)">
+<meta name="twitter:description" content="Paste a seat-activity CSV or enter Creator seat counts and your per-seat rate. Get a Keep, Move, and Archive table plus annual arithmetic from your numbers. Name and email columns are dropped.">
+<meta name="twitter:image" content="https://firstmoverprojects.com/assets/previews/loom-seat-audit-kit-preview-1280x720.png">
+
 <style>
 *{box-sizing:border-box}
 body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1b1f24;background:#f6f7f9;overflow-wrap:anywhere}
@@ -90,6 +100,47 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
     document.documentElement.classList.add("fmp-embed");
   }
 })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "dateModified": "2026-10-26",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does this page classify a Creator or Admin seat?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Archive and Export is a Creator or Admin row whose 90-day video count is 0. Move to Free Creator Lite/Viewer is a Creator or Admin row with a 30-day video count of 0 when the 90-day count is not 0, or a Creator or Admin row that still recorded in the last 30 days but whose recorded-minutes cell is a plain number of 5 or less. Keep Creator is every other Creator or Admin row with a usable activity number."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are name and email columns used?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Name, email, phone, and other identity columns are dropped before a row is counted. Results show counts only. A header that says name, email, user, or phone is dropped."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the annual line an invoice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The annual line is your entered rate times the seats this page puts in Archive or Move. It is not an invoice. Atlassian Support says a downgraded Creator keeps Creator access until the end of the billing period already paid, and that price examples on the billing page are illustrations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does Atlassian say about Creator Lite?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Atlassian Support says Creator Lite is discontinued when a workspace is integrated with Atlassian, and those users become paid Creator seats until an admin changes or deactivates them. Legacy Loom billing described Creator Lite as not billed. Check the roles your plan still offers. Rows already marked Creator Lite or Viewer are not added to the savings line."
+      }
+    }
+  ]
+}
 </script>
 </head>
 <body>
@@ -242,6 +293,18 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
 <li><a href="https://support.atlassian.com/loom/docs/add-remove-and-manage-members-in-your-workspace/" rel="noopener noreferrer">Atlassian Support: Add, remove and manage members</a> (role options depend on the plan)</li>
 </ul>
 <p class="muted">Support pages checked October 26, 2026. Your contract and billing page control the rate and the roles you can still assign.</p>
+</section>
+
+<section class="card" id="faq" aria-labelledby="faq-h" style="overflow-wrap:anywhere">
+<h2 id="faq-h">FAQ</h2>
+<h3>How does this page classify a Creator or Admin seat?</h3>
+<p>Archive and Export is a Creator or Admin row whose 90-day video count is 0. Move to Free Creator Lite/Viewer is a Creator or Admin row with a 30-day video count of 0 when the 90-day count is not 0, or a Creator or Admin row that still recorded in the last 30 days but whose recorded-minutes cell is a plain number of 5 or less. Keep Creator is every other Creator or Admin row with a usable activity number.</p>
+<h3>Are name and email columns used?</h3>
+<p>Name, email, phone, and other identity columns are dropped before a row is counted. Results show counts only. A header that says name, email, user, or phone is dropped.</p>
+<h3>Is the annual line an invoice?</h3>
+<p>No. The annual line is your entered rate times the seats this page puts in Archive or Move. It is not an invoice. Atlassian Support says a downgraded Creator keeps Creator access until the end of the billing period already paid, and that price examples on the billing page are illustrations.</p>
+<h3>What does Atlassian say about Creator Lite?</h3>
+<p>Atlassian Support says Creator Lite is discontinued when a workspace is integrated with Atlassian, and those users become paid Creator seats until an admin changes or deactivates them. Legacy Loom billing described Creator Lite as not billed. Check the roles your plan still offers. Rows already marked Creator Lite or Viewer are not added to the savings line.</p>
 </section>
 
 <p>Related: <a href="/tools/">Tools and kits</a> · <a href="/deadlines/">Deadlines</a></p>
