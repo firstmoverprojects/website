@@ -88,7 +88,8 @@ function load(rel, scriptId, apiName) {
   return { html: html, api: sandbox[apiName] };
 }
 
-function pageFacts(html, slug, source, urls) {
+function pageFacts(html, slug, source, urls, checked) {
+  checked = checked || "Checked October 31, 2026.";
   console.log(slug);
   assert(html.indexOf(THANKS) !== -1, slug + " thanks line");
   assert(html.indexOf("<footer>") !== -1 && html.indexOf(THANKS) > html.indexOf("<footer>"), slug + " thanks is in the footer");
@@ -109,7 +110,7 @@ function pageFacts(html, slug, source, urls) {
   assert(html.indexOf("font-size:16px") !== -1, slug + " 16px inputs");
   assert(html.indexOf("min-height:44px") !== -1, slug + " 44px targets");
   assert(html.indexOf("@media (max-width:480px)") !== -1, slug + " narrow layout");
-  assert(html.indexOf("Checked October 31, 2026.") !== -1, slug + " checked date");
+  assert(html.indexOf(checked) !== -1, slug + " checked date");
   assertEq(forbiddenHit(html), "", slug + " page has no forbidden phrase");
   var main = html.slice(html.indexOf("<main"), html.indexOf("</main>"));
   var firstP = main.match(/<p[^>]*>([\s\S]*?)<\/p>/);
@@ -125,74 +126,71 @@ function pageFacts(html, slug, source, urls) {
 
 var mo = load("tools/mo-zero-return-check/index.html", "mo-zero-return-check", "FMP_MO");
 pageFacts(mo.html, "mo-zero-return-check", "mo-zero", [
+  "https://www.sos.mo.gov/CMSImages/AdRules/moreg/2026/v51n21Nov2/v51n21.pdf",
+  "https://www.sos.mo.gov/CMSImages/AdRules/moreg/2026/v51n14July15/v51n14.pdf",
+  "https://www.sos.mo.gov/CMSImages/AdRules/moreg/2026/v51n19Oct1/v51n19.pdf",
   "https://dor.mo.gov/resources/proposed-rules/documents/12_CSR_10-103_185_Proposed_Rule.pdf",
   "https://dor.mo.gov/faq/taxation/business/sales-tax-filing.html",
-  "https://dor.mo.gov/resources/official-final-rules/documents/12_CSR_10-104_030_Filing_Requirements_as_Defined_in_Section_144,_RSMo.pdf",
-  "https://www.sos.mo.gov/CMSImages/AdRules/moreg/2026/v51n14July15/v51n14.pdf",
-  "https://www.sos.mo.gov/CMSImages/AdRules/moreg/2026/v51n19Oct1/v51n19.pdf"
-]);
+  "https://revisor.mo.gov/main/OneSection.aspx?section=144.250"
+], "Checked November 1, 2026.");
 assert(mo.html.indexOf("December 30, 2026") !== -1, "Missouri names December 30, 2026");
-assert(mo.html.indexOf("51 MoReg 879") !== -1, "Missouri names the proposal page");
-assert(mo.html.indexOf("no (zero) (0) sales") !== -1, "Missouri quotes the posted zero-sales sentence");
-assertEq(mo.api.LABEL, "Points to review", "Missouri label");
-
-var dec = mo.api.dueDate("monthly", 2026, 12);
-assertEq(mo.api.formatDate(dec.nominal), "January 31, 2027", "December period is due January 31");
-assertEq(dec.moved, true, "January 31, 2027 is a weekend");
-assertEq(mo.api.formatDate(dec.shifted), "February 1, 2027", "weekend moves to February 1, 2027");
-var mar = mo.api.dueDate("monthly", 2026, 3);
-assertEq(mo.api.formatDate(mar.nominal), "April 30, 2026", "March period is due April 30");
-assertEq(mar.moved, false, "April 30, 2026 stays on a weekday");
-assertEq(mo.api.formatDate(mo.api.dueDate("quarterly", 2026, null, 1).nominal), "April 30, 2026", "Q1 due April 30");
-assertEq(mo.api.formatDate(mo.api.dueDate("quarterly", 2026, null, 4).shifted), "February 1, 2027", "Q4 2026 shifts off Sunday January 31");
-assertEq(mo.api.formatDate(mo.api.dueDate("annual", 2026).shifted), "February 1, 2027", "2026 annual return shifts to February 1, 2027");
+assert(mo.html.indexOf("November 2, 2026") !== -1, "Missouri names the order date");
+assert(mo.html.indexOf("No changes were made") !== -1, "Missouri says the adopted text is unchanged");
+assert(mo.html.indexOf("order column is empty") === -1, "Missouri no longer says the order is missing");
+assert(mo.html.indexOf("Thanks for your time. If this isn't right for you, please share it with someone it could help.") !== -1, "Missouri share line");
+var moResult = mo.html.slice(mo.html.indexOf('id="mo-result"'), mo.html.indexOf('id="sources"'));
+assertEq((moResult.match(/<button\b/g) || []).length, 1, "one post-answer button");
+assert(moResult.indexOf("Sign up for the weekly FMP email") !== -1, "the post-answer button is the weekly email");
+assertEq(mo.api.DISCLAIMER, "General guidance, not legal, tax or IT advice.", "Missouri disclaimer");
 
 function moAnswers(extra) {
-  var base = { sales: "yes", consumer: "no", vendor: "no", frequency: "monthly", year: 2026, month: 3, quarter: null };
+  var base = { account: "yes", sales: "no", seasonal: "no" };
   var key;
   for (key in extra) base[key] = extra[key];
-  return mo.api.pointsToReview(base);
+  return mo.api.checkAccount(base);
 }
-var moRow = moAnswers({});
-assertEq(moRow.ok, true, "Missouri complete answers return points");
-assert(moRow.items.join("\n").indexOf("Proposed section (1)") !== -1, "registered sales tax quotes proposed section 1");
-assert(moRow.items.join("\n").indexOf("not registered for consumer's use tax") !== -1, "consumer no is stated");
-assert(moRow.items.join("\n").indexOf("April 30, 2026") !== -1, "March 2026 due date is in the result");
-assert(moRow.items.join("\n").indexOf("December 30, 2026") !== -1, "schedule date stays in the result");
-assertEq(mo.api.pointsToReview(null).ok, false, "Missouri null is incomplete");
-assertEq(moAnswers({ frequency: "monthly", month: null }).ok, false, "monthly without a month is incomplete");
-var moUnsure = moAnswers({ frequency: "unsure", sales: "unsure", consumer: "unsure", vendor: "unsure" });
-assertEq(moUnsure.ok, true, "unsure frequency still returns points");
-assert(moUnsure.items.join("\n").indexOf("after a frequency and a period are marked") !== -1, "unsure frequency waits for a period");
-assertEq(forbiddenHit(JSON.stringify(moRow) + JSON.stringify(moUnsure)), "", "Missouri results have no forbidden phrase");
+var moZero = moAnswers({});
+assertEq(moZero.ok, true, "open account with no sales returns a result");
+assertEq(moZero.code, "file-zero", "open account with no sales files a zero return");
+assertEq(moZero.headline, "File a $0 return each period.", "zero headline");
+assert(moZero.detail.indexOf("December 30, 2026") !== -1, "zero result names the effective date");
+var moClose = moAnswers({ seasonal: "yes" });
+assertEq(moClose.code, "consider-closing", "seasonal dormant account considers closing");
+assertEq(moClose.headline, "Consider closing the account.", "closing headline");
+assert(moClose.detail.indexOf("$0 return") !== -1, "closing result still names the zero return");
+var moSkip = moAnswers({ account: "no", sales: "yes", seasonal: "yes" });
+assertEq(moSkip.code, "does-not-apply", "no open account does not apply");
+assertEq(moSkip.headline, "This does not apply.", "does not apply headline");
+var moSales = moAnswers({ sales: "yes", seasonal: "no" });
+assertEq(moSales.code, "file-sales", "sales this period is a regular return");
+assertEq(moSales.headline, "File the return and report the sales.", "sales headline");
+var moLook = moAnswers({ account: "unsure" });
+assertEq(moLook.code, "check-account", "unsure account checks whether it is open");
+assertEq(mo.api.checkAccount(null).ok, false, "Missouri null is incomplete");
+assertEq(mo.api.checkAccount({ account: "yes", sales: "no" }).ok, false, "a missing answer is incomplete");
+assertEq(forbiddenHit(JSON.stringify(moZero) + JSON.stringify(moClose) + JSON.stringify(moSkip)), "", "Missouri results have no forbidden phrase");
 
 var yn = ["yes", "no", "unsure"];
-var freq = ["monthly", "quarterly", "annual", "unsure"];
 var moHit = "";
 var moCount = 0;
-yn.forEach(function (sales) {
-  yn.forEach(function (consumer) {
-    yn.forEach(function (vendor) {
-      freq.forEach(function (frequency) {
-        moCount++;
-        var row = mo.api.pointsToReview({
-          sales: sales,
-          consumer: consumer,
-          vendor: vendor,
-          frequency: frequency,
-          year: 2027,
-          month: 1,
-          quarter: 2
-        });
-        if (!row.ok || row.label !== "Points to review") moHit = "label";
-        var hit = forbiddenHit(row.items.join("\n"));
-        if (hit) moHit = hit;
-      });
+var moHeads = {};
+yn.forEach(function (account) {
+  yn.forEach(function (sales) {
+    yn.forEach(function (seasonal) {
+      moCount++;
+      var row = mo.api.checkAccount({ account: account, sales: sales, seasonal: seasonal });
+      if (!row.ok || !row.headline) moHit = "headline";
+      moHeads[row.headline] = 1;
+      var hit = forbiddenHit(row.headline + "\n" + row.detail);
+      if (hit) moHit = hit;
     });
   });
 });
-assertEq(moCount, 108, "Missouri answer grid");
+assertEq(moCount, 27, "Missouri answer grid");
 assertEq(moHit, "", "Missouri grid has no forbidden phrase");
+assert(moHeads["File a $0 return each period."] === 1, "grid includes the zero-return result");
+assert(moHeads["Consider closing the account."] === 1, "grid includes the closing result");
+assert(moHeads["This does not apply."] === 1, "grid includes the does-not-apply result");
 
 var ga = load("tools/ga-annual-registration-check/index.html", "ga-annual-registration-check", "FMP_GA");
 pageFacts(ga.html, "ga-annual-registration-check", "ga-ar", [

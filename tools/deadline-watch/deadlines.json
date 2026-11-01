@@ -1625,6 +1625,38 @@
     {
       "needsEmployees": false,
       "draft": false,
+      "id": "mo-zero-return-2026",
+      "date": "2026-12-30",
+      "state": "MO",
+      "title": "Missouri zero sales and use tax returns",
+      "detail": "The November 2, 2026 Missouri Register adopts 12 CSR 10-103.185 with no changes from the July 15, 2026 proposal. The order is effective 30 days after publication in the Code of State Regulations. The Register schedule lists Code publication on November 30, 2026 and a Code effective date of December 30, 2026. This row is that effective date, not one return's due date. From then, a business registered for sales tax, consumer's use tax, or vendor's use tax files that return even when sales, liability, or Missouri destination sales are zero. A sales tax license already files a zero-sales return under the current rule and the Department of Revenue FAQ. A monthly return is due on the last day of the next month. A quarterly return is due on the last day of the month after the quarter. An annual return is due January 31. A Saturday, Sunday, or Missouri state holiday moves that date to the next business day. Turn this off if you have no open Missouri sales, consumer's use, or vendor's use tax account.",
+      "sourceUrl": "https://www.sos.mo.gov/CMSImages/AdRules/moreg/2026/v51n21Nov2/v51n21.pdf",
+      "sourceLabel": "Missouri Register, November 2, 2026, order of rulemaking",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ],
+      "also": [
+        {
+          "label": "Missouri Register, July 15, 2026, proposed text",
+          "url": "https://www.sos.mo.gov/CMSImages/AdRules/moreg/2026/v51n14July15/v51n14.pdf"
+        },
+        {
+          "label": "Missouri Department of Revenue, sales tax filing FAQ",
+          "url": "https://dor.mo.gov/faq/taxation/business/sales-tax-filing.html"
+        },
+        {
+          "label": "Free check for a Missouri zero sales or use tax return",
+          "url": "https://firstmoverprojects.com/tools/mo-zero-return-check/"
+        }
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
       "id": "mn-corp-2026",
       "date": "2026-12-31",
       "state": "MN",

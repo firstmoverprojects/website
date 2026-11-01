@@ -140,6 +140,17 @@ const employer = api.rowsFor(data, { type: "scorp", employees: "yes", state: "TX
 check("Texas S corp has 1120-S", employer.some((row) => row.id === "fed-1120s-2025"));
 check("Texas S corp has 941", employer.some((row) => row.id === "fed-941-2026-q1"));
 check("Texas S corp has franchise tax", employer.some((row) => row.id === "tx-franchise-2026"));
+const moSeller = api.rowsFor(data, { type: "sole", employees: "no", state: "MO" });
+const moZero = moSeller.find((row) => row.id === "mo-zero-return-2026");
+check("Missouri sole sees the zero-return rule", !!moZero);
+check("Missouri zero-return date is the Code effective date", moZero && moZero.date === "2026-12-30");
+check("Missouri zero-return can be turned off", moZero && /Turn this off if you have no open Missouri/.test(moZero.detail));
+check("Missouri zero-return cites the November 2 order", moZero && moZero.sourceUrl === "https://www.sos.mo.gov/CMSImages/AdRules/moreg/2026/v51n21Nov2/v51n21.pdf");
+check("Missouri nonprofit also sees the row", api.rowsFor(data, { type: "nonprofit", employees: "no", state: "MO" }).some((row) => row.id === "mo-zero-return-2026"));
+check("a Texas seller does not get the Missouri row", api.rowsFor(data, { type: "sole", employees: "no", state: "TX" }).every((row) => row.id !== "mo-zero-return-2026"));
+const moOn = moSeller.filter((row) => row.id !== "mo-zero-return-2026");
+check("turning the Missouri row off drops it", moOn.length === moSeller.length - 1);
+check("turned-off Missouri row leaves the calendar", parseIcs(api.buildIcs(moOn, "20261101T120000Z")).events.every((event) => (event.summary || "").indexOf("Missouri zero") === -1));
 check("Texas S corp has no 1040", employer.every((row) => row.id.indexOf("1040") === -1 || row.id.indexOf("1040-es") !== -1 || row.id.indexOf("fed-es-") === 0));
 check("Texas S corp is not a C corp return", employer.every((row) => row.id !== "fed-1120-2025"));
 
