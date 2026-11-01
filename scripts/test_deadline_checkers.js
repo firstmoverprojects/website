@@ -137,8 +137,7 @@ assert(mo.html.indexOf("December 30, 2026") !== -1, "Missouri names December 30,
 assert(mo.html.indexOf("November 2, 2026") !== -1, "Missouri names the order date");
 assert(mo.html.indexOf("No changes were made") !== -1, "Missouri says the adopted text is unchanged");
 assert(mo.html.indexOf("order column is empty") === -1, "Missouri no longer says the order is missing");
-assert(mo.html.indexOf("Thank you for your time.") !== -1, "Missouri thank-you line");
-assert(mo.html.indexOf("Share it with someone it could help.") !== -1, "Missouri share line");
+assert(mo.html.indexOf("Thanks for your time. If this isn't right for you, please share it with someone it could help.") !== -1, "Missouri share line");
 var moResult = mo.html.slice(mo.html.indexOf('id="mo-result"'), mo.html.indexOf('id="sources"'));
 assertEq((moResult.match(/<button\b/g) || []).length, 1, "one post-answer button");
 assert(moResult.indexOf("Sign up for the weekly FMP email") !== -1, "the post-answer button is the weekly email");
