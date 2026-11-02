@@ -192,6 +192,78 @@ assert(moHeads["File a $0 return each period."] === 1, "grid includes the zero-r
 assert(moHeads["Consider closing the account."] === 1, "grid includes the closing result");
 assert(moHeads["This does not apply."] === 1, "grid includes the does-not-apply result");
 
+var det = load("tools/detroit-business-tax-check/index.html", "detroit-business-tax-check", "FMP_DET");
+pageFacts(det.html, "detroit-business-tax-check", "detroit-biz", [
+  "https://www.michigan.gov/taxes/citytax/detroit/key-changes/key-changes-for-business",
+  "https://www.michigan.gov/taxes/citytax/detroit/key-changes",
+  "https://www.michigan.gov/taxes/citytax/detroit/key-changes/key-changes-for-individual",
+  "https://www.michigan.gov/taxes/mitreasuryeservices/enews/impacts/web-platform-impacts",
+  "https://www.michigan.gov/taxes/citytax/detroit/bulk-filing-transition",
+  "https://www.michigan.gov/treasury/news/2026/10/30/michigan-treasury-eservices-to-expand",
+  "https://www.michigan.gov/taxes/mitreasuryeservices"
+], "Checked November 2, 2026.");
+assert(det.html.indexOf("November 12, 2026") !== -1, "Detroit names November 12, 2026");
+assert(det.html.indexOf("7:00 a.m.") !== -1, "Detroit names 7:00 a.m.");
+assert(det.html.indexOf("October 30, 2026") !== -1, "Detroit names the October 30 outage");
+assert(det.html.indexOf("does not say you must register the tax account again") !== -1, "Detroit does not invent re-registration");
+assert(det.html.indexOf("Does this apply to you?") !== -1, "Detroit asks whether it applies");
+assertEq(det.api.DISCLAIMER, "General guidance, not legal, tax or IT advice.", "Detroit disclaimer");
+var detResult = det.html.slice(det.html.indexOf('id="detroit-result"'), det.html.indexOf('id="sources"'));
+assertEq((detResult.match(/<button\b/g) || []).length, 1, "one Detroit post-answer button");
+assert(detResult.indexOf("Sign up for the weekly FMP email") !== -1, "the Detroit post-answer button is the weekly email");
+assert(detResult.indexOf("Open Deadline Watch") !== -1, "result names Deadline Watch");
+
+function detAnswers(extra) {
+  var base = { business: "yes", withholding: "no" };
+  var key;
+  for (key in extra) base[key] = extra[key];
+  return det.api.checkApplies(base);
+}
+var detBiz = detAnswers({});
+assertEq(detBiz.ok, true, "a business return applies");
+assertEq(detBiz.code, "applies-business", "business return without withholding");
+assertEq(detBiz.headline, "Use Michigan Treasury eServices on November 12, 2026.", "business headline");
+assert(detBiz.detail.indexOf("November 12, 2026 at 7:00 a.m.") !== -1, "business result names the opening time");
+var detBoth = detAnswers({ withholding: "yes" });
+assertEq(detBoth.code, "applies-both", "business return plus withholding");
+assertEq(detBoth.headline, "Use the new platform, and pay withholding electronically.", "both headline");
+var detWh = detAnswers({ business: "no", withholding: "yes" });
+assertEq(detWh.code, "applies-withholding", "withholding only");
+assertEq(detWh.headline, "Pay City of Detroit withholding electronically.", "withholding headline");
+assert(detWh.detail.indexOf("October 30 through November 11, 2026") !== -1, "withholding result names the bulk-file gap");
+var detSkip = detAnswers({ business: "no", withholding: "no" });
+assertEq(detSkip.code, "does-not-apply", "neither tax applies");
+assertEq(detSkip.headline, "This does not apply.", "Detroit does-not-apply headline");
+var detLook = detAnswers({ business: "unsure", withholding: "no" });
+assertEq(detLook.code, "check-account", "an unsure business return checks the account");
+var detWhUnsure = detAnswers({ business: "yes", withholding: "unsure" });
+assertEq(detWhUnsure.code, "applies-business-check-withholding", "a yes return still applies when withholding is unsure");
+var detBizUnsure = detAnswers({ business: "unsure", withholding: "yes" });
+assertEq(detBizUnsure.code, "applies-withholding-check-business", "withholding still applies when the return is unsure");
+assertEq(det.api.checkApplies(null).ok, false, "Detroit null is incomplete");
+assertEq(det.api.checkApplies({ business: "yes" }).ok, false, "a missing Detroit answer is incomplete");
+assertEq(forbiddenHit(JSON.stringify(detBiz) + JSON.stringify(detBoth) + JSON.stringify(detWh) + JSON.stringify(detSkip)), "", "Detroit results have no forbidden phrase");
+
+var detYn = ["yes", "no", "unsure"];
+var detHit = "";
+var detCount = 0;
+var detHeads = {};
+detYn.forEach(function (business) {
+  detYn.forEach(function (withholding) {
+    detCount++;
+    var row = det.api.checkApplies({ business: business, withholding: withholding });
+    if (!row.ok || !row.headline) detHit = "headline";
+    detHeads[row.headline] = 1;
+    var hit = forbiddenHit(row.headline + "\n" + row.detail);
+    if (hit) detHit = hit;
+  });
+});
+assertEq(detCount, 9, "Detroit answer grid");
+assertEq(detHit, "", "Detroit grid has no forbidden phrase");
+assert(detHeads["This does not apply."] === 1, "Detroit grid includes does-not-apply");
+assert(detHeads["Use Michigan Treasury eServices on November 12, 2026."] === 1, "Detroit grid includes the platform result");
+assert(detHeads["Pay City of Detroit withholding electronically."] === 1, "Detroit grid includes the withholding result");
+
 var ga = load("tools/ga-annual-registration-check/index.html", "ga-annual-registration-check", "FMP_GA");
 pageFacts(ga.html, "ga-annual-registration-check", "ga-ar", [
   "https://sos.ga.gov/how-to-guide/how-file-annual-registration",
