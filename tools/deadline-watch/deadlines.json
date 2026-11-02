@@ -1565,6 +1565,34 @@
     {
       "needsEmployees": false,
       "draft": false,
+      "id": "md-famli-2027",
+      "date": "2027-01-01",
+      "state": "MD",
+      "title": "Maryland FAMLI payroll deductions start",
+      "detail": "Maryland FAMLI payroll deductions start Jan 1, 2027. Employees need written notice at least one pay period before withholding starts. For most employers that notice is due in December 2026. COMAR 09.42 is the notice rule. Turn this off if you do not have employees on Maryland payroll. This row does not state a contribution split.",
+      "sourceUrl": "https://paidleave.maryland.gov/employers/make-contributions/",
+      "sourceLabel": "paidleave.maryland.gov: Make contributions",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ],
+      "also": [
+        {
+          "label": "paidleave.maryland.gov",
+          "url": "https://paidleave.maryland.gov/"
+        }
+      ],
+      "kit": {
+        "label": "Optional: $9 Maryland FAMLI notice kit",
+        "url": "https://firstmoverprojects.gumroad.com/l/maryland-famli-payroll-notice-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=deadline-watch&utm_content=md-famli"
+      }
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
       "id": "mi-llc-2026",
       "date": "2026-02-15",
       "state": "MI",

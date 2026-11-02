@@ -206,6 +206,16 @@
         '<p><a class="src" href="' + esc(extra.url) + '">' + esc(extra.label) + "</a></p>"
       );
     });
+    if (row.kit && row.kit.url && row.kit.label) {
+      bits.push(
+        '<p><a class="src" target="_blank" rel="noopener" referrerpolicy="strict-origin-when-cross-origin" href="' +
+          esc(row.kit.url) +
+          '">' +
+          esc(row.kit.label) +
+          "</a></p>"
+      );
+      bits.push("<p>General guidance, not legal, tax or IT advice.</p>");
+    }
     bits.push(
       '<p><button type="button" class="secondary" data-toggle="' +
         esc(row.id) +
@@ -381,6 +391,7 @@
     buildIcs: buildIcs,
     formatDate: formatDate,
     addDays: addDays,
+    card: card,
     mount: mount
   };
 });

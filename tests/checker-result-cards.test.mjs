@@ -80,7 +80,10 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       click: "#sample",
       problem: /to fix/,
       deadline: /Nov 2, 2026/,
-      button: "Get the $29 insurance kit",
+      button: "Get the $29 Amazon $1M insurance kit",
+      before: async (page) => {
+        await page.locator('input[name="q1"][value="yes"]').check();
+      },
       slug: "/l/amazon-1m-insurance-readiness-kit",
       campaign: "amazon-coi-check",
       resultContent: "coi-check-result",
@@ -90,6 +93,7 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
   ];
   for (const item of cases) {
     const { page, errors, nets } = await open(item.rel);
+    if (item.before) await item.before(page);
     await page.click(item.click);
     assert.equal(await page.locator("#results").isVisible(), true, item.rel);
     assert.equal(await page.locator("#result-cta").isVisible(), true, item.rel);

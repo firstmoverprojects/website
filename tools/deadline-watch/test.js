@@ -175,6 +175,19 @@ check("Maryland row can be turned off", mdEfile && /Turn this off if you do not 
 check("Maryland cites the Comptroller tax alert", mdEfile && mdEfile.sourceUrl === "https://www.marylandcomptroller.gov/content/dam/mdcomp/tax/legal-publications/alerts/tax-alert-sales-and-use-tax-updates-2026-2027.pdf");
 check("Maryland nonprofit also sees the row", api.rowsFor(data, { type: "nonprofit", employees: "no", state: "MD" }).some((row) => row.id === "md-efile-2027"));
 check("a Texas seller does not get the Maryland e-file row", api.rowsFor(data, { type: "mmllc", employees: "no", state: "TX" }).every((row) => row.id !== "md-efile-2027"));
+const mdFamli = mdFiler.find((row) => row.id === "md-famli-2027");
+check("Maryland filter includes FAMLI", !!mdFamli);
+check("FAMLI date is January 1, 2027", mdFamli && mdFamli.date === "2027-01-01");
+check("FAMLI cites paidleave.maryland.gov", mdFamli && mdFamli.sourceUrl === "https://paidleave.maryland.gov/employers/make-contributions/");
+check("FAMLI names COMAR 09.42", mdFamli && /COMAR 09\.42/.test(mdFamli.detail));
+check("FAMLI avoids a contribution split", mdFamli && /does not state a contribution split/.test(mdFamli.detail));
+check("FAMLI kit is only on that row", mdFamli && mdFamli.kit && mdFamli.kit.label === "Optional: $9 Maryland FAMLI notice kit");
+check("a Texas business does not get the FAMLI row", api.rowsFor(data, { type: "ccorp", employees: "yes", state: "TX" }).every((row) => row.id !== "md-famli-2027"));
+const famliCard = api.card(mdFamli, false, "2026-11-02");
+check("FAMLI card links the kit", famliCard.indexOf("maryland-famli-payroll-notice-kit") !== -1);
+check("FAMLI card has the advice line", famliCard.indexOf("General guidance, not legal, tax or IT advice.") !== -1);
+const plainCard = api.card(mdEfile, false, "2026-11-02");
+check("Maryland e-file card has no kit link", plainCard.indexOf("gumroad.com") === -1);
 check("Texas S corp has no 1040", employer.every((row) => row.id.indexOf("1040") === -1 || row.id.indexOf("1040-es") !== -1 || row.id.indexOf("fed-es-") === 0));
 check("Texas S corp is not a C corp return", employer.every((row) => row.id !== "fed-1120-2025"));
 

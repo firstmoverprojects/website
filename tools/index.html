@@ -173,7 +173,8 @@
               <p class="kicker">Free in browser · Optional $9 Checklist</p>
               <div class="ctas">
                 <a class="btn primary" href="/tools/fire-to-iris-check/">Open free check</a>
-                <a rel="noopener" target="_blank" class="btn" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=tools&amp;utm_content=tools-free" referrerpolicy="strict-origin-when-cross-origin">$9 Switch Checklist</a>
+                <a rel="noopener" target="_blank" class="btn" data-fire-kit="1" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=tools&amp;utm_content=tools-free" referrerpolicy="strict-origin-when-cross-origin">$9 Switch Checklist</a>
+                <p>General guidance, not legal, tax or IT advice.</p>
               </div>
             </article>
             <article class="card">
@@ -258,9 +259,11 @@
                 <!-- REMOVE Nov 20, 2026: FIRE kit unpublishes -->
                 <a rel="noopener" target="_blank"
                   class="btn primary"
+                  data-fire-kit="1"
                   href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=tools&amp;utm_content=tools-kit"
-                  referrerpolicy="strict-origin-when-cross-origin">Buy</a
+                  referrerpolicy="strict-origin-when-cross-origin">Get the $9 FIRE to IRIS switch checklist</a
                 >
+                <p>General guidance, not legal, tax or IT advice.</p>
               </div>
             </article>
             <article class="card">
@@ -699,6 +702,24 @@
   patchAll(landingSource());
   document.addEventListener("click", onClick, true);
   document.addEventListener("auxclick", onClick, true);
+})();
+</script>
+<script id="fmp-fire-kit">
+(function () {
+  "use strict";
+  var CUTOFF = Date.UTC(2026, 10, 19, 20, 0, 0);
+  function expired(now) {
+    return (now || new Date()).getTime() >= CUTOFF;
+  }
+  function hide(now) {
+    if (!expired(now) || !document.querySelectorAll) return;
+    var nodes = document.querySelectorAll("[data-fire-kit]");
+    var i;
+    for (i = 0; i < nodes.length; i++) nodes[i].hidden = true;
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { hide(new Date()); });
+  else hide(new Date());
+  if (typeof window !== "undefined") window.FMP_FIRE_KIT = { CUTOFF: CUTOFF, expired: expired, hide: hide };
 })();
 </script>
 </body>

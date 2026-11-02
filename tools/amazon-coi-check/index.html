@@ -387,10 +387,13 @@ Please reissue my certificate with these corrections:
 <h3>Date</h3>
 <p id="result-deadline">Amazon's extra rule starts Nov 2, 2026. Sellers in higher-safety categories need $1 million of coverage for each incident, and $1 million in total, even if sales are low.</p>
 <p class="deadline-count" data-deadline="2026-11-02" data-deadline-label="Nov 2, 2026 Amazon COI deadline" hidden></p>
-<p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
 <p class="deliverables">You get a 12-file ZIP: policy checklist quoting Amazon word for word, COI pre-check, category screen, broker email, Excel workbook.</p>
 <!-- TODO: two real preview images of the checklist and the workbook are not in this repo. sales/gumroad_previews/ is missing. assets/previews/amazon-coi-kit-preview-1280x720.png is one marketing composite, not two screenshots. Do not invent images. -->
-<p><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/coi-check-result" data-goatcounter-title="Amazon COI check result" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=amazon-1m-insurance&amp;utm_content=result" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the full kit, $29</a></p>
+<div id="amazon-kit" hidden>
+<p><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/coi-check-result" data-goatcounter-title="Amazon COI check result" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=amazon-coi-check&amp;utm_content=coi-check-result" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 Amazon $1M insurance kit</a></p>
+<p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
+<p>Not affiliated with Amazon.</p>
+</div>
 <p class="thanks">Thank you for your time.</p>
 <p class="share-line">Share it with someone it could help.</p>
 </div>
@@ -527,7 +530,9 @@ Please reissue my certificate with these corrections:
 <p>General guidance, not legal, tax or IT advice.</p>
 <p>This is not insurance advice. Talk to your insurance broker. Amazon's Business Insurance verification decides whether a certificate is accepted.</p>
 <p>Not affiliated with or endorsed by Amazon.</p>
-<p><a target="_blank" class="paid-quiet" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=firstmoverprojects&amp;utm_medium=amazon-coi-check&amp;utm_campaign=amazon-1m-insurance&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the full kit</a></p>
+<p><a target="_blank" class="paid-quiet" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=amazon-coi-check&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Optional: $29 Amazon $1M insurance kit</a></p>
+<p>General guidance, not legal, tax or IT advice.</p>
+<p>Not affiliated with Amazon.</p>
 <p>Made by First Mover Projects with AI coding tools.</p>
 <p>Your certificate text stays in this browser tab. Nothing is uploaded or saved.</p>
 <p><a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a></p>
@@ -975,6 +980,10 @@ function setText(id, value) {
   if (el) el.textContent = value;
 }
 
+function amazonKitVisible(q1) {
+  return q1 === "yes";
+}
+
 function applicableDate(q1, q2) {
   if (q1 === "yes") {
     return {
@@ -1071,6 +1080,8 @@ function paint(result, opts) {
   else if (nCheck > 0) setText("result-problem", "Some lines on your certificate still need a check by hand before " + date.when + ".");
   else setText("result-problem", "The seven key terms on your certificate look right for " + date.when + ".");
   setText("result-deadline", date.line);
+  var kit = byId("amazon-kit");
+  if (kit) kit.hidden = !amazonKitVisible(q1);
   paintSteps(collectSteps(result, q3));
   var cap = byId("cap");
   if (cap) {
@@ -1212,6 +1223,8 @@ function boot() {
     if (byId("expiry")) byId("expiry").value = "";
     var box = byId("results");
     if (box) box.hidden = true;
+    var kit = byId("amazon-kit");
+    if (kit) kit.hidden = true;
     var tb = byId("tbody");
     if (tb) tb.textContent = "";
     setText("fixlist", "");
@@ -1247,6 +1260,7 @@ window.FMP_COI = {
   paint: paint,
   SAMPLE: SAMPLE,
   scopeLines: scopeLines,
+  amazonKitVisible: amazonKitVisible,
   daysText: daysText,
   daysUntilNov2: daysUntilNov2,
   QUOTES: QUOTES

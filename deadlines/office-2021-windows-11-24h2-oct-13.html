@@ -76,7 +76,8 @@
         <h1>Agent prompt: track this deadline — Office 2021 and Windows 11 24H2 Home/Pro (ended Oct 13, 2026)</h1>
         <p class="lead">Anyone still on Office 2021 or Windows 11 version 24H2 Home or Pro.</p>
         <!-- REMOVE Nov 20, 2026: FIRE kit unpublishes -->
-        <p class="kit-cta"><a rel="noopener" target="_blank" class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=office-2021-windows-11-24h2-oct-13&amp;utm_content=top-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $9 FIRE→IRIS checklist (Gumroad)</a></p>
+        <p class="kit-cta" data-fire-kit="1"><a rel="noopener" target="_blank" class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=office-2021-windows-11-24h2-oct-13&amp;utm_content=top-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $9 FIRE→IRIS checklist (Gumroad)</a></p>
+        <p>General guidance, not legal, tax or IT advice.</p>
         <p class="kit-cta__note">Next small-business deadline: the IRS FIRE e-file system takes its last filings Nov 19, 2026, 3 p.m. ET (<a href="irs-fire-retirement-nov-19.html">see the free page</a>).</p>
       </section>
 
@@ -116,7 +117,8 @@ When you state any deadline or date, quote the exact line from the official sour
 
       <!-- REMOVE Nov 20, 2026: FIRE kit unpublishes (bottom button) -->
       <p class="kit-link">Next deadline: IRS FIRE takes its last filings Nov 19, 2026, 3 p.m. ET.</p>
-      <p class="kit-link"><a rel="noopener" target="_blank" class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=office-2021-windows-11-24h2-oct-13&amp;utm_content=bottom-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $9 FIRE→IRIS checklist on Gumroad</a></p>
+      <p class="kit-link" data-fire-kit="1"><a rel="noopener" target="_blank" class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=office-2021-windows-11-24h2-oct-13&amp;utm_content=bottom-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $9 FIRE→IRIS checklist on Gumroad</a></p>
+      <p>General guidance, not legal, tax or IT advice.</p>
 
       <p class="related">More: <a href="/deadlines/">All deadlines</a> · <a href="finder/">Deadline Finder</a> · <a href="/tools/">Tools and kits</a></p>
 
@@ -272,6 +274,24 @@ When you state any deadline or date, quote the exact line from the official sour
   patchAll(landingSource());
   document.addEventListener("click", onClick, true);
   document.addEventListener("auxclick", onClick, true);
+})();
+</script>
+<script id="fmp-fire-kit">
+(function () {
+  "use strict";
+  var CUTOFF = Date.UTC(2026, 10, 19, 20, 0, 0);
+  function expired(now) {
+    return (now || new Date()).getTime() >= CUTOFF;
+  }
+  function hide(now) {
+    if (!expired(now) || !document.querySelectorAll) return;
+    var nodes = document.querySelectorAll("[data-fire-kit]");
+    var i;
+    for (i = 0; i < nodes.length; i++) nodes[i].hidden = true;
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { hide(new Date()); });
+  else hide(new Date());
+  if (typeof window !== "undefined") window.FMP_FIRE_KIT = { CUTOFF: CUTOFF, expired: expired, hide: hide };
 })();
 </script>
 </body>

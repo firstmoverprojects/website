@@ -223,8 +223,8 @@ var allowed = [
   "https://firstmoverprojects.goatcounter.com",
   "https://firstmoverprojects.goatcounter.com/count",
   "https://firstmoverprojects.goatcounter.com/count?p=",
-  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance&utm_content=footer",
-  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=firstmoverprojects&utm_medium=amazon-coi-check&utm_campaign=amazon-1m-insurance&utm_content=result",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=footer",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=coi-check-result",
   "https://gc.zgo.at",
   "https://gc.zgo.at/count.js",
   "https://launchfree.io/listings/amazon-nov-2-coi-pre-check.html",
@@ -337,6 +337,19 @@ var dba = checkCOI("Insured: Trade Name Goods\nEach occurrence $1,000,000", "Sam
 var named = dba.extras.filter(function (e) { return e.id === "Named insured"; })[0];
 assert(named.detail.indexOf("single-member LLC using a trade name/DBA") !== -1, "trade-name checkbox is mentioned");
 assertEq(named.status, "check", "missing legal name is check by hand");
+
+console.log("Amazon kit button");
+assertEq(FMP.amazonKitVisible("yes"), true, "kit shows when the seller needs the $1M rule");
+assertEq(FMP.amazonKitVisible("no"), false, "kit hides when enhanced-safety categories are no");
+assertEq(FMP.amazonKitVisible("unsure"), false, "kit hides when the category answer is not sure");
+assertEq(FMP.amazonKitVisible(""), false, "kit hides when the category question is blank");
+assert(html.indexOf('id="amazon-kit" hidden') !== -1, "Amazon kit starts hidden");
+assert(html.indexOf("Get the $29 Amazon $1M insurance kit") !== -1, "Amazon kit button names the kit");
+assert(html.indexOf("Not affiliated with Amazon.") !== -1, "Not affiliated with Amazon under the kit");
+var kitAt = html.indexOf('id="kit-result"');
+var adviceAt = html.indexOf("General guidance, not legal, tax or IT advice.", kitAt);
+var affilAt = html.indexOf("Not affiliated with Amazon.", kitAt);
+assert(kitAt !== -1 && adviceAt > kitAt && affilAt > adviceAt, "advice and Amazon affiliation sit under the result kit button");
 
 console.log(passed + " passed, " + failed + " failed");
 if (failed) process.exit(1);

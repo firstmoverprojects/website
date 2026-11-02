@@ -238,8 +238,9 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <li>Cuts wasted Creator renewals before billing day: sorts every workspace member into Keep, Change Role, Deactivate, or Remove with automatic Summary tab counts.</li>
 <li>Includes ready-to-use Video Backup Inventory (.csv), Embedded Link Inventory (.csv for Notion/Zendesk/SOPs), and pilot-seat Cutover & Rollback worksheets.</li>
   </ul>
-  <div class="kit-btn-row">
-    <a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/fguyxn?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=loom-seat-audit-calculator&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $79 Loom Seat Audit & Exit Pack (1-Click Checkout) →</a>
+  <div class="kit-btn-row" id="loom-kit">
+    <a target="_blank" class="btn-buy-now" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/fguyxn?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=loom-seat-audit-calculator&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $79 Loom Seat Audit and Exit Pack</a>
+    <p>General guidance, not legal, tax or IT advice.</p>
   </div>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
@@ -656,8 +657,15 @@ function el(tag, text) {
   return node;
 }
 
+function loomKitApplies(model) {
+  if (!model || !model.ok || !model.classified || !model.classified.counts) return false;
+  var c = model.classified.counts;
+  return (c.keep + c.move + c.archive + c.free) > 0;
+}
+
 function render(model) {
   var errors = byId("errors");
+  var kit = byId("loom-kit");
   errors.textContent = "";
   (model.errors || []).forEach(function (err) { errors.appendChild(el("p", err)); });
   var body = byId("reclass-body");
@@ -674,6 +682,7 @@ function render(model) {
     box.setAttribute("data-math", "no");
     byId("savings").removeAttribute("data-annual-cents");
     byId("copystate").textContent = "";
+    if (kit) kit.hidden = true;
     return model;
   }
   var c = model.classified.counts;
@@ -720,6 +729,7 @@ function render(model) {
   box.hidden = false;
   box.setAttribute("data-source", model.classified.source);
   box.setAttribute("data-math", rate.ok ? "yes" : "no");
+  if (kit) kit.hidden = !loomKitApplies(model);
   return model;
 }
 
@@ -743,6 +753,7 @@ window.FMP_LOOM = {
   withRate: withRate,
   fromInputs: fromInputs,
   render: render,
+  kitApplies: loomKitApplies,
   fromDom: fromDom,
   EXAMPLE: EXAMPLE,
   BASIS: BASIS
