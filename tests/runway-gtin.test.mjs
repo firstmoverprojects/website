@@ -7,6 +7,14 @@ import vm from "node:vm";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const PILL = "Listed on The Runway (LaunchFree.io) — Upvote This Free Tool";
+const PILL_BY_PAGE = {
+  "tools/fire-to-iris-check/index.html":
+    "Listed on The Runway (LaunchFree.io): Upvote This Free Tool"
+};
+
+function pillFor(rel) {
+  return PILL_BY_PAGE[rel] || PILL;
+}
 const LISTINGS = {
   "tools/loom-seat-audit-calculator/index.html":
     "https://launchfree.io/listings/loom-seat-audit-and-creator-lite-migration-calculator.html",
@@ -61,7 +69,7 @@ function section(html, id) {
 test("each live LaunchFree tool has one Runway upvote pill", () => {
   for (const [rel, href] of Object.entries(LISTINGS)) {
     const html = read(rel);
-    assert.equal(html.split(PILL).length - 1, 1, rel);
+    assert.equal(html.split(pillFor(rel)).length - 1, 1, rel);
     assert.equal(html.split(href).length - 1, 1, rel);
     assert.equal(html.split("https://launchfree.io/").length - 1, 1, rel);
     const tag = html.match(/<a\b[^>]*class="runway-pill"[^>]*>/)[0];

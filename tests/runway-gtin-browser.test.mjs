@@ -8,6 +8,14 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 
 const PILL = "Listed on The Runway (LaunchFree.io) — Upvote This Free Tool";
+const PILL_BY_PAGE = {
+  "tools/fire-to-iris-check/index.html":
+    "Listed on The Runway (LaunchFree.io): Upvote This Free Tool"
+};
+
+function pillFor(rel) {
+  return PILL_BY_PAGE[rel] || PILL;
+}
 const LISTINGS = {
   "tools/loom-seat-audit-calculator/index.html":
     "https://launchfree.io/listings/loom-seat-audit-and-creator-lite-migration-calculator.html",
@@ -76,7 +84,7 @@ test("Runway pills and the GTIN helper run without horizontal scroll", async () 
     const { page, errors, nets } = await open(rel);
     const pill = page.locator("a.runway-pill");
     assert.equal(await pill.count(), 1, rel);
-    assert.equal(await pill.innerText(), PILL, rel);
+    assert.equal(await pill.innerText(), pillFor(rel), rel);
     assert.equal(await pill.getAttribute("href"), href, rel);
     await assertNoHScroll(page);
     if (CHECKOUT[rel]) {
