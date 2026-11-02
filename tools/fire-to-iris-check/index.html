@@ -216,7 +216,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <button id="example" class="sec" type="button">Load sample header row</button>
 <button id="clear" class="sec" type="button">Clear</button>
 </section>
-<p><a class="runway-pill" href="https://launchfree.io/listings/irs-fire-to-iris-readiness-and-1099-csv-header-check.html" target="_blank" rel="noopener noreferrer">Listed on The Runway (LaunchFree.io) — Upvote This Free Tool</a></p>
+<p><a class="runway-pill" href="https://launchfree.io/listings/irs-fire-to-iris-readiness-and-1099-csv-header-check.html" target="_blank" rel="noopener noreferrer">Listed on The Runway (LaunchFree.io): Upvote This Free Tool</a></p>
 
 <section class="card" id="results" hidden aria-live="polite">
 <!-- Result card. Dates from IRS news release IR-2026-99 (Aug. 24, 2026): Nov. 1, Nov. 9, and Nov. 19, 2026 at 3 p.m. ET.
@@ -238,7 +238,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 </ul>
 </div>
 <p class="deadline-count" data-deadline="2026-11-01" data-deadline-label="Nov 1, 2026 IRS FIRE test-file cutoff" hidden></p>
-<p data-fire-kit="1"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/fire-check-result" data-goatcounter-title="FIRE to IRIS check result" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-check-result" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 switch checklist</a><span class="kit-refund">Refunds within 30 days if the file is corrupt or materially not as described (see the Gumroad listing).</span></p>
+<p data-fire-kit="1"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/fire-check-result" data-goatcounter-title="FIRE to IRIS check result" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-check-result" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 switch checklist</a><span class="kit-refund">30-day money back guarantee (see the Gumroad listing).</span></p>
 <p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
@@ -324,7 +324,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 </ul>
 <p>The $9 checklist is one PDF, 3 pages. It puts the switch in order, with the IRS dates and links, your FIRE account, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on. This page does not send your files there.</p>
 <p class="deadline-count" data-deadline="2026-11-01" data-deadline-label="Nov 1, 2026 IRS FIRE test-file cutoff" hidden></p>
-<p data-fire-kit="1"><a target="_blank" class="paid-quiet" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Optional: $9 switch checklist on Gumroad</a><span class="kit-refund">Refunds within 30 days if the file is corrupt or materially not as described (see the Gumroad listing).</span></p>
+<p data-fire-kit="1"><a target="_blank" class="paid-quiet" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Optional: $9 switch checklist on Gumroad</a><span class="kit-refund">30-day money back guarantee (see the Gumroad listing).</span></p>
 <p>General guidance, not legal, tax or IT advice.</p>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
@@ -360,6 +360,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <footer>
 <p>Not affiliated with the IRS.</p>
 <p>General guidance, not legal, tax or IT advice.</p>
+<p>Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
 <p>Made by First Mover Projects with AI coding tools.</p>
 </footer>
 </main>
@@ -471,7 +472,7 @@ function analyze(opts) {
   if (steps.length > 3) steps = steps.slice(0, 3);
   var summary = warns > 0
     ? warns + (warns === 1 ? " time-sensitive item flagged before the November 2026 FIRE cutoffs." : " time-sensitive items flagged before the November 2026 FIRE cutoffs.")
-    : "No immediate FIRE cutoff blockers flagged from your selections — review the checklist below.";
+    : "No immediate FIRE cutoff blockers flagged from your selections. Review the checklist below.";
   return { summary: summary, items: items, csv: csv, warns: warns, steps: steps };
 }
 
@@ -534,10 +535,10 @@ function render() {
       var td2 = document.createElement("td");
       var badge = document.createElement("span");
       badge.className = "tag " + (g.matched ? "ok" : "info");
-      badge.textContent = g.matched ? "Seen in header" : "Not seen — add/map in IRS template";
+      badge.textContent = g.matched ? "Seen in header" : "Not seen: add or map in IRS template";
       td2.appendChild(badge);
       var td3 = document.createElement("td");
-      td3.textContent = g.matched ? g.hits.join(", ") : "—";
+      td3.textContent = g.matched ? g.hits.join(", ") : "None";
       tr.appendChild(td1);
       tr.appendChild(td2);
       tr.appendChild(td3);
