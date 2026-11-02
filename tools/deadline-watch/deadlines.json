@@ -1537,6 +1537,34 @@
     {
       "needsEmployees": false,
       "draft": false,
+      "id": "md-efile-2027",
+      "date": "2027-01-01",
+      "state": "MD",
+      "title": "Maryland electronic business returns",
+      "detail": "The Maryland Comptroller Tax Alert dated May 27, 2026 says Chapter 729 of the Acts of 2024 requires taxpayers to file sales and use tax returns electronically for all periods beginning after December 31, 2026. The alert says the same law requires electronic filing, for periods beginning after December 31, 2026, of admissions and amusement tax, alcoholic beverages tax, the Chesapeake Bay restoration fee, corporation income tax, digital advertising gross revenues tax, employer withholding tax, motor fuel tax, pass-through entity tax, the tire recycling fee, and tobacco tax. File at MDTaxConnect.gov. The alert says a person does not have to file electronically if that person has a disability as defined in the Americans with Disabilities Act, if religious beliefs prohibit the use of electronic filing technology, or if the Comptroller has determined a special need to file a paper return, schedule, or report. Chapter 729 states the sales and use tax rule for periods beginning after December 31, 2026. It states the corporation income tax return, the income tax withholding return, and the pass-through entity income tax return for a taxable year beginning after December 31, 2026. A corporation with fewer than 15 employees is not required to file its corporation income tax return electronically. This row is January 1, 2027, the first day a period or taxable year can begin after December 31, 2026. It is not one return's due date. Turn this off if you do not file one of these Maryland returns.",
+      "sourceUrl": "https://www.marylandcomptroller.gov/content/dam/mdcomp/tax/legal-publications/alerts/tax-alert-sales-and-use-tax-updates-2026-2027.pdf",
+      "sourceLabel": "Maryland Comptroller, Tax Alert, Sales and Use Tax Updates 2026-2027, May 27, 2026",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ],
+      "also": [
+        {
+          "label": "Maryland Chapter 729 of 2024, House Bill 455",
+          "url": "https://mgaleg.maryland.gov/2024RS/Chapters_noln/CH_729_hb0455t.pdf"
+        },
+        {
+          "label": "Maryland Tax Connect",
+          "url": "https://www.mdtaxconnect.gov/"
+        }
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
       "id": "mi-llc-2026",
       "date": "2026-02-15",
       "state": "MI",
@@ -1620,6 +1648,46 @@
       "sourceLabel": "Michigan LARA, annual reports and annual statements",
       "types": [
         "nonprofit"
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
+      "id": "mi-detroit-biz-2026",
+      "date": "2026-11-12",
+      "state": "MI",
+      "title": "Detroit business taxes move to eServices",
+      "detail": "The Michigan Department of Treasury key-changes page says Treasury is upgrading the technology system for city income tax administration beginning November 12, 2026. On that date, Treasury will put City of Detroit business taxes into GenTax. City of Detroit taxpayers and third parties can use Michigan Treasury eServices to file returns, make payments, and manage tax accounts online. The Web Platform Impacts page says the City Tax eService and City Tax ePayments for City of Detroit income taxes were taken down on October 30, 2026 at 5:00 p.m. That work moves to Michigan Treasury eServices on November 12, 2026 at 7:00 a.m. This row is that opening time, not one return's due date. An amended City of Detroit business tax return must be filed electronically. An original return can still be mailed. Most payments can still be mailed with a check. City employer withholding tax must be paid electronically. In-person and phone payments will not be accepted. A checking or savings payment on the site has no fee. A debit card, credit card, or digital wallet payment has a fee. The bulk-filing page says bulk filing of Detroit employer withholding is not available from October 30 through November 11, 2026, and resumes on November 12, 2026 at 7:00 a.m. The last period that could be bulk filed in Michigan Treasury Online was September 2026, due on or before October 15, 2026. The file format does not change. If you already have a Michigan Treasury Online username and password, the bulk-filing page says you can use those same credentials. The pages do not say you must register the tax account again. Turn this off if you do not file City of Detroit corporate income tax, partnership tax, fiduciary income tax, or employer withholding.",
+      "sourceUrl": "https://www.michigan.gov/taxes/citytax/detroit/key-changes/key-changes-for-business",
+      "sourceLabel": "Michigan Department of Treasury, key changes for City of Detroit business taxes",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ],
+      "also": [
+        {
+          "label": "Michigan Department of Treasury, key changes to City of Detroit income taxes",
+          "url": "https://www.michigan.gov/taxes/citytax/detroit/key-changes"
+        },
+        {
+          "label": "Michigan Department of Treasury, web platform impacts",
+          "url": "https://www.michigan.gov/taxes/mitreasuryeservices/enews/impacts/web-platform-impacts"
+        },
+        {
+          "label": "Michigan Department of Treasury, Detroit employer withholding bulk-filing transition",
+          "url": "https://www.michigan.gov/taxes/citytax/detroit/bulk-filing-transition"
+        },
+        {
+          "label": "Michigan Department of Treasury, eServices expansion notice, October 30, 2026",
+          "url": "https://www.michigan.gov/treasury/news/2026/10/30/michigan-treasury-eservices-to-expand"
+        },
+        {
+          "label": "Free check for the November 12 City of Detroit business tax change",
+          "url": "https://firstmoverprojects.com/tools/detroit-business-tax-check/"
+        }
       ]
     },
     {

@@ -151,6 +151,30 @@ check("a Texas seller does not get the Missouri row", api.rowsFor(data, { type: 
 const moOn = moSeller.filter((row) => row.id !== "mo-zero-return-2026");
 check("turning the Missouri row off drops it", moOn.length === moSeller.length - 1);
 check("turned-off Missouri row leaves the calendar", parseIcs(api.buildIcs(moOn, "20261101T120000Z")).events.every((event) => (event.summary || "").indexOf("Missouri zero") === -1));
+
+const miCorp = api.rowsFor(data, { type: "ccorp", employees: "yes", state: "MI" });
+const detroit = miCorp.find((row) => row.id === "mi-detroit-biz-2026");
+check("Michigan C corp sees the Detroit business tax change", !!detroit);
+check("Detroit date is November 12, 2026", detroit && detroit.date === "2026-11-12");
+check("Detroit row quotes November 12, 2026", detroit && /beginning November 12, 2026/.test(detroit.detail));
+check("Detroit row can be turned off", detroit && /Turn this off if you do not file City of Detroit/.test(detroit.detail));
+check("Detroit cites the business key-changes page", detroit && detroit.sourceUrl === "https://www.michigan.gov/taxes/citytax/detroit/key-changes/key-changes-for-business");
+check("Michigan sole also sees the Detroit row", api.rowsFor(data, { type: "sole", employees: "no", state: "MI" }).some((row) => row.id === "mi-detroit-biz-2026"));
+check("a Texas business does not get the Detroit row", api.rowsFor(data, { type: "ccorp", employees: "yes", state: "TX" }).every((row) => row.id !== "mi-detroit-biz-2026"));
+const miOn = miCorp.filter((row) => row.id !== "mi-detroit-biz-2026");
+check("turning the Detroit row off drops it", miOn.length === miCorp.length - 1);
+
+const mdFiler = api.rowsFor(data, { type: "mmllc", employees: "no", state: "MD" });
+const mdEfile = mdFiler.find((row) => row.id === "md-efile-2027");
+check("Maryland partnership sees electronic filing", !!mdEfile);
+check("Maryland e-file row is January 1, 2027", mdEfile && mdEfile.date === "2027-01-01");
+check("Maryland row quotes periods after December 31, 2026", mdEfile && /periods beginning after December 31, 2026/.test(mdEfile.detail));
+check("Maryland row quotes taxable years after December 31, 2026", mdEfile && /taxable year beginning after December 31, 2026/.test(mdEfile.detail));
+check("Maryland row names the under-15 corporation exception", mdEfile && /fewer than 15 employees/.test(mdEfile.detail));
+check("Maryland row can be turned off", mdEfile && /Turn this off if you do not file one of these Maryland returns/.test(mdEfile.detail));
+check("Maryland cites the Comptroller tax alert", mdEfile && mdEfile.sourceUrl === "https://www.marylandcomptroller.gov/content/dam/mdcomp/tax/legal-publications/alerts/tax-alert-sales-and-use-tax-updates-2026-2027.pdf");
+check("Maryland nonprofit also sees the row", api.rowsFor(data, { type: "nonprofit", employees: "no", state: "MD" }).some((row) => row.id === "md-efile-2027"));
+check("a Texas seller does not get the Maryland e-file row", api.rowsFor(data, { type: "mmllc", employees: "no", state: "TX" }).every((row) => row.id !== "md-efile-2027"));
 check("Texas S corp has no 1040", employer.every((row) => row.id.indexOf("1040") === -1 || row.id.indexOf("1040-es") !== -1 || row.id.indexOf("fed-es-") === 0));
 check("Texas S corp is not a C corp return", employer.every((row) => row.id !== "fed-1120-2025"));
 
@@ -219,10 +243,15 @@ function walk(dir, acc) {
 }
 const others = [];
 walk(root, others);
+const detroitCheck = path.join(root, "tools/detroit-business-tax-check/index.html");
 others.forEach((file) => {
   const text = fs.readFileSync(file, "utf8");
-  if (text.includes("deadline-watch")) failures.push("linked from " + path.relative(root, file));
+  if (text.includes("deadline-watch") && file !== detroitCheck) failures.push("linked from " + path.relative(root, file));
 });
+const detroitHtml = fs.readFileSync(detroitCheck, "utf8");
+check("Detroit check links Deadline Watch", detroitHtml.includes("https://firstmoverprojects.com/tools/deadline-watch/"));
+check("Detroit check stays noindex", /<meta\s+name="robots"\s+content="noindex"\s*>/.test(detroitHtml));
+check("Detroit check is the only outside Deadline Watch link", detroitHtml.includes("deadline-watch"));
 
 if (failures.length) {
   console.error(failures.join("\n"));
