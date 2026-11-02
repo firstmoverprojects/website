@@ -52,6 +52,7 @@ a{color:#0055ff}
 #kit-result{display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;box-sizing:border-box;min-height:48px;padding:14px 18px;margin:12px 0 0;background:#0055ff;color:#fff;font-weight:800;line-height:1.3;text-align:center;text-decoration:none;border-radius:8px;white-space:normal;overflow-wrap:anywhere}
 #kit-result:hover,#kit-result:focus{background:#0044cc;color:#fff}
 a.paid-quiet{display:inline-block;max-width:100%;box-sizing:border-box;min-height:44px;padding:12px 0;color:#0055ff;font-weight:700;line-height:1.3;text-decoration:underline;white-space:normal;overflow-wrap:anywhere}
+.kit-refund{display:block;max-width:100%;margin:6px 0 0;color:#5a636e;font-size:.82rem;font-weight:400;line-height:1.4}
 #results,#result-cta{overflow-wrap:anywhere;max-width:100%}
 a:focus,button:focus,textarea:focus,input:focus{outline:3px solid #1f5fbf;outline-offset:2px}
 table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0}
@@ -63,7 +64,7 @@ caption{text-align:left;font-weight:600;padding:4px 0}
 footer{margin:8px 0 24px}
 
 .kit-conv-box{background:linear-gradient(135deg,#fffbeb 0%,#f0fdf4 100%);border:2px solid #15803d;border-radius:12px;padding:16px;margin:16px 0}
-.kit-conv-badge{display:inline-block;background:#15803d;color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.03em;padding:3px 10px;border-radius:999px;margin-bottom:6px}
+.kit-conv-badge{display:inline-block;max-width:100%;box-sizing:border-box;background:#15803d;color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.03em;padding:3px 10px;border-radius:999px;margin-bottom:6px;white-space:normal;overflow-wrap:anywhere}
 .kit-conv-title{font-size:1.2rem;font-weight:800;margin:4px 0 8px;color:#0f172a}
 .kit-preview-img{display:block;width:100%;max-width:100%;height:auto;border-radius:10px;border:1px solid #cbd5e1;box-shadow:0 6px 18px rgba(15,23,42,.10);margin:10px 0 12px;background:#fff}
 .kit-bullets{margin:8px 0 14px;padding-left:1.25em}
@@ -161,7 +162,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <main id="main">
 <p class="muted site-nav"><a href="https://firstmoverprojects.com/">First Mover Projects</a> · <a href="/tools/">All tools</a> · free browser check</p>
 <h1>IRS FIRE to IRIS Readiness &amp; 1099 CSV Header Check</h1>
-<p><a class="runway-pill" href="https://launchfree.io/listings/irs-fire-to-iris-readiness-and-1099-csv-header-check.html" target="_blank" rel="noopener noreferrer">Listed on The Runway (LaunchFree.io) — Upvote This Free Tool</a></p>
+<p id="what">A free check that runs in your browser: see which IRS FIRE cutoff still applies to you and check your 1099 CSV header before you move to IRIS. If you want the steps on paper, there's an optional $9 checklist after your result.</p>
 <p><strong>Check which November 2026 IRS FIRE cutoff hits you, and verify your 1099 export header row before moving to IRIS.</strong></p>
 <p>Runs entirely in your browser. Nothing is uploaded, stored or sent anywhere.</p>
 <p id="who"><strong>Who it's for:</strong> small businesses and bookkeepers who e-file Forms 1099 or other information returns through the IRS FIRE system or are preparing a CSV export for the IRIS Taxpayer Portal.</p>
@@ -169,13 +170,13 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <div class="cd" aria-label="IRS FIRE and IRIS dates">
  <div id="cd-nov1">
   <div class="muted">FIRE test system closes</div>
-  <div class="big">Nov 1, 2026</div>
+  <div class="big" data-passed-end="nov1" data-passed-base="Nov 1, 2026">Nov 1, 2026 (passed)</div>
   <div class="muted" data-k="v"></div>
   <div class="muted">IRS: “Last day to file test information returns through the FIRE Trading Partner Test System.”</div>
  </div>
  <div id="cd-nov9">
   <div class="muted">IR TCC changes close</div>
-  <div class="big">Nov 9, 2026</div>
+  <div class="big" data-passed-end="nov9" data-passed-base="Nov 9, 2026">Nov 9, 2026</div>
   <div class="muted" data-k="v"></div>
   <div class="muted">IRS: “Last day to make changes to the Information Returns (IR) Applications for Transmitter Control Codes (TCC).”</div>
  </div>
@@ -215,6 +216,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <button id="example" class="sec" type="button">Load sample header row</button>
 <button id="clear" class="sec" type="button">Clear</button>
 </section>
+<p><a class="runway-pill" href="https://launchfree.io/listings/irs-fire-to-iris-readiness-and-1099-csv-header-check.html" target="_blank" rel="noopener noreferrer">Listed on The Runway (LaunchFree.io) — Upvote This Free Tool</a></p>
 
 <section class="card" id="results" hidden aria-live="polite">
 <!-- Result card. Dates from IRS news release IR-2026-99 (Aug. 24, 2026): Nov. 1, Nov. 9, and Nov. 19, 2026 at 3 p.m. ET.
@@ -229,14 +231,14 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <h3>Dates</h3>
 <div id="result-deadline">
 <ul class="date-list">
-<li>Test files stop on Nov 1, 2026.</li>
-<li>Changes to an old IRS application stop on Nov 9, 2026.</li>
+<li data-passed-end="nov1" data-passed-base="Test files stop on Nov 1, 2026.">Test files stop on Nov 1, 2026 (passed).</li>
+<li data-passed-end="nov9" data-passed-base="Changes to an old IRS application stop on Nov 9, 2026.">Changes to an old IRS application stop on Nov 9, 2026.</li>
 <li>The last day to file on the old system is Nov 19, 2026, at 3 p.m. Eastern Time.</li>
 <li>On Jan 1, 2027, the new system is the only way to file.</li>
 </ul>
 </div>
 <p class="deadline-count" data-deadline="2026-11-01" data-deadline-label="Nov 1, 2026 IRS FIRE test-file cutoff" hidden></p>
-<p data-fire-kit="1"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/fire-check-result" data-goatcounter-title="FIRE to IRIS check result" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-check-result" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 switch checklist</a></p>
+<p data-fire-kit="1"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/fire-check-result" data-goatcounter-title="FIRE to IRIS check result" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-check-result" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 switch checklist</a><span class="kit-refund">Refunds within 30 days if the file is corrupt or materially not as described (see the Gumroad listing).</span></p>
 <p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
@@ -270,13 +272,18 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
   <p style="margin:0"><a class="btn-email-cap" href="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" target="_blank" rel="noopener">Email me deadline reminders (1-click sign-up) →</a> <span class="muted">(opens Brevo's sign-up page · double opt-in, unsubscribe anytime · <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>)</span></p>
 </div>
 <div class="kit-conv-box">
-  <span class="kit-conv-badge">INSTANT DOWNLOAD · 2-PAGE PDF CHECKLIST + 1099-NEC PREP SHEET · $9</span>
+  <span class="kit-conv-badge">INSTANT DOWNLOAD · ONE PDF, 3 PAGES · CHECKLIST + 1099-NEC ADD-ON · $9</span>
   <h3 class="kit-conv-title">See What's Inside the $9 FIRE to IRIS Switch Checklist</h3>
-  <picture><source type="image/webp" srcset="/assets/previews/fire-to-iris-kit-preview-1280x720.webp"><img class="kit-preview-img" src="/assets/previews/fire-to-iris-kit-preview-1280x720.png" alt="See What's Inside the $9 IRS FIRE-to-IRIS Switch Checklist Kit: 2-page PDF checklist, 1099 CSV column map, and IRIS TCC prep sheet" width="1280" height="720" loading="lazy"></picture>
+  <picture><source type="image/webp" srcset="/assets/previews/fire-to-iris-kit-preview-1280x720.webp"><img class="kit-preview-img" src="/assets/previews/fire-to-iris-kit-preview-1280x720.png" alt="See What's Inside the $9 FIRE to IRIS Switch Checklist: one PDF, 3 pages, with the IRS dates, your FIRE account, the IRIS Application for TCC, and a 1099-NEC add-on" width="1280" height="720" loading="lazy"></picture>
   <ul class="kit-bullets">
-    <li>Saves hours of IRS PDF hunting: puts the Nov 1, Nov 9, Nov 19 (3 p.m. ET) and Jan 1, 2027 cutoffs in exact step-by-step order with Done checkboxes.</li>
-<li>Prevents a last-minute TCC lockout: walks through the separate 5-digit IRIS Application for TCC (up to 45 business days per IRS Pub 5903) vs. your old FIRE TCC.</li>
-<li>Includes a printable 1099-NEC prep sheet & Responsible Official sign-in check so your bookkeeper or team can verify everything offline.</li>
+    <li>One PDF, 3 pages. What is changing, in plain words.</li>
+    <li>Key dates from the IRS FIRE page (Nov. 1, Nov. 9, Nov. 19 at 3 p.m. ET, Jan. 1, 2027) with a Done? box for each.</li>
+    <li>Before Nov 9: your FIRE account (TCCs, Responsible Official and contacts, a saved copy of your IR Application).</li>
+    <li>Start your IRIS Application for TCC (start early: IRS Publication 5903 says a typical application is processed within 45 business days; who must be able to sign in; IRIS Taxpayer Portal or IRIS A2A).</li>
+    <li>Before Nov 19, 3 p.m. ET: anything still due in FIRE.</li>
+    <li>Get ready for the 2027 filing season (tax year 2026).</li>
+    <li>1099-NEC add-on: the $2,000 threshold, the January 31 deadline, and how to file and correct in IRIS, with a sample contractor table (example data).</li>
+    <li>Links to the IRS's own pages and IRS Publications 5903, 1099 and the 1099-MISC/NEC instructions.</li>
   </ul>
   <div class="kit-btn-row">
     <p class="deadline-count" data-deadline="2026-11-01" data-deadline-label="Nov 1, 2026 IRS FIRE test-file cutoff" hidden></p>
@@ -302,17 +309,22 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 
 <section class="card" id="paid-kit" aria-labelledby="paid-h">
 <!-- Footer kit link. Same product as wzxbmp. utm_content=footer. -->
-<span class="kit-conv-badge">INSTANT DOWNLOAD · 2-PAGE PDF CHECKLIST + 1099-NEC PREP SHEET · $9</span>
+<span class="kit-conv-badge">INSTANT DOWNLOAD · ONE PDF, 3 PAGES · CHECKLIST + 1099-NEC ADD-ON · $9</span>
 <h2 id="paid-h">A short checklist you can print</h2>
-<picture><source type="image/webp" srcset="/assets/previews/fire-to-iris-kit-preview-1280x720.webp"><img class="kit-preview-img" src="/assets/previews/fire-to-iris-kit-preview-1280x720.png" alt="See What's Inside the $9 IRS FIRE-to-IRIS Switch Checklist Kit: 2-page PDF checklist, 1099 CSV column map, and IRIS TCC prep sheet" width="1280" height="720" loading="lazy"></picture>
+<picture><source type="image/webp" srcset="/assets/previews/fire-to-iris-kit-preview-1280x720.webp"><img class="kit-preview-img" src="/assets/previews/fire-to-iris-kit-preview-1280x720.png" alt="See What's Inside the $9 FIRE to IRIS Switch Checklist: one PDF, 3 pages, with the IRS dates, your FIRE account, the IRIS Application for TCC, and a 1099-NEC add-on" width="1280" height="720" loading="lazy"></picture>
 <ul class="kit-bullets">
-<li>Saves hours of IRS PDF hunting: puts the Nov 1, Nov 9, Nov 19 (3 p.m. ET) and Jan 1, 2027 cutoffs in exact step-by-step order with Done checkboxes.</li>
-<li>Prevents a last-minute TCC lockout: walks through the separate 5-digit IRIS Application for TCC (up to 45 business days per IRS Pub 5903) vs. your old FIRE TCC.</li>
-<li>Includes a printable 1099-NEC prep sheet &amp; Responsible Official sign-in check so your bookkeeper or team can verify everything offline.</li>
+<li>One PDF, 3 pages. What is changing, in plain words.</li>
+<li>Key dates from the IRS FIRE page (Nov. 1, Nov. 9, Nov. 19 at 3 p.m. ET, Jan. 1, 2027) with a Done? box for each.</li>
+<li>Before Nov 9: your FIRE account (TCCs, Responsible Official and contacts, a saved copy of your IR Application).</li>
+<li>Start your IRIS Application for TCC (start early: IRS Publication 5903 says a typical application is processed within 45 business days; who must be able to sign in; IRIS Taxpayer Portal or IRIS A2A).</li>
+<li>Before Nov 19, 3 p.m. ET: anything still due in FIRE.</li>
+<li>Get ready for the 2027 filing season (tax year 2026).</li>
+<li>1099-NEC add-on: the $2,000 threshold, the January 31 deadline, and how to file and correct in IRIS, with a sample contractor table (example data).</li>
+<li>Links to the IRS's own pages and IRS Publications 5903, 1099 and the 1099-MISC/NEC instructions.</li>
 </ul>
-<p>The $9 checklist is a 3-page file. It covers the Nov 1, Nov 9, and Nov 19, 2026 dates, the new filing code, and a sheet for Form 1099-NEC. This page does not send your files there.</p>
+<p>The $9 checklist is one PDF, 3 pages. It puts the switch in order, with the IRS dates and links, your FIRE account, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on. This page does not send your files there.</p>
 <p class="deadline-count" data-deadline="2026-11-01" data-deadline-label="Nov 1, 2026 IRS FIRE test-file cutoff" hidden></p>
-<p data-fire-kit="1"><a target="_blank" class="paid-quiet" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Optional: $9 switch checklist on Gumroad</a></p>
+<p data-fire-kit="1"><a target="_blank" class="paid-quiet" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Optional: $9 switch checklist on Gumroad</a><span class="kit-refund">Refunds within 30 days if the file is corrupt or materially not as described (see the Gumroad listing).</span></p>
 <p>General guidance, not legal, tax or IT advice.</p>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
@@ -808,6 +820,47 @@ updateDays(new Date());
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { hide(new Date()); });
   else hide(new Date());
   if (typeof window !== "undefined") window.FMP_FIRE_KIT = { CUTOFF: CUTOFF, expired: expired, hide: hide };
+})();
+</script>
+<script id="fmp-passed-dates">
+(function () {
+  "use strict";
+  // Nov 1 and Nov 9, 2026 end at 23:59:59 Eastern Time.
+  // November 2026 is Eastern Standard Time (UTC-5), so those instants are written in UTC.
+  // Same comparison as the Nov 19 FIRE cutoff: the exact instant counts as passed.
+  var ENDS = {
+    nov1: Date.UTC(2026, 10, 2, 4, 59, 59),
+    nov9: Date.UTC(2026, 10, 10, 4, 59, 59)
+  };
+
+  function passed(now, endUtc) {
+    return (now || new Date()).getTime() >= endUtc;
+  }
+
+  function withPassed(base, isPassed) {
+    var text = String(base == null ? "" : base).replace(" (passed)", "");
+    if (!isPassed) return text;
+    if (/\.$/.test(text)) return text.replace(/\.$/, " (passed).");
+    return text + " (passed)";
+  }
+
+  function mark(now) {
+    if (!document.querySelectorAll) return;
+    var nodes = document.querySelectorAll("[data-passed-end]");
+    var i;
+    for (i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      var key = el.getAttribute("data-passed-end");
+      if (!Object.prototype.hasOwnProperty.call(ENDS, key)) continue;
+      var base = el.getAttribute("data-passed-base");
+      if (!base) base = el.textContent;
+      el.textContent = withPassed(base, passed(now, ENDS[key]));
+    }
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { mark(new Date()); });
+  else mark(new Date());
+  if (typeof window !== "undefined") window.FMP_PASSED_DATES = { ENDS: ENDS, passed: passed, withPassed: withPassed, mark: mark };
 })();
 </script>
 </body>
