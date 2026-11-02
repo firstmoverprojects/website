@@ -111,7 +111,6 @@ picture{display:block;max-width:100%}
 <p>Microsoft support for Remote Web Access and remotewebaccess.com ends Jan 12, 2027.</p>
 <p>Microsoft's <a href="https://support.microsoft.com/en-us/servicing/os/windows/docs/2026/09/windows-server-2016-essentials-end-support">Windows Server 2016 Essentials end of support</a> page says: "Microsoft support for Remote Web Access and remotewebaccess.com as part of Windows Server 2016 Essentials ends on January 12, 2027." That page also says support for Windows Server 2016 Essentials ends on January 12, 2027, and that Windows Server 2016 Essentials is the last version that includes the full classic Windows Server Essentials experience. It lists Remote Web Access (RWA) and the remotewebaccess.com domain and dynamic DNS integration as supported only through January 12, 2027.</p>
 <p>Not affiliated with or endorsed by Microsoft.</p>
-<p>Not affiliated with Microsoft.</p>
 <p>Microsoft sells paid Extended Security Updates for Windows Server 2016. Microsoft describes that paid program on its <a href="https://learn.microsoft.com/en-us/azure/azure-arc/servers/prepare-extended-security-updates">Prepare to deliver Extended Security Updates</a> page. This page does not sell those updates.</p>
 <p>Checked October 30, 2026.</p>
 
@@ -275,7 +274,6 @@ picture{display:block;max-width:100%}
     esu: "https://learn.microsoft.com/en-us/azure/azure-arc/servers/prepare-extended-security-updates"
   };
   var ESU_LINE = "Microsoft sells paid Extended Security Updates for Windows Server 2016. This page does not sell those updates.";
-  var NOT_MS = "Not affiliated with Microsoft.";
 
   function chicagoYmd(date) {
     var parts = new Intl.DateTimeFormat("en-US", {
@@ -380,7 +378,6 @@ picture{display:block;max-width:100%}
     if (essentials) lines.push(ESSENTIALS_LINE);
     lines = lines.concat(pathBlock(path));
     lines.push(ESU_LINE);
-    lines.push(NOT_MS);
     lines.push(AFFILIATION);
     lines.push(CHECKED);
     return { complete: true, days: days, path: path, essentials: essentials, text: lines.join("\n") };
@@ -453,8 +450,7 @@ picture{display:block;max-width:100%}
     buildResult: buildResult,
     kitVisible: kitVisible,
     show: show,
-    ESU_LINE: ESU_LINE,
-    NOT_MS: NOT_MS
+    ESU_LINE: ESU_LINE
   };
   if (typeof window !== "undefined") window.FMP_WS2016 = api;
 

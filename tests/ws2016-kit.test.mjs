@@ -71,7 +71,7 @@ test("kit is hidden for run=no and run=unsure, and shown for run=yes", () => {
   assert.equal(store["ws-kit"].hidden, false);
   assert.equal(store["ws-advice"].hidden, false);
   assert.match(yes.text, /Microsoft sells paid Extended Security Updates for Windows Server 2016/);
-  assert.match(yes.text, /Not affiliated with Microsoft/);
+  assert.match(yes.text, /Not affiliated with or endorsed by Microsoft/);
   assert.equal(yes.text.includes("setInterval"), false);
 
   api.show({ complete: false, text: "Answer all four questions, then use Show days left." });
@@ -87,5 +87,5 @@ test("the result button names the kit and the page has no live countdown", () =>
   const after = html.slice(html.indexOf('id="ws-kit"'));
   assert.match(after, /id="ws-advice" hidden>General guidance, not legal, tax or IT advice\./);
   assert.equal(html.includes("setInterval"), false);
-  assert.match(html, /Not affiliated with Microsoft\./);
+  assert.match(html, /Not affiliated with or endorsed by Microsoft\./);
 });

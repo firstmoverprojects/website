@@ -223,7 +223,7 @@ assert(html.indexOf("utm_content=ws-check-result") !== -1, "result kit utm");
 assert(html.indexOf("utm_content=footer") !== -1, "footer kit utm");
 assert(html.indexOf("General guidance, not legal, tax or IT advice.") !== -1, "advice line under the kit");
 assert(html.indexOf("Microsoft sells paid Extended Security Updates for Windows Server 2016.") !== -1, "ESU sentence");
-assert(html.indexOf("Not affiliated with Microsoft.") !== -1, "short Microsoft affiliation line");
+assert(html.indexOf("Not affiliated with or endorsed by Microsoft.") !== -1, "Microsoft affiliation line");
 assert(html.indexOf("setInterval") === -1, "no live countdown");
 assert(html.indexOf('id="ws-advice" hidden') !== -1, "advice under the result kit starts hidden");
 

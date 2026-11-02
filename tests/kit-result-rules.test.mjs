@@ -76,7 +76,7 @@ test("deadline rows keep each kit on its own row", () => {
   const html = read("deadlines/index.html");
   const famli = html.slice(html.indexOf('id="md-famli"'), html.indexOf('id="ws2016"'));
   const ws = html.slice(html.indexOf('id="ws2016"'), html.indexOf('data-date="Apr 1, 2027"'));
-  assert.match(famli, /Maryland FAMLI payroll deductions start Jan 1, 2027; employee notice due 1 pay period before/);
+  assert.match(famli, /Maryland FAMLI payroll deductions start Jan 1, 2027; employee notice due 1 pay period before \(Maryland FAMLI\)\./);
   assert.match(famli, /https:\/\/paidleave\.maryland\.gov\/employers\/make-contributions\//);
   assert.match(famli, /paidleave\.maryland\.gov/);
   assert.match(famli, /COMAR 09\.42/);
@@ -86,7 +86,7 @@ test("deadline rows keep each kit on its own row", () => {
   assert.equal(famli.includes("windows-server-2016"), false);
   assert.match(ws, /Windows Server 2016 extended support ends Jan 12, 2027/);
   assert.match(ws, /Microsoft sells paid Extended Security Updates/);
-  assert.match(ws, /Not affiliated with Microsoft/);
+  assert.match(ws, /Not affiliated with or endorsed by Microsoft/);
   assert.match(ws, /Optional: \$19 Windows Server 2016 planning checklist/);
   assert.match(ws, /utm_content=ws2016/);
   assert.match(ws, /General guidance, not legal, tax or IT advice\./);

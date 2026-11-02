@@ -345,10 +345,10 @@ assertEq(FMP.amazonKitVisible("unsure"), false, "kit hides when the category ans
 assertEq(FMP.amazonKitVisible(""), false, "kit hides when the category question is blank");
 assert(html.indexOf('id="amazon-kit" hidden') !== -1, "Amazon kit starts hidden");
 assert(html.indexOf("Get the $29 Amazon $1M insurance kit") !== -1, "Amazon kit button names the kit");
-assert(html.indexOf("Not affiliated with Amazon.") !== -1, "Not affiliated with Amazon under the kit");
+assert(html.indexOf("Not affiliated with or endorsed by Amazon.") !== -1, "Not affiliated with or endorsed by Amazon under the kit");
 var kitAt = html.indexOf('id="kit-result"');
 var adviceAt = html.indexOf("General guidance, not legal, tax or IT advice.", kitAt);
-var affilAt = html.indexOf("Not affiliated with Amazon.", kitAt);
+var affilAt = html.indexOf("Not affiliated with or endorsed by Amazon.", kitAt);
 assert(kitAt !== -1 && adviceAt > kitAt && affilAt > adviceAt, "advice and Amazon affiliation sit under the result kit button");
 
 console.log(passed + " passed, " + failed + " failed");
