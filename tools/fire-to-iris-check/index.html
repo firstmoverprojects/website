@@ -236,8 +236,8 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 </ul>
 </div>
 <p class="deadline-count" data-deadline="2026-11-01" data-deadline-label="Nov 1, 2026 IRS FIRE test-file cutoff" hidden></p>
+<p data-fire-kit="1"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/fire-check-result" data-goatcounter-title="FIRE to IRIS check result" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-check-result" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 switch checklist</a></p>
 <p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
-<p><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/fire-check-result" data-goatcounter-title="FIRE to IRIS check result" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-check-result" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 switch checklist</a></p>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
 <div class="follow-bar-actions">
@@ -312,7 +312,8 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 </ul>
 <p>The $9 checklist is a 3-page file. It covers the Nov 1, Nov 9, and Nov 19, 2026 dates, the new filing code, and a sheet for Form 1099-NEC. This page does not send your files there.</p>
 <p class="deadline-count" data-deadline="2026-11-01" data-deadline-label="Nov 1, 2026 IRS FIRE test-file cutoff" hidden></p>
-<p><a target="_blank" class="paid-quiet" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Optional: $9 switch checklist on Gumroad</a></p>
+<p data-fire-kit="1"><a target="_blank" class="paid-quiet" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Optional: $9 switch checklist on Gumroad</a></p>
+<p>General guidance, not legal, tax or IT advice.</p>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
 <div class="follow-bar-actions">
@@ -789,6 +790,24 @@ updateDays(new Date());
       showFallback();
     }
   });
+})();
+</script>
+<script id="fmp-fire-kit">
+(function () {
+  "use strict";
+  var CUTOFF = Date.UTC(2026, 10, 19, 20, 0, 0);
+  function expired(now) {
+    return (now || new Date()).getTime() >= CUTOFF;
+  }
+  function hide(now) {
+    if (!expired(now) || !document.querySelectorAll) return;
+    var nodes = document.querySelectorAll("[data-fire-kit]");
+    var i;
+    for (i = 0; i < nodes.length; i++) nodes[i].hidden = true;
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { hide(new Date()); });
+  else hide(new Date());
+  if (typeof window !== "undefined") window.FMP_FIRE_KIT = { CUTOFF: CUTOFF, expired: expired, hide: hide };
 })();
 </script>
 </body>

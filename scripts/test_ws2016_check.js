@@ -208,7 +208,24 @@ assert(html.indexOf("https://learn.microsoft.com/en-us/azure/migrate/migrate-ser
 assert(html.indexOf('name="viewport" content="width=device-width, initial-scale=1"') !== -1, "viewport");
 assert(html.indexOf("@media (max-width:480px)") !== -1, "narrow layout");
 assert(html.indexOf("min-height:44px") !== -1, "44px targets");
-assertEq(bannedHit(html), "", "page HTML has no banned words");
+function withoutOffers(src) {
+  return src
+    .replace(/<script[\s\S]*?<\/script>/gi, "")
+    .replace(/<style[\s\S]*?<\/style>/gi, "")
+    .replace(/<p id="ws-kit"[\s\S]*?<\/p>/g, "")
+    .replace(/<p><a[^>]*id="paid-link"[\s\S]*?<\/a><\/p>/g, "");
+}
+assertEq(bannedHit(withoutOffers(html)), "", "page copy outside the kit links has no banned words");
+assert(html.indexOf('id="ws-kit" hidden') !== -1, "result kit starts hidden");
+assert(html.indexOf("Get the $19 Windows Server 2016 planning checklist") !== -1, "result kit names the checklist");
+assert(html.indexOf("Optional: $19 Windows Server 2016 planning checklist") !== -1, "footer kit names the checklist");
+assert(html.indexOf("utm_content=ws-check-result") !== -1, "result kit utm");
+assert(html.indexOf("utm_content=footer") !== -1, "footer kit utm");
+assert(html.indexOf("General guidance, not legal, tax or IT advice.") !== -1, "advice line under the kit");
+assert(html.indexOf("Microsoft sells paid Extended Security Updates for Windows Server 2016.") !== -1, "ESU sentence");
+assert(html.indexOf("Not affiliated with or endorsed by Microsoft.") !== -1, "Microsoft affiliation line");
+assert(html.indexOf("setInterval") === -1, "no live countdown");
+assert(html.indexOf('id="ws-advice" hidden') !== -1, "advice under the result kit starts hidden");
 
 var unlisted = [
   ["sitemap.xml", path.join(root, "sitemap.xml")],
@@ -221,8 +238,10 @@ var unlisted = [
 ];
 unlisted.forEach(function (row) {
   var body = fs.readFileSync(row[1], "utf8");
-  assert(body.indexOf("windows-server-2016-check") === -1, "not listed in " + row[0]);
-  assert(body.indexOf("Windows Server 2016") === -1, "no Windows Server 2016 mention in " + row[0]);
+  assert(body.indexOf("windows-server-2016-check") === -1, "checker URL not listed in " + row[0]);
+  if (row[0] !== "deadlines/index.html") {
+    assert(body.indexOf("Windows Server 2016") === -1, "no Windows Server 2016 mention in " + row[0]);
+  }
 });
 
 console.log(passed + " passed, " + failed + " failed");

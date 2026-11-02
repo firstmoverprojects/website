@@ -141,6 +141,13 @@
       a.referrerPolicy = "strict-origin-when-cross-origin";
       a.textContent = it.kit.cta;
       ctaP.appendChild(a);
+      var note = document.createElement("p");
+      note.textContent = "General guidance, not legal, tax or IT advice.";
+      ctaP.appendChild(note);
+      if (String(a.href).indexOf("fire-to-iris-switch-checklist") !== -1) {
+        ctaP.setAttribute("data-fire-kit", "1");
+        if (window.FMP_FIRE_KIT && window.FMP_FIRE_KIT.expired(new Date())) ctaP.hidden = true;
+      }
       var freeP = document.createElement("p");
       freeP.className = "kit-free";
       var f = document.createElement("a");

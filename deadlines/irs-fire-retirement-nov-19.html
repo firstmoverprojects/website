@@ -121,7 +121,8 @@
         </div>
         <p class="lead">Anyone who e-files Forms 1099 or other information returns through the IRS FIRE system themselves.</p>
         <!-- REMOVE Nov 20, 2026: FIRE kit unpublishes (hero CTA too) -->
-        <p class="kit-cta"><a rel="noopener" target="_blank" class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=irs-fire-retirement-nov-19&amp;utm_content=top-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $9 FIRE→IRIS checklist on Gumroad</a></p>
+        <p class="kit-cta" data-fire-kit="1"><a rel="noopener" target="_blank" class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=irs-fire-retirement-nov-19&amp;utm_content=top-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $9 FIRE→IRIS checklist on Gumroad</a></p>
+        <p>General guidance, not legal, tax or IT advice.</p>
         <p class="kit-cta__note">Optional paid kit. Or use the <a href="/tools/fire-to-iris-check/">free in-browser FIRE to IRIS readiness &amp; 1099 CSV header check</a> (no sign-up, nothing uploaded). The free checklist prompt and source links are below.</p>
       </section>
 
@@ -183,7 +184,8 @@ When you state any deadline or date, quote the exact line from the IRS's own pag
 
       <!-- REMOVE Nov 20, 2026: FIRE kit unpublishes -->
       <p class="kit-link">Want this as a printable checklist?</p>
-      <p class="kit-link"><a rel="noopener" target="_blank" class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=irs-fire-retirement-nov-19&amp;utm_content=bottom-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $9 FIRE→IRIS checklist on Gumroad</a></p>
+      <p class="kit-link" data-fire-kit="1"><a rel="noopener" target="_blank" class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=irs-fire-retirement-nov-19&amp;utm_content=bottom-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $9 FIRE→IRIS checklist on Gumroad</a></p>
+      <p>General guidance, not legal, tax or IT advice.</p>
 
       <p class="related">More: <a href="/tools/fire-to-iris-check/">Free FIRE to IRIS Readiness Check</a> · <a href="/deadlines/">All deadlines</a> · <a href="finder/">Deadline Finder</a> · <a href="/tools/">Tools and kits</a></p>
 
@@ -339,6 +341,24 @@ When you state any deadline or date, quote the exact line from the IRS's own pag
   patchAll(landingSource());
   document.addEventListener("click", onClick, true);
   document.addEventListener("auxclick", onClick, true);
+})();
+</script>
+<script id="fmp-fire-kit">
+(function () {
+  "use strict";
+  var CUTOFF = Date.UTC(2026, 10, 19, 20, 0, 0);
+  function expired(now) {
+    return (now || new Date()).getTime() >= CUTOFF;
+  }
+  function hide(now) {
+    if (!expired(now) || !document.querySelectorAll) return;
+    var nodes = document.querySelectorAll("[data-fire-kit]");
+    var i;
+    for (i = 0; i < nodes.length; i++) nodes[i].hidden = true;
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { hide(new Date()); });
+  else hide(new Date());
+  if (typeof window !== "undefined") window.FMP_FIRE_KIT = { CUTOFF: CUTOFF, expired: expired, hide: hide };
 })();
 </script>
 </body>

@@ -265,8 +265,9 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <li>Built-in life-safety gate & ZIP filter: routes gas, sparks, smoke, and downed lines to 911/utility first and filters out-of-area requests before they wake your on-call tech.</li>
 <li>Includes a 4-tier escalation matrix, copy-paste SMS/email expectation replies, a 12-point mobile test checklist, plus the optional $39 5-page IntakeBay HVAC HTML template.</li>
   </ul>
-  <div class="kit-btn-row">
-    <a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/afwbvt?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=after-hours-gap-check&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $79 After-Hours Web Capture Kit (1-Click Checkout) →</a>
+  <div class="kit-btn-row" id="after-kit">
+    <a target="_blank" class="btn-buy-now" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/afwbvt?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=after-hours-gap-check&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $79 After-Hours Web Capture Kit</a>
+    <p>General guidance, not legal, tax or IT advice.</p>
   </div>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
@@ -532,6 +533,15 @@ function highlightTrade(trade) {
   byId("intake-note").hidden = !show;
 }
 
+function afterKitApplies(model) {
+  if (!model || !model.sides || !model.sides.current) return false;
+  return model.sides.current.some(function (item) {
+    if (!item.gap) return false;
+    var text = item.text || "";
+    return text.indexOf("not answered") === -1 && text.indexOf("was not answered") === -1;
+  });
+}
+
 function render(model) {
   byId("math-basis").textContent = model.math.ok
     ? BASIS + " Both columns use the same weekly inquiries and ticket. Only the close rate changes. This is not a forecast."
@@ -576,6 +586,8 @@ function render(model) {
   box.setAttribute("data-trade", model.sides.trade.label);
   box.setAttribute("data-math", model.math.ok ? "yes" : "no");
   highlightTrade(model.tradeId);
+  var kit = byId("after-kit");
+  if (kit) kit.hidden = !afterKitApplies(model);
   return model;
 }
 
@@ -604,6 +616,7 @@ window.FMP_AFTER = {
   profile: profile,
   build: build,
   render: render,
+  kitApplies: afterKitApplies,
   fromDom: fromDom,
   TRADES: TRADES,
   BASIS: BASIS

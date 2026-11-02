@@ -174,8 +174,9 @@ EwsBlockList               :"></textarea>
 <li>Prevents accidental tenant lockouts: step-by-step AppID Allow-List Planner + read-only PowerShell verification commands linked directly to Microsoft Learn.</li>
 <li>Includes an EWS-to-Microsoft Graph migration map, validation checklist, and a plain-English Client Notice Email template for IT teams and MSPs before Apr 1, 2027.</li>
   </ul>
-  <div class="kit-btn-row">
-    <a target="_blank" class="btn-buy-now" href="https://firstmoverprojects.gumroad.com/l/ews-cutover-kit?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=ews-setting-decoder&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $39 EWS Cutover Kit (1-Click Checkout) →</a>
+  <div class="kit-btn-row" id="ews-kit">
+    <a target="_blank" class="btn-buy-now" id="kit-result" href="https://firstmoverprojects.gumroad.com/l/ews-cutover-kit?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=ews-setting-decoder&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $39 EWS Cutover Kit</a>
+    <p>General guidance, not legal, tax or IT advice.</p>
   </div>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
@@ -323,13 +324,17 @@ function decode(text,now){
  r.items.push('Ask each vendor whose app still uses EWS for its Microsoft Graph date.');
  return r;
 }
-window.FMP_EWS={decode:decode,parse:parse,daysLeft:daysLeft};
+function ewsKitApplies(state) {
+ return state === "null" || state === "true-list" || state === "true-empty" || state === "false";
+}
+window.FMP_EWS={decode:decode,parse:parse,daysLeft:daysLeft,kitApplies:ewsKitApplies};
 var $=function(id){return document.getElementById(id);};
 function render(){
  var r=decode($('inp').value,new Date());
  $('res').hidden=false;
  var v=$('verdict');v.textContent=r.verdict;v.className='verdict '+r.level;
  $('detail').textContent=r.detail;
+ var kit=$('ews-kit'); if(kit) kit.hidden=!ewsKitApplies(r.state);
  var ul=$('out');ul.textContent='';
  r.items.forEach(function(t){var li=document.createElement('li');li.textContent=t;ul.appendChild(li);});
  $('res').scrollIntoView({behavior:'smooth',block:'start'});
