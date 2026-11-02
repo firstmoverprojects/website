@@ -201,7 +201,7 @@ pageFacts(det.html, "detroit-business-tax-check", "detroit-biz", [
   "https://www.michigan.gov/taxes/citytax/detroit/bulk-filing-transition",
   "https://www.michigan.gov/treasury/news/2026/10/30/michigan-treasury-eservices-to-expand",
   "https://www.michigan.gov/taxes/mitreasuryeservices"
-], "Checked November 2, 2026.");
+], "Checked November 1, 2026.");
 assert(det.html.indexOf("November 12, 2026") !== -1, "Detroit names November 12, 2026");
 assert(det.html.indexOf("7:00 a.m.") !== -1, "Detroit names 7:00 a.m.");
 assert(det.html.indexOf("October 30, 2026") !== -1, "Detroit names the October 30 outage");
