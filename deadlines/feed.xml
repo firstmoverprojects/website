@@ -6,7 +6,7 @@
   <atom:link href="https://firstmoverprojects.com/deadlines/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Dated vendor and system changes small businesses should check, each with its official source. General guidance, not legal, tax or IT advice.</description>
   <language>en-us</language>
-  <lastBuildDate>Fri, 30 Oct 2026 12:00:00 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 03 Nov 2026 12:00:00 +0000</lastBuildDate>
   <item>
     <title>Oct 16: Old Microsoft Whiteboards still in Azure are deleted</title>
     <link>https://firstmoverprojects.com/deadlines/whiteboard-azure-oct-16.html</link>
@@ -104,6 +104,13 @@
     <guid isPermaLink="false">federal-tax-payments-20261215@firstmoverprojects.com</guid>
     <pubDate>Fri, 30 Oct 2026 20:00:00 +0000</pubDate>
     <description><![CDATA[<p><b>Date:</b> Dec 15, 2026<br/><b>Who:</b> Calendar-year corporations, partnerships that file Form 8813, and monthly employment-tax depositors<br/><b>What to check:</b> Match your entity to the IRS line before you pay. Sole proprietors' next individual estimated-tax date under Publication 509 is Jan 15, 2027, not Dec 15.<br/><b>Official source:</b> <a href="https://www.irs.gov/publications/p509">https://www.irs.gov/publications/p509</a> · <a href="https://www.irs.gov/businesses/small-businesses-self-employed/fourth-quarter-tax-calendar">https://www.irs.gov/businesses/small-businesses-self-employed/fourth-quarter-tax-calendar</a></p><p>General guidance, not legal, tax or IT advice.</p>]]></description>
+  </item>
+  <item>
+    <title>Jan 4, 2027: Pennsylvania annual report enforcement applies to reports due on or after this date</title>
+    <link>https://firstmoverprojects.com/deadlines/pennsylvania-annual-report-2027.html</link>
+    <guid isPermaLink="false">pa-annual-report-enforce-20270104@firstmoverprojects.com</guid>
+    <pubDate>Tue, 03 Nov 2026 12:00:00 +0000</pubDate>
+    <description><![CDATA[<p><b>Date:</b> Jan 4, 2027 is the statutory start, not the filing day. Corporations file by June 30, LLCs by September 30, and limited partnerships, limited liability partnerships, business trusts, and professional associations by December 31.<br/><b>Who:</b> Most domestic and foreign Pennsylvania filing associations. Not a sole proprietor who is not an LLC, and not a general partnership that is not a limited liability partnership.<br/><b>What to check:</b> File the 2027 annual report on file.dos.pa.gov. The Department of State lists a $7 fee, or $0 for a nonprofit corporation and for a limited partnership or LLC with a not-for-profit purpose. A missed 2027 report can lead to administrative dissolution, cancellation, or termination six months after the due date, after notice.<br/><b>Official source:</b> <a href="https://www.pa.gov/agencies/dos/programs/business/types-of-filings-and-registrations/annual-reports">https://www.pa.gov/agencies/dos/programs/business/types-of-filings-and-registrations/annual-reports</a></p><p>General guidance, not legal, tax or IT advice.</p>]]></description>
   </item>
   <item>
     <title>Apr 1, 2027: Exchange Online EWS fully and permanently disabled</title>

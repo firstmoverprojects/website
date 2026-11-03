@@ -164,6 +164,34 @@ check("a Texas business does not get the Detroit row", api.rowsFor(data, { type:
 const miOn = miCorp.filter((row) => row.id !== "mi-detroit-biz-2026");
 check("turning the Detroit row off drops it", miOn.length === miCorp.length - 1);
 
+const paLlc = api.rowsFor(data, { type: "mmllc", employees: "no", state: "PA" });
+const paEnforce = paLlc.find((row) => row.id === "pa-enforce-2027");
+check("Pennsylvania LLC sees 2027 annual report enforcement", !!paEnforce);
+check("Pennsylvania enforcement date is January 4, 2027", paEnforce && paEnforce.date === "2027-01-04");
+check("January 4, 2027 is Monday", weekday("2027-01-04") === 1);
+check("Pennsylvania row says it is not one filing deadline", paEnforce && /not one association's filing deadline/.test(paEnforce.detail));
+check("Pennsylvania row names six months", paEnforce && /within six months after it is due/.test(paEnforce.detail));
+check("Pennsylvania row names the 60-day notice", paEnforce && /60 days after that notice/.test(paEnforce.detail));
+check("Pennsylvania row names the foreign reregistration", paEnforce && /new Foreign Registration Statement/.test(paEnforce.detail));
+check("Pennsylvania row names the $7 fee", paEnforce && /\$7/.test(paEnforce.detail));
+check("Pennsylvania row names the $0 nonprofit fee", paEnforce && /\$0 for a nonprofit corporation/.test(paEnforce.detail));
+check("Pennsylvania row can be turned off", paEnforce && /Turn this off if you are a sole proprietor and not an LLC/.test(paEnforce.detail));
+check(
+  "Pennsylvania cites the Department of State annual reports page",
+  paEnforce && paEnforce.sourceUrl === "https://www.pa.gov/agencies/dos/programs/business/types-of-filings-and-registrations/annual-reports"
+);
+const paAlso = (paEnforce && paEnforce.also ? paEnforce.also : []).map((item) => item.url);
+check("Pennsylvania row links section 381", paAlso.indexOf("https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/15/00.003.081.000..HTM") !== -1);
+check("Pennsylvania row links section 419", paAlso.indexOf("https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/15/00.004.019.000..HTM") !== -1);
+check("Pennsylvania row links the answer page", paAlso.indexOf("https://firstmoverprojects.com/deadlines/pennsylvania-annual-report-2027.html") !== -1);
+check("Pennsylvania corporation also sees the row", api.rowsFor(data, { type: "ccorp", employees: "no", state: "PA" }).some((row) => row.id === "pa-enforce-2027"));
+check("Pennsylvania nonprofit also sees the row", api.rowsFor(data, { type: "nonprofit", employees: "no", state: "PA" }).some((row) => row.id === "pa-enforce-2027"));
+check("Pennsylvania sole does not get the row", api.rowsFor(data, { type: "sole", employees: "no", state: "PA" }).every((row) => row.id !== "pa-enforce-2027"));
+check("a Texas business does not get the Pennsylvania enforcement row", api.rowsFor(data, { type: "mmllc", employees: "no", state: "TX" }).every((row) => row.id !== "pa-enforce-2027"));
+const paOn = paLlc.filter((row) => row.id !== "pa-enforce-2027");
+check("turning the Pennsylvania row off drops it", paOn.length === paLlc.length - 1);
+check("turned-off Pennsylvania row leaves the calendar", parseIcs(api.buildIcs(paOn, "20261103T120000Z")).events.every((event) => (event.summary || "").indexOf("Pennsylvania annual report enforcement") === -1));
+
 const mdFiler = api.rowsFor(data, { type: "mmllc", employees: "no", state: "MD" });
 const mdEfile = mdFiler.find((row) => row.id === "md-efile-2027");
 check("Maryland partnership sees electronic filing", !!mdEfile);
@@ -256,15 +284,20 @@ function walk(dir, acc) {
 }
 const others = [];
 walk(root, others);
-const detroitCheck = path.join(root, "tools/detroit-business-tax-check/index.html");
+const deadlineWatchLinks = new Set([
+  path.join(root, "tools/detroit-business-tax-check/index.html"),
+  path.join(root, "deadlines/pennsylvania-annual-report-2027.html")
+]);
 others.forEach((file) => {
   const text = fs.readFileSync(file, "utf8");
-  if (text.includes("deadline-watch") && file !== detroitCheck) failures.push("linked from " + path.relative(root, file));
+  if (text.includes("deadline-watch") && !deadlineWatchLinks.has(file)) failures.push("linked from " + path.relative(root, file));
 });
-const detroitHtml = fs.readFileSync(detroitCheck, "utf8");
+const detroitHtml = fs.readFileSync(path.join(root, "tools/detroit-business-tax-check/index.html"), "utf8");
+const paPageHtml = fs.readFileSync(path.join(root, "deadlines/pennsylvania-annual-report-2027.html"), "utf8");
 check("Detroit check links Deadline Watch", detroitHtml.includes("https://firstmoverprojects.com/tools/deadline-watch/"));
 check("Detroit check stays noindex", /<meta\s+name="robots"\s+content="noindex"\s*>/.test(detroitHtml));
-check("Detroit check is the only outside Deadline Watch link", detroitHtml.includes("deadline-watch"));
+check("Pennsylvania page links Deadline Watch as a reminder", paPageHtml.includes("https://firstmoverprojects.com/tools/deadline-watch/"));
+check("Deadline Watch links stay on the Detroit check and the Pennsylvania page", deadlineWatchLinks.size === 2);
 
 if (failures.length) {
   console.error(failures.join("\n"));
