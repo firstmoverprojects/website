@@ -69,7 +69,7 @@ test("the answer block leads with one result, one kit button, thanks, and a shar
   assert.equal(url.searchParams.get("utm_campaign"), "custom-gpt-retirement-checker");
   assert.equal(url.searchParams.get("utm_content"), "result-cta");
   assert.equal(card.split('id="kit-result"').length - 1, 1);
-  assert.match(html, /not affiliated with, endorsed or sponsored by OpenAI/);
+  assert.match(html, /Not affiliated with or endorsed by OpenAI/);
   assert.equal(/document\.cookie/.test(html), false);
   const scripts = [...html.matchAll(/<script\b[^>]*\bsrc="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(scripts, ["https://gc.zgo.at/count.js"]);

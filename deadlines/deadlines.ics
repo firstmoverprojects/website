@@ -36,11 +36,11 @@ DESCRIPTION:Who: Affected ChatGPT Enterprise workspaces. FedRAMP workspaces
   are exempt.\nWhat to check: New GPT creation ended on Oct 26\, 2026. Edit
  s to existing\, unmigrated GPTs are still allowed. For new reusable workfl
  ows\, OpenAI says to use Plugin Creator. A deferral alone does not preserv
- e eligibility to create new GPTs.\nOfficial source: https://help.openai.co
- m/en/articles/20001519-custom-gpt-retirement-and-migration-faq\nDetails: h
- ttps://firstmoverprojects.com/deadlines/custom-gpt-retirement-dec-11.html\
- nGeneral guidance\, not legal\, tax or IT advice. Dates from the official 
- source\; re-check it before you act.
+ e eligibility to create new GPTs.\nSource: https://help.openai.com/en/arti
+ cles/20001519-custom-gpt-retirement-and-migration-faq\nDetails: https://fi
+ rstmoverprojects.com/deadlines/custom-gpt-retirement-dec-11.html\nGeneral 
+ guidance\, not legal\, tax or IT advice. Dates from OpenAI's FAQ\; re-chec
+ k it before you act.
 URL:https://firstmoverprojects.com/deadlines/custom-gpt-retirement-dec-11.h
  tml
 TRANSP:TRANSPARENT
@@ -220,11 +220,11 @@ DESCRIPTION:Who: Anyone who created or relies on a custom GPT (FedRAMP work
  reate new GPTs.\nWhat to check: List your GPTs\, publish the version you w
  ant migrated (public sharing is not required)\, migrate the ones you creat
  ed to plugins and test them. Custom actions do not transfer. In a managed 
- workspace\, Share Plugin can prefill the original GPT audience.\nOfficial 
- source: https://help.openai.com/en/articles/20001519-custom-gpt-retirement
- -and-migration-faq\nDetails: https://firstmoverprojects.com/deadlines/cust
- om-gpt-retirement-dec-11.html\nGeneral guidance\, not legal\, tax or IT ad
- vice. Dates from the official source\; re-check it before you act.
+ workspace\, Share Plugin can prefill the original GPT audience.\nSource: h
+ ttps://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migr
+ ation-faq\nDetails: https://firstmoverprojects.com/deadlines/custom-gpt-re
+ tirement-dec-11.html\nGeneral guidance\, not legal\, tax or IT advice. Dat
+ es from OpenAI's FAQ\; re-check it before you act.
 URL:https://firstmoverprojects.com/deadlines/custom-gpt-retirement-dec-11.h
  tml
 TRANSP:TRANSPARENT
