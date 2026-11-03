@@ -70,7 +70,7 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       click: "#example",
       problem: /filing code/,
       deadline: /Nov 19, 2026, at 3 p\.m\. Eastern Time/,
-      button: "Get the $9 switch checklist",
+      button: "Get the $9 checklist (instant PDF)",
       slug: "/l/fire-to-iris-switch-checklist",
       campaign: "fire-to-iris-check",
       resultContent: "fire-check-result"
@@ -80,7 +80,7 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       click: "#sample",
       problem: /to fix/,
       deadline: /Nov 2, 2026/,
-      button: "Get the $29 Amazon $1M insurance kit",
+      button: "Get the $29 kit with broker scripts",
       before: async (page) => {
         await page.locator('input[name="q1"][value="yes"]').check();
       },

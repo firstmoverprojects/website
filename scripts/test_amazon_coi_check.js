@@ -225,6 +225,8 @@ var allowed = [
   "https://firstmoverprojects.goatcounter.com/count?p=",
   "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=footer",
   "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=coi-check-result",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=coi-check-sticky",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=coi-check-top",
   "https://gc.zgo.at",
   "https://gc.zgo.at/count.js",
   "https://launchfree.io/listings/amazon-nov-2-coi-pre-check.html",
@@ -318,7 +320,7 @@ if (!quoteFile) {
 
 var sitemap = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
 assert(sitemap.indexOf("<loc>https://firstmoverprojects.com/tools/amazon-coi-check/</loc>") !== -1, "sitemap loc");
-assert(sitemap.indexOf("<loc>https://firstmoverprojects.com/tools/amazon-coi-check/</loc>\n    <lastmod>2026-10-30</lastmod>") !== -1, "sitemap lastmod");
+assert(sitemap.indexOf("<loc>https://firstmoverprojects.com/tools/amazon-coi-check/</loc>\n    <lastmod>2026-11-03</lastmod>") !== -1, "sitemap lastmod");
 var deadline = fs.readFileSync(path.join(root, "deadlines", "amazon-insurance-nov-2.html"), "utf8");
 assert(deadline.indexOf('<p>Free: <a href="/tools/amazon-coi-check/">paste your certificate text and check it against Amazon\'s criteria</a> (runs in your browser, nothing uploaded).</p>') !== -1, "deadline page free-tool line");
 assert(deadline.indexOf("Amazon Insurance Certificate Checklist: What to Review Before Uploading") !== -1, "deadline checklist heading");
@@ -344,7 +346,7 @@ assertEq(FMP.amazonKitVisible("no"), false, "kit hides when enhanced-safety cate
 assertEq(FMP.amazonKitVisible("unsure"), false, "kit hides when the category answer is not sure");
 assertEq(FMP.amazonKitVisible(""), false, "kit hides when the category question is blank");
 assert(html.indexOf('id="amazon-kit" hidden') !== -1, "Amazon kit starts hidden");
-assert(html.indexOf("Get the $29 Amazon $1M insurance kit") !== -1, "Amazon kit button names the kit");
+assert(html.indexOf("Get the $29 kit with broker scripts") !== -1, "Amazon kit button names the kit");
 assert(html.indexOf("Not affiliated with or endorsed by Amazon.") !== -1, "Not affiliated with or endorsed by Amazon under the kit");
 var kitAt = html.indexOf('id="kit-result"');
 var adviceAt = html.indexOf("General guidance, not legal, tax or IT advice.", kitAt);

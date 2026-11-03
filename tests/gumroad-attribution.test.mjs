@@ -10,7 +10,7 @@ const UTM = readFileSync(path.join(ROOT, "assets/gumroad-utm.js"), "utf8").trim(
 const DEADLINE = readFileSync(path.join(ROOT, "assets/deadline-count.js"), "utf8").trim();
 const CONTENTS = new Set([
   "above-fold", "article", "bottom-cta", "card", "checklist", "comparison", "faq", "footer",
-  "coi-check-result", "etsy-check-result", "fire-check-result", "gtin-helper", "hub", "kit-preview", "link", "md-famli", "post-check", "product-demo", "result-card", "ws-check-result", "ws2016",
+  "coi-check-result", "coi-check-sticky", "coi-check-top", "etsy-check-result", "fire-check-result", "fire-check-sticky", "fire-check-top", "gtin-helper", "hub", "kit-preview", "link", "md-famli", "post-check", "product-demo", "result-card", "ws-check-result", "ws2016",
   "result-cta", "sticky-cta", "tools-free", "tools-kit", "top-cta", "trade-pill"
 ]);
 
