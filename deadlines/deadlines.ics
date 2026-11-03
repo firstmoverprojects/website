@@ -361,4 +361,27 @@ DESCRIPTION:Federal small-business tax payments due
 TRIGGER:-P7D
 END:VALARM
 END:VEVENT
+BEGIN:VEVENT
+UID:pa-annual-report-enforce-20270104@firstmoverprojects.com
+DTSTAMP:20261103T120000Z
+DTSTART;VALUE=DATE:20270104
+DTEND;VALUE=DATE:20270105
+SUMMARY:Pennsylvania annual report enforcement date
+DESCRIPTION:Who: Most domestic and foreign Pennsylvania filing associations
+ \nWhat to check: January 4\, 2027 is the statutory start\, not the filing 
+ day. Corporations file by June 30\, LLCs by September 30\, and limited par
+ tnerships and similar associations by December 31. File at file.dos.pa.gov
+ .\nOfficial source: https://www.pa.gov/agencies/dos/programs/business/type
+ s-of-filings-and-registrations/annual-reports\nDetails: https://firstmover
+ projects.com/deadlines/pennsylvania-annual-report-2027.html\nGeneral guida
+ nce\, not legal\, tax or IT advice.
+URL:https://firstmoverprojects.com/deadlines/pennsylvania-annual-report-202
+ 7.html
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Pennsylvania annual report enforcement date
+TRIGGER:-P7D
+END:VALARM
+END:VEVENT
 END:VCALENDAR

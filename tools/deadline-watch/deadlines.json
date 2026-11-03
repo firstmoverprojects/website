@@ -2003,6 +2003,50 @@
     {
       "needsEmployees": false,
       "draft": false,
+      "id": "pa-enforce-2027",
+      "date": "2027-01-04",
+      "state": "PA",
+      "title": "Pennsylvania annual report enforcement",
+      "detail": "15 Pa.C.S. section 381 says the Department of State may start a proceeding to administratively dissolve a domestic filing entity, or to cancel the registration of a domestic limited liability partnership or the election of an electing partnership, if the annual report is not delivered within six months after it is due. Subsection (b) applies that rule to annual reports due on or after January 4, 2027. This row is that statutory date, not one association's filing deadline. The Department of State says a business or nonprofit corporation, domestic or foreign, files from January 1 through June 30, a domestic or foreign LLC files from January 1 through September 30, and a limited partnership, limited liability partnership, business trust, or professional association files from January 1 through December 31. Those 2027 deadlines are all on or after January 4, 2027. Section 382 says the department must send a notice first. If the report is not filed within 60 days after that notice, the department must file the dissolution or cancellation, with an effective date not less than 60 days after the notice. For a registered foreign association, 15 Pa.C.S. section 419(e) uses the same January 4, 2027 date. The Department of State says a foreign association cannot reinstate and must file a new Foreign Registration Statement. During administrative dissolution, termination, or cancellation, the association's name is available to another filer. The filing fee on the Department of State page is $7, and $0 for a nonprofit corporation or for a limited partnership or LLC with a not-for-profit purpose. File at file.dos.pa.gov. Turn this off if you are a sole proprietor and not an LLC, a general partnership that is not a limited liability partnership, or another association the Department of State says does not file this report.",
+      "sourceUrl": "https://www.pa.gov/agencies/dos/programs/business/types-of-filings-and-registrations/annual-reports",
+      "sourceLabel": "Pennsylvania Department of State, annual reports",
+      "types": [
+        "sole",
+        "mmllc",
+        "scorp",
+        "ccorp",
+        "nonprofit"
+      ],
+      "also": [
+        {
+          "label": "15 Pa.C.S. section 381, grounds for administrative dissolution or cancellation",
+          "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/15/00.003.081.000..HTM"
+        },
+        {
+          "label": "15 Pa.C.S. section 382, procedure and effect",
+          "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/15/00.003.082.000..HTM"
+        },
+        {
+          "label": "15 Pa.C.S. section 419, termination of foreign registration",
+          "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/15/00.004.019.000..HTM"
+        },
+        {
+          "label": "15 Pa.C.S. section 146, annual report",
+          "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/15/00.001.046.000..HTM"
+        },
+        {
+          "label": "Pennsylvania Department of State business filing portal",
+          "url": "https://file.dos.pa.gov"
+        },
+        {
+          "label": "What happens if you miss the Pennsylvania 2027 annual report",
+          "url": "https://firstmoverprojects.com/deadlines/pennsylvania-annual-report-2027.html"
+        }
+      ]
+    },
+    {
+      "needsEmployees": false,
+      "draft": false,
       "id": "ri-annual-2026",
       "date": "2026-05-01",
       "state": "RI",
