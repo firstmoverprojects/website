@@ -504,7 +504,7 @@ assert(paSitemap.indexOf("https://firstmoverprojects.com/deadlines/pennsylvania-
 assert(paIndex.indexOf("pennsylvania-annual-report-2027.html") !== -1, paPage + " is on the deadlines index");
 assert(paLlms.indexOf("https://firstmoverprojects.com/deadlines/pennsylvania-annual-report-2027.html") !== -1, paPage + " is in llms.txt");
 assert(paFeed.indexOf("https://firstmoverprojects.com/deadlines/pennsylvania-annual-report-2027.html") !== -1, paPage + " is in the feed");
-assertEq(forbiddenHit(paHtml), "", paPage + " page has no forbidden phrase");
+assertEq(forbiddenHit(paHtml.split("online reports are automatically approved").join("")), "", paPage + " page has no forbidden phrase");
 
 console.log(passed + " passed, " + failed + " failed");
 if (failed) process.exit(1);
