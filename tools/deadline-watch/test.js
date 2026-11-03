@@ -186,7 +186,7 @@ check("Pennsylvania row links section 419", paAlso.indexOf("https://www.legis.st
 check("Pennsylvania row links the answer page", paAlso.indexOf("https://firstmoverprojects.com/deadlines/pennsylvania-annual-report-2027.html") !== -1);
 check("Pennsylvania corporation also sees the row", api.rowsFor(data, { type: "ccorp", employees: "no", state: "PA" }).some((row) => row.id === "pa-enforce-2027"));
 check("Pennsylvania nonprofit also sees the row", api.rowsFor(data, { type: "nonprofit", employees: "no", state: "PA" }).some((row) => row.id === "pa-enforce-2027"));
-check("Pennsylvania sole also sees the row", api.rowsFor(data, { type: "sole", employees: "no", state: "PA" }).some((row) => row.id === "pa-enforce-2027"));
+check("Pennsylvania sole does not get the row", api.rowsFor(data, { type: "sole", employees: "no", state: "PA" }).every((row) => row.id !== "pa-enforce-2027"));
 check("a Texas business does not get the Pennsylvania enforcement row", api.rowsFor(data, { type: "mmllc", employees: "no", state: "TX" }).every((row) => row.id !== "pa-enforce-2027"));
 const paOn = paLlc.filter((row) => row.id !== "pa-enforce-2027");
 check("turning the Pennsylvania row off drops it", paOn.length === paLlc.length - 1);
