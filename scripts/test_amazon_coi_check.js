@@ -225,6 +225,8 @@ var allowed = [
   "https://firstmoverprojects.goatcounter.com/count?p=",
   "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=footer",
   "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=coi-check-result",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=coi-check-sticky",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=coi-check-top",
   "https://gc.zgo.at",
   "https://gc.zgo.at/count.js",
   "https://launchfree.io/listings/amazon-nov-2-coi-pre-check.html",
