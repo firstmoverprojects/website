@@ -104,6 +104,7 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
 .kit-top{margin:0 0 16px}
 a#kit-top{display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;box-sizing:border-box;min-height:48px;padding:12px 18px;text-align:center;white-space:normal}
 .kit-note{margin:.4em 0 0;color:#5a636e;font-size:.82rem;line-height:1.4}
+.next-irs{margin:.4em 0 0;color:#1b1f24;font-size:1rem;font-weight:400;line-height:1.45}
 .kit-fit{margin:.6em 0;font-weight:600}
 .result-kit-lead{margin:.8em 0 .2em;font-weight:600}
 .kit-sticky{display:none;box-sizing:border-box}
@@ -199,9 +200,56 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <p class="muted site-nav"><a href="https://firstmoverprojects.com/">First Mover Projects</a> · <a href="/tools/">All tools</a> · free browser check</p>
 <h1>IRS FIRE to IRIS Readiness &amp; 1099 CSV Header Check</h1>
 <p class="subhead">Free check in your browser. If you want every step on one page, the $9 checklist is optional.</p>
-<div class="kit-top" data-fire-kit="1">
-<p><a target="_blank" class="btn" id="kit-top" data-goatcounter-click="cta/fire-check-top" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-check-top" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">See the $9 FIRE to IRIS checklist</a></p>
-<p class="kit-note">One PDF, 3 pages. 30-day money back guarantee.</p>
+<div class="kit-top">
+<p data-fire-kit="1"><a target="_blank" class="btn" id="kit-top" data-goatcounter-click="cta/fire-check-top" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-check-top" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">See the $9 FIRE to IRIS checklist</a></p>
+<p class="next-irs" id="next-irs"><span data-next-irs-copy="">Next IRS date: Nov 9, 2026, the last day to change your IR Application for TCC (after that it is read-only). Last day to file on FIRE: Nov 19, 2026, 3 p.m. ET. </span>Source: <a href="https://www.irs.gov/e-file-providers/filing-information-returns-electronically-fire" rel="noopener noreferrer">irs.gov/fire</a></p>
+<script id="fmp-next-irs">
+(function () {
+  "use strict";
+  // Nov 9, 2026 ends at midnight America/Chicago (CST, UTC-6, after the Nov 1 fallback).
+  // Nov 19, 2026 3 p.m. ET is 20:00 UTC. That instant counts as closed, same as the kit cutoff.
+  var NOV19 = Date.UTC(2026, 10, 19, 20, 0, 0);
+  var CLOSED = "FIRE is closed. IRIS is the only IRS e-file system for information returns from Jan 1, 2027.";
+  var NOV19_LINE = "Last day to file on FIRE: Nov 19, 2026, 3 p.m. ET. ";
+
+  function chicagoYmd(date) {
+    var parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Chicago",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).formatToParts(date);
+    var map = { year: "", month: "", day: "" };
+    var i;
+    for (i = 0; i < parts.length; i++) {
+      if (Object.prototype.hasOwnProperty.call(map, parts[i].type)) map[parts[i].type] = parts[i].value;
+    }
+    if (!map.year || !map.month || !map.day) return "";
+    return map.year + "-" + map.month + "-" + map.day;
+  }
+
+  function apply(el, now) {
+    if (!el) return "static";
+    now = now || new Date();
+    if (now.getTime() >= NOV19) {
+      el.textContent = CLOSED;
+      return "closed";
+    }
+    var ymd = "";
+    try { ymd = chicagoYmd(now); } catch (e) { return "static"; }
+    if (!ymd || ymd <= "2026-11-09") return "static";
+    var copy = el.querySelector ? el.querySelector("[data-next-irs-copy]") : null;
+    if (!copy) return "static";
+    copy.textContent = NOV19_LINE;
+    return "nov19";
+  }
+
+  var node = document.getElementById("next-irs");
+  if (node) apply(node, new Date());
+  if (typeof window !== "undefined") window.FMP_NEXT_IRS = { NOV19: NOV19, CLOSED: CLOSED, NOV19_LINE: NOV19_LINE, chicagoYmd: chicagoYmd, apply: apply };
+})();
+</script>
+<p class="kit-note" data-fire-kit="1">One PDF, 3 pages. 30-day money back guarantee.</p>
 </div>
 <p id="what">A free check that runs in your browser: see which IRS FIRE cutoff still applies to you and check your 1099 CSV header before you move to IRIS. If you want the steps on paper, there's an optional $9 checklist after your result.</p>
 <p><strong>Check which November 2026 IRS FIRE cutoff hits you, and verify your 1099 export header row before moving to IRIS.</strong></p>
@@ -209,12 +257,6 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <p id="who"><strong>Who it's for:</strong> small businesses and bookkeepers who e-file Forms 1099 or other information returns through the IRS FIRE system or are preparing a CSV export for the IRIS Taxpayer Portal.</p>
 
 <div class="cd" aria-label="IRS FIRE and IRIS dates">
- <div id="cd-nov1">
-  <div class="muted">FIRE test system closes</div>
-  <div class="big" data-passed-end="nov1" data-passed-base="Nov 1, 2026">Nov 1, 2026 (passed)</div>
-  <div class="muted" data-k="v"></div>
-  <div class="muted">IRS: “Last day to file test information returns through the FIRE Trading Partner Test System.”</div>
- </div>
  <div id="cd-nov9">
   <div class="muted">IR TCC changes close</div>
   <div class="big" data-passed-end="nov9" data-passed-base="Nov 9, 2026">Nov 9, 2026</div>
@@ -232,6 +274,12 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
   <div class="big">Jan 1, 2027</div>
   <div class="muted" data-k="v"></div>
   <div class="muted">IRS: “IRIS will be the only information returns electronic filing system, including current year, prior year, or corrections, after Jan. 1, 2027.”</div>
+ </div>
+ <div id="cd-nov1">
+  <div class="muted">FIRE test system closes</div>
+  <div class="big" data-passed-end="nov1" data-passed-base="Nov 1, 2026">Nov 1, 2026 (passed)</div>
+  <div class="muted" data-k="v"></div>
+  <div class="muted">IRS: “Last day to file test information returns through the FIRE Trading Partner Test System.”</div>
  </div>
 </div>
 
