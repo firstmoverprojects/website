@@ -7,15 +7,15 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="canonical" href="https://firstmoverprojects.com/tools/fire-to-iris-check/">
 <title>IRS FIRE to IRIS Readiness &amp; 1099 CSV Header Check (free, runs in your browser)</title>
-<meta name="description" content="Free in-browser check for the IRS FIRE e-file retirement (Nov 1 test cutoff, Nov 9 TCC change cutoff, Nov 19 last FIRE filing day, Jan 1, 2027 IRIS-only). Check your TCC status and 1099 CSV column headers with nothing uploaded.">
+<meta name="description" content="Free in-browser IRS FIRE to IRIS check. See which cutoff applies to you and test your 1099 CSV headers. Nothing is uploaded.">
 <meta property="og:title" content="IRS FIRE to IRIS Readiness &amp; 1099 CSV Header Check (free, runs in your browser)">
-<meta property="og:description" content="Free in-browser check for the IRS FIRE e-file retirement (Nov 1 test cutoff, Nov 9 TCC change cutoff, Nov 19 last FIRE filing day, Jan 1, 2027 IRIS-only). Check your TCC status and 1099 CSV column headers with nothing uploaded.">
+<meta property="og:description" content="Free in-browser IRS FIRE to IRIS check. See which cutoff applies to you and test your 1099 CSV headers. Nothing is uploaded.">
 <meta property="og:url" content="https://firstmoverprojects.com/tools/fire-to-iris-check/">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://firstmoverprojects.com/assets/previews/fire-to-iris-kit-preview-1280x720.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="IRS FIRE to IRIS Readiness &amp; 1099 CSV Header Check (free, runs in your browser)">
-<meta name="twitter:description" content="Free in-browser check for the IRS FIRE e-file retirement (Nov 1 test cutoff, Nov 9 TCC change cutoff, Nov 19 last FIRE filing day, Jan 1, 2027 IRIS-only). Check your TCC status and 1099 CSV column headers with nothing uploaded.">
+<meta name="twitter:description" content="Free in-browser IRS FIRE to IRIS check. See which cutoff applies to you and test your 1099 CSV headers. Nothing is uploaded.">
 <meta name="twitter:image" content="https://firstmoverprojects.com/assets/previews/fire-to-iris-kit-preview-1280x720.webp">
 
 <style>
@@ -44,7 +44,7 @@ button.sec{background:#e4e8ee;color:#1b1f24}
 a.btn{display:inline-block;max-width:100%;box-sizing:border-box;font-weight:700;line-height:1.3;text-decoration:none;background:#0055ff;color:#fff;padding:12px 18px;border-radius:8px;margin:12px 0 0}
 a.btn:hover{background:#0044cc;color:#fff}
 a{color:#0055ff}
-#result-cta h2,#result-cta h3,#result-cta .next-steps,#result-cta .date-list,#result-cta .disclaimer,#result-cta #result-deadline{color:#071b31}
+#result-cta h2,#result-cta h3,#result-cta .next-steps,#result-cta .date-list,#result-cta .disclaimer,#result-cta #result-deadline,#result-cta .result-kit-lead{color:#071b31}
 #result-cta h3{font-size:1rem;margin:1em 0 .3em}
 .next-steps,.date-list{margin:.2em 0 .6em;padding-left:1.25em}
 .next-steps li,.date-list li{margin:8px 0}
@@ -100,7 +100,27 @@ html.fmp-embed .site-nav{display:none !important}
 textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:border-box;font:13px/1.45 ui-monospace,Menlo,Consolas,monospace;padding:10px;border:1px solid #b9c0c8;border-radius:8px;background:#eef1f5;color:#1b1f24;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word}
 .fmp-license{margin:14px 0 0;padding-top:12px;border-top:1px solid #dde1e6}
 .fmp-powered{margin:8px 0 16px;font-size:.95rem}
-@media print{.fmp-share{display:none !important}}
+.subhead{font-size:1.08rem;line-height:1.45;margin:.2em 0 .6em}
+.kit-top{margin:0 0 16px}
+a#kit-top{display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;box-sizing:border-box;min-height:48px;padding:12px 18px;text-align:center;white-space:normal}
+.kit-note{margin:.4em 0 0;color:#5a636e;font-size:.82rem;line-height:1.4}
+.kit-fit{margin:.6em 0;font-weight:600}
+.result-kit-lead{margin:.8em 0 .2em;font-weight:600}
+.kit-sticky{display:none;box-sizing:border-box}
+.kit-sticky[hidden]{display:none !important}
+.kit-sticky-label{flex:1 1 auto;min-width:0;margin:0;font-weight:800;font-size:.95rem;line-height:1.25;color:#071b31}
+.kit-sticky-link{flex:0 1 auto;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;max-width:46%;min-width:44px;min-height:44px;padding:10px 12px;border-radius:8px;background:#0055ff;color:#fff !important;font-weight:800;line-height:1.2;text-align:center;text-decoration:none;white-space:normal}
+.kit-sticky-link:hover,.kit-sticky-link:focus{background:#0044cc;color:#fff !important}
+.kit-sticky-dismiss{flex:0 0 auto;margin:0;min-width:44px;min-height:44px;padding:8px 10px;background:#e4e8ee;color:#1b1f24}
+@media (max-width:767px){
+  .kit-sticky:not([hidden]){display:flex;position:fixed;z-index:40;left:0;right:0;bottom:0;width:auto;max-width:100%;gap:8px;align-items:center;margin:0;padding:8px 10px calc(8px + env(safe-area-inset-bottom, 0px));background:#fff;color:#1b1f24;border-top:2px solid #071b31;box-shadow:0 -6px 18px rgba(15,23,42,.16)}
+  body.kit-sticky-on{padding-bottom:128px}
+}
+@media (min-width:768px){
+  .kit-sticky{display:none !important}
+  body.kit-sticky-on{padding-bottom:0 !important}
+}
+@media print{.fmp-share,.kit-sticky{display:none !important}body.kit-sticky-on{padding-bottom:0 !important}}
 input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,textarea,#fmp-embed-snippet{font-size:16px}
 input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,button{min-height:44px}
 nav a,.site-nav a{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:44px;min-width:44px;padding:8px 6px}
@@ -119,7 +139,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "dateModified": "2026-10-27",
+  "dateModified": "2026-11-03",
   "mainEntity": [
     {
       "@type": "Question",
@@ -152,6 +172,22 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
         "@type": "Answer",
         "text": "The news release says the last FIRE filing time is 3 p.m. ET. The FIRE help page says \"3 p.m. Easter time.\" This page follows the news release and says Eastern Time."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "What is in the $9 checklist?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "One 3-page PDF with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on. It has a 30-day money back guarantee on Gumroad."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need the checklist to use the free check?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The check is free and runs in your browser. The checklist is optional."
+      }
     }
   ]
 }
@@ -162,6 +198,11 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <main id="main">
 <p class="muted site-nav"><a href="https://firstmoverprojects.com/">First Mover Projects</a> · <a href="/tools/">All tools</a> · free browser check</p>
 <h1>IRS FIRE to IRIS Readiness &amp; 1099 CSV Header Check</h1>
+<p class="subhead">Free check in your browser. If you want every step on one page, the $9 checklist is optional.</p>
+<div class="kit-top" data-fire-kit="1">
+<p><a target="_blank" class="btn" id="kit-top" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-check-result" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">See the $9 FIRE to IRIS checklist</a></p>
+<p class="kit-note">One PDF, 3 pages. 30-day money back guarantee.</p>
+</div>
 <p id="what">A free check that runs in your browser: see which IRS FIRE cutoff still applies to you and check your 1099 CSV header before you move to IRIS. If you want the steps on paper, there's an optional $9 checklist after your result.</p>
 <p><strong>Check which November 2026 IRS FIRE cutoff hits you, and verify your 1099 export header row before moving to IRIS.</strong></p>
 <p>Runs entirely in your browser. Nothing is uploaded, stored or sent anywhere.</p>
@@ -238,7 +279,8 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 </ul>
 </div>
 <p class="deadline-count" data-deadline="2026-11-01" data-deadline-label="Nov 1, 2026 IRS FIRE test-file cutoff" hidden></p>
-<p data-fire-kit="1"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/fire-check-result" data-goatcounter-title="FIRE to IRIS check result" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-check-result" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 switch checklist</a><span class="kit-refund">30-day money back guarantee (see the Gumroad listing).</span></p>
+<p class="result-kit-lead">Your result is above. If you would like the IRS dates, the IRIS TCC steps, and a 1099-NEC add-on in one printable list, the checklist covers it.</p>
+<p data-fire-kit="1"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/fire-check-result" data-goatcounter-title="FIRE to IRIS check result" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-check-result" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 checklist (instant PDF)</a><span class="kit-refund">30-day money back guarantee (see the Gumroad listing).</span></p>
 <p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
@@ -274,6 +316,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <div class="kit-conv-box">
   <span class="kit-conv-badge">INSTANT DOWNLOAD · ONE PDF, 3 PAGES · CHECKLIST + 1099-NEC ADD-ON · $9</span>
   <h3 class="kit-conv-title">See What's Inside the $9 FIRE to IRIS Switch Checklist</h3>
+  <p class="kit-fit">Good fit if you file 1099s for your business or clients and must move from FIRE to IRIS by Jan 1, 2027. Not needed if your software files for you.</p>
   <picture><source type="image/webp" srcset="/assets/previews/fire-to-iris-kit-preview-1280x720.webp"><img class="kit-preview-img" src="/assets/previews/fire-to-iris-kit-preview-1280x720.png" alt="See What's Inside the $9 FIRE to IRIS Switch Checklist: one PDF, 3 pages, with the IRS dates, your FIRE account, the IRIS Application for TCC, and a 1099-NEC add-on" width="1280" height="720" loading="lazy"></picture>
   <ul class="kit-bullets">
     <li>One PDF, 3 pages. What is changing, in plain words.</li>
@@ -311,6 +354,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <!-- Footer kit link. Same product as wzxbmp. utm_content=footer. -->
 <span class="kit-conv-badge">INSTANT DOWNLOAD · ONE PDF, 3 PAGES · CHECKLIST + 1099-NEC ADD-ON · $9</span>
 <h2 id="paid-h">A short checklist you can print</h2>
+<p class="kit-fit">Good fit if you file 1099s for your business or clients and must move from FIRE to IRIS by Jan 1, 2027. Not needed if your software files for you.</p>
 <picture><source type="image/webp" srcset="/assets/previews/fire-to-iris-kit-preview-1280x720.webp"><img class="kit-preview-img" src="/assets/previews/fire-to-iris-kit-preview-1280x720.png" alt="See What's Inside the $9 FIRE to IRIS Switch Checklist: one PDF, 3 pages, with the IRS dates, your FIRE account, the IRIS Application for TCC, and a 1099-NEC add-on" width="1280" height="720" loading="lazy"></picture>
 <ul class="kit-bullets">
 <li>One PDF, 3 pages. What is changing, in plain words.</li>
@@ -353,6 +397,10 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <p>No. It runs entirely in your browser. Nothing is uploaded, stored or sent anywhere. Do not paste real taxpayer names, Social Security numbers, EINs, or TCCs. Paste only column header names.</p>
 <h3>Why does this page say 3 p.m. Eastern Time?</h3>
 <p>The news release says the last FIRE filing time is 3 p.m. ET. The FIRE help page says "3 p.m. Easter time." This page follows the news release and says Eastern Time.</p>
+<h3>What is in the $9 checklist?</h3>
+<p>One 3-page PDF with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on. It has a 30-day money back guarantee on Gumroad.</p>
+<h3>Do I need the checklist to use the free check?</h3>
+<p>No. The check is free and runs in your browser. The checklist is optional.</p>
 </section>
 
 <p>Related: <a href="/deadlines/irs-fire-retirement-nov-19.html">IRS FIRE retirement, Nov 19, 2026</a> · <a href="/deadlines/">All deadlines</a> · <a href="/tools/">Tools and kits</a></p>
@@ -360,11 +408,16 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <footer>
 <p>Not affiliated with the IRS.</p>
 <p>General guidance, not legal, tax or IT advice.</p>
-<p>Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
+<p>Thank you for your time. If this check helped, please share it with someone who files 1099s.</p>
 <p>Made by First Mover Projects with AI coding tools.</p>
 </footer>
 </main>
 <noscript><p>This interactive check needs JavaScript in your browser. Nothing is uploaded.</p></noscript>
+<div id="kit-sticky" class="kit-sticky" hidden role="region" aria-labelledby="kit-sticky-label">
+<p id="kit-sticky-label" class="kit-sticky-label">$9 FIRE to IRIS checklist</p>
+<a target="_blank" class="kit-sticky-link" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-check-result" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the checklist</a>
+<button type="button" class="kit-sticky-dismiss" id="kit-sticky-dismiss">Dismiss</button>
+</div>
 <script>
 (function () {
 "use strict";
@@ -553,7 +606,25 @@ function render() {
   byId("plain-out").textContent = lines.join("\n");
   byId("copystate").textContent = "";
   byId("results").hidden = false;
+  syncKitSticky(true);
   return res;
+}
+
+var kitStickyDismissed = false;
+function syncKitSticky(show) {
+  var bar = byId("kit-sticky");
+  if (!bar || !document.body || !document.body.classList) return;
+  var on = !!show && !kitStickyDismissed;
+  if (on && window.FMP_FIRE_KIT && window.FMP_FIRE_KIT.expired(new Date())) on = false;
+  bar.hidden = !on;
+  if (on) {
+    document.body.classList.add("kit-sticky-on");
+    var h = bar.getBoundingClientRect ? bar.getBoundingClientRect().height : 0;
+    document.body.style.paddingBottom = h > 0 ? Math.ceil(h) + "px" : "";
+  } else {
+    document.body.classList.remove("kit-sticky-on");
+    document.body.style.paddingBottom = "";
+  }
 }
 
 window.FMP_FIRE_IRIS = {
@@ -572,6 +643,21 @@ byId("clear").addEventListener("click", function () {
   byId("inp").value = "";
   byId("results").hidden = true;
   byId("copystate").textContent = "";
+  syncKitSticky(false);
+});
+var kitStickyDismiss = byId("kit-sticky-dismiss");
+if (kitStickyDismiss) kitStickyDismiss.addEventListener("click", function () {
+  kitStickyDismissed = true;
+  syncKitSticky(false);
+  var back = byId("results") || byId("main");
+  if (back && back.focus) {
+    if (!back.hasAttribute("tabindex")) back.setAttribute("tabindex", "-1");
+    back.focus();
+  }
+});
+window.addEventListener("resize", function () {
+  var bar = byId("kit-sticky");
+  if (bar && !bar.hidden) syncKitSticky(true);
 });
 byId("copy").addEventListener("click", function () {
   var text = byId("plain-out").textContent;
