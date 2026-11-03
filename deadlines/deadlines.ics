@@ -217,14 +217,14 @@ SUMMARY:ChatGPT custom GPTs scheduled to retire
 DESCRIPTION:Who: Anyone who created or relies on a custom GPT (FedRAMP work
  spaces and affected Enterprise workspaces with a qualifying\, approved def
  erral: Feb 11\, 2027). A deferral alone does not preserve eligibility to c
- reate new GPTs.\nWhat to check: List your GPTs\, publish essential edits\,
-  migrate the ones you created to plugins and test them. Custom actions do 
- not transfer. In a managed workspace\, Share Plugin can prefill the origin
- al GPT audience.\nOfficial source: https://help.openai.com/en/articles/200
- 01519-custom-gpt-retirement-and-migration-faq\nDetails: https://firstmover
- projects.com/deadlines/custom-gpt-retirement-dec-11.html\nGeneral guidance
- \, not legal\, tax or IT advice. Dates from the official source\; re-check
-  it before you act.
+ reate new GPTs.\nWhat to check: List your GPTs\, publish the version you w
+ ant migrated (public sharing is not required)\, migrate the ones you creat
+ ed to plugins and test them. Custom actions do not transfer. In a managed 
+ workspace\, Share Plugin can prefill the original GPT audience.\nOfficial 
+ source: https://help.openai.com/en/articles/20001519-custom-gpt-retirement
+ -and-migration-faq\nDetails: https://firstmoverprojects.com/deadlines/cust
+ om-gpt-retirement-dec-11.html\nGeneral guidance\, not legal\, tax or IT ad
+ vice. Dates from the official source\; re-check it before you act.
 URL:https://firstmoverprojects.com/deadlines/custom-gpt-retirement-dec-11.h
  tml
 TRANSP:TRANSPARENT

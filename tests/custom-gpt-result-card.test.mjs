@@ -86,6 +86,8 @@ test("the result names the date that applies to the answer", () => {
   assert.match(creator.problem, /Dec 11, 2026/);
   assert.match(creator.deadline, /inaccessible/);
   assert.match(creator.deadline, /do not carry over/);
+  assert.match(creator.deadline, /Publish the version you want migrated/);
+  assert.match(creator.deadline, /does not require sharing it publicly/);
 
   const actions = leadFor(true, false, true);
   assert.match(actions.deadline, /Custom actions on it do not transfer/);
