@@ -59,10 +59,10 @@ test("the fee section states the free estimate, the buyer, and the kit limit", (
   assert.match(section, /fix_list\.csv/);
   assert.match(section, /template\.xlsx/);
   assert.match(section, /code Y081/);
-  assert.match(section, /generally final once access has been provided/);
-  assert.match(section, /materially defective or not delivered as described/);
-  assert.match(section, /30-day refund policy/);
-  assert.match(section, /General guidance, not legal, tax or customs advice\./);
+  assert.match(section, /Refunds: within 30 days of purchase/);
+  assert.match(section, /as set out on the kit's Gumroad page\./);
+  assert.match(section, /<p class="kit-refund">Refunds: within 30 days of purchase, as set out on the kit's Gumroad page\.<\/p>/);
+  assert.match(section, /General guidance, not legal, tax or IT advice\./);
   assert.match(section, /Thanks for your time\. If this isn't right for you, please share it with someone it could help\./);
   assert.match(section, /shall be EUR 2 per item/);
   assert.match(section, /It shall apply from 1 November 2026/);
