@@ -11,7 +11,7 @@ const DEADLINE = readFileSync(path.join(ROOT, "assets/deadline-count.js"), "utf8
 const CONTENTS = new Set([
   "above-fold", "article", "bottom-cta", "card", "checklist", "comparison", "faq", "footer",
   "coi-check-result", "coi-check-sticky", "coi-check-top", "etsy-check-result", "fire-check-result", "fire-check-sticky", "fire-check-top", "gtin-helper", "hub", "kit-preview", "link", "md-famli", "post-check", "product-demo", "result-card", "ws-check-result", "ws2016",
-  "result-cta", "sticky-cta", "tools-free", "tools-kit", "top-cta", "trade-pill"
+  "result-cta", "sticky-cta", "tools-free", "tools-kit", "top-cta", "trade-pill", "eu-fee"
 ]);
 
 function walk(dir, out = []) {
@@ -83,9 +83,15 @@ test("every Gumroad product link carries source, medium, campaign, and content",
       const url = new URL(raw.replace(/&amp;/g, "&"));
       assert.equal(url.searchParams.get("utm_source"), "site", raw);
       assert.equal(url.searchParams.get("utm_medium"), "site", raw);
-      assert.equal(url.searchParams.get("utm_campaign"), pageSlug(rel), raw);
       const content = url.searchParams.get("utm_content");
       assert.equal(CONTENTS.has(content), true, rel + " " + content);
+      const campaign = url.searchParams.get("utm_campaign");
+      if (content === "eu-fee") {
+        assert.equal(campaign, "tools", raw);
+        assert.equal(rel, "tools/eu-product-id-check/index.html", raw);
+      } else {
+        assert.equal(campaign, pageSlug(rel), raw);
+      }
       if (!url.pathname.endsWith("/pdkqbs")) assert.equal(url.searchParams.get("wanted"), "true", raw);
     }
   }
