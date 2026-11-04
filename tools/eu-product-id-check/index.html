@@ -51,6 +51,13 @@ a.btn:hover{background:#0044cc;color:#fff}
 .warn{background:#fde8e6;color:#8a1c12}
 .ok{background:#e3f4e6;color:#1d6b2c}
 .cta{background:#fff8e6;border-color:#f0d58a}
+#eu-fee{overflow-wrap:anywhere}
+#eu-fee h2{margin-top:0}
+#fee-n{width:8rem;max-width:100%}
+.fee-check{display:flex;align-items:flex-start;gap:10px;font-weight:600;min-height:44px;margin-top:12px}
+.fee-check input{margin-top:3px;width:1.25rem;height:1.25rem;flex:0 0 auto}
+#fee-out{white-space:pre-line;font-weight:700;margin:.6em 0;min-height:1.5em}
+.kit-refund{color:#5a636e;font-size:.9rem;margin:.4em 0 0}
 a{color:#1f5fbf}
 a:focus,button:focus,textarea:focus{outline:3px solid #1f5fbf;outline-offset:2px}
 table{border-collapse:collapse;width:100%;min-width:40rem;background:#fff;margin:8px 0}
@@ -169,6 +176,26 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
  </div>
 </div>
 
+<section class="card" id="eu-fee" aria-labelledby="eu-fee-h">
+<h2 id="eu-fee-h">New since Nov 1: the €2 EU handling fee</h2>
+<p id="eu-fee-what">This is a free estimate. Type the number of declaration lines and it shows €2 times that number. The $29 kit does not do this math.</p>
+<label for="fee-n">Number of declaration lines (items)</label>
+<input id="fee-n" type="number" inputmode="numeric" min="0" max="999999" step="1" autocomplete="off" aria-describedby="fee-how fee-vat">
+<label class="fee-check"><input id="fee-low" type="checkbox"> This consignment's intrinsic value does not exceed EUR 150</label>
+<p id="fee-out" aria-live="polite">Enter a whole number of declaration lines.</p>
+<p class="muted" id="fee-vat">Estimate before VAT.</p>
+<p id="fee-how">From 1 November 2026 the Union handling fee is EUR 2 per item. Article 1 of Commission Delegated Regulation (EU) 2026/2152 says: "The amount of the Union handling fee laid down in Article 20(2) of Regulation (EU) 2026/2108 shall be EUR 2 per item." Article 2 says: "It shall apply from 1 November 2026." <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32026R2152" rel="noopener noreferrer">Commission Delegated Regulation (EU) 2026/2152 on EUR-Lex</a></p>
+<p>The Commission's guidance quotes the definition of an item: one or more goods in a consignment that share the same tariff classification, description and, where the declaration asks for it, origin. The same guidance says the €2 fee and the temporary €3 customs duty apply per declaration line, whatever the quantity of articles on that line. <a href="https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en" rel="noopener noreferrer">European Commission guidance (PDF, Version of 5 October 2026), section 5.2</a></p>
+<p><strong>Who it is for:</strong> sellers outside the EU who ship online orders to consumers in the EU. <strong>Who it is not for:</strong> business-to-business sales to a taxable person, and EU-based sellers shipping goods that are already in the EU.</p>
+<p>The temporary customs duty is EUR 3 per item from 1 July 2026 until 1 July 2028, only when the consignment's intrinsic value does not exceed EUR 150. The €2 fee still applies when the consignment is above EUR 150. The guidance says the €2 fee is part of the VAT taxable amount, and that the fee is non-refundable once the customs declaration is accepted. This total is an estimate before VAT. It does not add a VAT rate. <a href="https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en" rel="noopener noreferrer">European Commission: EU Customs Reform</a> · <a href="https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en" rel="noopener noreferrer">guidance sections 3.1, 7.6 and 9.2</a></p>
+<h3>The $29 kit</h3>
+<p>The $29 EU Customs Product Data Checker is an offline Python script and an Excel workbook. It reads a Shopify product CSV on your computer and flags missing or duplicate merchant SKUs, invalid GTIN check digits, barcodes turned into scientific notation, blank or 6-digit HS codes, and country-of-origin values that are not ISO codes. It writes fix_list.csv and template.xlsx, with a suggested fix per variant and a code Y081 note when no standardised barcode exists. The kit covers product identifiers; the fee math above is free.</p>
+<p><a target="_blank" class="btn" id="eu-fee-kit" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=tools&amp;utm_content=eu-fee" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 EU Customs Product Data Checker</a></p>
+<p class="kit-refund">Refunds: within 30 days of purchase, as set out on the kit's Gumroad page.</p>
+<p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
+<p class="thanks">Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
+</section>
+
 <section class="card" aria-labelledby="guide-h">
 <h2 id="guide-h">What the guidance says</h2>
 <p>The EU ended the customs duty exemption for parcels worth up to €150 and, from July 1, 2026, charges a temporary €3 customs duty per item on most of those low-value imports. The European Commission says product identifiers become mandatory on November 1, 2026. <a href="https://taxation-customs.ec.europa.eu/news/guidance-and-legal-text-temporary-flat-fee-low-value-imports-which-will-apply-until-1-july-2028-2026-06-08_en" rel="noopener noreferrer">European Commission: Guidance and legal text on temporary flat fee on low-value imports</a></p>
@@ -278,7 +305,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 
 <section class="card" aria-labelledby="src-h">
 <h2 id="src-h">Sources</h2>
-<p><a href="https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en" rel="noopener noreferrer">European Commission: The temporary EUR 3 customs duty and the Union handling fee, Guidance for Member States and Trade (PDF, Version of 5 October 2026)</a> · <a href="https://taxation-customs.ec.europa.eu/news/guidance-and-legal-text-temporary-flat-fee-low-value-imports-which-will-apply-until-1-july-2028-2026-06-08_en" rel="noopener noreferrer">European Commission news: Guidance and legal text on temporary flat fee on low-value imports</a> · <a href="https://www.douane.nl/en/themes/import-and-export/import/e-commerce/including-product-identifiers-in-your-e-commerce-declaration/" rel="noopener noreferrer">Dutch Customs: Including product identifiers in your e-commerce declaration</a></p>
+<p><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32026R2152" rel="noopener noreferrer">Commission Delegated Regulation (EU) 2026/2152 (EUR-Lex): EUR 2 per item from 1 November 2026</a> · <a href="https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en" rel="noopener noreferrer">European Commission: EU Customs Reform</a> · <a href="https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en" rel="noopener noreferrer">European Commission: The temporary EUR 3 customs duty and the Union handling fee, Guidance for Member States and Trade (PDF, Version of 5 October 2026)</a> · <a href="https://taxation-customs.ec.europa.eu/news/guidance-and-legal-text-temporary-flat-fee-low-value-imports-which-will-apply-until-1-july-2028-2026-06-08_en" rel="noopener noreferrer">European Commission news: Guidance and legal text on temporary flat fee on low-value imports</a> · <a href="https://www.douane.nl/en/themes/import-and-export/import/e-commerce/including-product-identifiers-in-your-e-commerce-declaration/" rel="noopener noreferrer">Dutch Customs: Including product identifiers in your e-commerce declaration</a></p>
 <p>Checked against European Commission guidance (Version of 5 October 2026) on October 23, 2026; the Commission says its guidance is not legally binding and may change.</p>
 <p class="muted">The day count uses your device's date. This page reads only the text you paste.</p>
 </section>
@@ -874,6 +901,47 @@ showDays(new Date());
       showFallback();
     }
   });
+})();
+</script>
+<script id="fmp-eu-fee">
+(function () {
+  "use strict";
+  function euros(n) { return "\u20ac" + String(n); }
+
+  function feeEstimate(raw, lowValue) {
+    var text = String(raw == null ? "" : raw).trim();
+    if (!/^\d+$/.test(text)) {
+      return { ok: false, text: "Enter a whole number of declaration lines." };
+    }
+    var n = Number(text);
+    if (n > 999999) {
+      return { ok: false, text: "Enter a whole number of declaration lines from 0 to 999999." };
+    }
+    var fee = 2 * n;
+    var duty = lowValue ? 3 * n : 0;
+    var lines = [euros(2) + " \u00d7 " + n + " = " + euros(fee) + " handling fee"];
+    if (lowValue) {
+      lines.push(euros(3) + " \u00d7 " + n + " = " + euros(duty) + " temporary customs duty");
+    } else {
+      lines.push("No temporary \u20ac3 duty in this estimate. That duty applies only when the consignment intrinsic value does not exceed EUR 150.");
+    }
+    lines.push(euros(fee + duty) + " estimate before VAT");
+    return { ok: true, n: n, fee: fee, duty: duty, total: fee + duty, lowValue: !!lowValue, text: lines.join("\n") };
+  }
+
+  function paint() {
+    var input = document.getElementById("fee-n");
+    var low = document.getElementById("fee-low");
+    var out = document.getElementById("fee-out");
+    if (!input || !out) return;
+    out.textContent = feeEstimate(input.value, !!(low && low.checked)).text;
+  }
+
+  var input = document.getElementById("fee-n");
+  var low = document.getElementById("fee-low");
+  if (input) input.addEventListener("input", paint);
+  if (low) low.addEventListener("change", paint);
+  window.FMP_EU_FEE = { feeEstimate: feeEstimate };
 })();
 </script>
 </body>
