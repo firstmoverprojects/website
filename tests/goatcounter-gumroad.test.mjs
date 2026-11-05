@@ -15,7 +15,8 @@ const SIB_FORM_CSP = new Set([
   "tools/eu-product-id-check/index.html",
   "tools/1099-nec-or-1099-k-check/index.html",
   "tools/tx-franchise-forfeiture-check/index.html",
-  "tools/windows-server-2016-check/index.html"
+  "tools/windows-server-2016-check/index.html",
+  "tools/missed-lead-text-samples/index.html"
 ]);
 // Same quiet set as tests/follower-growth.test.mjs. Their own scripts require
 // no GoatCounter host, so the public CSP and count.js must stay off the page.
