@@ -51,7 +51,7 @@ test("the hero answers first, then shows the next IRS date beside the checklist"
   assert.match(top, /This page lists the IRS FIRE retirement dates and what to do next\./);
   assert.match(top, /run the free check and finish any IR Application for TCC changes before the next date/);
   assert.match(top, /data-next-irs-copy="">Next IRS date: Nov 9, 2026, the last day to change your IR Application for TCC \(after that it is read-only\)\. Last day to file on FIRE: Nov 19, 2026, 3 p\.m\. ET\. <\/span>/);
-  assert.match(top, /Refunds within 30 days if the file is corrupt or not as described \(see the Gumroad listing\)\./);
+  assert.match(top, /Refunds: within 30 days if a file is corrupt or materially not as described\./);
   assert.match(top, /One PDF, 3 pages/);
   assert.equal(/Nov(?:ember)? 1\b/.test(top), false);
   assert.equal(top.includes("(passed)"), false);
