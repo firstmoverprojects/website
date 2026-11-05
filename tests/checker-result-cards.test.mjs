@@ -115,7 +115,7 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       button: "Get the $9 photo checklist",
       slug: "/l/lnfgc",
       campaign: "etsy-photo-audit-check",
-      resultContent: "etsy-check-result",
+      resultContent: "etsy-photo-result-mockup",
       stepMatch: /unedited photo of the real item/,
       skipWeeklyEmail: true,
       thanks: true,

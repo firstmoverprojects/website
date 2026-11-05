@@ -23,7 +23,7 @@ const PAGES = {
 };
 const GUMROAD = {
   etsy: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=site&utm_campaign=etsy-photo-audit-check&utm_content=footer",
-  etsyResult: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=site&utm_campaign=etsy-photo-audit-check&utm_content=etsy-check-result",
+  etsyResult: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=site&utm_campaign=etsy-photo-audit-check&utm_content=etsy-photo-result-mockup",
   hvac: "https://firstmoverprojects.gumroad.com/l/afwbvt?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
   intake: "https://firstmoverprojects.gumroad.com/l/fretzy?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
   roofing: "https://firstmoverprojects.gumroad.com/l/wymols?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
@@ -251,8 +251,9 @@ test("Etsy checks, redaction, cap, and 390px layout", async () => {
   await page.click("#go");
   assert.equal(await page.getAttribute("#results", "hidden"), null);
   assert.equal(await page.locator("#result-cta").isVisible(), true);
-  assert.match(await page.innerText("#result-problem"), /listing|photo|problem|checked/i);
-  assert.equal(await page.locator("#result-cta a.btn").count(), 1);
+  assert.match(await page.innerText("#result-problem"), /did not find a problem/);
+  assert.equal(await page.locator("#result-cta a.btn").count(), 0);
+  assert.equal(await page.locator("#kit-result.paid-quiet").isVisible(), true);
   const shown = await page.innerText("#results");
   assert.equal(shown.includes("555-010-1999"), false);
   assert.equal(shown.includes("pat@secret.test"), false);
