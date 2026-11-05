@@ -1,8 +1,8 @@
 // Product JSON-LD for paid kits linked from tool pages.
 // Prices, names, and descriptions must already be on the page (or a data file it loads).
 // Google merchant listing required fields: Product name, image when the page has a preview,
-// Offer price and priceCurrency. Availability, offer URL, seller, and MerchantReturnPolicy
-// are included so a shopping assistant can read the kit, the price, and the refund window.
+// Offer price and priceCurrency. Availability, offer URL, and seller
+// are included so a shopping assistant can read the kit and the price.
 import assert from "node:assert/strict";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
@@ -10,10 +10,8 @@ import { test } from "node:test";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const HOST = "https://firstmoverprojects.com";
-const REFUND = "Refunds: within 30 days of purchase, as set out on the kit's Gumroad page.";
 // Unpublished on Gumroad. PR #111 removes the buy links. Do not describe it as a product.
 const UNPUBLISHED = new Set(["fetwsm"]);
-// Seller mailing address on the site is PO Box 98, Firth, NE 68358, so the return policy country is US.
 const PREVIEW = {
   lnfgc: "/assets/previews/etsy-photo-audit-kit-preview-1280x720.png",
   "fire-to-iris-switch-checklist": "/assets/previews/fire-to-iris-kit-preview-1280x720.png",
@@ -178,14 +176,7 @@ test("live paid-kit links on tool pages have Product offers, and the unpublished
         name: "First Mover Projects",
         url: "https://firstmoverprojects.com/"
       });
-      assert.deepEqual(offer.hasMerchantReturnPolicy, {
-        "@type": "MerchantReturnPolicy",
-        applicableCountry: "US",
-        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
-        merchantReturnDays: 30,
-        merchantReturnLink: "https://firstmoverprojects.com/refund-policy.html",
-        description: REFUND
-      });
+      assert.equal(offer.hasMerchantReturnPolicy, undefined);
       const pagePrice = priceFor(corpus, slug);
       assert.equal(pagePrice, offer.price, `${rel} ${slug} price ${offer.price} is not the price on the page`);
       const facts = flat(corpus);
