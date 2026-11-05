@@ -10,8 +10,10 @@ import { test } from "node:test";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const HOST = "https://firstmoverprojects.com";
-// Unpublished on Gumroad. PR #111 removes the buy links. Do not describe it as a product.
-const UNPUBLISHED = new Set(["fetwsm"]);
+// Unpublished on Gumroad. PR #111 removes the EU buy links. The Maryland FAMLI
+// notice kit is unpublished because the state posts the 2026 employee notice
+// template free. Do not describe either as a product.
+const UNPUBLISHED = new Set(["fetwsm", "maryland-famli-payroll-notice-kit"]);
 const PREVIEW = {
   lnfgc: "/assets/previews/etsy-photo-audit-kit-preview-1280x720.png",
   "fire-to-iris-switch-checklist": "/assets/previews/fire-to-iris-kit-preview-1280x720.png",
