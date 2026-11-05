@@ -143,7 +143,7 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       },
       slug: "/l/amazon-1m-insurance-readiness-kit",
       campaign: "amazon-coi-check",
-      resultContent: "coi-check-result",
+      resultContent: "amazon-coi-result-fix",
       nameStep: /insured name|legal business name/i,
       skipWeeklyEmail: true,
       reminder: "signup/amazon-coi-check"
