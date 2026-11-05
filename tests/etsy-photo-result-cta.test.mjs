@@ -12,6 +12,8 @@ const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
 const PAGE = path.join(ROOT, "tools/etsy-photo-audit-check/index.html");
 const html = readFileSync(PAGE, "utf8");
 const DISCLAIMER = "General guidance, not legal, tax or IT advice.";
+const REFUND = "Refunds: within 30 days if a file is corrupt or materially not as described.";
+const THANKS = "Thanks for your time. If this isn't right for you, please share it with someone it could help.";
 const BUTTON = "Get the $9 photo checklist";
 const QUIET = "Optional: $9 photo checklist";
 const DEADLINE = "Etsy posted this rule on Oct 22, 2026. They did not name a last day. If the photos are wrong and a buyer opens a case, you may have to give a refund.";
@@ -37,22 +39,24 @@ test("result copy stays on the page facts and keeps the house lines", () => {
     assert.equal(LEADS[key].includes("\u2013"), false, key);
     assert.equal(LEADS[key].startsWith("Because you "), true, key);
   }
-  assert.equal(html.includes("Thank you for your time."), true);
-  assert.equal(html.includes("Share it with someone it could help."), true);
+  assert.equal(html.includes(THANKS), true);
+  assert.equal(html.includes("Thank you for your time."), false);
   assert.equal(html.includes(DEADLINE), true);
-  assert.equal(html.includes("Refunds: within 30 days"), false);
-  assert.equal(html.includes("kit-refund"), false);
+  assert.equal(html.includes("\u2014"), false);
+  assert.equal(html.split(REFUND).length - 1, 1);
+  assert.match(html, /id="kit-offer"[^>]*>[\s\S]*id="kit-result"[\s\S]*<span class="kit-refund" id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described\.<\/span>/);
   assert.match(html, /id="result-kit-lead"/);
   assert.match(html, /data-goatcounter-click="cta\/etsy-photo-result-mockup"/);
   assert.match(html, /utm_content=etsy-photo-result-mockup/);
   const card = html.slice(html.indexOf('id="result-cta"'), html.indexOf('<h2>Current Listing Risk'));
   const leadAt = card.indexOf('id="result-kit-lead"');
   const offerAt = card.indexOf('id="kit-offer"');
+  const refundAt = card.indexOf('id="kit-refund"');
   const disclaimerAt = card.indexOf('class="disclaimer"');
   const thanksAt = card.indexOf('class="thanks"');
-  const shareAt = card.indexOf('class="share-line"');
-  assert.ok(leadAt < offerAt && offerAt < disclaimerAt && disclaimerAt < thanksAt && thanksAt < shareAt);
+  assert.ok(leadAt < offerAt && offerAt < refundAt && refundAt < disclaimerAt && disclaimerAt < thanksAt);
   assert.equal(card.split(DISCLAIMER).length - 1, 1);
+  assert.equal(card.split(REFUND).length - 1, 1);
 });
 
 test("all five outcomes set the lead, offer, and gumroad click at 1280 and 390", async () => {
@@ -88,10 +92,10 @@ test("all five outcomes set the lead, offer, and gumroad click at 1280 and 390",
     return page.evaluate(() => {
       const link = document.getElementById("kit-result");
       const offer = document.getElementById("kit-offer");
+      const refund = document.getElementById("kit-refund");
       const lead = document.getElementById("result-kit-lead");
       const disclaimer = document.querySelector("#result-cta .disclaimer");
       const thanks = document.querySelector("#result-cta .thanks");
-      const share = document.querySelector("#result-cta .share-line");
       const style = getComputedStyle(link);
       const url = new URL(link.href);
       const visible = (node) => !!(node && (node.offsetWidth || node.offsetHeight || node.getClientRects().length));
@@ -101,12 +105,12 @@ test("all five outcomes set the lead, offer, and gumroad click at 1280 and 390",
         deadline: document.getElementById("result-deadline").textContent,
         linkVisible: visible(link),
         offerVisible: visible(offer),
+        refund: refund.textContent,
+        refundVisible: visible(refund),
         disclaimer: disclaimer.textContent,
         disclaimerVisible: visible(disclaimer),
         thanks: thanks.textContent,
-        share: share.textContent,
         thanksVisible: visible(thanks),
-        shareVisible: visible(share),
         linkText: link.textContent,
         className: link.className,
         bg: style.backgroundColor,
@@ -123,9 +127,9 @@ test("all five outcomes set the lead, offer, and gumroad click at 1280 and 390",
         leadBottom: lead.getBoundingClientRect().bottom,
         linkTop: link.getBoundingClientRect().top,
         linkBottom: link.getBoundingClientRect().bottom,
+        refundTop: refund.getBoundingClientRect().top,
         disclaimerTop: disclaimer.getBoundingClientRect().top,
         thanksTop: thanks.getBoundingClientRect().top,
-        shareTop: share.getBoundingClientRect().top,
         footerAdvice: document.querySelector("footer").innerText.includes("General guidance, not legal, tax or IT advice."),
         refundSpans: document.querySelectorAll("#result-cta .kit-refund").length,
         buyButtons: document.querySelectorAll("#result-cta a.btn").length
@@ -140,7 +144,7 @@ test("all five outcomes set the lead, offer, and gumroad click at 1280 and 390",
     });
     const clip = await page.evaluate(() => {
       const start = document.getElementById("result-problem").getBoundingClientRect();
-      const end = document.querySelector("#result-cta .share-line").getBoundingClientRect();
+      const end = document.querySelector("#result-cta .thanks").getBoundingClientRect();
       const x = Math.max(0, Math.floor(start.left - 8));
       const y = Math.max(0, Math.floor(Math.min(start.top, end.top) - 8));
       const bottom = Math.max(start.bottom, end.bottom);
@@ -211,21 +215,22 @@ test("all five outcomes set the lead, offer, and gumroad click at 1280 and 390",
       assert.equal(state.deadline, DEADLINE, width + " " + item.key);
       assert.equal(state.disclaimer, DISCLAIMER, width + " " + item.key);
       assert.equal(state.disclaimerVisible, true, width + " " + item.key);
-      assert.equal(state.thanks, "Thank you for your time.", width + " " + item.key);
-      assert.equal(state.share, "Share it with someone it could help.", width + " " + item.key);
+      assert.equal(state.thanks, THANKS, width + " " + item.key);
       assert.equal(state.thanksVisible, true, width + " " + item.key);
-      assert.equal(state.shareVisible, true, width + " " + item.key);
       assert.equal(state.footerAdvice, true, width + " " + item.key);
-      assert.equal(state.refundSpans, 0, width + " " + item.key);
+      assert.equal(state.refund, REFUND, width + " " + item.key);
       assert.ok(state.steps >= 2 && state.steps <= 3, width + " " + item.key + " steps " + state.steps);
-      assert.ok(state.disclaimerTop < state.thanksTop && state.thanksTop < state.shareTop, width + " " + item.key);
+      assert.ok(state.disclaimerTop < state.thanksTop, width + " " + item.key);
       if (item.hide) {
         assert.equal(state.linkVisible, false, width + " " + item.key);
         assert.equal(state.offerVisible, false, width + " " + item.key);
+        assert.equal(state.refundVisible, false, width + " " + item.key);
         assert.ok(state.leadBottom <= state.disclaimerTop + 1, width + " " + item.key);
       } else {
         assert.equal(state.linkVisible, true, width + " " + item.key);
         assert.equal(state.offerVisible, true, width + " " + item.key);
+        assert.equal(state.refundVisible, true, width + " " + item.key);
+        assert.ok(state.linkBottom <= state.refundTop + 1, width + " " + item.key);
         assert.equal(state.content, item.content, width + " " + item.key);
         assert.equal(state.source, "site", width + " " + item.key);
         assert.equal(state.medium, "site", width + " " + item.key);

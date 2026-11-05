@@ -8,6 +8,8 @@ import vm from "node:vm";
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const PILL = "Listed on The Runway (LaunchFree.io) — Upvote This Free Tool";
 const PILL_BY_PAGE = {
+  "tools/etsy-photo-audit-check/index.html":
+    "Listed on The Runway (LaunchFree.io): Upvote This Free Tool",
   "tools/fire-to-iris-check/index.html":
     "Listed on The Runway (LaunchFree.io): Upvote This Free Tool"
 };
