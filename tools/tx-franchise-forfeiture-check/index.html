@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action https://05279842.sibforms.com; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/tx-franchise-forfeiture-check/">
+<title>Texas franchise tax forfeiture check (free, runs in your browser)</title>
+<meta name="description" content="A free web check of the Texas Comptroller and Secretary of State steps after a franchise tax forfeiture. Form 05-391, then Form 801. Nothing is uploaded.">
+<meta property="og:title" content="Texas franchise tax forfeiture check (free, runs in your browser)">
+<meta property="og:description" content="A free web check of the Texas Comptroller and Secretary of State steps after a franchise tax forfeiture. Nothing is uploaded.">
+<meta property="og:url" content="https://firstmoverprojects.com/tools/tx-franchise-forfeiture-check/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "dateModified": "2026-11-05",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What date does the Comptroller give for reviving the right to transact business?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The October 2026 Tax Counsel News says if the right to transact business is not revived before Jan. 29, 2027, the entity's registration with the Secretary of State will be forfeited."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Comptroller Form 05-391?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Form 05-391 is the Tax Clearance Letter Request for Reinstatement. The Comptroller issues the letter as Form 05-377. You use it when reinstating a registration with the Secretary of State."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the Secretary of State Form 801 fee?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Form 801 instructions say the filing fee is $75, unless the entity is a nonprofit corporation. There is no fee for a nonprofit corporation following a tax forfeiture."
+      }
+    }
+  ]
+}
+</script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#12161c;background:#f4f6f8}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;line-height:1.25;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.2em 0 .4em}
+.topline{font-size:1.05rem;margin:0 0 8px}
+.card{background:#fff;border:2px solid #1b2838;border-radius:10px;padding:16px;margin:12px 0}
+.big{font-size:1.45rem;font-weight:800;color:#12161c;line-height:1.3;margin:.2em 0}
+.muted{color:#1b2838;font-size:.95rem}
+label{display:block;font-weight:600;margin-top:12px}
+button,.btn{font:inherit;padding:10px 18px;border-radius:8px;border:2px solid #08306b;background:#08306b;color:#fff;cursor:pointer;margin:12px 8px 0 0;min-height:44px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;text-align:center}
+button.sec,.btn.sec{background:#fff;color:#12161c;border-color:#12161c}
+a{color:#08306b}
+a:hover,a:focus{color:#041e42}
+a:focus,button:focus,input:focus,select:focus{outline:3px solid #08306b;outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:8px;top:8px;background:#fff;color:#12161c;padding:8px 12px;z-index:2}
+footer{margin:8px 0 24px}
+fieldset{border:2px solid #1b2838;border-radius:8px;margin:12px 0;padding:8px 12px;min-width:0}
+legend{font-weight:800;padding:0 4px}
+.choices{display:flex;flex-wrap:wrap;gap:8px}
+.choices label{font-weight:600;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:center;margin:0;flex:1 1 14rem;min-width:0;max-width:100%;min-height:44px;padding:8px 10px;border:2px solid #1b2838;border-radius:8px;background:#fff;color:#12161c;cursor:pointer}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.actions button{margin:0;flex:1 1 12rem}
+a,p,li,label,legend,h1,h2{overflow-wrap:anywhere}
+[hidden]{display:none !important}
+#tx-points{margin:.4em 0;padding-left:1.2em}
+#tx-points li{margin:.45em 0}
+#sib-form{position:relative;display:grid;gap:12px;margin-top:8px}
+#sib-form label{margin-top:0}
+#sib-form input[type="email"]{width:100%;max-width:100%;min-height:44px;font:inherit;font-size:16px;padding:8px;border:2px solid #1b2838;border-radius:6px;background:#fff;color:#12161c}
+.sib-optin{display:flex;align-items:flex-start;gap:8px;font-weight:400;min-height:44px;min-width:0;max-width:100%}
+.sib-optin span{min-width:0;overflow-wrap:anywhere}
+#sib-form .input--hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.sources a{display:block;min-height:44px;padding:10px 0;max-width:100%}
+main,.card,fieldset,form{max-width:100%;min-width:0}
+@media (max-width:480px){
+  main{padding:12px}
+  h1{font-size:1.35rem}
+  .choices{flex-direction:column}
+  .choices label,.actions button,button,.btn{flex-basis:auto;width:100%;margin-right:0}
+}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,textarea{font-size:16px}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,button{min-height:44px}
+label:has(> input[type="checkbox"]),label:has(> input[type="radio"]){min-height:44px;box-sizing:border-box}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<p class="topline">A free web check of the Texas Comptroller and Secretary of State steps after a franchise tax forfeiture. It runs in this browser. Nothing is uploaded.</p>
+<p class="muted"><a href="/">First Mover Projects</a> · <a href="/deadlines/texas-franchise-tax-forfeiture-reinstatement.html">Full deadline page</a></p>
+<h1>Texas franchise tax forfeiture check</h1>
+<p>Answer for one entity. The page lists the filings those answers match on the Comptroller and Secretary of State pages. It does not look up your account, and it does not file anything.</p>
+<p>Checked November 5, 2026.</p>
+<p><a class="btn" href="#signup">Coming soon: $9 revival checklist kit</a></p>
+<p>General guidance, not legal, tax or IT advice.</p>
+
+<section class="card" aria-labelledby="rules-h">
+<h2 id="rules-h">What this page uses</h2>
+<p>The <a href="https://comptroller.texas.gov/taxes/tax-policy-news/2026-october.php">October 2026 Tax Counsel News</a> says the Comptroller began mailing the Texas Notice of Forfeiture of Right to Transact Business on Sept. 29. If the right to transact business is not revived before Jan. 29, 2027, the entity's registration with the Secretary of State will be forfeited. That issue is October 2026, so Sept. 29 is September 29, 2026.</p>
+<p>The <a href="https://comptroller.texas.gov/taxes/franchise/forms/2026-franchise.php">2026 forms page</a> says the No Tax Due Report is not available. An entity at or below the no tax due threshold still files a Public Information Report (Form 05-102) or an Ownership Information Report (Form 05-167). That page lists the 2026 threshold as $2.65 million. The <a href="https://comptroller.texas.gov/taxes/franchise/">rate table</a> lists $2,650,000 for 2026 and 2027. The <a href="https://comptroller.texas.gov/taxes/franchise/notices.php">notices page</a> says there is no $50 penalty for a late Public Information Report or Ownership Information Report.</p>
+<p>The <a href="https://comptroller.texas.gov/taxes/franchise/reinstate-terminate.php">reinstatement page</a> says to file outstanding reports, pay tax, penalty, and interest, then request a tax clearance letter in Webfile or on <a href="https://comptroller.texas.gov/forms/05-391.pdf">Form 05-391</a>. The Comptroller issues Form 05-377. <a href="https://www.sos.state.tx.us/corp/instructions/801.shtml">Form 801 instructions</a> say the Secretary of State filing fee is $75, unless the entity is a nonprofit corporation. There is no fee for a nonprofit corporation following a tax forfeiture.</p>
+</section>
+
+<section class="card" id="check" aria-labelledby="check-h">
+<h2 id="check-h">Questions</h2>
+<p id="how">One entity. The answers stay in this tab.</p>
+<form id="tx-form" autocomplete="off">
+<fieldset>
+<legend>Has the Secretary of State forfeited or revoked this entity for franchise tax?</legend>
+<div class="choices">
+<label><input type="radio" name="sos" value="yes"> Yes</label>
+<label><input type="radio" name="sos" value="no"> No, the Comptroller notice is the one I have</label>
+<label><input type="radio" name="sos" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Annualized total revenue for the report</legend>
+<div class="choices">
+<label><input type="radio" name="revenue" value="at-or-below"> At or below $2,650,000</label>
+<label><input type="radio" name="revenue" value="above"> Above $2,650,000</label>
+<label><input type="radio" name="revenue" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>What is still open with the Comptroller?</legend>
+<div class="choices">
+<label><input type="radio" name="gap" value="info"> Information report only</label>
+<label><input type="radio" name="gap" value="report"> A franchise tax report is still missing</label>
+<label><input type="radio" name="gap" value="payment"> Reports are filed and an amount is still due</label>
+<label><input type="radio" name="gap" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>Is the entity a nonprofit corporation?</legend>
+<p>This is the Form 801 fee question. The Secretary of State instructions use this split.</p>
+<div class="choices">
+<label><input type="radio" name="nonprofit" value="yes"> Yes</label>
+<label><input type="radio" name="nonprofit" value="no"> No</label>
+<label><input type="radio" name="nonprofit" value="unsure"> Not sure</label>
+</div>
+</fieldset>
+<div class="actions">
+<button type="button" id="tx-go">Show the steps</button>
+<button type="button" class="sec" id="tx-clear">Clear answers</button>
+</div>
+</form>
+</section>
+
+<section class="card" id="tx-result" aria-live="polite">
+<h2>Result</h2>
+<p class="big" id="tx-headline">Answer all four questions, then use Show the steps.</p>
+<p id="tx-days"></p>
+<ul id="tx-points"></ul>
+<p id="tx-kit"><a class="btn" href="#signup">Coming soon: $9 revival checklist kit</a></p>
+<p id="tx-advice">General guidance, not legal, tax or IT advice.</p>
+</section>
+
+<section class="card sources" aria-labelledby="src-h">
+<h2 id="src-h">Sources</h2>
+<ul>
+<li><a href="https://comptroller.texas.gov/taxes/tax-policy-news/2026-october.php">Texas Comptroller: Tax Counsel News, October 2026</a></li>
+<li><a href="https://comptroller.texas.gov/taxes/franchise/">Texas Comptroller: Franchise tax</a></li>
+<li><a href="https://comptroller.texas.gov/taxes/franchise/forms/2026-franchise.php">Texas Comptroller: 2026 franchise tax forms</a></li>
+<li><a href="https://comptroller.texas.gov/taxes/franchise/current-2024.php">Texas Comptroller: Making your franchise tax account current</a></li>
+<li><a href="https://comptroller.texas.gov/taxes/franchise/notices.php">Texas Comptroller: Tax notices</a></li>
+<li><a href="https://comptroller.texas.gov/taxes/franchise/account-status/search">Texas Comptroller: Account status search</a></li>
+<li><a href="https://comptroller.texas.gov/taxes/franchise/reinstate-terminate.php">Texas Comptroller: Reinstating or terminating a business</a></li>
+<li><a href="https://comptroller.texas.gov/forms/05-391.pdf">Form 05-391, Tax Clearance Letter Request for Reinstatement (PDF)</a></li>
+<li><a href="https://www.sos.state.tx.us/corp/instructions/801.shtml">Texas Secretary of State: Form 801 instructions</a></li>
+<li><a href="https://www.sos.state.tx.us/corp/forms/801.pdf">Texas Secretary of State: Form 801 (PDF)</a></li>
+</ul>
+<p>Checked November 5, 2026.</p>
+<p>Not affiliated with or endorsed by the Texas Comptroller of Public Accounts or the Texas Secretary of State. First Mover Projects does not file franchise tax reports, Form 05-391, or Form 801, and it is not a filing service. General guidance, not legal, tax or IT advice.</p>
+</section>
+
+<section class="card signup" id="signup" aria-labelledby="signup-h">
+<h2 id="signup-h">Coming soon: $9 revival checklist kit</h2>
+<p>The $9 kit is not for sale. This form is an email sign-up. It asks for an email address. It does not file Form 05-391 or Form 801, and it does not take a payment.</p>
+<p>We will mention the kit in this email if it launches. No payment is taken here.</p>
+<p>One short weekly email about new free browser checks and small-business deadlines. Double opt-in. Unsubscribe any time. See our <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>.</p>
+<p>Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
+<form id="sib-form" method="POST" action="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" data-type="subscription" autocomplete="off">
+<p>
+<label for="EMAIL">Enter your email address to subscribe</label>
+<input type="email" id="EMAIL" name="EMAIL" autocomplete="email" inputmode="email" placeholder="EMAIL" required>
+</p>
+<p>
+<label class="sib-optin" for="OPT_IN">
+<input type="checkbox" value="1" id="OPT_IN" name="OPT_IN" required>
+<span>By subscribing you agree to get this weekly email from First Mover Projects. We'll send a confirmation first. Unsubscribe any time with one click. We don't sell or share your email. See our Privacy Policy: firstmoverprojects.com/privacy.html</span>
+</label>
+</p>
+<p><button type="submit">Sign up for the weekly FMP email</button></p>
+<input type="text" name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+<input type="hidden" name="locale" value="en">
+<input type="hidden" name="SIGNUP_SOURCE" value="tx-forfeiture">
+</form>
+<script id="signup-source-script">
+(function () {
+  "use strict";
+  var form = document.getElementById("sib-form");
+  if (!form) return;
+  var input = form.querySelector('input[name="SIGNUP_SOURCE"]');
+  if (!input) return;
+  var match = /(?:^|[?&])SIGNUP_SOURCE=([^&#]*)/.exec(window.location.search || "");
+  if (!match) return;
+  var raw = match[1].replace(/\+/g, " ");
+  try { raw = decodeURIComponent(raw); } catch (err) { raw = match[1]; }
+  var clean = String(raw).toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+  if (clean) input.value = clean;
+})();
+</script>
+</section>
+</main>
+<footer>
+<p>Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
+<p>First Mover Projects, PO Box 98, Firth, NE 68358. firstmoverprojects@gmail.com. General guidance, not legal, tax or IT advice. Not affiliated with or endorsed by the Texas Comptroller of Public Accounts or the Texas Secretary of State.</p>
+</footer>
+<noscript>
+<p>The four questions need JavaScript in your browser. Nothing is uploaded. The dates, source links, and email form above still work.</p>
+</noscript>
+<script id="tx-forfeiture-check">
+(function () {
+  "use strict";
+
+  var DEADLINE = "2027-01-29";
+  var INCOMPLETE = "Answer all four questions, then use Show the steps.";
+  var DISCLAIMER = "General guidance, not legal, tax or IT advice.";
+  var SOS = { yes: 1, no: 1, unsure: 1 };
+  var REVENUE = { "at-or-below": 1, above: 1, unsure: 1 };
+  var GAP = { info: 1, report: 1, payment: 1, unsure: 1 };
+  var NONPROFIT = { yes: 1, no: 1, unsure: 1 };
+
+  function chicagoYmd(date) {
+    var parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Chicago",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).formatToParts(date);
+    var map = { year: "", month: "", day: "" };
+    var i;
+    for (i = 0; i < parts.length; i++) {
+      if (Object.prototype.hasOwnProperty.call(map, parts[i].type)) map[parts[i].type] = parts[i].value;
+    }
+    return map.year + "-" + map.month + "-" + map.day;
+  }
+
+  function utc(ymd) {
+    var p = String(ymd).split("-");
+    return Date.UTC(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+  }
+
+  function daysUntil(deadline, now) {
+    return Math.round((utc(deadline) - utc(chicagoYmd(now))) / 86400000);
+  }
+
+  function dayLine(days) {
+    if (days > 1) return days + " days remain before January 29, 2027, counted on the America/Chicago calendar.";
+    if (days === 1) return "1 day remains before January 29, 2027, counted on the America/Chicago calendar.";
+    if (days === 0) return "January 29, 2027 is today in America/Chicago. The Comptroller's line says the right to transact business must be revived before this date.";
+    return "January 29, 2027 has passed on the America/Chicago calendar. Form 801 instructions say the request to set aside a tax forfeiture may be submitted at any time after forfeiture so long as the entity would otherwise have continued to exist.";
+  }
+
+  function feeLine(nonprofit) {
+    if (nonprofit === "yes") return "Form 801 instructions say there is no fee for filing the reinstatement of a nonprofit corporation following a tax forfeiture.";
+    if (nonprofit === "no") return "Form 801 instructions say the filing fee is $75.";
+    return "Form 801 instructions say the filing fee is $75, unless the entity is a nonprofit corporation. There is no fee for a nonprofit corporation following a tax forfeiture.";
+  }
+
+  function filingLines(a) {
+    var lines = [];
+    if (a.revenue === "at-or-below" && a.gap !== "payment") {
+      lines.push("The 2026 forms page says an entity with annualized total revenue at or below the no tax due threshold does not file a No Tax Due Report. It still files Form 05-102 or Form 05-167. The notices page says there is no $50 penalty for a late Public Information Report or Ownership Information Report.");
+    }
+    if (a.revenue === "above" || a.gap === "report") {
+      lines.push("The page on making an account current says an entity above the threshold files Form 05-169 or Forms 05-158-A and 05-158-B, files Form 05-102 or Form 05-167, and pays any tax, penalty, and interest.");
+    }
+    if (a.gap === "payment") {
+      lines.push("The franchise tax page says a $50 penalty is assessed on each report filed after the due date. If tax is paid 1 to 30 days after the due date, a 5 percent penalty is assessed. If tax is paid more than 30 days after the due date, a 10 percent penalty is assessed. Interest begins 61 days after the due date. The interest page lists 7.75 percent for 2026.");
+    }
+    if (a.revenue === "at-or-below" && a.gap === "payment") {
+      lines.push("You marked revenue at or below the threshold and an amount still due. The account-current page says that revenue level does not owe franchise tax and files the information report. If the notice still shows an amount, pay the amount printed on it. If you already filed the missing item, the notices page says to call 800-252-7942.");
+    }
+    if (a.revenue === "unsure" || a.gap === "unsure") {
+      lines.push("Match the issue printed on your notice to the Comptroller notices page, and look up the account status at https://comptroller.texas.gov/taxes/franchise/account-status/search.");
+    }
+    return lines;
+  }
+
+  function buildForfeiture(a, now) {
+    var when = now || new Date();
+    var days = daysUntil(DEADLINE, when);
+    if (!a || !SOS[a.sos] || !REVENUE[a.revenue] || !GAP[a.gap] || !NONPROFIT[a.nonprofit]) {
+      return { ok: false, days: days, headline: INCOMPLETE, lines: [] };
+    }
+    var lines = [dayLine(days)];
+    var headline = "";
+    if (a.sos === "no") {
+      headline = "Make the franchise tax account current before January 29, 2027.";
+      lines.push("The October 2026 Tax Counsel News says that if the right to transact business is not revived before Jan. 29, 2027, the Secretary of State registration will be forfeited.");
+      lines = lines.concat(filingLines(a));
+      lines.push("Form 05-391 and Secretary of State Form 801 come after the Secretary of State has forfeited or revoked the entity under Tax Code chapter 171. The tax clearance page says that letter is required when reinstating a registration with the Secretary of State.");
+      lines.push(feeLine(a.nonprofit));
+    } else if (a.sos === "yes") {
+      headline = "File what the Comptroller still requires, request Form 05-391, then file Secretary of State Form 801.";
+      lines.push("Form 801 instructions say this is the final step after the Secretary of State forfeits or revokes the entity under chapter 171. Before you submit it, file each delinquent chapter 171 report and pay the tax, penalty, and interest that is due.");
+      lines = lines.concat(filingLines(a));
+      lines.push("Request the tax clearance letter in Webfile or on Form 05-391. The reinstatement page says to wait 2 to 3 business days after a payment. The Comptroller issues Form 05-377. Mail Form 05-391 to Comptroller of Public Accounts, P.O. Box 149348, Austin, TX 78714-9348.");
+      lines.push("File Form 801 with that letter through SOSPortal, or mail it to Secretary of State, P.O. Box 13697, Austin, TX 78711-3697. In-person delivery is 400 W. 15th St., Austin, TX 78701.");
+      lines.push(feeLine(a.nonprofit));
+      lines.push("Confirm the forfeiture date with the Secretary of State at 512-463-5555 before you pay the Form 801 fee. The Comptroller's January 29, 2027 line is about reviving the right to transact business so the registration is not forfeited.");
+    } else {
+      headline = "Look up the Comptroller status and the Secretary of State record before you choose Form 801.";
+      lines.push("The account status search shows the right to transact business. Form 801 instructions say to call the Secretary of State at 512-463-5555 if you are not sure of the forfeiture date.");
+      lines = lines.concat(filingLines(a));
+      lines.push("If the Secretary of State has not forfeited the registration, make the account current before January 29, 2027. If it has, request Form 05-391 and then file Form 801.");
+      lines.push(feeLine(a.nonprofit));
+    }
+    lines.push(DISCLAIMER);
+    lines.push("First Mover Projects does not file these forms and is not a filing service.");
+    return { ok: true, days: days, headline: headline, lines: lines };
+  }
+
+  function readAnswers(form) {
+    function pick(name) {
+      var nodes = form.elements[name];
+      var i;
+      if (!nodes) return "";
+      if (typeof nodes.length !== "number") return nodes.checked ? nodes.value : "";
+      for (i = 0; i < nodes.length; i++) {
+        if (nodes[i].checked) return nodes[i].value;
+      }
+      return "";
+    }
+    return {
+      sos: pick("sos"),
+      revenue: pick("revenue"),
+      gap: pick("gap"),
+      nonprofit: pick("nonprofit")
+    };
+  }
+
+  function show(result) {
+    var headline = document.getElementById("tx-headline");
+    var days = document.getElementById("tx-days");
+    var list = document.getElementById("tx-points");
+    var i;
+    var li;
+    if (!headline || !days || !list) return;
+    headline.textContent = result.headline;
+    days.textContent = result.ok ? "" : "";
+    list.textContent = "";
+    for (i = 0; i < result.lines.length; i++) {
+      li = document.createElement("li");
+      li.textContent = result.lines[i];
+      list.appendChild(li);
+    }
+  }
+
+  var form = document.getElementById("tx-form");
+  var go = document.getElementById("tx-go");
+  var clear = document.getElementById("tx-clear");
+  if (form) {
+    form.addEventListener("submit", function (ev) { ev.preventDefault(); });
+  }
+  if (form && go) {
+    go.addEventListener("click", function () {
+      show(buildForfeiture(readAnswers(form), new Date()));
+    });
+  }
+  if (form && clear) {
+    clear.addEventListener("click", function () {
+      form.reset();
+      show({ ok: false, days: null, headline: INCOMPLETE, lines: [] });
+    });
+  }
+
+  window.FMP_TX_FORFEITURE = {
+    DEADLINE: DEADLINE,
+    DISCLAIMER: DISCLAIMER,
+    INCOMPLETE: INCOMPLETE,
+    daysUntil: daysUntil,
+    buildForfeiture: buildForfeiture
+  };
+})();
+</script>
+    <script>
+    (function () {
+      var q = location.search || "";
+      var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(q);
+      if (testVisit) {
+        window.goatcounter = { path: function (p) { return "TEST-EXCLUDE" + p; } };
+      }
+      function trackGumroadClick(ev) {
+    if (ev.type === "auxclick" && ev.button !== 1) return;
+    var node = ev.target && ev.target.closest ? ev.target.closest("a") : null;
+    if (!node || !node.getAttribute) return;
+    var href = node.getAttribute("href") || "";
+    var toolSlug = node.getAttribute("data-tool-slug") || "";
+    var className = node.getAttribute("class") || "";
+    var path = "";
+    var title = "";
+    if (className.indexOf("follow-tiktok") !== -1) {
+      if (!/^[a-z0-9-]{1,80}$/.test(toolSlug)) return;
+      if (node.target !== "_blank") node.target = "_blank";
+      if (typeof node.setAttribute === "function") {
+        var tiktokRel = node.getAttribute("rel") || "";
+        if (tiktokRel.indexOf("noopener") === -1) node.setAttribute("rel", (tiktokRel ? tiktokRel + " " : "") + "noopener");
+      }
+      path = (testVisit ? "TEST-EXCLUDE-" : "") + "/event/tiktok-follow-click-" + toolSlug;
+      title = "TikTok follow click: " + toolSlug;
+    } else {
+      var parts = href.split("/");
+      if (parts[0] !== "https:" || parts[2] !== "firstmoverprojects.gumroad.com" || parts[3] !== "l") return;
+      if (href.indexOf("wanted=true") === -1) return;
+      var slug = parts[4] || "";
+      var cut = slug.search(/[?#]/);
+      if (cut !== -1) slug = slug.slice(0, cut);
+      if (!slug) return;
+      if (node.target !== "_blank") node.target = "_blank";
+      if (typeof node.setAttribute === "function") {
+        var rel = node.getAttribute("rel") || "";
+        if (rel.indexOf("noopener") === -1) node.setAttribute("rel", (rel ? rel + " " : "") + "noopener");
+      }
+      path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+      title = "Gumroad checkout click: " + slug;
+    }
+    if (window.goatcounter && typeof window.goatcounter.count === "function") {
+      window.goatcounter.count({
+        path: path,
+        title: title,
+        event: true
+      });
+    }
+    var gcCountUrl = "https://firstmoverprojects.goatcounter.com/count?p=" + encodeURIComponent(path) + "&t=" + encodeURIComponent(title) + "&e=true";
+    try {
+      if (typeof fetch === "function") fetch(gcCountUrl, { keepalive: true, mode: "no-cors" });
+    } catch (fetchErr) {}
+    try {
+      if (typeof navigator !== "undefined" && navigator && typeof navigator.sendBeacon === "function") navigator.sendBeacon(gcCountUrl);
+    } catch (beaconErr) {}
+  }
+      document.addEventListener("click", trackGumroadClick);
+      document.addEventListener("auxclick", trackGumroadClick);
+    })();
+    </script>
+<script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script id="fmp-utm">
+(function () {
+  "use strict";
+  var KEY = "fmp_utm_source";
+  var FALLBACK = "site";
+
+  function clean(value) {
+    if (value == null) return "";
+    var s = String(value).replace(/\+/g, " ").trim().toLowerCase();
+    try { s = decodeURIComponent(s); } catch (e) { /* keep the raw token */ }
+    s = s.trim().toLowerCase().replace(/[^a-z0-9\-_]/g, "-").slice(0, 200).replace(/^-+|-+$/g, "");
+    if (!/^[a-z0-9][a-z0-9_-]*$/.test(s) || s === FALLBACK) return "";
+    return s;
+  }
+
+  function fromLocation() {
+    var q = "";
+    try { q = location.search || ""; } catch (e) { q = ""; }
+    var m = /(?:^|[?&])utm_source=([^&#]*)/.exec(q);
+    return m ? clean(m[1]) : "";
+  }
+
+  function landingSource() {
+    var fromUrl = fromLocation();
+    var saved = "";
+    try {
+      saved = clean(sessionStorage.getItem(KEY));
+      if (!saved && fromUrl) {
+        sessionStorage.setItem(KEY, fromUrl);
+        saved = fromUrl;
+      }
+    } catch (e) {
+      saved = fromUrl;
+    }
+    return saved || FALLBACK;
+  }
+
+  function patchHref(anchor, source) {
+    if (!anchor || !source || source === FALLBACK || !anchor.getAttribute) return;
+    var href = anchor.getAttribute("href");
+    if (!href || href.indexOf("firstmoverprojects.gumroad.com/l/") === -1) return;
+    if (href.indexOf("utm_source=") === -1) return;
+    var next = href.replace(/([?&]utm_source=)[^&#]*/, "$1" + source);
+    if (next !== href) anchor.setAttribute("href", next);
+  }
+
+  function patchAll(source) {
+    if (!document.querySelectorAll) return;
+    var links = document.querySelectorAll('a[href*="firstmoverprojects.gumroad.com/l/"]');
+    for (var i = 0; i < links.length; i++) patchHref(links[i], source);
+  }
+
+  function onClick(ev) {
+    var t = ev.target;
+    if (!t || !t.closest) return;
+    patchHref(t.closest("a"), landingSource());
+  }
+
+  patchAll(landingSource());
+  document.addEventListener("click", onClick, true);
+  document.addEventListener("auxclick", onClick, true);
+})();
+</script>
+</body>
+</html>
