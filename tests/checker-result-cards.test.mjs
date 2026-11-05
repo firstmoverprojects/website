@@ -115,7 +115,7 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       button: "Get the $9 photo checklist",
       slug: "/l/lnfgc",
       campaign: "etsy-photo-audit-check",
-      resultContent: "etsy-check-result",
+      resultContent: "etsy-photo-result-mockup",
       stepMatch: /unedited photo of the real item/,
       skipWeeklyEmail: true,
       thanks: true,
@@ -181,12 +181,10 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
     }
     if (item.thanks) {
       const cardText = await page.innerText("#result-cta");
-      assert.match(cardText, /Thank you for your time/);
-      assert.match(cardText, /Share it with someone it could help/);
+      assert.match(cardText, /Thanks for your time\. If this isn't right for you, please share it with someone it could help\./);
       const kitTop = await page.locator("#kit-result").boundingBox();
       const thanksTop = await page.locator("#result-cta .thanks").boundingBox();
-      const shareTop = await page.locator("#result-cta .share-line").boundingBox();
-      assert.ok(kitTop && thanksTop && shareTop && kitTop.y < thanksTop.y && thanksTop.y < shareTop.y, item.rel);
+      assert.ok(kitTop && thanksTop && kitTop.y < thanksTop.y, item.rel);
     }
     if (item.contrast) {
       const colors = await page.evaluate(() => {
@@ -197,7 +195,6 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
           bg: getComputedStyle(card).backgroundColor,
           text: getComputedStyle(heading).color,
           thanks: getComputedStyle(document.querySelector("#result-cta .thanks")).color,
-          share: getComputedStyle(document.querySelector("#result-cta .share-line")).color,
           btnBg: getComputedStyle(btn).backgroundColor,
           btnColor: getComputedStyle(btn).color,
           btnH: btn.getBoundingClientRect().height
@@ -206,7 +203,6 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       assert.equal(colors.bg, "rgb(255, 255, 255)", item.rel);
       assert.equal(colors.text, "rgb(7, 27, 49)", item.rel);
       assert.equal(colors.thanks, "rgb(7, 27, 49)", item.rel);
-      assert.equal(colors.share, "rgb(7, 27, 49)", item.rel);
       assert.equal(colors.btnBg, "rgb(0, 85, 255)", item.rel);
       assert.equal(colors.btnColor, "rgb(255, 255, 255)", item.rel);
       assert.ok(colors.btnH >= 44, item.rel + " button " + colors.btnH);
