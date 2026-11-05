@@ -8,7 +8,7 @@
   </url>
   <url>
     <loc>https://firstmoverprojects.com/tools/</loc>
-    <lastmod>2026-11-03</lastmod>
+    <lastmod>2026-11-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -38,7 +38,7 @@
   </url>
   <url>
     <loc>https://firstmoverprojects.com/deadlines/</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
     <loc>https://firstmoverprojects.com/deadlines/finder/</loc>
@@ -101,6 +101,10 @@
     <lastmod>2026-11-03</lastmod>
   </url>
   <url>
+    <loc>https://firstmoverprojects.com/deadlines/texas-franchise-tax-forfeiture-reinstatement.html</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
     <loc>https://firstmoverprojects.com/games/</loc>
     <lastmod>2026-10-29</lastmod>
   </url>
@@ -139,5 +143,9 @@
   <url>
     <loc>https://firstmoverprojects.com/tools/grok-bot-team-check/</loc>
     <lastmod>2026-10-30</lastmod>
+  </url>
+  <url>
+    <loc>https://firstmoverprojects.com/tools/tx-franchise-forfeiture-check/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
 </urlset>
