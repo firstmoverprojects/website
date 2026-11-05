@@ -63,6 +63,18 @@ test("every #signup section is the full FMP weekly update with a green pill butt
       count += 1;
       const section = sectionAt(html, at);
       assert.match(section, /<section\b[^>]*class="[^"]*\bsignup\b/, rel);
+      if (rel === "deadlines/1098-vli-check/index.html") {
+        // scripts/test_1098_vli_check.js locks this page to the embedded
+        // waitlist and forbids the weekly pill link and sessionStorage.
+        assert.ok(section.includes(`<h2 id="signup-h">${HEADING}</h2>`), rel);
+        assert.equal(section.includes(`>${BUTTON}</a>`), false, rel);
+        assert.ok(section.includes('href="#sib-form">Join the free waitlist for the $29 kit</a>'), rel);
+        assert.ok(section.includes('id="sib-form"'), rel);
+        assert.equal(section.includes("sessionStorage"), false, rel);
+        assert.equal(/Deadlines This Week|weekly deadline email/i.test(section), false, rel);
+        from = at + 'id="signup"'.length;
+        continue;
+      }
       assert.ok(section.includes(`<h2 id="signup-h">${HEADING}</h2>`), rel);
       assert.ok(section.includes(`>${BUTTON}</a>`), rel);
       const anchor = section.match(/<a\b[^>]*>[^<]*<\/a>/);

@@ -218,6 +218,7 @@ var allowed = [
   "https://05279842.sibforms.com",
   "https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==",
   "https://firstmoverprojects.com/",
+  "https://firstmoverprojects.com/assets/previews/amazon-coi-kit-preview-1280x720.png",
   "https://firstmoverprojects.com/assets/previews/amazon-coi-kit-preview-1280x720.webp",
   "https://firstmoverprojects.com/privacy.html",
   "https://firstmoverprojects.com/tools/amazon-coi-check/",
@@ -225,6 +226,7 @@ var allowed = [
   "https://firstmoverprojects.goatcounter.com",
   "https://firstmoverprojects.goatcounter.com/count",
   "https://firstmoverprojects.goatcounter.com/count?p=",
+  "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit",
   "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=footer",
   "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=amazon-coi-result-fix",
   "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=coi-check-sticky",
@@ -233,6 +235,7 @@ var allowed = [
   "https://gc.zgo.at/count.js",
   "https://launchfree.io/listings/amazon-nov-2-coi-pre-check.html",
   "https://schema.org",
+  "https://schema.org/InStock",
   "https://sellercentral.amazon.com/help/hub/reference/external/G200386300",
   "https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT",
   "https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408",
@@ -322,7 +325,7 @@ if (!quoteFile) {
 
 var sitemap = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
 assert(sitemap.indexOf("<loc>https://firstmoverprojects.com/tools/amazon-coi-check/</loc>") !== -1, "sitemap loc");
-assert(sitemap.indexOf("<loc>https://firstmoverprojects.com/tools/amazon-coi-check/</loc>\n    <lastmod>2026-11-03</lastmod>") !== -1, "sitemap lastmod");
+assert(sitemap.indexOf("<loc>https://firstmoverprojects.com/tools/amazon-coi-check/</loc>\n    <lastmod>2026-11-05</lastmod>") !== -1, "sitemap lastmod");
 var deadline = fs.readFileSync(path.join(root, "deadlines", "amazon-insurance-nov-2.html"), "utf8");
 assert(deadline.indexOf('<p>Free: <a href="/tools/amazon-coi-check/">paste your certificate text and check it against Amazon\'s criteria</a> (runs in your browser, nothing uploaded).</p>') !== -1, "deadline page free-tool line");
 assert(deadline.indexOf("Amazon Insurance Certificate Checklist: What to Review Before Uploading") !== -1, "deadline checklist heading");
