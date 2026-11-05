@@ -81,7 +81,8 @@ test("every tool checker has a follow bar under the result kit button and the ma
     if (singleResultCta) {
       assert.equal(result.split('class="follow-bar"').length - 1, 0, rel + " result");
       assert.equal(/class="follow-email"/.test(result), false, rel + " result");
-      assert.equal((result.match(/gumroad\.com/g) || []).length, 1, rel + " result");
+      const gumroadInResult = rel === "tools/eu-product-id-check/index.html" ? 0 : 1;
+      assert.equal((result.match(/gumroad\.com/g) || []).length, gumroadInResult, rel + " result");
     } else {
       assert.equal(result.split('class="follow-bar"').length - 1, 1, rel + " result");
       assert.match(result, /class="follow-email" href="#signup"/, rel);

@@ -55,12 +55,11 @@ test("the fee section states the free estimate, the buyer, and the kit limit", (
   assert.match(section, /sellers outside the EU who ship online orders to consumers in the EU/);
   assert.match(section, /business-to-business sales to a taxable person/);
   assert.match(section, /EU-based sellers shipping goods that are already in the EU/);
-  assert.match(section, /The kit covers product identifiers; the fee math above is free\./);
-  assert.match(section, /fix_list\.csv/);
-  assert.match(section, /template\.xlsx/);
-  assert.match(section, /code Y081/);
   assert.equal(section.includes("eu-fee-kit"), false);
   assert.equal(section.includes("kit-refund"), false);
+  assert.equal(section.includes("$29"), false);
+  assert.equal(html.includes("fetwsm"), false);
+  assert.equal(/money[- ]back/i.test(html), false);
   assert.match(section, /General guidance, not legal, tax or IT advice\./);
   assert.match(section, /Thanks for your time\. If this isn't right for you, please share it with someone it could help\./);
   assert.match(section, /shall be EUR 2 per item/);

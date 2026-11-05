@@ -54,10 +54,10 @@ test("the page opens by saying what the checker is", () => {
   assert.ok(html.indexOf('id="what"') < html.indexOf('id="who"'));
 });
 
-test("the answer block leads with one result, one kit button, and the thanks line", () => {
+test("the answer block leads with one result and the thanks line", () => {
   const results = element(html, "results");
   const card = element(results, "result-cta");
-  const order = ["result-problem", "next-steps", "result-deadline", "disclaimer", "kit-result", "thanks"];
+  const order = ["result-problem", "next-steps", "result-deadline", "disclaimer", "thanks"];
   let at = -1;
   for (const id of order) {
     const next = id === "thanks" || id === "disclaimer"
@@ -66,7 +66,12 @@ test("the answer block leads with one result, one kit button, and the thanks lin
     assert.ok(next > at, id);
     at = next;
   }
-  assert.equal((results.match(/gumroad\.com/g) || []).length, 1);
+  assert.equal((results.match(/gumroad\.com/g) || []).length, 0);
+  assert.equal(html.includes("fetwsm"), false);
+  assert.equal(html.includes("$29"), false);
+  assert.equal(html.includes('id="kit-result"'), false);
+  assert.equal(html.includes('id="paid-link"'), false);
+  assert.equal(/money[- ]back/i.test(html), false);
   assert.equal(/follow-bar|email-cap|btn-buy-now|btn-email|sibforms/.test(card), false);
   assert.equal(/follow-bar|email-cap|btn-buy-now|btn-email/.test(results), false);
   assert.equal(results.split('id="deadline-reminder-form"').length - 1, 1);
@@ -75,24 +80,16 @@ test("the answer block leads with one result, one kit button, and the thanks lin
   assert.match(card, /November 1, 2026/);
   assert.match(card, /EUR 150/);
   assert.match(card, /General guidance, not legal, tax or IT advice/);
-  const href = card.match(/id="kit-result"[^>]*href="([^"]+)"/)[1].replace(/&amp;/g, "&");
-  const url = new URL(href);
-  assert.equal(url.pathname, "/l/fetwsm");
-  assert.equal(url.searchParams.get("wanted"), "true");
-  assert.equal(url.searchParams.get("utm_source"), "site");
-  assert.equal(url.searchParams.get("utm_medium"), "site");
-  assert.equal(url.searchParams.get("utm_campaign"), "eu-product-id-check");
-  assert.equal(url.searchParams.get("utm_content"), "result-cta");
-  assert.equal(card.split('id="kit-result"').length - 1, 1);
   assert.match(html, /Not affiliated with the European Commission or any customs authority/);
   assert.match(html, /General guidance, not legal, tax or IT advice/);
   assert.match(html, /id="faq"/);
-  assert.match(html, /property="og:image"/);
+  assert.match(html, /property="og:image" content="https:\/\/firstmoverprojects.com\/assets\/fmp-logo-460.png"/);
+  assert.match(html, /name="twitter:image" content="https:\/\/firstmoverprojects.com\/assets\/fmp-logo-460.png"/);
   assert.match(html, /name="twitter:card"/);
+  assert.equal(html.includes("eu-product-id-kit-preview"), false);
   assert.equal(/document\.cookie/.test(html), false);
   const scripts = [...html.matchAll(/<script\b[^>]*\bsrc="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(scripts, ["https://gc.zgo.at/count.js"]);
-  assert.match(html, /#kit-result\{[^}]*min-height:48px/);
 });
 
 test("the result names the date, the rule, and the next step for that answer", () => {
