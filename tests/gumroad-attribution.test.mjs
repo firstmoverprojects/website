@@ -10,7 +10,7 @@ const UTM = readFileSync(path.join(ROOT, "assets/gumroad-utm.js"), "utf8").trim(
 const DEADLINE = readFileSync(path.join(ROOT, "assets/deadline-count.js"), "utf8").trim();
 const CONTENTS = new Set([
   "above-fold", "article", "bottom-cta", "card", "checklist", "comparison", "faq", "footer",
-  "amazon-coi-result-check", "amazon-coi-result-fix", "amazon-coi-result-ontrack", "coi-check-result", "coi-check-sticky", "coi-check-top", "etsy-check-result", "fire-check-result", "fire-check-sticky", "fire-check-top", "fire-result-need-tcc", "fire-result-nov9", "fire-result-ontrack", "fire-result-still-fire", "fire-result-warn", "gtin-helper", "hub", "kit-preview", "link", "md-famli", "post-check", "product-demo", "result-card", "ws-check-result", "ws2016",
+  "amazon-coi-result-check", "amazon-coi-result-fix", "amazon-coi-result-ontrack", "coi-check-result", "coi-check-sticky", "coi-check-top", "etsy-check-result", "etsy-photo-result-fix", "etsy-photo-result-mockup", "etsy-photo-result-ontrack", "fire-check-result", "fire-check-sticky", "fire-check-top", "fire-result-need-tcc", "fire-result-nov9", "fire-result-ontrack", "fire-result-still-fire", "fire-result-warn", "gtin-helper", "hub", "kit-preview", "link", "md-famli", "post-check", "product-demo", "result-card", "ws-check-result", "ws2016",
   "result-cta", "sticky-cta", "tools-free", "tools-kit", "top-cta", "trade-pill", "eu-fee"
 ]);
 
