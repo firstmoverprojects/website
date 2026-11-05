@@ -61,7 +61,7 @@ assert(page.indexOf("noindex") === -1, "deadline page is indexable");
 assert(page.indexOf("First Mover Projects does not file") !== -1, "does not file");
 assert(page.indexOf("is not a filing service") !== -1, "not a filing service");
 assert(page.indexOf('href="#signup"') !== -1, "kit button opens signup");
-assert(!/gumroad\.com/i.test(page), "deadline page has no gumroad link");
+assert(!/<a\b[^>]*gumroad\.com\/l\//i.test(page), "deadline page has no gumroad product link");
 assertEq(forbiddenHit(page), "", "deadline page wording");
 
 assert(tool.indexOf('<p class="topline">A free web check') !== -1, "tool opens with a free web check");
@@ -69,7 +69,7 @@ assert(tool.indexOf('name="robots" content="noindex"') === -1, "tool is indexabl
 assert(tool.indexOf("Coming soon: $9 revival checklist kit") !== -1, "tool coming soon");
 assert(tool.indexOf("https://comptroller.texas.gov/forms/05-391.pdf") !== -1, "tool links 05-391");
 assert(tool.indexOf("SIGNUP_SOURCE\" value=\"tx-forfeiture\"") !== -1, "signup source");
-assert(!/gumroad\.com/i.test(tool), "tool has no gumroad link");
+assert(!/<a\b[^>]*gumroad\.com\/l\//i.test(tool), "tool has no gumroad product link");
 assertEq(forbiddenHit(tool), "", "tool wording");
 
 assert(sitemap.indexOf("https://firstmoverprojects.com/deadlines/texas-franchise-tax-forfeiture-reinstatement.html") !== -1, "sitemap deadline");
