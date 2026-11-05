@@ -26,6 +26,12 @@ const PAGES = [
     source: "eu-product-id",
     event: "signup/eu-product-id-check",
     region: "deadline-reminder"
+  },
+  {
+    rel: "tools/1099-nec-or-1099-k-check/index.html",
+    source: "1099-nec-or-1099-k",
+    event: "signup/1099-nec-or-1099-k-check",
+    region: "signup"
   }
 ];
 
@@ -106,8 +112,7 @@ function loadEvents(html, search, attrs) {
 
 test("each tool result has one accessible reminder form on the existing list", () => {
   const scripts = PAGES.map((page) => eventScript(read(page.rel)));
-  assert.equal(scripts[1], scripts[0]);
-  assert.equal(scripts[2], scripts[0]);
+  for (const script of scripts) assert.equal(script, scripts[0]);
   assert.equal(/fetch\(|sendBeacon|localStorage|sessionStorage|XMLHttpRequest|document\.cookie/.test(scripts[0]), false);
 
   for (const page of PAGES) {

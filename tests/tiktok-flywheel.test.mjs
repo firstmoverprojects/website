@@ -84,7 +84,7 @@ test("home and tools hub show the same six TikTok quick-jump chips", () => {
 
 test("every interactive checker has an embed snippet, license link, and embed-mode nav hide", () => {
   const pages = toolPages();
-  assert.equal(pages.length, 9, pages.join(","));
+  assert.equal(pages.length, 10, pages.join(","));
   for (const rel of pages) {
     const slug = rel.split("/")[1];
     const html = read(rel);
