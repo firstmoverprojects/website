@@ -45,7 +45,7 @@ test("static HTML keeps the Nov 9 sentence, the IRS link, and the live dates fir
   const result = html.match(/id="kit-result"[^>]*href="([^"]+)"/);
   const sticky = html.match(/data-goatcounter-click="cta\/fire-check-sticky"[^>]*href="([^"]+)"/);
   assert.equal(top[1].includes("utm_content=fire-check-top"), true);
-  assert.equal(result[1].includes("utm_content=fire-check-result"), true);
+  assert.equal(result[1].includes("utm_content=fire-result-need-tcc"), true);
   assert.equal(sticky[1].includes("utm_content=fire-check-sticky"), true);
   assert.equal(top[1].includes("fire-to-iris-switch-checklist"), true);
 });

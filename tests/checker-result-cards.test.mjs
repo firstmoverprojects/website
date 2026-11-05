@@ -129,7 +129,7 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       button: "Get the $9 checklist (instant PDF)",
       slug: "/l/fire-to-iris-switch-checklist",
       campaign: "fire-to-iris-check",
-      resultContent: "fire-check-result",
+      resultContent: "fire-result-need-tcc",
       reminder: "signup/fire-to-iris-check"
     },
     {
