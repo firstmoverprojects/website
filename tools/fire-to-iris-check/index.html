@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action 'none'; base-uri 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action https://05279842.sibforms.com; base-uri 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="canonical" href="https://firstmoverprojects.com/tools/fire-to-iris-check/">
 <title>IRS FIRE to IRIS Readiness &amp; 1099 CSV Header Check (free, runs in your browser)</title>
@@ -78,6 +78,17 @@ footer{margin:8px 0 24px}
 .email-cap-box{background:#f0f9ff;border:2px solid #0284c7;border-radius:10px;padding:14px 16px;margin:14px 0 6px}
 .email-cap-title{font-size:1.02rem;font-weight:800;margin:0 0 6px;color:#0c4a6e}
 .btn-email-cap{display:inline-block;max-width:100%;box-sizing:border-box;background:#0284c7;color:#fff !important;font-weight:700;padding:12px 16px;border-radius:8px;text-decoration:none;margin:6px 8px 6px 0;white-space:normal;overflow-wrap:anywhere;min-height:44px}
+.deadline-reminder{background:#f0f9ff;border:2px solid #0369a1;border-radius:10px;padding:14px 16px;margin:14px 0 6px;color:#1b1f24;max-width:100%}
+.deadline-reminder h2{font-size:1.05rem;font-weight:800;margin:0 0 6px;color:#0c4a6e}
+.deadline-reminder p{margin:.45em 0}
+#deadline-reminder-form{position:relative;display:grid;gap:12px;margin-top:8px;max-width:100%}
+#deadline-reminder-form label{margin-top:0;font-weight:700;color:#1b1f24}
+#deadline-reminder-form input[type="email"]{width:100%;max-width:100%;box-sizing:border-box;min-height:48px;font:inherit;font-size:16px;padding:8px 10px;border:2px solid #0c4a6e;border-radius:6px;background:#fff;color:#1b1f24}
+#deadline-reminder-form .sib-optin{display:flex;align-items:flex-start;gap:10px;font-weight:400;min-height:44px}
+#deadline-reminder-form .sib-optin input{margin-top:3px;width:1.25rem;height:1.25rem;min-width:20px;min-height:20px;flex:0 0 auto}
+#deadline-reminder-form .input--hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+#deadline-reminder-form button{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;width:100%;max-width:100%;margin:0;min-height:48px;padding:12px 16px;background:#0c4a6e;color:#fff;font-weight:800;line-height:1.3;white-space:normal;border-radius:8px}
+#deadline-reminder-form button:hover{background:#075985}
 a.runway-pill{display:inline-block;max-width:100%;box-sizing:border-box;margin:4px 0 12px;padding:8px 14px;border-radius:999px;background:#01060b;color:#f4f7fa !important;border:1px solid #00d8ff;font-weight:700;font-size:.92rem;line-height:1.35;text-decoration:none;white-space:normal;overflow-wrap:anywhere;text-align:center}
 a.runway-pill:hover,a.runway-pill:focus{background:#0c1520;color:#00d8ff !important;outline:3px solid #00d8ff;outline-offset:2px}
 
@@ -340,6 +351,26 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 
 <p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
 </div>
+<section class="deadline-reminder" id="signup" aria-labelledby="deadline-reminder-h">
+<h2 id="deadline-reminder-h">Get a reminder before this deadline</h2>
+<p id="reminder-note">The weekly First Mover Projects email includes a reminder before deadlines like this one. Double opt-in. Unsubscribe any time. This check stays in your browser. The form sends only the email address you type. <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>.</p>
+<form id="deadline-reminder-form" method="POST" action="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" data-type="subscription" autocomplete="off" data-goatcounter-submit="signup/fire-to-iris-check" data-goatcounter-title="Deadline reminder signup: fire-to-iris-check">
+<p>
+<label for="reminder-email">Email address</label>
+<input class="input" type="email" id="reminder-email" name="EMAIL" autocomplete="email" inputmode="email" spellcheck="false" required aria-describedby="reminder-note">
+</p>
+<p>
+<label class="sib-optin" for="reminder-opt-in">
+<input type="checkbox" value="1" id="reminder-opt-in" name="OPT_IN" required>
+<span>Send me the weekly deadline reminder. First Mover Projects will email a confirmation first. Unsubscribe any time with one click. We do not sell or share your email.</span>
+</label>
+</p>
+<p><button type="submit">Get a reminder before this deadline</button></p>
+<input type="text" name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+<input type="hidden" name="locale" value="en">
+<input type="hidden" name="SIGNUP_SOURCE" value="fire-to-iris">
+</form>
+</section>
 <h2>2. Your FIRE to IRIS readiness checklist</h2>
 <p id="summary" class="big"></p>
 <ul id="out"></ul>
@@ -356,11 +387,6 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <button id="copy" class="sec" type="button">Copy checklist</button>
 <p id="copystate" class="muted" role="status"></p>
 
-<div class="email-cap-box" id="signup">
-  <div class="email-cap-title">Email me my free check results + deadline reminders</div>
-  <p class="muted" style="margin:0 0 6px">Save your checklist above, then join our weekly deadline alert list so cutoff changes never catch you off guard:</p>
-  <p style="margin:0"><a class="btn-email-cap" href="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" target="_blank" rel="noopener">Email me deadline reminders (1-click sign-up) →</a> <span class="muted">(opens Brevo's sign-up page · double opt-in, unsubscribe anytime · <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>)</span></p>
-</div>
 <div class="kit-conv-box">
   <span class="kit-conv-badge">INSTANT DOWNLOAD · ONE PDF, 3 PAGES · CHECKLIST + 1099-NEC ADD-ON · $9</span>
   <h3 class="kit-conv-title">See What's Inside the $9 FIRE to IRIS Switch Checklist</h3>
@@ -416,7 +442,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 </ul>
 <p>The $9 checklist is one PDF, 3 pages. It puts the switch in order, with the IRS dates and links, your FIRE account, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on. This page does not send your files there.</p>
 <p class="deadline-count" data-deadline="2026-11-01" data-deadline-label="Nov 1, 2026 IRS FIRE test-file cutoff" hidden></p>
-<p data-fire-kit="1"><a target="_blank" class="paid-quiet" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Optional: $9 switch checklist on Gumroad</a><span class="kit-refund">30-day money back guarantee (see the Gumroad listing).</span></p>
+<p data-fire-kit="1"><a target="_blank" class="paid-quiet" id="paid-link" data-goatcounter-click="cta/fire-check-footer" data-goatcounter-title="FIRE to IRIS check footer" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Optional: $9 switch checklist on Gumroad</a><span class="kit-refund">30-day money back guarantee (see the Gumroad listing).</span></p>
 <p>General guidance, not legal, tax or IT advice.</p>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
@@ -996,6 +1022,41 @@ updateDays(new Date());
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { mark(new Date()); });
   else mark(new Date());
   if (typeof window !== "undefined") window.FMP_PASSED_DATES = { ENDS: ENDS, passed: passed, withPassed: withPassed, mark: mark };
+})();
+</script>
+<script id="deadline-reminder-events">
+(function () {
+  "use strict";
+  var form = document.getElementById("deadline-reminder-form");
+  if (!form || !form.addEventListener) return;
+  var source = form.querySelector ? form.querySelector('input[name="SIGNUP_SOURCE"]') : null;
+  if (source) {
+    var search = "";
+    try { search = window.location.search || ""; } catch (err) { search = ""; }
+    var match = /(?:^|[?&])SIGNUP_SOURCE=([^&#]*)/.exec(search);
+    if (match) {
+      var raw = match[1].replace(/\+/g, " ");
+      try { raw = decodeURIComponent(raw); } catch (err2) { raw = match[1]; }
+      var clean = String(raw).toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+      if (clean) source.value = clean;
+    }
+  }
+  form.addEventListener("submit", function () {
+    var eventPath = form.getAttribute("data-goatcounter-submit") || "";
+    if (!/^signup\/[a-z0-9-]{1,80}$/.test(eventPath)) return;
+    var title = form.getAttribute("data-goatcounter-title") || "Deadline reminder signup";
+    var q = "";
+    try { q = window.location.search || ""; } catch (err3) { q = ""; }
+    var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(q);
+    var path = (testVisit ? "TEST-EXCLUDE/" : "") + eventPath;
+    if (window.goatcounter && typeof window.goatcounter.count === "function") {
+      window.goatcounter.count({
+        path: path,
+        title: title,
+        event: true
+      });
+    }
+  });
 })();
 </script>
 </body>
