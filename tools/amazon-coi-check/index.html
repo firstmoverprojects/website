@@ -194,6 +194,12 @@ a#kit-top{display:flex;align-items:center;justify-content:center;width:100%;max-
 .kit-refund{display:block;max-width:100%;margin:6px 0 0;color:#5a636e;font-size:.82rem;font-weight:400;line-height:1.4}
 .kit-fit{margin:.6em 0;font-weight:600}
 .result-kit-lead{margin:.8em 0 .2em;font-weight:600}
+#result-kit-offer[hidden],#nofit-next[hidden],#kit-result[hidden],#kit-refund[hidden]{display:none !important}
+.nofit-next{background:#eef1f5;border:1px solid #b9c0c8;border-radius:8px;padding:12px;margin:12px 0 0}
+.nofit-next-text{margin:0;font-weight:700;color:#071b31;white-space:pre-wrap}
+#nofit-next button{margin:12px 0 0}
+#kit-result.paid-quiet{display:inline-block;width:auto;min-height:44px;padding:12px 0;margin:12px 0 0;background:transparent;color:#0055ff;font-weight:700;line-height:1.3;text-align:left;text-decoration:underline;border-radius:0}
+#kit-result.paid-quiet:hover,#kit-result.paid-quiet:focus{background:transparent;color:#0055ff}
 .kit-sticky{display:none;box-sizing:border-box}
 .kit-sticky[hidden]{display:none !important}
 .kit-sticky-label{flex:1 1 auto;min-width:0;margin:0;font-weight:800;font-size:.95rem;line-height:1.25;color:#071b31}
@@ -451,20 +457,23 @@ Please reissue my certificate with these corrections:
 
 <section class="card" id="results" hidden aria-live="polite">
 <!-- Result card. Nov 2, 2026 is the date in Amazon's seller announcement, already linked in Sources.
-     One buy button, directly under this result. utm_content=result. The plain text link is in the footer. -->
+     paint() sets the post-answer lead, button state, and utm_content for each outcome. The plain text link is in the footer. -->
 <div class="lead-cta" id="result-cta">
-<h2 id="result-problem">Your certificate still needs a look before Nov 2, 2026.</h2>
+<h2 id="result-problem">Your certificate still needs a look before you upload it to Amazon.</h2>
 <h3>Next steps</h3>
 <ol class="next-steps" id="next-steps"></ol>
 <h3>Date</h3>
 <p id="result-deadline">Amazon's extra rule starts Nov 2, 2026. Sellers in higher-safety categories need $1 million of coverage for each incident, and $1 million in total, even if sales are low.</p>
 <p class="deadline-count" data-deadline="2026-11-02" data-deadline-label="Nov 2, 2026 Amazon COI deadline" hidden></p>
-<p class="deliverables">You get a 12-file ZIP: policy checklist quoting Amazon word for word, COI pre-check, category screen, broker email, Excel workbook.</p>
 <!-- TODO: two real preview images of the checklist and the workbook are not in this repo. sales/gumroad_previews/ is missing. assets/previews/amazon-coi-kit-preview-1280x720.png is one marketing composite, not two screenshots. Do not invent images. -->
 <div id="amazon-kit" hidden>
-<p class="result-kit-lead">Found a mismatch? The kit has a copy-paste broker email for each one, so your broker can fix the certificate before you upload.</p>
-<p><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/coi-check-result" data-goatcounter-title="Amazon COI check result" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=amazon-coi-check&amp;utm_content=coi-check-result" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 kit with broker scripts</a></p>
-<p class="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</p>
+<p class="result-kit-lead" id="result-kit-lead">Because you have a certificate with items to fix before you upload it to Amazon, the kit has the interactive 7-point ACORD 25 pre-upload audit workbook, the copy-paste broker email correction scripts, and the step-by-step Seller Central Account Health upload walkthrough.</p>
+<p id="result-kit-offer"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/amazon-coi-result-fix" data-goatcounter-title="Amazon COI check result" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=amazon-coi-check&amp;utm_content=amazon-coi-result-fix" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 kit with broker scripts</a><span class="kit-refund" id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</span></p>
+<div id="nofit-next" class="nofit-next" hidden>
+<p id="nofit-next-text" class="nofit-next-text" tabindex="0">If the notice was triggered by an old discontinued or inactive ASIN you no longer sell, permanently deleting that listing from Manage Inventory, rather than only closing it, can remove the category trigger at $0 cost. If you actively sell in that category, you must upload a compliant ACORD 25 certificate of insurance.</p>
+<button type="button" class="sec" id="copy-nofit">Copy next step</button>
+<p id="nofit-copy-state" class="muted" role="status"></p>
+</div>
 <p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
 <p>Not affiliated with or endorsed by Amazon.</p>
 </div>
@@ -1087,6 +1096,113 @@ function amazonKitVisible(q1) {
   return q1 === "yes";
 }
 
+var KIT_CONTENTS = "the interactive 7-point ACORD 25 pre-upload audit workbook, the copy-paste broker email correction scripts, and the step-by-step Seller Central Account Health upload walkthrough";
+var DELETE_STEP = "If the notice was triggered by an old discontinued or inactive ASIN you no longer sell, permanently deleting that listing from Manage Inventory, rather than only closing it, can remove the category trigger at $0 cost. If you actively sell in that category, you must upload a compliant ACORD 25 certificate of insurance.";
+var CATEGORY_CHECK = "Check Amazon's category list and your Account Health page. This page can't see your account.";
+var CHOOSE_ANSWERS = "Choose Yes, No, or Not sure for each question.";
+var SALES_RULE = "Amazon's existing rule already applies: insurance within 30 days after exceeding USD 10,000 in gross proceeds in one month.";
+var AIA_RULE = "Amazon's page says Mainland China sellers must get the policy through the Amazon Insurance Accelerator (AIA) program unless Amazon agrees otherwise in writing. From Nov 2, Amazon says it will reject newly submitted policies not obtained through AIA.";
+var SALES_UNSURE = "If you are not sure whether gross proceeds went over USD 10,000 in any one month, check your payments reports in Seller Central. This page can't see your account.";
+var CHINA_UNSURE = "If you are not sure whether your business is based in Mainland China, check Account Info in Seller Central. This page can't see your account.";
+var AMAZON_DECIDES = "Amazon decides. Check Amazon's own help pages.";
+var LEAD_NONE = "Because you answered no to enhanced-safety categories, no to USD 10,000 in gross proceeds in any one month, and no to a business based in Mainland China, neither rule appears to apply right now, but Amazon may request insurance at any time ('or if otherwise requested by us'). If the notice came from an old listing you no longer sell, try deleting it first, at no cost.";
+var LEAD_CATEGORY_NO = "Because you said no, your Amazon.com products do not fall in a category with enhanced safety listing requirements. Good fit if you got Amazon's $1M insurance notice and sell in an enhanced-safety category. If the notice came from an old listing you no longer sell, try deleting it first, at no cost.";
+var LEAD_UNSURE = "Because you are not sure whether any of your Amazon.com products fall in a category with enhanced safety listing requirements, check Amazon's category list and your Account Health page. This page can't see your account.";
+var LEAD_BLANK = "Because you have not chosen Yes, No, or Not sure for whether any of your Amazon.com products fall in a category with enhanced safety listing requirements, choose Yes, No, or Not sure for each question. This page cannot see your Seller Central account.";
+
+function setLead(text) {
+  var lead = byId("result-kit-lead");
+  if (lead) lead.textContent = text;
+}
+
+function extraScope(q2, q3) {
+  var lines = [];
+  if (q2 === "yes") lines.push(SALES_RULE);
+  if (q2 === "unsure") lines.push(SALES_UNSURE);
+  if (q3 === "yes") lines.push(AIA_RULE);
+  if (q3 === "unsure") lines.push(CHINA_UNSURE);
+  return lines;
+}
+
+function setNofitOffer(text) {
+  var box = byId("nofit-next");
+  var state = byId("nofit-copy-state");
+  var offer = byId("result-kit-offer");
+  var link = byId("kit-result");
+  var refund = byId("kit-refund");
+  var next = byId("nofit-next-text");
+  if (state) state.textContent = "";
+  if (next) next.textContent = text;
+  if (box) box.hidden = false;
+  if (offer) offer.hidden = true;
+  if (link) link.hidden = true;
+  if (refund) refund.hidden = true;
+}
+
+function setResultOffer(content, quiet) {
+  var box = byId("nofit-next");
+  var state = byId("nofit-copy-state");
+  var offer = byId("result-kit-offer");
+  var link = byId("kit-result");
+  var refund = byId("kit-refund");
+  if (state) state.textContent = "";
+  if (box) box.hidden = true;
+  if (!link) return;
+  if (offer) offer.hidden = false;
+  link.hidden = false;
+  if (refund) refund.hidden = false;
+  var href = link.getAttribute ? (link.getAttribute("href") || "") : "";
+  if (href.indexOf("utm_content=") !== -1 && link.setAttribute) {
+    link.setAttribute("href", href.replace(/([?&]utm_content=)[^&#]*/, "$1" + content));
+  }
+  if (link.setAttribute) link.setAttribute("data-goatcounter-click", "cta/" + content);
+  if (quiet) {
+    link.className = "paid-quiet";
+    link.textContent = "Optional: $29 kit with broker scripts";
+  } else {
+    link.className = "btn";
+    link.textContent = "Get the $29 kit with broker scripts";
+  }
+}
+
+function applyResultCta(q1, q2, q3, nFix, nCheck, date) {
+  var kit = byId("amazon-kit");
+  if (kit) kit.hidden = false;
+  if (q1 === "no" && q2 === "no" && q3 === "no") {
+    setLead(LEAD_NONE);
+    setNofitOffer(DELETE_STEP);
+    return "nofit";
+  }
+  if (q1 === "no") {
+    setLead(LEAD_CATEGORY_NO);
+    setNofitOffer([DELETE_STEP].concat(extraScope(q2, q3)).concat([AMAZON_DECIDES]).join("\n"));
+    return "nofit";
+  }
+  if (q1 === "unsure") {
+    setLead(LEAD_UNSURE);
+    setNofitOffer([CATEGORY_CHECK].concat(extraScope(q2, q3)).join("\n"));
+    return "nofit";
+  }
+  if (q1 !== "yes") {
+    setLead(LEAD_BLANK);
+    setNofitOffer([CHOOSE_ANSWERS, CATEGORY_CHECK].concat(extraScope(q2, q3)).join("\n"));
+    return "nofit";
+  }
+  if (nFix > 0) {
+    setLead("Because you have a certificate with items to fix before you upload it to Amazon, the kit has " + KIT_CONTENTS + ".");
+    setResultOffer("amazon-coi-result-fix", false);
+    return "button";
+  }
+  if (nCheck > 0) {
+    setLead("Because you still have lines on your certificate to check by hand before you upload it to Amazon, the kit has " + KIT_CONTENTS + ".");
+    setResultOffer("amazon-coi-result-check", false);
+    return "button";
+  }
+  setLead("Because the seven key terms on your certificate look right, the kit is optional. It is " + KIT_CONTENTS + ".");
+  setResultOffer("amazon-coi-result-ontrack", true);
+  return "quiet";
+}
+
 function applicableDate(q1, q2) {
   if (q1 === "yes") {
     return {
@@ -1179,12 +1295,11 @@ function paint(result, opts) {
   var q2 = groupValue("q2");
   var q3 = groupValue("q3");
   var date = applicableDate(q1, q2);
-  if (nFix > 0) setText("result-problem", "Your certificate has " + nFix + (nFix === 1 ? " item" : " items") + " to fix before " + date.when + ".");
-  else if (nCheck > 0) setText("result-problem", "Some lines on your certificate still need a check by hand before " + date.when + ".");
-  else setText("result-problem", "The seven key terms on your certificate look right for " + date.when + ".");
+  if (nFix > 0) setText("result-problem", "Your certificate has " + nFix + (nFix === 1 ? " item" : " items") + " to fix before you upload it to Amazon.");
+  else if (nCheck > 0) setText("result-problem", "Some lines on your certificate still need a check by hand before you upload it to Amazon.");
+  else setText("result-problem", "The seven key terms on your certificate look right for Amazon's rule in effect since Nov 2, 2026.");
   setText("result-deadline", date.line);
-  var kit = byId("amazon-kit");
-  if (kit) kit.hidden = !amazonKitVisible(q1);
+  var mode = applyResultCta(q1, q2, q3, nFix, nCheck, date);
   paintSteps(collectSteps(result, q3));
   var cap = byId("cap");
   if (cap) {
@@ -1220,7 +1335,7 @@ function paint(result, opts) {
   setText("fixlist", result.fixList);
   setText("checked", result.checkedText);
   setText("copystate", "");
-  syncKitSticky(true);
+  syncKitSticky(mode === "button");
   if (opts && opts.scroll && box.scrollIntoView) {
     try { box.scrollIntoView({ block: "start" }); } catch (e) {}
   }
@@ -1355,6 +1470,22 @@ function boot() {
       for (i = 0; i < nodes.length; i++) nodes[i].addEventListener("change", paintScope);
     });
   }
+  var copyNofit = byId("copy-nofit");
+  if (copyNofit) copyNofit.addEventListener("click", function () {
+    var node = byId("nofit-next-text");
+    var text = node ? node.textContent : "";
+    var state = byId("nofit-copy-state");
+    if (!text) return;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        if (state) state.textContent = "Copied.";
+      }, function () {
+        if (state) state.textContent = "Select the next step above and copy it.";
+      });
+    } else if (state) {
+      state.textContent = "Select the next step above and copy it.";
+    }
+  });
   paintScope();
 }
 
