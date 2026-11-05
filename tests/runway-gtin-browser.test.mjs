@@ -9,6 +9,10 @@ import { pathToFileURL } from "node:url";
 
 const PILL = "Listed on The Runway (LaunchFree.io) — Upvote This Free Tool";
 const PILL_BY_PAGE = {
+  "tools/amazon-coi-check/index.html":
+    "Listed on The Runway (LaunchFree.io) - Upvote This Free Tool",
+  "tools/custom-gpt-retirement-checker/index.html":
+    "Listed on The Runway (LaunchFree.io): Upvote This Free Tool",
   "tools/etsy-photo-audit-check/index.html":
     "Listed on The Runway (LaunchFree.io): Upvote This Free Tool",
   "tools/fire-to-iris-check/index.html":
@@ -32,9 +36,11 @@ const LISTINGS = {
   "tools/custom-gpt-retirement-checker/index.html":
     "https://launchfree.io/listings/custom-gpt-retirement-checker.html"
 };
+const CALCULATOR = new Set([
+  "tools/amazon-coi-check/index.html",
+  "tools/etsy-photo-audit-check/index.html"
+]);
 const CHECKOUT = {
-  "tools/amazon-coi-check/index.html":
-    "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=gtin-helper",
   "tools/etsy-photo-audit-check/index.html":
     "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=site&utm_campaign=etsy-photo-audit-check&utm_content=gtin-helper"
 };
@@ -89,7 +95,7 @@ test("Runway pills and the GTIN helper run without horizontal scroll", async () 
     assert.equal(await pill.innerText(), pillFor(rel), rel);
     assert.equal(await pill.getAttribute("href"), href, rel);
     await assertNoHScroll(page);
-    if (CHECKOUT[rel]) {
+    if (CALCULATOR.has(rel)) {
       assert.equal(await page.locator("#gtin-out").isVisible(), false, rel);
       await page.fill("#gtin-code", "036000291453");
       await page.fill("#gtin-price", "24.00");
@@ -100,7 +106,11 @@ test("Runway pills and the GTIN helper run without horizontal scroll", async () 
       assert.match(await page.innerText("#gtin-code-line"), /036000291452/, rel);
       assert.match(await page.innerText("#gtin-fee-line"), /\$3\.60/, rel);
       assert.match(await page.innerText("#gtin-be-line"), /Break-even sale price: \$10\.00/, rel);
-      assert.equal(await page.getAttribute("#gtin-checkout", "href"), CHECKOUT[rel], rel);
+      if (CHECKOUT[rel]) {
+        assert.equal(await page.getAttribute("#gtin-checkout", "href"), CHECKOUT[rel], rel);
+      } else {
+        assert.equal(await page.locator("#gtin-checkout").count(), 0, rel);
+      }
       const signup = page.locator("#gtin-fee a[href='/deadlines/#signup']");
       assert.equal(await signup.count(), 1, rel);
       await page.fill("#gtin-code", "5901234123457");

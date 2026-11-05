@@ -8,6 +8,10 @@ import vm from "node:vm";
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const PILL = "Listed on The Runway (LaunchFree.io) — Upvote This Free Tool";
 const PILL_BY_PAGE = {
+  "tools/amazon-coi-check/index.html":
+    "Listed on The Runway (LaunchFree.io) - Upvote This Free Tool",
+  "tools/custom-gpt-retirement-checker/index.html":
+    "Listed on The Runway (LaunchFree.io): Upvote This Free Tool",
   "tools/etsy-photo-audit-check/index.html":
     "Listed on The Runway (LaunchFree.io): Upvote This Free Tool",
   "tools/fire-to-iris-check/index.html":
@@ -32,11 +36,13 @@ const LISTINGS = {
     "https://launchfree.io/listings/custom-gpt-retirement-checker.html"
 };
 const COMMERCE = {
-  "tools/amazon-coi-check/index.html":
-    "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=site&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=gtin-helper",
   "tools/etsy-photo-audit-check/index.html":
     "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=site&utm_campaign=etsy-photo-audit-check&utm_content=gtin-helper"
 };
+const GTIN_PAGES = [
+  "tools/amazon-coi-check/index.html",
+  "tools/etsy-photo-audit-check/index.html"
+];
 const BANNED = [/C\.?\s*J\.?\s*Crispin/i, /CurioFinch/i];
 
 function read(rel) {
@@ -95,9 +101,10 @@ test("Amazon and Etsy helpers validate GTIN-12/13/14 and price the fee break-eve
   assert.equal(gtinSource(amazon).includes("fetch("), false);
   assert.equal(gtinSource(amazon).includes("sendBeacon"), false);
 
-  for (const [rel, checkout] of Object.entries(COMMERCE)) {
+  for (const rel of GTIN_PAGES) {
     const html = read(rel);
     const block = section(html, "gtin-fee");
+    const checkout = COMMERCE[rel];
     assert.match(block, /Quick GTIN \/ Barcode Check-Digit &amp; Break-Even Fee Calculator/);
     assert.match(block, /id="gtin-code"/);
     assert.match(block, /id="gtin-price"/);
@@ -106,14 +113,21 @@ test("Amazon and Etsy helpers validate GTIN-12/13/14 and price the fee break-eve
     assert.match(block, /id="gtin-fixed"/);
     assert.match(block, /id="gtin-go"/);
     assert.equal(/<form[\s>]/i.test(block), false, rel);
-    assert.ok(block.includes(checkout.replace(/&/g, "&amp;")), rel);
-    const checkoutTag = block.match(/<a\b[^>]*id="gtin-checkout"[^>]*>/)[0];
-    assert.match(checkoutTag, /class="gtin-checkout"/);
-    assert.match(checkoutTag, /target="_blank"/);
-    assert.match(checkoutTag, /rel="noopener"/);
-    assert.equal(/noreferrer/i.test(checkoutTag), false, rel);
-    assert.match(checkoutTag, /referrerpolicy="strict-origin-when-cross-origin"/);
     assert.match(block, /href="\/deadlines\/#signup"/);
+    if (checkout) {
+      assert.ok(block.includes(checkout.replace(/&/g, "&amp;")), rel);
+      const checkoutTag = block.match(/<a\b[^>]*id="gtin-checkout"[^>]*>/)[0];
+      assert.match(checkoutTag, /class="gtin-checkout"/);
+      assert.match(checkoutTag, /target="_blank"/);
+      assert.match(checkoutTag, /rel="noopener"/);
+      assert.equal(/noreferrer/i.test(checkoutTag), false, rel);
+      assert.match(checkoutTag, /referrerpolicy="strict-origin-when-cross-origin"/);
+    } else {
+      // PR #75 left one kit buy path on the Amazon page and replaced this
+      // card's checkout with the free weekly email. The calculator stays.
+      assert.equal(/id="gtin-checkout"/.test(block), false, rel);
+      assert.equal(block.includes("gumroad.com"), false, rel);
+    }
     assert.match(html, /a\.gtin-checkout\{[^}]*background:linear-gradient\(135deg,#22c55e 0%,#4ade80 100%\)/);
     assert.match(html, /a\.gtin-checkout\{[^}]*color:#01060b !important/);
     assert.match(html, /\.gtin-card\{[^}]*background:#01060b/);

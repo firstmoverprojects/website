@@ -8,6 +8,21 @@ import vm from "node:vm";
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const UTM = readFileSync(path.join(ROOT, "assets/gumroad-utm.js"), "utf8").trim();
 const DEADLINE = readFileSync(path.join(ROOT, "assets/deadline-count.js"), "utf8").trim();
+// Quiet unlisted checkers must not carry the pass-through script: it names
+// gumroad.com, and their own tests forbid that word (or, for Deadline Watch
+// and the 1098-VLI check, forbid the sessionStorage the script uses).
+const QUIET_HTML = new Set([
+  "deadlines/1098-vli-check/index.html",
+  "tools/deadline-watch/index.html",
+  "tools/detroit-business-tax-check/index.html",
+  "tools/ga-annual-registration-check/index.html",
+  "tools/mo-zero-return-check/index.html",
+  "tools/nj-contractor-check/index.html",
+  "tools/sam-renewal-check/index.html",
+  "tools/sba-7a-buyer-calculator/index.html",
+  "tools/sba-surety-fee-check/index.html",
+  "tools/tx-franchise-report-check/index.html"
+]);
 const CONTENTS = new Set([
   "above-fold", "article", "bottom-cta", "card", "checklist", "comparison", "faq", "footer",
   "coi-check-result", "coi-check-sticky", "coi-check-top", "etsy-check-result", "etsy-photo-result-fix", "etsy-photo-result-mockup", "etsy-photo-result-ontrack", "fire-check-result", "fire-check-sticky", "fire-check-top", "fire-result-need-tcc", "fire-result-nov9", "fire-result-ontrack", "fire-result-still-fire", "fire-result-warn", "gtin-helper", "hub", "kit-preview", "link", "md-famli", "post-check", "product-demo", "result-card", "ws-check-result", "ws2016",
@@ -57,6 +72,18 @@ test("every page inlines the same Gumroad pass-through and no other storage", ()
   for (const full of pages) {
     const rel = path.relative(ROOT, full).split(path.sep).join("/");
     const html = readFileSync(full, "utf8");
+    if (QUIET_HTML.has(rel)) {
+      assert.equal(scriptBody(html, "fmp-utm"), "", rel);
+      assert.equal(html.includes('id="fmp-utm"'), false, rel);
+      assert.equal(html.includes("sessionStorage"), false, rel);
+      assert.equal(html.includes("document.cookie"), false, rel);
+      if (rel === "tools/deadline-watch/index.html") {
+        assert.equal(/<a\b[^>]*gumroad\.com\/l\//i.test(html), false, rel);
+      } else {
+        assert.equal(/gumroad/i.test(html), false, rel);
+      }
+      continue;
+    }
     assert.equal(scriptBody(html, "fmp-utm"), UTM, rel);
     assert.equal(html.split('id="fmp-utm"').length - 1, 1, rel);
     const surface = html.replace(/<script id="fmp-utm">[\s\S]*?<\/script>/g, "");
@@ -77,7 +104,18 @@ test("every Gumroad product link carries source, medium, campaign, and content",
   for (const full of walk(ROOT)) {
     const rel = path.relative(ROOT, full).split(path.sep).join("/");
     const html = readFileSync(full, "utf8");
-    const matches = html.match(re) || [];
+    for (const block of html.matchAll(/<script type="application\/ld\+json" id="product-jsonld">([\s\S]*?)<\/script>/g)) {
+      const data = JSON.parse(block[1]);
+      const products = data["@graph"] || [data];
+      for (const product of products) {
+        const offerUrl = product.offers && product.offers.url;
+        assert.equal(typeof offerUrl, "string", rel);
+        assert.equal(offerUrl.includes("?"), false, rel + " " + offerUrl);
+        assert.match(offerUrl, /^https:\/\/firstmoverprojects\.gumroad\.com\/l\/[A-Za-z0-9_-]+$/, rel);
+      }
+    }
+    const visible = html.replace(/<script type="application\/ld\+json" id="product-jsonld">[\s\S]*?<\/script>/g, "");
+    const matches = visible.match(re) || [];
     for (const raw of matches) {
       count += 1;
       const url = new URL(raw.replace(/&amp;/g, "&"));

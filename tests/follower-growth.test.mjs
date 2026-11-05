@@ -10,6 +10,21 @@ const HUB = "https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverpro
 const TIKTOK_LABEL = "Follow @firstmoverprojects on TikTok (Daily 60-Sec Checklists)";
 const EMAIL_LABEL = "Get Free Email Deadline Reminders";
 const HUB_LABEL = "Watch our 60-second live-drawing deadline checklists on TikTok (@firstmoverprojects) →";
+// Unlisted checkers whose own scripts forbid GoatCounter, and usually the word
+// "gumroad", so the public follow bar does not belong on them:
+// scripts/test_deadline_checkers.js, scripts/test_nj_contractor_check.js,
+// scripts/test_sba_7a_calculator.js, and tools/deadline-watch/test.js.
+const QUIET_TOOLS = new Set([
+  "tools/deadline-watch/index.html",
+  "tools/detroit-business-tax-check/index.html",
+  "tools/ga-annual-registration-check/index.html",
+  "tools/mo-zero-return-check/index.html",
+  "tools/nj-contractor-check/index.html",
+  "tools/sam-renewal-check/index.html",
+  "tools/sba-7a-buyer-calculator/index.html",
+  "tools/sba-surety-fee-check/index.html",
+  "tools/tx-franchise-report-check/index.html"
+]);
 
 function read(rel) {
   return readFileSync(path.join(ROOT, rel), "utf8");
@@ -52,9 +67,17 @@ function element(html, id) {
 test("every tool checker has a follow bar under the result kit button and the main card", () => {
   const pages = toolPages();
   assert.ok(pages.length >= 9, pages.join(","));
+  for (const rel of QUIET_TOOLS) assert.ok(pages.includes(rel), rel);
   for (const rel of pages) {
     const slug = rel.split("/")[1];
     const html = read(rel);
+    if (QUIET_TOOLS.has(rel)) {
+      assert.equal((html.match(/<div class="follow-bar"/g) || []).length, 0, rel);
+      assert.equal(html.includes("gc.zgo.at"), false, rel);
+      assert.equal(/goatcounter/i.test(html), false, rel);
+      assert.match(html, /name="robots" content="noindex/, rel);
+      continue;
+    }
     const singleResultCta = rel === "tools/amazon-coi-check/index.html" || rel === "tools/etsy-photo-audit-check/index.html" || rel === "tools/custom-gpt-retirement-checker/index.html" || rel === "tools/eu-product-id-check/index.html";
     const bars = html.match(/<div class="follow-bar"/g) || [];
     const copies = singleResultCta ? 1 : 2;

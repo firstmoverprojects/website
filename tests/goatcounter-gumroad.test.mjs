@@ -13,7 +13,22 @@ const SIB_FORM_CSP = new Set([
   "tools/fire-to-iris-check/index.html",
   "tools/amazon-coi-check/index.html",
   "tools/eu-product-id-check/index.html",
-  "tools/1099-nec-or-1099-k-check/index.html"
+  "tools/1099-nec-or-1099-k-check/index.html",
+  "tools/tx-franchise-forfeiture-check/index.html",
+  "tools/windows-server-2016-check/index.html"
+]);
+// Same quiet set as tests/follower-growth.test.mjs. Their own scripts require
+// no GoatCounter host, so the public CSP and count.js must stay off the page.
+const QUIET_TOOLS = new Set([
+  "tools/deadline-watch/index.html",
+  "tools/detroit-business-tax-check/index.html",
+  "tools/ga-annual-registration-check/index.html",
+  "tools/mo-zero-return-check/index.html",
+  "tools/nj-contractor-check/index.html",
+  "tools/sam-renewal-check/index.html",
+  "tools/sba-7a-buyer-calculator/index.html",
+  "tools/sba-surety-fee-check/index.html",
+  "tools/tx-franchise-report-check/index.html"
 ]);
 const COUNT = '<script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>';
 const BANNED = ["XMLHttpRequest", "localStorage", "sessionStorage", "indexedDB"];
@@ -99,8 +114,22 @@ function click(listeners, href, type = "click", button = 0) {
 test("every individual tool page allows GoatCounter and sends an origin referrer", () => {
   const pages = toolPages();
   assert.ok(pages.length >= 9, pages.join(","));
+  for (const rel of QUIET_TOOLS) assert.ok(pages.includes(rel), rel);
   for (const rel of pages) {
     const html = read(rel);
+    if (QUIET_TOOLS.has(rel)) {
+      assert.equal(html.includes("gc.zgo.at"), false, rel);
+      assert.equal(/goatcounter/i.test(html), false, rel);
+      assert.equal(html.includes("function trackGumroadClick"), false, rel);
+      assert.match(html, /name="robots" content="noindex/, rel);
+      if (rel === "tools/deadline-watch/index.html") {
+        assert.equal(html.includes("Content-Security-Policy"), false, rel);
+      } else {
+        assert.match(html, /form-action https:\/\/05279842\.sibforms\.com/, rel);
+        assert.equal(html.includes("https://gc.zgo.at"), false, rel);
+      }
+      continue;
+    }
     const expectedCsp = SIB_FORM_CSP.has(rel) ? CT_PSL_CSP : CSP;
     assert.equal(html.includes(`content="${expectedCsp}"`), true, rel);
     assert.equal(html.includes('<meta name="referrer" content="strict-origin-when-cross-origin">'), true, rel);
@@ -124,6 +153,11 @@ test("tracking pages load the test-exclude helper before count.js", () => {
   assert.match(canonical, /navigator\.sendBeacon\(gcCountUrl\)/);
   for (const rel of trackingPages()) {
     const html = read(rel);
+    if (QUIET_TOOLS.has(rel)) {
+      assert.equal(html.includes("function trackGumroadClick"), false, rel);
+      assert.equal(html.split('src="https://gc.zgo.at/count.js"').length - 1, 0, rel);
+      continue;
+    }
     assert.equal(helperBody(html), canonical, rel);
     const helperAt = html.indexOf("function trackGumroadClick");
     const countAt = html.indexOf(COUNT);
