@@ -59,9 +59,8 @@ test("the fee section states the free estimate, the buyer, and the kit limit", (
   assert.match(section, /fix_list\.csv/);
   assert.match(section, /template\.xlsx/);
   assert.match(section, /code Y081/);
-  assert.match(section, /Refunds: within 30 days of purchase/);
-  assert.match(section, /as set out on the kit's Gumroad page\./);
-  assert.match(section, /<p class="kit-refund">Refunds: within 30 days of purchase, as set out on the kit's Gumroad page\.<\/p>/);
+  assert.equal(section.includes("eu-fee-kit"), false);
+  assert.equal(section.includes("kit-refund"), false);
   assert.match(section, /General guidance, not legal, tax or IT advice\./);
   assert.match(section, /Thanks for your time\. If this isn't right for you, please share it with someone it could help\./);
   assert.match(section, /shall be EUR 2 per item/);
@@ -71,15 +70,6 @@ test("the fee section states the free estimate, the buyer, and the kit limit", (
   assert.match(section, /https:\/\/eur-lex\.europa\.eu\/legal-content\/EN\/TXT\/\?uri=CELEX:32026R2152/);
   assert.match(section, /https:\/\/taxation-customs\.ec\.europa\.eu\/document\/download\/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en/);
   assert.match(section, /https:\/\/taxation-customs\.ec\.europa\.eu\/customs\/eu-customs-reform_en/);
-  const href = section.match(/id="eu-fee-kit"[^>]*href="([^"]+)"/)[1].replace(/&amp;/g, "&");
-  const url = new URL(href);
-  assert.equal(url.origin + url.pathname, "https://firstmoverprojects.gumroad.com/l/fetwsm");
-  assert.equal(url.searchParams.get("wanted"), "true");
-  assert.equal(url.searchParams.get("utm_source"), "site");
-  assert.equal(url.searchParams.get("utm_medium"), "site");
-  assert.equal(url.searchParams.get("utm_campaign"), "tools");
-  assert.equal(url.searchParams.get("utm_content"), "eu-fee");
-  assert.match(section, /class="btn"/);
   assert.equal((html.match(/src="https:\/\/gc\.zgo\.at\/count\.js"/g) || []).length, 1);
   const scripts = [...html.matchAll(/<script\b[^>]*\bsrc="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(scripts, ["https://gc.zgo.at/count.js"]);
