@@ -107,7 +107,7 @@ test("FAQPage JSON matches the visible questions and the kit sections have no Pr
   }
 });
 
-test("the kit flag hides the buttons until it is on, then the Nov 19 cutoff applies", () => {
+test("the kit is shown before 20:00:00Z on Nov 19 and hidden at the cutoff", () => {
   const first = read(PAGES[0]);
   for (const rel of PAGES) {
     const html = read(rel);
@@ -122,10 +122,7 @@ test("the kit flag hides the buttons until it is on, then the Nov 19 cutoff appl
   }
   const { api, nodes } = loadKit(first);
   nodes.push({ hidden: false }, { hidden: false });
-  assert.equal(api.SHOW, false);
-  api.hide(new Date("2026-11-19T19:59:59Z"));
-  assert.deepEqual(nodes.map((node) => node.hidden), [true, true]);
-  api.SHOW = true;
+  assert.equal(api.SHOW, true);
   api.hide(new Date("2026-11-19T19:59:59Z"));
   assert.deepEqual(nodes.map((node) => node.hidden), [false, false]);
   api.hide(new Date("2026-11-19T20:00:00Z"));

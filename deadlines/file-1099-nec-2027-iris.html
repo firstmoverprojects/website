@@ -384,8 +384,8 @@
 <script id="fmp-fire-kit">
 (function () {
   "use strict";
-  // false until the Gumroad refund badge is off. Flip SHOW to true after that.
-  var SHOW = false;
+  // Gumroad refund badge is off. Nov 19, 2026 at 3 p.m. Eastern still hides the kit.
+  var SHOW = true;
   var CUTOFF = Date.UTC(2026, 10, 19, 20, 0, 0);
   function expired(now) {
     return (now || new Date()).getTime() >= CUTOFF;
