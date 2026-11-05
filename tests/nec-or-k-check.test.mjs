@@ -124,8 +124,10 @@ test("the page cites the IRS sources, the check date, and stays in the sitemap a
   for (const url of sources) assert.equal(html.includes(url), true, url);
   assert.match(html, /Checked November 5, 2026/);
   assert.match(html, /For payments made in 2026, the reporting threshold is \$2,000/);
-  assert.match(html, /General guidance, not legal or tax advice\./);
-  assert.match(html, /General guidance, not legal, tax or IT advice\./);
+  assert.equal(html.includes("General guidance, not legal or tax advice."), false);
+  assert.equal(html.includes("General guidance, not legal, tax or IT advice."), true);
+  assert.equal(html.includes("Not affiliated with the IRS."), false);
+  assert.equal(html.includes("Not affiliated with or endorsed by the IRS."), true);
   assert.match(html, /"@type": "FAQPage"/);
   assert.match(html, /"@type": "WebApplication"/);
   const blocks = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].map((match) => JSON.parse(match[1]));
