@@ -12,7 +12,8 @@ const SIB_FORM_CSP = new Set([
   "tools/ct-paid-sick-leave-check/index.html",
   "tools/fire-to-iris-check/index.html",
   "tools/amazon-coi-check/index.html",
-  "tools/eu-product-id-check/index.html"
+  "tools/eu-product-id-check/index.html",
+  "tools/1099-nec-or-1099-k-check/index.html"
 ]);
 const COUNT = '<script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>';
 const BANNED = ["XMLHttpRequest", "localStorage", "sessionStorage", "indexedDB"];

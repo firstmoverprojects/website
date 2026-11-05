@@ -1,0 +1,848 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action https://05279842.sibforms.com; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/1099-nec-or-1099-k-check/">
+<title>1099-NEC or 1099-K Check (free, runs in your browser)</title>
+<meta name="description" content="Free check for a 2026 contractor payment: Form 1099-NEC, Form 1099-K, a split, or likely no 1099. Runs in your browser. Nothing is uploaded.">
+<meta property="og:title" content="1099-NEC or 1099-K Check (free, runs in your browser)">
+<meta property="og:description" content="Free check for a 2026 contractor payment: Form 1099-NEC, Form 1099-K, a split, or likely no 1099. Runs in your browser. Nothing is uploaded.">
+<meta property="og:url" content="https://firstmoverprojects.com/tools/1099-nec-or-1099-k-check/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://firstmoverprojects.com/assets/previews/fire-to-iris-kit-preview-1280x720.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="1099-NEC or 1099-K Check (free, runs in your browser)">
+<meta name="twitter:description" content="Free check for a 2026 contractor payment: Form 1099-NEC, Form 1099-K, a split, or likely no 1099. Runs in your browser. Nothing is uploaded.">
+<meta name="twitter:image" content="https://firstmoverprojects.com/assets/previews/fire-to-iris-kit-preview-1280x720.webp">
+<style>
+
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1b1f24;background:#f6f7f9}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.2em 0 .4em}
+.card{background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:16px;margin:12px 0}
+.cd{display:flex;flex-wrap:wrap;gap:12px}
+.cd>div{flex:1 1 190px;background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:12px}
+.big{font-size:1.35rem;font-weight:700}
+.muted{color:#5a636e;font-size:.9rem}
+label{display:block;font-weight:600;margin-top:12px}
+.chk label{font-weight:400;display:flex;gap:8px;align-items:flex-start;margin-top:8px}
+textarea{width:100%;min-height:96px;font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;padding:8px;border:1px solid #b9c0c8;border-radius:6px}
+pre{font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;background:#eef1f5;padding:10px;border-radius:6px;white-space:pre-wrap;word-break:break-word;margin:.4em 0}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:0;background:#1f5fbf;color:#fff;cursor:pointer;margin:12px 8px 0 0;min-height:44px}
+button.sec{background:#e4e8ee;color:#1b1f24}
+.tag{display:inline-block;font-size:.8rem;padding:2px 8px;border-radius:9px;margin:0 6px 0 0;background:#e4e8ee}
+.warn{background:#fde8e6;color:#8a1c12}
+.ok{background:#e3f4e6;color:#1d6b2c}
+.info{background:#e7eefc;color:#071b31}
+.cta{background:#fff;border-color:#dde1e6}
+.lead-cta{background:#fff;border:2px solid #071b31;border-radius:10px;padding:16px;margin:0 0 16px;color:#071b31}
+a.btn{display:inline-block;max-width:100%;box-sizing:border-box;font-weight:700;line-height:1.3;text-decoration:none;background:#0055ff;color:#fff;padding:12px 18px;border-radius:8px;margin:12px 0 0}
+a.btn:hover{background:#0044cc;color:#fff}
+a{color:#0055ff}
+#result-cta h2,#result-cta h3,#result-cta .next-steps,#result-cta .date-list,#result-cta .disclaimer,#result-cta #result-deadline,#result-cta .result-kit-lead{color:#071b31}
+#result-cta h3{font-size:1rem;margin:1em 0 .3em}
+.next-steps,.date-list{margin:.2em 0 .6em;padding-left:1.25em}
+.next-steps li,.date-list li{margin:8px 0}
+.disclaimer{font-weight:700;margin:12px 0 0}
+#kit-result{display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;box-sizing:border-box;min-height:48px;padding:14px 18px;margin:12px 0 0;background:#0055ff;color:#fff;font-weight:800;line-height:1.3;text-align:center;text-decoration:none;border-radius:8px;white-space:normal;overflow-wrap:anywhere}
+#kit-result:hover,#kit-result:focus{background:#0044cc;color:#fff}
+a.paid-quiet{display:inline-block;max-width:100%;box-sizing:border-box;min-height:44px;padding:12px 0;color:#0055ff;font-weight:700;line-height:1.3;text-decoration:underline;white-space:normal;overflow-wrap:anywhere}
+.kit-refund{display:block;max-width:100%;margin:6px 0 0;color:#5a636e;font-size:.82rem;font-weight:400;line-height:1.4}
+#results,#result-cta{overflow-wrap:anywhere;max-width:100%}
+a:focus,button:focus,textarea:focus,input:focus{outline:3px solid #1f5fbf;outline-offset:2px}
+table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0}
+th,td{border:1px solid #dde1e6;padding:6px 8px;text-align:left;vertical-align:top;word-break:break-word}
+caption{text-align:left;font-weight:600;padding:4px 0}
+#out li{margin:8px 0}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:8px;top:8px;background:#fff;padding:8px 12px;z-index:2}
+footer{margin:8px 0 24px}
+
+.kit-conv-box{background:linear-gradient(135deg,#fffbeb 0%,#f0fdf4 100%);border:2px solid #15803d;border-radius:12px;padding:16px;margin:16px 0}
+.kit-conv-badge{display:inline-block;max-width:100%;box-sizing:border-box;background:#15803d;color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.03em;padding:3px 10px;border-radius:999px;margin-bottom:6px;white-space:normal;overflow-wrap:anywhere}
+.kit-conv-title{font-size:1.2rem;font-weight:800;margin:4px 0 8px;color:#0f172a}
+.kit-preview-img{display:block;width:100%;max-width:100%;height:auto;border-radius:10px;border:1px solid #cbd5e1;box-shadow:0 6px 18px rgba(15,23,42,.10);margin:10px 0 12px;background:#fff}
+.kit-bullets{margin:8px 0 14px;padding-left:1.25em}
+.kit-bullets li{margin:6px 0;font-weight:600;color:#1e293b}
+.kit-btn-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0;min-width:0;max-width:100%}
+.deadline-count{display:block;max-width:100%;margin:10px 0;padding:8px 12px;border:1px solid #1b1f24;border-radius:8px;background:#fff;color:#1b1f24;font-weight:700;font-size:1rem;line-height:1.4}
+.kit-btn-row .deadline-count{flex:1 1 100%;margin:0;min-width:0}
+.deadline-count[hidden]{display:none}
+.btn-buy-now{display:inline-block;max-width:100%;box-sizing:border-box;background:#15803d;color:#fff !important;font-weight:800;font-size:1rem;padding:12px 20px;border-radius:9px;text-decoration:none;box-shadow:0 4px 12px rgba(21,128,61,.28);white-space:normal;overflow-wrap:anywhere;text-align:center}
+.btn-buy-now:hover{background:#166534}
+.email-cap-box{background:#f0f9ff;border:2px solid #0284c7;border-radius:10px;padding:14px 16px;margin:14px 0 6px}
+.email-cap-title{font-size:1.02rem;font-weight:800;margin:0 0 6px;color:#0c4a6e}
+.btn-email-cap{display:inline-block;max-width:100%;box-sizing:border-box;background:#0284c7;color:#fff !important;font-weight:700;padding:12px 16px;border-radius:8px;text-decoration:none;margin:6px 8px 6px 0;white-space:normal;overflow-wrap:anywhere;min-height:44px}
+.deadline-reminder{background:#f0f9ff;border:2px solid #0369a1;border-radius:10px;padding:14px 16px;margin:14px 0 6px;color:#1b1f24;max-width:100%}
+.deadline-reminder h2{font-size:1.05rem;font-weight:800;margin:0 0 6px;color:#0c4a6e}
+.deadline-reminder p{margin:.45em 0}
+#deadline-reminder-form{position:relative;display:grid;gap:12px;margin-top:8px;max-width:100%}
+#deadline-reminder-form label{margin-top:0;font-weight:700;color:#1b1f24}
+#deadline-reminder-form input[type="email"]{width:100%;max-width:100%;box-sizing:border-box;min-height:48px;font:inherit;font-size:16px;padding:8px 10px;border:2px solid #0c4a6e;border-radius:6px;background:#fff;color:#1b1f24}
+#deadline-reminder-form .sib-optin{display:flex;align-items:flex-start;gap:10px;font-weight:400;min-height:44px}
+#deadline-reminder-form .sib-optin input{margin-top:3px;width:1.25rem;height:1.25rem;min-width:20px;min-height:20px;flex:0 0 auto}
+#deadline-reminder-form .input--hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+#deadline-reminder-form button{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;width:100%;max-width:100%;margin:0;min-height:48px;padding:12px 16px;background:#0c4a6e;color:#fff;font-weight:800;line-height:1.3;white-space:normal;border-radius:8px}
+#deadline-reminder-form button:hover{background:#075985}
+a.runway-pill{display:inline-block;max-width:100%;box-sizing:border-box;margin:4px 0 12px;padding:8px 14px;border-radius:999px;background:#01060b;color:#f4f7fa !important;border:1px solid #00d8ff;font-weight:700;font-size:.92rem;line-height:1.35;text-decoration:none;white-space:normal;overflow-wrap:anywhere;text-align:center}
+a.runway-pill:hover,a.runway-pill:focus{background:#0c1520;color:#00d8ff !important;outline:3px solid #00d8ff;outline-offset:2px}
+
+
+.follow-bar{background:#01060b;color:#f4f7fa;border:1px solid #00d8ff;border-radius:12px;padding:12px;margin:12px 0 0;max-width:100%;box-sizing:border-box}
+.follow-bar-title{margin:0 0 8px;font-weight:800;font-size:.95rem;line-height:1.35;color:#f4f7fa}
+.follow-bar-actions{display:flex;flex-wrap:wrap;gap:8px;min-width:0}
+.follow-tiktok,.follow-email{flex:1 1 220px;min-width:0;max-width:100%;box-sizing:border-box;display:inline-block;padding:12px 14px;border-radius:999px;font-weight:800;font-size:.92rem;line-height:1.35;text-decoration:none !important;text-align:center;white-space:normal;overflow-wrap:anywhere;min-height:44px}
+.follow-tiktok{background:#0c1520;color:#f4f7fa !important;border:1px solid #00d8ff}
+.follow-tiktok:hover,.follow-tiktok:focus{color:#00d8ff !important;outline:3px solid #00d8ff;outline-offset:2px}
+.follow-email{background:linear-gradient(135deg,#22c55e 0%,#4ade80 100%);color:#01060b !important;border:0}
+.follow-email:hover,.follow-email:focus{background:#16a34a;color:#01060b !important;outline:3px solid #00d8ff;outline-offset:2px}
+
+html.fmp-embed .site-nav{display:none !important}
+.fmp-share{background:#fff;border:1px solid #dde1e6;border-radius:10px;margin:12px 0;padding:0;max-width:100%}
+.fmp-share summary{cursor:pointer;font-weight:800;padding:14px 16px;list-style:none}
+.fmp-share summary::-webkit-details-marker{display:none}
+.fmp-share summary:focus{outline:3px solid #1f5fbf;outline-offset:2px}
+.fmp-share-body{padding:0 16px 16px}
+textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:border-box;font:13px/1.45 ui-monospace,Menlo,Consolas,monospace;padding:10px;border:1px solid #b9c0c8;border-radius:8px;background:#eef1f5;color:#1b1f24;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word}
+.fmp-license{margin:14px 0 0;padding-top:12px;border-top:1px solid #dde1e6}
+.fmp-powered{margin:8px 0 16px;font-size:.95rem}
+.subhead{font-size:1.08rem;line-height:1.45;margin:.2em 0 .6em}
+.kit-top{margin:0 0 16px}
+a#kit-top{display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;box-sizing:border-box;min-height:48px;padding:12px 18px;text-align:center;white-space:normal}
+.kit-note{margin:.4em 0 0;color:#5a636e;font-size:.82rem;line-height:1.4}
+.next-irs{margin:.4em 0 0;color:#1b1f24;font-size:1rem;font-weight:400;line-height:1.45}
+.kit-fit{margin:.6em 0;font-weight:600}
+.result-kit-lead{margin:.8em 0 .2em;font-weight:600}
+.kit-sticky{display:none;box-sizing:border-box}
+.kit-sticky[hidden]{display:none !important}
+.kit-sticky-label{flex:1 1 auto;min-width:0;margin:0;font-weight:800;font-size:.95rem;line-height:1.25;color:#071b31}
+.kit-sticky-link{flex:0 1 auto;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;max-width:46%;min-width:44px;min-height:44px;padding:10px 12px;border-radius:8px;background:#0055ff;color:#fff !important;font-weight:800;line-height:1.2;text-align:center;text-decoration:none;white-space:normal}
+.kit-sticky-link:hover,.kit-sticky-link:focus{background:#0044cc;color:#fff !important}
+.kit-sticky-dismiss{flex:0 0 auto;margin:0;min-width:44px;min-height:44px;padding:8px 10px;background:#e4e8ee;color:#1b1f24}
+@media (max-width:767px){
+  .kit-sticky:not([hidden]){display:flex;position:fixed;z-index:40;left:0;right:0;bottom:0;width:auto;max-width:100%;gap:8px;align-items:center;margin:0;padding:8px 10px calc(8px + env(safe-area-inset-bottom, 0px));background:#fff;color:#1b1f24;border-top:2px solid #071b31;box-shadow:0 -6px 18px rgba(15,23,42,.16)}
+  body.kit-sticky-on{padding-bottom:128px}
+}
+@media (min-width:768px){
+  .kit-sticky{display:none !important}
+  body.kit-sticky-on{padding-bottom:0 !important}
+}
+@media print{.fmp-share,.kit-sticky{display:none !important}body.kit-sticky-on{padding-bottom:0 !important}}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,textarea,#fmp-embed-snippet{font-size:16px}
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,button{min-height:44px}
+nav a,.site-nav a{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:44px;min-width:44px;padding:8px 6px}
+label:has(> input[type="checkbox"]),label:has(> input[type="radio"]){min-height:44px;box-sizing:border-box}
+.follow-tiktok,.follow-email,a.btn,a.btn-buy-now,a.btn-email-cap{box-sizing:border-box;min-height:44px}
+picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
+
+fieldset{border:1px solid #dde1e6;border-radius:8px;margin:12px 0;padding:8px 12px 12px;min-width:0}
+legend{font-weight:700;padding:0 6px}
+.choices label{font-weight:400;display:flex;gap:10px;align-items:flex-start;margin-top:8px}
+.answer-key li{margin:8px 0}
+</style>
+<script id="fmp-embed-boot">
+(function () {
+  if (/(?:^|[?&])embed=1(?:&|$)/.test(location.search || "")) {
+    document.documentElement.classList.add("fmp-embed");
+  }
+})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "dateModified": "2026-11-05",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What amount makes a 2026 service payment reportable on Form 1099-NEC?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The December 2026 instructions say to file Form 1099-NEC for each person in your business to whom you paid at least $2,000 for services performed by someone who is not your employee, or for fees paid to an attorney. Box 1a says to enter nonemployee compensation of $2,000 or more. Publication 1099 lists Form 1099-NEC at $2,000 or more. The IRS page on who must file an information return says that for payments made in 2026 the reporting threshold is $2,000, and that for payments made before 2026 it was $600. That page also describes a payment exceeding the threshold. This check uses $2,000 or more, the line in the form instructions and in Publication 1099. Publication 1099 says the amount will be adjusted for inflation beginning in calendar year 2027. Checked November 5, 2026."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I file Form 1099-NEC when I paid by credit card, debit card, or a payment app?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The instructions say payments made with a credit card or payment card, and third-party network transactions, must be reported on Form 1099-K by the payment settlement entity and are not subject to reporting on Form 1099-NEC. The Form 1099-K instructions say the de minimis threshold is disregarded for that choice, so you still do not file Form 1099-NEC when the app sends no Form 1099-K. A payment card has no dollar minimum. A payment app must report when payments for goods or services exceed $20,000 and the number of transactions exceeds 200, and it may send a form below that. An automated clearing house does not report under that rule. Cash, a check, a bank transfer, and ACH can still be your Form 1099-NEC."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I paid the same person by check and by card?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "File Form 1099-NEC only for the cash, check, bank transfer, and ACH portion, and only when that portion is at least $2,000 for 2026. Leave the card and payment-app goods-and-services portion off Form 1099-NEC. The card company or payment app reports that portion on Form 1099-K."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When is Form 1099-NEC due, and how do I file a 2026 payment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Publication 1099 lists Form 1099-NEC as due to the IRS on January 31 and due to the recipient on January 31. That row is not marked with the asterisk that moves some electronic forms to March 31. If January 31 falls on a Saturday, Sunday, or legal holiday, the due date is the next business day. Publication 1099 says to check IRS.gov/TaxCalendar for the actual date. Checked November 5, 2026. These pages state January 31 and the weekend rule. They do not print a separate 2027 calendar date. Beginning tax year 2026, filing season 2027, IRIS is the only intake system. The IRIS Taxpayer Portal is a no-cost way to type the form or upload a .csv file, up to 100 forms per submission. You need an IRIS TCC. A typical application is processed within 45 business days, and processing times may vary. The same publication says the application may take up to 45 days. If you have 10 or more information returns, you must e-file. That count includes Forms W-2. There is no automatic extension for Form 1099-NEC. You are on time for e-file if IRIS receives the form by 11:59 p.m. on the due date."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if the payee is a corporation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Generally, a payment to a corporation, including an LLC treated as a C or S corporation, is not reported on Form 1099-NEC. Fees paid to an attorney are still reported. A federal executive agency still reports payments to vendors for services. Medical and health care payments are a Form 1099-MISC item, not this check. An LLC taxed as a partnership, or a single-owner LLC that is disregarded, is not in the corporation exception."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this check upload my answers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The check runs in your browser. The answers are not uploaded. The optional email form sends only the address you type if you choose a reminder."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need the checklist to use this check?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The check is free and runs in your browser. The checklist is optional. One 3-page PDF with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on. Refunds: within 30 days if a file is corrupt or materially not as described."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "1099-NEC or 1099-K Check",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "url": "https://firstmoverprojects.com/tools/1099-nec-or-1099-k-check/",
+  "description": "Free browser check for a 2026 contractor payment. It says whether Form 1099-NEC is likely yours to file, whether the card company or payment app reports it on Form 1099-K, whether to file Form 1099-NEC only for the non-card portion, or whether no 1099 is likely needed.",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "browserRequirements": "The questions and answer key are readable without JavaScript. JavaScript fills in one result."
+}
+</script>
+<script type="application/ld+json" id="product-jsonld">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "FIRE to IRIS Switch Checklist",
+  "description": "One 3-page PDF with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on.",
+  "offers": {
+    "@type": "Offer",
+    "url": "https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist",
+    "price": 9,
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Organization",
+      "name": "First Mover Projects",
+      "url": "https://firstmoverprojects.com/"
+    }
+  },
+  "image": "https://firstmoverprojects.com/assets/previews/fire-to-iris-kit-preview-1280x720.png"
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<p class="muted site-nav"><a href="https://firstmoverprojects.com/">First Mover Projects</a> · <a href="/tools/">All tools</a> · <a href="/deadlines/">Deadlines</a></p>
+<h1>1099-NEC or 1099-K Check</h1>
+<p class="subhead">Four questions about one payee you paid in 2026. The result is one of four answers: file Form 1099-NEC, leave it to Form 1099-K, file Form 1099-NEC only for the non-card part, or likely no 1099.</p>
+<p>General guidance, not legal or tax advice.</p>
+<div class="kit-top">
+<p data-fire-kit="1"><a target="_blank" class="btn" id="kit-top" data-goatcounter-click="cta/1099-nec-or-1099-k-check-top" data-goatcounter-title="1099-NEC or 1099-K check top" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=1099-nec-or-1099-k-check&amp;utm_content=fire-check-top" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">See the $9 FIRE to IRIS checklist</a></p>
+<p class="kit-note">If you already know a form is yours to file, the <a href="/tools/fire-to-iris-check/">free FIRE to IRIS check</a> covers the cutoff and the IRIS TCC steps. FIRE closes November 19, 2026. IRIS is the only e-file system after January 1, 2027.</p>
+</div>
+
+<section class="card" aria-labelledby="facts-h">
+<h2 id="facts-h">What the IRS says</h2>
+<p>These lines are the rules this check uses. They were read on the IRS pages linked below on November 5, 2026.</p>
+<ul class="answer-key">
+<li>For payments made in 2026, file Form 1099-NEC when you paid at least $2,000 for services in your trade or business to someone who is not your employee. The December 2026 instructions say "at least $2,000." Publication 1099 lists "$2,000 or more." The IRS "who must file" page says the 2026 reporting threshold is $2,000, and that payments made before 2026 used $600. For payments made after 2026, Publication 1099 says the amount is adjusted for inflation.</li>
+<li>Personal payments are not reportable. Wages to an employee go on Form W-2, not Form 1099-NEC. A payment to a corporation is generally not on Form 1099-NEC, except fees paid to an attorney and payments by a federal executive agency for services.</li>
+<li>A credit card, debit card, or payment-app goods-and-services payment is reported on Form 1099-K by the card company or payment app. It is not subject to reporting on your Form 1099-NEC. The Form 1099-K instructions say the de minimis threshold is disregarded for that choice. A payment card has no dollar minimum. A payment app reports when the amount exceeds $20,000 and the number of transactions exceeds 200, and it may send a form below that. An automated clearing house does not report under that rule, so a bank transfer or ACH can still be your Form 1099-NEC.</li>
+<li>If you paid both ways, file Form 1099-NEC only for the cash, check, bank transfer, and ACH portion, and only when that portion is at least $2,000.</li>
+<li>If you file Form 1099-NEC, Publication 1099 lists January 31 for the IRS and January 31 for the recipient. If that date falls on a Saturday, Sunday, or legal holiday, file on the next business day. For 2026 payments, file in IRIS. Publication 1099 says IRIS is the only intake system beginning tax year 2026, filing season 2027.</li>
+</ul>
+<p>General guidance, not legal or tax advice.</p>
+</section>
+
+<section class="card" id="questions" aria-labelledby="q-h">
+<h2 id="q-h">Your payment</h2>
+<p class="muted">Answer for one payee, for all of 2026. The questions stay on the page if JavaScript is off. Use the answer key under the questions, or press the button when JavaScript is on.</p>
+<fieldset class="choices">
+<legend>1. Was this payment for your trade or business?</legend>
+<label><input type="radio" name="purpose" value="business"> Yes. It was for my trade or business. A nonprofit counts.</label>
+<label><input type="radio" name="purpose" value="personal"> No. It was personal.</label>
+<label><input type="radio" name="purpose" value="unsure"> Not sure.</label>
+</fieldset>
+<fieldset class="choices">
+<legend>2. Who did you pay?</legend>
+<label><input type="radio" name="who" value="contractor"> Someone who is not my employee, for services. Not a corporation.</label>
+<label><input type="radio" name="who" value="attorney"> An attorney or law firm, for the attorney's fee.</label>
+<label><input type="radio" name="who" value="employee"> My employee, for wages.</label>
+<label><input type="radio" name="who" value="corporation"> A corporation, or an LLC taxed as a C or S corporation, and the payment was not for legal services.</label>
+<label><input type="radio" name="who" value="unsure"> Not sure.</label>
+</fieldset>
+<fieldset class="choices">
+<legend>3. How did you pay them in 2026?</legend>
+<label><input type="radio" name="method" value="noncard"> Cash, check, bank transfer, or ACH only.</label>
+<label><input type="radio" name="method" value="card"> Credit card, debit card, or a payment app's goods-and-services checkout only. PayPal Goods and Services is this kind of checkout.</label>
+<label><input type="radio" name="method" value="mixed"> Both. Some by cash, check, bank transfer, or ACH, and some by card or a payment app's goods-and-services checkout.</label>
+<label><input type="radio" name="method" value="unsure"> Not sure.</label>
+</fieldset>
+<fieldset class="choices">
+<legend>4. How much of the 2026 total was cash, check, bank transfer, or ACH?</legend>
+<p class="muted">Do not count a credit card, a debit card, or a payment app's goods-and-services payment in this amount.</p>
+<label><input type="radio" name="noncard" value="under"> Under $2,000.</label>
+<label><input type="radio" name="noncard" value="least"> $2,000 or more.</label>
+<label><input type="radio" name="noncard" value="none"> None. Every dollar was a card or a payment app's goods-and-services payment.</label>
+<label><input type="radio" name="noncard" value="unsure"> Not sure.</label>
+</fieldset>
+<button id="go" type="button">See the answer</button>
+<div id="answer-key">
+<h2>Answer key</h2>
+<p>Use this if you are reading the questions without the button.</p>
+<ul class="answer-key">
+<li>Personal payment, wages to an employee, a payment to a corporation that is not for legal services, or a cash, check, bank, and ACH total under $2,000: Likely no 1099 needed.</li>
+<li>Every dollar by credit card, debit card, or a payment app's goods-and-services checkout: The card company or payment app reports it on 1099-K, so you likely don't file a 1099-NEC for those payments.</li>
+<li>Both ways, and the cash, check, bank, and ACH portion is $2,000 or more: Mixed: file 1099-NEC only for the non-card portion.</li>
+<li>Cash, check, bank transfer, or ACH only, and that total is $2,000 or more, for services in your trade or business: 1099-NEC is likely yours to file.</li>
+</ul>
+<p>If you file Form 1099-NEC, the Guide lists January 31 for the IRS and January 31 for the recipient. If January 31 falls on a Saturday, Sunday, or legal holiday, the due date is the next business day. For 2026 payments, file in IRIS. If you withheld federal income tax under the backup withholding rules, file Form 1099-NEC no matter the amount.</p>
+</div>
+<noscript><p>The button needs JavaScript. The questions and the answer key above are the whole check. Nothing is uploaded.</p></noscript>
+</section>
+
+<section class="card" id="results" hidden aria-live="polite">
+<div class="lead-cta" id="result-cta">
+<h2 id="result-problem"></h2>
+<ol class="next-steps" id="next-steps"></ol>
+<p class="result-kit-lead">If a form is yours to file, the checklist puts the IRIS steps and a 1099-NEC add-on on one printable list.</p>
+<p data-fire-kit="1"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/1099-nec-or-1099-k-check-result" data-goatcounter-title="1099-NEC or 1099-K check result" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=1099-nec-or-1099-k-check&amp;utm_content=fire-check-result" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 checklist (instant PDF)</a><span class="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</span></p>
+<p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
+<div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
+<p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
+<div class="follow-bar-actions">
+<a class="follow-tiktok" data-tool-slug="1099-nec-or-1099-k-check" target="_blank" rel="noopener" href="https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&amp;utm_medium=tool_result&amp;utm_campaign=follower_growth">Follow @firstmoverprojects on TikTok (Daily 60-Sec Checklists)</a>
+<a class="follow-email" href="#signup">Get Free Email Deadline Reminders</a>
+</div>
+</div>
+<p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>. <a href="/tools/fire-to-iris-check/">Open the free FIRE to IRIS check</a>.</p>
+</div>
+<section class="deadline-reminder" id="signup" aria-labelledby="deadline-reminder-h">
+<h2 id="deadline-reminder-h">Get a reminder before this deadline</h2>
+<p id="reminder-note">The weekly First Mover Projects email includes a reminder before deadlines like this one. Double opt-in. Unsubscribe any time. This check stays in your browser. The form sends only the email address you type. <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>.</p>
+<form id="deadline-reminder-form" method="POST" action="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" data-type="subscription" autocomplete="off" data-goatcounter-submit="signup/1099-nec-or-1099-k-check" data-goatcounter-title="Deadline reminder signup: 1099-nec-or-1099-k-check">
+<p>
+<label for="reminder-email">Email address</label>
+<input class="input" type="email" id="reminder-email" name="EMAIL" autocomplete="email" inputmode="email" spellcheck="false" required aria-describedby="reminder-note">
+</p>
+<p>
+<label class="sib-optin" for="reminder-opt-in">
+<input type="checkbox" value="1" id="reminder-opt-in" name="OPT_IN" required>
+<span>Send me the weekly First Mover Projects email: deadline reminders, plus news about our kits, games and books. We will email a confirmation first. Unsubscribe any time with one click. We do not sell or share your email.</span>
+</label>
+</p>
+<p><button type="submit" id="deadline-reminder-submit">Get a reminder before this deadline</button></p>
+<input type="text" name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+<input type="hidden" name="locale" value="en">
+<input type="hidden" name="SIGNUP_SOURCE" value="1099-nec-or-1099-k">
+</form>
+</section>
+</section>
+
+<details class="fmp-share" id="fmp-share">
+<summary>Share, Embed, or License This Tool</summary>
+<div class="fmp-share-body">
+<p><strong>Free embed snippet.</strong> Bookkeepers, CPAs, seller communities, and newsletters can place this free checker on their site. The check still runs in the visitor's browser.</p>
+<label for="fmp-embed-snippet">Copy this embed code</label>
+<textarea id="fmp-embed-snippet" class="fmp-snippet" readonly rows="6">&lt;iframe src=&quot;https://firstmoverprojects.com/tools/1099-nec-or-1099-k-check/?embed=1&quot; title=&quot;1099-NEC or 1099-K check&quot; width=&quot;100%&quot; height=&quot;720&quot; style=&quot;border:0;max-width:100%&quot; loading=&quot;lazy&quot;&gt;&lt;/iframe&gt;
+&lt;p&gt;Powered by &lt;a href=&quot;https://firstmoverprojects.com/tools/1099-nec-or-1099-k-check/&quot;&gt;First Mover Projects&lt;/a&gt;&lt;/p&gt;</textarea>
+<button type="button" class="sec" id="fmp-copy-embed">Copy embed snippet</button>
+<p id="fmp-copy-status" class="muted" role="status"></p>
+<p class="fmp-license">Commercial white-label / agency license: CPAs, agencies, and trade newsletters can license a custom-branded or white-label copy of this calculator for their clients. <a href="mailto:firstmoverprojects@gmail.com?subject=White-Label%20Tool%20License">Request a white-label tool license</a>.</p>
+</div>
+</details>
+<p class="fmp-powered">Powered by <a href="https://firstmoverprojects.com/">First Mover Projects</a></p>
+
+<section class="card" id="paid-kit" aria-labelledby="paid-h">
+<span class="kit-conv-badge">INSTANT DOWNLOAD · ONE PDF, 3 PAGES · CHECKLIST + 1099-NEC ADD-ON · $9</span>
+<h2 id="paid-h">FIRE to IRIS Switch Checklist</h2>
+<p class="kit-fit">Good fit if you file 1099s for your business or clients and must move from FIRE to IRIS by Jan 1, 2027. Not needed if your software files for you.</p>
+<picture><source type="image/webp" srcset="/assets/previews/fire-to-iris-kit-preview-1280x720.webp"><img class="kit-preview-img" src="/assets/previews/fire-to-iris-kit-preview-1280x720.png" alt="See What's Inside the $9 FIRE to IRIS Switch Checklist: one PDF, 3 pages, with the IRS dates, your FIRE account, the IRIS Application for TCC, and a 1099-NEC add-on" width="1280" height="720" loading="lazy"></picture>
+<p>One 3-page PDF with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on.</p>
+<p data-fire-kit="1"><a target="_blank" class="paid-quiet" id="paid-link" data-goatcounter-click="cta/1099-nec-or-1099-k-check-footer" data-goatcounter-title="1099-NEC or 1099-K check footer" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=1099-nec-or-1099-k-check&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Optional: $9 switch checklist on Gumroad</a><span class="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</span></p>
+<p>General guidance, not legal, tax or IT advice.</p>
+<div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
+<p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
+<div class="follow-bar-actions">
+<a class="follow-tiktok" data-tool-slug="1099-nec-or-1099-k-check" target="_blank" rel="noopener" href="https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&amp;utm_medium=tool_result&amp;utm_campaign=follower_growth">Follow @firstmoverprojects on TikTok (Daily 60-Sec Checklists)</a>
+<a class="follow-email" href="/deadlines/#signup">Get Free Email Deadline Reminders</a>
+</div>
+</div>
+<p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>. <a href="/deadlines/file-1099-nec-2027-iris.html">Read how to file Form 1099-NEC for 2027 in IRIS</a>.</p>
+</section>
+
+<section class="card" aria-labelledby="src-h">
+<h2 id="src-h">Sources</h2>
+<p>Checked November 5, 2026. This page states only the figures those pages gave that day.</p>
+<ul>
+<li><a href="https://www.irs.gov/instructions/i1099mec" rel="noopener noreferrer">Instructions for Forms 1099-MISC and 1099-NEC (revised December 2026)</a>. File Form 1099-NEC for at least $2,000 of services or attorneys' fees. Card and third-party network payments are not subject to reporting on Form 1099-NEC. Personal payments are not reportable. File on or before January 31, or the next business day if that date is a Saturday, Sunday, or legal holiday. Gross proceeds paid to an attorney of $600 or more go on Form 1099-MISC, box 10, not in Form 1099-NEC box 1a.</li>
+<li><a href="https://www.irs.gov/publications/p1099" rel="noopener noreferrer">Publication 1099 (2026), General Instructions for Certain Information Returns</a>. For tax years beginning after 2025 the threshold is $2,000, adjusted for inflation beginning in calendar year 2027. The Guide lists Form 1099-NEC at $2,000 or more, due January 31 to the IRS and January 31 to the recipient. IRIS is the only intake system beginning tax year 2026, filing season 2027. The Taxpayer Portal is no-cost, by key entry or .csv, up to 100 forms per submission. A typical TCC application is processed within 45 business days. The application may take up to 45 days. Ten or more information returns must be e-filed. No automatic extension for Form 1099-NEC. E-file is on time at 11:59 p.m. through IRIS. Third party settlement organizations report Form 1099-K only when payments are over $20,000 and over 200 transactions.</li>
+<li><a href="https://www.irs.gov/businesses/small-businesses-self-employed/am-i-required-to-file-a-form-1099-or-other-information-return" rel="noopener noreferrer">IRS: Am I required to file a Form 1099 or other information return?</a>. For payments made before 2026, the reporting threshold is $600. For payments made in 2026, the reporting threshold is $2,000. For payments made after 2026, see Publication 1099 for the inflation-adjusted amount. Ten or more information returns must be e-filed, and that count includes Forms W-2.</li>
+<li><a href="https://www.irs.gov/instructions/i1099k" rel="noopener noreferrer">Instructions for Form 1099-K (revised December 2026)</a>. A third party settlement organization reports when the amount exceeds $20,000 and the number of transactions exceeds 200. Payments that would otherwise fall under sections 6041 or 6041A are reported under section 6050W instead, and the de minimis threshold is disregarded for that choice. An automated clearing house does not qualify as a third party settlement organization.</li>
+<li><a href="https://www.irs.gov/businesses/understanding-your-form-1099-k" rel="noopener noreferrer">IRS: Understanding your Form 1099-K</a>. Payment cards are reported with no dollar minimum. A payment app or online marketplace reports when payments for goods or services total over $20,000 in more than 200 transactions, and it may send a form below that. The payee copy is due by January 31.</li>
+<li><a href="https://www.irs.gov/newsroom/form-1099-k-faqs-general-information" rel="noopener noreferrer">IRS: Form 1099-K FAQs, general information</a>. The FAQ page says it was updated October 23, 2025. It says a payment card has no threshold, including a payment of $0.01, and that a third party settlement organization reports when total gross payments exceed $20,000 and there are more than 200 transactions.</li>
+<li><a href="https://www.irs.gov/filing/e-file-information-returns-with-iris" rel="noopener noreferrer">IRS: E-file information returns with IRIS</a>. <a href="https://www.irs.gov/businesses/small-businesses-self-employed/employment-tax-due-dates" rel="noopener noreferrer">IRS: Employment tax due dates</a>. The employment-tax due dates page says to file Form 1099-NEC by January 31. <a href="https://www.irs.gov/e-file-providers/filing-information-returns-electronically-fire" rel="noopener noreferrer">IRS: Filing Information Returns Electronically (FIRE)</a>.</li>
+</ul>
+</section>
+
+<section class="card" id="faq" aria-labelledby="faq-h">
+<h2 id="faq-h">FAQ</h2>
+<h3>What amount makes a 2026 service payment reportable on Form 1099-NEC?</h3>
+<p>The December 2026 instructions say to file Form 1099-NEC for each person in your business to whom you paid at least $2,000 for services performed by someone who is not your employee, or for fees paid to an attorney. Box 1a says to enter nonemployee compensation of $2,000 or more. Publication 1099 lists Form 1099-NEC at $2,000 or more. The IRS page on who must file an information return says that for payments made in 2026 the reporting threshold is $2,000, and that for payments made before 2026 it was $600. That page also describes a payment exceeding the threshold. This check uses $2,000 or more, the line in the form instructions and in Publication 1099. Publication 1099 says the amount will be adjusted for inflation beginning in calendar year 2027. Checked November 5, 2026.</p>
+<h3>Do I file Form 1099-NEC when I paid by credit card, debit card, or a payment app?</h3>
+<p>No. The instructions say payments made with a credit card or payment card, and third-party network transactions, must be reported on Form 1099-K by the payment settlement entity and are not subject to reporting on Form 1099-NEC. The Form 1099-K instructions say the de minimis threshold is disregarded for that choice, so you still do not file Form 1099-NEC when the app sends no Form 1099-K. A payment card has no dollar minimum. A payment app must report when payments for goods or services exceed $20,000 and the number of transactions exceeds 200, and it may send a form below that. An automated clearing house does not report under that rule. Cash, a check, a bank transfer, and ACH can still be your Form 1099-NEC.</p>
+<h3>What if I paid the same person by check and by card?</h3>
+<p>File Form 1099-NEC only for the cash, check, bank transfer, and ACH portion, and only when that portion is at least $2,000 for 2026. Leave the card and payment-app goods-and-services portion off Form 1099-NEC. The card company or payment app reports that portion on Form 1099-K.</p>
+<h3>When is Form 1099-NEC due, and how do I file a 2026 payment?</h3>
+<p>Publication 1099 lists Form 1099-NEC as due to the IRS on January 31 and due to the recipient on January 31. That row is not marked with the asterisk that moves some electronic forms to March 31. If January 31 falls on a Saturday, Sunday, or legal holiday, the due date is the next business day. Publication 1099 says to check IRS.gov/TaxCalendar for the actual date. Checked November 5, 2026. These pages state January 31 and the weekend rule. They do not print a separate 2027 calendar date. Beginning tax year 2026, filing season 2027, IRIS is the only intake system. The IRIS Taxpayer Portal is a no-cost way to type the form or upload a .csv file, up to 100 forms per submission. You need an IRIS TCC. A typical application is processed within 45 business days, and processing times may vary. The same publication says the application may take up to 45 days. If you have 10 or more information returns, you must e-file. That count includes Forms W-2. There is no automatic extension for Form 1099-NEC. You are on time for e-file if IRIS receives the form by 11:59 p.m. on the due date.</p>
+<h3>What if the payee is a corporation?</h3>
+<p>Generally, a payment to a corporation, including an LLC treated as a C or S corporation, is not reported on Form 1099-NEC. Fees paid to an attorney are still reported. A federal executive agency still reports payments to vendors for services. Medical and health care payments are a Form 1099-MISC item, not this check. An LLC taxed as a partnership, or a single-owner LLC that is disregarded, is not in the corporation exception.</p>
+<h3>Does this check upload my answers?</h3>
+<p>No. The check runs in your browser. The answers are not uploaded. The optional email form sends only the address you type if you choose a reminder.</p>
+<h3>Do I need the checklist to use this check?</h3>
+<p>No. The check is free and runs in your browser. The checklist is optional. One 3-page PDF with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on. Refunds: within 30 days if a file is corrupt or materially not as described.</p>
+</section>
+
+<p>Related: <a href="/tools/fire-to-iris-check/">Free FIRE to IRIS check</a> · <a href="/deadlines/file-1099-nec-2027-iris.html">File Form 1099-NEC for 2027 in IRIS</a> · <a href="/deadlines/irs-fire-retirement-nov-19.html">IRS FIRE retirement, November 19, 2026</a> · <a href="/deadlines/">All deadlines</a> · <a href="/tools/">Tools and kits</a></p>
+
+<footer>
+<p>Not affiliated with the IRS.</p>
+<p>General guidance, not legal, tax or IT advice.</p>
+<p>Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
+<p>Made by First Mover Projects with AI coding tools.</p>
+</footer>
+</main>
+<div id="kit-sticky" class="kit-sticky" hidden role="region" aria-labelledby="kit-sticky-label">
+<p id="kit-sticky-label" class="kit-sticky-label">$9 FIRE to IRIS checklist</p>
+<a target="_blank" class="kit-sticky-link" data-goatcounter-click="cta/1099-nec-or-1099-k-check-sticky" data-goatcounter-title="1099-NEC or 1099-K check sticky" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=1099-nec-or-1099-k-check&amp;utm_content=fire-check-sticky" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the checklist</a>
+<button type="button" class="kit-sticky-dismiss" id="kit-sticky-dismiss">Dismiss</button>
+</div>
+<script>
+(function () {
+"use strict";
+var HEADLINES = {
+  nec: "1099-NEC is likely yours to file",
+  k: "The card company or payment app reports it on 1099-K, so you likely don't file a 1099-NEC for those payments",
+  mixed: "Mixed: file 1099-NEC only for the non-card portion",
+  none: "Likely no 1099 needed",
+  unsure: "This check needs a clearer answer before it can pick one result."
+};
+var FILE_STEPS = [
+  "Due date: Publication 1099 lists Form 1099-NEC as due to the IRS on January 31 and due to the recipient on January 31. That row is not marked with the asterisk that moves some electronic forms to March 31. If January 31 falls on a Saturday, Sunday, or legal holiday, the due date is the next business day. Publication 1099 says to check IRS.gov/TaxCalendar for the actual date. Checked November 5, 2026. These pages state January 31 and the weekend rule. They do not print a separate 2027 calendar date.",
+  "How to file: Publication 1099 says that beginning tax year 2026, filing season 2027, IRIS is the only intake system for information returns. FIRE will not take submissions after it shuts down in 2026. Use the IRIS Taxpayer Portal. It is a no-cost way to type the form or upload a .csv file, up to 100 forms per submission.",
+  "You need an IRIS TCC. Publication 1099 says a typical application is processed within 45 business days, and that processing times may vary. The same publication says the application may take up to 45 days, so apply before filing season.",
+  "If you have 10 or more information returns, you must e-file. The IRS page on who must file says that count includes Forms W-2 filed with the Social Security Administration. Publication 1099 says the count adds different forms together. It is not 10 Forms 1099-NEC by themselves.",
+  "Publication 1099 says there is no automatic extension for Form 1099-NEC. You are on time for e-file if you submit the form through IRIS by 11:59 p.m. on the due date.",
+  "The free FIRE to IRIS check on this site lists the IRS pages for the TCC application. Rules on this page were checked November 5, 2026."
+];
+var BACKUP = "If you withheld any federal income tax under the backup withholding rules, file Form 1099-NEC for that person no matter the amount. The instructions say to report that withholding in box 4.";
+var ATTORNEY = "Fees paid to an attorney of $2,000 or more go in box 1a of Form 1099-NEC even when the law firm is a corporation. Gross proceeds paid to an attorney, such as a settlement that is not the fee, do not go in box 1a. The instructions say gross proceeds of $600 or more go in box 10 of Form 1099-MISC.";
+
+function out(id, steps) {
+  return { id: id, headline: HEADLINES[id], steps: steps };
+}
+
+function withNotes(steps, who) {
+  var list = steps.slice();
+  if (who === "attorney") list.push(ATTORNEY);
+  list.push(BACKUP);
+  return list;
+}
+
+function decide(input) {
+  var purpose = input && input.purpose;
+  var who = input && input.who;
+  var method = input && input.method;
+  var noncard = input && input.noncard;
+  if (!purpose || !who || !method || !noncard) {
+    return out("unsure", ["Pick one answer for each question."]);
+  }
+  if (purpose === "personal") {
+    return out("none", [
+      "The instructions say to use Form 1099-NEC only for a payment made in the course of your trade or business. Personal payments are not reportable.",
+      "A nonprofit is treated as a trade or business. If this payment was for the nonprofit, answer the first question as business and run the check again.",
+      "There is no Form 1099-NEC due date for this personal payment. January 31 and IRIS matter only for a payment that does have to be filed.",
+      BACKUP
+    ]);
+  }
+  if (who === "employee") {
+    return out("none", [
+      "The instructions say wages, bonuses, prizes, and awards paid to employees are not reported on Form 1099-NEC. Report them on Form W-2.",
+      "There is no Form 1099-NEC due date for these wages.",
+      BACKUP
+    ]);
+  }
+  if (purpose === "unsure" || who === "unsure" || method === "unsure") {
+    return out("unsure", [
+      "The form depends on whether the payment was for your trade or business, who you paid, and how you paid them.",
+      "Personal payments are not reportable. Wages go on Form W-2. A payment to a corporation is generally not on Form 1099-NEC, except fees paid to an attorney and a federal executive agency's payments for services. Card and payment-app goods-and-services payments are reported on Form 1099-K by the card company or app, not on your Form 1099-NEC. Cash, check, bank transfer, and ACH of $2,000 or more for services can be your Form 1099-NEC."
+    ]);
+  }
+  if (who === "corporation") {
+    return out("none", [
+      "The instructions say that, generally, a payment to a corporation, including an LLC treated as a C or S corporation, is not reported on Form 1099-NEC.",
+      "That exception does not cover fees paid to an attorney. It also does not cover a federal executive agency's payments to vendors for services. Medical and health care payments are reported on Form 1099-MISC, not on this check.",
+      "An LLC taxed as a partnership, or a single-owner LLC that is disregarded, is not in the corporation exception. Run the check again and choose contractor.",
+      "There is no Form 1099-NEC due date for this corporation payment under the general rule.",
+      BACKUP
+    ]);
+  }
+  if (who !== "contractor" && who !== "attorney") {
+    return out("unsure", ["Pick who you paid."]);
+  }
+  if (method === "noncard" && noncard === "none") {
+    return out("unsure", ["You marked cash, check, bank transfer, or ACH only, and also marked that none of the payment was made that way. Pick one."]);
+  }
+  if (method === "mixed" && noncard === "none") {
+    return out("unsure", ["You marked both a card or payment app and a cash, check, or bank payment, and also marked that none of the payment was cash, check, or bank. Pick one."]);
+  }
+  if ((method === "noncard" || method === "mixed") && noncard === "unsure") {
+    return out("unsure", [
+      "The cash, check, bank transfer, and ACH total is the part that can go on your Form 1099-NEC. The instructions say to file when that kind of payment for services is at least $2,000 for the year. Card and payment-app goods-and-services payments stay off your Form 1099-NEC.",
+      "Pick whether that non-card total is under $2,000 or $2,000 or more."
+    ]);
+  }
+  if (method === "card" && (noncard === "none" || noncard === "unsure")) {
+    return out("k", withNotes([
+      "The instructions say a payment made with a credit card or payment card, and a third-party network transaction, must be reported on Form 1099-K by the payment settlement entity. Those payments are not subject to reporting on Form 1099-NEC.",
+      "The Form 1099-K instructions say the de minimis threshold is disregarded for this choice. You still do not file Form 1099-NEC for those payments when the app does not send a Form 1099-K.",
+      "A payment card has no dollar minimum. The Form 1099-K FAQ says a payee should receive a Form 1099-K for a payment card amount of $0.01. A payment app or online marketplace must report when payments for goods or services exceed $20,000 and the number of transactions exceeds 200. It may send a Form 1099-K below that.",
+      "An automated clearing house does not qualify as a third party settlement organization and does not report under section 6050W. This answer is for the card or payment-app goods-and-services portion only.",
+      "You do not have a Form 1099-NEC due date for these payments. The IRS 1099-K page says the card company or payment app sends the payee a copy by January 31.",
+      "If any of this payee's 2026 total was cash, check, bank transfer, or ACH of $2,000 or more, run the check again and choose both ways of paying."
+    ], who));
+  }
+  if (method === "noncard" && noncard === "least") {
+    return out("nec", withNotes([
+      "You paid at least $2,000 in 2026 by cash, check, bank transfer, or ACH for services in your trade or business, to someone who is not your employee. The instructions say to file Form 1099-NEC. Enter nonemployee compensation of $2,000 or more in box 1a.",
+      "Do not add credit card, debit card, or payment-app goods-and-services amounts into that box. Those payments are reported on Form 1099-K, not on your Form 1099-NEC.",
+      "Parts and materials that were part of the service count in the Form 1099-NEC amount. A payment for merchandise alone is not reported on Form 1099-NEC."
+    ], who).concat(FILE_STEPS));
+  }
+  if (noncard === "least" && (method === "mixed" || method === "card")) {
+    return out("mixed", withNotes([
+      "File Form 1099-NEC only for the cash, check, bank transfer, and ACH portion. That portion is $2,000 or more.",
+      "Leave the credit card, debit card, and payment-app goods-and-services portion off Form 1099-NEC. The instructions say the card company or payment app reports those payments on Form 1099-K.",
+      "The Form 1099-K instructions say the de minimis threshold is disregarded for this choice. You still leave the card and payment-app portion off Form 1099-NEC when the app does not send a Form 1099-K."
+    ], who).concat(FILE_STEPS));
+  }
+  if (noncard === "under" && (method === "noncard" || method === "mixed" || method === "card")) {
+    var under = [
+      "The instructions say to file Form 1099-NEC for services when you have paid at least $2,000 during the year. The cash, check, bank transfer, and ACH total here is under $2,000.",
+      "For payments made before 2026, the IRS page says the reporting threshold was $600. For payments made in 2026, that page says the threshold is $2,000. This check is for 2026 payments."
+    ];
+    if (method === "mixed" || method === "card") {
+      under.push("The card or payment-app goods-and-services portion is not added to that total. The card company or payment app reports it on Form 1099-K. You likely do not file a Form 1099-NEC for either portion.");
+    }
+    under.push("There is no Form 1099-NEC due date for this payee unless the backup withholding rule below applies.");
+    return out("none", withNotes(under, who));
+  }
+  return out("unsure", ["Pick one answer for each question."]);
+}
+
+function selected(name) {
+  var nodes = document.getElementsByName(name);
+  var i;
+  for (i = 0; i < nodes.length; i++) {
+    if (nodes[i].checked) return nodes[i].value;
+  }
+  return "";
+}
+
+function render() {
+  var result = decide({
+    purpose: selected("purpose"),
+    who: selected("who"),
+    method: selected("method"),
+    noncard: selected("noncard")
+  });
+  var title = document.getElementById("result-problem");
+  var list = document.getElementById("next-steps");
+  var box = document.getElementById("results");
+  if (!title || !list || !box) return result;
+  title.textContent = result.headline;
+  while (list.firstChild) list.removeChild(list.firstChild);
+  var i;
+  for (i = 0; i < result.steps.length; i++) {
+    var li = document.createElement("li");
+    li.textContent = result.steps[i];
+    list.appendChild(li);
+  }
+  box.hidden = false;
+  if (box.scrollIntoView) box.scrollIntoView({ behavior: "smooth", block: "start" });
+  syncKitSticky(true);
+  return result;
+}
+
+var kitStickyDismissed = false;
+function syncKitSticky(show) {
+  var bar = document.getElementById("kit-sticky");
+  if (!bar || !document.body || !document.body.classList) return;
+  var on = !!show && !kitStickyDismissed;
+  if (on && window.FMP_FIRE_KIT && window.FMP_FIRE_KIT.expired(new Date())) on = false;
+  bar.hidden = !on;
+  if (on) document.body.classList.add("kit-sticky-on");
+  else document.body.classList.remove("kit-sticky-on");
+}
+
+window.FMP_1099 = {
+  HEADLINES: HEADLINES,
+  FILE_STEPS: FILE_STEPS,
+  decide: decide,
+  render: render
+};
+
+var go = document.getElementById("go");
+if (go && go.addEventListener) go.addEventListener("click", render);
+var dismiss = document.getElementById("kit-sticky-dismiss");
+if (dismiss && dismiss.addEventListener) {
+  dismiss.addEventListener("click", function () {
+    kitStickyDismissed = true;
+    syncKitSticky(false);
+  });
+}
+})();
+</script>
+<script>
+(function () {
+  var q = location.search || "";
+  var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(q);
+  if (testVisit) {
+    window.goatcounter = { path: function (p) { return "TEST-EXCLUDE" + p; } };
+  }
+  function trackGumroadClick(ev) {
+    if (ev.type === "auxclick" && ev.button !== 1) return;
+    var node = ev.target && ev.target.closest ? ev.target.closest("a") : null;
+    if (!node || !node.getAttribute) return;
+    var href = node.getAttribute("href") || "";
+    var toolSlug = node.getAttribute("data-tool-slug") || "";
+    var className = node.getAttribute("class") || "";
+    var path = "";
+    var title = "";
+    if (className.indexOf("follow-tiktok") !== -1) {
+      if (!/^[a-z0-9-]{1,80}$/.test(toolSlug)) return;
+      if (node.target !== "_blank") node.target = "_blank";
+      if (typeof node.setAttribute === "function") {
+        var tiktokRel = node.getAttribute("rel") || "";
+        if (tiktokRel.indexOf("noopener") === -1) node.setAttribute("rel", (tiktokRel ? tiktokRel + " " : "") + "noopener");
+      }
+      path = (testVisit ? "TEST-EXCLUDE-" : "") + "/event/tiktok-follow-click-" + toolSlug;
+      title = "TikTok follow click: " + toolSlug;
+    } else {
+      var parts = href.split("/");
+      if (parts[0] !== "https:" || parts[2] !== "firstmoverprojects.gumroad.com" || parts[3] !== "l") return;
+      if (href.indexOf("wanted=true") === -1) return;
+      var slug = parts[4] || "";
+      var cut = slug.search(/[?#]/);
+      if (cut !== -1) slug = slug.slice(0, cut);
+      if (!slug) return;
+      if (node.target !== "_blank") node.target = "_blank";
+      if (typeof node.setAttribute === "function") {
+        var rel = node.getAttribute("rel") || "";
+        if (rel.indexOf("noopener") === -1) node.setAttribute("rel", (rel ? rel + " " : "") + "noopener");
+      }
+      path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+      title = "Gumroad checkout click: " + slug;
+    }
+    if (window.goatcounter && typeof window.goatcounter.count === "function") {
+      window.goatcounter.count({
+        path: path,
+        title: title,
+        event: true
+      });
+    }
+    var gcCountUrl = "https://firstmoverprojects.goatcounter.com/count?p=" + encodeURIComponent(path) + "&t=" + encodeURIComponent(title) + "&e=true";
+    try {
+      if (typeof fetch === "function") fetch(gcCountUrl, { keepalive: true, mode: "no-cors" });
+    } catch (fetchErr) {}
+    try {
+      if (typeof navigator !== "undefined" && navigator && typeof navigator.sendBeacon === "function") navigator.sendBeacon(gcCountUrl);
+    } catch (beaconErr) {}
+  }
+  document.addEventListener("click", trackGumroadClick);
+  document.addEventListener("auxclick", trackGumroadClick);
+})();
+</script>
+<script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script id="fmp-utm">
+(function () {
+  "use strict";
+  var KEY = "fmp_utm_source";
+  var FALLBACK = "site";
+
+  function clean(value) {
+    if (value == null) return "";
+    var s = String(value).replace(/\+/g, " ").trim().toLowerCase();
+    try { s = decodeURIComponent(s); } catch (e) { /* keep the raw token */ }
+    s = s.trim().toLowerCase().replace(/[^a-z0-9\-_]/g, "-").slice(0, 200).replace(/^-+|-+$/g, "");
+    if (!/^[a-z0-9][a-z0-9_-]*$/.test(s) || s === FALLBACK) return "";
+    return s;
+  }
+
+  function fromLocation() {
+    var q = "";
+    try { q = location.search || ""; } catch (e) { q = ""; }
+    var m = /(?:^|[?&])utm_source=([^&#]*)/.exec(q);
+    return m ? clean(m[1]) : "";
+  }
+
+  function landingSource() {
+    var fromUrl = fromLocation();
+    var saved = "";
+    try {
+      saved = clean(sessionStorage.getItem(KEY));
+      if (!saved && fromUrl) {
+        sessionStorage.setItem(KEY, fromUrl);
+        saved = fromUrl;
+      }
+    } catch (e) {
+      saved = fromUrl;
+    }
+    return saved || FALLBACK;
+  }
+
+  function patchHref(anchor, source) {
+    if (!anchor || !source || source === FALLBACK || !anchor.getAttribute) return;
+    var href = anchor.getAttribute("href");
+    if (!href || href.indexOf("firstmoverprojects.gumroad.com/l/") === -1) return;
+    if (href.indexOf("utm_source=") === -1) return;
+    var next = href.replace(/([?&]utm_source=)[^&#]*/, "$1" + source);
+    if (next !== href) anchor.setAttribute("href", next);
+  }
+
+  function patchAll(source) {
+    if (!document.querySelectorAll) return;
+    var links = document.querySelectorAll('a[href*="firstmoverprojects.gumroad.com/l/"]');
+    for (var i = 0; i < links.length; i++) patchHref(links[i], source);
+  }
+
+  function onClick(ev) {
+    var t = ev.target;
+    if (!t || !t.closest) return;
+    patchHref(t.closest("a"), landingSource());
+  }
+
+  patchAll(landingSource());
+  document.addEventListener("click", onClick, true);
+  document.addEventListener("auxclick", onClick, true);
+})();
+</script>
+<script>
+(function () {
+  var btn = document.getElementById("fmp-copy-embed");
+  var box = document.getElementById("fmp-embed-snippet");
+  var status = document.getElementById("fmp-copy-status");
+  if (!btn || !box) return;
+  function showFallback() {
+    box.focus();
+    if (status) status.textContent = "Select the snippet above and copy it from there.";
+  }
+  btn.addEventListener("click", function () {
+    var text = box.value || "";
+    var clip = navigator.clipboard;
+    if (!clip || !clip.writeText) {
+      showFallback();
+      return;
+    }
+    try {
+      var pending = clip.writeText(text);
+      if (!pending || !pending.then) {
+        if (status) status.textContent = "Embed snippet copied.";
+        return;
+      }
+      pending.then(function () {
+        if (status) status.textContent = "Embed snippet copied.";
+      }, showFallback);
+    } catch (err) {
+      showFallback();
+    }
+  });
+})();
+</script>
+<script id="fmp-fire-kit">
+(function () {
+  "use strict";
+  var CUTOFF = Date.UTC(2026, 10, 19, 20, 0, 0);
+  function expired(now) {
+    return (now || new Date()).getTime() >= CUTOFF;
+  }
+  function hide(now) {
+    if (!expired(now) || !document.querySelectorAll) return;
+    var nodes = document.querySelectorAll("[data-fire-kit]");
+    var i;
+    for (i = 0; i < nodes.length; i++) nodes[i].hidden = true;
+    var heading = document.getElementById("deadline-reminder-h");
+    var button = document.getElementById("deadline-reminder-submit");
+    if (heading) heading.textContent = "The FIRE deadline has passed. Get the weekly email for the next deadline";
+    if (button) button.textContent = "Get the weekly deadline email";
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { hide(new Date()); });
+  else hide(new Date());
+  if (typeof window !== "undefined") window.FMP_FIRE_KIT = { CUTOFF: CUTOFF, expired: expired, hide: hide };
+})();
+</script>
+<script id="deadline-reminder-events">
+(function () {
+  "use strict";
+  var form = document.getElementById("deadline-reminder-form");
+  if (!form || !form.addEventListener) return;
+  var source = form.querySelector ? form.querySelector('input[name="SIGNUP_SOURCE"]') : null;
+  if (source) {
+    var search = "";
+    try { search = window.location.search || ""; } catch (err) { search = ""; }
+    var match = /(?:^|[?&])SIGNUP_SOURCE=([^&#]*)/.exec(search);
+    if (match) {
+      var raw = match[1].replace(/\+/g, " ");
+      try { raw = decodeURIComponent(raw); } catch (err2) { raw = match[1]; }
+      var clean = String(raw).toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+      if (clean) source.value = clean;
+    }
+  }
+  form.addEventListener("submit", function () {
+    var eventPath = form.getAttribute("data-goatcounter-submit") || "";
+    if (!/^signup\/[a-z0-9-]{1,80}$/.test(eventPath)) return;
+    var title = form.getAttribute("data-goatcounter-title") || "Deadline reminder signup";
+    var q = "";
+    try { q = window.location.search || ""; } catch (err3) { q = ""; }
+    var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(q);
+    var path = (testVisit ? "TEST-EXCLUDE/" : "") + eventPath;
+    if (window.goatcounter && typeof window.goatcounter.count === "function") {
+      window.goatcounter.count({
+        path: path,
+        title: title,
+        event: true
+      });
+    }
+  });
+})();
+</script>
+</body>
+</html>
