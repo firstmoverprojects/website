@@ -215,6 +215,8 @@ while ((um = urlRe.exec(html))) {
   found[u] = true;
 }
 var allowed = [
+  "https://05279842.sibforms.com",
+  "https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==",
   "https://firstmoverprojects.com/",
   "https://firstmoverprojects.com/assets/previews/amazon-coi-kit-preview-1280x720.webp",
   "https://firstmoverprojects.com/privacy.html",
@@ -239,7 +241,7 @@ var allowed = [
 var foundList = Object.keys(found).sort();
 var allowedSorted = allowed.slice().sort();
 assertEq(foundList.join("\n"), allowedSorted.join("\n"), "T6 http(s) URLs are only the canonical page, 3 Amazon sources, and Gumroad checkout");
-assert(html.indexOf("default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action 'none'; base-uri 'none'") !== -1, "T6 CSP meta present");
+assert(html.indexOf("default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action https://05279842.sibforms.com; base-uri 'none'") !== -1, "T6 CSP meta present");
 assert(html.indexOf('name="referrer" content="strict-origin-when-cross-origin"') !== -1, "T6 referrer meta present");
 [
   "General guidance, not legal, tax or IT advice.",

@@ -67,7 +67,10 @@ test("the answer block leads with one result, one kit button, and the thanks lin
     at = next;
   }
   assert.equal((results.match(/gumroad\.com/g) || []).length, 1);
-  assert.equal(/follow-bar|email-cap|btn-buy-now|btn-email|sibforms/.test(results), false);
+  assert.equal(/follow-bar|email-cap|btn-buy-now|btn-email|sibforms/.test(card), false);
+  assert.equal(/follow-bar|email-cap|btn-buy-now|btn-email/.test(results), false);
+  assert.equal(results.split('id="deadline-reminder-form"').length - 1, 1);
+  assert.match(results, /<h2 id="deadline-reminder-h">Get a reminder before this deadline<\/h2>/);
   assert.match(card, /Thanks for your time\. If this isn't right for you, please share it with someone it could help\./);
   assert.match(card, /November 1, 2026/);
   assert.match(card, /EUR 150/);

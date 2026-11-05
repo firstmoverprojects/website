@@ -41,6 +41,60 @@ async function open(rel) {
   return { page, errors, nets };
 }
 
+async function assertReminder(page, eventPath, rel) {
+  assert.equal(await page.locator("#results .deadline-reminder").isVisible(), true, rel);
+  assert.equal(await page.locator("#result-cta #deadline-reminder-form").count(), 0, rel);
+  assert.equal(await page.innerText("#deadline-reminder-h"), "Get a reminder before this deadline", rel);
+  assert.equal(await page.getAttribute(".deadline-reminder", "aria-labelledby"), "deadline-reminder-h", rel);
+  assert.equal(await page.getAttribute("#reminder-email", "aria-describedby"), "reminder-note", rel);
+  const kitClick = await page.getAttribute("#kit-result", "data-goatcounter-click");
+  assert.equal(typeof kitClick === "string" && kitClick.startsWith("cta/"), true, rel);
+  const colors = await page.evaluate(() => {
+    const heading = document.querySelector("#deadline-reminder-h");
+    const button = document.querySelector("#deadline-reminder-form button");
+    const email = document.getElementById("reminder-email");
+    const label = document.querySelector('label[for="reminder-email"]');
+    return {
+      heading: getComputedStyle(heading).color,
+      box: getComputedStyle(heading.closest(".deadline-reminder")).backgroundColor,
+      btnBg: getComputedStyle(button).backgroundColor,
+      btnColor: getComputedStyle(button).color,
+      btnH: button.getBoundingClientRect().height,
+      label: label ? label.textContent : "",
+      required: email.required,
+      type: email.type
+    };
+  });
+  assert.equal(colors.heading, "rgb(12, 74, 110)", rel);
+  assert.equal(colors.box, "rgb(240, 249, 255)", rel);
+  assert.equal(colors.btnBg, "rgb(12, 74, 110)", rel);
+  assert.equal(colors.btnColor, "rgb(255, 255, 255)", rel);
+  assert.ok(colors.btnH >= 48, rel + " reminder button " + colors.btnH);
+  assert.equal(colors.label, "Email address", rel);
+  assert.equal(colors.required, true, rel);
+  assert.equal(colors.type, "email", rel);
+  const counts = await page.evaluate((path) => {
+    const form = document.getElementById("deadline-reminder-form");
+    form.addEventListener("submit", (ev) => ev.preventDefault(), true);
+    const seen = [];
+    window.goatcounter = window.goatcounter || {};
+    window.goatcounter.count = (payload) => { seen.push(payload); };
+    form.requestSubmit();
+    const blocked = seen.slice();
+    document.getElementById("reminder-email").value = "lead-test@example.com";
+    document.getElementById("reminder-opt-in").checked = true;
+    form.requestSubmit();
+    return { blocked, sent: seen.slice(blocked.length), event: form.getAttribute("data-goatcounter-submit"), path };
+  }, eventPath);
+  assert.deepEqual(counts.blocked, [], rel);
+  assert.equal(counts.event, eventPath, rel);
+  assert.deepEqual(counts.sent, [{
+    path: eventPath,
+    title: "Deadline reminder signup: " + eventPath.slice("signup/".length),
+    event: true
+  }], rel);
+}
+
 async function assertNoHScroll(page) {
   const box = await page.evaluate(() => ({
     sw: document.documentElement.scrollWidth,
@@ -73,7 +127,8 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       button: "Get the $9 checklist (instant PDF)",
       slug: "/l/fire-to-iris-switch-checklist",
       campaign: "fire-to-iris-check",
-      resultContent: "fire-check-result"
+      resultContent: "fire-check-result",
+      reminder: "signup/fire-to-iris-check"
     },
     {
       rel: "tools/amazon-coi-check/index.html",
@@ -88,7 +143,8 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       campaign: "amazon-coi-check",
       resultContent: "coi-check-result",
       nameStep: /insured name|legal business name/i,
-      skipWeeklyEmail: true
+      skipWeeklyEmail: true,
+      reminder: "signup/amazon-coi-check"
     }
   ];
   for (const item of cases) {
@@ -159,6 +215,7 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
     } else {
       assert.match(await page.innerText("#result-cta"), /free weekly deadline email/);
     }
+    if (item.reminder) await assertReminder(page, item.reminder, item.rel);
     assert.deepEqual(errors, [], item.rel);
     assert.deepEqual(toolNetwork(nets), [], item.rel);
     await assertNoHScroll(page);
@@ -185,6 +242,7 @@ test("EU product ID checker shows one result, the November 1 rule, and one kit b
 
   await page.click("#example");
   assert.equal(await page.locator("#results").isVisible(), true);
+  await assertReminder(page, "signup/eu-product-id-check", "tools/eu-product-id-check/index.html");
   assert.equal(await page.locator("#result-cta").isVisible(), true);
   assert.equal(await page.locator("#result-cta a").count(), 1);
   assert.equal(await page.locator("#results a[href*='gumroad.com']").count(), 1);
