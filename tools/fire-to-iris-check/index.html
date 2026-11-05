@@ -362,10 +362,10 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <p>
 <label class="sib-optin" for="reminder-opt-in">
 <input type="checkbox" value="1" id="reminder-opt-in" name="OPT_IN" required>
-<span>Send me the weekly deadline reminder. First Mover Projects will email a confirmation first. Unsubscribe any time with one click. We do not sell or share your email.</span>
+<span>Send me the weekly First Mover Projects email: deadline reminders, plus news about our kits, games and books. We will email a confirmation first. Unsubscribe any time with one click. We do not sell or share your email.</span>
 </label>
 </p>
-<p><button type="submit">Get a reminder before this deadline</button></p>
+<p><button type="submit" id="deadline-reminder-submit">Get a reminder before this deadline</button></p>
 <input type="text" name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
 <input type="hidden" name="locale" value="en">
 <input type="hidden" name="SIGNUP_SOURCE" value="fire-to-iris">
@@ -977,6 +977,10 @@ updateDays(new Date());
     var nodes = document.querySelectorAll("[data-fire-kit]");
     var i;
     for (i = 0; i < nodes.length; i++) nodes[i].hidden = true;
+    var heading = document.getElementById("deadline-reminder-h");
+    var button = document.getElementById("deadline-reminder-submit");
+    if (heading) heading.textContent = "The FIRE deadline has passed. Get the weekly email for the next deadline";
+    if (button) button.textContent = "Get the weekly deadline email";
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { hide(new Date()); });
   else hide(new Date());

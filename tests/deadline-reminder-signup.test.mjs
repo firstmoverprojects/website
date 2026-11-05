@@ -128,7 +128,8 @@ test("each tool result has one accessible reminder form on the existing list", (
     assert.match(form, /type="email" id="reminder-email" name="EMAIL" autocomplete="email" inputmode="email"[^>]*required aria-describedby="reminder-note"/);
     assert.match(form, /<label class="sib-optin" for="reminder-opt-in">/);
     assert.match(form, /id="reminder-opt-in" name="OPT_IN" required/);
-    assert.match(form, /<button type="submit">Get a reminder before this deadline<\/button>/);
+    assert.match(form, /<button type="submit"(?: id="deadline-reminder-submit")?>Get a reminder before this deadline<\/button>/);
+    assert.match(form, /<span>Send me the weekly First Mover Projects email: deadline reminders, plus news about our kits, games and books\. We will email a confirmation first\. Unsubscribe any time with one click\. We do not sell or share your email\.<\/span>/);
     assert.match(form, /name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off" aria-hidden="true"/);
     assert.match(form, new RegExp(`name="SIGNUP_SOURCE" value="${page.source}"`));
     assert.equal(/mailto:/i.test(form), false, page.rel);
@@ -182,6 +183,37 @@ test("a valid reminder submit records one GoatCounter event and keeps test visit
   const quiet = loadEvents(html, "", { goatcounter: false });
   assert.doesNotThrow(() => quiet.listeners.submit());
   assert.deepEqual(quiet.counts, []);
+});
+
+test("the FIRE reminder copy changes when the Nov 19 cutoff closes the kit", () => {
+  const html = read("tools/fire-to-iris-check/index.html");
+  const start = html.indexOf('<script id="fmp-fire-kit">');
+  assert.notEqual(start, -1);
+  const openEnd = html.indexOf(">", start);
+  const close = html.indexOf("</script>", openEnd);
+  const heading = { textContent: "Get a reminder before this deadline" };
+  const button = { textContent: "Get a reminder before this deadline" };
+  const sandbox = {
+    document: {
+      readyState: "loading",
+      getElementById(id) {
+        if (id === "deadline-reminder-h") return heading;
+        if (id === "deadline-reminder-submit") return button;
+        return null;
+      },
+      querySelectorAll() { return []; },
+      addEventListener() {}
+    }
+  };
+  sandbox.window = sandbox;
+  vm.runInNewContext(html.slice(openEnd + 1, close), sandbox, { filename: "fmp-fire-kit.js" });
+  const api = sandbox.FMP_FIRE_KIT;
+  api.hide(new Date("2026-11-19T19:59:59Z"));
+  assert.equal(heading.textContent, "Get a reminder before this deadline");
+  assert.equal(button.textContent, "Get a reminder before this deadline");
+  api.hide(new Date("2026-11-19T20:00:00Z"));
+  assert.equal(heading.textContent, "The FIRE deadline has passed. Get the weekly email for the next deadline");
+  assert.equal(button.textContent, "Get the weekly deadline email");
 });
 
 test("SIGNUP_SOURCE from the page address replaces only a short safe token", () => {
