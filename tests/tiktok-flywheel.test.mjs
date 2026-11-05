@@ -177,8 +177,13 @@ test("?embed=1 hides the site nav and keeps the powered-by link and kit button",
     assert.equal(await page.locator(".site-nav").first().isVisible(), false, rel);
     assert.equal(await page.locator(".fmp-powered").isVisible(), true, rel);
     assert.match(await page.innerText(".fmp-powered"), /Powered by First Mover Projects/, rel);
-    const kit = page.locator("#paid-link, a.trade-link").first();
-    assert.equal(await kit.isVisible(), true, rel);
+    if (rel === "tools/eu-product-id-check/index.html") {
+      assert.equal(await page.locator("#paid-link, #kit-result, a[href*='fetwsm'], a[href*='gumroad.com']").count(), 0, rel);
+      assert.equal(await page.locator(".follow-email").isVisible(), true, rel);
+    } else {
+      const kit = page.locator("#paid-link, a.trade-link").first();
+      assert.equal(await kit.isVisible(), true, rel);
+    }
     await page.locator("#fmp-share summary").click();
     const snippet = await page.locator("#fmp-embed-snippet").inputValue();
     const slug = rel.split("/")[1];

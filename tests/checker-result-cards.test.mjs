@@ -47,8 +47,10 @@ async function assertReminder(page, eventPath, rel) {
   assert.equal(await page.innerText("#deadline-reminder-h"), "Get a reminder before this deadline", rel);
   assert.equal(await page.getAttribute(".deadline-reminder", "aria-labelledby"), "deadline-reminder-h", rel);
   assert.equal(await page.getAttribute("#reminder-email", "aria-describedby"), "reminder-note", rel);
-  const kitClick = await page.getAttribute("#kit-result", "data-goatcounter-click");
-  assert.equal(typeof kitClick === "string" && kitClick.startsWith("cta/"), true, rel);
+  if (await page.locator("#kit-result").count()) {
+    const kitClick = await page.getAttribute("#kit-result", "data-goatcounter-click");
+    assert.equal(typeof kitClick === "string" && kitClick.startsWith("cta/"), true, rel);
+  }
   const colors = await page.evaluate(() => {
     const heading = document.querySelector("#deadline-reminder-h");
     const button = document.querySelector("#deadline-reminder-form button");
@@ -225,7 +227,7 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
   }
 });
 
-test("EU product ID checker shows one result, the November 1 rule, and one kit button", async () => {
+test("EU product ID checker shows one result, the November 1 rule, and the reminder signup", async () => {
   const { page, errors, nets } = await open("tools/eu-product-id-check/index.html");
   assert.match(await page.locator("#what").innerText(), /^This is a free checker that tells you /);
   const targets = await page.evaluate(() => {
@@ -244,41 +246,29 @@ test("EU product ID checker shows one result, the November 1 rule, and one kit b
   assert.equal(await page.locator("#results").isVisible(), true);
   await assertReminder(page, "signup/eu-product-id-check", "tools/eu-product-id-check/index.html");
   assert.equal(await page.locator("#result-cta").isVisible(), true);
-  assert.equal(await page.locator("#result-cta a").count(), 1);
-  assert.equal(await page.locator("#results a[href*='gumroad.com']").count(), 1);
+  assert.equal(await page.locator("#result-cta a").count(), 0);
+  assert.equal(await page.locator("#kit-result, #paid-link, a[href*='fetwsm'], a[href*='gumroad.com']").count(), 0);
   assert.equal(await page.locator("#results .follow-bar, #results .kit-conv-box, #results .email-cap-box, #results .btn-buy-now").count(), 0);
   assert.match(await page.innerText("#result-problem"), /4 of 6 rows need a fix before November 1, 2026/);
   assert.match(await page.innerText("#result-deadline"), /November 1, 2026/);
   assert.match(await page.innerText("#result-deadline"), /EUR 150/);
   assert.match(await page.innerText("#next-steps"), /Y081/);
   assert.equal(await page.locator("#next-steps li").count(), 3);
-  assert.equal(await page.innerText("#kit-result"), "Get the $29 EU Customs Product Data Checker");
-  const href = await page.getAttribute("#kit-result", "href");
-  const url = new URL(href);
-  assert.equal(url.pathname, "/l/fetwsm");
-  assert.equal(url.searchParams.get("utm_content"), "result-cta");
-  assert.equal(url.searchParams.get("utm_campaign"), "eu-product-id-check");
   const cardText = await page.innerText("#result-cta");
+  assert.equal(cardText.includes("$29"), false);
   assert.match(cardText, /Thanks for your time\. If this isn't right for you, please share it with someone it could help\./);
   assert.match(cardText, /General guidance, not legal, tax or IT advice/);
   assert.match(await page.innerText("footer"), /Not affiliated with the European Commission or any customs authority/);
   const colors = await page.evaluate(() => {
-    const btn = document.querySelector("#kit-result");
     return {
       bg: getComputedStyle(document.querySelector("#result-cta")).backgroundColor,
       text: getComputedStyle(document.querySelector("#result-problem")).color,
-      thanks: getComputedStyle(document.querySelector("#result-cta .thanks")).color,
-      btnBg: getComputedStyle(btn).backgroundColor,
-      btnColor: getComputedStyle(btn).color,
-      btnH: btn.getBoundingClientRect().height
+      thanks: getComputedStyle(document.querySelector("#result-cta .thanks")).color
     };
   });
   assert.equal(colors.bg, "rgb(255, 255, 255)");
   assert.equal(colors.text, "rgb(7, 27, 49)");
   assert.equal(colors.thanks, "rgb(7, 27, 49)");
-  assert.equal(colors.btnBg, "rgb(0, 85, 255)");
-  assert.equal(colors.btnColor, "rgb(255, 255, 255)");
-  assert.ok(colors.btnH >= 48, "button " + colors.btnH);
   assert.deepEqual(errors, []);
   assert.deepEqual(toolNetwork(nets), []);
   await assertNoHScroll(page);
@@ -287,7 +277,7 @@ test("EU product ID checker shows one result, the November 1 rule, and one kit b
   await page.click("#go");
   assert.match(await page.innerText("#result-problem"), /No problems found in these checks/);
   assert.match(await page.innerText("#result-problem"), /November 1, 2026/);
-  assert.equal(await page.locator("#result-cta a").count(), 1);
+  assert.equal(await page.locator("#result-cta a").count(), 0);
 
   await page.fill("#inp", "");
   await page.click("#go");

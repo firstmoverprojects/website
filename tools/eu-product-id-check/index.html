@@ -43,8 +43,6 @@ a.btn:hover{background:#0044cc;color:#fff}
 .next-steps{margin:.2em 0 .6em;padding-left:1.25em}
 .next-steps li{margin:8px 0}
 .disclaimer,.thanks{font-weight:700;margin:12px 0 0}
-#kit-result{display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;box-sizing:border-box;min-height:48px;padding:14px 18px;margin:12px 0 0;background:#0055ff;color:#fff;font-weight:800;line-height:1.3;text-align:center;text-decoration:none;border-radius:8px;white-space:normal;overflow-wrap:anywhere}
-#kit-result:hover,#kit-result:focus{background:#0044cc;color:#fff}
 #results,#result-cta{overflow-wrap:anywhere;max-width:100%}
 [hidden]{display:none !important}
 .tag{display:inline-block;font-size:.8rem;padding:2px 8px;border-radius:9px;margin:0 0 6px;background:#e4e8ee}
@@ -189,7 +187,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 
 <section class="card" id="eu-fee" aria-labelledby="eu-fee-h">
 <h2 id="eu-fee-h">New since Nov 1: the €2 EU handling fee</h2>
-<p id="eu-fee-what">This is a free estimate. Type the number of declaration lines and it shows €2 times that number. The $29 kit does not do this math.</p>
+<p id="eu-fee-what">This is a free estimate. Type the number of declaration lines and it shows €2 times that number.</p>
 <label for="fee-n">Number of declaration lines (items)</label>
 <input id="fee-n" type="number" inputmode="numeric" min="0" max="999999" step="1" autocomplete="off" aria-describedby="fee-how fee-vat">
 <label class="fee-check"><input id="fee-low" type="checkbox"> This consignment's intrinsic value does not exceed EUR 150</label>
@@ -199,8 +197,6 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <p>The Commission's guidance quotes the definition of an item: one or more goods in a consignment that share the same tariff classification, description and, where the declaration asks for it, origin. The same guidance says the €2 fee and the temporary €3 customs duty apply per declaration line, whatever the quantity of articles on that line. <a href="https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en" rel="noopener noreferrer">European Commission guidance (PDF, Version of 5 October 2026), section 5.2</a></p>
 <p><strong>Who it is for:</strong> sellers outside the EU who ship online orders to consumers in the EU. <strong>Who it is not for:</strong> business-to-business sales to a taxable person, and EU-based sellers shipping goods that are already in the EU.</p>
 <p>The temporary customs duty is EUR 3 per item from 1 July 2026 until 1 July 2028, only when the consignment's intrinsic value does not exceed EUR 150. The €2 fee still applies when the consignment is above EUR 150. The guidance says the €2 fee is part of the VAT taxable amount, and that the fee is non-refundable once the customs declaration is accepted. This total is an estimate before VAT. It does not add a VAT rate. <a href="https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en" rel="noopener noreferrer">European Commission: EU Customs Reform</a> · <a href="https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en" rel="noopener noreferrer">guidance sections 3.1, 7.6 and 9.2</a></p>
-<h3>The $29 kit</h3>
-<p>The $29 EU Customs Product Data Checker is an offline Python script and an Excel workbook. It reads a Shopify product CSV on your computer and flags missing or duplicate merchant SKUs, invalid GTIN check digits, barcodes turned into scientific notation, blank or 6-digit HS codes, and country-of-origin values that are not ISO codes. It writes fix_list.csv and template.xlsx, with a suggested fix per variant and a code Y081 note when no standardised barcode exists. The kit covers product identifiers; the fee math above is free.</p>
 <p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
 <p class="thanks">Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
 </section>
@@ -226,9 +222,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 </section>
 
 <section class="card" id="results" hidden aria-live="polite">
-<!-- Result card. November 1, 2026 and the EUR 150 distance-sale rule are already stated on this page from the European Commission guidance.
-     Gumroad product fetwsm. The post-answer button keeps utm_content=result-cta.
-     Gumroad counts the click only when utm_source, utm_medium, and utm_campaign are all set. -->
+<!-- Result card. November 1, 2026 and the EUR 150 distance-sale rule are already stated on this page from the European Commission guidance. -->
 <div class="lead-cta" id="result-cta">
 <h2 id="result-problem">Paste rows to see which product identifiers are missing.</h2>
 <h3>Next steps</h3>
@@ -236,7 +230,6 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <h3>The rule and the date</h3>
 <p id="result-deadline">The European Commission says product identifiers become mandatory on November 1, 2026. Its guidance (Version of 5 October 2026) says the requirement applies to all goods sold in distance sales of imported goods with an intrinsic value not exceeding EUR 150 as from 1 November 2026, mainly goods sold to consumers (B2C). Business-to-business shipments are in principle not concerned.</p>
 <p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
-<p><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/eu-check-result" data-goatcounter-title="EU product ID check result" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=eu-product-id-check&amp;utm_content=result-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 EU Customs Product Data Checker</a></p>
 <p class="thanks">Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
 </div>
 <section class="deadline-reminder" id="deadline-reminder" aria-labelledby="deadline-reminder-h">
@@ -292,7 +285,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <pre id="fixlist" tabindex="0"></pre>
 <button id="copy" class="sec" type="button">Copy fix list</button>
 <p id="copystate" class="muted" role="status"></p>
-<p class="muted">The kit button is at the top of this result. Free deadline page: <a href="/deadlines/eu-product-identifiers-nov-1.html">EU product identifiers become mandatory for low-value e-commerce imports (Nov 1, 2026)</a></p>
+<p class="muted">Free deadline page: <a href="/deadlines/eu-product-identifiers-nov-1.html">EU product identifiers become mandatory for low-value e-commerce imports (Nov 1, 2026)</a></p>
 </section>
 <details class="fmp-share" id="fmp-share">
 <summary>Share, Embed, or License This Tool</summary>
@@ -309,18 +302,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <p class="fmp-powered">Powered by <a href="https://firstmoverprojects.com/">First Mover Projects</a></p>
 
 
-<section class="card cta" id="paid-tool" aria-labelledby="paid-h">
-<span class="kit-conv-badge">INSTANT DOWNLOAD · OFFLINE PYTHON CSV CHECKER + EXCEL FIX WORKBOOK · $29</span>
-<h2 id="paid-h">See What's Inside the $29 EU Customs Product Data Checker</h2>
-<picture><source type="image/webp" srcset="/assets/previews/eu-product-id-kit-preview-1280x720.webp"><img class="kit-preview-img" src="/assets/previews/eu-product-id-kit-preview-1280x720.png" alt="See What's Inside the $29 EU Customs Product Data Checker: offline Python CSV script, Excel Fix List workbook, and GS1 barcode & Y081 check" width="1280" height="720" loading="lazy"></picture>
-<ul class="kit-bullets">
-<li>Checks your entire Shopify product CSV export offline (not just 25 rows): flags missing or duplicate SKUs, invalid GTIN check digits, and barcodes mangled into '5.01E+12' scientific notation.</li>
-<li>Catches customs hold triggers before Nov 1, 2026: checks blank or 6-digit HS codes and non-ISO country-of-origin values (like 'USA' instead of 'US' or 'UK' instead of 'GB').</li>
-<li>Outputs a ready-to-work fix_list.csv + Excel workbook (template.xlsx) with variant-by-variant suggested fixes and code Y081 notes.</li>
-</ul>
-<div class="kit-btn-row">
-  <a target="_blank" id="paid-link" class="btn-buy-now" data-goatcounter-click="cta/eu-check-bottom" data-goatcounter-title="EU product ID check bottom" href="https://firstmoverprojects.gumroad.com/l/fetwsm?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=eu-product-id-check&amp;utm_content=bottom-cta" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 EU Customs Product Data Checker (1-Click Checkout) →</a>
-</div>
+<section class="card" id="reminders">
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
 <div class="follow-bar-actions">

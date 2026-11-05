@@ -148,10 +148,15 @@ test("each tool result has one accessible reminder form on the existing list", (
       kitClicks.push(tag);
       assert.match(tag, /data-goatcounter-click="cta\/[a-z0-9-]+"/, page.rel + " " + tag);
     }
-    const minKits = page.rel === "tools/eu-product-id-check/index.html" ? 2 : 3;
-    assert.ok(kitClicks.length >= minKits, page.rel + " kit buttons " + kitClicks.length);
-    assert.match(html, /id="kit-result"[^>]*data-goatcounter-click="cta\/[a-z0-9-]+"/, page.rel);
-    assert.match(html, /id="kit-result"[^>]*data-goatcounter-title="[^"]+"/, page.rel);
+    if (page.rel === "tools/eu-product-id-check/index.html") {
+      assert.equal(kitClicks.length, 0, page.rel + " kit buttons " + kitClicks.length);
+      assert.equal(html.includes("fetwsm"), false, page.rel);
+      assert.equal(html.includes('id="kit-result"'), false, page.rel);
+    } else {
+      assert.ok(kitClicks.length >= 3, page.rel + " kit buttons " + kitClicks.length);
+      assert.match(html, /id="kit-result"[^>]*data-goatcounter-click="cta\/[a-z0-9-]+"/, page.rel);
+      assert.match(html, /id="kit-result"[^>]*data-goatcounter-title="[^"]+"/, page.rel);
+    }
   }
 });
 
