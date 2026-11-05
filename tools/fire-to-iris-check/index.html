@@ -118,6 +118,12 @@ a#kit-top{display:flex;align-items:center;justify-content:center;width:100%;max-
 .next-irs{margin:.4em 0 0;color:#1b1f24;font-size:1rem;font-weight:400;line-height:1.45}
 .kit-fit{margin:.6em 0;font-weight:600}
 .result-kit-lead{margin:.8em 0 .2em;font-weight:600}
+#kit-offer[hidden],#provider-copy[hidden],#kit-result[hidden],#kit-refund[hidden]{display:none !important}
+.provider-copy{background:#eef1f5;border:1px solid #b9c0c8;border-radius:8px;padding:12px;margin:12px 0 0}
+.provider-question{margin:0;font-weight:700;color:#071b31;white-space:pre-wrap}
+#provider-copy button{margin:12px 0 0}
+#kit-result.paid-quiet{display:inline-block;width:auto;min-height:44px;padding:12px 0;margin:12px 0 0;background:transparent;color:#0055ff;font-weight:700;line-height:1.3;text-align:left;text-decoration:underline;border-radius:0}
+#kit-result.paid-quiet:hover,#kit-result.paid-quiet:focus{background:transparent;color:#0055ff}
 .kit-sticky{display:none;box-sizing:border-box}
 .kit-sticky[hidden]{display:none !important}
 .kit-sticky-label{flex:1 1 auto;min-width:0;margin:0;font-weight:800;font-size:.95rem;line-height:1.25;color:#071b31}
@@ -344,7 +350,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
      https://www.irs.gov/newsroom/irs-reminder-information-return-e-file-system-transitioning-to-a-new-platform
      The FIRE page, reviewed Oct 23, 2026, says "3 p.m. Easter time" for Nov. 19. IR-2026-99 says "3 p.m. ET". This page uses Eastern Time from the news release.
      https://www.irs.gov/e-file-providers/filing-information-returns-electronically-fire
-     Gumroad product id wzxbmp redirects to /l/fire-to-iris-switch-checklist and keeps the query string. The post-answer button uses utm_content=fire-check-result. -->
+     Gumroad product id wzxbmp redirects to /l/fire-to-iris-switch-checklist and keeps the query string. render() sets the post-answer utm_content for each outcome. -->
 <div class="lead-cta" id="result-cta">
 <h2 id="result-problem">You may still be on the IRS system that is closing.</h2>
 <h3>Next steps</h3>
@@ -359,8 +365,13 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 </ul>
 </div>
 <p class="deadline-count" data-deadline="2026-11-01" data-deadline-label="Nov 1, 2026 IRS FIRE test-file cutoff" hidden></p>
-<p class="result-kit-lead">Your result is above. If you would like the IRS dates, the IRIS TCC steps, and a 1099-NEC add-on in one printable list, the checklist covers it.</p>
-<p data-fire-kit="1"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/fire-check-result" data-goatcounter-title="FIRE to IRIS check result" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-check-result" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 checklist (instant PDF)</a><span class="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</span></p>
+<p class="result-kit-lead" id="result-kit-lead">Because you file yourself and don't have an IRIS TCC yet, this is the step that matters most. The checklist walks through the IRIS Application for TCC and your FIRE account steps on 3 pages, with the IRS dates and links at the top.</p>
+<p data-fire-kit="1" id="kit-offer"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/fire-result-need-tcc" data-goatcounter-title="FIRE to IRIS check result" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-result-need-tcc" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 checklist (instant PDF)</a><span class="kit-refund" id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</span></p>
+<div id="provider-copy" class="provider-copy" hidden>
+<p id="provider-question" class="provider-question" tabindex="0">Will you file our tax year 2026 information returns through IRIS?</p>
+<button type="button" class="sec" id="copy-provider">Copy question</button>
+<p id="provider-copy-state" class="muted" role="status"></p>
+</div>
 <p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
@@ -624,6 +635,61 @@ function analyze(opts) {
   return { summary: summary, items: items, csv: csv, warns: warns, steps: steps };
 }
 
+var PROVIDER_QUESTION = "Will you file our tax year 2026 information returns through IRIS?";
+
+function setLead(text) {
+  var lead = byId("result-kit-lead");
+  if (lead) lead.textContent = text;
+}
+
+function setProviderOffer() {
+  var box = byId("provider-copy");
+  var state = byId("provider-copy-state");
+  var offer = byId("kit-offer");
+  var link = byId("kit-result");
+  var refund = byId("kit-refund");
+  var question = byId("provider-question");
+  if (state) state.textContent = "";
+  if (question) question.textContent = PROVIDER_QUESTION;
+  if (box) box.hidden = false;
+  if (offer) offer.hidden = true;
+  if (link) link.hidden = true;
+  if (refund) refund.hidden = true;
+}
+
+function setResultOffer(content, quiet) {
+  var box = byId("provider-copy");
+  var state = byId("provider-copy-state");
+  var offer = byId("kit-offer");
+  var link = byId("kit-result");
+  var refund = byId("kit-refund");
+  var expired = window.FMP_FIRE_KIT && window.FMP_FIRE_KIT.expired(new Date());
+  if (state) state.textContent = "";
+  if (box) box.hidden = true;
+  if (!link) return;
+  if (expired) {
+    if (offer) offer.hidden = true;
+    link.hidden = true;
+    if (refund) refund.hidden = true;
+    return;
+  }
+  if (offer) offer.hidden = false;
+  link.hidden = false;
+  if (refund) refund.hidden = false;
+  var href = link.getAttribute("href") || "";
+  if (href.indexOf("utm_content=") !== -1) {
+    link.setAttribute("href", href.replace(/([?&]utm_content=)[^&#]*/, "$1" + content));
+  }
+  link.setAttribute("data-goatcounter-click", "cta/" + content);
+  if (quiet) {
+    link.className = "paid-quiet";
+    link.textContent = "Optional: $9 checklist (instant PDF)";
+  } else {
+    link.className = "btn";
+    link.textContent = "Get the $9 checklist (instant PDF)";
+  }
+}
+
 function render() {
   var res = analyze({
     selfFile: byId("c-self").checked,
@@ -635,12 +701,31 @@ function render() {
   });
   var problem = byId("result-problem");
   if (problem) {
-    if (!byId("c-self").checked) problem.textContent = "A provider may file your 1099 forms. Ask them to confirm they will file through IRIS after Jan 1, 2027.";
-    else if (!byId("c-iris-tcc").checked) problem.textContent = "You still need a new IRS filing code before the old system closes on Nov 19, 2026, at 3 p.m. Eastern Time.";
-    else if (byId("c-ir-changes").checked) problem.textContent = "You need to change an existing IR Application for TCC by Nov 9, 2026, before those applications become read-only.";
-    else if (byId("c-open-2026").checked) problem.textContent = "You still plan to file on FIRE. Test files stop on Nov 1, 2026. The last day to file on the old system is Nov 19, 2026, at 3 p.m. Eastern Time.";
-    else if (res.warns) problem.textContent = "You still have a step to finish before the old IRS system closes on Nov 19, 2026, at 3 p.m. Eastern Time.";
-    else problem.textContent = "Nothing urgent was flagged from the boxes you checked. On Jan 1, 2027, the new system is the only way to file.";
+    if (!byId("c-self").checked) {
+      problem.textContent = "A provider may file your 1099 forms. Ask them to confirm they will file through IRIS after Jan 1, 2027.";
+      setLead("The checklist is for people who file their own 1099s. If your provider files for you, you don't need it. Copy the question below and send it to them instead: \"" + PROVIDER_QUESTION + "\"");
+      setProviderOffer();
+    } else if (!byId("c-iris-tcc").checked) {
+      problem.textContent = "You still need a new IRS filing code before the old system closes on Nov 19, 2026, at 3 p.m. Eastern Time.";
+      setLead("Because you file yourself and don't have an IRIS TCC yet, this is the step that matters most. The checklist walks through the IRIS Application for TCC and your FIRE account steps on 3 pages, with the IRS dates and links at the top.");
+      setResultOffer("fire-result-need-tcc", false);
+    } else if (byId("c-ir-changes").checked) {
+      problem.textContent = "You need to change an existing IR Application for TCC by Nov 9, 2026, before those applications become read-only.";
+      setLead("Because you need to change an existing IR TCC application, do that before Nov 9, 2026, when those applications become read-only. The checklist puts that step, the IRIS TCC steps and the other IRS dates on one printable list.");
+      setResultOffer("fire-result-nov9", false);
+    } else if (byId("c-open-2026").checked) {
+      problem.textContent = "You still plan to file on FIRE. Test files stop on Nov 1, 2026. The last day to file on the old system is Nov 19, 2026, at 3 p.m. Eastern Time.";
+      setLead("Because you still plan to file on FIRE, the last day is Nov 19, 2026, at 3 p.m. Eastern Time. The checklist lists the IRS dates and links, your FIRE account steps and 2027 prep on one page set.");
+      setResultOffer("fire-result-still-fire", false);
+    } else if (res.warns) {
+      problem.textContent = "You still have a step to finish before the old IRS system closes on Nov 19, 2026, at 3 p.m. Eastern Time.";
+      setLead("You still have a step to finish. The checklist puts the IRS dates, IRIS TCC steps and a 1099-NEC add-on in one printable list.");
+      setResultOffer("fire-result-warn", false);
+    } else {
+      problem.textContent = "Nothing urgent was flagged from the boxes you checked. On Jan 1, 2027, the new system is the only way to file.";
+      setLead("You look on track from what you checked. Most people in your spot don't need to buy anything. If you'd like 2027 prep and the IRS dates on one printable list, the checklist is optional.");
+      setResultOffer("fire-result-ontrack", true);
+    }
   }
   var stepList = byId("next-steps");
   if (stepList) {
@@ -753,6 +838,20 @@ if (kitStickyDismiss) kitStickyDismiss.addEventListener("click", function () {
 window.addEventListener("resize", function () {
   var bar = byId("kit-sticky");
   if (bar && !bar.hidden) syncKitSticky(true);
+});
+byId("copy-provider").addEventListener("click", function () {
+  var text = byId("provider-question").textContent;
+  var state = byId("provider-copy-state");
+  if (!text) return;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function () {
+      state.textContent = "Copied.";
+    }, function () {
+      state.textContent = "Select the question above and copy it.";
+    });
+  } else {
+    state.textContent = "Select the question above and copy it.";
+  }
 });
 byId("copy").addEventListener("click", function () {
   var text = byId("plain-out").textContent;
