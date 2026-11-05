@@ -459,16 +459,15 @@ Please reissue my certificate with these corrections:
 <!-- Result card. Nov 2, 2026 is the date in Amazon's seller announcement, already linked in Sources.
      paint() sets the post-answer lead, button state, and utm_content for each outcome. The plain text link is in the footer. -->
 <div class="lead-cta" id="result-cta">
-<h2 id="result-problem">Your certificate still needs a look before Nov 2, 2026.</h2>
+<h2 id="result-problem">Your certificate still needs a look before you upload it to Amazon.</h2>
 <h3>Next steps</h3>
 <ol class="next-steps" id="next-steps"></ol>
 <h3>Date</h3>
 <p id="result-deadline">Amazon's extra rule starts Nov 2, 2026. Sellers in higher-safety categories need $1 million of coverage for each incident, and $1 million in total, even if sales are low.</p>
 <p class="deadline-count" data-deadline="2026-11-02" data-deadline-label="Nov 2, 2026 Amazon COI deadline" hidden></p>
-<p class="deliverables">You get a 12-file ZIP: policy checklist quoting Amazon word for word, COI pre-check, category screen, broker email, Excel workbook.</p>
 <!-- TODO: two real preview images of the checklist and the workbook are not in this repo. sales/gumroad_previews/ is missing. assets/previews/amazon-coi-kit-preview-1280x720.png is one marketing composite, not two screenshots. Do not invent images. -->
 <div id="amazon-kit" hidden>
-<p class="result-kit-lead" id="result-kit-lead">Because you have a certificate with items to fix before Nov 2, 2026, the kit has the interactive 7-point ACORD 25 pre-upload audit workbook, the copy-paste broker email correction scripts, and the step-by-step Seller Central Account Health upload walkthrough.</p>
+<p class="result-kit-lead" id="result-kit-lead">Because you have a certificate with items to fix before you upload it to Amazon, the kit has the interactive 7-point ACORD 25 pre-upload audit workbook, the copy-paste broker email correction scripts, and the step-by-step Seller Central Account Health upload walkthrough.</p>
 <p id="result-kit-offer"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/amazon-coi-result-fix" data-goatcounter-title="Amazon COI check result" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=amazon-coi-check&amp;utm_content=amazon-coi-result-fix" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 kit with broker scripts</a><span class="kit-refund" id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</span></p>
 <div id="nofit-next" class="nofit-next" hidden>
 <p id="nofit-next-text" class="nofit-next-text" tabindex="0">If the notice was triggered by an old discontinued or inactive ASIN you no longer sell, permanently deleting that listing from Manage Inventory, rather than only closing it, can remove the category trigger at $0 cost. If you actively sell in that category, you must upload a compliant ACORD 25 certificate of insurance.</p>
@@ -1116,13 +1115,6 @@ function setLead(text) {
   if (lead) lead.textContent = text;
 }
 
-function setDeliverablesVisible(show) {
-  if (!document.querySelectorAll) return;
-  var nodes = document.querySelectorAll("#result-cta .deliverables");
-  var i;
-  for (i = 0; i < nodes.length; i++) nodes[i].hidden = !show;
-}
-
 function extraScope(q2, q3) {
   var lines = [];
   if (q2 === "yes") lines.push(SALES_RULE);
@@ -1197,16 +1189,16 @@ function applyResultCta(q1, q2, q3, nFix, nCheck, date) {
     return "nofit";
   }
   if (nFix > 0) {
-    setLead("Because you have a certificate with items to fix before " + date.when + ", the kit has " + KIT_CONTENTS + ".");
+    setLead("Because you have a certificate with items to fix before you upload it to Amazon, the kit has " + KIT_CONTENTS + ".");
     setResultOffer("amazon-coi-result-fix", false);
     return "button";
   }
   if (nCheck > 0) {
-    setLead("Because you still have lines on your certificate to check by hand before " + date.when + ", the kit has " + KIT_CONTENTS + ".");
+    setLead("Because you still have lines on your certificate to check by hand before you upload it to Amazon, the kit has " + KIT_CONTENTS + ".");
     setResultOffer("amazon-coi-result-check", false);
     return "button";
   }
-  setLead("Because you have a certificate whose seven key terms look right for " + date.when + ", the kit is optional. It is " + KIT_CONTENTS + ".");
+  setLead("Because the seven key terms on your certificate look right, the kit is optional. It is " + KIT_CONTENTS + ".");
   setResultOffer("amazon-coi-result-ontrack", true);
   return "quiet";
 }
@@ -1303,12 +1295,11 @@ function paint(result, opts) {
   var q2 = groupValue("q2");
   var q3 = groupValue("q3");
   var date = applicableDate(q1, q2);
-  if (nFix > 0) setText("result-problem", "Your certificate has " + nFix + (nFix === 1 ? " item" : " items") + " to fix before " + date.when + ".");
-  else if (nCheck > 0) setText("result-problem", "Some lines on your certificate still need a check by hand before " + date.when + ".");
-  else setText("result-problem", "The seven key terms on your certificate look right for " + date.when + ".");
+  if (nFix > 0) setText("result-problem", "Your certificate has " + nFix + (nFix === 1 ? " item" : " items") + " to fix before you upload it to Amazon.");
+  else if (nCheck > 0) setText("result-problem", "Some lines on your certificate still need a check by hand before you upload it to Amazon.");
+  else setText("result-problem", "The seven key terms on your certificate look right for Amazon's rule in effect since Nov 2, 2026.");
   setText("result-deadline", date.line);
   var mode = applyResultCta(q1, q2, q3, nFix, nCheck, date);
-  setDeliverablesVisible(mode !== "nofit");
   paintSteps(collectSteps(result, q3));
   var cap = byId("cap");
   if (cap) {

@@ -27,9 +27,9 @@ const LEADS = {
   category: "Because you said no, your Amazon.com products do not fall in a category with enhanced safety listing requirements. Good fit if you got Amazon's $1M insurance notice and sell in an enhanced-safety category. If the notice came from an old listing you no longer sell, try deleting it first, at no cost.",
   unsure: "Because you are not sure whether any of your Amazon.com products fall in a category with enhanced safety listing requirements, check Amazon's category list and your Account Health page. This page can't see your account.",
   blank: "Because you have not chosen Yes, No, or Not sure for whether any of your Amazon.com products fall in a category with enhanced safety listing requirements, choose Yes, No, or Not sure for each question. This page cannot see your Seller Central account.",
-  fix: "Because you have a certificate with items to fix before Nov 2, 2026, the kit has " + KIT_CONTENTS + ".",
-  check: "Because you still have lines on your certificate to check by hand before Nov 2, 2026, the kit has " + KIT_CONTENTS + ".",
-  ontrack: "Because you have a certificate whose seven key terms look right for Nov 2, 2026, the kit is optional. It is " + KIT_CONTENTS + "."
+  fix: "Because you have a certificate with items to fix before you upload it to Amazon, the kit has " + KIT_CONTENTS + ".",
+  check: "Because you still have lines on your certificate to check by hand before you upload it to Amazon, the kit has " + KIT_CONTENTS + ".",
+  ontrack: "Because the seven key terms on your certificate look right, the kit is optional. It is " + KIT_CONTENTS + "."
 };
 const CLEAN = [
   "Insured: Sample Goods LLC",
@@ -49,13 +49,14 @@ test("result copy stays on the page facts and keeps the house lines", () => {
   const product = html.slice(html.indexOf('id="product-jsonld"'), html.indexOf("</script>", html.indexOf('id="product-jsonld"')));
   assert.equal(product.includes(KIT_CONTENTS), true);
   for (const key of ["none", "category", "unsure", "blank", "fix"]) assert.equal(html.includes(LEADS[key]), true, key);
-  assert.equal(html.includes("Because you still have lines on your certificate to check by hand before "), true);
-  assert.equal(html.includes("Because you have a certificate whose seven key terms look right for "), true);
-  assert.equal(html.includes("the kit is optional. It is "), true);
-  assert.equal(html.includes("12-file"), true);
-  assert.equal(LEADS.fix.includes("12-file"), false);
-  assert.equal(LEADS.check.includes("Excel"), false);
-  assert.equal(LEADS.ontrack.includes("category screen"), false);
+  assert.equal(html.includes("Because you still have lines on your certificate to check by hand before you upload it to Amazon, the kit has "), true);
+  assert.equal(html.includes("Because the seven key terms on your certificate look right, the kit is optional. It is "), true);
+  assert.equal(html.includes("look right for Amazon's rule in effect since Nov 2, 2026."), true);
+  assert.equal(html.includes("12-file"), false);
+  assert.equal(html.includes("Excel workbook"), false);
+  assert.equal(LEADS.fix.includes("before Nov 2"), false);
+  assert.equal(LEADS.check.includes("before Nov 2"), false);
+  assert.equal(LEADS.ontrack.includes("before Nov 2"), false);
   assert.equal(html.includes("Thanks for your time. If this isn't right for you, please share it with someone it could help."), true);
   assert.equal(html.includes("Thank you for your time."), true);
   assert.equal(html.includes("Share it with someone it could help."), true);
@@ -157,7 +158,8 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
         stickyVisible: visible(sticky),
         disclaimer: disclaimer.textContent,
         disclaimerVisible: visible(disclaimer),
-        deliverablesVisible: visible(document.querySelector("#result-cta .deliverables")),
+        deadline: document.getElementById("result-deadline").textContent,
+        card: document.getElementById("result-cta").textContent,
         thanks: document.querySelector("#result-cta .thanks").textContent,
         share: document.querySelector("#result-cta .share-line").textContent,
         footerThanks: document.body.innerText.includes("Thanks for your time. If this isn't right for you, please share it with someone it could help."),
@@ -220,7 +222,8 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
       nofit: true,
       next: DELETE_STEP,
       run: (page) => runSample(page, { q1: "no", q2: "no", q3: "no" }),
-      problem: /items to fix before Nov 2, 2026/
+      problem: /3 items to fix before you upload it to Amazon\./,
+      deadline: "Amazon's extra rule starts Nov 2, 2026. Sellers in higher-safety categories need $1 million of coverage for each incident, and $1 million in total, even if sales are low."
     },
     {
       key: "category",
@@ -228,7 +231,8 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
       nofit: true,
       next: DELETE_STEP + "\n" + SALES_RULE + "\n" + AMAZON_DECIDES,
       run: (page) => runSample(page, { q1: "no", q2: "yes", q3: "no" }),
-      problem: /items to fix before the 30-day window in Amazon's existing rule/
+      problem: /3 items to fix before you upload it to Amazon\./,
+      deadline: "Amazon's existing rule already applies: insurance within 30 days after exceeding USD 10,000 in gross proceeds in one month."
     },
     {
       key: "unsure",
@@ -236,7 +240,8 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
       nofit: true,
       next: CATEGORY_CHECK,
       run: (page) => runSample(page, { q1: "unsure", q2: "no", q3: "no" }),
-      problem: /items to fix before Nov 2, 2026/
+      problem: /3 items to fix before you upload it to Amazon\./,
+      deadline: "Amazon's extra rule starts Nov 2, 2026. Sellers in higher-safety categories need $1 million of coverage for each incident, and $1 million in total, even if sales are low."
     },
     {
       key: "blank",
@@ -244,7 +249,8 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
       nofit: true,
       next: CHOOSE_ANSWERS + "\n" + CATEGORY_CHECK,
       run: (page) => runSample(page, { q1: "", q2: "", q3: "" }),
-      problem: /items to fix before Nov 2, 2026/
+      problem: /3 items to fix before you upload it to Amazon\./,
+      deadline: "Amazon's extra rule starts Nov 2, 2026. Sellers in higher-safety categories need $1 million of coverage for each incident, and $1 million in total, even if sales are low."
     },
     {
       key: "fix",
@@ -253,7 +259,8 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
       quiet: false,
       content: "amazon-coi-result-fix",
       run: (page) => runSample(page, { q1: "yes", q2: "no", q3: "no" }),
-      problem: /3 items to fix before Nov 2, 2026/
+      problem: /3 items to fix before you upload it to Amazon\./,
+      deadline: "From Nov 2, 2026, Amazon's page says you need USD 1 million coverage for those products regardless of sales."
     },
     {
       key: "check",
@@ -262,7 +269,8 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
       quiet: false,
       content: "amazon-coi-result-check",
       run: (page) => runClean(page),
-      problem: "Some lines on your certificate still need a check by hand before Nov 2, 2026."
+      problem: "Some lines on your certificate still need a check by hand before you upload it to Amazon.",
+      deadline: "From Nov 2, 2026, Amazon's page says you need USD 1 million coverage for those products regardless of sales."
     },
     {
       key: "ontrack",
@@ -271,7 +279,8 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
       quiet: true,
       content: "amazon-coi-result-ontrack",
       run: (page) => runOnTrack(page),
-      problem: "The seven key terms on your certificate look right for Nov 2, 2026."
+      problem: "The seven key terms on your certificate look right for Amazon's rule in effect since Nov 2, 2026.",
+      deadline: "From Nov 2, 2026, Amazon's page says you need USD 1 million coverage for those products regardless of sales."
     }
   ];
 
@@ -282,7 +291,11 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
       const state = await offerState(page);
       const label = width + " " + item.key;
       assert.equal(state.lead, LEADS[item.key], label);
-      assert.equal(state.lead.startsWith("Because you "), true, label);
+      if (item.key === "ontrack") assert.equal(state.lead.startsWith("Because the "), true, label);
+      else assert.equal(state.lead.startsWith("Because you "), true, label);
+      assert.equal(state.deadline, item.deadline, label);
+      assert.equal(state.card.includes("12-file"), false, label);
+      assert.equal(state.card.includes("before Nov 2"), false, label);
       if (item.problem instanceof RegExp) assert.match(state.problem, item.problem, label);
       else assert.equal(state.problem, item.problem, label);
       assert.equal(state.disclaimer, DISCLAIMER, label);
@@ -292,7 +305,6 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
       assert.equal(state.footerThanks, true, label);
       assert.ok(state.thanksTop < state.shareTop, label);
       assert.ok(state.steps >= 1 && state.steps <= 3, label + " steps " + state.steps);
-      assert.equal(state.deliverablesVisible, !item.nofit, label);
       if (item.nofit) {
         assert.equal(state.boxVisible, true, label);
         assert.equal(state.nextText, item.next, label);
