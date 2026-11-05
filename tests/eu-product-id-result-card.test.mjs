@@ -83,8 +83,10 @@ test("the answer block leads with one result and the thanks line", () => {
   assert.match(html, /Not affiliated with the European Commission or any customs authority/);
   assert.match(html, /General guidance, not legal, tax or IT advice/);
   assert.match(html, /id="faq"/);
-  assert.match(html, /property="og:image"/);
+  assert.match(html, /property="og:image" content="https:\/\/firstmoverprojects.com\/assets\/fmp-logo-460.png"/);
+  assert.match(html, /name="twitter:image" content="https:\/\/firstmoverprojects.com\/assets\/fmp-logo-460.png"/);
   assert.match(html, /name="twitter:card"/);
+  assert.equal(html.includes("eu-product-id-kit-preview"), false);
   assert.equal(/document\.cookie/.test(html), false);
   const scripts = [...html.matchAll(/<script\b[^>]*\bsrc="([^"]+)"/g)].map((match) => match[1]);
   assert.deepEqual(scripts, ["https://gc.zgo.at/count.js"]);
