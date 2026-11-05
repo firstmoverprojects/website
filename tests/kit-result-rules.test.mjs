@@ -78,10 +78,14 @@ test("deadline rows keep each kit on its own row", () => {
   const ws = html.slice(html.indexOf('id="ws2016"'), html.indexOf('data-date="Apr 1, 2027"'));
   assert.match(famli, /Maryland FAMLI payroll deductions start Jan 1, 2027; employee notice due 1 pay period before \(Maryland FAMLI\)\./);
   assert.match(famli, /https:\/\/paidleave\.maryland\.gov\/employers\/make-contributions\//);
+  assert.match(famli, /https:\/\/paidleave\.maryland\.gov\/files\/famli-2026-employee-notification-template\.docx/);
+  assert.match(famli, /Free Maryland FAMLI employee notice template \(Maryland Department of Labor\)/);
+  assert.match(famli, /Not affiliated with or endorsed by the Maryland Department of Labor\./);
   assert.match(famli, /paidleave\.maryland\.gov/);
   assert.match(famli, /COMAR 09\.42/);
-  assert.match(famli, /Optional: \$9 Maryland FAMLI notice kit/);
-  assert.match(famli, /utm_content=md-famli/);
+  assert.equal(famli.includes("gumroad.com"), false);
+  assert.equal(famli.includes("$9"), false);
+  assert.equal(famli.includes("notice kit"), false);
   assert.match(famli, /General guidance, not legal, tax or IT advice\./);
   assert.equal(famli.includes("windows-server-2016"), false);
   assert.match(ws, /Windows Server 2016 extended support ends Jan 12, 2027/);
@@ -92,7 +96,7 @@ test("deadline rows keep each kit on its own row", () => {
   assert.match(ws, /General guidance, not legal, tax or IT advice\./);
   assert.equal(ws.includes("days left"), false);
   assert.equal(ws.includes("setInterval"), false);
-  assert.equal(html.split("maryland-famli-payroll-notice-kit").length - 1, 1);
+  assert.equal(html.split("maryland-famli-payroll-notice-kit").length - 1, 0);
   assert.equal(html.split("windows-server-2016-end-of-support-kit").length - 1, 1);
   assert.equal(html.includes("windows-server-2016-check"), false);
   const hub = html.slice(html.indexOf("Optional printable kits"));

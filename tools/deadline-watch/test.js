@@ -209,11 +209,23 @@ check("FAMLI date is January 1, 2027", mdFamli && mdFamli.date === "2027-01-01")
 check("FAMLI cites paidleave.maryland.gov", mdFamli && mdFamli.sourceUrl === "https://paidleave.maryland.gov/employers/make-contributions/");
 check("FAMLI names COMAR 09.42", mdFamli && /COMAR 09\.42/.test(mdFamli.detail));
 check("FAMLI avoids a contribution split", mdFamli && /does not state a contribution split/.test(mdFamli.detail));
-check("FAMLI kit is only on that row", mdFamli && mdFamli.kit && mdFamli.kit.label === "Optional: $9 Maryland FAMLI notice kit");
+check("FAMLI row has no paid kit", !mdFamli.kit);
 check("a Texas business does not get the FAMLI row", api.rowsFor(data, { type: "ccorp", employees: "yes", state: "TX" }).every((row) => row.id !== "md-famli-2027"));
+const famliAlso = (mdFamli && mdFamli.also ? mdFamli.also : []).map((item) => item.url);
+check(
+  "FAMLI links the official notice template",
+  famliAlso.indexOf("https://paidleave.maryland.gov/files/famli-2026-employee-notification-template.docx") !== -1
+);
+check(
+  "FAMLI names the free state template",
+  mdFamli && (mdFamli.also || []).some((item) => item.label === "Free Maryland FAMLI employee notice template (Maryland Department of Labor)")
+);
+check("FAMLI keeps the Department of Labor line", mdFamli && /Not affiliated with or endorsed by the Maryland Department of Labor\./.test(mdFamli.detail));
 const famliCard = api.card(mdFamli, false, "2026-11-02");
-check("FAMLI card links the kit", famliCard.indexOf("maryland-famli-payroll-notice-kit") !== -1);
-check("FAMLI card has the advice line", famliCard.indexOf("General guidance, not legal, tax or IT advice.") !== -1);
+check("FAMLI card links the official notice template", famliCard.indexOf("https://paidleave.maryland.gov/files/famli-2026-employee-notification-template.docx") !== -1);
+check("FAMLI card names the free state template", famliCard.indexOf("Free Maryland FAMLI employee notice template (Maryland Department of Labor)") !== -1);
+check("FAMLI card keeps the Department of Labor line", famliCard.indexOf("Not affiliated with or endorsed by the Maryland Department of Labor.") !== -1);
+check("FAMLI card has no paid kit", famliCard.indexOf("gumroad.com") === -1 && famliCard.indexOf("$9") === -1 && famliCard.indexOf("notice kit") === -1);
 const plainCard = api.card(mdEfile, false, "2026-11-02");
 check("Maryland e-file card has no kit link", plainCard.indexOf("gumroad.com") === -1);
 check("Texas S corp has no 1040", employer.every((row) => row.id.indexOf("1040") === -1 || row.id.indexOf("1040-es") !== -1 || row.id.indexOf("fed-es-") === 0));
@@ -298,6 +310,24 @@ check("Detroit check links Deadline Watch", detroitHtml.includes("https://firstm
 check("Detroit check stays noindex", /<meta\s+name="robots"\s+content="noindex"\s*>/.test(detroitHtml));
 check("Pennsylvania page links Deadline Watch as a reminder", paPageHtml.includes("https://firstmoverprojects.com/tools/deadline-watch/"));
 check("Deadline Watch links stay on the Detroit check and the Pennsylvania page", deadlineWatchLinks.size === 2);
+check("Deadline Watch page keeps the Department of Labor line", html.includes("Not affiliated with or endorsed by the Maryland Department of Labor."));
+check("Deadline Watch page has no FAMLI product markup", html.indexOf("product-jsonld") === -1 && html.indexOf('"@type": "Product"') === -1);
+
+const paidFamli = /maryland-famli-payroll-notice-kit|\$9 Maryland FAMLI|Maryland FAMLI notice kit/;
+function scanPaid(dir) {
+  fs.readdirSync(dir).forEach((name) => {
+    if (name === ".git" || name === "node_modules") return;
+    const full = path.join(dir, name);
+    const stat = fs.statSync(full);
+    if (stat.isDirectory()) scanPaid(full);
+    else if (/\.(html|xml|js|json|md|yml|mjs|css)$/.test(name)) {
+      if (name === "test.js" || name.endsWith(".test.mjs")) return;
+      const text = fs.readFileSync(full, "utf8");
+      if (paidFamli.test(text)) failures.push("paid FAMLI reference in " + path.relative(root, full));
+    }
+  });
+}
+scanPaid(root);
 
 if (failures.length) {
   console.error(failures.join("\n"));
