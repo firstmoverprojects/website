@@ -110,6 +110,88 @@ test("missing or contradictory answers do not pick a form", () => {
   assert.equal(decide("business", "contractor", "mixed", "none").id, "unsure");
 });
 
+test("each outcome sets its own checklist offer on the existing $9 product", () => {
+  const cases = [
+    ["business", "contractor", "noncard", "least", "nec", "1099-result-nec", false, false],
+    ["business", "attorney", "noncard", "least", "nec", "1099-result-nec", false, false],
+    ["business", "contractor", "card", "none", "k", "1099-result-k-only", true, true],
+    ["business", "contractor", "card", "unsure", "k", "1099-result-k-only", true, true],
+    ["business", "contractor", "mixed", "least", "mixed", "1099-result-split", false, false],
+    ["business", "attorney", "card", "least", "mixed", "1099-result-split", false, false],
+    ["personal", "contractor", "noncard", "least", "none", "1099-result-none", true, true],
+    ["business", "employee", "noncard", "least", "none", "1099-result-none", true, true],
+    ["business", "corporation", "noncard", "least", "none", "1099-result-none", true, true],
+    ["business", "contractor", "noncard", "under", "none", "1099-result-none", true, true],
+    ["business", "contractor", "mixed", "under", "none", "1099-result-none", true, true],
+    ["", "contractor", "noncard", "least", "unsure", "1099-result-warn", false, false],
+    ["unsure", "contractor", "noncard", "least", "unsure", "1099-result-warn", false, false],
+    ["business", "unsure", "noncard", "least", "unsure", "1099-result-warn", false, false],
+    ["business", "contractor", "unsure", "least", "unsure", "1099-result-warn", false, false],
+    ["business", "contractor", "noncard", "unsure", "unsure", "1099-result-warn", false, false],
+    ["business", "contractor", "noncard", "none", "unsure", "1099-result-warn", false, false],
+    ["business", "contractor", "mixed", "none", "unsure", "1099-result-warn", false, false]
+  ];
+  for (const row of cases) {
+    const result = decide(row[0], row[1], row[2], row[3]);
+    const offer = api.offerFor(result.id);
+    assert.equal(result.id, row[4], row.join("|"));
+    assert.equal(offer.utm, row[5], result.id);
+    assert.equal(offer.quiet, row[6], result.id);
+    assert.equal(offer.nofit, row[7], result.id);
+    assert.equal(html.includes(offer.lead), true, offer.lead);
+    if (offer.nofit) assert.match(offer.lead, /You likely do not need to buy a checklist for this payment/);
+    else assert.match(offer.lead, /the checklist puts the IRIS steps and a 1099-NEC add-on on one printable list\./i);
+  }
+  assert.match(api.offerFor("k").lead, /Keep your card and payment-app records/);
+  assert.match(api.offerFor("k").lead, /\$2,000 or more/);
+  const withheldHead = "If you withheld federal income tax, the amount is not the limit: Form 1099-NEC is still required; see the backup-withholding step above.";
+  assert.equal(api.offerFor("none").lead.includes(withheldHead), true);
+  assert.ok(api.offerFor("none").lead.indexOf(withheldHead) < api.offerFor("none").lead.indexOf("Watch the $2,000 threshold"));
+  assert.match(api.offerFor("none").lead, /Watch the \$2,000 threshold/);
+  assert.match(api.offerFor("none").lead, /keep notes on who you paid and how/);
+  assert.match(api.offerFor("unsure").lead, /^Because you said/);
+  assert.match(html, /utm_content=1099-result-nec/);
+  assert.match(html, /id="kit-offer"/);
+  assert.match(html, /id="result-irs">Not affiliated with or endorsed by the IRS\./);
+  assert.match(html, /id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described\./);
+  assert.equal(html.includes("Not affiliated with the IRS."), false);
+  const slugs = [...html.matchAll(/firstmoverprojects\.gumroad\.com\/l\/([A-Za-z0-9_-]+)/g)].map((match) => match[1]);
+  assert.ok(slugs.length >= 4);
+  for (const slug of slugs) assert.equal(slug, "fire-to-iris-switch-checklist");
+});
+
+test("a no-fit none result keeps the backup withholding exception in the visible lead", () => {
+  const head = "If you withheld federal income tax, the amount is not the limit: Form 1099-NEC is still required; see the backup-withholding step above.";
+  const step = "If you withheld any federal income tax under the backup withholding rules, file Form 1099-NEC for that person no matter the amount. The instructions say to report that withholding in box 4.";
+  const offer = api.offerFor("none");
+  assert.equal(offer.utm, "1099-result-none");
+  assert.equal(offer.quiet, true);
+  assert.equal(offer.nofit, true);
+  assert.equal(offer.lead, "You likely do not need to buy a checklist for this payment. " + head + " Watch the $2,000 threshold on cash, check, bank transfer, and ACH payments, and keep notes on who you paid and how.");
+  const paths = [
+    ["personal", "contractor", "noncard", "under"],
+    ["business", "employee", "noncard", "least"],
+    ["business", "corporation", "noncard", "least"],
+    ["business", "contractor", "noncard", "under"],
+    ["business", "contractor", "mixed", "under"],
+    ["business", "contractor", "card", "under"]
+  ];
+  for (const row of paths) {
+    const result = decide(row[0], row[1], row[2], row[3]);
+    const label = row.join("|");
+    assert.equal(result.id, "none", label);
+    assert.equal(result.headline, "Likely no 1099 needed", label);
+    assert.equal(result.steps.includes(step), true, label);
+    assert.equal(api.offerFor(result.id), offer, label);
+  }
+  assert.equal(api.offerFor("nec").lead.includes(head), false);
+  assert.equal(api.offerFor("mixed").lead.includes(head), false);
+  assert.equal(api.offerFor("unsure").lead.includes(head), false);
+  assert.equal(api.offerFor("k").nofit, true);
+  assert.equal(api.offerFor("k").quiet, true);
+  assert.equal(api.offerFor("k").lead.includes(head), false);
+});
+
 test("the page cites the IRS sources, the check date, and stays in the sitemap and tools index", () => {
   const sources = [
     "https://www.irs.gov/instructions/i1099mec",

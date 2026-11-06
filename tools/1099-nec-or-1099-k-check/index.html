@@ -51,6 +51,10 @@ a{color:#0055ff}
 .disclaimer{font-weight:700;margin:12px 0 0}
 #kit-result{display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;box-sizing:border-box;min-height:48px;padding:14px 18px;margin:12px 0 0;background:#0055ff;color:#fff;font-weight:800;line-height:1.3;text-align:center;text-decoration:none;border-radius:8px;white-space:normal;overflow-wrap:anywhere}
 #kit-result:hover,#kit-result:focus{background:#0044cc;color:#fff}
+#kit-offer[hidden],#kit-result[hidden],#kit-refund[hidden],#kit-top-offer[hidden],#kit-top-free[hidden],#kit-footer-offer[hidden]{display:none !important}
+#kit-result.paid-quiet{display:inline-block;width:auto;min-height:44px;padding:12px 0;margin:12px 0 0;background:transparent;color:#0055ff;font-weight:700;line-height:1.3;text-align:left;text-decoration:underline;border-radius:0}
+#kit-result.paid-quiet:hover,#kit-result.paid-quiet:focus{background:transparent;color:#0055ff}
+a.free-next{display:inline-block;max-width:100%;box-sizing:border-box;min-height:44px;padding:12px 0;color:#0055ff;font-weight:700;line-height:1.3;text-decoration:underline;white-space:normal;overflow-wrap:anywhere}
 a.paid-quiet{display:inline-block;max-width:100%;box-sizing:border-box;min-height:44px;padding:12px 0;color:#0055ff;font-weight:700;line-height:1.3;text-decoration:underline;white-space:normal;overflow-wrap:anywhere}
 .kit-refund{display:block;max-width:100%;margin:6px 0 0;color:#5a636e;font-size:.82rem;font-weight:400;line-height:1.4}
 #results,#result-cta{overflow-wrap:anywhere;max-width:100%}
@@ -263,10 +267,12 @@ legend{font-weight:700;padding:0 6px}
 <p class="muted site-nav"><a href="https://firstmoverprojects.com/">First Mover Projects</a> · <a href="/tools/">All tools</a> · <a href="/deadlines/">Deadlines</a></p>
 <h1>1099-NEC or 1099-K Check</h1>
 <p class="subhead">Four questions about one payee you paid in 2026. The result is one of four answers: file Form 1099-NEC, leave it to Form 1099-K, file Form 1099-NEC only for the non-card part, or likely no 1099.</p>
-<p>General guidance, not legal, tax or IT advice.</p>
 <div class="kit-top">
-<p data-fire-kit="1"><a target="_blank" class="btn" id="kit-top" data-goatcounter-click="cta/1099-nec-or-1099-k-check-top" data-goatcounter-title="1099-NEC or 1099-K check top" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=1099-nec-or-1099-k-check&amp;utm_content=fire-check-top" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">See the $9 FIRE to IRIS checklist</a></p>
+<p data-fire-kit="1" id="kit-top-offer"><a target="_blank" class="btn" id="kit-top" data-goatcounter-click="cta/1099-nec-or-1099-k-check-top" data-goatcounter-title="1099-NEC or 1099-K check top" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=1099-nec-or-1099-k-check&amp;utm_content=fire-check-top" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">See the $9 FIRE to IRIS checklist</a><span class="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</span></p>
+<p id="kit-top-free" hidden><a class="free-next" id="kit-top-free-link" data-goatcounter-click="cta/1099-top-free-fire" href="/tools/fire-to-iris-check/">Open the free FIRE to IRIS check</a></p>
 <p class="kit-note">If you already know a form is yours to file, the <a href="/tools/fire-to-iris-check/">free FIRE to IRIS check</a> covers the cutoff and the IRIS TCC steps. FIRE closes November 19, 2026. IRIS is the only e-file system after January 1, 2027.</p>
+<p>General guidance, not legal, tax or IT advice.</p>
+<p>Not affiliated with or endorsed by the IRS.</p>
 </div>
 
 <section class="card" aria-labelledby="facts-h">
@@ -330,12 +336,15 @@ legend{font-weight:700;padding:0 6px}
 </section>
 
 <section class="card" id="results" hidden aria-live="polite">
+<!-- render() keeps the headline from decide() and sets the lead, button, and utm_content for that outcome.
+     Paid links stay on fire-to-iris-switch-checklist. No other product. -->
 <div class="lead-cta" id="result-cta">
 <h2 id="result-problem"></h2>
 <ol class="next-steps" id="next-steps"></ol>
-<p class="result-kit-lead">If a form is yours to file, the checklist puts the IRIS steps and a 1099-NEC add-on on one printable list.</p>
-<p data-fire-kit="1"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/1099-nec-or-1099-k-check-result" data-goatcounter-title="1099-NEC or 1099-K check result" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=1099-nec-or-1099-k-check&amp;utm_content=fire-check-result" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 checklist (instant PDF)</a><span class="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</span></p>
+<p class="result-kit-lead" id="result-kit-lead">Because this payment looks like a Form 1099-NEC for you to file, the checklist puts the IRIS steps and a 1099-NEC add-on on one printable list.</p>
+<p data-fire-kit="1" id="kit-offer"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/1099-result-nec" data-goatcounter-title="1099-NEC or 1099-K check result" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=1099-nec-or-1099-k-check&amp;utm_content=1099-result-nec" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 checklist (instant PDF)</a><span class="kit-refund" id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</span></p>
 <p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
+<p id="result-irs">Not affiliated with or endorsed by the IRS.</p>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
 <div class="follow-bar-actions">
@@ -387,8 +396,10 @@ legend{font-weight:700;padding:0 6px}
 <p class="kit-fit">Good fit if you file 1099s for your business or clients and must move from FIRE to IRIS by Jan 1, 2027. Not needed if your software files for you.</p>
 <picture><source type="image/webp" srcset="/assets/previews/fire-to-iris-kit-preview-1280x720.webp"><img class="kit-preview-img" src="/assets/previews/fire-to-iris-kit-preview-1280x720.png" alt="See What's Inside the $9 FIRE to IRIS Switch Checklist: one PDF, 3 pages, with the IRS dates, your FIRE account, the IRIS Application for TCC, and a 1099-NEC add-on" width="1280" height="720" loading="lazy"></picture>
 <p>One 3-page PDF with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on.</p>
-<p data-fire-kit="1"><a target="_blank" class="paid-quiet" id="paid-link" data-goatcounter-click="cta/1099-nec-or-1099-k-check-footer" data-goatcounter-title="1099-NEC or 1099-K check footer" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=1099-nec-or-1099-k-check&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Optional: $9 switch checklist on Gumroad</a><span class="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</span></p>
+<p id="kit-footer-free"><a class="free-next" id="kit-footer-free-link" data-goatcounter-click="cta/1099-footer-free-fire" href="/tools/fire-to-iris-check/">Open the free FIRE to IRIS check</a></p>
+<p data-fire-kit="1" id="kit-footer-offer"><a target="_blank" class="paid-quiet" id="paid-link" data-goatcounter-click="cta/1099-nec-or-1099-k-check-footer" data-goatcounter-title="1099-NEC or 1099-K check footer" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=1099-nec-or-1099-k-check&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Optional: $9 switch checklist on Gumroad</a><span class="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</span></p>
 <p>General guidance, not legal, tax or IT advice.</p>
+<p>Not affiliated with or endorsed by the IRS.</p>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
 <div class="follow-bar-actions">
@@ -442,7 +453,7 @@ legend{font-weight:700;padding:0 6px}
 </main>
 <div id="kit-sticky" class="kit-sticky" hidden role="region" aria-labelledby="kit-sticky-label">
 <p id="kit-sticky-label" class="kit-sticky-label">$9 FIRE to IRIS checklist</p>
-<a target="_blank" class="kit-sticky-link" data-goatcounter-click="cta/1099-nec-or-1099-k-check-sticky" data-goatcounter-title="1099-NEC or 1099-K check sticky" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=1099-nec-or-1099-k-check&amp;utm_content=fire-check-sticky" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the checklist</a>
+<a id="kit-sticky-link" target="_blank" class="kit-sticky-link" data-goatcounter-click="cta/1099-nec-or-1099-k-check-sticky" data-goatcounter-title="1099-NEC or 1099-K check sticky" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=1099-nec-or-1099-k-check&amp;utm_content=fire-check-sticky" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the checklist</a>
 <button type="button" class="kit-sticky-dismiss" id="kit-sticky-dismiss">Dismiss</button>
 </div>
 <script>
@@ -577,6 +588,126 @@ function selected(name) {
   return "";
 }
 
+var BUTTON_TEXT = "Get the $9 checklist (instant PDF)";
+var QUIET_TEXT = "Optional: $9 checklist (instant PDF)";
+var OFFERS = {
+  nec: {
+    lead: "Because this payment looks like a Form 1099-NEC for you to file, the checklist puts the IRIS steps and a 1099-NEC add-on on one printable list.",
+    utm: "1099-result-nec",
+    quiet: false,
+    nofit: false
+  },
+  k: {
+    lead: "You likely do not need to buy a checklist for this payment. Keep your card and payment-app records. The card company or payment app reports those payments on Form 1099-K. File Form 1099-NEC only if a cash, check, bank transfer, or ACH portion for this payee is $2,000 or more.",
+    utm: "1099-result-k-only",
+    quiet: true,
+    nofit: true
+  },
+  mixed: {
+    lead: "Because you paid both ways and the cash, check, bank transfer, and ACH portion is $2,000 or more, file Form 1099-NEC only for that non-card portion. The checklist puts the IRIS steps and a 1099-NEC add-on on one printable list.",
+    utm: "1099-result-split",
+    quiet: false,
+    nofit: false
+  },
+  none: {
+    lead: "You likely do not need to buy a checklist for this payment. If you withheld federal income tax, the amount is not the limit: Form 1099-NEC is still required; see the backup-withholding step above. Watch the $2,000 threshold on cash, check, bank transfer, and ACH payments, and keep notes on who you paid and how.",
+    utm: "1099-result-none",
+    quiet: true,
+    nofit: true
+  },
+  unsure: {
+    lead: "Because you said you are not sure, or two answers do not match, this check cannot pick one form yet. If a form is yours to file, the checklist puts the IRIS steps and a 1099-NEC add-on on one printable list.",
+    utm: "1099-result-warn",
+    quiet: false,
+    nofit: false
+  }
+};
+
+function offerFor(id) {
+  return OFFERS[id] || OFFERS.unsure;
+}
+
+function byId(id) {
+  return document.getElementById(id);
+}
+
+function paidExpired() {
+  return !!(window.FMP_FIRE_KIT && window.FMP_FIRE_KIT.expired && window.FMP_FIRE_KIT.expired(new Date()));
+}
+
+function setLead(text) {
+  var lead = byId("result-kit-lead");
+  if (lead) lead.textContent = text;
+}
+
+function setResultOffer(content, quiet) {
+  var offer = byId("kit-offer");
+  var link = byId("kit-result");
+  var refund = byId("kit-refund");
+  if (!link) return;
+  if (paidExpired()) {
+    if (offer) offer.hidden = true;
+    link.hidden = true;
+    if (refund) refund.hidden = true;
+    return;
+  }
+  if (offer) offer.hidden = false;
+  link.hidden = false;
+  if (refund) refund.hidden = false;
+  var href = link.getAttribute("href") || "";
+  if (href.indexOf("utm_content=") !== -1) {
+    link.setAttribute("href", href.replace(/([?&]utm_content=)[^&#]*/, "$1" + content));
+  }
+  link.setAttribute("data-goatcounter-click", "cta/" + content);
+  if (quiet) {
+    link.className = "paid-quiet";
+    link.textContent = QUIET_TEXT;
+  } else {
+    link.className = "btn";
+    link.textContent = BUTTON_TEXT;
+  }
+}
+
+function setTopOffer(nofit) {
+  var paid = byId("kit-top-offer");
+  var free = byId("kit-top-free");
+  var footer = byId("kit-footer-offer");
+  var expired = paidExpired();
+  if (paid) paid.hidden = !!nofit || expired;
+  if (free) free.hidden = !nofit;
+  if (footer) footer.hidden = !!nofit || expired;
+}
+
+var stickyBuy = null;
+function applyStickyMode(mode) {
+  var link = byId("kit-sticky-link");
+  var label = byId("kit-sticky-label");
+  if (!link) return;
+  if (!stickyBuy) {
+    stickyBuy = {
+      href: link.getAttribute("href") || "",
+      click: link.getAttribute("data-goatcounter-click") || "",
+      title: link.getAttribute("data-goatcounter-title") || "",
+      text: link.textContent || "Get the checklist",
+      label: label ? label.textContent : "$9 FIRE to IRIS checklist"
+    };
+  }
+  if (mode === "free") {
+    if (label) label.textContent = "Free FIRE to IRIS check";
+    link.textContent = "Open the free check";
+    link.setAttribute("href", "/tools/fire-to-iris-check/");
+    link.removeAttribute("target");
+    link.setAttribute("data-goatcounter-click", "cta/1099-sticky-free-fire");
+  } else if (mode === "buy") {
+    if (label) label.textContent = stickyBuy.label;
+    link.textContent = stickyBuy.text;
+    link.setAttribute("href", stickyBuy.href);
+    link.setAttribute("target", "_blank");
+    link.setAttribute("data-goatcounter-click", stickyBuy.click);
+    if (stickyBuy.title) link.setAttribute("data-goatcounter-title", stickyBuy.title);
+  }
+}
+
 function render() {
   var result = decide({
     purpose: selected("purpose"),
@@ -584,9 +715,9 @@ function render() {
     method: selected("method"),
     noncard: selected("noncard")
   });
-  var title = document.getElementById("result-problem");
-  var list = document.getElementById("next-steps");
-  var box = document.getElementById("results");
+  var title = byId("result-problem");
+  var list = byId("next-steps");
+  var box = byId("results");
   if (!title || !list || !box) return result;
   title.textContent = result.headline;
   while (list.firstChild) list.removeChild(list.firstChild);
@@ -596,18 +727,26 @@ function render() {
     li.textContent = result.steps[i];
     list.appendChild(li);
   }
+  var offer = offerFor(result.id);
+  setLead(offer.lead);
+  setResultOffer(offer.utm, offer.quiet);
+  setTopOffer(offer.nofit);
   box.hidden = false;
+  box.setAttribute("data-cta", offer.nofit ? "nofit" : "buy");
   if (box.scrollIntoView) box.scrollIntoView({ behavior: "smooth", block: "start" });
-  syncKitSticky(true);
+  syncKitSticky(offer.nofit ? "free" : "buy");
   return result;
 }
 
 var kitStickyDismissed = false;
-function syncKitSticky(show) {
-  var bar = document.getElementById("kit-sticky");
+function syncKitSticky(mode) {
+  var bar = byId("kit-sticky");
   if (!bar || !document.body || !document.body.classList) return;
-  var on = !!show && !kitStickyDismissed;
-  if (on && window.FMP_FIRE_KIT && window.FMP_FIRE_KIT.expired(new Date())) on = false;
+  if (mode === true) mode = "buy";
+  if (mode === false || !mode) mode = "off";
+  if (mode === "buy" && paidExpired()) mode = "off";
+  applyStickyMode(mode);
+  var on = mode !== "off" && !kitStickyDismissed;
   bar.hidden = !on;
   if (on) document.body.classList.add("kit-sticky-on");
   else document.body.classList.remove("kit-sticky-on");
@@ -616,7 +755,9 @@ function syncKitSticky(show) {
 window.FMP_1099 = {
   HEADLINES: HEADLINES,
   FILE_STEPS: FILE_STEPS,
+  OFFERS: OFFERS,
   decide: decide,
+  offerFor: offerFor,
   render: render
 };
 
