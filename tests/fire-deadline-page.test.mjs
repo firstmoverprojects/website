@@ -77,7 +77,9 @@ test("checklist links reuse the tool page product, price, labels, and click name
   assert.match(html, /id="kit-result"[^>]*data-goatcounter-click="cta\/fire-check-result"[^>]*utm_content=fire-check-result"/);
   assert.match(html, /data-goatcounter-click="cta\/fire-check-sticky"[^>]*utm_content=fire-check-sticky"/);
   assert.match(html, />See the \$9 FIRE to IRIS checklist</);
-  assert.match(html, />Get the \$9 checklist \(PDF, instant download\)</);
+  assert.match(html, />Get the \$9 checklist \(PDF in a ZIP\)</);
+  assert.equal(html.includes("(PDF, instant download)"), false);
+  assert.equal(html.includes("(instant PDF)"), false);
   assert.match(html, />Get the checklist</);
   assert.equal(html.includes("FIRE→IRIS"), false);
   assert.equal(html.split(PRODUCT).length - 1, 3);
