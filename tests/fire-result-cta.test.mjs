@@ -14,8 +14,8 @@ const html = readFileSync(PAGE, "utf8");
 const QUESTION = "Will you file our tax year 2026 information returns through IRIS?";
 const REFUND = "Refunds: within 30 days if a file is corrupt or materially not as described.";
 const DISCLAIMER = "General guidance, not legal, tax or IT advice.";
-const BUTTON = "Get the $9 checklist (instant PDF)";
-const QUIET = "Optional: $9 checklist (instant PDF)";
+const BUTTON = "Get the $9 checklist (PDF in a ZIP)";
+const QUIET = "Optional: $9 checklist (PDF in a ZIP)";
 const LEADS = {
   A: "The checklist is for people who file their own 1099s. If your provider files for you, you don't need it. Copy the question below and send it to them instead: \"" + QUESTION + "\"",
   B: "Because you file yourself and don't have an IRIS TCC yet, this is the step that matters most. The checklist walks through the IRIS Application for TCC and your FIRE account steps on 3 pages, with the IRS dates and links at the top.",

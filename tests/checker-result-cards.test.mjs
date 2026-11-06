@@ -126,7 +126,7 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       click: "#example",
       problem: /filing code/,
       deadline: /Nov 19, 2026, at 3 p\.m\. Eastern Time/,
-      button: "Get the $9 checklist (instant PDF)",
+      button: "Get the $9 checklist (PDF in a ZIP)",
       slug: "/l/fire-to-iris-switch-checklist",
       campaign: "fire-to-iris-check",
       resultContent: "fire-result-need-tcc",
