@@ -58,6 +58,9 @@ test("each landing page answers first, cites Publication 5717 and the IRIS pages
     assert.equal(new URL(hrefs[0]).searchParams.get("utm_content"), "fire-check-top");
     assert.equal(new URL(hrefs[1]).searchParams.get("utm_content"), "fire-check-result");
     assert.equal(new URL(hrefs[2]).searchParams.get("utm_content"), "fire-check-sticky");
+    assert.match(html, />Get the \$9 checklist \(PDF in a ZIP\)</, rel);
+    assert.equal(html.includes("(PDF, instant download)"), false, rel);
+    assert.equal(html.includes("(instant PDF)"), false, rel);
   }
 });
 
