@@ -366,7 +366,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 </div>
 <p class="deadline-count" data-deadline="2026-11-01" data-deadline-label="Nov 1, 2026 IRS FIRE test-file cutoff" hidden></p>
 <p class="result-kit-lead" id="result-kit-lead">Because you file yourself and don't have an IRIS TCC yet, this is the step that matters most. The checklist walks through the IRIS Application for TCC and your FIRE account steps on 3 pages, with the IRS dates and links at the top.</p>
-<p data-fire-kit="1" id="kit-offer"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/fire-result-need-tcc" data-goatcounter-title="FIRE to IRIS check result" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-result-need-tcc" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 checklist (instant PDF)</a><span class="kit-refund" id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</span></p>
+<p data-fire-kit="1" id="kit-offer"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/fire-result-need-tcc" data-goatcounter-title="FIRE to IRIS check result" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-result-need-tcc" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 checklist (PDF in a ZIP)</a><span class="kit-refund" id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</span></p>
 <div id="provider-copy" class="provider-copy" hidden>
 <p id="provider-question" class="provider-question" tabindex="0">Will you file our tax year 2026 information returns through IRIS?</p>
 <button type="button" class="sec" id="copy-provider">Copy question</button>
@@ -683,10 +683,10 @@ function setResultOffer(content, quiet) {
   link.setAttribute("data-goatcounter-click", "cta/" + content);
   if (quiet) {
     link.className = "paid-quiet";
-    link.textContent = "Optional: $9 checklist (instant PDF)";
+    link.textContent = "Optional: $9 checklist (PDF in a ZIP)";
   } else {
     link.className = "btn";
-    link.textContent = "Get the $9 checklist (instant PDF)";
+    link.textContent = "Get the $9 checklist (PDF in a ZIP)";
   }
 }
 
