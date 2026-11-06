@@ -14,8 +14,10 @@ const html = readFileSync(PAGE, "utf8");
 const DISCLAIMER = "General guidance, not legal, tax or IT advice.";
 const REFUND = "Refunds: within 30 days if a file is corrupt or materially not as described.";
 const THANKS = "Thanks for your time. If this isn't right for you, please share it with someone it could help.";
-const BUTTON = "Get the $9 photo checklist";
-const QUIET = "Optional: $9 photo checklist";
+const BUTTON = "Get my photo-fix checklist (PDF + CSV in a ZIP)";
+const QUIET = "Optional: photo-fix checklist (PDF + CSV in a ZIP, $9)";
+const AFTER = "Opens Gumroad. ZIP download after you pay (2-page PDF + CSV sheet). Close the tab anytime with no purchase.";
+const PRICE_NOTE = "The $9 kit is a separate file on Gumroad. This page does not send your listings there.";
 const DEADLINE = "Etsy posted this rule on Oct 22, 2026. They did not name a last day. If the photos are wrong and a buyer opens a case, you may have to give a refund.";
 const LEADS = {
   empty: "Because you have not checked a listing row, paste up to 10 listing rows, or fill in one listing with the toggles.",
@@ -44,19 +46,30 @@ test("result copy stays on the page facts and keeps the house lines", () => {
   assert.equal(html.includes(DEADLINE), true);
   assert.equal(html.includes("\u2014"), false);
   assert.equal(html.split(REFUND).length - 1, 1);
-  assert.match(html, /id="kit-offer"[^>]*>[\s\S]*id="kit-result"[\s\S]*<span class="kit-refund" id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described\.<\/span>/);
+  assert.equal(html.split('id="kit-after-click"').length - 1, 1);
+  assert.equal(html.split(AFTER).length - 1, 1);
+  assert.equal(html.includes(BUTTON), true);
+  assert.equal(html.includes(QUIET), true);
+  assert.equal(QUIET.includes("$9"), true);
+  assert.equal(html.includes("Get the $9 photo checklist"), false);
+  assert.equal(html.includes("Optional: $9 photo checklist on Gumroad"), true);
+  assert.equal(html.includes(PRICE_NOTE), true);
+  assert.match(html, /id="kit-offer"[^>]*>[\s\S]*id="kit-result"[\s\S]*id="kit-after-click"[^>]*>Opens Gumroad\. ZIP download after you pay \(2-page PDF \+ CSV sheet\)\. Close the tab anytime with no purchase\.<\/span><span class="kit-refund" id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described\.<\/span>/);
   assert.match(html, /id="result-kit-lead"/);
   assert.match(html, /data-goatcounter-click="cta\/etsy-photo-result-mockup"/);
   assert.match(html, /utm_content=etsy-photo-result-mockup/);
+  assert.match(html, /href="https:\/\/firstmoverprojects\.gumroad\.com\/l\/lnfgc\?/);
   const card = html.slice(html.indexOf('id="result-cta"'), html.indexOf('<h2>Current Listing Risk'));
   const leadAt = card.indexOf('id="result-kit-lead"');
   const offerAt = card.indexOf('id="kit-offer"');
+  const afterAt = card.indexOf('id="kit-after-click"');
   const refundAt = card.indexOf('id="kit-refund"');
   const disclaimerAt = card.indexOf('class="disclaimer"');
   const thanksAt = card.indexOf('class="thanks"');
-  assert.ok(leadAt < offerAt && offerAt < refundAt && refundAt < disclaimerAt && disclaimerAt < thanksAt);
+  assert.ok(leadAt < offerAt && offerAt < afterAt && afterAt < refundAt && refundAt < disclaimerAt && disclaimerAt < thanksAt);
   assert.equal(card.split(DISCLAIMER).length - 1, 1);
   assert.equal(card.split(REFUND).length - 1, 1);
+  assert.equal(card.split(AFTER).length - 1, 1);
 });
 
 test("all five outcomes set the lead, offer, and gumroad click at 1280 and 390", async () => {
@@ -93,12 +106,17 @@ test("all five outcomes set the lead, offer, and gumroad click at 1280 and 390",
       const link = document.getElementById("kit-result");
       const offer = document.getElementById("kit-offer");
       const refund = document.getElementById("kit-refund");
+      const after = document.getElementById("kit-after-click");
       const lead = document.getElementById("result-kit-lead");
       const disclaimer = document.querySelector("#result-cta .disclaimer");
       const thanks = document.querySelector("#result-cta .thanks");
+      const card = document.getElementById("result-cta");
       const style = getComputedStyle(link);
+      const afterStyle = getComputedStyle(after);
       const url = new URL(link.href);
       const visible = (node) => !!(node && (node.offsetWidth || node.offsetHeight || node.getClientRects().length));
+      const afterBox = after.getBoundingClientRect();
+      const linkBox = link.getBoundingClientRect();
       return {
         lead: lead.textContent,
         problem: document.getElementById("result-problem").textContent,
@@ -117,20 +135,36 @@ test("all five outcomes set the lead, offer, and gumroad click at 1280 and 390",
         color: style.color,
         deco: style.textDecorationLine,
         display: style.display,
+        linkH: linkBox.height,
         content: url.searchParams.get("utm_content"),
         source: url.searchParams.get("utm_source"),
         medium: url.searchParams.get("utm_medium"),
         campaign: url.searchParams.get("utm_campaign"),
         wanted: url.searchParams.get("wanted"),
+        pathname: url.pathname,
         click: link.getAttribute("data-goatcounter-click"),
         steps: document.querySelectorAll("#next-steps li").length,
         leadBottom: lead.getBoundingClientRect().bottom,
-        linkTop: link.getBoundingClientRect().top,
-        linkBottom: link.getBoundingClientRect().bottom,
+        linkTop: linkBox.top,
+        linkBottom: linkBox.bottom,
+        afterText: after.textContent,
+        afterVisible: visible(after),
+        afterHidden: after.hidden,
+        afterDisplay: afterStyle.display,
+        afterCount: document.querySelectorAll("#kit-after-click").length,
+        afterTop: afterBox.top,
+        afterBottom: afterBox.bottom,
+        afterRight: afterBox.right,
+        afterFont: parseFloat(afterStyle.fontSize),
+        cardText: card.innerText,
+        offerText: offer.innerText,
+        resultsText: document.getElementById("results").innerText,
+        clientWidth: document.documentElement.clientWidth,
         refundTop: refund.getBoundingClientRect().top,
         disclaimerTop: disclaimer.getBoundingClientRect().top,
         thanksTop: thanks.getBoundingClientRect().top,
         footerAdvice: document.querySelector("footer").innerText.includes("General guidance, not legal, tax or IT advice."),
+        footerQuiet: document.getElementById("paid-link").textContent,
         refundSpans: document.querySelectorAll("#result-cta .kit-refund").length,
         buyButtons: document.querySelectorAll("#result-cta a.btn").length
       };
@@ -219,27 +253,48 @@ test("all five outcomes set the lead, offer, and gumroad click at 1280 and 390",
       assert.equal(state.thanksVisible, true, width + " " + item.key);
       assert.equal(state.footerAdvice, true, width + " " + item.key);
       assert.equal(state.refund, REFUND, width + " " + item.key);
+      assert.equal(state.afterCount, 1, width + " " + item.key);
+      assert.equal(state.afterText, AFTER, width + " " + item.key);
+      assert.equal(state.footerQuiet, "Optional: $9 photo checklist on Gumroad", width + " " + item.key);
+      assert.equal(state.resultsText.includes(PRICE_NOTE), true, width + " " + item.key);
       assert.ok(state.steps >= 2 && state.steps <= 3, width + " " + item.key + " steps " + state.steps);
       assert.ok(state.disclaimerTop < state.thanksTop, width + " " + item.key);
       if (item.hide) {
         assert.equal(state.linkVisible, false, width + " " + item.key);
         assert.equal(state.offerVisible, false, width + " " + item.key);
         assert.equal(state.refundVisible, false, width + " " + item.key);
+        assert.equal(state.afterVisible, false, width + " " + item.key);
+        assert.equal(state.afterHidden, true, width + " " + item.key);
+        assert.equal(state.afterDisplay, "none", width + " " + item.key);
+        assert.equal(state.cardText.includes(AFTER), false, width + " " + item.key);
         assert.ok(state.leadBottom <= state.disclaimerTop + 1, width + " " + item.key);
       } else {
         assert.equal(state.linkVisible, true, width + " " + item.key);
         assert.equal(state.offerVisible, true, width + " " + item.key);
         assert.equal(state.refundVisible, true, width + " " + item.key);
+        assert.equal(state.afterVisible, true, width + " " + item.key);
+        assert.equal(state.afterHidden, false, width + " " + item.key);
+        assert.equal(state.afterDisplay, "block", width + " " + item.key);
+        assert.equal(state.cardText.includes(AFTER), true, width + " " + item.key);
+        assert.equal(state.offerText.includes(AFTER), true, width + " " + item.key);
+        assert.ok(state.linkH >= 44, width + " " + item.key + " link " + state.linkH);
+        assert.ok(state.afterFont >= 13, width + " " + item.key + " font " + state.afterFont);
+        assert.ok(state.linkBottom <= state.afterTop + 1, width + " " + item.key + " overlap " + (state.afterTop - state.linkBottom));
+        assert.ok(state.afterTop - state.linkBottom <= 24, width + " " + item.key + " gap " + (state.afterTop - state.linkBottom));
+        assert.ok(state.afterBottom <= state.refundTop + 1, width + " " + item.key);
+        assert.ok(state.afterRight <= state.clientWidth + 1, width + " " + item.key + " right " + state.afterRight);
         assert.ok(state.linkBottom <= state.refundTop + 1, width + " " + item.key);
         assert.equal(state.content, item.content, width + " " + item.key);
         assert.equal(state.source, "site", width + " " + item.key);
         assert.equal(state.medium, "site", width + " " + item.key);
         assert.equal(state.campaign, "etsy-photo-audit-check", width + " " + item.key);
         assert.equal(state.wanted, "true", width + " " + item.key);
+        assert.equal(state.pathname.endsWith("/l/lnfgc"), true, width + " " + item.key);
         assert.equal(state.click, "cta/" + item.content, width + " " + item.key);
         assert.ok(state.linkBottom <= state.disclaimerTop + 1, width + " " + item.key);
         if (item.quiet) {
           assert.equal(state.linkText, QUIET, width + " " + item.key);
+          assert.equal(state.offerText.includes("$9"), true, width + " " + item.key);
           assert.equal(state.className, "paid-quiet", width + " " + item.key);
           assert.equal(state.buyButtons, 0, width + " " + item.key);
           assert.equal(state.bg, "rgba(0, 0, 0, 0)", width + " " + item.key);
@@ -273,10 +328,16 @@ test("all five outcomes set the lead, offer, and gumroad click at 1280 and 390",
   assert.equal(priority.problem, PROBLEMS.mockup);
   assert.equal(priority.content, "etsy-photo-result-mockup");
   assert.equal(priority.linkText, BUTTON);
+  assert.equal(priority.afterVisible, true);
+  assert.equal(priority.afterText, AFTER);
+  assert.equal(priority.resultsText.includes(PRICE_NOTE), true);
   await runPaste("FAKE mug,1,real,linked,not-needed");
   priority = await offerState();
   assert.equal(priority.problem, PROBLEMS.ontrack);
   assert.equal(priority.linkText, QUIET);
+  assert.equal(priority.offerText.includes("$9"), true);
+  assert.equal(priority.afterVisible, true);
+  assert.equal(priority.afterText, AFTER);
   assert.equal(priority.content, "etsy-photo-result-ontrack");
 
   const footer = await page.evaluate(() => {
@@ -301,13 +362,17 @@ test("all five outcomes set the lead, offer, and gumroad click at 1280 and 390",
       source: url.searchParams.get("utm_source"),
       content: url.searchParams.get("utm_content"),
       text: document.getElementById("kit-result").textContent,
-      lead: document.getElementById("result-kit-lead").textContent
+      lead: document.getElementById("result-kit-lead").textContent,
+      after: document.getElementById("kit-after-click").textContent,
+      afterHidden: document.getElementById("kit-after-click").hidden
     };
   });
   assert.equal(kept.source, "tiktok");
   assert.equal(kept.content, "etsy-photo-result-fix");
   assert.equal(kept.text, BUTTON);
   assert.equal(kept.lead, LEADS.fix);
+  assert.equal(kept.after, AFTER);
+  assert.equal(kept.afterHidden, false);
 
   await browser.close();
 });

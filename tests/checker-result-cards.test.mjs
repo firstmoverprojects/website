@@ -112,7 +112,7 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       click: "#example",
       problem: /mockup|computer picture/i,
       deadline: /Oct 22, 2026/,
-      button: "Get the $9 photo checklist",
+      button: "Get my photo-fix checklist (PDF + CSV in a ZIP)",
       slug: "/l/lnfgc",
       campaign: "etsy-photo-audit-check",
       resultContent: "etsy-photo-result-mockup",

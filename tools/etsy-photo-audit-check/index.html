@@ -58,7 +58,8 @@ a{color:#0055ff}
 .disclaimer,.thanks,.share-line{font-weight:700;margin:12px 0 0}
 .result-kit-lead{margin:.8em 0 .2em;font-weight:600}
 .kit-refund{display:block;max-width:100%;margin:6px 0 0;color:#5a636e;font-size:.82rem;font-weight:400;line-height:1.4}
-#kit-offer[hidden],#kit-result[hidden]{display:none !important}
+#kit-after-click{display:block;max-width:100%;margin:6px 0 0;color:#5a636e;font-size:.82rem;font-weight:400;line-height:1.4;overflow-wrap:anywhere}
+#kit-offer[hidden],#kit-result[hidden],#kit-after-click[hidden]{display:none !important}
 #kit-result{display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;box-sizing:border-box;min-height:48px;padding:14px 18px;margin:12px 0 0;background:#0055ff;color:#fff;font-weight:800;line-height:1.3;text-align:center;text-decoration:none;border-radius:8px;white-space:normal;overflow-wrap:anywhere}
 #kit-result:hover,#kit-result:focus{background:#0044cc;color:#fff}
 #kit-result.paid-quiet{display:inline-block;width:auto;min-height:44px;padding:12px 0;margin:12px 0 0;background:transparent;color:#0055ff;font-weight:700;line-height:1.3;text-align:left;text-decoration:underline;border-radius:0}
@@ -312,7 +313,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <h3>Date</h3>
 <p id="result-deadline">Etsy posted this rule on Oct 22, 2026. They did not name a last day. If the photos are wrong and a buyer opens a case, you may have to give a refund.</p>
 <p class="result-kit-lead" id="result-kit-lead">Because you marked a first photo as a mockup or a computer picture, add at least one unedited photo of the real item on a real background. The checklist lists which photos to take for each kind of item, plus a sheet with one row per listing.</p>
-<p id="kit-offer"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/etsy-photo-result-mockup" data-goatcounter-title="Etsy photo check result" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=etsy-photo-result-mockup" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 photo checklist</a><span class="kit-refund" id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</span></p>
+<p id="kit-offer"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/etsy-photo-result-mockup" data-goatcounter-title="Etsy photo check result" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=etsy-photo-result-mockup" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get my photo-fix checklist (PDF + CSV in a ZIP)</a><span id="kit-after-click">Opens Gumroad. ZIP download after you pay (2-page PDF + CSV sheet). Close the tab anytime with no purchase.</span><span class="kit-refund" id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</span></p>
 <p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
 <p class="thanks">Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
 </div>
@@ -781,16 +782,20 @@ function setLead(text) {
 function hideResultOffer() {
   var offer = byId("kit-offer");
   var link = byId("kit-result");
+  var after = byId("kit-after-click");
   if (offer) offer.hidden = true;
   if (link) link.hidden = true;
+  if (after) after.hidden = true;
 }
 
 function setResultOffer(content, quiet) {
   var offer = byId("kit-offer");
   var link = byId("kit-result");
+  var after = byId("kit-after-click");
   if (!link) return;
   if (offer) offer.hidden = false;
   link.hidden = false;
+  if (after) after.hidden = false;
   var href = link.getAttribute("href") || "";
   if (href.indexOf("utm_content=") !== -1) {
     link.setAttribute("href", href.replace(/([?&]utm_content=)[^&#]*/, "$1" + content));
@@ -798,10 +803,10 @@ function setResultOffer(content, quiet) {
   link.setAttribute("data-goatcounter-click", "cta/" + content);
   if (quiet) {
     link.className = "paid-quiet";
-    link.textContent = "Optional: $9 photo checklist";
+    link.textContent = "Optional: photo-fix checklist (PDF + CSV in a ZIP, $9)";
   } else {
     link.className = "btn";
-    link.textContent = "Get the $9 photo checklist";
+    link.textContent = "Get my photo-fix checklist (PDF + CSV in a ZIP)";
   }
 }
 
