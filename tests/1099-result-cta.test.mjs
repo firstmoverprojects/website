@@ -15,6 +15,10 @@ const IRS = "Not affiliated with or endorsed by the IRS.";
 const BUTTON = "Get the $9 checklist (instant PDF)";
 const QUIET = "Optional: $9 checklist (instant PDF)";
 const FREE = "/tools/fire-to-iris-check/";
+const WITHHELD = "If you withheld federal income tax, the amount is not the limit: Form 1099-NEC is still required; see the backup-withholding step above.";
+const NONE_LEAD = "You likely do not need to buy a checklist for this payment. " + WITHHELD + " Watch the $2,000 threshold on cash, check, bank transfer, and ACH payments, and keep notes on who you paid and how.";
+const UNDER = { purpose: "business", who: "contractor", method: "noncard", noncard: "under" };
+const NEC = { purpose: "business", who: "contractor", method: "noncard", noncard: "least" };
 
 const CASES = [
   {
@@ -48,7 +52,7 @@ const CASES = [
     key: "none",
     answers: { purpose: "personal", who: "contractor", method: "noncard", noncard: "under" },
     headline: "Likely no 1099 needed",
-    lead: "You likely do not need to buy a checklist for this payment. Watch the $2,000 threshold on cash, check, bank transfer, and ACH payments, and keep notes on who you paid and how.",
+    lead: NONE_LEAD,
     utm: "1099-result-none",
     quiet: true,
     nofit: true
@@ -115,6 +119,8 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
       return {
         problem: document.getElementById("result-problem").textContent,
         lead: document.getElementById("result-kit-lead").textContent,
+        leadVisible: shown(document.getElementById("result-kit-lead")),
+        steps: document.getElementById("next-steps").innerText,
         linkText: link.textContent,
         className: link.className,
         linkVisible: shown(link),
@@ -177,6 +183,15 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
     const state = await stateOf();
     assert.equal(state.problem, item.headline, item.key);
     assert.equal(state.lead, item.lead, item.key);
+    assert.equal(state.leadVisible, true, item.key);
+    if (item.key === "none") {
+      assert.equal(state.lead.includes(WITHHELD), true, item.key);
+      assert.ok(state.lead.indexOf(WITHHELD) < state.lead.indexOf("Watch the $2,000 threshold"), item.key);
+      assert.match(state.steps, /If you withheld any federal income tax under the backup withholding rules/, item.key);
+      assert.match(state.steps, /report that withholding in box 4/, item.key);
+    } else {
+      assert.equal(state.lead.includes(WITHHELD), false, item.key);
+    }
     assert.equal(state.linkVisible, true, item.key);
     assert.equal(state.refundVisible, true, item.key);
     assert.equal(state.refund, REFUND, item.key);
@@ -239,6 +254,76 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
     await shot("1099-result-" + item.key + "-1280.png");
   }
 
+  await answer(NEC);
+  const buyFirst = await stateOf();
+  assert.equal(buyFirst.className, "btn");
+  assert.equal(buyFirst.linkText, BUTTON);
+  assert.equal(buyFirst.cta, "buy");
+  assert.equal(buyFirst.topPaid, true);
+  assert.equal(buyFirst.topFree, false);
+  assert.equal(buyFirst.lead.includes(WITHHELD), false);
+  assert.match(buyFirst.stickyHref, /utm_content=fire-check-sticky/);
+
+  await answer(UNDER);
+  const noneUnder = await stateOf();
+  assert.equal(noneUnder.problem, "Likely no 1099 needed");
+  assert.equal(noneUnder.lead, NONE_LEAD);
+  assert.equal(noneUnder.leadVisible, true);
+  assert.equal(noneUnder.lead.includes(WITHHELD), true);
+  assert.ok(noneUnder.lead.indexOf(WITHHELD) < noneUnder.lead.indexOf("Watch the $2,000 threshold"));
+  assert.match(noneUnder.steps, /cash, check, bank transfer, and ACH total here is under \$2,000/);
+  assert.match(noneUnder.steps, /If you withheld any federal income tax under the backup withholding rules, file Form 1099-NEC for that person no matter the amount\./);
+  const stepBeforeLead = await page.evaluate(() => {
+    const steps = document.getElementById("next-steps");
+    const lead = document.getElementById("result-kit-lead");
+    return !!(steps.compareDocumentPosition(lead) & Node.DOCUMENT_POSITION_FOLLOWING);
+  });
+  assert.equal(stepBeforeLead, true);
+  assert.equal(noneUnder.linkText, QUIET);
+  assert.equal(noneUnder.className, "paid-quiet");
+  assert.equal(noneUnder.buyButtons, 0);
+  assert.equal(noneUnder.bg, "rgba(0, 0, 0, 0)");
+  assert.equal(noneUnder.color, "rgb(0, 85, 255)");
+  assert.equal(noneUnder.refund, REFUND);
+  assert.equal(noneUnder.refundVisible, true);
+  assert.equal(noneUnder.disclaimer, DISCLAIMER);
+  assert.equal(noneUnder.irs, IRS);
+  assert.equal(noneUnder.content, "1099-result-none");
+  assert.equal(noneUnder.cta, "nofit");
+  assert.equal(noneUnder.topPaid, false);
+  assert.equal(noneUnder.topFree, true);
+  assert.equal(noneUnder.footerPaid, false);
+  assert.equal(noneUnder.stickyHref, FREE);
+  assert.equal(noneUnder.stickyText, "Open the free check");
+  assert.equal(noneUnder.stickyClick, "cta/1099-sticky-free-fire");
+  await shot("1099-result-none-withholding-1280.png");
+
+  await answer(NEC);
+  const buyAgain = await stateOf();
+  assert.equal(buyAgain.className, "btn");
+  assert.equal(buyAgain.linkText, BUTTON);
+  assert.equal(buyAgain.cta, "buy");
+  assert.equal(buyAgain.topPaid, true);
+  assert.equal(buyAgain.topFree, false);
+  assert.equal(buyAgain.footerPaid, true);
+  assert.equal(buyAgain.lead.includes(WITHHELD), false);
+  assert.equal(buyAgain.content, "1099-result-nec");
+  assert.match(buyAgain.stickyHref, /utm_content=fire-check-sticky/);
+  assert.equal(buyAgain.stickyText, "Get the checklist");
+  assert.equal(buyAgain.refund, REFUND);
+  assert.equal(buyAgain.refundVisible, true);
+
+  await answer(UNDER);
+  const noneAgain = await stateOf();
+  assert.equal(noneAgain.lead, NONE_LEAD);
+  assert.equal(noneAgain.className, "paid-quiet");
+  assert.equal(noneAgain.buyButtons, 0);
+  assert.equal(noneAgain.cta, "nofit");
+  assert.equal(noneAgain.topPaid, false);
+  assert.equal(noneAgain.stickyHref, FREE);
+  assert.equal(noneAgain.content, "1099-result-none");
+  assert.equal(noneAgain.refundVisible, true);
+
   await page.setViewportSize({ width: 390, height: 844 });
   for (const item of CASES) {
     await answer(item.answers);
@@ -250,6 +335,30 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
     assert.equal(box.sw, box.cw, item.key + " " + JSON.stringify(box));
     assert.equal(box.sticky, true, item.key + " sticky");
     await shot("1099-result-" + item.key + "-390.png");
+  }
+  await answer(UNDER);
+  const mobileUnder = await stateOf();
+  assert.equal(mobileUnder.lead, NONE_LEAD);
+  assert.equal(mobileUnder.leadVisible, true);
+  assert.equal(mobileUnder.className, "paid-quiet");
+  assert.equal(mobileUnder.buyButtons, 0);
+  assert.equal(mobileUnder.cta, "nofit");
+  assert.equal(mobileUnder.stickyHref, FREE);
+  assert.equal(mobileUnder.refund, REFUND);
+  assert.equal(mobileUnder.refundVisible, true);
+  const mobileBox = await page.evaluate(() => ({
+    sw: document.documentElement.scrollWidth,
+    cw: document.documentElement.clientWidth,
+    sticky: !!(document.getElementById("kit-sticky").offsetWidth || document.getElementById("kit-sticky").offsetHeight)
+  }));
+  assert.equal(mobileBox.sw, mobileBox.cw, JSON.stringify(mobileBox));
+  assert.equal(mobileBox.sticky, true);
+  await shot("1099-result-none-withholding-390.png");
+  await page.evaluate(() => {
+    document.getElementById("result-kit-lead").scrollIntoView({ block: "start" });
+  });
+  if (shots) {
+    await page.screenshot({ path: path.join(shots, "1099-result-none-withholding-390-view.png") });
   }
   await page.setViewportSize({ width: 1280, height: 1400 });
   const wide = await page.evaluate(() => ({
@@ -277,6 +386,91 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
   });
   assert.equal(kept.source, "tiktok");
   assert.equal(kept.content, "1099-result-nec");
+  await tagged.evaluate((input) => {
+    ["purpose", "who", "method", "noncard"].forEach((name) => {
+      const nodes = document.getElementsByName(name);
+      for (let i = 0; i < nodes.length; i++) nodes[i].checked = nodes[i].value === input[name];
+    });
+  }, UNDER);
+  await tagged.click("#go");
+  const keptNone = await tagged.evaluate(() => {
+    const link = document.getElementById("kit-result");
+    const url = new URL(link.href);
+    return {
+      source: url.searchParams.get("utm_source"),
+      content: url.searchParams.get("utm_content"),
+      medium: url.searchParams.get("utm_medium"),
+      campaign: url.searchParams.get("utm_campaign"),
+      wanted: url.searchParams.get("wanted"),
+      lead: document.getElementById("result-kit-lead").textContent,
+      className: link.className,
+      hidden: link.hidden
+    };
+  });
+  assert.equal(keptNone.source, "tiktok");
+  assert.equal(keptNone.content, "1099-result-none");
+  assert.equal(keptNone.medium, "site");
+  assert.equal(keptNone.campaign, "1099-nec-or-1099-k-check");
+  assert.equal(keptNone.wanted, "true");
+  assert.equal(keptNone.lead, NONE_LEAD);
+  assert.equal(keptNone.className, "paid-quiet");
+  assert.equal(keptNone.hidden, false);
+
+  await answer(UNDER);
+  const liveCutoff = await page.evaluate(() => ({
+    before: window.FMP_FIRE_KIT.expired(new Date("2026-11-19T19:59:59Z")),
+    at: window.FMP_FIRE_KIT.expired(new Date("2026-11-19T20:00:00Z"))
+  }));
+  assert.equal(liveCutoff.before, false);
+  assert.equal(liveCutoff.at, true);
+  const beforeExpiry = await stateOf();
+  assert.equal(beforeExpiry.lead, NONE_LEAD);
+  assert.equal(beforeExpiry.linkVisible, true);
+  assert.equal(beforeExpiry.refundVisible, true);
+  assert.equal(beforeExpiry.className, "paid-quiet");
+  await page.evaluate(() => {
+    const RealDate = Date;
+    const frozen = new RealDate(window.FMP_FIRE_KIT.CUTOFF);
+    function FrozenDate(...args) {
+      if (!(this instanceof FrozenDate)) return RealDate();
+      if (args.length === 0) return new RealDate(frozen.getTime());
+      return new RealDate(...args);
+    }
+    FrozenDate.now = function () { return frozen.getTime(); };
+    FrozenDate.parse = RealDate.parse;
+    FrozenDate.UTC = RealDate.UTC;
+    FrozenDate.prototype = RealDate.prototype;
+    window.Date = FrozenDate;
+    window.FMP_FIRE_KIT.hide(frozen);
+  });
+  await answer(UNDER);
+  const expiredNone = await stateOf();
+  assert.equal(expiredNone.lead, NONE_LEAD);
+  assert.equal(expiredNone.leadVisible, true);
+  assert.equal(expiredNone.linkVisible, false);
+  assert.equal(expiredNone.refundVisible, false);
+  assert.equal(expiredNone.buyButtons, 0);
+  assert.equal(expiredNone.topPaid, false);
+  assert.equal(expiredNone.topFree, true);
+  assert.equal(expiredNone.topFreeHref, FREE);
+  assert.equal(expiredNone.footerPaid, false);
+  assert.equal(expiredNone.cta, "nofit");
+  assert.equal(expiredNone.stickyHref, FREE);
+  assert.equal(expiredNone.stickyText, "Open the free check");
+  const expiredNoneBar = await page.evaluate(() => document.getElementById("kit-sticky").hidden);
+  assert.equal(expiredNoneBar, false);
+  await shot("1099-result-none-expired-1280.png");
+  await answer(NEC);
+  const expiredBuy = await stateOf();
+  assert.equal(expiredBuy.problem, "1099-NEC is likely yours to file");
+  assert.equal(expiredBuy.lead.includes(WITHHELD), false);
+  assert.equal(expiredBuy.linkVisible, false);
+  assert.equal(expiredBuy.refundVisible, false);
+  assert.equal(expiredBuy.topPaid, false);
+  assert.equal(expiredBuy.topFree, false);
+  assert.equal(expiredBuy.footerPaid, false);
+  assert.equal(expiredBuy.buyButtons, 0);
+  assert.equal(await page.evaluate(() => document.getElementById("kit-sticky").hidden), true);
   assert.deepEqual(errors.filter((item) => item.indexOf("Failed to fetch") === -1), []);
   await browser.close();
 });

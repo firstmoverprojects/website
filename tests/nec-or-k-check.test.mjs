@@ -144,6 +144,9 @@ test("each outcome sets its own checklist offer on the existing $9 product", () 
   }
   assert.match(api.offerFor("k").lead, /Keep your card and payment-app records/);
   assert.match(api.offerFor("k").lead, /\$2,000 or more/);
+  const withheldHead = "If you withheld federal income tax, the amount is not the limit: Form 1099-NEC is still required; see the backup-withholding step above.";
+  assert.equal(api.offerFor("none").lead.includes(withheldHead), true);
+  assert.ok(api.offerFor("none").lead.indexOf(withheldHead) < api.offerFor("none").lead.indexOf("Watch the $2,000 threshold"));
   assert.match(api.offerFor("none").lead, /Watch the \$2,000 threshold/);
   assert.match(api.offerFor("none").lead, /keep notes on who you paid and how/);
   assert.match(api.offerFor("unsure").lead, /^Because you said/);
@@ -155,6 +158,38 @@ test("each outcome sets its own checklist offer on the existing $9 product", () 
   const slugs = [...html.matchAll(/firstmoverprojects\.gumroad\.com\/l\/([A-Za-z0-9_-]+)/g)].map((match) => match[1]);
   assert.ok(slugs.length >= 4);
   for (const slug of slugs) assert.equal(slug, "fire-to-iris-switch-checklist");
+});
+
+test("a no-fit none result keeps the backup withholding exception in the visible lead", () => {
+  const head = "If you withheld federal income tax, the amount is not the limit: Form 1099-NEC is still required; see the backup-withholding step above.";
+  const step = "If you withheld any federal income tax under the backup withholding rules, file Form 1099-NEC for that person no matter the amount. The instructions say to report that withholding in box 4.";
+  const offer = api.offerFor("none");
+  assert.equal(offer.utm, "1099-result-none");
+  assert.equal(offer.quiet, true);
+  assert.equal(offer.nofit, true);
+  assert.equal(offer.lead, "You likely do not need to buy a checklist for this payment. " + head + " Watch the $2,000 threshold on cash, check, bank transfer, and ACH payments, and keep notes on who you paid and how.");
+  const paths = [
+    ["personal", "contractor", "noncard", "under"],
+    ["business", "employee", "noncard", "least"],
+    ["business", "corporation", "noncard", "least"],
+    ["business", "contractor", "noncard", "under"],
+    ["business", "contractor", "mixed", "under"],
+    ["business", "contractor", "card", "under"]
+  ];
+  for (const row of paths) {
+    const result = decide(row[0], row[1], row[2], row[3]);
+    const label = row.join("|");
+    assert.equal(result.id, "none", label);
+    assert.equal(result.headline, "Likely no 1099 needed", label);
+    assert.equal(result.steps.includes(step), true, label);
+    assert.equal(api.offerFor(result.id), offer, label);
+  }
+  assert.equal(api.offerFor("nec").lead.includes(head), false);
+  assert.equal(api.offerFor("mixed").lead.includes(head), false);
+  assert.equal(api.offerFor("unsure").lead.includes(head), false);
+  assert.equal(api.offerFor("k").nofit, true);
+  assert.equal(api.offerFor("k").quiet, true);
+  assert.equal(api.offerFor("k").lead.includes(head), false);
 });
 
 test("the page cites the IRS sources, the check date, and stays in the sitemap and tools index", () => {
