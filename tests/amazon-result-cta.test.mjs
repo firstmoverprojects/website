@@ -223,7 +223,7 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
       next: DELETE_STEP,
       run: (page) => runSample(page, { q1: "no", q2: "no", q3: "no" }),
       problem: /3 items to fix before you upload it to Amazon\./,
-      deadline: "Amazon's extra rule starts Nov 2, 2026. Sellers in higher-safety categories need $1 million of coverage for each incident, and $1 million in total, even if sales are low."
+      deadline: "Amazon's extra rule has been in effect since Nov 2, 2026. Sellers in higher-safety categories need $1 million of coverage for each incident, and $1 million in total, even if sales are low."
     },
     {
       key: "category",
@@ -241,7 +241,7 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
       next: CATEGORY_CHECK,
       run: (page) => runSample(page, { q1: "unsure", q2: "no", q3: "no" }),
       problem: /3 items to fix before you upload it to Amazon\./,
-      deadline: "Amazon's extra rule starts Nov 2, 2026. Sellers in higher-safety categories need $1 million of coverage for each incident, and $1 million in total, even if sales are low."
+      deadline: "Amazon's extra rule has been in effect since Nov 2, 2026. Sellers in higher-safety categories need $1 million of coverage for each incident, and $1 million in total, even if sales are low."
     },
     {
       key: "blank",
@@ -250,7 +250,7 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
       next: CHOOSE_ANSWERS + "\n" + CATEGORY_CHECK,
       run: (page) => runSample(page, { q1: "", q2: "", q3: "" }),
       problem: /3 items to fix before you upload it to Amazon\./,
-      deadline: "Amazon's extra rule starts Nov 2, 2026. Sellers in higher-safety categories need $1 million of coverage for each incident, and $1 million in total, even if sales are low."
+      deadline: "Amazon's extra rule has been in effect since Nov 2, 2026. Sellers in higher-safety categories need $1 million of coverage for each incident, and $1 million in total, even if sales are low."
     },
     {
       key: "fix",
