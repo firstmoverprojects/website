@@ -110,6 +110,53 @@ test("missing or contradictory answers do not pick a form", () => {
   assert.equal(decide("business", "contractor", "mixed", "none").id, "unsure");
 });
 
+test("each outcome sets its own checklist offer on the existing $9 product", () => {
+  const cases = [
+    ["business", "contractor", "noncard", "least", "nec", "1099-result-nec", false, false],
+    ["business", "attorney", "noncard", "least", "nec", "1099-result-nec", false, false],
+    ["business", "contractor", "card", "none", "k", "1099-result-k-only", true, true],
+    ["business", "contractor", "card", "unsure", "k", "1099-result-k-only", true, true],
+    ["business", "contractor", "mixed", "least", "mixed", "1099-result-split", false, false],
+    ["business", "attorney", "card", "least", "mixed", "1099-result-split", false, false],
+    ["personal", "contractor", "noncard", "least", "none", "1099-result-none", true, true],
+    ["business", "employee", "noncard", "least", "none", "1099-result-none", true, true],
+    ["business", "corporation", "noncard", "least", "none", "1099-result-none", true, true],
+    ["business", "contractor", "noncard", "under", "none", "1099-result-none", true, true],
+    ["business", "contractor", "mixed", "under", "none", "1099-result-none", true, true],
+    ["", "contractor", "noncard", "least", "unsure", "1099-result-warn", false, false],
+    ["unsure", "contractor", "noncard", "least", "unsure", "1099-result-warn", false, false],
+    ["business", "unsure", "noncard", "least", "unsure", "1099-result-warn", false, false],
+    ["business", "contractor", "unsure", "least", "unsure", "1099-result-warn", false, false],
+    ["business", "contractor", "noncard", "unsure", "unsure", "1099-result-warn", false, false],
+    ["business", "contractor", "noncard", "none", "unsure", "1099-result-warn", false, false],
+    ["business", "contractor", "mixed", "none", "unsure", "1099-result-warn", false, false]
+  ];
+  for (const row of cases) {
+    const result = decide(row[0], row[1], row[2], row[3]);
+    const offer = api.offerFor(result.id);
+    assert.equal(result.id, row[4], row.join("|"));
+    assert.equal(offer.utm, row[5], result.id);
+    assert.equal(offer.quiet, row[6], result.id);
+    assert.equal(offer.nofit, row[7], result.id);
+    assert.equal(html.includes(offer.lead), true, offer.lead);
+    if (offer.nofit) assert.match(offer.lead, /You likely do not need to buy a checklist for this payment/);
+    else assert.match(offer.lead, /the checklist puts the IRIS steps and a 1099-NEC add-on on one printable list\./i);
+  }
+  assert.match(api.offerFor("k").lead, /Keep your card and payment-app records/);
+  assert.match(api.offerFor("k").lead, /\$2,000 or more/);
+  assert.match(api.offerFor("none").lead, /Watch the \$2,000 threshold/);
+  assert.match(api.offerFor("none").lead, /keep notes on who you paid and how/);
+  assert.match(api.offerFor("unsure").lead, /^Because you said/);
+  assert.match(html, /utm_content=1099-result-nec/);
+  assert.match(html, /id="kit-offer"/);
+  assert.match(html, /id="result-irs">Not affiliated with or endorsed by the IRS\./);
+  assert.match(html, /id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described\./);
+  assert.equal(html.includes("Not affiliated with the IRS."), false);
+  const slugs = [...html.matchAll(/firstmoverprojects\.gumroad\.com\/l\/([A-Za-z0-9_-]+)/g)].map((match) => match[1]);
+  assert.ok(slugs.length >= 4);
+  for (const slug of slugs) assert.equal(slug, "fire-to-iris-switch-checklist");
+});
+
 test("the page cites the IRS sources, the check date, and stays in the sitemap and tools index", () => {
   const sources = [
     "https://www.irs.gov/instructions/i1099mec",
