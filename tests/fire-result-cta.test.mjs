@@ -46,6 +46,39 @@ test("result copy stays on the spec sentences and keeps the house lines", () => 
   assert.match(html, /utm_content=fire-result-need-tcc/);
 });
 
+const DELIVERY = "One 3-page PDF checklist in a ZIP, with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on.";
+
+test("body, FAQ, badges, schema, alt text, and the sticky name the ZIP download", () => {
+  assert.equal(html.split(DELIVERY).length - 1, 3);
+  assert.match(html, /<p class="kit-note" data-fire-kit="1">One 3-page PDF checklist in a ZIP\. Refunds: within 30 days if a file is corrupt or materially not as described\.<\/p>/);
+  assert.equal(html.split("INSTANT DOWNLOAD · ONE 3-PAGE PDF IN A ZIP · CHECKLIST + 1099-NEC ADD-ON · $9").length - 1, 2);
+  assert.equal(html.split('alt="See What\'s Inside the $9 FIRE to IRIS Switch Checklist: one 3-page PDF checklist in a ZIP, with the IRS dates, your FIRE account, the IRIS Application for TCC, and a 1099-NEC add-on"').length - 1, 2);
+  assert.equal(html.split("One 3-page PDF checklist in a ZIP. What is changing, in plain words.").length - 1, 2);
+  assert.equal(html.includes("The $9 checklist is one 3-page PDF in a ZIP."), true);
+  assert.match(html, /id="kit-sticky-label"[^>]*>\$9 FIRE to IRIS checklist \(PDF in a ZIP\)</);
+  assert.equal(html.includes(BUTTON), true);
+  assert.equal(html.includes(QUIET), true);
+  assert.equal(html.includes(">Get the $9 checklist (PDF in a ZIP)<"), true);
+  for (const phrase of ["One PDF", "ONE PDF", "one PDF", "instant PDF", "(PDF, instant download)", "One 3-page PDF with", "is one PDF"]) {
+    assert.equal(html.includes(phrase), false, phrase);
+  }
+  html.split("\n").forEach((line, index) => {
+    if (!/PDF/i.test(line)) return;
+    assert.match(line, /ZIP/, "line " + (index + 1) + " names a PDF without ZIP");
+  });
+  const blocks = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].map((block) => JSON.parse(block[1]));
+  const faq = blocks.find((item) => item["@type"] === "FAQPage");
+  const product = blocks.find((item) => item["@type"] === "Product");
+  assert.equal(faq.dateModified, "2026-11-07");
+  const kitAnswer = faq.mainEntity.find((item) => item.name === "What is in the $9 checklist?");
+  assert.equal(kitAnswer.acceptedAnswer.text, DELIVERY + " " + REFUND);
+  assert.equal(product.description, DELIVERY);
+  assert.equal(product.offers.price, 9);
+  const visibleFaq = html.slice(html.indexOf('id="faq"'), html.indexOf("</section>", html.indexOf('id="faq"')));
+  assert.equal(visibleFaq.includes(kitAnswer.acceptedAnswer.text), true);
+  assert.equal(html.includes(REFUND), true);
+});
+
 test("all six outcomes set the lead, offer, and gumroad click", async () => {
   const mod = process.env.PLAYWRIGHT_CORE || "playwright-core";
   const { chromium } = await import(mod);
