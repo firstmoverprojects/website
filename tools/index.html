@@ -936,8 +936,17 @@
       (function () {
         var q = location.search || "";
         var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(q);
+        function prefixExcludedClick(ev) {
+          var node = ev.target && ev.target.closest ? ev.target.closest("[data-goatcounter-click]") : null;
+          if (!node || !node.getAttribute) return;
+          var cur = node.getAttribute("data-goatcounter-click") || "";
+          if (!cur || cur.indexOf("TEST-EXCLUDE") === 0) return;
+          node.setAttribute("data-goatcounter-click", "TEST-EXCLUDE/" + cur);
+        }
         if (testVisit) {
           window.goatcounter = { path: function (p) { return "TEST-EXCLUDE" + p; } };
+          document.addEventListener("click", prefixExcludedClick, true);
+          document.addEventListener("auxclick", prefixExcludedClick, true);
         }
         function trackGumroadClick(ev) {
     if (ev.type === "auxclick" && ev.button !== 1) return;
