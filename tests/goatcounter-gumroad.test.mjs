@@ -87,8 +87,8 @@ function loadHelper(search) {
   const sandbox = {
     location: { search },
     document: {
-      addEventListener(type, fn) {
-        listeners[type] = fn;
+      addEventListener(type, fn, capture) {
+        listeners[capture ? "capture:" + type : type] = fn;
       }
     }
   };
@@ -193,6 +193,81 @@ test("wanted=true Gumroad anchors keep an origin referrer", () => {
   assert.equal(/paid\.rel\s*=/.test(eu), false);
   assert.equal(eu.includes("fetwsm"), false);
   assert.equal(/<a\b[^>]*gumroad\.com\/l\//.test(eu), false);
+});
+
+test("test visits prefix data-goatcounter-click and live visits do not", () => {
+  const href = "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=site&utm_campaign=etsy-photo-audit-check&utm_content=footer";
+  const testVisit = loadHelper("?fmp_test=1&qa=qa-clicktrack-20261107-2035ct");
+  assert.equal(typeof testVisit.listeners["capture:click"], "function");
+  assert.equal(typeof testVisit.listeners["capture:auxclick"], "function");
+  const anchor = {
+    attrs: {
+      href,
+      "data-goatcounter-click": "cta/etsy-photo-result-mockup"
+    },
+    getAttribute(name) {
+      return Object.prototype.hasOwnProperty.call(this.attrs, name) ? this.attrs[name] : null;
+    },
+    setAttribute(name, value) {
+      this.attrs[name] = value;
+    }
+  };
+  const ev = {
+    type: "click",
+    button: 0,
+    target: {
+      closest(sel) {
+        return sel === "[data-goatcounter-click]" || sel === "a" ? anchor : null;
+      }
+    }
+  };
+  testVisit.listeners["capture:click"](ev);
+  assert.equal(anchor.attrs["data-goatcounter-click"], "TEST-EXCLUDE/cta/etsy-photo-result-mockup");
+  testVisit.listeners["capture:click"](ev);
+  assert.equal(anchor.attrs["data-goatcounter-click"], "TEST-EXCLUDE/cta/etsy-photo-result-mockup");
+
+  const footer = {
+    attrs: { href },
+    getAttribute(name) {
+      return Object.prototype.hasOwnProperty.call(this.attrs, name) ? this.attrs[name] : null;
+    },
+    setAttribute(name, value) {
+      this.attrs[name] = value;
+    }
+  };
+  testVisit.listeners["capture:click"]({
+    type: "click",
+    button: 0,
+    target: { closest: (sel) => (sel === "a" ? footer : null) }
+  });
+  assert.equal(footer.attrs["data-goatcounter-click"], undefined);
+  testVisit.sandbox.fetch = () => Promise.resolve();
+  testVisit.sandbox.navigator = { sendBeacon() { return true; } };
+  testVisit.listeners.click({
+    type: "click",
+    button: 0,
+    target: { closest: () => footer }
+  });
+  assert.equal(testVisit.counts.at(-1).path, "TEST-EXCLUDE/gumroad-click/lnfgc");
+
+  const live = loadHelper("");
+  assert.equal(live.listeners["capture:click"], undefined);
+  const liveAnchor = {
+    attrs: { href, "data-goatcounter-click": "cta/fire-check-top" },
+    getAttribute(name) {
+      return this.attrs[name] || null;
+    },
+    setAttribute(name, value) {
+      this.attrs[name] = value;
+    }
+  };
+  live.listeners.click({
+    type: "click",
+    button: 0,
+    target: { closest: () => liveAnchor }
+  });
+  assert.equal(liveAnchor.attrs["data-goatcounter-click"], "cta/fire-check-top");
+  assert.equal(live.counts[0].path, "gumroad-click/lnfgc");
 });
 
 test("checkout clicks record gumroad-click/slug and test visits stay under TEST-EXCLUDE", () => {
