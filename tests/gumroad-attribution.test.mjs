@@ -162,7 +162,7 @@ function runUtm(search, hrefs, storage) {
 const SAMPLE = "https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&utm_source=site&utm_medium=site&utm_campaign=fire-to-iris-check&utm_content=footer";
 
 test("landing utm_source is stored and written onto checkout links", () => {
-  const first = runUtm("?utm_source=TikTok&utm_medium=social", [SAMPLE]);
+  const first = runUtm("?utm_source=TikTok&utm_medium=newsletter&utm_campaign=newsletter-week&utm_content=nl-body", [SAMPLE]);
   assert.equal(first.store.get("fmp_utm_source"), "tiktok");
   assert.equal(new URL(first.anchors[0].href).searchParams.get("utm_source"), "tiktok");
   assert.equal(new URL(first.anchors[0].href).searchParams.get("utm_medium"), "site");
