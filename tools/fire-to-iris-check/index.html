@@ -237,7 +237,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <main id="main">
 <p class="muted site-nav"><a href="https://firstmoverprojects.com/">First Mover Projects</a> · <a href="/tools/">All tools</a> · free browser check</p>
 <h1>IRS FIRE to IRIS Readiness &amp; 1099 CSV Header Check</h1>
-<p class="subhead">Free check in your browser. If you want every step on one page, the $9 checklist is optional.</p>
+<p class="subhead">Free check in your browser. If you want every step on 3 pages, the $9 checklist is optional.</p>
 <div class="kit-top">
 <p data-fire-kit="1"><a target="_blank" class="btn" id="kit-top" data-goatcounter-click="cta/fire-check-top" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-check-top" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">See the $9 FIRE to IRIS checklist</a></p>
 <p class="next-irs" id="next-irs"><span data-next-irs-copy="">Next IRS date: Nov 9, 2026, the last day to change your IR Application for TCC (after that it is read-only). Last day to file on FIRE: Nov 19, 2026, 3 p.m. ET. </span>Source: <a href="https://www.irs.gov/e-file-providers/filing-information-returns-electronically-fire" rel="noopener noreferrer">irs.gov/fire</a></p>
@@ -512,7 +512,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <p>Related: <a href="/deadlines/irs-fire-retirement-nov-19.html">IRS FIRE retirement, Nov 19, 2026</a> · <a href="/deadlines/">All deadlines</a> · <a href="/tools/">Tools and kits</a></p>
 
 <footer>
-<p>Not affiliated with the IRS.</p>
+<p>Not affiliated with or endorsed by the IRS.</p>
 <p>General guidance, not legal, tax or IT advice.</p>
 <p>Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
 <p>Made by First Mover Projects with AI coding tools.</p>
@@ -599,7 +599,7 @@ function analyze(opts) {
     add("warn", "Before Nov 9, 2026", "Submit any changes to your existing Information Returns (IR) Application for TCC by Nov. 9, 2026. After Nov. 9, existing IR TCC applications become read-only.", "Nov. 9, 2026: Last day to make changes to the Information Returns (IR) Applications for Transmitter Control Codes (TCC).");
   }
   if (open2026) {
-    add("warn", "Before Nov 1 / Nov 19, 2026", "If you need FIRE test filings, submit them by Nov. 1, 2026. Submit any remaining live FIRE information returns by Nov. 19, 2026, at 3 p.m. ET.", "Nov. 1, 2026: Last day to file test information returns through the FIRE Trading Partner Test System. Nov. 19, 2026, at 3 p.m. ET: Last day to file information returns through the FIRE system.");
+    add("warn", "Nov 1, 2026 (passed) / Nov 19, 2026", "Nov. 1, 2026 was the last day to file test information returns through the FIRE Trading Partner Test System. Submit any remaining live FIRE information returns by Nov. 19, 2026, at 3 p.m. ET.", "Nov. 1, 2026: Last day to file test information returns through the FIRE Trading Partner Test System. Nov. 19, 2026, at 3 p.m. ET: Last day to file information returns through the FIRE system.");
   }
   if (over100) {
     add("info", "Over 100 returns", "The free web-based IRIS Taxpayer Portal allows filers to e-file up to 100 returns at a time (or multiple batches of up to 100). For bulk Application-to-Application (A2A) transmission, check the IRS IRIS A2A specifications and TCC requirements.", "The IRIS Taxpayer Portal is a free, web-based filing system that allows filers to e-file up to 100 returns at a time.");
@@ -715,7 +715,7 @@ function render() {
       setResultOffer("fire-result-nov9", false);
     } else if (byId("c-open-2026").checked) {
       problem.textContent = "You still plan to file on FIRE. Test files stop on Nov 1, 2026. The last day to file on the old system is Nov 19, 2026, at 3 p.m. Eastern Time.";
-      setLead("Because you still plan to file on FIRE, the last day is Nov 19, 2026, at 3 p.m. Eastern Time. The checklist lists the IRS dates and links, your FIRE account steps and 2027 prep on one page set.");
+      setLead("Because you still plan to file on FIRE, the last day is Nov 19, 2026, at 3 p.m. Eastern Time. The checklist lists the IRS dates and links, your FIRE account steps and 2027 prep on 3 pages.");
       setResultOffer("fire-result-still-fire", false);
     } else if (res.warns) {
       problem.textContent = "You still have a step to finish before the old IRS system closes on Nov 19, 2026, at 3 p.m. Eastern Time.";
@@ -782,7 +782,7 @@ function render() {
     csvBox.hidden = true;
   }
   lines.push("");
-  lines.push("Not affiliated with the IRS. General guidance, not legal, tax or IT advice. Check irs.gov for official templates and current dates.");
+  lines.push("Not affiliated with or endorsed by the IRS. General guidance, not legal, tax or IT advice. Check irs.gov for official templates and current dates.");
   byId("plain-out").textContent = lines.join("\n");
   byId("copystate").textContent = "";
   byId("results").hidden = false;

@@ -20,7 +20,7 @@ const LEADS = {
   A: "The checklist is for people who file their own 1099s. If your provider files for you, you don't need it. Copy the question below and send it to them instead: \"" + QUESTION + "\"",
   B: "Because you file yourself and don't have an IRIS TCC yet, this is the step that matters most. The checklist walks through the IRIS Application for TCC and your FIRE account steps on 3 pages, with the IRS dates and links at the top.",
   C: "Because you need to change an existing IR TCC application, do that before Nov 9, 2026, when those applications become read-only. The checklist puts that step, the IRIS TCC steps and the other IRS dates on one printable list.",
-  D: "Because you still plan to file on FIRE, the last day is Nov 19, 2026, at 3 p.m. Eastern Time. The checklist lists the IRS dates and links, your FIRE account steps and 2027 prep on one page set.",
+  D: "Because you still plan to file on FIRE, the last day is Nov 19, 2026, at 3 p.m. Eastern Time. The checklist lists the IRS dates and links, your FIRE account steps and 2027 prep on 3 pages.",
   E: "You still have a step to finish. The checklist puts the IRS dates, IRIS TCC steps and a 1099-NEC add-on in one printable list.",
   F: "You look on track from what you checked. Most people in your spot don't need to buy anything. If you'd like 2027 prep and the IRS dates on one printable list, the checklist is optional."
 };
@@ -77,6 +77,16 @@ test("body, FAQ, badges, schema, alt text, and the sticky name the ZIP download"
   const visibleFaq = html.slice(html.indexOf('id="faq"'), html.indexOf("</section>", html.indexOf('id="faq"')));
   assert.equal(visibleFaq.includes(kitAnswer.acceptedAnswer.text), true);
   assert.equal(html.includes(REFUND), true);
+  assert.equal(html.includes("If you want every step on 3 pages, the $9 checklist is optional."), true);
+  assert.equal(html.includes("every step on one page"), false);
+  assert.equal(html.includes("on one page set"), false);
+  assert.equal(html.includes("on 3 pages."), true);
+  assert.equal(html.includes("submit them by Nov. 1, 2026"), false);
+  assert.equal(html.includes("Nov. 1, 2026 was the last day to file test information returns through the FIRE Trading Partner Test System."), true);
+  assert.equal(html.includes("Nov. 1, 2026: Last day to file test information returns through the FIRE Trading Partner Test System."), true);
+  assert.equal(html.includes("Submit any remaining live FIRE information returns by Nov. 19, 2026, at 3 p.m. ET."), true);
+  assert.equal(html.split("Not affiliated with or endorsed by the IRS.").length - 1, 2);
+  assert.equal(html.includes("Not affiliated with the IRS."), false);
 });
 
 test("all six outcomes set the lead, offer, and gumroad click", async () => {
