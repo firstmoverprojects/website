@@ -41,10 +41,12 @@ async function open(rel) {
   return { page, errors, nets };
 }
 
-async function assertReminder(page, eventPath, rel) {
+async function assertReminder(page, eventPath, rel, heading) {
+  const label = heading || "Get a reminder before this deadline";
   assert.equal(await page.locator("#results .deadline-reminder").isVisible(), true, rel);
   assert.equal(await page.locator("#result-cta #deadline-reminder-form").count(), 0, rel);
-  assert.equal(await page.innerText("#deadline-reminder-h"), "Get a reminder before this deadline", rel);
+  assert.equal(await page.innerText("#deadline-reminder-h"), label, rel);
+  assert.equal(eventPath.startsWith("/"), false, rel);
   assert.equal(await page.getAttribute(".deadline-reminder", "aria-labelledby"), "deadline-reminder-h", rel);
   assert.equal(await page.getAttribute("#reminder-email", "aria-describedby"), "reminder-note", rel);
   if (await page.locator("#kit-result").count()) {
@@ -63,11 +65,13 @@ async function assertReminder(page, eventPath, rel) {
       btnColor: getComputedStyle(button).color,
       btnH: button.getBoundingClientRect().height,
       label: label ? label.textContent : "",
+      button: button.textContent,
       required: email.required,
       type: email.type
     };
   });
   assert.equal(colors.heading, "rgb(12, 74, 110)", rel);
+  assert.equal(colors.button, label, rel);
   assert.equal(colors.box, "rgb(240, 249, 255)", rel);
   assert.equal(colors.btnBg, "rgb(12, 74, 110)", rel);
   assert.equal(colors.btnColor, "rgb(255, 255, 255)", rel);
@@ -75,6 +79,11 @@ async function assertReminder(page, eventPath, rel) {
   assert.equal(colors.label, "Email address", rel);
   assert.equal(colors.required, true, rel);
   assert.equal(colors.type, "email", rel);
+  if (await page.locator("#kit-result").isVisible()) {
+    const kitBox = await page.locator("#kit-result").boundingBox();
+    const formBox = await page.locator("#deadline-reminder-form").boundingBox();
+    assert.ok(kitBox && formBox && kitBox.y + kitBox.height <= formBox.y + 1, rel);
+  }
   const counts = await page.evaluate((path) => {
     const form = document.getElementById("deadline-reminder-form");
     form.addEventListener("submit", (ev) => ev.preventDefault(), true);
@@ -119,7 +128,9 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       stepMatch: /unedited photo of the real item/,
       skipWeeklyEmail: true,
       thanks: true,
-      contrast: true
+      contrast: true,
+      reminder: "signup/etsy-photo-audit-check",
+      reminderHeading: "Get the free weekly deadline email"
     },
     {
       rel: "tools/fire-to-iris-check/index.html",
@@ -213,7 +224,7 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
     } else {
       assert.match(await page.innerText("#result-cta"), /free weekly deadline email/);
     }
-    if (item.reminder) await assertReminder(page, item.reminder, item.rel);
+    if (item.reminder) await assertReminder(page, item.reminder, item.rel, item.reminderHeading);
     assert.deepEqual(errors, [], item.rel);
     assert.deepEqual(toolNetwork(nets), [], item.rel);
     await assertNoHScroll(page);

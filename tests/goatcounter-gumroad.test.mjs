@@ -12,6 +12,7 @@ const SIB_FORM_CSP = new Set([
   "tools/ct-paid-sick-leave-check/index.html",
   "tools/fire-to-iris-check/index.html",
   "tools/amazon-coi-check/index.html",
+  "tools/etsy-photo-audit-check/index.html",
   "tools/eu-product-id-check/index.html",
   "tools/1099-nec-or-1099-k-check/index.html",
   "tools/tx-franchise-forfeiture-check/index.html",
