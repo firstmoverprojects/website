@@ -1,4 +1,4 @@
-// Deadline reminder box on the FIRE, Amazon COI, and EU product ID results.
+// Deadline reminder box on the FIRE, Amazon COI, EU product ID, and Etsy photo results.
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import path from "node:path";
@@ -32,6 +32,16 @@ const PAGES = [
     source: "1099-nec-or-1099-k",
     event: "signup/1099-nec-or-1099-k-check",
     region: "signup"
+  },
+  {
+    rel: "tools/etsy-photo-audit-check/index.html",
+    source: "etsy-photo-audit",
+    event: "signup/etsy-photo-audit-check",
+    region: "deadline-reminder",
+    heading: "Get the free weekly deadline email",
+    button: "Get the free weekly deadline email",
+    note: "Your photo answers stay in this browser. The form sends only the email address you type.",
+    skipKitSweep: true
   }
 ];
 
@@ -124,8 +134,11 @@ test("each tool result has one accessible reminder form on the existing list", (
     assert.equal(html.split('id="deadline-reminder-form"').length - 1, 1, page.rel);
     assert.equal(html.split('id="deadline-reminder-h"').length - 1, 1, page.rel);
     assert.equal(html.split('id="reminder-email"').length - 1, 1, page.rel);
+    const heading = page.heading || "Get a reminder before this deadline";
+    const button = page.button || "Get a reminder before this deadline";
+    assert.equal(page.event.startsWith("/"), false, page.rel);
     assert.match(results, new RegExp(`<section class="deadline-reminder" id="${page.region}" aria-labelledby="deadline-reminder-h">`));
-    assert.match(results, /<h2 id="deadline-reminder-h">Get a reminder before this deadline<\/h2>/);
+    assert.match(results, new RegExp(`<h2 id="deadline-reminder-h">${heading}</h2>`));
     assert.match(form, new RegExp(`method="POST" action="${ACTION.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
     assert.match(form, new RegExp(`data-goatcounter-submit="${page.event}"`));
     assert.match(form, new RegExp(`data-goatcounter-title="Deadline reminder signup: ${page.event.slice("signup/".length)}"`));
@@ -133,7 +146,8 @@ test("each tool result has one accessible reminder form on the existing list", (
     assert.match(form, /type="email" id="reminder-email" name="EMAIL" autocomplete="email" inputmode="email"[^>]*required aria-describedby="reminder-note"/);
     assert.match(form, /<label class="sib-optin" for="reminder-opt-in">/);
     assert.match(form, /id="reminder-opt-in" name="OPT_IN" required/);
-    assert.match(form, /<button type="submit"(?: id="deadline-reminder-submit")?>Get a reminder before this deadline<\/button>/);
+    assert.match(form, new RegExp(`<button type="submit"(?: id="deadline-reminder-submit")?>${button}</button>`));
+    if (page.note) assert.match(results, new RegExp(page.note.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     assert.match(form, /<span>Send me the weekly First Mover Projects email: deadline reminders, plus news about our kits, games and books\. We will email a confirmation first\. Unsubscribe any time with one click\. We do not sell or share your email\.<\/span>/);
     assert.match(form, /name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off" aria-hidden="true"/);
     assert.match(form, new RegExp(`name="SIGNUP_SOURCE" value="${page.source}"`));
@@ -147,13 +161,25 @@ test("each tool result has one accessible reminder form on the existing list", (
     assert.deepEqual(httpsSrc, ["https://gc.zgo.at/count.js"], page.rel);
     for (const host of TRACKERS) assert.equal(html.includes(host), false, page.rel + " " + host);
     const kitClicks = [];
-    for (const tag of html.match(/<a\b[^>]*>/g) || []) {
-      const decoded = tag.replace(/&amp;/g, "&");
-      if (!decoded.includes("https://firstmoverprojects.gumroad.com/l/")) continue;
-      kitClicks.push(tag);
-      assert.match(tag, /data-goatcounter-click="cta\/[a-z0-9-]+"/, page.rel + " " + tag);
+    if (!page.skipKitSweep) {
+      for (const tag of html.match(/<a\b[^>]*>/g) || []) {
+        const decoded = tag.replace(/&amp;/g, "&");
+        if (!decoded.includes("https://firstmoverprojects.gumroad.com/l/")) continue;
+        kitClicks.push(tag);
+        assert.match(tag, /data-goatcounter-click="cta\/[a-z0-9-]+"/, page.rel + " " + tag);
+      }
     }
-    if (page.rel === "tools/eu-product-id-check/index.html") {
+    if (page.rel === "tools/etsy-photo-audit-check/index.html") {
+      assert.equal(html.includes("next Etsy listing-rule"), false, page.rel);
+      assert.equal(html.includes("Email me the next rule change"), false, page.rel);
+      assert.equal(/email me my results/i.test(html), false, page.rel);
+      assert.equal(html.includes("money-back"), false, page.rel);
+      assert.match(html, /data-goatcounter-submit="signup\/etsy-photo-audit-check"/);
+      assert.match(results, /Double opt-in\. Unsubscribe any time\./);
+      const resultCard = element(results, "result-cta");
+      assert.equal(resultCard.includes("deadline-reminder-form"), false, page.rel);
+      assert.ok(results.indexOf('id="kit-offer"') < results.indexOf('id="deadline-reminder-form"'), page.rel);
+    } else if (page.rel === "tools/eu-product-id-check/index.html") {
       assert.equal(kitClicks.length, 0, page.rel + " kit buttons " + kitClicks.length);
       assert.equal(html.includes("fetwsm"), false, page.rel);
       assert.equal(html.includes('id="kit-result"'), false, page.rel);

@@ -118,7 +118,10 @@ async function assertNoHScroll(page) {
 test("static CSP, privacy, nav, and footer guards", () => {
   for (const rel of Object.values(PAGES)) {
     const html = read(rel);
-    assert.match(html, new RegExp(`content="${CSP.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
+    const csp = rel === PAGES.etsy
+      ? CSP.replace("form-action 'none'", "form-action https://05279842.sibforms.com")
+      : CSP;
+    assert.match(html, new RegExp(`content="${csp.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
     assert.match(html, /<meta name="referrer" content="strict-origin-when-cross-origin">/);
     assert.match(html, /href="\/tools\/"/);
     assert.match(html, /href="\/deadlines\/"/);
@@ -135,7 +138,12 @@ test("static CSP, privacy, nav, and footer guards", () => {
     const outside = helperStart === -1 ? html : html.slice(0, helperStart) + html.slice(helperEnd + "</script>".length);
     assert.equal(outside.includes("fetch("), false, rel + " fetch outside helper");
     assert.equal(outside.includes("sendBeacon"), false, rel + " sendBeacon outside helper");
-    assert.equal(/<form[\s>]/i.test(html), false, rel);
+    if (rel === PAGES.etsy) {
+      assert.equal(html.split(/<form[\s>]/i).length - 1, 1, rel);
+      assert.match(html, /id="deadline-reminder-form"[^>]*action="https:\/\/05279842\.sibforms\.com\//);
+    } else {
+      assert.equal(/<form[\s>]/i.test(html), false, rel);
+    }
     const httpsSrc = [...html.matchAll(/\ssrc\s*=\s*["'](https?:[^"']+)["']/gi)].map((match) => match[1]);
     assert.deepEqual(httpsSrc, ["https://gc.zgo.at/count.js"], rel);
     assert.match(html, /data-goatcounter="https:\/\/firstmoverprojects\.goatcounter\.com\/count"/);
