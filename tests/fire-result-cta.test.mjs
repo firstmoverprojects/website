@@ -34,7 +34,7 @@ const PROBLEMS = {
 };
 
 test("result copy stays on the spec sentences and keeps the house lines", () => {
-  const shareTitle = "FIRE ends Nov 19, 2026 3 p.m. ET \u2014 Free IRIS readiness &amp; 1099 CSV check";
+  const shareTitle = "FIRE filing ends Nov 19, 2026 3 p.m. ET - Free IRIS readiness &amp; 1099 CSV check";
   assert.equal(html.split(shareTitle).length - 1, 3);
   assert.equal(html.replaceAll(shareTitle, "").includes("\u2014"), false);
   assert.equal(html.includes("\u2013"), false);

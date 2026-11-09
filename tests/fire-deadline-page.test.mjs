@@ -100,7 +100,7 @@ test("the kit is described as one 3-page PDF and the house lines stay", () => {
   assert.equal(html.includes(FOOTER), true);
   assert.equal(html.includes("Deadlines for small businesses, in plain English, with source links."), true);
   assert.equal(html.includes("General guidance, not legal, tax or IT advice. Check the IRS's own pages and ask your tax professional for your situation. Not affiliated with the IRS. Names are used only to describe compatibility."), true);
-  const shareTitle = "FIRE ends Nov 19, 2026 3 p.m. ET \u2014 Free IRIS readiness &amp; 1099 CSV check";
+  const shareTitle = "FIRE filing ends Nov 19, 2026 3 p.m. ET - Free IRIS readiness &amp; 1099 CSV check";
   assert.equal(html.split(shareTitle).length - 1, 3);
   assert.equal(html.replaceAll(shareTitle, "").includes("\u2014"), false);
   assert.equal(html.includes("\u2013"), false);
