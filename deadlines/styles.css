@@ -205,12 +205,14 @@ p {
 }
 
 .btn--primary {
-  background: var(--gradient-accent);
-  color: #01060b;
+  background: linear-gradient(135deg, #22c55e 0%, #4ade80 100%);
+  color: #02060f;
 }
 
 .btn--primary:hover {
-  filter: brightness(1.08);
+  background: #16a34a;
+  color: #02060f;
+  filter: none;
 }
 
 .btn--primary:focus-visible {
@@ -663,9 +665,18 @@ pre.prompt {
   }
 }
 
-/* A/B CTA test (ab-cta.js). Cyan = current gradient; green = brand Option 1 #22c55e. */
-html[data-ab-cta="green"] .ab-cta.btn--primary { background: #22c55e; color: #01060b; }
-html[data-ab-cta="green"] .ab-cta.btn--primary:hover { background: #16a34a; filter: none; }
+/* A/B CTA test (ab-cta.js) still labels views, but both arms render Brand Option 1. */
+html[data-ab-cta="green"] .ab-cta.btn--primary,
+html[data-ab-cta="cyan"] .ab-cta.btn--primary {
+  background: linear-gradient(135deg, #22c55e 0%, #4ade80 100%);
+  color: #02060f;
+}
+html[data-ab-cta="green"] .ab-cta.btn--primary:hover,
+html[data-ab-cta="cyan"] .ab-cta.btn--primary:hover {
+  background: #16a34a;
+  color: #02060f;
+  filter: none;
+}
 .ab-cta.btn { margin: 0.25rem 0; }
 
 /* ---- staged 2026-10-16: kit CTA + expired banner (DRAFT, Risk review) ---- */
