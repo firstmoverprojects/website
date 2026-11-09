@@ -87,7 +87,7 @@ test("FAQPage JSON matches the visible questions and the kit sections have no Pr
     const blocks = [...html.matchAll(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/g)].map((block) => JSON.parse(block[1]));
     const faq = blocks.find((item) => item["@type"] === "FAQPage");
     assert.ok(faq, rel);
-    assert.equal(faq.dateModified, "2026-11-05");
+    assert.equal(faq.dateModified, rel === "deadlines/file-1099-nec-2027-iris.html" ? "2026-11-09" : "2026-11-05");
     const visible = html.slice(html.indexOf('id="faq-h"'), html.indexOf('id="src-h"'));
     const questions = [...visible.matchAll(/<summary>([\s\S]*?)<\/summary>\s*<p>([\s\S]*?)<\/p>/g)];
     assert.equal(questions.length, faq.mainEntity.length, rel);
@@ -145,6 +145,9 @@ test("the 1099-NEC page states the 2026 payment threshold", () => {
   const line = "The IRS lists a $2,000 threshold for payments made in 2026 and a January 31 due date";
   assert.match(html, new RegExp(`<meta name="description" content="${line.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
   assert.match(html, new RegExp(`<meta property="og:description" content="${line.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
-  assert.match(html, /The \$2,000 threshold applies to payments made in 2026 \(the One Big Beautiful Bill Act raised it from \$600 for payments made after December 31, 2025\)\. For payments made after 2026 it is adjusted for inflation\./);
+  assert.match(html, /The \$2,000 threshold applies to payments made in 2026 \(the One Big Beautiful Bill Act raised it from \$600 for payments made after December 31, 2025\)\. For payments made in calendar year 2027, the section 6041\(a\) reporting threshold is \$2,100 \(<a href="https:\/\/www\.irs\.gov\/pub\/irs-drop\/rp-26-35\.pdf">Rev\. Proc\. 2026-35 section 3\.52<\/a>\)\. Payments made in 2026 stay \$2,000\. That figure covers Form 1099-NEC and most Form 1099-MISC payment types that use the same threshold; it does not change the \$10 royalty threshold, Form 1099-K rules, or backup withholding\./);
+  assert.equal(html.includes("For payments made after 2026 it is adjusted for inflation."), false);
+  assert.match(html, /https:\/\/www\.irs\.gov\/pub\/irs-drop\/rp-26-35\.pdf/);
+  assert.equal(html.includes("https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2027-taxpayers-continue-to-benefit-from-the-working-families-tax-cuts"), false);
   assert.match(html, /https:\/\/www\.irs\.gov\/businesses\/small-businesses-self-employed\/am-i-required-to-file-a-form-1099-or-other-information-return/);
 });
