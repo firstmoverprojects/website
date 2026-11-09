@@ -665,20 +665,6 @@ pre.prompt {
   }
 }
 
-/* A/B CTA test (ab-cta.js) still labels views, but both arms render Brand Option 1. */
-html[data-ab-cta="green"] .ab-cta.btn--primary,
-html[data-ab-cta="cyan"] .ab-cta.btn--primary {
-  background: linear-gradient(135deg, #22c55e 0%, #4ade80 100%);
-  color: #02060f;
-}
-html[data-ab-cta="green"] .ab-cta.btn--primary:hover,
-html[data-ab-cta="cyan"] .ab-cta.btn--primary:hover {
-  background: #16a34a;
-  color: #02060f;
-  filter: none;
-}
-.ab-cta.btn { margin: 0.25rem 0; }
-
 /* ---- staged 2026-10-16: kit CTA + expired banner (DRAFT, Risk review) ---- */
 .kit-cta { margin: 1rem 0 0; }
 .kit-cta .btn, .kit-link .btn { min-height: 48px; width: 100%; max-width: 28rem; text-align: center; white-space: normal; }

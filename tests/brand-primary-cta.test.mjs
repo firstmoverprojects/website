@@ -35,10 +35,8 @@ test("deadlines and games primary buttons use Brand Option 1", () => {
     new RegExp(`\\.btn--primary\\s*\\{\\s*background:\\s*${GREEN.replace(/[()]/g, "\\$&")};\\s*color:\\s*#02060f;`)
   );
   assert.match(css, /\.btn--primary:hover\s*\{\s*background:\s*#16a34a;\s*color:\s*#02060f;\s*filter:\s*none;/);
-  assert.match(css, /html\[data-ab-cta="cyan"\] \.ab-cta\.btn--primary/);
-  assert.equal(/html\[data-ab-cta="green"\] \.ab-cta\.btn--primary \{ background: #22c55e/.test(css), false);
-  const arms = css.slice(css.indexOf('html[data-ab-cta="green"] .ab-cta.btn--primary'));
-  assert.match(arms, new RegExp(GREEN.replace(/[()]/g, "\\$&")));
+  assert.equal(css.includes("data-ab-cta"), false);
+  assert.equal(css.includes(".ab-cta"), false);
   assert.match(css, /\.steps li::before\s*\{[^}]*background:\s*var\(--gradient-accent\)/);
 });
 

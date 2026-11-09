@@ -184,8 +184,9 @@ test("wanted=true Gumroad anchors keep an origin referrer", () => {
   }
   assert.ok(anchors >= 40, String(anchors));
   const ab = read("deadlines/assets/ab-cta.js");
-  assert.match(ab, /TEST-EXCLUDE\/" \+ path/);
-  assert.match(ab, /fmp_test=1/);
+  assert.match(ab, /A\/B CTA test ended 2026-11-09, no result \(confounded: both arms identical after PR131\)\./);
+  assert.equal(/data-ab-cta|Math\.random|goatcounter|ab-cta\//.test(ab), false);
+  assert.equal(read("deadlines/index.html").includes("ab-cta.js"), false);
   const finder = read("deadlines/finder/finder.js");
   assert.match(finder, /a\.rel = "noopener"/);
   assert.match(finder, /a\.referrerPolicy = "strict-origin-when-cross-origin"/);
