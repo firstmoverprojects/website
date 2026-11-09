@@ -201,11 +201,20 @@ test("the page cites the IRS sources, the check date, and stays in the sitemap a
     "https://www.irs.gov/businesses/understanding-your-form-1099-k",
     "https://www.irs.gov/newsroom/form-1099-k-faqs-general-information",
     "https://www.irs.gov/filing/e-file-information-returns-with-iris",
-    "https://www.irs.gov/businesses/small-businesses-self-employed/employment-tax-due-dates"
+    "https://www.irs.gov/businesses/small-businesses-self-employed/employment-tax-due-dates",
+    "https://www.irs.gov/pub/irs-drop/rp-26-35.pdf"
   ];
   for (const url of sources) assert.equal(html.includes(url), true, url);
+  assert.equal(html.includes("https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2027-taxpayers-continue-to-benefit-from-the-working-families-tax-cuts"), false);
   assert.match(html, /Checked November 5, 2026/);
+  assert.match(html, /Checked November 9, 2026/);
   assert.match(html, /For payments made in 2026, the reporting threshold is \$2,000/);
+  assert.equal(html.includes("For payments made after 2026, Publication 1099 says the amount is adjusted for inflation."), false);
+  assert.equal(html.includes("Publication 1099 says the amount will be adjusted for inflation beginning in calendar year 2027."), false);
+  assert.equal(html.includes("For payments made after 2026, see Publication 1099 for the inflation-adjusted amount."), false);
+  const revProc = '<a href="https://www.irs.gov/pub/irs-drop/rp-26-35.pdf" rel="noopener noreferrer">Rev. Proc. 2026-35 section 3.52</a>';
+  assert.equal(html.includes("For payments made in calendar year 2027, " + revProc + " sets the section 6041(a) reporting threshold at $2,100. Payments made in 2026 stay $2,000. Form 1099-NEC and most Form 1099-MISC boxes that share that threshold use $2,100; royalties ($10), Form 1099-K, and backup withholding are separate."), true);
+  assert.equal(html.includes("For payments made in calendar year 2027, the section 6041(a) amount is $2,100 (" + revProc + "). See also Publication 1099 / the Guide to Information Returns."), true);
   assert.equal(html.includes("General guidance, not legal or tax advice."), false);
   assert.equal(html.includes("General guidance, not legal, tax or IT advice."), true);
   assert.equal(html.includes("Not affiliated with the IRS."), false);
