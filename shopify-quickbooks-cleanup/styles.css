@@ -205,12 +205,14 @@ p {
 }
 
 .btn--primary {
-  background: var(--gradient-accent);
-  color: #01060b;
+  background: linear-gradient(135deg, #22c55e 0%, #4ade80 100%);
+  color: #02060f;
 }
 
 .btn--primary:hover {
-  filter: brightness(1.08);
+  background: #16a34a;
+  color: #02060f;
+  filter: none;
 }
 
 .btn--primary:focus-visible {
