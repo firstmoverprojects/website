@@ -94,12 +94,12 @@ test("mark writes (passed) from the base label and can remove it", () => {
   assert.equal(nov9.textContent, "Nov 9, 2026 (passed)");
 });
 
-test("static HTML marks Nov 1 as passed and leaves Nov 9 unmarked", () => {
+test("static HTML marks Nov 1 and Nov 9 as passed", () => {
   assert.match(html, /data-passed-end="nov1" data-passed-base="Nov 1, 2026">Nov 1, 2026 \(passed\)/);
-  assert.match(html, /data-passed-end="nov9" data-passed-base="Nov 9, 2026">Nov 9, 2026</);
+  assert.match(html, /data-passed-end="nov9" data-passed-base="Nov 9, 2026">Nov 9, 2026 \(passed\)/);
   assert.match(html, /data-passed-base="Test files stop on Nov 1, 2026\.">Test files stop on Nov 1, 2026 \(passed\)\./);
-  assert.match(html, /data-passed-base="Changes to an old IRS application stop on Nov 9, 2026\.">Changes to an old IRS application stop on Nov 9, 2026\./);
-  assert.equal(html.includes("Nov 9, 2026 (passed)"), false);
+  assert.match(html, /data-passed-base="Changes to an old IRS application stop on Nov 9, 2026\.">Changes to an old IRS application stop on Nov 9, 2026 \(passed\)\./);
+  assert.equal(html.includes("Nov 9, 2026 (passed)"), true);
   assert.match(html, /Last day to file test information returns through the FIRE Trading Partner Test System\./);
   assert.match(html, /Last day to make changes to the Information Returns \(IR\) Applications for Transmitter Control Codes \(TCC\)\./);
 });
