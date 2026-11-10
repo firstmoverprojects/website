@@ -11,7 +11,7 @@
       "check": "html",
       "file": "tools/etsy-photo-audit-check/index.html",
       "match": "[aria-label-misuse]",
-      "reason": "Edited by open PR #143. Fix: add role=\"group\" to <div class=\"cd\" aria-label=\"Summary\">."
+      "reason": "Edited by open PRs #143 and #144. Fix: add role=\"group\" to <div class=\"cd\" aria-label=\"Summary\">."
     },
     {
       "check": "html",
