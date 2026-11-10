@@ -79,7 +79,7 @@ test("body, FAQ, badges, schema, alt text, and the sticky name the ZIP download"
   const visibleFaq = html.slice(html.indexOf('id="faq"'), html.indexOf("</section>", html.indexOf('id="faq"')));
   assert.equal(visibleFaq.includes(kitAnswer.acceptedAnswer.text), true);
   assert.equal(html.includes(REFUND), true);
-  assert.equal(html.includes("Optional <strong>$9 downloadable kit</strong>: one 3-page PDF checklist in a ZIP."), true);
+  assert.equal(html.includes("If you want every step on 3 pages, the $9 checklist is optional."), true);
   assert.equal(html.includes("every step on one page"), false);
   assert.equal(html.includes("on one page set"), false);
   assert.equal(html.includes("on 3 pages."), true);
@@ -228,7 +228,7 @@ test("all six outcomes set the lead, offer, and gumroad click", async () => {
     assert.equal(state.disclaimerVisible, true, item.key);
     assert.equal(state.content, item.content, item.key);
     assert.equal(state.source, "site", item.key);
-    assert.equal(state.medium, "offer_page", item.key);
+    assert.equal(state.medium, "site", item.key);
     assert.equal(state.campaign, "fire-to-iris-check", item.key);
     assert.equal(state.wanted, "true", item.key);
     assert.equal(state.click, "cta/" + item.content, item.key);

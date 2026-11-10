@@ -29,7 +29,6 @@ const CONTENTS = new Set([
   "result-cta", "sticky-cta", "tools-free", "tools-kit", "top-cta", "trade-pill", "eu-fee"
 ]);
 const OFFER_TOOL_PAGES = new Set([
-  "tools/fire-to-iris-check/index.html",
   "tools/amazon-coi-check/index.html",
   "tools/etsy-photo-audit-check/index.html"
 ]);
@@ -170,13 +169,13 @@ function runUtm(search, hrefs, storage) {
   return { anchors, listeners, store };
 }
 
-const SAMPLE = "https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&utm_source=site&utm_medium=offer_page&utm_campaign=fire-to-iris-check&utm_content=footer";
+const SAMPLE = "https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&utm_source=site&utm_medium=site&utm_campaign=fire-to-iris-check&utm_content=footer";
 
 test("landing utm_source is stored and written onto checkout links", () => {
   const first = runUtm("?utm_source=TikTok&utm_medium=newsletter&utm_campaign=newsletter-week&utm_content=nl-body", [SAMPLE]);
   assert.equal(first.store.get("fmp_utm_source"), "tiktok");
   assert.equal(new URL(first.anchors[0].href).searchParams.get("utm_source"), "tiktok");
-  assert.equal(new URL(first.anchors[0].href).searchParams.get("utm_medium"), "offer_page");
+  assert.equal(new URL(first.anchors[0].href).searchParams.get("utm_medium"), "site");
   assert.equal(new URL(first.anchors[0].href).searchParams.get("utm_campaign"), "fire-to-iris-check");
   assert.equal(new URL(first.anchors[0].href).searchParams.get("utm_content"), "footer");
 

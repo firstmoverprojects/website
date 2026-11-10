@@ -176,7 +176,11 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       const url = new URL(href);
       assert.equal(url.pathname.endsWith(item.slug), true, href);
       assert.equal(url.searchParams.get("utm_source"), "site", href);
-      assert.equal(url.searchParams.get("utm_medium"), "offer_page", href);
+      assert.equal(
+        url.searchParams.get("utm_medium"),
+        item.rel === "tools/fire-to-iris-check/index.html" ? "site" : "offer_page",
+        href
+      );
       assert.equal(url.searchParams.get("wanted"), "true", href);
       assert.equal(url.searchParams.get("utm_campaign"), item.campaign, href);
     }
