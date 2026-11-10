@@ -12,11 +12,11 @@
 <meta property="og:description" content="Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE. The IRS says IRIS will be the only e-file system for information returns after Jan. 1, 2027. Nov 9, 2026 was the last day to change IR Applications for TCC, and those applications are now read-only.">
 <meta property="og:url" content="https://firstmoverprojects.com/tools/fire-to-iris-check/">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://firstmoverprojects.com/assets/previews/fire-to-iris-kit-preview-1280x720.webp">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://firstmoverprojects.com/assets/fmp-logo-460.png">
+<meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IRS FIRE filing ended Nov 19, 2026 (3 p.m. ET) - Free IRIS readiness &amp; 1099 CSV check">
 <meta name="twitter:description" content="Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE. The IRS says IRIS will be the only e-file system for information returns after Jan. 1, 2027. Nov 9, 2026 was the last day to change IR Applications for TCC, and those applications are now read-only.">
-<meta name="twitter:image" content="https://firstmoverprojects.com/assets/previews/fire-to-iris-kit-preview-1280x720.webp">
+<meta name="twitter:image" content="https://firstmoverprojects.com/assets/fmp-logo-460.png">
 
 <style>
 *{box-sizing:border-box}
@@ -190,14 +190,6 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "The news release says the last FIRE filing time is 3 p.m. ET. The FIRE help page says \"3 p.m. Easter time.\" This page follows the news release and says Eastern Time."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do I need the checklist to use the free check?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. The check is free and runs in your browser. The checklist is optional."
       }
     }
   ]
@@ -609,7 +601,7 @@ function analyze(opts) {
   }
   if (steps.length > 3) steps = steps.slice(0, 3);
   var summary = warns > 0
-    ? warns + (warns === 1 ? " time-sensitive item flagged before the November 2026 FIRE cutoffs." : " time-sensitive items flagged before the November 2026 FIRE cutoffs.")
+    ? warns + (warns === 1 ? " item to follow up on was flagged from your selections." : " items to follow up on were flagged from your selections.")
     : "Nothing urgent was flagged from your selections. Review the list below.";
   return { summary: summary, items: items, csv: csv, warns: warns, steps: steps };
 }
