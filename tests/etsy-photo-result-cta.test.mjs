@@ -16,7 +16,7 @@ const REFUND = "Refunds: within 30 days if a file is corrupt or materially not a
 const THANKS = "Thanks for your time. If this isn't right for you, please share it with someone it could help.";
 const BUTTON = "Get my photo-fix checklist (PDF + CSV in a ZIP)";
 const QUIET = "Optional: photo-fix checklist (PDF + CSV in a ZIP, $9)";
-const AFTER = "Opens Gumroad. ZIP download after you pay (2-page PDF + CSV sheet). Close the tab anytime with no purchase.";
+const AFTER = "Opens Gumroad. ZIP download after you pay (3-page PDF + CSV sheet). Close the tab anytime with no purchase.";
 const PRICE_NOTE = "The $9 kit is a separate file on Gumroad. This page does not send your listings there.";
 const DEADLINE = "Etsy posted this rule on Oct 22, 2026. They did not name a last day. Etsy says it plans to begin proactively enforcing the photo rule in early 2027, with notice first. If the photos are wrong and a buyer opens a case now, you may have to give a refund.";
 const LEADS = {
@@ -59,7 +59,9 @@ test("result copy stays on the page facts and keeps the house lines", () => {
   assert.equal(html.includes("Get the $9 photo checklist"), false);
   assert.equal(html.includes("Optional: $9 photo checklist on Gumroad"), true);
   assert.equal(html.includes(PRICE_NOTE), true);
-  assert.match(html, /id="kit-offer"[^>]*>[\s\S]*id="kit-result"[\s\S]*id="kit-after-click"[^>]*>Opens Gumroad\. ZIP download after you pay \(2-page PDF \+ CSV sheet\)\. Close the tab anytime with no purchase\.<\/span><span class="kit-refund" id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described\.<\/span>/);
+  assert.equal(html.includes("INSTANT DOWNLOAD · 3-PAGE PDF SHOT LIST + CSV LISTING AUDIT SHEET · $9"), true);
+  assert.equal(/2[- ]page/i.test(html), false);
+  assert.match(html, /id="kit-offer"[^>]*>[\s\S]*id="kit-result"[\s\S]*id="kit-after-click"[^>]*>Opens Gumroad\. ZIP download after you pay \(3-page PDF \+ CSV sheet\)\. Close the tab anytime with no purchase\.<\/span><span class="kit-refund" id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described\.<\/span>/);
   assert.match(html, /id="result-kit-lead"/);
   assert.match(html, /data-goatcounter-click="cta\/etsy-photo-result-mockup"/);
   assert.match(html, /utm_content=etsy-photo-result-mockup/);
