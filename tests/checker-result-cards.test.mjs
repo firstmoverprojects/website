@@ -148,7 +148,7 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       click: "#sample",
       problem: /to fix/,
       deadline: /Nov 2, 2026/,
-      button: "Get the $29 kit with broker scripts",
+      button: "Get the $29 kit with broker email",
       before: async (page) => {
         await page.locator('input[name="q1"][value="yes"]').check();
       },

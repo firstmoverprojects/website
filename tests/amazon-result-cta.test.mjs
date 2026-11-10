@@ -13,9 +13,9 @@ const PAGE = path.join(ROOT, "tools/amazon-coi-check/index.html");
 const html = readFileSync(PAGE, "utf8");
 const REFUND = "Refunds: within 30 days if a file is corrupt or materially not as described.";
 const DISCLAIMER = "General guidance, not legal, tax or IT advice.";
-const BUTTON = "Get the $29 kit with broker scripts";
-const QUIET = "Optional: $29 kit with broker scripts";
-const KIT_CONTENTS = "the interactive 7-point ACORD 25 pre-upload audit workbook, the copy-paste broker email correction scripts, and the step-by-step Seller Central Account Health upload walkthrough";
+const BUTTON = "Get the $29 kit with broker email";
+const QUIET = "Optional: $29 kit with broker email";
+const KIT_CONTENTS = "a spreadsheet that compares what you type from your certificate with Amazon's quoted terms, a policy-terms checklist that quotes Amazon word for word, and a copy-paste broker email";
 const DELETE_STEP = "If the notice was triggered by an old discontinued or inactive ASIN you no longer sell, permanently deleting that listing from Manage Inventory, rather than only closing it, can remove the category trigger at $0 cost. If you actively sell in that category, you must upload a compliant ACORD 25 certificate of insurance.";
 const CATEGORY_CHECK = "Check Amazon's category list and your Account Health page. This page can't see your account.";
 const CHOOSE_ANSWERS = "Choose Yes, No, or Not sure for each question.";
@@ -28,7 +28,7 @@ const BEYOND_INTRO = "The free check lists mismatches in the certificate text yo
 const BEYOND_BULLETS = [
   "That download is a 12-file ZIP: a policy-terms checklist that quotes Amazon word for word, a COI pre-submission checker, a category screen, a broker email, and an Excel workbook.",
   "A copy-paste broker email that asks for the exact certificate wording. The free check gives you a fix list, not that email.",
-  "The field review covers additional insured versus certificate holder, and an exact legal-entity name match, including the single-member LLC trade-name exception."
+  "The workbook puts each field you type next to Amazon's quoted term, including the additional insured wording and the legal-entity name with the single-member LLC trade-name exception, with a column for your broker's answer."
 ];
 const BEYOND_NOTE = "The kit is an organizing tool, not insurance.";
 const DEADLINE_PAGE = path.join(ROOT, "deadlines/amazon-insurance-nov-2.html");
