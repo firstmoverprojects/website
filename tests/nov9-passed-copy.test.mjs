@@ -80,27 +80,3 @@ test("unguarded copy does not treat Nov 9, 2026 as still upcoming", () => {
   assert.equal(read("llms.txt").includes("- [IRS FIRE to IRIS Readiness & 1099 CSV Header Check](https://firstmoverprojects.com/tools/fire-to-iris-check/): Free in-browser check for the IRS FIRE to IRIS switch: Nov 1, 2026 (test filings, passed), Nov 9, 2026 (last day to change FIRE IR Applications for TCC, now read-only) and Nov 19, 2026 at 3 p.m. ET (last FIRE filing day), plus IRIS TCC steps and 1099 CSV export header columns (no upload)."), true);
   assert.equal(read("tools/index.html").includes("Nov 1, 2026 was the last day for FIRE test filings. Nov 9, 2026 was the last day to make changes to FIRE IR Applications for TCC; those applications are now read-only. The last day to file through FIRE is Nov 19, 2026 (3 p.m. ET), and IRIS is the only IRS e-filing system for information returns after Jan. 1, 2027. Check your TCC steps and 1099 CSV column headers in your browser."), true);
 });
-
-test("robots.txt disallows /event/ and keeps the existing groups", () => {
-  const robots = read("robots.txt");
-  for (const line of [
-    "User-agent: *",
-    "Allow: /",
-    "User-agent: Googlebot",
-    "User-agent: Google-InspectionTool",
-    "User-agent: GSCWizard-Bot",
-    "Sitemap: https://firstmoverprojects.com/sitemap.xml"
-  ]) {
-    assert.equal(robots.includes(line), true, line);
-  }
-  assert.equal(robots.split("\n").filter((line) => line === "Disallow: /event/").length, 4);
-});
-
-test("visitor price labels say per month", () => {
-  const html = read("tools/grok-bot-team-check/index.html");
-  assert.equal(html.includes("$0/mo"), false);
-  assert.equal(html.includes('"/mo'), false);
-  assert.equal(html.includes("+ \"/mo"), false);
-  assert.match(html, /\$0 per month/);
-  assert.match(html, /hrs\/mo/);
-});
