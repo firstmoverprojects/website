@@ -17,6 +17,12 @@ const UNPUBLISHED = new Set(["fetwsm", "maryland-famli-payroll-notice-kit"]);
 // Past the Nov 19, 2026 FIRE cutoff the check page no longer publishes a Product Offer.
 // The Gumroad hrefs stay; the kit hide script covers the buy buttons.
 const NO_PRODUCT_OFFER = new Set(["tools/fire-to-iris-check/index.html"]);
+// The FIRE kit Product is removed on these pages. The buy links stay inside
+// data-fire-kit and the hide script covers them at the Nov 19 cutoff.
+const FIRE_KIT_NO_PRODUCT = new Set([
+  "tools/index.html",
+  "tools/1099-nec-or-1099-k-check/index.html"
+]);
 const PREVIEW = {
   lnfgc: "/assets/previews/etsy-photo-audit-kit-preview-1280x720.png",
   "fire-to-iris-switch-checklist": "/assets/previews/fire-to-iris-kit-preview-1280x720.png",
@@ -189,6 +195,10 @@ test("live paid-kit links on tool pages have Product offers, and the unpublished
     for (const slug of slugs) {
       if (UNPUBLISHED.has(slug)) {
         assert.equal(bySlug.has(slug), false, `${rel} must not describe unpublished ${slug}`);
+        continue;
+      }
+      if (slug === "fire-to-iris-switch-checklist" && FIRE_KIT_NO_PRODUCT.has(rel)) {
+        assert.equal(bySlug.has(slug), false, `${rel} must not keep a FIRE kit Product`);
         continue;
       }
       const product = bySlug.get(slug);

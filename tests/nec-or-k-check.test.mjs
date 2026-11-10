@@ -262,7 +262,10 @@ test("the page cites the IRS sources, the check date, and stays in the sitemap a
   const blocks = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].map((match) => JSON.parse(match[1]));
   const faq = blocks.find((item) => item["@type"] === "FAQPage");
   const visible = html.slice(html.indexOf('id="faq-h"'), html.indexOf('id="src-h"') === -1 ? html.length : html.indexOf("Related:"));
-  const questions = [...html.slice(html.indexOf('id="faq-h"')).matchAll(/<h3>([\s\S]*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/g)];
+  const questions = [...html.slice(html.indexOf('id="faq-h"')).matchAll(/<h3>([\s\S]*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/g)]
+    .filter((item) => item[1] !== "Do I need the checklist to use this check?");
+  assert.equal(faq.mainEntity.some((item) => item.name === "Do I need the checklist to use this check?"), false);
+  assert.match(html, /<div data-fire-kit="1">\s*<h3>Do I need the checklist to use this check\?<\/h3>/);
   assert.equal(questions.length, faq.mainEntity.length);
   faq.mainEntity.forEach((item, i) => {
     assert.equal(item.name, questions[i][1]);
