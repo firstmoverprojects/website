@@ -135,7 +135,7 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
     {
       rel: "tools/fire-to-iris-check/index.html",
       click: "#example",
-      problem: /Nov 19, 2026 at 3 p\.m\. Eastern was the last day to file information returns through FIRE/,
+      problem: /You still need a separate IRIS Application for TCC\. FIRE filing ended Nov 19, 2026 at 3 p\.m\. ET\./,
       deadline: /Nov 19, 2026 at 3 p\.m\. Eastern was the last day to file information returns through FIRE/,
       button: "Get the $9 checklist (PDF in a ZIP)",
       slug: "/l/fire-to-iris-switch-checklist",
