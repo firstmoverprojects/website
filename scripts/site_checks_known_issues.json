@@ -1,0 +1,161 @@
+{
+  "about": "Issues scripts/check_site.mjs reports as warnings instead of failures. Each entry matches one check, one file, and a substring of the message. Only add files you cannot edit yet (open PRs, frozen pages), and remove the entry once the file is fixed. The script lists entries that no longer match.",
+  "issues": [
+    {
+      "check": "html",
+      "file": "tools/amazon-coi-check/index.html",
+      "match": "[aria-label-misuse]",
+      "reason": "Edited by open PR #143. Fix: add role=\"group\" to <div class=\"cd\" aria-label=\"Date and checks\">."
+    },
+    {
+      "check": "html",
+      "file": "tools/etsy-photo-audit-check/index.html",
+      "match": "[aria-label-misuse]",
+      "reason": "Edited by open PR #143. Fix: add role=\"group\" to <div class=\"cd\" aria-label=\"Summary\">."
+    },
+    {
+      "check": "html",
+      "file": "tools/eu-product-id-check/index.html",
+      "match": "[aria-label-misuse]",
+      "reason": "Edited by open PR #143. Fix: add role=\"group\" to <div class=\"cd\" aria-label=\"Date and limit\">."
+    },
+    {
+      "check": "html",
+      "file": "tools/fire-to-iris-check/index.html",
+      "match": "[aria-label-misuse]",
+      "reason": "FIRE page is frozen and is also edited by open PRs #140 and #142. Fix: add role=\"group\" to <div class=\"cd\" aria-label=\"IRS FIRE and IRIS dates\">."
+    },
+    {
+      "check": "meta",
+      "file": "deadlines/amazon-ads-legacy-reports-dec-31.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #143. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "deadlines/amazon-holiday-returns-2026.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #143. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "deadlines/amazon-insurance-nov-2.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #143. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "deadlines/custom-gpt-retirement-dec-11.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #143. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "deadlines/ebay-payments-terms-nov-4.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #143. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "deadlines/eu-product-identifiers-nov-1.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #143. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "deadlines/exchange-online-ews-retirement-apr-1.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #52. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "deadlines/federal-tax-payments-dec-15.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #143. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "deadlines/finder/index.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #142. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "deadlines/form-941-q3-due-nov-2.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #143. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "deadlines/office-2021-windows-11-24h2-oct-13.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #142. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "deadlines/whiteboard-azure-oct-16.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #142. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "deadlines/zenbusiness-banking-closure.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #143. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "games/index.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #143. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "help/shopify-quickbooks-connector-migration-problems.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #143. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "index.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #143. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "privacy.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #143. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "refund-policy.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #143. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "terms.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #143. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "tools/index.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #142. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "tools/missed-lead-text-samples/index.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #143. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    },
+    {
+      "check": "meta",
+      "file": "tools/tx-franchise-forfeiture-check/index.html",
+      "match": "og:image",
+      "reason": "Edited by open PR #143. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
+    }
+  ]
+}

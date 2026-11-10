@@ -1,0 +1,38 @@
+# Free static checks for the whole site: internal links and assets, HTML validity,
+# JSON-LD, page meta tags, sitemap.xml, Gumroad house lines, and the RSS feed.
+# Reads the checkout only. No secrets, no paid services, no network calls to third parties.
+
+name: Site checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # --ignore-scripts: html-validate is the only package this job needs; no browser download.
+      - name: Install html-validate
+        run: npm ci --ignore-scripts
+
+      - name: Check site
+        run: npm run check:site
