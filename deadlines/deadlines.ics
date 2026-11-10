@@ -142,17 +142,19 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:irs-fire-tcc-20261109@firstmoverprojects.com
-DTSTAMP:20261013T194913Z
+DTSTAMP:20261110T134002Z
+SEQUENCE:1
 DTSTART;VALUE=DATE:20261109
 DTEND;VALUE=DATE:20261110
 SUMMARY:Nov 9, 2026 was the last day to change FIRE IR Applications for TCC
-DESCRIPTION:Who: Businesses that file through FIRE\nWhat to check: Check 
- whether an IRIS Application for TCC is started (the IRS says current FIRE
-  users must complete a separate IRIS Application for TCC).\nOfficial sour
- ce: https://www.irs.gov/e-file-providers/filing-information-returns-elect
- ronically-fire\nDetails: https://firstmoverprojects.com/deadlines/irs-fir
- e-retirement-nov-19.html\nGeneral guidance\, not legal\, tax or IT advice
- . Dates from the official source\; re-check it before you act.
+DESCRIPTION:Who: Businesses that file through FIRE\nWhat to check: Check wh
+ ether an IRIS Application for TCC is started (the IRS says current FIRE us
+ ers who will e-file in IRIS themselves must complete a separate IRIS Appli
+ cation for TCC).\nOfficial source: https://www.irs.gov/e-file-providers/fi
+ ling-information-returns-electronically-fire\nDetails: https://firstmoverp
+ rojects.com/deadlines/irs-fire-retirement-nov-19.html\nGeneral guidance\, 
+ not legal\, tax or IT advice. Dates from the official source\; re-check it
+  before you act.
 URL:https://firstmoverprojects.com/deadlines/irs-fire-retirement-nov-19.h
  tml
 TRANSP:TRANSPARENT
