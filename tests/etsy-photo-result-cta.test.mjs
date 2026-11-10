@@ -45,7 +45,7 @@ test("result copy stays on the page facts and keeps the house lines", () => {
   assert.equal(html.includes("Thank you for your time."), false);
   assert.equal(html.includes(DEADLINE), true);
   assert.equal(html.includes("\u2014"), false);
-  assert.equal(html.split(REFUND).length - 1, 3);
+  assert.equal(html.split(REFUND).length - 1, 4);
   for (const id of ["gtin-checkout", "paid-link"]) {
     const at = html.indexOf(`id="${id}"`);
     const next = html.slice(at, html.indexOf("</p>", html.indexOf("</p>", at) + 4));
@@ -56,7 +56,7 @@ test("result copy stays on the page facts and keeps the house lines", () => {
   assert.equal(html.includes(BUTTON), true);
   assert.equal(html.includes(QUIET), true);
   assert.equal(QUIET.includes("$9"), true);
-  assert.equal(html.includes("Get the $9 photo checklist"), false);
+  assert.equal(html.includes("Get the $9 photo checklist (PDF + CSV in a ZIP)"), true);
   assert.equal(html.includes("Optional: $9 photo checklist on Gumroad"), true);
   assert.equal(html.includes(PRICE_NOTE), true);
   assert.equal(html.includes("INSTANT DOWNLOAD · 3-PAGE PDF SHOT LIST + CSV LISTING AUDIT SHEET · $9"), true);
@@ -309,7 +309,7 @@ test("all five outcomes set the lead, offer, and gumroad click at 1280 and 390",
         assert.ok(state.linkBottom <= state.refundTop + 1, width + " " + item.key);
         assert.equal(state.content, item.content, width + " " + item.key);
         assert.equal(state.source, "site", width + " " + item.key);
-        assert.equal(state.medium, "site", width + " " + item.key);
+        assert.equal(state.medium, "offer_page", width + " " + item.key);
         assert.equal(state.campaign, "etsy-photo-audit-check", width + " " + item.key);
         assert.equal(state.wanted, "true", width + " " + item.key);
         assert.equal(state.pathname.endsWith("/l/lnfgc"), true, width + " " + item.key);

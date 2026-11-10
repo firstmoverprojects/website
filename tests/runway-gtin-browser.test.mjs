@@ -42,7 +42,7 @@ const CALCULATOR = new Set([
 ]);
 const CHECKOUT = {
   "tools/etsy-photo-audit-check/index.html":
-    "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=site&utm_campaign=etsy-photo-audit-check&utm_content=gtin-helper"
+    "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=offer_page&utm_campaign=etsy-photo-audit-check&utm_content=gtin-helper"
 };
 
 let chromium;
