@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1280px;
+    height: 720px;
+    overflow: hidden;
+    font: 13px/1.35 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    color: #0f172a;
+    background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 42%, #f8fafc 100%);
+  }
+  .wrap {
+    width: 1248px;
+    height: 688px;
+    margin: 16px;
+    background: #fff;
+    border: 3px solid #7c3aed;
+    border-radius: 18px;
+    box-shadow: 0 14px 36px rgba(76, 29, 149, 0.14);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .top {
+    padding: 14px 18px 10px;
+    border-bottom: 1px solid #e2e8f0;
+    position: relative;
+  }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+  .badge {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+    background: #f8fafc;
+  }
+  .badge.price {
+    background: #15803d;
+    border-color: #15803d;
+    color: #fff;
+  }
+  h1 {
+    font-size: 22px;
+    line-height: 1.2;
+    color: #1e1b4b;
+    max-width: 920px;
+  }
+  .sub {
+    margin-top: 4px;
+    color: #475569;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .icons {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    gap: 8px;
+  }
+  .icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    font-weight: 800;
+    border: 2px solid #c4b5fd;
+    background: #ede9fe;
+    color: #5b21b6;
+  }
+  .icon.doc { background: #f5f3ff; }
+  .cols {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 10px 12px 8px;
+    min-height: 0;
+  }
+  .panel {
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    background: #fff;
+  }
+  .ph {
+    background: linear-gradient(135deg, #312e81 0%, #1e3a8a 100%);
+    color: #fff;
+    padding: 8px 10px 7px;
+  }
+  .ph .k {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.9;
+  }
+  .ph .t {
+    margin-top: 2px;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .pb {
+    padding: 8px 9px 6px;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .sec-title {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+  }
+  .quote {
+    border-left: 3px solid #6366f1;
+    padding: 3px 0 3px 8px;
+    color: #1e293b;
+    font-size: 10px;
+    line-height: 1.28;
+  }
+  .quote .src {
+    display: block;
+    margin-top: 3px;
+    font-size: 9px;
+    font-weight: 800;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px;
+    align-items: start;
+    font-size: 10.5px;
+    line-height: 1.3;
+  }
+  .pill {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    padding: 2px 6px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .ok { background: #dcfce7; color: #166534; }
+  .no { background: #fee2e2; color: #991b1b; }
+  .shot {
+    border: 2px solid #fdba74;
+    border-radius: 8px;
+    padding: 4px 6px;
+    background: #fff7ed;
+  }
+  .shot b {
+    display: block;
+    font-size: 10px;
+    color: #9a3412;
+    margin-bottom: 1px;
+  }
+  .shot span {
+    font-size: 10px;
+    color: #1e293b;
+    line-height: 1.25;
+  }
+  .shots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+  .check {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 5px;
+    align-items: center;
+    font-size: 10px;
+  }
+  .off { background: #fecaca; color: #991b1b; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9px;
+  }
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 3px 4px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: #f1f5f9; font-weight: 800; }
+  .exc li, .finish li {
+    margin-left: 14px;
+    font-size: 10px;
+    line-height: 1.3;
+    margin-bottom: 2px;
+  }
+  .csv {
+    margin-top: auto;
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    border-radius: 8px;
+    padding: 5px 6px;
+    font-size: 10px;
+    color: #065f46;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .foot {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 8px 14px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+  .foot strong { color: #fff; }
+  .foot .r { text-align: right; color: #cbd5e1; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="badges">
+      <span class="badge">Instant Download</span>
+      <span class="badge">3-Page PDF Shot List + CSV Listing Audit Sheet</span>
+      <span class="badge price">$9 Complete Kit</span>
+    </div>
+    <h1>See What's Inside the $9 Etsy Real-Photo Audit Kit</h1>
+    <p class="sub">3-page printable shot list by item type, plus a one-row-per-listing CSV audit sheet.</p>
+    <div class="icons" aria-hidden="true">
+      <div class="icon">📷</div>
+      <div class="icon doc">📄</div>
+    </div>
+  </div>
+  <div class="cols">
+    <section class="panel">
+      <div class="ph">
+        <div class="k">Page 1</div>
+        <div class="t">What Etsy published</div>
+      </div>
+      <div class="pb">
+        <div class="sec-title">Handbook and help quotes</div>
+        <p class="quote">"If any of your listings don't meet our new Listing Image Requirements, you'll need to update them."
+          <span class="src">Etsy Seller Handbook, Oct 22, 2026</span>
+        </p>
+        <p class="quote">"We plan to begin proactively enforcing these requirements in early 2027. We'll provide advance notice before enforcement begins."
+          <span class="src">Etsy Seller Handbook, updated Nov 2026</span>
+        </p>
+        <p class="quote">"Your listing must include at least one unedited photo of the actual item against a real background, meaning the photo hasn't been edited or changed."
+          <span class="src">Etsy Help, image requirements</span>
+        </p>
+        <p class="quote">"Your first listing image does not need to be the unedited photo, but make sure it is the clearest, most realistic representation of the item buyers will receive."
+          <span class="src">Etsy Help, image requirements</span>
+        </p>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="ph">
+        <div class="k">Page 2</div>
+        <div class="t">What unedited means</div>
+      </div>
+      <div class="pb">
+        <div class="row"><span class="pill ok">Allowed</span><span>Crop, resize, add a watermark, or change the file format.</span></div>
+        <div class="row"><span class="pill no">No AI</span><span>AI tools are not allowed on the required photo.</span></div>
+        <div class="row"><span class="pill no">Light</span><span>Lighting changes are not allowed on that photo.</span></div>
+        <div class="row"><span class="pill ok">Real</span><span>One photo of the actual item on a real background. It does not have to be first.</span></div>
+        <div class="sec-title">Shot list: six item types</div>
+        <div class="shots">
+          <div class="shot"><b>Jewelry</b><span>Hand or linen tray by a window.</span></div>
+          <div class="shot"><b>Ceramics</b><span>On a real wood table.</span></div>
+          <div class="shot"><b>Clothing</b><span>On a hanger on a plain wall.</span></div>
+          <div class="shot"><b>Home decor</b><span>In a real room, not a render.</span></div>
+          <div class="shot"><b>Craft supplies</b><span>Flat lay on a real surface.</span></div>
+          <div class="shot"><b>Custom items</b><span>Finished piece plus exception check.</span></div>
+        </div>
+        <div class="sec-title">Camera and file checks</div>
+        <div class="check"><span class="pill off">Off</span><span>Turn off portrait blur.</span></div>
+        <div class="check"><span class="pill off">Off</span><span>Turn off beauty mode.</span></div>
+        <div class="check"><span class="pill off">Off</span><span>Turn off AI enhance.</span></div>
+        <div class="check"><span class="pill ok">Save</span><span>Keep the original file from the camera.</span></div>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="ph">
+        <div class="k">Page 3</div>
+        <div class="t">Listing audit and exceptions</div>
+      </div>
+      <div class="pb">
+        <div class="sec-title">One row per listing</div>
+        <table>
+          <thead>
+            <tr><th>Listing</th><th>Unedited?</th><th>Exception</th><th>Done</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Blue mug</td><td>Y/N</td><td>None</td><td>□</td></tr>
+            <tr><td>Wall print</td><td>Y/N</td><td>POD</td><td>□</td></tr>
+            <tr><td>Digital file</td><td>Y/N</td><td>Preview</td><td>□</td></tr>
+          </tbody>
+        </table>
+        <div class="sec-title">Exceptions by item type</div>
+        <ul class="exc">
+          <li>Print-on-demand: authorized stock mockup.</li>
+          <li>Digital: preview of actual content.</li>
+          <li>Custom: real finished items you made before.</li>
+          <li>Patterns, recipes, seeds: real photo of something made with your product.</li>
+        </ul>
+        <div class="sec-title">Before you finish</div>
+        <ul class="finish">
+          <li>Mark each listing row in the CSV.</li>
+          <li>Re-read Etsy Help for your item type.</li>
+          <li>Confirm the clearest photo is first if you can.</li>
+        </ul>
+        <p class="csv">ZIP includes a CSV audit sheet for Excel, Google Sheets, or Numbers.</p>
+      </div>
+    </section>
+  </div>
+  <footer class="foot">
+    <div><strong>FIRST MOVER PROJECTS</strong> · 3-page printable PDF + CSV audit sheet. Refunds: within 30 days if a file is corrupt or materially not as described.</div>
+    <div class="r">Not affiliated with or endorsed by Etsy. General guidance, not legal, tax or IT advice.</div>
+  </footer>
+</div>
+</body>
+</html>
