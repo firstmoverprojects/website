@@ -9,7 +9,8 @@ import assert from "node:assert/strict";
 import { chromium } from "playwright";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const FROZEN = "2026-11-10T18:00:00.000Z";
+export const DEFAULT_FROZEN = "2026-11-10T18:00:00.000Z";
+const FROZEN = DEFAULT_FROZEN;
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -88,7 +89,8 @@ export async function startBrowser() {
   return { browser, context };
 }
 
-export async function openPage(context, origin, pagePath) {
+export async function openPage(context, origin, pagePath, frozenIso) {
+  const pinned = frozenIso || FROZEN;
   const page = await context.newPage();
   const thirdParty = [];
   const consoleErrors = [];
@@ -112,7 +114,7 @@ export async function openPage(context, origin, pagePath) {
     thirdParty.push(`${route.request().method()} ${url}`);
     return route.abort();
   });
-  await page.clock.install({ time: new Date(FROZEN) });
+  await page.clock.install({ time: new Date(pinned) });
   const response = await page.goto(origin + pagePath, { waitUntil: "load" });
   assert.ok(response, pagePath + " did not navigate");
   assert.equal(response.status(), 200, pagePath);
@@ -151,4 +153,4 @@ export async function lines(page, selector) {
   return page.locator(selector).allTextContents();
 }
 
-export const FROZEN_INSTANT = FROZEN;
+export const FROZEN_INSTANT = DEFAULT_FROZEN;

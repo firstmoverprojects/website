@@ -3,7 +3,16 @@
 // page's own arithmetic. The clock is America/Chicago on 2026-11-10 12:00.
 import assert from "node:assert/strict";
 import { after, before, test } from "node:test";
-import { assertLive, assertQuietLoad, lines, openPage, pick, startBrowser, startServer } from "./harness.mjs";
+import {
+  assertLive,
+  assertQuietLoad,
+  DEFAULT_FROZEN,
+  lines,
+  openPage,
+  pick,
+  startBrowser,
+  startServer
+} from "./harness.mjs";
 
 let origin;
 let server;
@@ -20,14 +29,77 @@ after(async () => {
   if (server) await new Promise((resolve) => server.close(resolve));
 });
 
-async function check(pagePath, fn) {
-  const opened = await openPage(context, origin, pagePath);
+async function check(pagePath, fn, frozenIso) {
+  const opened = await openPage(context, origin, pagePath, frozenIso);
   try {
     await fn(opened.page);
     assertQuietLoad(opened, pagePath);
   } finally {
     await opened.page.close();
   }
+}
+
+const FIRE_BEFORE_CUTOFF = DEFAULT_FROZEN;
+const FIRE_AFTER_CUTOFF = "2026-11-19T21:00:00.000Z";
+
+async function fireEra(page) {
+  const title = await page.title();
+  return /filing ended/i.test(title) ? "post140" : "pre140";
+}
+
+const FIRE_NEXT_IRS_CLOSED = {
+  pre140: /FIRE is closed\. IRIS is the only IRS e-file system for information returns from Jan 1, 2027\./,
+  post140:
+    /FIRE filing ended Nov 19, 2026 at 3 p\.m\. ET\. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS\./
+};
+
+const FIRE_NEXT_IRS_COUNTDOWN = /Last day to file on FIRE: Nov 19, 2026, 3 p\.m\. ET\./;
+
+const FIRE_RESULT = {
+  pre140: {
+    provider: /A provider may file your 1099 forms/,
+    needTcc:
+      /You still need a new IRS filing code before the old system closes on Nov 19, 2026, at 3 p\.m\. Eastern Time/,
+    nov9: /Nov 9, 2026 has passed/,
+    open2026:
+      /last day to file on the old system is Nov 19, 2026, at 3 p\.m\. Eastern Time/,
+    nothing: /Nothing urgent was flagged from the boxes you checked/
+  },
+  post140: {
+    provider: /A provider may file your 1099 forms/,
+    needTcc:
+      /You still need a separate IRIS Application for TCC\. FIRE filing ended Nov 19, 2026 at 3 p\.m\. ET\./,
+    nov9: /Nov 9, 2026 has passed/,
+    open2026:
+      /FIRE filing ended Nov 19, 2026 at 3 p\.m\. ET\. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS\./,
+    nothing: /Nothing urgent was flagged from the boxes you checked/
+  }
+};
+
+async function fireBranchChecks(page, era) {
+  const expect = FIRE_RESULT[era];
+  await assertLive(page, "#results");
+  await page.locator("#c-self").uncheck();
+  await page.locator("#go").click();
+  assert.match(await page.locator("#result-problem").innerText(), expect.provider);
+
+  await page.locator("#c-self").check();
+  await page.locator("#go").click();
+  assert.match(await page.locator("#result-problem").innerText(), expect.needTcc);
+
+  await page.locator("#c-iris-tcc").check();
+  await page.locator("#c-ir-changes").check();
+  await page.locator("#go").click();
+  assert.match(await page.locator("#result-problem").innerText(), expect.nov9);
+
+  await page.locator("#c-ir-changes").uncheck();
+  await page.locator("#c-open-2026").check();
+  await page.locator("#go").click();
+  assert.match(await page.locator("#result-problem").innerText(), expect.open2026);
+
+  await page.locator("#c-open-2026").uncheck();
+  await page.locator("#go").click();
+  assert.match(await page.locator("#result-problem").innerText(), expect.nothing);
 }
 
 const CLEAN_COI = [
@@ -670,41 +742,28 @@ test("Deadline Watch marks past dates and keeps Detroit's November 12 opening", 
   });
 });
 
-test("FIRE to IRIS check follows the self-file, TCC, and Nov 19 branches", async () => {
-  await check("/tools/fire-to-iris-check/", async (page) => {
-    await assertLive(page, "#results");
-    await page.locator("#c-self").uncheck();
-    await page.locator("#go").click();
-    assert.match(
-      await page.locator("#result-problem").innerText(),
-      /A provider may file your 1099 forms/
-    );
+test("FIRE to IRIS check before Nov 19 cutoff uses the countdown copy and keeps kit offers", async () => {
+  await check(
+    "/tools/fire-to-iris-check/",
+    async (page) => {
+      const era = await fireEra(page);
+      assert.match(await page.locator("#next-irs").innerText(), FIRE_NEXT_IRS_COUNTDOWN);
+      assert.equal(await page.locator("#kit-top").isVisible(), true);
+      await fireBranchChecks(page, era);
+    },
+    FIRE_BEFORE_CUTOFF
+  );
+});
 
-    await page.locator("#c-self").check();
-    await page.locator("#go").click();
-    assert.match(
-      await page.locator("#result-problem").innerText(),
-      /You still need a new IRS filing code before the old system closes on Nov 19, 2026, at 3 p\.m\. Eastern Time/
-    );
-
-    await page.locator("#c-iris-tcc").check();
-    await page.locator("#c-ir-changes").check();
-    await page.locator("#go").click();
-    assert.match(await page.locator("#result-problem").innerText(), /Nov 9, 2026 has passed/);
-
-    await page.locator("#c-ir-changes").uncheck();
-    await page.locator("#c-open-2026").check();
-    await page.locator("#go").click();
-    assert.match(
-      await page.locator("#result-problem").innerText(),
-      /last day to file on the old system is Nov 19, 2026, at 3 p\.m\. Eastern Time/
-    );
-
-    await page.locator("#c-open-2026").uncheck();
-    await page.locator("#go").click();
-    assert.match(
-      await page.locator("#result-problem").innerText(),
-      /Nothing urgent was flagged from the boxes you checked/
-    );
-  });
+test("FIRE to IRIS check after Nov 19 cutoff uses post-cutoff copy and hides kit offers", async () => {
+  await check(
+    "/tools/fire-to-iris-check/",
+    async (page) => {
+      const era = await fireEra(page);
+      assert.match(await page.locator("#next-irs").innerText(), FIRE_NEXT_IRS_CLOSED[era]);
+      assert.equal(await page.locator("#kit-top").isHidden(), true);
+      await fireBranchChecks(page, era);
+    },
+    FIRE_AFTER_CUTOFF
+  );
 });
