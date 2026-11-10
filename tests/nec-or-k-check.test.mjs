@@ -81,10 +81,46 @@ test("a mix files Form 1099-NEC only for a non-card portion of $2,000 or more", 
   assert.match(text, /IRIS/);
 });
 
-test("a card total plus a non-card total of $2,000 or more is the mixed answer", () => {
-  const result = decide("business", "attorney", "card", "least");
-  assert.equal(result.id, "mixed");
-  assert.match(result.steps.join(" "), /box 10 of Form 1099-MISC/);
+test("card only plus a non-card amount is a contradiction, not mixed or no 1099", () => {
+  for (const who of ["contractor", "attorney"]) {
+    for (const noncard of ["least", "under"]) {
+      const label = who + "|card|" + noncard;
+      const result = decide("business", who, "card", noncard);
+      assert.equal(result.id, "unsure", label);
+      assert.equal(result.headline, H.unsure, label);
+      assert.equal(result.steps.length, 1, label);
+      assert.equal(result.steps[0], "You marked credit card, debit card, or payment app only, and also marked a cash, check, bank transfer, or ACH amount. Pick one.", label);
+      const text = result.steps.join(" ");
+      assert.equal(text.includes("Form 1099-K"), false, label);
+      assert.equal(text.includes("January 31"), false, label);
+      assert.equal(api.offerFor(result.id).utm, "1099-result-warn", label);
+    }
+  }
+});
+
+test("every payment method and non-card amount pair gets one answer", () => {
+  const expected = {
+    noncard: { least: "nec", under: "none", none: "unsure", unsure: "unsure" },
+    card: { least: "unsure", under: "unsure", none: "k", unsure: "k" },
+    mixed: { least: "mixed", under: "none", none: "unsure", unsure: "unsure" },
+    unsure: { least: "unsure", under: "unsure", none: "unsure", unsure: "unsure" }
+  };
+  for (const who of ["contractor", "attorney"]) {
+    for (const [method, row] of Object.entries(expected)) {
+      for (const [noncard, id] of Object.entries(row)) {
+        const label = who + "|" + method + "|" + noncard;
+        const result = decide("business", who, method, noncard);
+        assert.equal(result.id, id, label);
+        assert.equal(result.headline, H[id], label);
+        const text = result.steps.join(" ");
+        if (id === "unsure" && method !== "unsure") assert.match(text, /Pick /, label);
+        if (id === "mixed" || id === "nec") assert.equal(result.steps.includes(api.FILE_STEPS[0]), true, label);
+        else assert.equal(result.steps.includes(api.FILE_STEPS[0]), false, label);
+        if (method === "mixed" && noncard === "under") assert.match(text, /Form 1099-K/, label);
+        if (method === "noncard" && noncard === "under") assert.equal(text.includes("card or payment-app goods-and-services portion is not added"), false, label);
+      }
+    }
+  }
 });
 
 test("likely no 1099 for personal, wages, corporations, and non-card totals under $2,000", () => {
@@ -108,6 +144,8 @@ test("missing or contradictory answers do not pick a form", () => {
   assert.equal(decide("business", "contractor", "noncard", "unsure").id, "unsure");
   assert.equal(decide("business", "contractor", "noncard", "none").id, "unsure");
   assert.equal(decide("business", "contractor", "mixed", "none").id, "unsure");
+  assert.equal(decide("business", "contractor", "card", "least").id, "unsure");
+  assert.equal(decide("business", "contractor", "card", "under").id, "unsure");
 });
 
 test("each outcome sets its own checklist offer on the existing $9 product", () => {
@@ -117,7 +155,8 @@ test("each outcome sets its own checklist offer on the existing $9 product", () 
     ["business", "contractor", "card", "none", "k", "1099-result-k-only", true, true],
     ["business", "contractor", "card", "unsure", "k", "1099-result-k-only", true, true],
     ["business", "contractor", "mixed", "least", "mixed", "1099-result-split", false, false],
-    ["business", "attorney", "card", "least", "mixed", "1099-result-split", false, false],
+    ["business", "attorney", "card", "least", "unsure", "1099-result-warn", false, false],
+    ["business", "contractor", "card", "under", "unsure", "1099-result-warn", false, false],
     ["personal", "contractor", "noncard", "least", "none", "1099-result-none", true, true],
     ["business", "employee", "noncard", "least", "none", "1099-result-none", true, true],
     ["business", "corporation", "noncard", "least", "none", "1099-result-none", true, true],
@@ -173,8 +212,7 @@ test("a no-fit none result keeps the backup withholding exception in the visible
     ["business", "employee", "noncard", "least"],
     ["business", "corporation", "noncard", "least"],
     ["business", "contractor", "noncard", "under"],
-    ["business", "contractor", "mixed", "under"],
-    ["business", "contractor", "card", "under"]
+    ["business", "contractor", "mixed", "under"]
   ];
   for (const row of paths) {
     const result = decide(row[0], row[1], row[2], row[3]);
