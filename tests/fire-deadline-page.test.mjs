@@ -62,7 +62,7 @@ function load(id) {
   return sandbox;
 }
 
-test("the hero answers first, then shows the next IRS date beside the checklist", () => {
+test("the hero answers first, then shows the passed Nov 19 line beside the checklist", () => {
   const top = hero();
   const answerAt = top.indexOf('class="answer-first"');
   const buyAt = top.indexOf('id="kit-top"');
@@ -70,10 +70,11 @@ test("the hero answers first, then shows the next IRS date beside the checklist"
   assert.ok(answerAt !== -1 && answerAt < buyAt && buyAt < nextAt);
   assert.match(top, /This page lists the IRS FIRE retirement dates and what to do next\./);
   assert.match(top, /November 9, 2026 has passed, so existing IR Applications for TCC are read-only/);
-  assert.match(top, /The next IRS date is November 19, 2026 at 3 p\.m\. ET, the last day to file on FIRE/);
+  assert.match(top, /Nov 19, 2026 at 3 p\.m\. Eastern was the last day to file information returns through FIRE\./);
   assert.equal(top.includes("finish any IR Application for TCC changes before the next date"), false);
   assert.equal(top.includes("Next IRS date: Nov 9, 2026"), false);
-  assert.match(top, /data-next-irs-copy="">Nov 9, 2026 has passed\. Existing IR Applications for TCC are now read-only\. Next IRS date: Nov 19, 2026, 3 p\.m\. ET, the last day to file on FIRE\. <\/span>/);
+  assert.equal(top.includes("Next IRS date: Nov 19"), false);
+  assert.match(top, /data-next-irs-copy="">Nov 19, 2026 at 3 p\.m\. ET was the last day to file information returns through FIRE\. IRIS is the only system after Jan\. 1, 2027\. Nov 9, 2026 was the last day to change IR Applications for TCC, and those applications are now read-only\. <\/span>/);
   assert.match(top, /Refunds: within 30 days if a file is corrupt or materially not as described\./);
   assert.match(top, /One PDF, 3 pages/);
   assert.equal(/Nov(?:ember)? 1\b/.test(top), false);
@@ -140,7 +141,7 @@ test("FAQPage JSON matches the visible questions and answers", () => {
   const blocks = [...html.matchAll(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/g)];
   const data = blocks.map((block) => JSON.parse(block[1])).find((item) => item["@type"] === "FAQPage");
   assert.ok(data);
-  assert.equal(data.dateModified, "2026-11-10");
+  assert.equal(data.dateModified, "2026-11-19");
   assert.equal(metaContent(html, "name", "description"), SHARE_DESC);
   assert.equal(metaContent(html, "property", "og:title"), SHARE_TITLE);
   assert.equal(metaContent(html, "property", "og:description"), SHARE_DESC);

@@ -22,16 +22,16 @@ const LEADS = {
   A: "The checklist is for people who file their own 1099s. If your provider files for you, you don't need it. Copy the question below and send it to them instead: \"" + QUESTION + "\"",
   B: "Because you file yourself and don't have an IRIS TCC yet, this is the step that matters most. The checklist walks through the IRIS Application for TCC and your FIRE account steps on 3 pages, with the IRS dates and links at the top.",
   C: "Because Nov 9, 2026 has passed, existing IR TCC applications are read-only. The checklist puts the IRIS TCC steps and the other IRS dates on one printable list.",
-  D: "Because you still plan to file on FIRE, the last day is Nov 19, 2026, at 3 p.m. Eastern Time. The checklist lists the IRS dates and links, your FIRE account steps and 2027 prep on 3 pages.",
+  D: "Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE. IRIS is the only system after Jan. 1, 2027. The checklist lists the IRS dates and links, your FIRE account steps and 2027 prep on 3 pages.",
   E: "You still have a step to finish. The checklist puts the IRS dates, IRIS TCC steps and a 1099-NEC add-on in one printable list.",
   F: "You look on track from what you checked. Most people in your spot don't need to buy anything. If you'd like 2027 prep and the IRS dates on one printable list, the checklist is optional."
 };
 const PROBLEMS = {
   A: "A provider may file your 1099 forms. Ask them to confirm they will file through IRIS after Jan 1, 2027.",
-  B: "You still need a new IRS filing code before the old system closes on Nov 19, 2026, at 3 p.m. Eastern Time.",
+  B: "Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE. IRIS is the only system after Jan. 1, 2027.",
   C: "Nov 9, 2026 has passed. Existing IR Applications for TCC are now read-only.",
-  D: "You still plan to file on FIRE. Test files stop on Nov 1, 2026. The last day to file on the old system is Nov 19, 2026, at 3 p.m. Eastern Time.",
-  E: "You still have a step to finish before the old IRS system closes on Nov 19, 2026, at 3 p.m. Eastern Time.",
+  D: "Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE. IRIS is the only system after Jan. 1, 2027.",
+  E: "Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE. IRIS is the only system after Jan. 1, 2027.",
   F: "Nothing urgent was flagged from the boxes you checked. On Jan 1, 2027, the new system is the only way to file."
 };
 
@@ -108,7 +108,7 @@ test("body, FAQ, badges, schema, alt text, and the sticky name the ZIP download"
   assert.equal(/"@type":\s*"Product"/.test(html), false);
   assert.equal(/"@type":\s*"Offer"/.test(html), false);
   assert.deepEqual(descriptionValues(blocks), []);
-  assert.equal(faq.dateModified, "2026-11-10");
+  assert.equal(faq.dateModified, "2026-11-19");
   const kitAnswer = faq.mainEntity.find((item) => item.name === "What is in the $9 checklist?");
   assert.equal(kitAnswer.acceptedAnswer.text, DELIVERY + " " + REFUND);
   const visibleFaq = html.slice(html.indexOf('id="faq"'), html.indexOf("</section>", html.indexOf('id="faq"')));
@@ -121,7 +121,8 @@ test("body, FAQ, badges, schema, alt text, and the sticky name the ZIP download"
   assert.equal(html.includes("submit them by Nov. 1, 2026"), false);
   assert.equal(html.includes("Nov. 1, 2026 was the last day to file test information returns through the FIRE Trading Partner Test System."), true);
   assert.equal(html.includes("Nov. 1, 2026: Last day to file test information returns through the FIRE Trading Partner Test System."), true);
-  assert.equal(html.includes("Submit any remaining live FIRE information returns by Nov. 19, 2026, at 3 p.m. ET."), true);
+  assert.equal(html.includes("Submit any remaining live FIRE information returns by Nov. 19, 2026, at 3 p.m. ET."), false);
+  assert.equal(html.includes("Nov 19, 2026 at 3 p.m. ET was the last day to file information returns through FIRE."), true);
   assert.equal(html.split("Not affiliated with or endorsed by the IRS.").length - 1, 2);
   assert.equal(html.includes("Not affiliated with the IRS."), false);
 });
