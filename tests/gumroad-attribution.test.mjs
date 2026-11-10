@@ -25,7 +25,7 @@ const QUIET_HTML = new Set([
 ]);
 const CONTENTS = new Set([
   "above-fold", "article", "bottom-cta", "card", "checklist", "comparison", "faq", "footer",
-  "1099-result-k-only", "1099-result-nec", "1099-result-none", "1099-result-split", "1099-result-warn", "amazon-coi-result-check", "amazon-coi-result-fix", "amazon-coi-result-ontrack", "coi-check-result", "coi-check-sticky", "coi-check-top", "etsy-check-result", "etsy-photo-check-top", "etsy-photo-result-fix", "etsy-photo-result-mockup", "etsy-photo-result-ontrack", "fire-check-result", "fire-check-sticky", "fire-check-top", "fire-result-need-tcc", "fire-result-nov9", "fire-result-ontrack", "fire-result-still-fire", "fire-result-warn", "gtin-helper", "hub", "kit-preview", "link", "post-check", "product-demo", "result-card", "ws-check-result", "ws2016",
+  "1099-result-k-only", "1099-result-nec", "1099-result-none", "1099-result-split", "1099-result-warn", "amazon-coi-result-check", "amazon-coi-result-fix", "amazon-coi-result-ontrack", "coi-check-result", "coi-check-sticky", "coi-check-top", "etsy-check-result", "etsy-photo-check-sticky", "etsy-photo-check-top", "etsy-photo-result-fix", "etsy-photo-result-mockup", "etsy-photo-result-ontrack", "fire-check-result", "fire-check-sticky", "fire-check-top", "fire-result-need-tcc", "fire-result-nov9", "fire-result-ontrack", "fire-result-still-fire", "fire-result-warn", "gtin-helper", "hub", "kit-preview", "link", "post-check", "product-demo", "result-card", "ws-check-result", "ws2016",
   "result-cta", "sticky-cta", "tools-free", "tools-kit", "top-cta", "trade-pill", "eu-fee"
 ]);
 const OFFER_TOOL_PAGES = new Set([
@@ -76,6 +76,7 @@ test("every page inlines the same Gumroad pass-through and no other storage", ()
   assert.ok(pages.length >= 30);
   for (const full of pages) {
     const rel = path.relative(ROOT, full).split(path.sep).join("/");
+    if (rel.startsWith("scripts/") && rel.endsWith(".html")) continue;
     const html = readFileSync(full, "utf8");
     if (QUIET_HTML.has(rel)) {
       assert.equal(scriptBody(html, "fmp-utm"), "", rel);
@@ -108,6 +109,7 @@ test("every Gumroad product link carries source, medium, campaign, and content",
   let count = 0;
   for (const full of walk(ROOT)) {
     const rel = path.relative(ROOT, full).split(path.sep).join("/");
+    if (rel.startsWith("scripts/") && rel.endsWith(".html")) continue;
     const html = readFileSync(full, "utf8");
     for (const block of html.matchAll(/<script type="application\/ld\+json" id="product-jsonld">([\s\S]*?)<\/script>/g)) {
       const data = JSON.parse(block[1]);

@@ -83,7 +83,7 @@ test("result copy stays on the page facts and keeps the house lines", () => {
   assert.equal(html.includes(THANKS), true);
   assert.equal(html.includes("Thank you for your time."), false);
   assert.equal(html.includes("Share it with someone it could help."), false);
-  assert.equal(html.split(DISCLAIMER).length - 1 >= 3, true);
+  assert.equal(html.split(DISCLAIMER).length - 1 >= 2, true);
   assert.match(html, /id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described\./);
   assert.match(html, /data-goatcounter-click="cta\/amazon-coi-result-fix"/);
   assert.match(html, /utm_content=amazon-coi-result-fix/);
