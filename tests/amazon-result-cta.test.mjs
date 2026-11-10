@@ -92,9 +92,10 @@ test("result copy stays on the page facts and keeps the house lines", () => {
   assert.equal(html.includes("sellers around $1,500"), false);
   assert.equal(html.includes("This is not insurance and First Mover Projects is not an insurance broker or agent."), true);
   assert.equal(html.includes("Who it is not for:"), true);
-  assert.equal(html.includes("Get the 12-file ZIP on Gumroad - $29"), true);
+  assert.equal(html.includes("Get the $29 kit (12-file ZIP)"), true);
   assert.equal(html.includes("checked Nov 10, 2026"), true);
-  assert.equal(html.includes('<p class="kit-note"><strong>' + REFUND + '</strong> The kit cannot guarantee Amazon acceptance.</p>'), true);
+  assert.equal(html.includes('<p class="kit-note">For Amazon.com sellers reviewing a certificate or broker questions before upload. ' + REFUND + '</p>'), true);
+  assert.equal(html.includes("The kit cannot guarantee Amazon acceptance."), true);
   assert.equal(html.replaceAll("Check the official sources for your case.", "").match(/official/gi), null);
   assert.equal(html.includes("before Nov 2, 2026"), false);
   assert.equal(html.includes("before November 2, 2026"), false);
@@ -366,7 +367,7 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
         assert.equal(state.refund, REFUND, label);
         assert.equal(state.content, item.content, label);
         assert.equal(state.source, "site", label);
-        assert.equal(state.medium, "site", label);
+        assert.equal(state.medium, "offer_page", label);
         assert.equal(state.campaign, "amazon-coi-check", label);
         assert.equal(state.wanted, "true", label);
         assert.equal(state.click, "cta/" + item.content, label);

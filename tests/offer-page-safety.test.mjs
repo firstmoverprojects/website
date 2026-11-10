@@ -42,7 +42,7 @@ const OFFERS = [
     route: "/tools/etsy-photo-audit-check/",
     file: "tools/etsy-photo-audit-check/index.html",
     slug: "lnfgc",
-    cta: "#gtin-checkout",
+    cta: "#kit-top",
     emailForm: true
   }
 ];

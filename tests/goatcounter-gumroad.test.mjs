@@ -199,7 +199,7 @@ test("wanted=true Gumroad anchors keep an origin referrer", () => {
 });
 
 test("test visits prefix data-goatcounter-click and live visits do not", () => {
-  const href = "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=site&utm_campaign=etsy-photo-audit-check&utm_content=footer";
+  const href = "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=offer_page&utm_campaign=etsy-photo-audit-check&utm_content=footer";
   const testVisit = loadHelper("?fmp_test=1&qa=qa-clicktrack-20261107-2035ct");
   assert.equal(typeof testVisit.listeners["capture:click"], "function");
   assert.equal(typeof testVisit.listeners["capture:auxclick"], "function");

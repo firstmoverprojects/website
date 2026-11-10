@@ -25,8 +25,13 @@ const QUIET_HTML = new Set([
 ]);
 const CONTENTS = new Set([
   "above-fold", "article", "bottom-cta", "card", "checklist", "comparison", "faq", "footer",
-  "1099-result-k-only", "1099-result-nec", "1099-result-none", "1099-result-split", "1099-result-warn", "amazon-coi-result-check", "amazon-coi-result-fix", "amazon-coi-result-ontrack", "coi-check-result", "coi-check-sticky", "coi-check-top", "etsy-check-result", "etsy-photo-result-fix", "etsy-photo-result-mockup", "etsy-photo-result-ontrack", "fire-check-result", "fire-check-sticky", "fire-check-top", "fire-result-need-tcc", "fire-result-nov9", "fire-result-ontrack", "fire-result-still-fire", "fire-result-warn", "gtin-helper", "hub", "kit-preview", "link", "post-check", "product-demo", "result-card", "ws-check-result", "ws2016",
+  "1099-result-k-only", "1099-result-nec", "1099-result-none", "1099-result-split", "1099-result-warn", "amazon-coi-result-check", "amazon-coi-result-fix", "amazon-coi-result-ontrack", "coi-check-result", "coi-check-sticky", "coi-check-top", "etsy-check-result", "etsy-photo-check-top", "etsy-photo-result-fix", "etsy-photo-result-mockup", "etsy-photo-result-ontrack", "fire-check-result", "fire-check-sticky", "fire-check-top", "fire-result-need-tcc", "fire-result-nov9", "fire-result-ontrack", "fire-result-still-fire", "fire-result-warn", "gtin-helper", "hub", "kit-preview", "link", "post-check", "product-demo", "result-card", "ws-check-result", "ws2016",
   "result-cta", "sticky-cta", "tools-free", "tools-kit", "top-cta", "trade-pill", "eu-fee"
+]);
+const OFFER_TOOL_PAGES = new Set([
+  "tools/fire-to-iris-check/index.html",
+  "tools/amazon-coi-check/index.html",
+  "tools/etsy-photo-audit-check/index.html"
 ]);
 
 function walk(dir, out = []) {
@@ -120,7 +125,11 @@ test("every Gumroad product link carries source, medium, campaign, and content",
       count += 1;
       const url = new URL(raw.replace(/&amp;/g, "&"));
       assert.equal(url.searchParams.get("utm_source"), "site", raw);
-      assert.equal(url.searchParams.get("utm_medium"), "site", raw);
+      assert.equal(
+        url.searchParams.get("utm_medium"),
+        OFFER_TOOL_PAGES.has(rel) ? "offer_page" : "site",
+        raw
+      );
       const content = url.searchParams.get("utm_content");
       assert.equal(CONTENTS.has(content), true, rel + " " + content);
       const campaign = url.searchParams.get("utm_campaign");
@@ -159,13 +168,13 @@ function runUtm(search, hrefs, storage) {
   return { anchors, listeners, store };
 }
 
-const SAMPLE = "https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&utm_source=site&utm_medium=site&utm_campaign=fire-to-iris-check&utm_content=footer";
+const SAMPLE = "https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&utm_source=site&utm_medium=offer_page&utm_campaign=fire-to-iris-check&utm_content=footer";
 
 test("landing utm_source is stored and written onto checkout links", () => {
   const first = runUtm("?utm_source=TikTok&utm_medium=newsletter&utm_campaign=newsletter-week&utm_content=nl-body", [SAMPLE]);
   assert.equal(first.store.get("fmp_utm_source"), "tiktok");
   assert.equal(new URL(first.anchors[0].href).searchParams.get("utm_source"), "tiktok");
-  assert.equal(new URL(first.anchors[0].href).searchParams.get("utm_medium"), "site");
+  assert.equal(new URL(first.anchors[0].href).searchParams.get("utm_medium"), "offer_page");
   assert.equal(new URL(first.anchors[0].href).searchParams.get("utm_campaign"), "fire-to-iris-check");
   assert.equal(new URL(first.anchors[0].href).searchParams.get("utm_content"), "footer");
 
