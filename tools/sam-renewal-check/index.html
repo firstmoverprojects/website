@@ -41,7 +41,7 @@
       "name": "How long does SAM.gov say activation can take?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The entity registration checklist says to allow at least ten business days after you submit the registration for it to become active. This page counts ten weekdays and skips Saturday and Sunday. It does not skip federal holidays."
+        "text": "The entity registration checklist says to allow at least ten business days after you submit the registration for it to become active. This page counts ten U.S. federal business days and skips Saturday, Sunday, and federal holidays on the OPM list for 2026 through 2027 (observed dates)."
       }
     }
   ]
@@ -196,7 +196,7 @@ picture {
 <section class="card" aria-labelledby="rules-h">
 <h2 id="rules-h">What this page uses</h2>
 <p>The <a href="https://sam.gov/entity-registration">SAM.gov entity registration page</a> says: you must renew your registration every 365 days to keep it active. Updates can be made at any time, or during renewal.</p>
-<p>The <a href="https://sam.gov/sites/default/files/2024-11/entity-checklist.pdf">entity registration checklist</a> (November 2024) says the same 365-day renewal, and says to allow at least ten business days after you submit the registration for it to become active in SAM.gov. This page counts ten weekdays after the submission date you enter. It skips Saturday and Sunday. It skips no federal holiday.</p>
+<p>The <a href="https://sam.gov/sites/default/files/2024-11/entity-checklist.pdf">entity registration checklist</a> (November 2024) says the same 365-day renewal, and says to allow at least ten business days after you submit the registration for it to become active in SAM.gov. This page counts ten federal business days after the submission date you enter. It skips Saturday, Sunday, and U.S. federal holidays on the <a href="https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/">OPM federal holiday schedule</a> for 2026 through 2027, using each holiday's observed date when OPM moves it off a weekend.</p>
 <p><a href="https://www.ecfr.gov/current/title-48/chapter-1/subchapter-H/part-52/subpart-52.2/section-52.204-7">FAR 52.204-7</a> (NOV 2024) says an offeror is required to be registered in SAM when submitting an offer or quotation and at time of award.</p>
 <p><a href="https://www.acquisition.gov/far/52.204-13">FAR 52.204-13</a> says the contractor maintains registration in SAM during contract performance and through final payment of any contract, basic agreement, basic ordering agreement, or blanket purchasing agreement. To remain registered after the initial registration, the contractor reviews and updates the information on an annual basis, from the date of initial registration or subsequent updates. The SAM.gov page states the interval as 365 days. This page counts 365 days.</p>
 <p>The <a href="https://www.gsa.gov/small-business/find-opportunities/register-your-business">GSA page on registering a business</a> says you do not need to pay a third party to complete your registration.</p>
@@ -211,7 +211,7 @@ picture {
 <p id="anchor-hint" class="muted">SAM.gov counts the renewal interval from this kind of date. Use the date shown in the Entity Workspace.</p>
 <label for="sam-submit">Date a registration or renewal was submitted (optional)</label>
 <input id="sam-submit" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="YYYY-MM-DD" aria-describedby="submit-hint">
-<p id="submit-hint" class="muted">Leave blank to skip the ten-weekday count from the checklist.</p>
+<p id="submit-hint" class="muted">Leave blank to skip the ten-business-day count from the checklist.</p>
 <fieldset>
 <legend>FAR 52.204-13 in a contract you are reviewing</legend>
 <div class="choices">
@@ -258,6 +258,7 @@ picture {
 <li><a href="https://www.ecfr.gov/current/title-48/chapter-1/subchapter-H/part-52/subpart-52.2/section-52.204-7">FAR 52.204-7, System for Award Management</a></li>
 <li><a href="https://www.acquisition.gov/far/52.204-13">FAR 52.204-13, System for Award Management Maintenance</a></li>
 <li><a href="https://www.gsa.gov/small-business/find-opportunities/register-your-business">GSA: register your business</a></li>
+<li><a href="https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/">OPM: federal holidays (2026 through 2027 observed dates used by this page)</a></li>
 </ul>
 <p>Checked October 31, 2026.</p>
 <p>General guidance, not legal, tax or IT advice. Not affiliated with or endorsed by the U.S. General Services Administration or the System for Award Management.</p>
@@ -316,6 +317,31 @@ picture {
   var NEED = "Enter the date. Then this page shows an estimate.";
   var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var YN = { yes: 1, no: 1, unsure: 1 };
+  var OPM_HOLIDAY_SOURCE = "https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/";
+  var FEDERAL_HOLIDAY = {
+    "2026-01-01": 1,
+    "2026-01-19": 1,
+    "2026-02-16": 1,
+    "2026-05-25": 1,
+    "2026-06-19": 1,
+    "2026-07-03": 1,
+    "2026-09-07": 1,
+    "2026-10-12": 1,
+    "2026-11-11": 1,
+    "2026-11-26": 1,
+    "2026-12-25": 1,
+    "2027-01-01": 1,
+    "2027-01-18": 1,
+    "2027-02-15": 1,
+    "2027-05-31": 1,
+    "2027-06-18": 1,
+    "2027-07-05": 1,
+    "2027-09-06": 1,
+    "2027-10-11": 1,
+    "2027-11-11": 1,
+    "2027-11-25": 1,
+    "2027-12-24": 1
+  };
 
   function fail(message) {
     return { ok: false, label: LABEL, lines: [], error: message, disclaimer: DISCLAIMER };
@@ -353,13 +379,18 @@ picture {
     return fromUTC(part.utc + n * 86400000);
   }
 
+  function isFederalHoliday(part) {
+    return !!FEDERAL_HOLIDAY[part.iso];
+  }
+
   function addBusinessDays(part, n) {
     var ms = part.utc;
     var left = n;
     while (left > 0) {
       ms += 86400000;
+      var cur = fromUTC(ms);
       var day = new Date(ms).getUTCDay();
-      if (day !== 0 && day !== 6) left -= 1;
+      if (day !== 0 && day !== 6 && !isFederalHoliday(cur)) left -= 1;
     }
     return fromUTC(ms);
   }
@@ -379,7 +410,7 @@ picture {
     lines.push("Estimate: FAR 52.204-13 says the contractor reviews and updates information in SAM on an annual basis, from the date of initial registration or subsequent updates. This count is 365 days, the interval stated on the SAM.gov entity registration page.");
     if (submit) {
       var active = addBusinessDays(submit, 10);
-      lines.push("Estimate: the entity registration checklist says to allow at least ten business days after you submit your registration for it to become active in SAM.gov. Ten weekdays after " + formatLong(submit) + " lands on " + formatLong(active) + ". This count skips Saturday and Sunday. It skips no federal holiday.");
+      lines.push("Estimate: the entity registration checklist says to allow at least ten business days after you submit your registration for it to become active in SAM.gov. Ten federal business days after " + formatLong(submit) + " lands on " + formatLong(active) + ". This count skips Saturday, Sunday, and U.S. federal holidays on the OPM list for 2026 through 2027 (observed dates). Source: " + OPM_HOLIDAY_SOURCE + ". Holiday list checked October 31, 2026.");
     }
     if (input.clause === "yes") {
       lines.push("Estimate: FAR 52.204-13 says the contractor maintains registration in SAM during contract performance and through final payment of any contract, basic agreement, basic ordering agreement, or blanket purchasing agreement.");

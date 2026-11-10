@@ -4,7 +4,8 @@
   "description": "Dev-only checks for the static site: offer page safety and static site checks. The site itself is static HTML.",
   "scripts": {
     "test:offers": "node --test --test-concurrency=1 tests/offer-page-safety.test.mjs",
-    "check:site": "node scripts/check_site.mjs"
+    "check:site": "node scripts/check_site.mjs",
+    "test:e2e": "node --test --test-concurrency=1 tests/e2e/*.test.mjs"
   },
   "devDependencies": {
     "html-validate": "11.21.0",
