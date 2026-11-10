@@ -14,7 +14,7 @@ const PAGE = path.join(ROOT, "tools/fire-to-iris-check/index.html");
 const html = readFileSync(PAGE, "utf8");
 const QUESTION = "Will you file our tax year 2026 information returns through IRIS?";
 const SHARE_TITLE = "IRS FIRE filing ended Nov 19, 2026 (3 p.m. ET) - Free IRIS readiness &amp; 1099 CSV check";
-const SHARE_DESC = "Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE. IRIS is the only system after Jan. 1, 2027. Nov 9, 2026 was the last day to change IR Applications for TCC, and those applications are now read-only.";
+const SHARE_DESC = "Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE. The IRS says IRIS will be the only e-file system for information returns after Jan. 1, 2027. Nov 9, 2026 was the last day to change IR Applications for TCC, and those applications are now read-only.";
 const REFUND = "Refunds: within 30 days if a file is corrupt or materially not as described.";
 const DISCLAIMER = "General guidance, not legal, tax or IT advice.";
 const BUTTON = "Get the $9 checklist (PDF in a ZIP)";
@@ -23,16 +23,16 @@ const LEADS = {
   A: "The checklist is for people who file their own 1099s. If your provider files for you, you don't need it. Copy the question below and send it to them instead: \"" + QUESTION + "\"",
   B: "Because you file yourself and don't have an IRIS TCC yet, this is the step that matters most. The checklist walks through the IRIS Application for TCC and your FIRE account steps on 3 pages, with the IRS dates and links at the top.",
   C: "Because Nov 9, 2026 has passed, existing IR TCC applications are read-only. The checklist puts the IRIS TCC steps and the other IRS dates on one printable list.",
-  D: "Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE. IRIS is the only system after Jan. 1, 2027. The checklist lists the IRS dates and links, your FIRE account steps and 2027 prep on 3 pages.",
+  D: "Because you still have returns or corrections to file, the checklist lists the IRS dates and links, your IRIS TCC steps and 2027 prep on 3 pages.",
   E: "You still have a step to finish. The checklist puts the IRS dates, IRIS TCC steps and a 1099-NEC add-on in one printable list.",
   F: "You look on track from what you checked. Most people in your spot don't need to buy anything. If you'd like 2027 prep and the IRS dates on one printable list, the checklist is optional."
 };
 const PROBLEMS = {
   A: "A provider may file your 1099 forms. Ask them to confirm they will file through IRIS after Jan 1, 2027.",
-  B: "Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE. IRIS is the only system after Jan. 1, 2027.",
+  B: "You still need a separate IRIS Application for TCC. FIRE filing ended Nov 19, 2026 at 3 p.m. ET.",
   C: "Nov 9, 2026 has passed. Existing IR Applications for TCC are now read-only.",
-  D: "Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE. IRIS is the only system after Jan. 1, 2027.",
-  E: "Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE. IRIS is the only system after Jan. 1, 2027.",
+  D: "FIRE filing ended Nov 19, 2026 at 3 p.m. ET. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS.",
+  E: "You still have a step to finish. FIRE filing ended Nov 19, 2026 at 3 p.m. ET.",
   F: "Nothing urgent was flagged from the boxes you checked. On Jan 1, 2027, the new system is the only way to file."
 };
 
@@ -84,7 +84,7 @@ test("result copy stays on the spec sentences and keeps the house lines", () => 
 const DELIVERY = "One 3-page PDF checklist in a ZIP, with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on.";
 
 test("body, FAQ, badges, schema, alt text, and the sticky name the ZIP download", () => {
-  assert.equal(html.split(DELIVERY).length - 1, 2);
+  assert.equal(html.split(DELIVERY).length - 1, 1);
   assert.match(html, /<p class="kit-note" data-fire-kit="1">One 3-page PDF checklist in a ZIP\. Refunds: within 30 days if a file is corrupt or materially not as described\.<\/p>/);
   assert.equal(html.split("INSTANT DOWNLOAD · ONE 3-PAGE PDF IN A ZIP · CHECKLIST + 1099-NEC ADD-ON · $9").length - 1, 2);
   assert.equal(html.split('alt="See What\'s Inside the $9 FIRE to IRIS Switch Checklist: one 3-page PDF checklist in a ZIP, with the IRS dates, your FIRE account, the IRIS Application for TCC, and a 1099-NEC add-on"').length - 1, 2);
@@ -110,10 +110,10 @@ test("body, FAQ, badges, schema, alt text, and the sticky name the ZIP download"
   assert.equal(/"@type":\s*"Offer"/.test(html), false);
   assert.deepEqual(descriptionValues(blocks), []);
   assert.equal(faq.dateModified, "2026-11-19");
-  const kitAnswer = faq.mainEntity.find((item) => item.name === "What is in the $9 checklist?");
-  assert.equal(kitAnswer.acceptedAnswer.text, DELIVERY + " " + REFUND);
+  assert.equal(faq.mainEntity.some((item) => item.name === "What is in the $9 checklist?"), false);
   const visibleFaq = html.slice(html.indexOf('id="faq"'), html.indexOf("</section>", html.indexOf('id="faq"')));
-  assert.equal(visibleFaq.includes(kitAnswer.acceptedAnswer.text), true);
+  assert.equal(visibleFaq.includes(DELIVERY + " " + REFUND), true);
+  assert.match(visibleFaq, /<div data-fire-kit="1">[\s\S]*What is in the \$9 checklist/);
   assert.equal(html.includes(REFUND), true);
   assert.equal(html.includes("If you want every step on 3 pages, the $9 checklist is optional."), true);
   assert.equal(html.includes("every step on one page"), false);

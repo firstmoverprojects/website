@@ -12,10 +12,10 @@ const html = readFileSync(path.join(ROOT, PAGE), "utf8");
 const tool = readFileSync(path.join(ROOT, "tools/fire-to-iris-check/index.html"), "utf8");
 const STATIC = "Next IRS date: Nov 9, 2026, the last day to change your IR Application for TCC (after that it is read-only). Last day to file on FIRE: Nov 19, 2026, 3 p.m. ET. ";
 const NOV19_LINE = "Last day to file on FIRE: Nov 19, 2026, 3 p.m. ET. ";
-const CLOSED = "FIRE is closed. IRIS is the only IRS e-file system for information returns from Jan 1, 2027.";
+const CLOSED = "FIRE filing ended Nov 19, 2026 at 3 p.m. ET. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS. ";
 const PRODUCT = "https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist";
 const SHARE_TITLE = "IRS FIRE filing ended Nov 19, 2026 (3 p.m. ET) - Free IRIS readiness &amp; 1099 CSV check";
-const SHARE_DESC = "Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE. IRIS is the only system after Jan. 1, 2027. Nov 9, 2026 was the last day to change IR Applications for TCC, and those applications are now read-only.";
+const SHARE_DESC = "Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE. The IRS says IRIS will be the only e-file system for information returns after Jan. 1, 2027. Nov 9, 2026 was the last day to change IR Applications for TCC, and those applications are now read-only.";
 const FOOTER = "First Mover Projects, PO Box 98, Firth, NE 68358. firstmoverprojects@gmail.com. General guidance, not legal, tax or IT advice. Check the IRS's own pages for your case. Not affiliated with any vendor named on this page. Names are used only to describe compatibility.";
 
 function metaContent(source, attr, name) {
@@ -74,7 +74,8 @@ test("the hero answers first, then shows the passed Nov 19 line beside the check
   assert.equal(top.includes("finish any IR Application for TCC changes before the next date"), false);
   assert.equal(top.includes("Next IRS date: Nov 9, 2026"), false);
   assert.equal(top.includes("Next IRS date: Nov 19"), false);
-  assert.match(top, /data-next-irs-copy="">Nov 19, 2026 at 3 p\.m\. ET was the last day to file information returns through FIRE\. IRIS is the only system after Jan\. 1, 2027\. Nov 9, 2026 was the last day to change IR Applications for TCC, and those applications are now read-only\. <\/span>/);
+  assert.match(top, /data-next-irs-copy="">FIRE filing ended Nov 19, 2026 at 3 p\.m\. ET\. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS\. <\/span>/);
+  assert.match(top, /<a href="https:\/\/www\.irs\.gov\/filing\/e-file-information-returns-with-iris" rel="noopener noreferrer">irs\.gov\/iris<\/a>/);
   assert.match(top, /Refunds: within 30 days if a file is corrupt or materially not as described\./);
   assert.match(top, /One PDF, 3 pages/);
   assert.equal(/Nov(?:ember)? 1\b/.test(top), false);
@@ -168,7 +169,8 @@ test("FAQPage JSON matches the visible questions and answers", () => {
   assert.match(sitemap, /<loc>https:\/\/firstmoverprojects\.com\/deadlines\/irs-fire-retirement-nov-19\.html<\/loc>\s*<lastmod>2026-11-19<\/lastmod>/);
   assert.match(sitemap, /<loc>https:\/\/firstmoverprojects\.com\/tools\/fire-to-iris-check\/<\/loc>\s*<lastmod>2026-11-19<\/lastmod>/);
   assert.equal(html.includes("The next IRS date is November 9, 2026"), false);
-  const faq = html.slice(html.indexOf('id="faq-h"'), html.indexOf('id="src-h"'));
+  const faq = html.slice(html.indexOf('id="faq-h"'), html.indexOf('id="src-h"'))
+    .replace(/<details\b[^>]*\bdata-fire-kit="1"[^>]*>[\s\S]*?<\/details>/g, "");
   const questions = [...faq.matchAll(/<summary>([\s\S]*?)<\/summary>\s*<p>([\s\S]*?)<\/p>/g)];
   assert.equal(questions.length, data.mainEntity.length);
   data.mainEntity.forEach((item, i) => {
