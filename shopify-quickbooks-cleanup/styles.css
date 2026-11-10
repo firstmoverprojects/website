@@ -43,6 +43,11 @@ body {
   background: var(--color-bg);
 }
 
+.skip-link,
+.skip-link:focus {
+  color: #01060b;
+}
+
 .skip-link {
   position: absolute;
   left: -9999px;
@@ -50,7 +55,6 @@ body {
   z-index: 100;
   padding: var(--space-sm) var(--space-md);
   background: var(--color-text);
-  color: var(--color-bg);
   text-decoration: none;
   border-radius: var(--radius);
 }
@@ -58,7 +62,6 @@ body {
 .skip-link:focus,
 .skip-link:focus-visible {
   left: var(--space-md);
-  color: var(--color-bg);
   background: var(--color-text);
   outline: 3px solid var(--color-accent-blue);
   outline-offset: 2px;

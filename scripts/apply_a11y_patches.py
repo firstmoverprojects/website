@@ -45,8 +45,33 @@ def is_blocked(path: Path) -> bool:
     return rel(path) in BLOCKED or "/tests/" in rel(path)
 
 
-def ensure_stylesheet(html: str, href: str, link_tag: str) -> str:
-    if link_tag in html:
+def has_a11y_patch_link(html: str) -> bool:
+    return bool(
+        re.search(
+            r'<link\s+rel="stylesheet"[^>]*href="[^"]*a11y-patch\.css"\s*/>',
+            html,
+            re.I,
+        )
+    )
+
+
+def link_href_resolves(page: Path, href: str) -> bool:
+    if href.startswith("/"):
+        target = ROOT / href.lstrip("/")
+    else:
+        target = (page.parent / href).resolve()
+        try:
+            target.relative_to(ROOT.resolve())
+        except ValueError:
+            return False
+    return target.is_file()
+
+
+def ensure_stylesheet(html: str, href: str, link_tag: str, page: Path) -> str:
+    if link_tag in html or has_a11y_patch_link(html):
+        return html
+    patch_href = re.search(r'href="([^"]+)"', link_tag)
+    if not patch_href or not link_href_resolves(page, patch_href.group(1)):
         return html
     pattern = re.compile(
         rf'(<link\s+rel="stylesheet"[^>]*href="{re.escape(href)}"\s*/>)',
@@ -70,14 +95,14 @@ def ensure_main_id(html: str) -> str:
 
 
 def patch_root_legal(path: Path, html: str) -> str:
-    html = ensure_stylesheet(html, "./assets/styles-Bi5nM5kw.css", SITE_A11Y)
+    html = ensure_stylesheet(html, "./assets/styles-Bi5nM5kw.css", SITE_A11Y, path)
     html = ensure_skip(html, SKIP_MAIN)
     html = ensure_main_id(html)
     return html
 
 
 def patch_index(html: str) -> str:
-    html = ensure_stylesheet(html, "./assets/styles-Bi5nM5kw.css", SITE_A11Y)
+    html = ensure_stylesheet(html, "./assets/styles-Bi5nM5kw.css", SITE_A11Y, ROOT / "index.html")
     if SKIP_MAIN not in html:
         html = html.replace("<body>\n    <div id=\"app\">", "<body>\n    " + SKIP_MAIN + "\n    <div id=\"app\">")
     html = re.sub(r"<main>", '<main id="main">', html, count=1)
@@ -85,14 +110,14 @@ def patch_index(html: str) -> str:
 
 
 def patch_deadline_page(path: Path, html: str) -> str:
-    nested = "/index.html" in rel(path) and path.parent.name != "deadlines"
+    nested = path.parent.name != "deadlines"
     link = DEADLINE_PATCH_NESTED if nested else DEADLINE_PATCH
     if 'href="styles.css"' in html:
-        html = ensure_stylesheet(html, "styles.css", link)
+        html = ensure_stylesheet(html, "styles.css", link, path)
     elif 'href="../styles.css"' in html:
-        html = ensure_stylesheet(html, "../styles.css", DEADLINE_PATCH)
+        html = ensure_stylesheet(html, "../styles.css", DEADLINE_PATCH_NESTED, path)
     elif 'href="/deadlines/styles.css"' in html:
-        html = ensure_stylesheet(html, "/deadlines/styles.css", GAMES_PATCH)
+        html = ensure_stylesheet(html, "/deadlines/styles.css", GAMES_PATCH, path)
     return html
 
 
@@ -110,12 +135,17 @@ def patch_tool(html: str) -> str:
 
 
 def patch_games(html: str) -> str:
-    return ensure_stylesheet(html, "/deadlines/styles.css", GAMES_PATCH)
+    return ensure_stylesheet(
+        html, "/deadlines/styles.css", GAMES_PATCH, ROOT / "games/index.html"
+    )
 
 
 def patch_help(html: str) -> str:
     return ensure_stylesheet(
-        html, "../shopify-quickbooks-cleanup/help-article.css", HELP_PATCH
+        html,
+        "../shopify-quickbooks-cleanup/help-article.css",
+        HELP_PATCH,
+        ROOT / "help/shopify-quickbooks-connector-migration-problems.html",
     )
 
 
@@ -188,5 +218,23 @@ def main() -> None:
         print(" ", c)
 
 
+def _self_test() -> None:
+    vli = ROOT / "deadlines/1098-vli-check/index.html"
+    html = vli.read_text(encoding="utf-8")
+    assert has_a11y_patch_link(html), "1098-vli-check should link a11y-patch.css"
+    assert link_href_resolves(vli, "../a11y-patch.css"), "nested patch path must exist"
+    assert not link_href_resolves(vli, "a11y-patch.css"), "flat a11y-patch.css is not beside 1098 page"
+    patched = patch_deadline_page(vli, html)
+    assert patched == html, "re-run must not rewrite 1098-vli-check"
+    assert "../a11y-patch.css" in patched
+    assert not re.search(
+        r'<link\s+rel="stylesheet"[^>]*href="a11y-patch\.css"\s*/>', patched, re.I
+    ), "nested deadline pages must not use flat a11y-patch.css"
+
+
 if __name__ == "__main__":
-    main()
+    if "--self-test" in __import__("sys").argv:
+        _self_test()
+        print("apply_a11y_patches self-test OK")
+    else:
+        main()
