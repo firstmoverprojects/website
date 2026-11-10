@@ -42,7 +42,7 @@ input[type=radio]{margin-top:.35em;flex:0 0 auto}
 pre{font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;background:#eef1f5;padding:10px;border-radius:6px;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;margin:.4em 0;min-width:0;max-width:100%}
 button{font:inherit;padding:10px 18px;border-radius:8px;border:0;background:#1f5fbf;color:#fff;cursor:pointer;margin:12px 8px 0 0;white-space:normal;max-width:100%;min-height:44px}
 button.sec{background:#e4e8ee;color:#1b1f24}
-.tag{display:inline-block;font-size:.8rem;padding:2px 8px;border-radius:9px;margin:0 6px 6px 0;background:#e4e8ee}
+.tag{display:inline-block;font-size:.8rem;line-height:1.35;padding:1px 8px;border-radius:9px;margin:0 6px 0 0;background:#e4e8ee}
 .warn{background:#fde8e6;color:#8a1c12}
 .ok{background:#e3f4e6;color:#1d6b2c}
 .mid{background:#fff3d6;color:#7a5200}
@@ -79,7 +79,7 @@ a.paid-quiet{display:inline-block;max-width:100%;box-sizing:border-box;min-heigh
 #deadline-reminder-form button:hover{background:#075985}
 a:focus,button:focus,textarea:focus,input:focus,select:focus{outline:3px solid #1f5fbf;outline-offset:2px}
 table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0}
-th,td{border:1px solid #dde1e6;padding:6px 8px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+th,td{border:1px solid #dde1e6;padding:6px 8px;text-align:left;vertical-align:top;overflow-wrap:break-word}
 caption{text-align:left;font-weight:600;padding:4px 0}
 .table-wrap{overflow-x:auto;max-width:100%}
 ul,ol{margin:.4em 0;padding-left:1.2em}
@@ -87,6 +87,14 @@ ul,ol{margin:.4em 0;padding-left:1.2em}
 .skip:focus{left:8px;top:8px;background:#fff;padding:8px 12px;z-index:2}
 footer{margin:8px 0 24px}
 [hidden]{display:none !important}
+@media (max-width:480px){
+  main{padding:12px}
+  .card{padding:12px}
+  .lead-cta{padding:12px}
+  .deadline-reminder{padding:12px}
+  #results .card,.pair>section{padding:10px}
+  #results .pair{gap:10px}
+}
 @media print{
   body{background:#fff}
   .noprint{display:none !important}
@@ -157,7 +165,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "dateModified": "2026-10-27",
+  "dateModified": "2026-11-10",
   "mainEntity": [
     {
       "@type": "Question",
@@ -172,7 +180,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
       "name": "What does Etsy say about the listing photo?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Etsy Help says a listing must include at least one unedited photo of the actual item against a real background. Some exceptions may apply. Etsy also says the first photo should be the clearest realistic picture of what the buyer receives. That first-photo line does not say the unedited photo has to be first. Etsy's listing help says a listing can hold up to 20 photos and 2 short videos. This page scores a whole number from 1 to 10 and does not score photos 11 through 20. A count of 1 is a note, not a failed rule."
+        "text": "Etsy Help says most listings must include at least one unedited photo of the actual item against a real background. You can crop or resize that photo, add a watermark, or change its file format, without AI tools. One unedited photo per listing is enough, even with variations. It does not have to be the first photo, but Etsy says the first photo should be the clearest, most realistic picture of what the buyer receives. Exceptions apply to print-on-demand, digital, customized, and made-to-order items. Etsy's listing help says a listing can hold up to 20 photos and 2 short videos. This page scores a whole number from 1 to 10 and does not score photos 11 through 20. A count of 1 is a note, not a failed rule."
       }
     },
     {
@@ -180,7 +188,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
       "name": "Did Etsy name a last day for this photo rule?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The Etsy Seller Handbook dated Oct 22, 2026 tells sellers to update listings that do not meet the photo rule. It does not name a last day."
+        "text": "No. The Etsy Seller Handbook article dated Oct 22, 2026 asks sellers to review listing images and update them as soon as possible. It says Etsy plans to begin proactively enforcing the image requirements in early 2027 and will give advance notice first. It does not name a date. If a buyer opens a case because the item is materially different from the listing, the seller may be responsible for the refund now."
       }
     }
   ]
@@ -219,16 +227,19 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <h1>Etsy Real-Photo &amp; Listing Audit Check</h1>
 <p><a class="runway-pill" href="https://launchfree.io/listings/etsy-real-photo-and-listing-audit-check.html" target="_blank" rel="noopener noreferrer">Listed on The Runway (LaunchFree.io): Upvote This Free Tool</a></p>
 <p><strong>Paste your listing, get a ranked fix plan.</strong> Free. Runs in your browser. Nothing is uploaded.</p>
+<p id="what"><strong>What it is:</strong> a free checklist for Etsy listing photos, titles, and production-partner disclosure. You say what each listing has. The page compares that with Etsy's published rules, linked under Sources.</p>
 <p id="who"><strong>Who it's for:</strong> an Etsy seller checking a physical, digital, or print-on-demand listing before a buyer sees the photos and title.</p>
-<p class="muted">This page applies the checks written below to the text and toggles you enter. It cannot see your shop. It does not score a listing with a percent, and it does not estimate sales.</p>
+<p id="not-for"><strong>Not for:</strong> checking the photo files themselves. This page cannot see your shop, and it cannot tell whether a photo was edited or made with AI. It is not an Etsy tool, it does not score a listing with a percent, and it does not estimate sales.</p>
+<p id="you-get"><strong>What you get free:</strong> a risk list and fix plan for up to 10 listings, a plain-text checklist, and an AI prompt you can copy. A $9 checklist (2-page PDF shot list and CSV listing sheet) is optional, further down the page.</p>
 
 <section class="card" aria-labelledby="rules-h">
 <h2 id="rules-h">Checks this page runs</h2>
 <ul>
-<li><strong>Primary photo.</strong> Etsy Help says a listing must include at least one unedited photo of the actual item against a real background. Some exceptions may apply. Etsy also says the first photo should be the clearest realistic picture of what the buyer receives. That first-photo line does not say the unedited photo has to be first. You mark whether the first photo is an unedited photo of the real item, or a mockup or render.</li>
+<li><strong>Primary photo.</strong> Etsy Help says most listings must include at least one unedited photo of the actual item against a real background. On that photo you can crop, resize, add a watermark, or change the file format, but not adjust the lighting, and Etsy says not to use AI tools for those changes. Edits that make the item look different are not allowed on any photo. The unedited photo does not have to be first, but Etsy says the first photo should be the clearest, most realistic picture of what the buyer receives. Videos do not count toward the unedited photo. You mark whether the first photo is an unedited photo of the real item, or a mockup or render.</li>
+<li><strong>Exceptions.</strong> Etsy lists different photo rules for some items. Print-on-demand: a stock-photo mockup is allowed if the stock photo's owner has authorized it. Digital downloads: show a preview of the actual content. Customized items you make: show real finished items you made before. Patterns, recipes, and seeds: include at least one real, unedited photo of something made with your product. This page does not apply these exceptions for you, so read a mockup flag with them in mind.</li>
 <li><strong>Photo count.</strong> Enter a whole number from 1 to 10, the photos you want this audit to score. Etsy's listing help says a listing can hold up to 20 photos and 2 short videos. This page does not score photos 11–20. A count of 1 is a note, not a failed rule.</li>
-<li><strong>Variation photos.</strong> You mark whether each color or size option has a linked photo. This page does not claim Etsy requires that link. It records your answer.</li>
-<li><strong>Disclosure.</strong> You mark whether a digital item or a print-on-demand production partner still needs a disclosure. Etsy's Handmade policy says a seller who uses a production partner must disclose the partner's name, location, and the work they do. Some of that detail can be kept confidential to shoppers. Check the current policy for your item.</li>
+<li><strong>Variation photos.</strong> You mark whether each color or size option has a linked photo. This page does not claim Etsy requires that link. It records your answer. Etsy Help says one unedited photo per listing is enough, even if the listing has variations.</li>
+<li><strong>Disclosure.</strong> You mark whether a digital item or a print-on-demand production partner still needs a disclosure. Etsy's Handmade policy says a seller who uses a production partner must disclose the partner's name, location, and the work they do in the listing process. The name and partnership details can stay visible only to Etsy. The location and a description of the work appear to shoppers. Check the current policy for your item.</li>
 <li><strong>Title.</strong> Etsy's listing help says a title can be up to 140 characters, and says to avoid repetition. This page's repetition rule: a word of at least 3 letters or digits counts, except and, are, for, from, item, the, this, that, with, your. The same counted word 3 or more times is a repetition flag. The help page also says to consider fewer than 15 words. That 15-word line is a note, not a failed check. Character count runs after phone, email, SSN, and EIN redaction, with spaces at the ends removed. Redaction markers are not counted as title words.</li>
 </ul>
 </section>
@@ -309,12 +320,14 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <p id="gtin-note" class="muted"></p>
 </div>
 <p><a target="_blank" class="gtin-checkout" id="gtin-checkout" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=gtin-helper" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 Etsy Real-Photo Audit Kit (1-Click Checkout) →</a></p>
+<p class="muted">Refunds: within 30 days if a file is corrupt or materially not as described. <a href="/refund-policy.html">Refund Policy</a>.</p>
 <p>Or <a href="/deadlines/#signup">get the free weekly deadline email</a>.</p>
 </section>
 
 <section class="card" id="results" hidden aria-live="polite">
-<!-- Result card. Etsy did not name a last day. Announcement dated 22 October 2026: https://www.etsy.com/seller-handbook/article/1522733284810
-     Help text checked Oct 27, 2026: https://help.etsy.com/hc/en-us/articles/115015663347-Requirements-and-Best-Practices-for-Images-in-Your-Etsy-Shop
+<!-- Result card. Etsy did not name a last day; it says proactive enforcement is planned for early 2027 with advance notice. Announcement dated 22 October 2026: https://www.etsy.com/seller-handbook/article/1522733284810
+     Help text checked Nov 10, 2026: https://help.etsy.com/hc/en-us/articles/115015663347-Requirements-and-Best-Practices-for-Images-in-Your-Etsy-Shop
+     and https://help.etsy.com/hc/en-us/articles/44297885802647-How-Do-Etsy-s-Listing-Image-Requirements-Apply-to-My-Listings
      Gumroad product lnfgc. render() sets the post-answer utm_content for each outcome.
      Gumroad counts the click only when utm_source, utm_medium, and utm_campaign are all set. -->
 <div class="lead-cta" id="result-cta">
@@ -322,7 +335,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <h3>Next steps</h3>
 <ol class="next-steps" id="next-steps"></ol>
 <h3>Date</h3>
-<p id="result-deadline">Etsy posted this rule on Oct 22, 2026. They did not name a last day. If the photos are wrong and a buyer opens a case, you may have to give a refund.</p>
+<p id="result-deadline">Etsy posted this rule on Oct 22, 2026. They did not name a last day. Etsy says it plans to begin proactively enforcing the photo rule in early 2027, with notice first. If the photos are wrong and a buyer opens a case now, you may have to give a refund.</p>
 <p class="result-kit-lead" id="result-kit-lead">Because you marked a first photo as a mockup or a computer picture, add at least one unedited photo of the real item on a real background. The checklist lists which photos to take for each kind of item, plus a sheet with one row per listing.</p>
 <p id="kit-offer"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/etsy-photo-result-mockup" data-goatcounter-title="Etsy photo check result" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=etsy-photo-result-mockup" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get my photo-fix checklist (PDF + CSV in a ZIP)</a><span id="kit-after-click">Opens Gumroad. ZIP download after you pay (2-page PDF + CSV sheet). Close the tab anytime with no purchase.</span><span class="kit-refund" id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</span></p>
 <p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
@@ -331,8 +344,8 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <!-- Optional weekly email under the one kit button. Etsy did not name a last day, and this email's Etsy coverage is not verified, so the label stays the generic weekly deadline email. Same Brevo form as the Amazon checker. Photo answers are not sent. -->
 <section class="deadline-reminder" id="deadline-reminder" aria-labelledby="deadline-reminder-h">
 <h2 id="deadline-reminder-h">Get the free weekly deadline email</h2>
-<p id="reminder-note">The weekly First Mover Projects email includes deadline reminders. Double opt-in. Unsubscribe any time. Your photo answers stay in this browser. The form sends only the email address you type. <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>.</p>
-<form id="deadline-reminder-form" method="POST" action="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" data-type="subscription" autocomplete="off" data-goatcounter-submit="signup/etsy-photo-audit-check" data-goatcounter-title="Deadline reminder signup: etsy-photo-audit-check">
+<p id="reminder-note">The weekly First Mover Projects email includes deadline reminders. Double opt-in. Unsubscribe any time. Your photo answers stay in this browser. The form sends the email address you type, plus a tag naming this page, to Brevo, our email provider. Brevo also records when you signed up and confirmed, the IP address used, and the consent text, as proof of consent. <a href="https://firstmoverprojects.com/privacy.html#newsletter">Privacy Policy: weekly email</a>.</p>
+<form id="deadline-reminder-form" aria-labelledby="deadline-reminder-h" method="POST" action="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" data-type="subscription" autocomplete="off" data-goatcounter-submit="signup/etsy-photo-audit-check" data-goatcounter-title="Deadline reminder signup: etsy-photo-audit-check">
 <p>
 <label for="reminder-email">Email address</label>
 <input class="input" type="email" id="reminder-email" name="EMAIL" autocomplete="email" inputmode="email" spellcheck="false" required aria-describedby="reminder-note">
@@ -390,10 +403,11 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <ul class="kit-bullets">
 <li>Audit your whole shop in one pass: includes a one-row-per-listing CSV spreadsheet (Excel, Google Sheets, Numbers) to mark which listings already have an unedited real-background photo.</li>
 <li>Takes the guesswork out of reshoots: 2-page printable PDF with real-background shot ideas for jewelry, ceramics, clothing, home decor, craft supplies, and custom items.</li>
-<li>Includes a camera-settings safe-default checklist (turning off portrait blur, beauty mode, and AI background swaps) plus Etsy's exact Oct 22 policy quotes.</li>
+<li>Includes a camera-settings safe-default checklist (turning off portrait blur, beauty mode, and AI background swaps) and Etsy's original Oct 22, 2026 handbook quotes. Etsy has since allowed crop, resize, watermark, and file-format changes on the unedited photo (no AI tools, and no lighting changes). Use this page and Etsy Help for the current rule.</li>
 </ul>
 <p>The $9 checklist is a file you download. It lists which photos to take for each kind of item, plus a sheet with one row per listing. This page does not send your listings there.</p>
 <p><a target="_blank" class="paid-quiet" id="paid-link" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Optional: $9 photo checklist on Gumroad</a></p>
+<p class="muted">Refunds: within 30 days if a file is corrupt or materially not as described. <a href="/refund-policy.html">Refund Policy</a>.</p>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
 <div class="follow-bar-actions">
@@ -408,12 +422,14 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <section class="card" aria-labelledby="src-h">
 <h2 id="src-h">Sources</h2>
 <ul>
-<li><a href="https://www.etsy.com/seller-handbook/article/1522733284810" rel="noopener noreferrer">Etsy Seller Handbook, Oct 22, 2026: Important updates to AI use on Etsy</a> (the handbook tells sellers to update listings that do not meet the photo rule. It does not name a last day.)</li>
+<li><a href="https://www.etsy.com/seller-handbook/article/1522733284810" rel="noopener noreferrer">Etsy Seller Handbook, Oct 22, 2026: Important updates to AI use on Etsy</a> (asks sellers to update listing images as soon as possible and says proactive enforcement is planned for early 2027, with advance notice. It does not name a date.)</li>
 <li><a href="https://help.etsy.com/hc/en-us/articles/115015663347-Requirements-and-Best-Practices-for-Images-in-Your-Etsy-Shop" rel="noopener noreferrer">Etsy Help: Requirements and Best Practices for Images in Your Etsy Shop</a></li>
+<li><a href="https://help.etsy.com/hc/en-us/articles/44297885802647-How-Do-Etsy-s-Listing-Image-Requirements-Apply-to-My-Listings" rel="noopener noreferrer">Etsy Help: How Do Etsy's Listing Image Requirements Apply to My Listings?</a> (allowed changes to the unedited photo, one per listing, first photo, exceptions by item type)</li>
+<li><a href="https://www.etsy.com/legal/policy/listing-image-requirements/253962679005" rel="noopener noreferrer">Etsy policy: Listing Image Requirements</a></li>
 <li><a href="https://help.etsy.com/hc/en-us/articles/115015628707-How-to-Create-a-Listing" rel="noopener noreferrer">Etsy Help: How to Create a Listing</a> (title up to 140 characters, consider fewer than 15 words, up to 20 photos and 2 videos)</li>
 <li><a href="https://www.etsy.com/legal/handmade/" rel="noopener noreferrer">Etsy Handmade Policy</a> (production partners)</li>
 </ul>
-<p class="muted">Help pages checked October 27, 2026. Etsy can change them. Confirm the current page before you edit a listing.</p>
+<p class="muted">Help pages checked November 10, 2026. Etsy can change them. Confirm the current page before you edit a listing.</p>
 </section>
 
 <section class="card" id="faq" aria-labelledby="faq-h" style="overflow-wrap:anywhere">
@@ -421,9 +437,9 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <h3>What does this free Etsy check do?</h3>
 <p>Paste up to 10 Etsy listing rows, or toggle one listing's photos, variations, disclosure and title. Get a side-by-side risk list and real-photo fix plan. It runs in your browser. Nothing is uploaded. This page applies the checks written below to the text and toggles you enter. It cannot see your shop. It does not score a listing with a percent, and it does not estimate sales.</p>
 <h3>What does Etsy say about the listing photo?</h3>
-<p>Etsy Help says a listing must include at least one unedited photo of the actual item against a real background. Some exceptions may apply. Etsy also says the first photo should be the clearest realistic picture of what the buyer receives. That first-photo line does not say the unedited photo has to be first. Etsy's listing help says a listing can hold up to 20 photos and 2 short videos. This page scores a whole number from 1 to 10 and does not score photos 11 through 20. A count of 1 is a note, not a failed rule.</p>
+<p>Etsy Help says most listings must include at least one unedited photo of the actual item against a real background. You can crop or resize that photo, add a watermark, or change its file format, without AI tools. One unedited photo per listing is enough, even with variations. It does not have to be the first photo, but Etsy says the first photo should be the clearest, most realistic picture of what the buyer receives. Exceptions apply to print-on-demand, digital, customized, and made-to-order items. Etsy's listing help says a listing can hold up to 20 photos and 2 short videos. This page scores a whole number from 1 to 10 and does not score photos 11 through 20. A count of 1 is a note, not a failed rule.</p>
 <h3>Did Etsy name a last day for this photo rule?</h3>
-<p>The Etsy Seller Handbook dated Oct 22, 2026 tells sellers to update listings that do not meet the photo rule. It does not name a last day.</p>
+<p>No. The Etsy Seller Handbook article dated Oct 22, 2026 asks sellers to review listing images and update them as soon as possible. It says Etsy plans to begin proactively enforcing the image requirements in early 2027 and will give advance notice first. It does not name a date. If a buyer opens a case because the item is materially different from the listing, the seller may be responsible for the refund now.</p>
 </section>
 
 <p>Related: <a href="/tools/">Tools and kits</a> · <a href="/deadlines/">Deadlines</a></p>
@@ -569,11 +585,11 @@ function classify(input) {
   if (!primary) {
     addFlag(flags, "primary-unknown", 2, true, "warn",
       "Primary photo was not set to an unedited real photo or a mockup/render.",
-      "Say whether the first photo is an unedited photo of the real item, or a mockup. Etsy requires at least one unedited photo of the actual item on a real background. Some exceptions may apply.");
+      "Say whether the first photo is an unedited photo of the real item, or a mockup. For most items, Etsy requires at least one unedited photo of the actual item on a real background. Some exceptions may apply.");
   } else if (primary === "mockup") {
     addFlag(flags, "primary-mockup", 1, true, "warn",
-      "Primary photo is a mockup or render, not an unedited real photo of the finished physical item.",
-      "You marked the first photo as a mockup or render. Add at least one unedited photo of the real item on a real background. Etsy Help requires that photo in the listing. Some exceptions may apply. Etsy also says the first photo should be the clearest realistic picture of what the buyer gets.");
+      "First photo is a mockup or render. For most items, Etsy requires at least one unedited photo of the actual item somewhere in the listing.",
+      "Make sure the listing has at least one unedited photo of the real item on a real background. It does not have to be the first photo. Crop, resize, watermark, or file-format changes are allowed on it, without AI tools. Etsy also says the first photo should be the clearest, most realistic picture of what the buyer gets. Exceptions: a print-on-demand item may use a stock-photo mockup the owner authorized, and a digital download needs a preview of the actual content instead.");
   }
   if (!disclosure) {
     addFlag(flags, "disclosure-unknown", 2, true, "warn",
@@ -617,7 +633,7 @@ function classify(input) {
       "Enter a photo count from 1 to 10. Etsy's listing help says a listing can hold up to 20 photos; this page does not score photos 11–20.");
   } else if (photos === 1) {
     addFlag(flags, "photos-one", 5, false, "ok",
-      "Photo count is 1. A single photo is a note, not a failed check. Etsy Help still requires that the listing include at least one unedited photo of the actual item, with some exceptions.",
+      "Photo count is 1. A single photo is a note, not a failed check. For most items, Etsy Help still requires at least one unedited photo of the actual item, with some exceptions.",
       "Optional: add more unedited photos of scale, materials, and condition.");
   }
   if (titleInfo.wordCount >= 15) {
@@ -684,7 +700,7 @@ function buildTexts(model) {
     "Do not try to restore [redacted-email], [redacted-phone], [redacted-ssn], or [redacted-ein].",
     "Tasks:",
     "1. Rewrite each title in 140 characters or fewer. State what the item is. Do not repeat a counted word 3 times.",
-    "2. List the photos to shoot. If the checklist says the primary photo is a mockup or render, the first shot is an unedited photo of the finished physical item on a real background.",
+    "2. List the photos to shoot. If the checklist says the primary photo is a mockup or render, include one unedited photo of the actual item on a real background. It does not have to be the first photo. Only crop, resize, watermark, or file-format changes are allowed on it, without AI tools. Print-on-demand items may use an authorized stock-photo mockup instead, and digital downloads need a preview of the actual content.",
     "3. If a disclosure is missing, list the fields to fill (partner name, location, work performed) and leave the name blank.",
     "",
     checklist
@@ -852,7 +868,7 @@ function applyResultOffer(model) {
 }
 
 var STEP_TEXT = {
-  "primary-mockup": "Replace the mockup or computer picture with an unedited photo of the real item on a real background.",
+  "primary-mockup": "Add an unedited photo of the real item on a real background. Your mockup can stay first if it accurately shows what the buyer gets.",
   "primary-unknown": "Say whether the first photo is an unedited photo of the real item, or a mockup.",
   "disclosure-missing": "Add the production-partner disclosure before you rely on the listing.",
   "disclosure-unknown": "Mark whether a production-partner disclosure is needed, already in the listing, or still missing.",
@@ -868,7 +884,7 @@ function collectSteps(model) {
   if (!model.listings.length) {
     return [
       "Paste up to 10 listing rows, or fill in one listing with the toggles.",
-      "Etsy posted the real-photo rule on Oct 22, 2026. They did not name a last day."
+      "Etsy posted the real-photo rule on Oct 22, 2026. They did not name a last day, and plan to begin proactive enforcement in early 2027."
     ];
   }
   var seen = {};
@@ -887,7 +903,7 @@ function collectSteps(model) {
     steps.push(STEP_TEXT[flag.code]);
   });
   if (steps.length < 2) steps.push("Keep at least one unedited photo of the real item on a real background.");
-  if (steps.length < 2) steps.push("Etsy did not name a last day. Recheck the help page before you edit a listing.");
+  if (steps.length < 2) steps.push("Etsy did not name a last day. Recheck the help pages under Sources before you edit a listing.");
   return steps.slice(0, 3);
 }
 

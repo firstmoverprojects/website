@@ -18,7 +18,7 @@ const BUTTON = "Get my photo-fix checklist (PDF + CSV in a ZIP)";
 const QUIET = "Optional: photo-fix checklist (PDF + CSV in a ZIP, $9)";
 const AFTER = "Opens Gumroad. ZIP download after you pay (2-page PDF + CSV sheet). Close the tab anytime with no purchase.";
 const PRICE_NOTE = "The $9 kit is a separate file on Gumroad. This page does not send your listings there.";
-const DEADLINE = "Etsy posted this rule on Oct 22, 2026. They did not name a last day. If the photos are wrong and a buyer opens a case, you may have to give a refund.";
+const DEADLINE = "Etsy posted this rule on Oct 22, 2026. They did not name a last day. Etsy says it plans to begin proactively enforcing the photo rule in early 2027, with notice first. If the photos are wrong and a buyer opens a case now, you may have to give a refund.";
 const LEADS = {
   empty: "Because you have not checked a listing row, paste up to 10 listing rows, or fill in one listing with the toggles.",
   mockup: "Because you marked a first photo as a mockup or a computer picture, add at least one unedited photo of the real item on a real background. The checklist lists which photos to take for each kind of item, plus a sheet with one row per listing.",
@@ -45,7 +45,12 @@ test("result copy stays on the page facts and keeps the house lines", () => {
   assert.equal(html.includes("Thank you for your time."), false);
   assert.equal(html.includes(DEADLINE), true);
   assert.equal(html.includes("\u2014"), false);
-  assert.equal(html.split(REFUND).length - 1, 1);
+  assert.equal(html.split(REFUND).length - 1, 3);
+  for (const id of ["gtin-checkout", "paid-link"]) {
+    const at = html.indexOf(`id="${id}"`);
+    const next = html.slice(at, html.indexOf("</p>", html.indexOf("</p>", at) + 4));
+    assert.equal(next.includes(REFUND), true, id);
+  }
   assert.equal(html.split('id="kit-after-click"').length - 1, 1);
   assert.equal(html.split(AFTER).length - 1, 1);
   assert.equal(html.includes(BUTTON), true);
@@ -70,6 +75,22 @@ test("result copy stays on the page facts and keeps the house lines", () => {
   assert.equal(card.split(DISCLAIMER).length - 1, 1);
   assert.equal(card.split(REFUND).length - 1, 1);
   assert.equal(card.split(AFTER).length - 1, 1);
+});
+
+test("photo-rule copy matches Etsy's Nov 2026 help text", () => {
+  assert.equal(html.includes("Replace the mockup"), false);
+  assert.equal(html.includes("the first shot is an unedited photo"), false);
+  assert.equal(html.includes("That first-photo line does not say"), false);
+  assert.match(html, /does not have to be the first photo/);
+  assert.match(html, /You can crop or resize that photo, add a watermark, or change its file format, without AI tools\./);
+  assert.match(html, /One unedited photo per listing is enough, even with variations\./);
+  assert.match(html, /stock-photo mockup is allowed if the stock photo's owner has authorized it/);
+  assert.match(html, /proactively enforcing the image requirements in early 2027/);
+  assert.match(html, /help\.etsy\.com\/hc\/en-us\/articles\/44297885802647-/);
+  assert.match(html, /<form id="deadline-reminder-form" aria-labelledby="deadline-reminder-h"/);
+  assert.match(html, /privacy\.html#newsletter/);
+  assert.equal(html.includes("The form sends only the email address you type"), false);
+  for (const id of ["what", "who", "not-for", "you-get"]) assert.match(html, new RegExp(`<p id="${id}"><strong>`), id);
 });
 
 test("all five outcomes set the lead, offer, and gumroad click at 1280 and 390", async () => {
