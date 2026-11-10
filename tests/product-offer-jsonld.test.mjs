@@ -14,6 +14,9 @@ const HOST = "https://firstmoverprojects.com";
 // notice kit is unpublished because the state posts the 2026 employee notice
 // template free. Do not describe either as a product.
 const UNPUBLISHED = new Set(["fetwsm", "maryland-famli-payroll-notice-kit"]);
+// Past the Nov 19, 2026 FIRE cutoff the check page no longer publishes a Product Offer.
+// The Gumroad hrefs stay; the kit hide script covers the buy buttons.
+const NO_PRODUCT_OFFER = new Set(["tools/fire-to-iris-check/index.html"]);
 const PREVIEW = {
   lnfgc: "/assets/previews/etsy-photo-audit-kit-preview-1280x720.png",
   "fire-to-iris-switch-checklist": "/assets/previews/fire-to-iris-kit-preview-1280x720.png",
@@ -138,6 +141,19 @@ function forbidKeys(node, where) {
 
 const toolPages = walkHtml(path.join(ROOT, "tools"), []).map((file) => path.relative(ROOT, file)).sort();
 
+test("the FIRE check and the Nov 19 deadline page have no Product Offer", () => {
+  for (const rel of ["tools/fire-to-iris-check/index.html", "deadlines/irs-fire-retirement-nov-19.html"]) {
+    const html = readFileSync(path.join(ROOT, rel), "utf8");
+    assert.equal(html.includes('id="product-jsonld"'), false, rel);
+    assert.equal(html.includes("priceValidUntil"), false, rel);
+    assert.equal(/"@type":\s*"Product"/.test(html), false, rel);
+    assert.equal(/"@type":\s*"Offer"/.test(html), false, rel);
+    const shareTitle = "IRS FIRE filing ended Nov 19, 2026 (3 p.m. ET) - Free IRIS readiness &amp; 1099 CSV check";
+    assert.equal(html.split(shareTitle).length - 1, 3, rel);
+    assert.match(html, /firstmoverprojects\.gumroad\.com\/l\/fire-to-iris-switch-checklist/, rel);
+  }
+});
+
 test("every tool-page JSON-LD block parses", () => {
   for (const rel of toolPages) {
     const html = readFileSync(path.join(ROOT, rel), "utf8");
@@ -148,6 +164,15 @@ test("every tool-page JSON-LD block parses", () => {
 test("live paid-kit links on tool pages have Product offers, and the unpublished EU kit does not", () => {
   for (const rel of toolPages) {
     const html = readFileSync(path.join(ROOT, rel), "utf8");
+    if (NO_PRODUCT_OFFER.has(rel)) {
+      assert.equal(html.includes('id="product-jsonld"'), false, rel);
+      assert.equal(html.includes("priceValidUntil"), false, rel);
+      assert.equal(/"@type":\s*"Product"/.test(html), false, rel);
+      assert.equal(/"@type":\s*"Offer"/.test(html), false, rel);
+      assert.equal(productsOf(html).length, 0, rel);
+      assert.match(html, /firstmoverprojects\.gumroad\.com\/l\/fire-to-iris-switch-checklist/, rel);
+      continue;
+    }
     const stripped = stripProductScript(html);
     const corpus = stripped + referencedFacts(rel, stripped);
     const slugs = [...slugsIn(corpus)];

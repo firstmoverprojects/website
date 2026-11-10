@@ -12,6 +12,8 @@ const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
 const PAGE = path.join(ROOT, "tools/fire-to-iris-check/index.html");
 const html = readFileSync(PAGE, "utf8");
 const QUESTION = "Will you file our tax year 2026 information returns through IRIS?";
+const SHARE_TITLE = "IRS FIRE filing ended Nov 19, 2026 (3 p.m. ET) - Free IRIS readiness &amp; 1099 CSV check";
+const SHARE_DESC = "Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE. IRIS is the only system after Jan. 1, 2027. Nov 9, 2026 was the last day to change IR Applications for TCC, and those applications are now read-only.";
 const REFUND = "Refunds: within 30 days if a file is corrupt or materially not as described.";
 const DISCLAIMER = "General guidance, not legal, tax or IT advice.";
 const BUTTON = "Get the $9 checklist (PDF in a ZIP)";
@@ -33,10 +35,40 @@ const PROBLEMS = {
   F: "Nothing urgent was flagged from the boxes you checked. On Jan 1, 2027, the new system is the only way to file."
 };
 
+function metaContent(source, attr, name) {
+  const match = source.match(new RegExp(`<meta ${attr}="${name}" content="([^"]*)"`));
+  assert.ok(match, name);
+  return match[1];
+}
+
+function descriptionValues(nodes, out) {
+  out = out || [];
+  if (Array.isArray(nodes)) {
+    for (const item of nodes) descriptionValues(item, out);
+    return out;
+  }
+  if (!nodes || typeof nodes !== "object") return out;
+  if (typeof nodes.description === "string") out.push(nodes.description);
+  for (const value of Object.values(nodes)) descriptionValues(value, out);
+  return out;
+}
+
 test("result copy stays on the spec sentences and keeps the house lines", () => {
-  const shareTitle = "FIRE filing ends Nov 19, 2026 3 p.m. ET - Free IRIS readiness &amp; 1099 CSV check";
-  assert.equal(html.split(shareTitle).length - 1, 3);
-  assert.equal(html.replaceAll(shareTitle, "").includes("\u2014"), false);
+  assert.equal(html.split(SHARE_TITLE).length - 1, 3);
+  assert.equal(html.includes("FIRE filing ends Nov 19"), false);
+  assert.equal(metaContent(html, "name", "description"), SHARE_DESC);
+  assert.equal(metaContent(html, "property", "og:title"), SHARE_TITLE);
+  assert.equal(metaContent(html, "property", "og:description"), SHARE_DESC);
+  assert.equal(metaContent(html, "name", "twitter:title"), SHARE_TITLE);
+  assert.equal(metaContent(html, "name", "twitter:description"), SHARE_DESC);
+  assert.equal(html.includes("Optional $9 checklist."), false);
+  for (const text of [SHARE_TITLE, SHARE_DESC]) {
+    assert.equal(text.includes("$9"), false, text);
+    assert.equal(/checklist/i.test(text), false, text);
+    assert.equal(/FIRE closes/i.test(text), false, text);
+    assert.equal(text.includes("\u2014"), false, text);
+  }
+  assert.equal(html.replaceAll(SHARE_TITLE, "").includes("\u2014"), false);
   assert.equal(html.includes("\u2013"), false);
   assert.equal(html.includes("&mdash;"), false);
   assert.equal(html.includes(QUESTION), true);
@@ -51,7 +83,7 @@ test("result copy stays on the spec sentences and keeps the house lines", () => 
 const DELIVERY = "One 3-page PDF checklist in a ZIP, with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on.";
 
 test("body, FAQ, badges, schema, alt text, and the sticky name the ZIP download", () => {
-  assert.equal(html.split(DELIVERY).length - 1, 3);
+  assert.equal(html.split(DELIVERY).length - 1, 2);
   assert.match(html, /<p class="kit-note" data-fire-kit="1">One 3-page PDF checklist in a ZIP\. Refunds: within 30 days if a file is corrupt or materially not as described\.<\/p>/);
   assert.equal(html.split("INSTANT DOWNLOAD · ONE 3-PAGE PDF IN A ZIP · CHECKLIST + 1099-NEC ADD-ON · $9").length - 1, 2);
   assert.equal(html.split('alt="See What\'s Inside the $9 FIRE to IRIS Switch Checklist: one 3-page PDF checklist in a ZIP, with the IRS dates, your FIRE account, the IRIS Application for TCC, and a 1099-NEC add-on"').length - 1, 2);
@@ -70,12 +102,15 @@ test("body, FAQ, badges, schema, alt text, and the sticky name the ZIP download"
   });
   const blocks = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].map((block) => JSON.parse(block[1]));
   const faq = blocks.find((item) => item["@type"] === "FAQPage");
-  const product = blocks.find((item) => item["@type"] === "Product");
+  assert.equal(blocks.some((item) => item["@type"] === "Product" || item["@type"] === "Offer"), false);
+  assert.equal(html.includes('id="product-jsonld"'), false);
+  assert.equal(html.includes("priceValidUntil"), false);
+  assert.equal(/"@type":\s*"Product"/.test(html), false);
+  assert.equal(/"@type":\s*"Offer"/.test(html), false);
+  assert.deepEqual(descriptionValues(blocks), []);
   assert.equal(faq.dateModified, "2026-11-10");
   const kitAnswer = faq.mainEntity.find((item) => item.name === "What is in the $9 checklist?");
   assert.equal(kitAnswer.acceptedAnswer.text, DELIVERY + " " + REFUND);
-  assert.equal(product.description, DELIVERY);
-  assert.equal(product.offers.price, 9);
   const visibleFaq = html.slice(html.indexOf('id="faq"'), html.indexOf("</section>", html.indexOf('id="faq"')));
   assert.equal(visibleFaq.includes(kitAnswer.acceptedAnswer.text), true);
   assert.equal(html.includes(REFUND), true);
