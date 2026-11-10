@@ -5,7 +5,7 @@
 //   npm ci --ignore-scripts && node scripts/check_site.mjs
 //   node scripts/check_site.mjs links sitemap   # run a subset
 //
-// Checks: links, html, jsonld, meta, sitemap, house-lines, feed.
+// Checks: links, images, html, jsonld, meta, sitemap, house-lines, feed, denylist.
 // Issues listed in scripts/site_checks_known_issues.json are reported as
 // warnings instead of failures (use it only for files you are not allowed to edit yet).
 
@@ -17,7 +17,11 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const ORIGIN = "https://firstmoverprojects.com";
 const HOSTS = new Set(["firstmoverprojects.com", "www.firstmoverprojects.com"]);
 const KNOWN_ISSUES_FILE = "scripts/site_checks_known_issues.json";
-const ALL_CHECKS = ["links", "html", "jsonld", "meta", "sitemap", "house-lines", "feed"];
+const DENYLIST_FILE = "scripts/site_denylist.txt";
+const ALL_CHECKS = ["links", "images", "html", "jsonld", "meta", "sitemap", "house-lines", "feed", "denylist"];
+const IMAGE_EXT = new Set(["png", "jpg", "jpeg", "gif", "webp"]);
+const TEXT_SCAN_EXT = /\.(html?|css|js|mjs|json|xml|txt|md|ics|webmanifest)$/i;
+const DENYLIST_SKIP_PREFIX = ["tests/", "node_modules/", "offer-page-screenshots/", "playwright-report/", "test-results/"];
 const IN_ACTIONS = process.env.GITHUB_ACTIONS === "true";
 
 // Jekyll (GitHub Pages) does not publish these.
@@ -189,6 +193,104 @@ function checkUrl(check, fromRel, line, raw, what, { fragments = true } = {}) {
     }
   }
   return file;
+}
+
+// ---------- check: images ----------
+
+function detectImageFormat(buf) {
+  if (buf.length >= 8 && buf[0] === 0x89 && buf[1] === 0x50 && buf[2] === 0x4e && buf[3] === 0x47) return "png";
+  if (buf.length >= 3 && buf[0] === 0xff && buf[1] === 0xd8 && buf[2] === 0xff) return "jpeg";
+  if (buf.length >= 6) {
+    const head = buf.toString("ascii", 0, 6);
+    if (head === "GIF87a" || head === "GIF89a") return "gif";
+  }
+  if (buf.length >= 12 && buf.toString("ascii", 0, 4) === "RIFF" && buf.toString("ascii", 8, 12) === "WEBP") return "webp";
+  return null;
+}
+
+const EXT_FOR_FORMAT = {
+  png: new Set(["png"]),
+  jpeg: new Set(["jpg", "jpeg"]),
+  gif: new Set(["gif"]),
+  webp: new Set(["webp"]),
+};
+
+function checkImages() {
+  for (const rel of FILES) {
+    const ext = path.extname(rel).slice(1).toLowerCase();
+    if (!IMAGE_EXT.has(ext)) continue;
+    const buf = readFileSync(path.join(ROOT, rel));
+    const format = detectImageFormat(buf);
+    if (!format) {
+      fail("images", rel, 1, `could not detect image format from file header (extension .${ext})`);
+      continue;
+    }
+    const allowed = EXT_FOR_FORMAT[format];
+    if (!allowed?.has(ext)) {
+      fail(
+        "images",
+        rel,
+        1,
+        `extension .${ext} does not match file contents (${format === "jpeg" ? "JPEG" : format.toUpperCase()}); rename the file or fix the reference`,
+      );
+    }
+  }
+}
+
+// ---------- check: denylist ----------
+
+function loadDenylistPatterns() {
+  const rel = DENYLIST_FILE;
+  if (!FILE_SET.has(rel) && !existsSync(path.join(ROOT, rel))) {
+    fail("denylist", rel, 1, "denylist file is missing");
+    return [];
+  }
+  const patterns = [];
+  const lines = read(rel).split(/\r?\n/);
+  for (let i = 0; i < lines.length; i++) {
+    const pattern = lines[i].trim();
+    if (!pattern || pattern.startsWith("#")) continue;
+    patterns.push({ pattern, denyLine: i + 1 });
+  }
+  return patterns;
+}
+
+function isDenylistTarget(rel) {
+  if (DENYLIST_SKIP_PREFIX.some((prefix) => rel.startsWith(prefix))) return false;
+  return TEXT_SCAN_EXT.test(rel);
+}
+
+function checkBadgeCase() {
+  for (const rel of HTML_FILES) {
+    const html = read(rel);
+    for (const m of html.matchAll(/<span class="kit-conv-badge"[^>]*>([\s\S]*?)<\/span>/gi)) {
+      const text = decodeEntities(m[1].replace(/<[^>]+>/g, " ")).trim();
+      if (/[a-z]{2,}/.test(text)) {
+        fail("denylist", rel, lineAt(html, m.index), `kit-conv-badge must not use lowercase words (got "${text}")`);
+      }
+    }
+  }
+}
+
+function checkDenylist() {
+  checkBadgeCase();
+  const patterns = loadDenylistPatterns();
+  if (!patterns.length) return;
+  const scanFiles = FILES.filter(isDenylistTarget);
+  for (const rel of scanFiles) {
+    const text = read(rel);
+    const lower = text.toLowerCase();
+    for (const { pattern, denyLine } of patterns) {
+      const needle = pattern.toLowerCase();
+      let from = 0;
+      while (true) {
+        const at = lower.indexOf(needle, from);
+        if (at === -1) break;
+        fail("denylist", rel, lineAt(text, at), `matched denylist pattern "${pattern}" (${DENYLIST_FILE}:${denyLine})`);
+        from = at + Math.max(needle.length, 1);
+      }
+    }
+  }
 }
 
 // ---------- check: links ----------
@@ -530,7 +632,17 @@ if (unknown.length) {
   process.exit(2);
 }
 const selected = requested.length ? requested : ALL_CHECKS;
-const runners = { links: checkLinks, html: checkHtml, jsonld: checkJsonLd, meta: checkMeta, sitemap: checkSitemap, "house-lines": checkHouseLines, feed: checkFeed };
+const runners = {
+  links: checkLinks,
+  images: checkImages,
+  html: checkHtml,
+  jsonld: checkJsonLd,
+  meta: checkMeta,
+  sitemap: checkSitemap,
+  "house-lines": checkHouseLines,
+  feed: checkFeed,
+  denylist: checkDenylist,
+};
 
 const started = Date.now();
 for (const name of selected) await runners[name]();
