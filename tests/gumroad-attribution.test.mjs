@@ -125,20 +125,32 @@ test("every Gumroad product link carries source, medium, campaign, and content",
     for (const raw of matches) {
       count += 1;
       const url = new URL(raw.replace(/&amp;/g, "&"));
-      assert.equal(url.searchParams.get("utm_source"), "site", raw);
-      assert.equal(
-        url.searchParams.get("utm_medium"),
-        OFFER_TOOL_PAGES.has(rel) ? "offer_page" : "site",
-        raw
-      );
+      const medium = url.searchParams.get("utm_medium");
       const content = url.searchParams.get("utm_content");
-      assert.equal(CONTENTS.has(content), true, rel + " " + content);
       const campaign = url.searchParams.get("utm_campaign");
-      if (content === "eu-fee") {
-        assert.equal(campaign, "tools", raw);
-        assert.equal(rel, "tools/eu-product-id-check/index.html", raw);
+      const internalKitCampaigns = new Set([
+        "fire-to-iris-switch-checklist",
+        "amazon-1m-insurance-readiness-kit",
+        "etsy-photo-audit-kit"
+      ]);
+      if (medium === "internal") {
+        assert.equal(url.searchParams.get("utm_source"), "site", raw);
+        assert.equal(content, "link", rel + " " + content);
+        assert.equal(internalKitCampaigns.has(campaign), true, rel + " " + campaign);
       } else {
-        assert.equal(campaign, pageSlug(rel), raw);
+        assert.equal(url.searchParams.get("utm_source"), "site", raw);
+        assert.equal(
+          medium,
+          OFFER_TOOL_PAGES.has(rel) ? "offer_page" : "site",
+          raw
+        );
+        assert.equal(CONTENTS.has(content), true, rel + " " + content);
+        if (content === "eu-fee") {
+          assert.equal(campaign, "tools", raw);
+          assert.equal(rel, "tools/eu-product-id-check/index.html", raw);
+        } else {
+          assert.equal(campaign, pageSlug(rel), raw);
+        }
       }
       if (!url.pathname.endsWith("/pdkqbs")) assert.equal(url.searchParams.get("wanted"), "true", raw);
     }
