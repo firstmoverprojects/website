@@ -22,22 +22,22 @@
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "dateModified": "2026-11-03",
+  "dateModified": "2026-11-10",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Why did I receive the Nov 2, 2026 Commercial Liability Insurance email when my sales are under $10,000/month (even $1,500/month)?",
+      "name": "Is the $29 kit insurance or a broker service?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Under Amazon's Nov 2, 2026 update (Policy G200386300), enhanced-safety product categories require $1,000,000 commercial general liability insurance regardless of monthly sales volume. Amazon's examples include children's products, cosmetic and ingestible products, and lithium battery products, and Amazon says that list is not complete. Sellers also see the notice on topicals, cosmetics, supplements, and other dietary or safety-regulated items. Even a single old or inactive listing in Manage Inventory can trigger the notice, including when sales are under $10,000 a month or about $1,500 a month. Free decision rule: if the notice was triggered by an old discontinued or inactive ASIN you no longer sell, permanently deleting that listing from Manage Inventory, rather than only closing it, can remove the category trigger at $0 cost. If you actively sell in that category, you must upload a compliant ACORD 25 certificate of insurance."
+        "text": "No. It is a downloadable ZIP of checklists and editable templates. First Mover Projects does not sell insurance, act as an insurance broker or agent, provide quotes, or submit a certificate for you."
       }
     },
     {
       "@type": "Question",
-      "name": "How do individual / sole-proprietor sellers using an offline insurance broker pass Amazon's review without Amazon Insurance Accelerator?",
+      "name": "Who is the $29 kit not for?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Amazon's Insurance Accelerator requirement on Policy G200386300 is for sellers based in Mainland China, unless Amazon agrees otherwise in writing. An individual or sole proprietor elsewhere can ask an offline broker for an ACORD 25 that meets this checklist: Insured name matches the Seller Central Legal Entity character for character. Amazon's exception is for a single-member LLC whose trade name Amazon allows, not for every sole proprietor using a DBA. Additional insured reads \"Amazon.com Services LLC and its affiliates and assignees\". At least $1,000,000 per occurrence and $1,000,000 aggregate, covering products, products/completed operations, and bodily injury. A commercial general liability form also addresses personal injury. The limit Amazon states is $1,000,000 per occurrence and in aggregate. Deductible no greater than $10,000, and the amount is listed on the certificate. The policy covers all sales on Amazon.com. No sunset clause. At least 30 days' notice of cancellation, modification, or non-renewal. Amazon's Business Insurance verification decides whether the certificate is accepted. The free tool and $29 kit help sellers spot common ACORD 25 mismatches and organize broker questions before uploading, and cannot guarantee Amazon acceptance or prevent all upload rejections."
+        "text": "It is not for someone looking to buy an insurance policy, get a quote, hire a broker, have a certificate submitted, or receive legal or insurance advice. It also is not a guarantee that Amazon will accept a certificate."
       }
     },
     {
@@ -193,6 +193,11 @@ a#kit-top{display:flex;align-items:center;justify-content:center;width:100%;max-
 .kit-note{margin:.4em 0 0;color:#5a636e;font-size:.82rem;line-height:1.4}
 .kit-refund{display:block;max-width:100%;margin:6px 0 0;color:#5a636e;font-size:.82rem;font-weight:400;line-height:1.4}
 .kit-fit{margin:.6em 0;font-weight:600}
+.fit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+.fit-box{border:1px solid #cbd5e1;border-radius:8px;padding:10px 12px;background:#fff}
+.fit-box h3{margin:0 0 4px;font-size:1rem}
+.fit-box p{margin:0}
+.source-inline{font-size:.9rem}
 .result-kit-lead{margin:.8em 0 .2em;font-weight:600}
 #result-kit-offer[hidden],#nofit-next[hidden],#kit-result[hidden],#kit-refund[hidden]{display:none !important}
 #kit-beyond{margin:12px 0 0}
@@ -211,6 +216,7 @@ a#kit-top{display:flex;align-items:center;justify-content:center;width:100%;max-
 .kit-sticky-link:hover,.kit-sticky-link:focus{background:#0044cc;color:#fff !important}
 .kit-sticky-dismiss{flex:0 0 auto;margin:0;min-width:44px;min-height:44px;padding:8px 10px;background:#e4e8ee;color:#1b1f24}
 @media (max-width:767px){
+  .fit-grid{grid-template-columns:1fr}
   .kit-sticky:not([hidden]){display:flex;position:fixed;z-index:40;left:0;right:0;bottom:0;width:auto;max-width:100%;gap:8px;align-items:center;margin:0;padding:8px 10px calc(8px + env(safe-area-inset-bottom, 0px));background:#fff;color:#1b1f24;border-top:2px solid #071b31;box-shadow:0 -6px 18px rgba(15,23,42,.16)}
   body.kit-sticky-on{padding-bottom:128px}
 }
@@ -340,38 +346,41 @@ picture {
 <a class="skip" href="#main">Skip to main content</a>
 <main id="main">
 <p class="muted site-nav"><a href="/">First Mover Projects</a> · free tool</p>
-<h1>Amazon Nov 2 insurance certificate pre-check</h1>
-<p class="subhead">Paste your COI text and get a free fix list for your broker. Want Amazon's terms in a spreadsheet and a broker email? The $29 kit is optional.</p>
-<p class="missed">Missed Nov 2? Amazon can still ask for a valid COI. Use this to fix yours.</p>
+<h1>Free Amazon certificate of insurance (COI) pre-check</h1>
+<p class="subhead">Paste certificate text and get a question list for your broker. The check is free; the optional $29 product is a ZIP of checklists and editable templates.</p>
 <p><a class="runway-pill" href="https://launchfree.io/listings/amazon-nov-2-coi-pre-check.html" target="_blank" rel="noopener noreferrer">Listed on The Runway (LaunchFree.io) - Upvote This Free Tool</a></p>
-<p>From November 2, 2026, Amazon says sellers with products in categories with enhanced safety listing requirements need USD 1 million commercial liability coverage per occurrence and in aggregate, regardless of sales. Paste your certificate (COI) text and get a fix list to send your broker before you upload it.</p>
+<p><a href="https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408" rel="noopener noreferrer">Amazon's November 2 announcement</a> says sellers with products in categories with enhanced safety listing requirements need USD 1 million commercial liability coverage per occurrence and in aggregate, regardless of sales. Paste your certificate text and get a question list to take to your broker before you upload it.</p>
 <ul class="hooks">
 <li>No account. Nothing uploaded.</li>
 <li>Plain-text fix list you can paste to your broker or AI assistant</li>
 <li>7 key terms checked in seconds</li>
 </ul>
-<p id="who"><strong>Who it's for:</strong> Amazon.com sellers (US store) whose broker has sent a COI, or who are getting quotes.</p>
+<p id="who"><strong>Who it's for:</strong> Amazon.com sellers (US store) who have a certificate to review or want a structured list of questions for an insurance professional.</p>
+<p><strong>Who it is not for:</strong> Anyone looking to buy insurance, get a quote, hire a broker, have a certificate submitted, or receive legal or insurance advice.</p>
 
 <section class="kit-conv-box" id="kit-offer" aria-labelledby="kit-offer-h">
 <span class="kit-conv-badge">INSTANT DOWNLOAD</span>
-<h2 id="kit-offer-h">Exactly what buyers receive in the $29 Amazon $1M Insurance Readiness Kit</h2>
-<p>Checkout opens on Gumroad and the download starts after payment. This page does not send your certificate there.</p>
+<h2 id="kit-offer-h">What you get in the Amazon $1M Insurance Readiness Kit: a 12-file ZIP</h2>
+<p><strong>This is not insurance and First Mover Projects is not an insurance broker or agent.</strong> Checkout opens on Gumroad and the ZIP is available after payment. This page does not send your certificate there.</p>
 <figure>
 <picture><source type="image/webp" srcset="/assets/previews/amazon-coi-kit-preview-1280x720.webp"><img class="kit-preview-img" src="/assets/previews/amazon-coi-kit-preview-1280x720.png" alt="Preview of the $29 Amazon COI kit: a policy-terms checklist, a spreadsheet workbook and a broker email" width="1280" height="720"></picture>
-<figcaption class="kit-caption">Inside the kit: a spreadsheet that compares what you type from your certificate with Amazon's quoted terms, a policy-terms checklist that quotes Amazon word for word, and a copy-paste broker email.</figcaption>
+<figcaption class="kit-caption">Inside the kit: a spreadsheet that compares what you type from your certificate with <a href="https://sellercentral.amazon.com/help/hub/reference/external/G200386300" rel="noopener noreferrer">Amazon's quoted terms</a>, a policy-terms checklist, and a copy-paste broker email.</figcaption>
 </figure>
 <ol class="file-list">
-<li><strong>Policy-terms checklist and workbook.</strong> Amazon's terms from Policy G200386300, quoted word for word, next to what you type from your own certificate: legal-entity name match with your Seller Central Account Info (with the single-member LLC trade-name exception Amazon states), additional insured wording, $1,000,000 per occurrence and $1,000,000 aggregate, deductible of $10,000 or less listed on the certificate, coverage of all Amazon.com sales, no sunset clause, and 30 days' cancellation notice.</li>
-<li><strong>Copy-paste broker email</strong> that sends your broker Amazon's terms and asks them to confirm each one, including whether the certificate can show the additional insured wording.</li>
-<li><strong>Category screen</strong> for a second look at your products against Amazon's enhanced-safety category list. Seller Central is the authority, so check Account Health too.</li>
+<li><strong>Policy-terms checklist and workbook.</strong> The fields from <a href="https://sellercentral.amazon.com/help/hub/reference/external/G200386300" rel="noopener noreferrer">Amazon's insurance criteria</a>, next to what you type from your own certificate, with a column for your broker's answer.</li>
+<li><strong>Copy-paste broker email</strong> that sends your broker <a href="https://sellercentral.amazon.com/help/hub/reference/external/G200386300" rel="noopener noreferrer">Amazon's terms</a> and asks them to confirm each one, including whether the certificate can show the additional insured wording.</li>
+<li><strong>Category screen</strong> for a second look at your products against <a href="https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT" rel="noopener noreferrer">Amazon's enhanced-safety category list</a>. Seller Central is the authority, so check Account Health too.</li>
 </ol>
 <p class="limit-note"><strong>What this page and the kit can and cannot do.</strong> The free tool and $29 kit help sellers spot common ACORD 25 mismatches and organize broker questions before uploading, and cannot guarantee Amazon acceptance or prevent all upload rejections.</p>
 <div class="kit-btn-row">
 <p class="deadline-count" data-deadline="2026-11-02" data-deadline-label="Nov 2, 2026 Amazon COI deadline" hidden></p>
 </div>
-<p class="kit-fit">Good fit if you got Amazon's $1M insurance notice and sell in an enhanced-safety category. If the notice came from an old listing you no longer sell, try deleting it first, at no cost.</p>
-<p><a target="_blank" class="btn" id="kit-top" data-goatcounter-click="cta/coi-check-top" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=amazon-coi-check&amp;utm_content=coi-check-top" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">See the $29 readiness kit</a></p>
-<p class="kit-note">One-time download. Refunds: within 30 days if a file is corrupt or materially not as described. Cannot guarantee Amazon acceptance.</p>
+<div class="fit-grid">
+<div class="fit-box"><h3>Good fit</h3><p>You have a COI or are preparing broker questions, and want reusable checklists and templates.</p></div>
+<div class="fit-box"><h3>Not a fit</h3><p>You need insurance, a quote, a broker, filing help, or a promise that Amazon will accept your certificate.</p></div>
+</div>
+<p><a target="_blank" class="btn" id="kit-top" data-goatcounter-click="cta/coi-check-top" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=amazon-coi-check&amp;utm_content=coi-check-top" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the 12-file ZIP on Gumroad - $29</a></p>
+<p class="kit-note"><strong>Refunds: within 30 days if a file is corrupt or materially not as described.</strong> The kit cannot guarantee Amazon acceptance.</p>
 </section>
 
 <section class="card" id="compare" aria-labelledby="compare-h">
@@ -395,11 +404,11 @@ picture {
 <tr>
 <th scope="row">What you do</th>
 <td>Paste certificate text. The check runs in this browser tab. Nothing is uploaded.</td>
-<td>Fill in the spreadsheet and copy the broker email. You upload the certificate yourself through Business Insurance verification in Seller Central.</td>
+<td>Fill in the spreadsheet and copy the broker email. You submit the certificate yourself; see <a href="https://sellercentral.amazon.com/help/hub/reference/external/G200386300" rel="noopener noreferrer">Amazon's insurance page</a>.</td>
 </tr>
 <tr>
 <th scope="row">What it helps you spot</th>
-<td>Common ACORD 25 mismatches in the text you paste: additional insured, $1,000,000 per occurrence, $1,000,000 aggregate, deductible over $10,000, occurrence basis, sunset wording, and 30-day notice. If you type your Seller Central legal entity, it also looks for that name.</td>
+<td>Fields from <a href="https://sellercentral.amazon.com/help/hub/reference/external/G200386300" rel="noopener noreferrer">Amazon's published criteria</a> in the text you paste: additional insured, limits, deductible, occurrence basis, sunset wording, notice, and legal-entity name.</td>
 <td>The same terms in a spreadsheet you keep, plus a broker email that asks your broker to confirm each one.</td>
 </tr>
 <tr>
@@ -434,10 +443,10 @@ picture {
 </div>
 <p>Before anything is uploaded to Seller Central, the pre-check spots two mismatches:</p>
 <ol>
-<li><strong>Legal entity name.</strong> Seller Central says Jordan Lee. The certificate says Lee Home Goods. Amazon's G200386300 page says the insured name must match the legal entity in Account Info, except for a single-member LLC whose trade name Amazon allows. This sample seller is a sole proprietor, so the trade name is not that exception. The names do not match character for character.</li>
-<li><strong>Deductible.</strong> The sample certificate lists $25,000. Amazon says the deductible must not be greater than $10,000 and that the amount must be listed on the certificate.</li>
+<li><strong>Legal entity name.</strong> Seller Central says Jordan Lee. The certificate says Lee Home Goods. <a href="https://sellercentral.amazon.com/help/hub/reference/external/G200386300" rel="noopener noreferrer">Amazon's published criteria</a> state the insured-name rule and the single-member LLC trade-name exception. This fictional sample does not use that exception.</li>
+<li><strong>Deductible.</strong> The sample certificate lists $25,000; <a href="https://sellercentral.amazon.com/help/hub/reference/external/G200386300" rel="noopener noreferrer">Amazon's published criteria</a> state a maximum of $10,000 and say the amount must appear on the certificate.</li>
 </ol>
-<p>The $29 kit's broker email sends a broker Amazon's terms and asks them to confirm each one. This sample seller would also send this note:</p>
+<p>The $29 kit's broker email organizes questions around <a href="https://sellercentral.amazon.com/help/hub/reference/external/G200386300" rel="noopener noreferrer">Amazon's published criteria</a>. This fictional sample seller could send this note:</p>
 <pre>Subject: Please reissue the ACORD 25 before I upload it to Amazon
 
 Please reissue my certificate with these corrections:
@@ -449,12 +458,12 @@ Please reissue my certificate with these corrections:
 4. Replace the $25,000 deductible with $10,000 or less, and list that amount on the certificate.
 5. Confirm in writing: no sunset clause, and the policy covers all sales on Amazon.com.
 6. Give Amazon at least 30 days' notice of cancellation, modification, or non-renewal.</pre>
-<p>After the broker reissues the certificate, you upload it yourself through Business Insurance verification in Seller Central. The free check on this page can flag the same two sample problems if you paste that fictional certificate text. Neither the free tool nor the $29 kit can guarantee Amazon acceptance or prevent all upload rejections.</p>
+<p>After the broker reissues the certificate, you submit it yourself as described on <a href="https://sellercentral.amazon.com/help/hub/reference/external/G200386300" rel="noopener noreferrer">Amazon's insurance page</a>. The free check on this page can flag the same two sample problems if you paste that fictional certificate text. Neither the free tool nor the $29 kit can guarantee Amazon acceptance or prevent all upload rejections.</p>
 </section>
 
 <div class="cd" aria-label="Date and checks">
  <div>
-  <div class="muted">Amazon's additional requirements</div>
+  <div class="muted"><a href="https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408" rel="noopener noreferrer">Amazon's additional requirements</a></div>
   <div class="big">Nov 2, 2026</div>
   <div id="days"></div>
   <div class="muted">Counted from this device's clock.</div>
@@ -470,7 +479,7 @@ Please reissue my certificate with these corrections:
 <h2 id="step1-h">1. Does the Nov 2 change reach you?</h2>
 <p id="step1-how">Three questions. This page cannot see your Seller Central account.</p>
 <fieldset>
-<legend>Do any of your Amazon.com products fall in a category with enhanced safety listing requirements? Amazon's examples include children's products, cosmetic and ingestible products, and lithium battery products, and Amazon says the list is not complete. Check Account Health.</legend>
+<legend>Do any of your Amazon.com products fall in a category with <a href="https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT" rel="noopener noreferrer">Amazon's enhanced safety listing requirements</a>? Check Account Health.</legend>
 <p><a href="https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT" rel="noopener noreferrer">Amazon's category list</a></p>
 <div class="choice">
 <label><input type="radio" name="q1" value="yes"> Yes</label>
@@ -479,7 +488,7 @@ Please reissue my certificate with these corrections:
 </div>
 </fieldset>
 <fieldset>
-<legend>Have your Amazon.com gross proceeds gone over USD 10,000 in any one month?</legend>
+<legend>Have your Amazon.com gross proceeds gone over <a href="https://sellercentral.amazon.com/help/hub/reference/external/G200386300" rel="noopener noreferrer">Amazon's USD 10,000 threshold</a> in any one month?</legend>
 <div class="choice">
 <label><input type="radio" name="q2" value="yes"> Yes</label>
 <label><input type="radio" name="q2" value="no"> No</label>
@@ -487,7 +496,7 @@ Please reissue my certificate with these corrections:
 </div>
 </fieldset>
 <fieldset>
-<legend>Is your business based in Mainland China?</legend>
+<legend>Is your business based in Mainland China? <a href="https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408" rel="noopener noreferrer">Amazon's announcement explains why this matters.</a></legend>
 <div class="choice">
 <label><input type="radio" name="q3" value="yes"> Yes</label>
 <label><input type="radio" name="q3" value="no"> No</label>
@@ -509,7 +518,7 @@ Please reissue my certificate with these corrections:
 </div>
 <label for="expiry">Policy expiry date</label>
 <input type="date" id="expiry" autocomplete="off">
-<p class="muted">Optional. Flags a date before Nov 2, 2026 or before today.</p>
+<p class="muted">Optional. Flags a date that is already past.</p>
 <button id="go" type="button">Check my certificate</button>
 <button id="sample" class="sec" type="button" aria-describedby="sample-note">Load a sample</button>
 <button id="clear" class="sec" type="button">Clear</button>
@@ -547,8 +556,10 @@ Please reissue my certificate with these corrections:
 <h2 id="result-problem">Your certificate still needs a look before you upload it to Amazon.</h2>
 <h3>Next steps</h3>
 <ol class="next-steps" id="next-steps"></ol>
+<p class="source-inline"><a href="https://sellercentral.amazon.com/help/hub/reference/external/G200386300" rel="noopener noreferrer">Amazon criteria used for these result notes</a></p>
 <h3>Date</h3>
 <p id="result-deadline">Amazon's extra rule has been in effect since Nov 2, 2026. Sellers in higher-safety categories need $1 million of coverage for each incident, and $1 million in total, even if sales are low.</p>
+<p class="source-inline"><a href="https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408" rel="noopener noreferrer">Amazon's November 2 announcement</a></p>
 <p class="deadline-count" data-deadline="2026-11-02" data-deadline-label="Nov 2, 2026 Amazon COI deadline" hidden></p>
 <!-- TODO: two real preview images of the checklist and the workbook are not in this repo. sales/gumroad_previews/ is missing. assets/previews/amazon-coi-kit-preview-1280x720.png is one marketing composite, not two screenshots. Do not invent images. -->
 <div id="amazon-kit" hidden>
@@ -567,15 +578,15 @@ Please reissue my certificate with these corrections:
 </div>
 </div>
 <div id="nofit-next" class="nofit-next" hidden>
-<p id="nofit-next-text" class="nofit-next-text" tabindex="0">If the notice was triggered by an old discontinued or inactive ASIN you no longer sell, permanently deleting that listing from Manage Inventory, rather than only closing it, can remove the category trigger at $0 cost. If you actively sell in that category, you must upload a compliant ACORD 25 certificate of insurance.</p>
+<p id="nofit-next-text" class="nofit-next-text" tabindex="0">Check Amazon's category list and the notice in Account Health before buying anything. This page cannot see your account.</p>
+<p class="source-inline"><a href="https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT" rel="noopener noreferrer">Amazon's category list</a></p>
 <button type="button" class="sec" id="copy-nofit">Copy next step</button>
 <p id="nofit-copy-state" class="muted" role="status"></p>
 </div>
 <p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
 <p>Not affiliated with or endorsed by Amazon.</p>
 </div>
-<p class="thanks">Thank you for your time.</p>
-<p class="share-line">Share it with someone it could help.</p>
+<p class="thanks">Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
 </div>
 <section class="deadline-reminder" id="deadline-reminder" aria-labelledby="deadline-reminder-h">
 <h2 id="deadline-reminder-h">Get a reminder before this deadline</h2>
@@ -675,8 +686,8 @@ Please reissue my certificate with these corrections:
 <li><strong>Copy-paste broker email</strong> asking your broker to confirm each Amazon term.</li>
 <li><strong>Category screen</strong> for a second look at your products.</li>
 </ol>
-<p>The $29 kit is a file you download. It helps you spot common ACORD 25 mismatches and organize broker questions before uploading. It cannot guarantee Amazon acceptance or prevent all upload rejections. This page does not send your certificate there.</p>
-<p class="kit-fit">Good fit if you got Amazon's $1M insurance notice and sell in an enhanced-safety category. If the notice came from an old listing you no longer sell, try deleting it first, at no cost.</p>
+<p>The $29 kit is a ZIP of checklists and editable templates. It is not insurance, a broker service, or filing help. It helps you organize broker questions before uploading, but cannot guarantee Amazon acceptance. This page does not send your certificate to Gumroad.</p>
+<p class="kit-fit">Good fit when you have a COI or are preparing broker questions. Not a fit when you need insurance, a quote, a broker, filing help, or an acceptance guarantee.</p>
 <p class="deadline-count" data-deadline="2026-11-02" data-deadline-label="Nov 2, 2026 Amazon COI deadline" hidden></p>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
@@ -692,9 +703,9 @@ Please reissue my certificate with these corrections:
 <section class="card" aria-labelledby="src-h">
 <h2 id="src-h">Sources</h2>
 <ol>
-<li>Amazon Seller Central, Commercial Liability Insurance Requirements: <a href="https://sellercentral.amazon.com/help/hub/reference/external/G200386300" rel="noopener noreferrer">https://sellercentral.amazon.com/help/hub/reference/external/G200386300</a> (checked Oct 26, 2026)</li>
-<li>Amazon Seller Central, Product categories with enhanced safety listing requirements: <a href="https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT" rel="noopener noreferrer">https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT</a> (checked Oct 26, 2026)</li>
-<li>Amazon Seller Forums announcement, "New Commercial Liability Insurance Requirements effective November 2, 2026": <a href="https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408" rel="noopener noreferrer">https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408</a></li>
+<li>Amazon Seller Central, Commercial Liability Insurance Requirements: <a href="https://sellercentral.amazon.com/help/hub/reference/external/G200386300" rel="noopener noreferrer">https://sellercentral.amazon.com/help/hub/reference/external/G200386300</a> (checked Nov 10, 2026)</li>
+<li>Amazon Seller Central, Product categories with enhanced safety listing requirements: <a href="https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT" rel="noopener noreferrer">https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT</a> (checked Nov 10, 2026)</li>
+<li>Amazon Seller Forums announcement, "New Commercial Liability Insurance Requirements effective November 2, 2026": <a href="https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408" rel="noopener noreferrer">https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408</a> (checked Nov 10, 2026)</li>
 </ol>
 <p>Seller Central may ask you to log in.</p>
 <h2 id="criteria-h">Amazon's criteria, quoted</h2>
@@ -704,21 +715,12 @@ Please reissue my certificate with these corrections:
 
 <section class="card" id="faq" aria-labelledby="faq-h">
 <h2 id="faq-h">Questions sellers are asking</h2>
-<h3>Why did I receive the Nov 2, 2026 Commercial Liability Insurance email when my sales are under $10,000/month (even $1,500/month)?</h3>
-<p>Under Amazon's Nov 2, 2026 update (Policy G200386300), enhanced-safety product categories require $1,000,000 commercial general liability insurance regardless of monthly sales volume. Amazon's examples include children's products, cosmetic and ingestible products, and lithium battery products, and Amazon says that list is not complete. Sellers also see the notice on topicals, cosmetics, supplements, and other dietary or safety-regulated items. Even a single old or inactive listing in Manage Inventory can trigger the notice, including when sales are under $10,000 a month or about $1,500 a month.</p>
-<p><strong>Free decision rule:</strong> if the notice was triggered by an old discontinued or inactive ASIN you no longer sell, permanently deleting that listing from Manage Inventory, rather than only closing it, can remove the category trigger at $0 cost. If you actively sell in that category, you must upload a compliant ACORD 25 certificate of insurance. This page cannot see your catalog. Confirm the listing in Manage Inventory and the notice in Account Health.</p>
-<h3>How do individual / sole-proprietor sellers using an offline insurance broker pass Amazon's review without Amazon Insurance Accelerator?</h3>
-<p>Amazon's Insurance Accelerator requirement on Policy G200386300 is for sellers based in Mainland China, unless Amazon agrees otherwise in writing. An individual or sole proprietor elsewhere can ask an offline broker for an ACORD 25 that meets this checklist:</p>
-<ol>
-<li>Insured name matches the Seller Central Legal Entity character for character. Amazon's exception is for a single-member LLC whose trade name Amazon allows, not for every sole proprietor using a DBA.</li>
-<li>Additional insured reads "Amazon.com Services LLC and its affiliates and assignees".</li>
-<li>At least $1,000,000 per occurrence and $1,000,000 aggregate, covering products, products/completed operations, and bodily injury. A commercial general liability form also addresses personal injury. The limit Amazon states is $1,000,000 per occurrence and in aggregate.</li>
-<li>Deductible no greater than $10,000, and the amount is listed on the certificate.</li>
-<li>The policy covers all sales on Amazon.com.</li>
-<li>No sunset clause.</li>
-<li>At least 30 days' notice of cancellation, modification, or non-renewal.</li>
-</ol>
-<p>Amazon's Business Insurance verification decides whether the certificate is accepted. The free tool and $29 kit help sellers spot common ACORD 25 mismatches and organize broker questions before uploading, and cannot guarantee Amazon acceptance or prevent all upload rejections.</p>
+<h3>Can sellers under USD 10,000 in monthly sales still fall under the newer requirement?</h3>
+<p>Yes, for products in categories with enhanced safety listing requirements. <a href="https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408" rel="noopener noreferrer">Amazon's November 2 announcement</a> says the USD 1 million requirement applies to those products regardless of the USD 10,000 monthly threshold. Check <a href="https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT" rel="noopener noreferrer">Amazon's category list</a> and your own Account Health notice.</p>
+<h3>Is the $29 kit insurance or a broker service?</h3>
+<p>No. It is a downloadable ZIP of checklists and editable templates. First Mover Projects does not sell insurance, act as an insurance broker or agent, provide quotes, or submit a certificate for you.</p>
+<h3>Who is the kit not for?</h3>
+<p>It is not for someone looking to buy an insurance policy, get a quote, hire a broker, have a certificate submitted, or receive legal or insurance advice. It also is not a guarantee that Amazon will accept a certificate.</p>
 <h3>Can the free browser check or the $29 kit guarantee Amazon will accept my certificate?</h3>
 <p>No. The free tool and $29 kit help sellers spot common ACORD 25 mismatches and organize broker questions before uploading, and cannot guarantee Amazon acceptance or prevent all upload rejections.</p>
 <h3>Is there a refund on the $29 kit?</h3>
@@ -732,7 +734,7 @@ Please reissue my certificate with these corrections:
 
 <footer>
 <p>General guidance, not legal, tax or IT advice.</p>
-<p>This is not insurance advice. Talk to your insurance broker. Amazon's Business Insurance verification decides whether a certificate is accepted.</p>
+<p>This is not insurance advice. Talk to your insurance broker. Check <a href="https://sellercentral.amazon.com/help/hub/reference/external/G200386300" rel="noopener noreferrer">Amazon's insurance page</a> before submitting a certificate.</p>
 <p>Not affiliated with or endorsed by Amazon.</p>
 <p><a target="_blank" class="paid-quiet" id="paid-link" data-goatcounter-click="cta/coi-check-footer" data-goatcounter-title="Amazon COI check footer" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=amazon-coi-check&amp;utm_content=footer" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Optional: $29 Amazon $1M insurance kit</a></p>
 <p>General guidance, not legal, tax or IT advice.</p>
@@ -1131,11 +1133,11 @@ function checkCOI(text, entity, isSmllcDba, expiry, today) {
   var todayStr = ymd(today || new Date());
   var expNote = "Amazon's quoted criteria on this page do not state an expiry date. This check uses only the date you enter.";
   if (!exp) {
-    extras.push(row("Expiry", "Expiry", false, "check", "Enter the policy expiry date so this page can flag a certificate that lapses before Nov 2, 2026 or is already past.", expNote, null, []));
-  } else if (exp < DEADLINE || exp < todayStr) {
-    extras.push(row("Expiry", "Expiry", false, "fix", "The expiry date " + exp + " is before Nov 2, 2026 or before today (" + todayStr + ").", expNote, null, []));
+    extras.push(row("Expiry", "Expiry", false, "check", "Enter the policy expiry date so this page can flag a certificate that is already past.", expNote, null, []));
+  } else if (exp < todayStr) {
+    extras.push(row("Expiry", "Expiry", false, "fix", "The expiry date " + exp + " is before today (" + todayStr + ").", expNote, null, []));
   } else {
-    extras.push(row("Expiry", "Expiry", false, "ok", "The expiry date " + exp + " is not before Nov 2, 2026 and is not before today (" + todayStr + ").", expNote, null, []));
+    extras.push(row("Expiry", "Expiry", false, "ok", "The expiry date " + exp + " is not before today (" + todayStr + ").", expNote, null, []));
   }
 
   extras.push(row("Insurer rating", "Insurer rating", false, "check", "Confirm global claim handling and the financial rating with your broker. A certificate often does not show the rating.", Q_RATING, null, []));
@@ -1166,16 +1168,19 @@ function checkCOI(text, entity, isSmllcDba, expiry, today) {
 
 function scopeLines(q1, q2, q3) {
   var out = [];
-  function add(text, quote) { out.push({ text: text, quote: quote || "" }); }
+  var insuranceSource = "https://sellercentral.amazon.com/help/hub/reference/external/G200386300";
+  var categorySource = "https://sellercentral.amazon.com/help/hub/reference/external/G4RUG6EAT2ZLVSRT";
+  var announcementSource = "https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408";
+  function add(text, quote, source) { out.push({ text: text, quote: quote || "", source: source || "" }); }
   if (!q1 && !q2 && !q3) return out;
-  if (q1 === "yes") add("From Nov 2, 2026, Amazon's page says you need USD 1 million coverage for those products regardless of sales.", Q_NOV2_CAT);
-  if (q2 === "yes") add("Amazon's existing rule already applies: insurance within 30 days after exceeding USD 10,000 in gross proceeds in one month.", Q_THRESHOLD);
-  if (q3 === "yes") add("Amazon's page says Mainland China sellers must get the policy through the Amazon Insurance Accelerator (AIA) program unless Amazon agrees otherwise in writing. From Nov 2, Amazon says it will reject newly submitted policies not obtained through AIA.", Q_AIA);
-  if (q1 === "unsure") add("Check Amazon's category list and your Account Health page. This page can't see your account.", "");
+  if (q1 === "yes") add("From Nov 2, 2026, Amazon's page says you need USD 1 million coverage for those products regardless of sales.", Q_NOV2_CAT, announcementSource);
+  if (q2 === "yes") add("Amazon's existing rule already applies: insurance within 30 days after exceeding USD 10,000 in gross proceeds in one month.", Q_THRESHOLD, insuranceSource);
+  if (q3 === "yes") add("Amazon's page says Mainland China sellers must get the policy through the Amazon Insurance Accelerator (AIA) program unless Amazon agrees otherwise in writing. From Nov 2, Amazon says it will reject newly submitted policies not obtained through AIA.", Q_AIA, announcementSource);
+  if (q1 === "unsure") add("Check Amazon's category list and your Account Health page. This page can't see your account.", "", categorySource);
   if (q2 === "unsure") add("If you are not sure whether gross proceeds went over USD 10,000 in any one month, check your payments reports in Seller Central. This page can't see your account.", "");
   if (q3 === "unsure") add("If you are not sure whether your business is based in Mainland China, check Account Info in Seller Central. This page can't see your account.", "");
-  if (q1 === "no" && q2 === "no" && q3 === "no") add("Based on your answers, neither rule appears to apply right now, but Amazon may request insurance at any time ('or if otherwise requested by us').", Q_THRESHOLD);
-  add("Amazon decides. Check Amazon's own help pages.", "");
+  if (q1 === "no" && q2 === "no" && q3 === "no") add("Based on your answers, neither rule appears to apply right now, but Amazon may request insurance at any time ('or if otherwise requested by us').", Q_THRESHOLD, insuranceSource);
+  add("Amazon decides. Check Amazon's own help pages.", "", insuranceSource);
   return out;
 }
 
@@ -1194,7 +1199,7 @@ function amazonKitVisible(q1) {
 }
 
 var KIT_CONTENTS = "a spreadsheet that compares what you type from your certificate with Amazon's quoted terms, a policy-terms checklist that quotes Amazon word for word, and a copy-paste broker email";
-var DELETE_STEP = "If the notice was triggered by an old discontinued or inactive ASIN you no longer sell, permanently deleting that listing from Manage Inventory, rather than only closing it, can remove the category trigger at $0 cost. If you actively sell in that category, you must upload a compliant ACORD 25 certificate of insurance.";
+var DELETE_STEP = "Check Amazon's category list and the notice in Account Health before buying anything. This page cannot see your account.";
 var CATEGORY_CHECK = "Check Amazon's category list and your Account Health page. This page can't see your account.";
 var CHOOSE_ANSWERS = "Choose Yes, No, or Not sure for each question.";
 var SALES_RULE = "Amazon's existing rule already applies: insurance within 30 days after exceeding USD 10,000 in gross proceeds in one month.";
@@ -1202,8 +1207,8 @@ var AIA_RULE = "Amazon's page says Mainland China sellers must get the policy th
 var SALES_UNSURE = "If you are not sure whether gross proceeds went over USD 10,000 in any one month, check your payments reports in Seller Central. This page can't see your account.";
 var CHINA_UNSURE = "If you are not sure whether your business is based in Mainland China, check Account Info in Seller Central. This page can't see your account.";
 var AMAZON_DECIDES = "Amazon decides. Check Amazon's own help pages.";
-var LEAD_NONE = "Because you answered no to enhanced-safety categories, no to USD 10,000 in gross proceeds in any one month, and no to a business based in Mainland China, neither rule appears to apply right now, but Amazon may request insurance at any time ('or if otherwise requested by us'). If the notice came from an old listing you no longer sell, try deleting it first, at no cost.";
-var LEAD_CATEGORY_NO = "Because you said no, your Amazon.com products do not fall in a category with enhanced safety listing requirements. Good fit if you got Amazon's $1M insurance notice and sell in an enhanced-safety category. If the notice came from an old listing you no longer sell, try deleting it first, at no cost.";
+var LEAD_NONE = "Because you answered no to enhanced-safety categories, no to USD 10,000 in gross proceeds in any one month, and no to a business based in Mainland China, neither rule appears to apply based on those answers. Check your Account Health notice before buying anything.";
+var LEAD_CATEGORY_NO = "Because you said no, your Amazon.com products do not fall in a category with enhanced safety listing requirements. Check Amazon's category list and your Account Health notice before buying anything.";
 var LEAD_UNSURE = "Because you are not sure whether any of your Amazon.com products fall in a category with enhanced safety listing requirements, check Amazon's category list and your Account Health page. This page can't see your account.";
 var LEAD_BLANK = "Because you have not chosen Yes, No, or Not sure for whether any of your Amazon.com products fall in a category with enhanced safety listing requirements, choose Yes, No, or Not sure for each question. This page cannot see your Seller Central account.";
 
@@ -1369,6 +1374,11 @@ function paintSteps(steps) {
   steps.forEach(function (text) {
     var li = document.createElement("li");
     li.textContent = text;
+    var source = document.createElement("a");
+    source.setAttribute("href", "https://sellercentral.amazon.com/help/hub/reference/external/G200386300");
+    source.setAttribute("rel", "noopener noreferrer");
+    source.textContent = " Amazon source";
+    li.appendChild(source);
     stepList.appendChild(li);
   });
 }
@@ -1424,7 +1434,12 @@ function paint(result, opts) {
       detail.textContent = item.detail;
       tr.appendChild(detail);
       var crit = document.createElement("td");
-      crit.textContent = item.criterion;
+      crit.textContent = item.criterion + " ";
+      var source = document.createElement("a");
+      source.setAttribute("href", "https://sellercentral.amazon.com/help/hub/reference/external/G200386300");
+      source.setAttribute("rel", "noopener noreferrer");
+      source.textContent = "Amazon source";
+      crit.appendChild(source);
       tr.appendChild(crit);
       tb.appendChild(tr);
     });
@@ -1471,6 +1486,13 @@ function paintScope() {
   lines.forEach(function (line) {
     var p = document.createElement("p");
     p.textContent = line.text;
+    if (line.source) {
+      var source = document.createElement("a");
+      source.setAttribute("href", line.source);
+      source.setAttribute("rel", "noopener noreferrer");
+      source.textContent = " Amazon source";
+      p.appendChild(source);
+    }
     out.appendChild(p);
     if (line.quote) {
       var bq = document.createElement("blockquote");
@@ -1486,7 +1508,12 @@ function paintCriteria() {
   if (!list || (list.children && list.children.length)) return;
   QUOTES.forEach(function (q) {
     var li = document.createElement("li");
-    li.textContent = q;
+    li.textContent = q + " ";
+    var source = document.createElement("a");
+    source.setAttribute("href", "https://sellercentral.amazon.com/help/hub/reference/external/G200386300");
+    source.setAttribute("rel", "noopener noreferrer");
+    source.textContent = "Amazon source";
+    li.appendChild(source);
     list.appendChild(li);
   });
 }
