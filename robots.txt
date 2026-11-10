@@ -1,13 +1,17 @@
 User-agent: *
 Allow: /
+Disallow: /event/
 
 User-agent: Googlebot
 Allow: /
+Disallow: /event/
 
 User-agent: Google-InspectionTool
 Allow: /
+Disallow: /event/
 
 User-agent: GSCWizard-Bot
 Allow: /
+Disallow: /event/
 
 Sitemap: https://firstmoverprojects.com/sitemap.xml

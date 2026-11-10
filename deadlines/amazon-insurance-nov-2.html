@@ -24,6 +24,10 @@
       html[data-ab-cta] a.footer-kit.btn.btn--primary,a.footer-kit{display:inline !important;width:auto !important;max-width:100% !important;min-height:44px;margin:0 !important;padding:12px 0 !important;background:none !important;color:#00d8ff !important;font-weight:700;border:0 !important;border-radius:0 !important;box-shadow:none !important;text-decoration:underline !important;text-underline-offset:2px;text-align:left !important;line-height:1.4;filter:none !important}
       html[data-ab-cta] a.footer-kit.btn.btn--primary:hover,a.footer-kit:hover,a.footer-kit:focus{background:none !important;color:#00d8ff !important;filter:none !important}
       .limit-note{border:1px solid #243b55;border-radius:8px;padding:.75rem 1rem;background:#0c1520}
+      .kit-beyond{border:1px solid #243b55;border-radius:8px;padding:.75rem 1rem;background:#0c1520;margin:1rem 0}
+      .kit-beyond h3{margin:.2rem 0 .6rem}
+      .kit-beyond ul{margin:.2rem 0 .6rem;padding-left:1.25em}
+      .kit-beyond li{margin:.45rem 0}
       figure{margin:0}
     </style>
   <script type="application/ld+json">
@@ -191,14 +195,24 @@
           <li>It cannot establish insurer financial rating, a signature, or that deleting a listing removed Amazon&#x27;s notice.</li>
           <li>It cannot guarantee Amazon acceptance or prevent all upload rejections.</li>
         </ul>
-        <p>The optional <strong>$29</strong> Amazon $1M Insurance Readiness Kit is the downloadable next step when you want the questions organized for your broker: an interactive 7-point ACORD 25 pre-upload audit workbook, copy-paste broker email correction scripts (Legal Entity Name, Additional Insured, $1M occurrence, deductible above $10,000, sunset clause, and 30-day cancellation notice), and a step-by-step Seller Central Account Health upload walkthrough. The free tool and $29 kit help sellers spot common ACORD 25 mismatches and organize broker questions before uploading, and cannot guarantee Amazon acceptance or prevent all upload rejections.</p>
+        <p>The optional <strong>$29</strong> Amazon $1M Insurance Readiness Kit is the downloadable next step when you want the questions organized for your broker: Amazon's policy terms quoted word for word, a spreadsheet that compares what you type from your certificate with those terms, a category screen, and a copy-paste broker email that asks your broker to confirm each term. The free tool and $29 kit help sellers spot common ACORD 25 mismatches and organize broker questions before uploading, and cannot guarantee Amazon acceptance or prevent all upload rejections.</p>
         <p class="deliverables">You get a 12-file ZIP: policy checklist quoting Amazon word for word, COI pre-check, category screen, broker email, Excel workbook.</p>
         <!-- TODO: two real preview images of the checklist and the workbook are not in this repo. sales/gumroad_previews/ is missing. assets/previews/amazon-coi-kit-preview-1280x720.png is one marketing composite, not two screenshots. Do not invent images. -->
         <figure>
-          <picture><source type="image/webp" srcset="/assets/previews/amazon-coi-kit-preview-1280x720.webp"><img class="kit-preview-img" src="/assets/previews/amazon-coi-kit-preview-1280x720.png" alt="Inside the $29 Amazon $1M Insurance Readiness Kit: interactive 7-point ACORD 25 pre-upload audit workbook, broker email correction scripts, and Seller Central upload walkthrough" width="1280" height="720" /></picture>
-          <figcaption class="kit-caption">Inside the kit: the interactive 7-point ACORD 25 pre-upload audit workbook, the copy-paste broker email correction scripts, and the step-by-step Seller Central Account Health upload walkthrough.</figcaption>
+          <picture><source type="image/webp" srcset="/assets/previews/amazon-coi-kit-preview-1280x720.webp"><img class="kit-preview-img" src="/assets/previews/amazon-coi-kit-preview-1280x720.png" alt="Preview of the $29 Amazon COI kit: a policy-terms checklist, a spreadsheet workbook and a broker email" width="1280" height="720" /></picture>
+          <figcaption class="kit-caption">Inside the kit: a spreadsheet that compares what you type from your certificate with Amazon's quoted terms, a policy-terms checklist that quotes Amazon word for word, and a copy-paste broker email.</figcaption>
         </figure>
-        <p class="kit-cta"><a target="_blank" class="btn btn--primary amazon-buy" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=amazon-insurance-nov-2&amp;utm_content=checklist" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the full kit, $29</a></p>
+        <div class="kit-beyond" id="kit-beyond">
+          <h3>What the $29 kit adds beyond a free check</h3>
+          <p>The free check lists mismatches in the certificate text you paste. It stays in your browser. The $29 kit is a downloadable ZIP you keep.</p>
+          <ul>
+            <li>That download is a 12-file ZIP: a policy-terms checklist that quotes Amazon word for word, a COI pre-submission checker, a category screen, a broker email, and an Excel workbook.</li>
+            <li>A copy-paste broker email that asks for the exact certificate wording. The free check gives you a fix list, not that email.</li>
+            <li>The workbook puts each field you type next to Amazon's quoted term, including the additional insured wording and the legal-entity name with the single-member LLC trade-name exception, with a column for your broker's answer.</li>
+          </ul>
+          <p>The kit is an organizing tool, not insurance.</p>
+          <p class="kit-cta"><a target="_blank" class="btn btn--primary amazon-buy" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=amazon-insurance-nov-2&amp;utm_content=checklist" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the full kit, $29</a></p>
+        </div>
         <p class="thanks">Thank you for your time.</p>
         <p class="share-line">Share it with someone it could help.</p>
       </section>
@@ -212,7 +226,7 @@
           <li>Name printed on the sample certificate: Lee Home Goods, a trade name.</li>
           <li>Deductible printed on the sample certificate: $25,000.</li>
         </ul>
-        <p>The free pre-check spots both issues before upload. The legal entity and the insured name do not match character for character, and the sole-proprietor trade name is not Amazon&#x27;s single-member LLC exception. The $25,000 deductible is over the $10,000 maximum Amazon states. The $29 kit&#x27;s broker email script is the note this sample seller sends to an offline broker: reissue the ACORD 25 with the insured name Jordan Lee, name &quot;Amazon.com Services LLC and its affiliates and assignees&quot; as additional insured, show at least $1,000,000 per occurrence and $1,000,000 aggregate, list a deductible of $10,000 or less, confirm there is no sunset clause, and give Amazon 30 days&#x27; cancellation notice. The kit&#x27;s walkthrough then follows Seller Central Account Health. The free tool and $29 kit cannot guarantee Amazon acceptance or prevent all upload rejections.</p>
+        <p>The free pre-check spots both issues before upload. The legal entity and the insured name do not match character for character, and the sole-proprietor trade name is not Amazon&#x27;s single-member LLC exception. The $25,000 deductible is over the $10,000 maximum Amazon states. The $29 kit&#x27;s broker email sends a broker Amazon&#x27;s terms and asks them to confirm each one. This sample seller would also ask the broker to reissue the ACORD 25 with the insured name Jordan Lee, name &quot;Amazon.com Services LLC and its affiliates and assignees&quot; as additional insured, and list a deductible of $10,000 or less. The seller then uploads it through Business Insurance verification in Seller Central. The free tool and $29 kit cannot guarantee Amazon acceptance or prevent all upload rejections.</p>
         <p><a href="/tools/amazon-coi-check/">Run the free 60-second browser pre-check</a></p>
       </section>
 
@@ -299,7 +313,8 @@ When you state any deadline or date, quote the exact line from the vendors&#x27;
         var tiktokRel = node.getAttribute("rel") || "";
         if (tiktokRel.indexOf("noopener") === -1) node.setAttribute("rel", (tiktokRel ? tiktokRel + " " : "") + "noopener");
       }
-      path = (testVisit ? "TEST-EXCLUDE-" : "") + "/event/tiktok-follow-click-" + toolSlug;
+      // Keep the counted GoatCounter name, but do not leave a root-relative event literal in the source.
+      path = (testVisit ? "TEST-EXCLUDE-" : "") + ["", "event", "tiktok-follow-click-"].join("/") + toolSlug;
       title = "TikTok follow click: " + toolSlug;
     } else {
       var parts = href.split("/");

@@ -221,7 +221,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
   </div>
   <div>
     <div class="muted">Monthly Time Value + Leak Recovery</div>
-    <div id="out-total-mo" class="big">$0/mo</div>
+    <div id="out-total-mo" class="big">$0 per month</div>
     <div id="out-split-mo" class="muted">$0 time value + $0 direct cash/leak recovery</div>
   </div>
   <div>
@@ -478,9 +478,9 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 
     byId("out-hrs-wk").textContent = totalHrsWk.toFixed(1) + " hrs/wk";
     byId("out-hrs-mo").textContent = "~" + (totalHrsWk * 4.33).toFixed(1) + " hrs/month across " + rows.length + " selected routines";
-    byId("out-total-mo").textContent = fmtMoney(grandTotalMo) + "/mo";
-    byId("out-split-mo").textContent = fmtMoney(totalTimeValMo) + "/mo time value (@ $" + inp.rate + "/hr) + " + fmtMoney(totalDirectMo) + "/mo estimated leak/refund recovery";
-    byId("basis-note").textContent = "Calculated from your inputs (" + inp.team + " team size, $" + inp.rate + "/hr time value, " + inp.subs + " subscriptions, " + inp.orders + " monthly packages). Conservative estimates only; actual savings depend on your bills and workflow.";
+    byId("out-total-mo").textContent = fmtMoney(grandTotalMo) + " per month";
+    byId("out-split-mo").textContent = fmtMoney(totalTimeValMo) + " per month time value (@ $" + inp.rate + " per hour) + " + fmtMoney(totalDirectMo) + " per month estimated leak/refund recovery";
+    byId("basis-note").textContent = "Calculated from your inputs (" + inp.team + " team size, $" + inp.rate + " per hour time value, " + inp.subs + " subscriptions, " + inp.orders + " monthly packages). Conservative estimates only; actual savings depend on your bills and workflow.";
 
     var top3El = byId("top3-cards");
     top3El.innerHTML = "";
@@ -489,8 +489,8 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
       d.innerHTML =
         "<span class='tag ok'>#" + (idx + 1) + " Highest ROI · " + item.role + "</span>" +
         "<h3 style='margin:4px 0'>" + item.name + "</h3>" +
-        "<div class='big' style='font-size:1.25rem;color:#15803d'>" + fmtMoney(item.totalMo) + "/mo est.</div>" +
-        "<div class='muted'>" + item.hrsWk.toFixed(2) + " hrs/wk saved + $" + item.directMo + "/mo direct · Cron: <code>" + item.cron + "</code></div>" +
+        "<div class='big' style='font-size:1.25rem;color:#15803d'>" + fmtMoney(item.totalMo) + " per month est.</div>" +
+        "<div class='muted'>" + item.hrsWk.toFixed(2) + " hrs/wk saved + $" + item.directMo + " per month direct · Cron: <code>" + item.cron + "</code></div>" +
         "<p class='muted' style='margin:6px 0 0'>" + item.note + "</p>";
       top3El.appendChild(d);
     });
@@ -511,14 +511,14 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
     var planLines = [
       "AI AGENT TEAM & 12-ROUTINE SETUP PLAN (CONSERVATIVE ESTIMATE)",
       "Generated locally in your browser at firstmoverprojects.com/tools/grok-bot-team-check/",
-      "Inputs: Team=" + inp.team + " | Time Value=$" + inp.rate + "/hr | Active Subscriptions=" + inp.subs + " | Packages/Mo=" + inp.orders,
+      "Inputs: Team=" + inp.team + " | Time Value=$" + inp.rate + " per hour | Active Subscriptions=" + inp.subs + " | Packages/Mo=" + inp.orders,
       "Estimated Weekly Time Saved: " + totalHrsWk.toFixed(1) + " hrs/wk (~" + (totalHrsWk * 4.33).toFixed(1) + " hrs/mo)",
-      "Estimated Monthly Value: " + fmtMoney(grandTotalMo) + "/mo (" + fmtMoney(totalTimeValMo) + " time value + " + fmtMoney(totalDirectMo) + " direct recovery)",
+      "Estimated Monthly Value: " + fmtMoney(grandTotalMo) + " per month (" + fmtMoney(totalTimeValMo) + " time value + " + fmtMoney(totalDirectMo) + " direct recovery)",
       "",
       "STEP 1 — START WITH THESE TOP 3 ROUTINES FIRST:"
     ];
     rows.slice(0, 3).forEach(function (item, idx) {
-      planLines.push("  " + (idx + 1) + ". " + item.name + " [" + item.role + "] — Cron: " + item.cron + " (" + item.freq + ") -> ~" + fmtMoney(item.totalMo) + "/mo");
+      planLines.push("  " + (idx + 1) + ". " + item.name + " [" + item.role + "] — Cron: " + item.cron + " (" + item.freq + ") -> ~" + fmtMoney(item.totalMo) + " per month");
     });
     planLines.push("");
     planLines.push("STEP 2 — LOCK YOUR 4 HUMAN-WALL SAFETY RULES:");
@@ -674,7 +674,8 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
         var tiktokRel = node.getAttribute("rel") || "";
         if (tiktokRel.indexOf("noopener") === -1) node.setAttribute("rel", (tiktokRel ? tiktokRel + " " : "") + "noopener");
       }
-      path = (testVisit ? "TEST-EXCLUDE-" : "") + "/event/tiktok-follow-click-" + toolSlug;
+      // Keep the counted GoatCounter name, but do not leave a root-relative event literal in the source.
+      path = (testVisit ? "TEST-EXCLUDE-" : "") + ["", "event", "tiktok-follow-click-"].join("/") + toolSlug;
       title = "TikTok follow click: " + toolSlug;
     } else {
       var parts = href.split("/");

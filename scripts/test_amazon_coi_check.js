@@ -351,7 +351,7 @@ assertEq(FMP.amazonKitVisible("no"), false, "kit hides when enhanced-safety cate
 assertEq(FMP.amazonKitVisible("unsure"), false, "kit hides when the category answer is not sure");
 assertEq(FMP.amazonKitVisible(""), false, "kit hides when the category question is blank");
 assert(html.indexOf('id="amazon-kit" hidden') !== -1, "Amazon kit starts hidden");
-assert(html.indexOf("Get the $29 kit with broker scripts") !== -1, "Amazon kit button names the kit");
+assert(html.indexOf("Get the $29 kit with broker email") !== -1, "Amazon kit button names the kit");
 assert(html.indexOf("Not affiliated with or endorsed by Amazon.") !== -1, "Not affiliated with or endorsed by Amazon under the kit");
 var kitAt = html.indexOf('id="kit-result"');
 var adviceAt = html.indexOf("General guidance, not legal, tax or IT advice.", kitAt);

@@ -148,7 +148,8 @@ test("tracking pages load the test-exclude helper before count.js", () => {
   const canonical = helperBody(read("tools/amazon-coi-check/index.html"));
   assert.match(canonical, /window\.goatcounter = \{ path: function \(p\) \{ return "TEST-EXCLUDE" \+ p; \} \}/);
   assert.match(canonical, /gumroad-click\//);
-  assert.match(canonical, /\/event\/tiktok-follow-click-/);
+  assert.equal(canonical.includes('"/event/tiktok-follow-click-"'), false);
+  assert.match(canonical, /\["", "event", "tiktok-follow-click-"\]\.join\("\/"\)/);
   assert.match(canonical, /TEST-EXCLUDE-/);
   assert.match(canonical, /var gcCountUrl = "https:\/\/firstmoverprojects\.goatcounter\.com\/count\?p="/);
   assert.match(canonical, /fetch\(gcCountUrl, \{ keepalive: true, mode: "no-cors" \}\)/);
