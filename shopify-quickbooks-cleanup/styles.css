@@ -55,9 +55,12 @@ body {
   border-radius: var(--radius);
 }
 
-.skip-link:focus {
+.skip-link:focus,
+.skip-link:focus-visible {
   left: var(--space-md);
-  outline: 3px solid var(--color-focus);
+  color: var(--color-bg);
+  background: var(--color-text);
+  outline: 3px solid var(--color-accent-blue);
   outline-offset: 2px;
 }
 
@@ -359,7 +362,7 @@ li {
   color: var(--color-accent-cyan);
 }
 
-a:not(.btn):not(.brand-link) {
+a:not(.btn):not(.brand-link):not(.skip-link) {
   color: var(--color-accent-cyan);
   text-decoration: underline;
   text-underline-offset: 2px;
