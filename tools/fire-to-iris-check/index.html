@@ -296,7 +296,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 
 <section class="card" aria-labelledby="facts-h">
 <h2 id="facts-h">What the IRS says</h2>
-<p>In news release IR-2026-99 (Aug. 24, 2026) and on the IRS FIRE page, the IRS states that the Filing Information Returns Electronically (FIRE) system is retiring after the 2026 filing season and lists three November 2026 cutoffs: <strong>Nov. 1, 2026</strong> (last day to file test information returns through the FIRE Trading Partner Test System; that date has passed), <strong>Nov. 9, 2026</strong> (last day to make changes to Information Returns Applications for Transmitter Control Codes, after which existing IR TCC applications become read-only; that date has passed, so those applications are now read-only), and <strong>Nov. 19, 2026, at 3 p.m. ET</strong> (last day to file information returns through the FIRE system; that date has passed) <a href="https://www.irs.gov/newsroom/irs-reminder-information-return-e-file-system-transitioning-to-a-new-platform" rel="noopener noreferrer">IRS IR-2026-99: Information return e-file system transitioning to a new platform</a> · <a href="https://www.irs.gov/e-file-providers/filing-information-returns-electronically-fire" rel="noopener noreferrer">IRS: Filing Information Returns Electronically (FIRE)</a></p>
+<p>In news release IR-2026-99 (Aug. 24, 2026) and on the IRS FIRE page, the IRS states that the Filing Information Returns Electronically (FIRE) system is retiring after the 2026 filing season and lists three November 2026 cutoffs: <strong>Nov. 1, 2026</strong> (last day to file test information returns through the FIRE Trading Partner Test System; that date has passed), <strong>Nov. 9, 2026</strong> (last day to make changes to Information Returns Applications for Transmitter Control Codes, after which existing IR TCC applications become read-only; that date has passed, so those applications are now read-only), and <strong>Nov. 19, 2026, at 3 p.m. ET</strong> (last day to file information returns through the FIRE system; that date has passed). <a href="https://www.irs.gov/newsroom/irs-reminder-information-return-e-file-system-transitioning-to-a-new-platform" rel="noopener noreferrer">IRS IR-2026-99: Information return e-file system transitioning to a new platform</a> · <a href="https://www.irs.gov/e-file-providers/filing-information-returns-electronically-fire" rel="noopener noreferrer">IRS: Filing Information Returns Electronically (FIRE)</a></p>
 <p>Starting <strong>Jan. 1, 2027</strong>, the Information Returns Intake System (IRIS) is the only electronic filing system for information returns, including prior-year returns and corrections. Current FIRE users who will e-file in IRIS themselves must complete a separate IRIS Application for TCC. If a provider or paid e-file service transmits for you, ask whether they file under their own IRIS TCC. The IRS notes that the <strong>IRIS Taxpayer Portal</strong> is a free, web-based filing system that allows filers to e-file up to 100 returns at a time (by typing information directly or uploading a CSV file using the IRS template). <a href="https://www.irs.gov/filing/e-file-information-returns-with-iris" rel="noopener noreferrer">IRS: E-file information returns with IRIS</a></p>
 </section>
 
@@ -392,7 +392,7 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 <button id="copy" class="sec" type="button">Copy checklist</button>
 <p id="copystate" class="muted" role="status"></p>
 
-<div class="kit-conv-box">
+<div class="kit-conv-box" data-fire-kit="1">
   <span class="kit-conv-badge">INSTANT DOWNLOAD · ONE 3-PAGE PDF IN A ZIP · CHECKLIST + 1099-NEC ADD-ON · $9</span>
   <h3 class="kit-conv-title">See What's Inside the $9 FIRE to IRIS Switch Checklist</h3>
   <p class="kit-fit">Good fit if you file 1099s for your business or clients and must move from FIRE to IRIS by Jan 1, 2027. Not needed if your software files for you.</p>
@@ -611,7 +611,7 @@ function analyze(opts) {
   if (steps.length > 3) steps = steps.slice(0, 3);
   var summary = warns > 0
     ? warns + (warns === 1 ? " time-sensitive item flagged before the November 2026 FIRE cutoffs." : " time-sensitive items flagged before the November 2026 FIRE cutoffs.")
-    : "No immediate FIRE cutoff blockers flagged from your selections. Review the checklist below.";
+    : "Nothing urgent was flagged from your selections. Review the list below.";
   return { summary: summary, items: items, csv: csv, warns: warns, steps: steps };
 }
 

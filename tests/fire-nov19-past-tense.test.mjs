@@ -27,8 +27,6 @@ const PAGES = [
 ];
 const PAST_EASTERN = "Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE.";
 const PAST_ET = "Nov 19, 2026 at 3 p.m. ET was the last day to file information returns through FIRE.";
-const IRIS = "IRIS is the only system after Jan. 1, 2027.";
-const NOV9 = "Nov 9, 2026 was the last day to change IR Applications for TCC, and those applications are now read-only.";
 const FAQ_Q = "When was the last day to file information returns through FIRE?";
 const H1 = "When was the last day to file on IRS FIRE?";
 const R3 = "FIRE filing ended Nov 19, 2026 at 3 p.m. ET. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS. ";
@@ -122,7 +120,10 @@ test("the deadline FAQ question and answer are past tense and match JSON-LD", ()
   assert.equal(html.includes("2. If we filed through FIRE ourselves, list anything still open (2026 corrections or late returns) and whether we have an IRIS Application for TCC started. FIRE filing has ended, so anything still open would go through IRIS."), true);
   assert.equal(html.includes("5. Nov 9, 2026 was the last day to change an IR Application for TCC, and those applications are now read-only."), true);
   assert.equal(html.includes("5. Nov 9, 2026 was the last day to change an IR Application for TCC, and those applications are now read-only. " + PAST_ET), false);
-  assert.equal(html.includes("The IRS says " + PAST_ET.slice(0, -1) + ", and " + IRIS), true);
+  assert.equal(html.includes("The IRS says " + PAST_ET.slice(0, -1) + ", and IRIS will be the only e-file system for information returns after Jan. 1, 2027."), true);
+  assert.equal(html.includes("and IRIS is the only system after Jan. 1, 2027"), false);
+  assert.equal(html.includes('aria-label="Free check"'), true);
+  assert.equal(html.includes('aria-label="Free check and checklist"'), false);
 });
 
 test("the FIRE check states the passed filing day outside the kit hide nodes", () => {
@@ -135,6 +136,11 @@ test("the FIRE check states the passed filing day outside the kit hide nodes", (
   assert.equal(html.includes(R4_QUOTE2), true);
   assert.equal(html.includes("You still need a separate IRIS Application for TCC. FIRE filing ended Nov 19, 2026 at 3 p.m. ET."), true);
   assert.equal(html.includes("You still have a step to finish. FIRE filing ended Nov 19, 2026 at 3 p.m. ET."), true);
+  assert.equal(html.includes('<div class="kit-conv-box" data-fire-kit="1">'), true);
+  assert.equal(html.includes("(last day to file information returns through the FIRE system; that date has passed). <a href=\"https://www.irs.gov/newsroom/"), true);
+  assert.equal(html.includes("(last day to file information returns through the FIRE system; that date has passed) <a"), false);
+  assert.equal(html.includes("Nothing urgent was flagged from your selections. Review the list below."), true);
+  assert.equal(html.includes("No immediate FIRE cutoff blockers flagged from your selections. Review the checklist below."), false);
   assert.equal(html.includes("Because you still have returns or corrections to file, the checklist lists the IRS dates and links, your IRIS TCC steps and 2027 prep on 3 pages."), true);
   const blocks = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].map((block) => JSON.parse(block[1]));
   const faq = blocks.find((item) => item["@type"] === "FAQPage");
@@ -210,6 +216,59 @@ test("at the cutoff the kit is hidden and the Nov 19 card is Passed, and before 
     assert.equal(tool.includes(R4_CHECK), true);
     assert.equal(tool.includes(R4_TEXT), true);
     assert.equal(tool.includes(R4_QUOTE2), true);
+  } finally {
+    await browser.close();
+  }
+});
+
+const KIT_BANS = ["$9", "INSTANT DOWNLOAD", "checklist is optional", "Refunds:", "The checklist button is at the top"];
+
+test("after the cutoff a finished check hides the result kit box, and before it the box still shows $9", async () => {
+  const mod = process.env.PLAYWRIGHT_CORE || "playwright-core";
+  const { chromium } = await import(mod);
+  const browser = await chromium.launch({
+    executablePath: process.env.CHROME_PATH || "/usr/bin/google-chrome",
+    headless: true,
+    args: ["--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu"]
+  });
+  const tool = pathToFileURL(path.join(ROOT, "tools/fire-to-iris-check/index.html")).href;
+  const flows = [
+    { self: true, iris: false, open: false },
+    { self: true, iris: true, open: true }
+  ];
+  async function run(when, flags) {
+    const context = await browser.newContext({ timezoneId: "America/New_York" });
+    const page = await context.newPage();
+    await page.clock.install({ time: new Date(when) });
+    await page.goto(tool, { waitUntil: "load" });
+    await page.evaluate((state) => {
+      document.getElementById("c-self").checked = state.self;
+      document.getElementById("c-iris-tcc").checked = state.iris;
+      document.getElementById("c-ir-changes").checked = false;
+      document.getElementById("c-open-2026").checked = state.open;
+      document.getElementById("c-over100").checked = false;
+    }, flags);
+    await page.getByRole("button", { name: "Check my readiness" }).click();
+    await page.locator("#results").waitFor({ state: "visible" });
+    const text = await page.evaluate(() => document.body.innerText || "");
+    const boxHidden = await page.evaluate(() => {
+      const box = document.querySelector("#results .kit-conv-box");
+      return !!(box && box.hidden);
+    });
+    await context.close();
+    return { text, boxHidden };
+  }
+  try {
+    for (const flags of flows) {
+      const after = await run("2026-11-19T20:00:00.000Z", flags);
+      assert.equal(after.boxHidden, true, JSON.stringify(flags));
+      for (const phrase of KIT_BANS) {
+        assert.equal(after.text.includes(phrase), false, phrase + " " + JSON.stringify(flags));
+      }
+      const before = await run("2026-11-19T19:59:59.000Z", flags);
+      assert.equal(before.boxHidden, false, JSON.stringify(flags));
+      assert.equal(before.text.includes("$9"), true, JSON.stringify(flags));
+    }
   } finally {
     await browser.close();
   }
