@@ -1,0 +1,38 @@
+/* Accessibility patch for shopify-quickbooks-cleanup (light skip link, layout). */
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  color: #01060b;
+  background: #f4f7fa;
+  outline: 3px solid #005cb9;
+  outline-offset: 2px;
+}
+
+html {
+  overflow-x: clip;
+}
+
+body,
+main {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+img,
+picture,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 390px) {
+  main {
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+  }
+
+  .site-header {
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+  }
+}

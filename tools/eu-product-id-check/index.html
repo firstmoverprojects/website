@@ -120,6 +120,87 @@ label:has(> input[type="checkbox"]),label:has(> input[type="radio"]){min-height:
 .follow-tiktok,.follow-email,a.btn,a.btn-buy-now,a.btn-email-cap{box-sizing:border-box;min-height:48px}
 #go,#example,#clear,#copy,#fmp-share button{min-height:48px}
 picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
+
+/* fmp-tool-a11y-patch */
+/* Shared accessibility patch for in-browser tool pages. */
+
+.skip,
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0.5rem;
+  z-index: 100;
+  padding: 0.5rem 0.75rem;
+  background: #fff;
+  color: #1b1f24;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 6px;
+  box-shadow: 0 0 0 2px #1f5fbf;
+}
+
+.skip:focus,
+.skip:focus-visible,
+.skip-link:focus,
+.skip-link:focus-visible {
+  left: 0.5rem;
+  outline: 3px solid #1f5fbf;
+  outline-offset: 2px;
+}
+
+.muted,
+.subhead {
+  color: #4a5560;
+}
+
+p a:not(.btn):not(.runway-pill):not(.gtin-checkout):not(.kit-sticky-link):not(.follow-tiktok):not(.follow-email),
+li a:not(.btn) {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #1f5fbf;
+  outline-offset: 2px;
+}
+
+html {
+  overflow-x: clip;
+}
+
+body,
+main {
+  overflow-x: clip;
+  max-width: 100%;
+  min-width: 0;
+}
+
+pre,
+textarea,
+.card,
+.cd {
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+img,
+picture {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 390px) {
+  main {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+}
 </style>
 <script id="fmp-embed-boot">
 (function () {

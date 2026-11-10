@@ -4,7 +4,7 @@
   root.DeadlineWatch = api;
   if (typeof document !== "undefined") {
     document.addEventListener("DOMContentLoaded", function () {
-      var app = document.getElementById("app");
+      var app = document.getElementById("main");
       if (!app) return;
       fetch("deadlines.json", { credentials: "same-origin" })
         .then(function (res) {
@@ -352,7 +352,7 @@
     }
 
     document.getElementById("filters").addEventListener("change", render);
-    document.getElementById("app").addEventListener("click", function (event) {
+    document.getElementById("main").addEventListener("click", function (event) {
       var btn = event.target.closest("[data-toggle]");
       if (!btn) return;
       var id = btn.getAttribute("data-toggle");

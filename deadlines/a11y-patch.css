@@ -1,0 +1,75 @@
+/* Accessibility patch layered on deadlines/styles.css (editable deadline pages only). */
+
+.tagline,
+.lead,
+.kit-caption,
+.muted {
+  color: #d0dce6;
+}
+
+p a:not(.btn):not(.amazon-buy):not(.footer-kit):not(.tiktok-hub-link):not(.tiktok-hub-email),
+main li a:not(.btn) {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid var(--color-focus, #00d8ff);
+  outline-offset: 2px;
+}
+
+.skip-link:focus-visible {
+  outline: 3px solid var(--color-focus, #00d8ff);
+  outline-offset: 2px;
+}
+
+html {
+  overflow-x: clip;
+}
+
+body,
+main {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+.site-header__inner,
+.hero,
+.card,
+.wrap,
+section {
+  max-width: 100%;
+  min-width: 0;
+}
+
+img,
+picture,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 390px) {
+  main {
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+  }
+
+  .site-header {
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+  }
+
+  pre,
+  code,
+  table {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}

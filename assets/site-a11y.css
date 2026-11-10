@@ -1,0 +1,91 @@
+/* Accessibility & layout patch for main-site pages (index, legal). */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0.75rem;
+  z-index: 100;
+  padding: 0.65rem 1rem;
+  background: #f7fbff;
+  color: #071b31;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 8px;
+  box-shadow: 0 0 0 3px #25d0d7;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  left: 0.75rem;
+  outline: 3px solid #25d0d7;
+  outline-offset: 2px;
+}
+
+html {
+  overflow-x: clip;
+}
+
+body {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+.kicker,
+footer .small,
+.small {
+  color: #b4c5d4;
+}
+
+.legal p,
+.legal li,
+.lede ~ p a,
+main p a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+main p a:not(.btn):not(.signup-cta):not(.tiktok-chip):not(.pill):not(.primary):not(.secondary),
+.legal a:not(.btn),
+footer a {
+  text-decoration: underline;
+}
+
+.navlinks a:focus-visible,
+footer a:focus-visible,
+a.btn:focus-visible,
+.btn:focus-visible,
+a.tiktok-chip:focus-visible {
+  outline: 3px solid #25d0d7;
+  outline-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #25d0d7;
+  outline-offset: 2px;
+}
+
+.wrap {
+  max-width: min(1080px, 100%);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 390px) {
+  .navlinks {
+    display: none;
+  }
+
+  h1 {
+    font-size: clamp(1.85rem, 9vw, 2.4rem);
+  }
+
+  .tiktok-jump-row,
+  a.tiktok-chip {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
