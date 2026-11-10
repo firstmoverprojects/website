@@ -22,6 +22,16 @@ const CHOOSE_ANSWERS = "Choose Yes, No, or Not sure for each question.";
 const SALES_RULE = "Amazon's existing rule already applies: insurance within 30 days after exceeding USD 10,000 in gross proceeds in one month.";
 const AIA_RULE = "Amazon's page says Mainland China sellers must get the policy through the Amazon Insurance Accelerator (AIA) program unless Amazon agrees otherwise in writing. From Nov 2, Amazon says it will reject newly submitted policies not obtained through AIA.";
 const AMAZON_DECIDES = "Amazon decides. Check Amazon's own help pages.";
+const GUMROAD_KIT = "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit";
+const BEYOND_HEADING = "What the $29 kit adds beyond a free check";
+const BEYOND_INTRO = "The free check lists mismatches in the certificate text you paste. It stays in your browser. The $29 kit is a downloadable ZIP you keep.";
+const BEYOND_BULLETS = [
+  "That download is a 12-file ZIP: a policy-terms checklist that quotes Amazon word for word, a COI pre-submission checker, a category screen, a broker email, and an Excel workbook.",
+  "A copy-paste broker email that asks for the exact certificate wording. The free check gives you a fix list, not that email.",
+  "The field review covers additional insured versus certificate holder, and an exact legal-entity name match, including the single-member LLC trade-name exception."
+];
+const BEYOND_NOTE = "The kit is an organizing tool, not insurance.";
+const DEADLINE_PAGE = path.join(ROOT, "deadlines/amazon-insurance-nov-2.html");
 const LEADS = {
   none: "Because you answered no to enhanced-safety categories, no to USD 10,000 in gross proceeds in any one month, and no to a business based in Mainland China, neither rule appears to apply right now, but Amazon may request insurance at any time ('or if otherwise requested by us'). If the notice came from an old listing you no longer sell, try deleting it first, at no cost.",
   category: "Because you said no, your Amazon.com products do not fall in a category with enhanced safety listing requirements. Good fit if you got Amazon's $1M insurance notice and sell in an enhanced-safety category. If the notice came from an old listing you no longer sell, try deleting it first, at no cost.",
@@ -52,8 +62,21 @@ test("result copy stays on the page facts and keeps the house lines", () => {
   assert.equal(html.includes("Because you still have lines on your certificate to check by hand before you upload it to Amazon, the kit has "), true);
   assert.equal(html.includes("Because the seven key terms on your certificate look right, the kit is optional. It is "), true);
   assert.equal(html.includes("look right for Amazon's rule in effect since Nov 2, 2026."), true);
-  assert.equal(html.includes("12-file"), false);
-  assert.equal(html.includes("Excel workbook"), false);
+  const beyondAt = html.indexOf('id="kit-beyond"');
+  const beyond = html.slice(html.indexOf(">", beyondAt) + 1, html.indexOf("</div>", beyondAt));
+  const outsideBeyond = html.slice(0, beyondAt) + html.slice(html.indexOf("</div>", beyondAt));
+  assert.equal(beyond.includes(BEYOND_HEADING), true);
+  assert.equal(beyond.includes(BEYOND_INTRO), true);
+  for (const bullet of BEYOND_BULLETS) assert.equal(beyond.includes(bullet), true, bullet);
+  assert.equal(beyond.includes(BEYOND_NOTE), true);
+  assert.equal(beyond.split("12-file").length - 1, 1);
+  assert.equal(beyond.split("Excel workbook").length - 1, 1);
+  assert.equal(outsideBeyond.includes("12-file"), false);
+  assert.equal(outsideBeyond.includes("Excel workbook"), false);
+  const beyondLinks = [...beyond.matchAll(/<a\b[^>]*href="([^"]+)"/gi)].map((match) => match[1].replace(/&amp;/g, "&"));
+  assert.equal(beyondLinks.length, 1);
+  assert.equal(beyondLinks[0].startsWith(GUMROAD_KIT), true, beyondLinks[0]);
+  assert.equal(new URL(beyondLinks[0]).pathname, "/l/amazon-1m-insurance-readiness-kit");
   assert.equal(LEADS.fix.includes("before Nov 2"), false);
   assert.equal(LEADS.check.includes("before Nov 2"), false);
   assert.equal(LEADS.ontrack.includes("before Nov 2"), false);
@@ -177,6 +200,12 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
         wanted: url.searchParams.get("wanted"),
         click: link.getAttribute("data-goatcounter-click"),
         steps: document.querySelectorAll("#next-steps li").length,
+        beyondVisible: visible(document.getElementById("kit-beyond")),
+        beyondHeading: document.querySelector("#kit-beyond h3").textContent,
+        beyondIntro: document.querySelector("#kit-beyond p").textContent,
+        beyondItems: Array.from(document.querySelectorAll("#kit-beyond li"), (node) => node.textContent),
+        beyondNote: document.querySelectorAll("#kit-beyond p")[1].textContent,
+        beyondLinks: Array.from(document.querySelectorAll("#kit-beyond a"), (node) => node.href),
         boxTop: box.getBoundingClientRect().top,
         linkTop: link.getBoundingClientRect().top,
         refundTop: refund.getBoundingClientRect().top,
@@ -294,7 +323,18 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
       if (item.key === "ontrack") assert.equal(state.lead.startsWith("Because the "), true, label);
       else assert.equal(state.lead.startsWith("Because you "), true, label);
       assert.equal(state.deadline, item.deadline, label);
-      assert.equal(state.card.includes("12-file"), false, label);
+      assert.equal(state.beyondHeading, BEYOND_HEADING, label);
+      assert.equal(state.beyondIntro, BEYOND_INTRO, label);
+      assert.deepEqual(state.beyondItems, BEYOND_BULLETS, label);
+      assert.equal(state.beyondNote, BEYOND_NOTE, label);
+      assert.equal(state.beyondVisible, !item.nofit, label);
+      assert.equal(state.beyondLinks.length, 1, label + " " + state.beyondLinks.join(","));
+      for (const href of state.beyondLinks) {
+        const kitUrl = new URL(href);
+        assert.equal(kitUrl.protocol, "https:", label);
+        assert.equal(kitUrl.hostname, "firstmoverprojects.gumroad.com", label);
+        assert.equal(kitUrl.pathname, "/l/amazon-1m-insurance-readiness-kit", label);
+      }
       assert.equal(state.card.includes("before Nov 2"), false, label);
       if (item.problem instanceof RegExp) assert.match(state.problem, item.problem, label);
       else assert.equal(state.problem, item.problem, label);
@@ -401,4 +441,25 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
   assert.equal(kept.content, "amazon-coi-result-fix");
   await taggedContext.close();
   await browser.close();
+});
+
+test("the deadline page kit block quotes the same additions and one Gumroad link", () => {
+  const deadline = readFileSync(DEADLINE_PAGE, "utf8");
+  assert.equal(deadline.includes("\u2014"), false);
+  assert.equal(deadline.includes("\u2013"), false);
+  assert.equal(deadline.includes("&mdash;"), false);
+  const at = deadline.indexOf('id="kit-beyond"');
+  assert.notEqual(at, -1);
+  const block = deadline.slice(deadline.indexOf(">", at) + 1, deadline.indexOf("</div>", at));
+  assert.equal(block.includes(BEYOND_HEADING), true);
+  assert.equal(block.includes(BEYOND_INTRO), true);
+  for (const bullet of BEYOND_BULLETS) assert.equal(block.includes(bullet), true, bullet);
+  assert.equal(block.includes(BEYOND_NOTE), true);
+  const links = [...block.matchAll(/<a\b[^>]*href="([^"]+)"/gi)].map((match) => match[1].replace(/&amp;/g, "&"));
+  assert.equal(links.length, 1);
+  assert.equal(links[0].startsWith(GUMROAD_KIT + "?"), true, links[0]);
+  const url = new URL(links[0]);
+  assert.equal(url.hostname, "firstmoverprojects.gumroad.com");
+  assert.equal(url.pathname, "/l/amazon-1m-insurance-readiness-kit");
+  assert.equal(block.includes("Get the full kit, $29"), true);
 });
