@@ -33,6 +33,11 @@ const QUIET_TOOLS = new Set([
   "tools/tx-franchise-report-check/index.html"
 ]);
 const COUNT = '<script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>';
+// PR 130 owns these pages. Their helpers still record "/event/..." so this branch does not edit them.
+const PR130_PAGES = new Set([
+  "tools/fire-to-iris-check/index.html",
+  "deadlines/irs-fire-retirement-nov-19.html"
+]);
 const BANNED = ["XMLHttpRequest", "localStorage", "sessionStorage", "indexedDB"];
 
 function read(rel) {
@@ -161,7 +166,13 @@ test("tracking pages load the test-exclude helper before count.js", () => {
       assert.equal(html.split('src="https://gc.zgo.at/count.js"').length - 1, 0, rel);
       continue;
     }
-    assert.equal(helperBody(html), canonical, rel);
+    if (PR130_PAGES.has(rel)) {
+      const body = helperBody(html);
+      assert.match(body, /"\/event\/tiktok-follow-click-"/, rel);
+      assert.equal(body.replace('"/event/tiktok-follow-click-"', '"event/tiktok-follow-click-"'), canonical, rel);
+    } else {
+      assert.equal(helperBody(html), canonical, rel);
+    }
     const helperAt = html.indexOf("function trackGumroadClick");
     const countAt = html.indexOf(COUNT);
     assert.ok(helperAt !== -1 && countAt !== -1 && helperAt < countAt, rel);
@@ -353,7 +364,7 @@ function clickTikTok(listeners, slug, type = "click", button = 0) {
   });
 }
 
-test("TikTok follow clicks record /event/tiktok-follow-click and test visits use TEST-EXCLUDE-", () => {
+test("TikTok follow clicks record event/tiktok-follow-click and test visits use TEST-EXCLUDE-", () => {
   const live = loadHelper("");
   const fetches = [];
   live.sandbox.fetch = (url, opts) => {
@@ -363,11 +374,11 @@ test("TikTok follow clicks record /event/tiktok-follow-click and test visits use
   live.sandbox.navigator = { sendBeacon(url) { return url; } };
   clickTikTok(live.listeners, "amazon-coi-check");
   assert.deepEqual(live.counts, [{
-    path: "/event/tiktok-follow-click-amazon-coi-check",
+    path: "event/tiktok-follow-click-amazon-coi-check",
     title: "TikTok follow click: amazon-coi-check",
     event: true
   }]);
-  assert.match(fetches[0].url, /p=%2Fevent%2Ftiktok-follow-click-amazon-coi-check/);
+  assert.match(fetches[0].url, /p=event%2Ftiktok-follow-click-amazon-coi-check/);
   assert.equal(fetches[0].opts.keepalive, true);
   assert.equal(fetches[0].opts.mode, "no-cors");
 
@@ -379,8 +390,8 @@ test("TikTok follow clicks record /event/tiktok-follow-click and test visits use
   };
   testVisit.sandbox.navigator = { sendBeacon() { return true; } };
   clickTikTok(testVisit.listeners, "etsy-photo-audit-check");
-  assert.equal(testVisit.counts[0].path, "TEST-EXCLUDE-/event/tiktok-follow-click-etsy-photo-audit-check");
-  assert.match(testFetches[0].url, /p=TEST-EXCLUDE-%2Fevent%2Ftiktok-follow-click-etsy-photo-audit-check/);
+  assert.equal(testVisit.counts[0].path, "TEST-EXCLUDE-event/tiktok-follow-click-etsy-photo-audit-check");
+  assert.match(testFetches[0].url, /p=TEST-EXCLUDE-event%2Ftiktok-follow-click-etsy-photo-audit-check/);
 
   const bad = loadHelper("");
   bad.sandbox.fetch = () => Promise.resolve();
