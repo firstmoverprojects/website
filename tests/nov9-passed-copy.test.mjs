@@ -71,11 +71,14 @@ test("unguarded copy does not treat Nov 9, 2026 as still upcoming", () => {
   assert.match(finder, /Nov\. 9, 2026 was the last day to make changes to FIRE IR Applications for TCC; those applications are now read-only and retained for historical reference\./);
   const data = JSON.parse(finder.match(/<script type="application\/json" id="finder-data">([\s\S]*?)<\/script>/)[1]);
   const fire = data.items.find((item) => item.id === "irs-fire");
-  assert.equal(fire.key_dates[1].text, "Nov 9, 2026 was the last day to make changes to IR Applications for TCCs; those applications are now read-only.");
+  assert.match(finder, /<strong>passed on Nov 9, 2026<\/strong>: Last day to make changes to IR Applications for TCCs; those applications are now read-only\./);
+  assert.equal(fire.key_dates[1].text, "Last day to make changes to IR Applications for TCCs; those applications are now read-only.");
   assert.equal(fire.key_dates[2].text, "Last day to file information returns through FIRE.");
   assert.equal(fire.prompt_text.includes("before the November 19 last FIRE filing day"), true);
   assert.match(read("deadlines/feed.xml"), /Nov 9, 2026 was the last day to change FIRE IR Applications for TCC/);
   assert.match(read("llms.txt"), /Nov 9, 2026 was the last day to make changes to FIRE IR Applications for TCC and those applications are now read-only/);
+  assert.equal(read("llms.txt").includes("- [IRS FIRE to IRIS Readiness & 1099 CSV Header Check](https://firstmoverprojects.com/tools/fire-to-iris-check/): Free in-browser check for the IRS FIRE to IRIS switch: Nov 1, 2026 (test filings, passed), Nov 9, 2026 (last day to change FIRE IR Applications for TCC, now read-only) and Nov 19, 2026 at 3 p.m. ET (last FIRE filing day), plus IRIS TCC steps and 1099 CSV export header columns (no upload)."), true);
+  assert.equal(read("tools/index.html").includes("Nov 1, 2026 was the last day for FIRE test filings. Nov 9, 2026 was the last day to make changes to FIRE IR Applications for TCC; those applications are now read-only. The last day to file through FIRE is Nov 19, 2026 (3 p.m. ET), and IRIS is the only IRS e-filing system for information returns after Jan. 1, 2027. Check your TCC steps and 1099 CSV column headers in your browser."), true);
 });
 
 test("robots.txt disallows /event/ and keeps the existing groups", () => {
