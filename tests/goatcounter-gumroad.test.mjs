@@ -32,7 +32,7 @@ const QUIET_TOOLS = new Set([
   "tools/sba-surety-fee-check/index.html",
   "tools/tx-franchise-report-check/index.html"
 ]);
-const COUNT = '<script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>';
+const COUNT = '<script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" data-goatcounter-settings="{&quot;no_events&quot;:true}" async src="https://gc.zgo.at/count.js"></script>';
 const BANNED = ["XMLHttpRequest", "localStorage", "sessionStorage", "indexedDB"];
 
 function read(rel) {
@@ -148,6 +148,10 @@ test("tracking pages load the test-exclude helper before count.js", () => {
   const canonical = helperBody(read("tools/amazon-coi-check/index.html"));
   assert.match(canonical, /window\.goatcounter = \{ path: function \(p\) \{ return "TEST-EXCLUDE" \+ p; \} \}/);
   assert.match(canonical, /gumroad-click\//);
+  assert.match(canonical, /function sendGcEvent/);
+  assert.match(canonical, /click-fire-kit/);
+  assert.match(canonical, /click-amazon-kit/);
+  assert.match(canonical, /click-etsy-kit/);
   assert.equal(canonical.includes('"/event/tiktok-follow-click-"'), false);
   assert.match(canonical, /\["", "event", "tiktok-follow-click-"\]\.join\("\/"\)/);
   assert.match(canonical, /TEST-EXCLUDE-/);
@@ -251,7 +255,14 @@ test("test visits prefix data-goatcounter-click and live visits do not", () => {
     button: 0,
     target: { closest: () => footer }
   });
-  assert.equal(testVisit.counts.at(-1).path, "TEST-EXCLUDE/gumroad-click/lnfgc");
+  assert.equal(
+    testVisit.counts.some((item) => item.path === "TEST-EXCLUDE/gumroad-click/lnfgc"),
+    true
+  );
+  assert.equal(
+    testVisit.counts.some((item) => item.path === "TEST-EXCLUDE/click-etsy-kit"),
+    true
+  );
 
   const live = loadHelper("");
   assert.equal(live.listeners["capture:click"], undefined);
@@ -270,7 +281,10 @@ test("test visits prefix data-goatcounter-click and live visits do not", () => {
     target: { closest: () => liveAnchor }
   });
   assert.equal(liveAnchor.attrs["data-goatcounter-click"], "cta/fire-check-top");
-  assert.equal(live.counts[0].path, "gumroad-click/lnfgc");
+  assert.deepEqual(
+    live.counts.map((item) => item.path),
+    ["cta/fire-check-top", "gumroad-click/lnfgc", "click-etsy-kit"]
+  );
 });
 
 test("checkout clicks record gumroad-click/slug and test visits stay under TEST-EXCLUDE", () => {
@@ -289,17 +303,25 @@ test("checkout clicks record gumroad-click/slug and test visits stay under TEST-
     }
   };
   click(live.listeners, href);
-  assert.equal(fetches.length, 1);
+  assert.equal(fetches.length, 2);
   assert.equal(fetches[0].opts.keepalive, true);
   assert.equal(fetches[0].opts.mode, "no-cors");
   assert.match(fetches[0].url, /^https:\/\/firstmoverprojects\.goatcounter\.com\/count\?/);
   assert.match(fetches[0].url, /p=gumroad-click%2Famazon-1m-insurance-readiness-kit/);
+  assert.match(fetches[1].url, /p=click-amazon-kit/);
   assert.deepEqual(beacons, fetches.map((item) => item.url));
-  assert.deepEqual(live.counts, [{
-    path: "gumroad-click/amazon-1m-insurance-readiness-kit",
-    title: "Gumroad checkout click: amazon-1m-insurance-readiness-kit",
-    event: true
-  }]);
+  assert.deepEqual(live.counts, [
+    {
+      path: "gumroad-click/amazon-1m-insurance-readiness-kit",
+      title: "Gumroad checkout click: amazon-1m-insurance-readiness-kit",
+      event: true
+    },
+    {
+      path: "click-amazon-kit",
+      title: "Kit buy click: click-amazon-kit",
+      event: true
+    }
+  ]);
   assert.equal(live.sandbox.goatcounter.path, undefined);
 
   for (const search of ["?fmp_test=1", "?utm_source=fmp_test_exclude", "?utm_campaign=kit&fmp_test=1"]) {
@@ -319,10 +341,12 @@ test("checkout clicks record gumroad-click/slug and test visits stay under TEST-
     };
     click(testVisit.listeners, href);
     assert.equal(testVisit.counts[0].path, "TEST-EXCLUDE/gumroad-click/amazon-1m-insurance-readiness-kit");
+    assert.equal(testVisit.counts[1].path, "TEST-EXCLUDE/click-amazon-kit");
     assert.match(fetches[0].url, /p=TEST-EXCLUDE%2Fgumroad-click%2Famazon-1m-insurance-readiness-kit/);
+    assert.match(fetches[1].url, /p=TEST-EXCLUDE%2Fclick-amazon-kit/);
     assert.equal(fetches[0].opts.keepalive, true);
     assert.equal(fetches[0].opts.mode, "no-cors");
-    assert.equal(beacons[0], fetches[0].url);
+    assert.equal(beacons.length, 2);
   }
 
   const ignored = loadHelper("?fmp_test=12");
@@ -331,7 +355,26 @@ test("checkout clicks record gumroad-click/slug and test visits stay under TEST-
   click(ignored.listeners, "https://example.com/l/lnfgc?wanted=true");
   click(ignored.listeners, href, "auxclick", 2);
   click(ignored.listeners, href, "auxclick", 1);
-  assert.deepEqual(ignored.counts.map((item) => item.path), ["gumroad-click/amazon-1m-insurance-readiness-kit"]);
+  assert.deepEqual(ignored.counts.map((item) => item.path), [
+    "gumroad-click/amazon-1m-insurance-readiness-kit",
+    "click-amazon-kit"
+  ]);
+});
+
+test("kit slug clicks also record click-fire-kit, click-amazon-kit, and click-etsy-kit", () => {
+  const samples = [
+    ["https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true", "click-fire-kit"],
+    ["https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true", "click-amazon-kit"],
+    ["https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true", "click-etsy-kit"]
+  ];
+  for (const [href, kitPath] of samples) {
+    const live = loadHelper("");
+    live.sandbox.fetch = () => Promise.resolve();
+    live.sandbox.navigator = { sendBeacon() { return true; } };
+    click(live.listeners, href);
+    assert.equal(live.counts.some((item) => item.path === "gumroad-click/" + href.split("/l/")[1].split("?")[0]), true, href);
+    assert.equal(live.counts.some((item) => item.path === kitPath), true, href);
+  }
 });
 
 function clickTikTok(listeners, slug, type = "click", button = 0) {
