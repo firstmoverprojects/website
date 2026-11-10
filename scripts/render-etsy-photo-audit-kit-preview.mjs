@@ -13,6 +13,15 @@ const htmlPath = path.join(root, "scripts/etsy-photo-audit-kit-preview-1280x720.
 const pngOut = path.join(root, "assets/previews/etsy-photo-audit-kit-preview-1280x720.png");
 const webpOut = path.join(root, "assets/previews/etsy-photo-audit-kit-preview-1280x720.webp");
 
+function assertWebp(filePath) {
+  const head = readFileSync(filePath).subarray(0, 12);
+  const riff = head.toString("ascii", 0, 4);
+  const webp = head.toString("ascii", 8, 12);
+  if (riff !== "RIFF" || webp !== "WEBP") {
+    throw new Error(`${filePath} is not a WebP (got ${riff}/${webp})`);
+  }
+}
+
 const html = readFileSync(htmlPath, "utf8");
 
 const browser = await chromium.launch({
@@ -26,11 +35,28 @@ await page.setContent(html, { waitUntil: "load" });
 await page.screenshot({ path: pngOut, type: "png", fullPage: false });
 await browser.close();
 
+let webpOk = false;
 try {
-  execFileSync("ffmpeg", ["-y", "-i", pngOut, "-quality", "88", webpOut], { stdio: "pipe" });
+  execFileSync(
+    "ffmpeg",
+    ["-y", "-i", pngOut, "-c:v", "libwebp", "-quality", "88", webpOut],
+    { stdio: "pipe" }
+  );
+  webpOk = true;
 } catch {
-  writeFileSync(webpOut, readFileSync(pngOut));
+  /* try cwebp */
 }
+
+if (!webpOk) {
+  try {
+    execFileSync("cwebp", ["-q", "88", pngOut, "-o", webpOut], { stdio: "pipe" });
+    webpOk = true;
+  } catch (err) {
+    throw new Error("WebP encode failed (ffmpeg and cwebp): " + (err?.message || err));
+  }
+}
+
+assertWebp(webpOut);
 
 console.log("Wrote", pngOut);
 console.log("Wrote", webpOut);
