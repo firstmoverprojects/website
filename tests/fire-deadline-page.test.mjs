@@ -49,8 +49,11 @@ test("the hero answers first, then shows the next IRS date beside the checklist"
   const nextAt = top.indexOf('id="next-irs"');
   assert.ok(answerAt !== -1 && answerAt < buyAt && buyAt < nextAt);
   assert.match(top, /This page lists the IRS FIRE retirement dates and what to do next\./);
-  assert.match(top, /run the free check and finish any IR Application for TCC changes before the next date/);
-  assert.match(top, /data-next-irs-copy="">Next IRS date: Nov 9, 2026, the last day to change your IR Application for TCC \(after that it is read-only\)\. Last day to file on FIRE: Nov 19, 2026, 3 p\.m\. ET\. <\/span>/);
+  assert.match(top, /November 9, 2026 has passed, so existing IR Applications for TCC are read-only/);
+  assert.match(top, /The next IRS date is November 19, 2026 at 3 p\.m\. ET, the last day to file on FIRE/);
+  assert.equal(top.includes("finish any IR Application for TCC changes before the next date"), false);
+  assert.equal(top.includes("Next IRS date: Nov 9, 2026"), false);
+  assert.match(top, /data-next-irs-copy="">Nov 9, 2026 has passed\. Existing IR Applications for TCC are now read-only\. Next IRS date: Nov 19, 2026, 3 p\.m\. ET, the last day to file on FIRE\. <\/span>/);
   assert.match(top, /Refunds: within 30 days if a file is corrupt or materially not as described\./);
   assert.match(top, /One PDF, 3 pages/);
   assert.equal(/Nov(?:ember)? 1\b/.test(top), false);
@@ -64,8 +67,9 @@ test("passed Nov 1 is marked passed and is not the first date", () => {
   const order = ["Nov 9, 2026", "Nov 19, 2026, 3 p.m. ET", "Jan 1, 2027", 'data-status="passed"'].map((token) => dates.indexOf(token));
   assert.deepEqual(order, order.slice().sort((a, b) => a - b));
   assert.match(dates, /data-passed-end="nov1" data-passed-base="Nov 1, 2026">Nov 1, 2026 \(passed\)/);
-  assert.match(dates, /data-passed-end="nov9" data-passed-base="Nov 9, 2026">Nov 9, 2026</);
-  assert.equal(dates.includes("Nov 9, 2026 (passed)"), false);
+  assert.match(dates, /data-passed-end="nov9" data-passed-base="Nov 9, 2026">Nov 9, 2026 \(passed\)/);
+  assert.equal(dates.includes("Nov 9, 2026 (passed)"), true);
+  assert.equal(dates.includes("November 9, 2026 is the last day"), false);
   assert.match(dates, /That date has passed\./);
 });
 
@@ -114,7 +118,10 @@ test("FAQPage JSON matches the visible questions and answers", () => {
   const blocks = [...html.matchAll(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/g)];
   const data = blocks.map((block) => JSON.parse(block[1])).find((item) => item["@type"] === "FAQPage");
   assert.ok(data);
-  assert.equal(data.dateModified, "2026-11-04");
+  assert.equal(data.dateModified, "2026-11-10");
+  assert.match(html, /<meta name="description" content="November 19, 2026 at 3 p\.m\. ET is the last FIRE filing day and the next IRS date\./);
+  assert.match(html, /property="og:image" content="https:\/\/firstmoverprojects\.com\/assets\/previews\/fire-to-iris-kit-preview-1280x720\.webp"/);
+  assert.equal(html.includes("The next IRS date is November 9, 2026"), false);
   const faq = html.slice(html.indexOf('id="faq-h"'), html.indexOf('id="src-h"'));
   const questions = [...faq.matchAll(/<summary>([\s\S]*?)<\/summary>\s*<p>([\s\S]*?)<\/p>/g)];
   assert.equal(questions.length, data.mainEntity.length);
