@@ -535,6 +535,9 @@ function decide(input) {
   if (method === "mixed" && noncard === "none") {
     return out("unsure", ["You marked both a card or payment app and a cash, check, or bank payment, and also marked that none of the payment was cash, check, or bank. Pick one."]);
   }
+  if (method === "card" && (noncard === "under" || noncard === "least")) {
+    return out("unsure", ["You marked credit card, debit card, or payment app only, and also marked a cash, check, bank transfer, or ACH amount. Pick one."]);
+  }
   if ((method === "noncard" || method === "mixed") && noncard === "unsure") {
     return out("unsure", [
       "The cash, check, bank transfer, and ACH total is the part that can go on your Form 1099-NEC. The instructions say to file when that kind of payment for services is at least $2,000 for the year. Card and payment-app goods-and-services payments stay off your Form 1099-NEC.",
@@ -558,19 +561,19 @@ function decide(input) {
       "Parts and materials that were part of the service count in the Form 1099-NEC amount. A payment for merchandise alone is not reported on Form 1099-NEC."
     ], who).concat(FILE_STEPS));
   }
-  if (noncard === "least" && (method === "mixed" || method === "card")) {
+  if (noncard === "least" && method === "mixed") {
     return out("mixed", withNotes([
       "File Form 1099-NEC only for the cash, check, bank transfer, and ACH portion. That portion is $2,000 or more.",
       "Leave the credit card, debit card, and payment-app goods-and-services portion off Form 1099-NEC. The instructions say the card company or payment app reports those payments on Form 1099-K.",
       "The Form 1099-K instructions say the de minimis threshold is disregarded for this choice. You still leave the card and payment-app portion off Form 1099-NEC when the app does not send a Form 1099-K."
     ], who).concat(FILE_STEPS));
   }
-  if (noncard === "under" && (method === "noncard" || method === "mixed" || method === "card")) {
+  if (noncard === "under" && (method === "noncard" || method === "mixed")) {
     var under = [
       "The instructions say to file Form 1099-NEC for services when you have paid at least $2,000 during the year. The cash, check, bank transfer, and ACH total here is under $2,000.",
       "For payments made before 2026, the IRS page says the reporting threshold was $600. For payments made in 2026, that page says the threshold is $2,000. This check is for 2026 payments."
     ];
-    if (method === "mixed" || method === "card") {
+    if (method === "mixed") {
       under.push("The card or payment-app goods-and-services portion is not added to that total. The card company or payment app reports it on Form 1099-K. You likely do not file a Form 1099-NEC for either portion.");
     }
     under.push("There is no Form 1099-NEC due date for this payee unless the backup withholding rule below applies.");
