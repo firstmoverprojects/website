@@ -248,7 +248,7 @@ assert(html.indexOf("default-src 'none'; style-src 'unsafe-inline'; script-src '
 assert(html.indexOf('name="referrer" content="strict-origin-when-cross-origin"') !== -1, "T6 referrer meta present");
 [
   "General guidance, not legal, tax or IT advice.",
-  "This is not insurance advice. Talk to your insurance broker. Amazon's Business Insurance verification decides whether a certificate is accepted.",
+  "This is not insurance advice. Talk to your insurance broker. Check ",
   "Not affiliated with or endorsed by Amazon.",
   "Made by First Mover Projects with AI coding tools.",
   "Your certificate text stays in this browser tab. Nothing is uploaded or saved."
@@ -329,7 +329,7 @@ assert(sitemap.indexOf("<loc>https://firstmoverprojects.com/tools/amazon-coi-che
 var deadline = fs.readFileSync(path.join(root, "deadlines", "amazon-insurance-nov-2.html"), "utf8");
 assert(deadline.indexOf('<p>Free: <a href="/tools/amazon-coi-check/">paste your certificate text and check it against Amazon\'s criteria</a> (runs in your browser, nothing uploaded).</p>') !== -1, "deadline page free-tool line");
 assert(deadline.indexOf("Amazon Insurance Certificate Checklist: What to Review Before Uploading") !== -1, "deadline checklist heading");
-assert(deadline.indexOf("Why did I receive the Nov 2, 2026 Commercial Liability Insurance email when my sales are under $10,000/month (even $1,500/month)?") !== -1, "deadline sales question");
+assert(deadline.indexOf("Can the newer requirement apply below $10,000 in monthly sales?") !== -1, "deadline sales question");
 assert(deadline.indexOf("SAMPLE SCENARIO: FICTIONAL DATA") !== -1, "deadline fictional sample label");
 assert(deadline.indexOf('src="/assets/previews/amazon-coi-kit-preview-1280x720.png"') !== -1, "deadline kit preview");
 assert(html.indexOf("Free Browser Check vs. $29 Readiness Kit") !== -1, "comparison heading");
