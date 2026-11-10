@@ -12,11 +12,12 @@ const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
 const PAGE = path.join(ROOT, "tools/amazon-coi-check/index.html");
 const html = readFileSync(PAGE, "utf8");
 const REFUND = "Refunds: within 30 days if a file is corrupt or materially not as described.";
+const THANKS = "Thanks for your time. If this isn't right for you, please share it with someone it could help.";
 const DISCLAIMER = "General guidance, not legal, tax or IT advice.";
 const BUTTON = "Get the $29 kit with broker email";
 const QUIET = "Optional: $29 kit with broker email";
 const KIT_CONTENTS = "a spreadsheet that compares what you type from your certificate with Amazon's quoted terms, a policy-terms checklist that quotes Amazon word for word, and a copy-paste broker email";
-const DELETE_STEP = "If the notice was triggered by an old discontinued or inactive ASIN you no longer sell, permanently deleting that listing from Manage Inventory, rather than only closing it, can remove the category trigger at $0 cost. If you actively sell in that category, you must upload a compliant ACORD 25 certificate of insurance.";
+const DELETE_STEP = "Check Amazon's category list and the notice in Account Health before buying anything. This page cannot see your account.";
 const CATEGORY_CHECK = "Check Amazon's category list and your Account Health page. This page can't see your account.";
 const CHOOSE_ANSWERS = "Choose Yes, No, or Not sure for each question.";
 const SALES_RULE = "Amazon's existing rule already applies: insurance within 30 days after exceeding USD 10,000 in gross proceeds in one month.";
@@ -33,8 +34,8 @@ const BEYOND_BULLETS = [
 const BEYOND_NOTE = "The kit is an organizing tool, not insurance.";
 const DEADLINE_PAGE = path.join(ROOT, "deadlines/amazon-insurance-nov-2.html");
 const LEADS = {
-  none: "Because you answered no to enhanced-safety categories, no to USD 10,000 in gross proceeds in any one month, and no to a business based in Mainland China, neither rule appears to apply right now, but Amazon may request insurance at any time ('or if otherwise requested by us'). If the notice came from an old listing you no longer sell, try deleting it first, at no cost.",
-  category: "Because you said no, your Amazon.com products do not fall in a category with enhanced safety listing requirements. Good fit if you got Amazon's $1M insurance notice and sell in an enhanced-safety category. If the notice came from an old listing you no longer sell, try deleting it first, at no cost.",
+  none: "Because you answered no to enhanced-safety categories, no to USD 10,000 in gross proceeds in any one month, and no to a business based in Mainland China, neither rule appears to apply based on those answers. Check your Account Health notice before buying anything.",
+  category: "Because you said no, your Amazon.com products do not fall in a category with enhanced safety listing requirements. Check Amazon's category list and your Account Health notice before buying anything.",
   unsure: "Because you are not sure whether any of your Amazon.com products fall in a category with enhanced safety listing requirements, check Amazon's category list and your Account Health page. This page can't see your account.",
   blank: "Because you have not chosen Yes, No, or Not sure for whether any of your Amazon.com products fall in a category with enhanced safety listing requirements, choose Yes, No, or Not sure for each question. This page cannot see your Seller Central account.",
   fix: "Because you have a certificate with items to fix before you upload it to Amazon, the kit has " + KIT_CONTENTS + ".",
@@ -71,8 +72,7 @@ test("result copy stays on the page facts and keeps the house lines", () => {
   assert.equal(beyond.includes(BEYOND_NOTE), true);
   assert.equal(beyond.split("12-file").length - 1, 1);
   assert.equal(beyond.split("Excel workbook").length - 1, 1);
-  assert.equal(outsideBeyond.includes("12-file"), false);
-  assert.equal(outsideBeyond.includes("Excel workbook"), false);
+  assert.equal(outsideBeyond.includes("What the $29 kit adds beyond a free check"), false);
   const beyondLinks = [...beyond.matchAll(/<a\b[^>]*href="([^"]+)"/gi)].map((match) => match[1].replace(/&amp;/g, "&"));
   assert.equal(beyondLinks.length, 1);
   assert.equal(beyondLinks[0].startsWith(GUMROAD_KIT), true, beyondLinks[0]);
@@ -80,14 +80,24 @@ test("result copy stays on the page facts and keeps the house lines", () => {
   assert.equal(LEADS.fix.includes("before Nov 2"), false);
   assert.equal(LEADS.check.includes("before Nov 2"), false);
   assert.equal(LEADS.ontrack.includes("before Nov 2"), false);
-  assert.equal(html.includes("Thanks for your time. If this isn't right for you, please share it with someone it could help."), true);
-  assert.equal(html.includes("Thank you for your time."), true);
-  assert.equal(html.includes("Share it with someone it could help."), true);
+  assert.equal(html.includes(THANKS), true);
+  assert.equal(html.includes("Thank you for your time."), false);
+  assert.equal(html.includes("Share it with someone it could help."), false);
   assert.equal(html.split(DISCLAIMER).length - 1 >= 3, true);
   assert.match(html, /id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described\./);
   assert.match(html, /data-goatcounter-click="cta\/amazon-coi-result-fix"/);
   assert.match(html, /utm_content=amazon-coi-result-fix/);
   assert.equal(html.includes("utm_content=coi-check-result"), false);
+  assert.equal(html.includes("old discontinued or inactive ASIN"), false);
+  assert.equal(html.includes("sellers around $1,500"), false);
+  assert.equal(html.includes("This is not insurance and First Mover Projects is not an insurance broker or agent."), true);
+  assert.equal(html.includes("Who it is not for:"), true);
+  assert.equal(html.includes("Get the 12-file ZIP on Gumroad - $29"), true);
+  assert.equal(html.includes("checked Nov 10, 2026"), true);
+  assert.equal(html.includes('<p class="kit-note"><strong>' + REFUND + '</strong> The kit cannot guarantee Amazon acceptance.</p>'), true);
+  assert.equal(html.replaceAll("Check the official sources for your case.", "").match(/official/gi), null);
+  assert.equal(html.includes("before Nov 2, 2026"), false);
+  assert.equal(html.includes("before November 2, 2026"), false);
 });
 
 test("all outcomes set the lead, offer, and gumroad click", async () => {
@@ -184,7 +194,6 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
         deadline: document.getElementById("result-deadline").textContent,
         card: document.getElementById("result-cta").textContent,
         thanks: document.querySelector("#result-cta .thanks").textContent,
-        share: document.querySelector("#result-cta .share-line").textContent,
         footerThanks: document.body.innerText.includes("Thanks for your time. If this isn't right for you, please share it with someone it could help."),
         linkText: link.textContent,
         className: link.className,
@@ -210,8 +219,7 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
         linkTop: link.getBoundingClientRect().top,
         refundTop: refund.getBoundingClientRect().top,
         disclaimerTop: disclaimer.getBoundingClientRect().top,
-        thanksTop: document.querySelector("#result-cta .thanks").getBoundingClientRect().top,
-        shareTop: document.querySelector("#result-cta .share-line").getBoundingClientRect().top
+        thanksTop: document.querySelector("#result-cta .thanks").getBoundingClientRect().top
       };
     });
   }
@@ -223,7 +231,7 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
     });
     const clip = await page.evaluate(() => {
       const start = document.getElementById("result-problem").getBoundingClientRect();
-      const end = document.querySelector("#result-cta .share-line").getBoundingClientRect();
+      const end = document.querySelector("#result-cta .thanks").getBoundingClientRect();
       const x = Math.max(0, Math.floor(start.left - 8));
       const y = Math.max(0, Math.floor(start.top - 8));
       return {
@@ -340,10 +348,9 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
       else assert.equal(state.problem, item.problem, label);
       assert.equal(state.disclaimer, DISCLAIMER, label);
       assert.equal(state.disclaimerVisible, true, label);
-      assert.equal(state.thanks, "Thank you for your time.", label);
-      assert.equal(state.share, "Share it with someone it could help.", label);
+      assert.equal(state.thanks, THANKS, label);
       assert.equal(state.footerThanks, true, label);
-      assert.ok(state.thanksTop < state.shareTop, label);
+      assert.ok(state.disclaimerTop < state.thanksTop, label);
       assert.ok(state.steps >= 1 && state.steps <= 3, label + " steps " + state.steps);
       if (item.nofit) {
         assert.equal(state.boxVisible, true, label);
@@ -462,4 +469,9 @@ test("the deadline page kit block quotes the same additions and one Gumroad link
   assert.equal(url.hostname, "firstmoverprojects.gumroad.com");
   assert.equal(url.pathname, "/l/amazon-1m-insurance-readiness-kit");
   assert.equal(block.includes("Get the full kit, $29"), true);
+  assert.equal(deadline.includes("<p><strong>" + REFUND + "</strong></p>"), true);
+  assert.equal(deadline.includes('<p class="thanks">' + THANKS + "</p>"), true);
+  assert.equal(deadline.replaceAll("Check the official sources for your case.", "").match(/official/gi), null);
+  assert.equal(deadline.includes("before Nov 2, 2026"), false);
+  assert.equal(deadline.includes("before November 2, 2026"), false);
 });
