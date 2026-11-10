@@ -2,6 +2,20 @@
 
 Static site published at https://firstmoverprojects.com from the `main` branch (GitHub Pages).
 
+## Site checks
+
+`.github/workflows/site-checks.yml` runs `scripts/check_site.mjs` on every pull request and on pushes to `main`. It reads only this checkout (no network, no browser) and fails on broken internal links or missing local assets, invalid HTML (`html-validate`, config in `.htmlvalidate.json`), JSON-LD that does not parse, public pages without a title, meta description, canonical or `og:image`, `sitemap.xml` entries without a file or public pages missing from it, Gumroad product links without the "Not affiliated with" and not-advice lines, and a broken RSS feed. Run it locally with Node 22:
+
+```bash
+npm ci --ignore-scripts
+npm run check:site
+node scripts/check_site.mjs links sitemap   # just some checks
+```
+
+Checks: `links`, `html`, `jsonld`, `meta`, `sitemap`, `house-lines`, `feed`. Pages marked `noindex` only need a title and description, and must stay out of `sitemap.xml`. Issues in files you cannot edit yet (for example, files an open PR changes) go in `scripts/site_checks_known_issues.json`, where they are reported as warnings. Remove an entry once its file is fixed.
+
+`/feed.xml` is a Jekyll stub that publishes `deadlines/feed.xml` at the site root. Edit only `deadlines/feed.xml`.
+
 ## Search indexing
 
 `sitemap.xml` `<lastmod>` values are the latest git commit date of each page. Refresh them after editing pages, before you commit:

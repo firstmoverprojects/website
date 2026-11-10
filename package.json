@@ -1,11 +1,13 @@
 {
   "name": "first-mover-projects-website",
   "private": true,
-  "description": "Dev-only safety check for the live offer pages. The site itself is static HTML.",
+  "description": "Dev-only checks for the static site: offer page safety and static site checks. The site itself is static HTML.",
   "scripts": {
-    "test:offers": "node --test --test-concurrency=1 tests/offer-page-safety.test.mjs"
+    "test:offers": "node --test --test-concurrency=1 tests/offer-page-safety.test.mjs",
+    "check:site": "node scripts/check_site.mjs"
   },
   "devDependencies": {
+    "html-validate": "11.21.0",
     "playwright": "1.65.0"
   }
 }
