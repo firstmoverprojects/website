@@ -40,7 +40,7 @@ const PAGES = [
     region: "deadline-reminder",
     heading: "Get the free weekly deadline email",
     button: "Get the free weekly deadline email",
-    note: "Your photo answers stay in this browser. The form sends only the email address you type.",
+    note: "Your photo answers stay in this browser. The form sends the email address you type, plus a tag naming this page, to Brevo, our email provider. Brevo also records when you signed up and confirmed, the IP address used, and the consent text, as proof of consent.",
     skipKitSweep: true
   }
 ];
