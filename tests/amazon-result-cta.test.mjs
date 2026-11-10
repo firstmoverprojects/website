@@ -12,6 +12,7 @@ const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
 const PAGE = path.join(ROOT, "tools/amazon-coi-check/index.html");
 const html = readFileSync(PAGE, "utf8");
 const REFUND = "Refunds: within 30 days if a file is corrupt or materially not as described.";
+const THANKS = "Thanks for your time. If this isn't right for you, please share it with someone it could help.";
 const DISCLAIMER = "General guidance, not legal, tax or IT advice.";
 const BUTTON = "Get the $29 kit with broker email";
 const QUIET = "Optional: $29 kit with broker email";
@@ -79,9 +80,9 @@ test("result copy stays on the page facts and keeps the house lines", () => {
   assert.equal(LEADS.fix.includes("before Nov 2"), false);
   assert.equal(LEADS.check.includes("before Nov 2"), false);
   assert.equal(LEADS.ontrack.includes("before Nov 2"), false);
-  assert.equal(html.includes("Thanks for your time. If this isn't right for you, please share it with someone it could help."), true);
-  assert.equal(html.includes("Thank you for your time."), true);
-  assert.equal(html.includes("Share it with someone it could help."), true);
+  assert.equal(html.includes(THANKS), true);
+  assert.equal(html.includes("Thank you for your time."), false);
+  assert.equal(html.includes("Share it with someone it could help."), false);
   assert.equal(html.split(DISCLAIMER).length - 1 >= 3, true);
   assert.match(html, /id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described\./);
   assert.match(html, /data-goatcounter-click="cta\/amazon-coi-result-fix"/);
@@ -93,6 +94,10 @@ test("result copy stays on the page facts and keeps the house lines", () => {
   assert.equal(html.includes("Who it is not for:"), true);
   assert.equal(html.includes("Get the 12-file ZIP on Gumroad - $29"), true);
   assert.equal(html.includes("checked Nov 10, 2026"), true);
+  assert.equal(html.includes('<p class="kit-note"><strong>' + REFUND + '</strong> The kit cannot guarantee Amazon acceptance.</p>'), true);
+  assert.equal(html.replaceAll("Check the official sources for your case.", "").match(/official/gi), null);
+  assert.equal(html.includes("before Nov 2, 2026"), false);
+  assert.equal(html.includes("before November 2, 2026"), false);
 });
 
 test("all outcomes set the lead, offer, and gumroad click", async () => {
@@ -189,7 +194,6 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
         deadline: document.getElementById("result-deadline").textContent,
         card: document.getElementById("result-cta").textContent,
         thanks: document.querySelector("#result-cta .thanks").textContent,
-        share: document.querySelector("#result-cta .share-line").textContent,
         footerThanks: document.body.innerText.includes("Thanks for your time. If this isn't right for you, please share it with someone it could help."),
         linkText: link.textContent,
         className: link.className,
@@ -215,8 +219,7 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
         linkTop: link.getBoundingClientRect().top,
         refundTop: refund.getBoundingClientRect().top,
         disclaimerTop: disclaimer.getBoundingClientRect().top,
-        thanksTop: document.querySelector("#result-cta .thanks").getBoundingClientRect().top,
-        shareTop: document.querySelector("#result-cta .share-line").getBoundingClientRect().top
+        thanksTop: document.querySelector("#result-cta .thanks").getBoundingClientRect().top
       };
     });
   }
@@ -228,7 +231,7 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
     });
     const clip = await page.evaluate(() => {
       const start = document.getElementById("result-problem").getBoundingClientRect();
-      const end = document.querySelector("#result-cta .share-line").getBoundingClientRect();
+      const end = document.querySelector("#result-cta .thanks").getBoundingClientRect();
       const x = Math.max(0, Math.floor(start.left - 8));
       const y = Math.max(0, Math.floor(start.top - 8));
       return {
@@ -345,10 +348,9 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
       else assert.equal(state.problem, item.problem, label);
       assert.equal(state.disclaimer, DISCLAIMER, label);
       assert.equal(state.disclaimerVisible, true, label);
-      assert.equal(state.thanks, "Thank you for your time.", label);
-      assert.equal(state.share, "Share it with someone it could help.", label);
+      assert.equal(state.thanks, THANKS, label);
       assert.equal(state.footerThanks, true, label);
-      assert.ok(state.thanksTop < state.shareTop, label);
+      assert.ok(state.disclaimerTop < state.thanksTop, label);
       assert.ok(state.steps >= 1 && state.steps <= 3, label + " steps " + state.steps);
       if (item.nofit) {
         assert.equal(state.boxVisible, true, label);
@@ -467,4 +469,9 @@ test("the deadline page kit block quotes the same additions and one Gumroad link
   assert.equal(url.hostname, "firstmoverprojects.gumroad.com");
   assert.equal(url.pathname, "/l/amazon-1m-insurance-readiness-kit");
   assert.equal(block.includes("Get the full kit, $29"), true);
+  assert.equal(deadline.includes("<p><strong>" + REFUND + "</strong></p>"), true);
+  assert.equal(deadline.includes('<p class="thanks">' + THANKS + "</p>"), true);
+  assert.equal(deadline.replaceAll("Check the official sources for your case.", "").match(/official/gi), null);
+  assert.equal(deadline.includes("before Nov 2, 2026"), false);
+  assert.equal(deadline.includes("before November 2, 2026"), false);
 });

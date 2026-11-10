@@ -248,7 +248,7 @@ assert(html.indexOf("default-src 'none'; style-src 'unsafe-inline'; script-src '
 assert(html.indexOf('name="referrer" content="strict-origin-when-cross-origin"') !== -1, "T6 referrer meta present");
 [
   "General guidance, not legal, tax or IT advice.",
-  "This is not insurance advice. Talk to your insurance broker. Check ",
+  "This is not insurance advice. Talk to your insurance broker. Check <a href=\"https://sellercentral.amazon.com/help/hub/reference/external/G200386300\" rel=\"noopener noreferrer\">Amazon's insurance page</a> before submitting a certificate.",
   "Not affiliated with or endorsed by Amazon.",
   "Made by First Mover Projects with AI coding tools.",
   "Your certificate text stays in this browser tab. Nothing is uploaded or saved."
@@ -327,6 +327,17 @@ var sitemap = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
 assert(sitemap.indexOf("<loc>https://firstmoverprojects.com/tools/amazon-coi-check/</loc>") !== -1, "sitemap loc");
 assert(sitemap.indexOf("<loc>https://firstmoverprojects.com/tools/amazon-coi-check/</loc>\n    <lastmod>2026-11-05</lastmod>") !== -1, "sitemap lastmod");
 var deadline = fs.readFileSync(path.join(root, "deadlines", "amazon-insurance-nov-2.html"), "utf8");
+var refund = "Refunds: within 30 days if a file is corrupt or materially not as described.";
+var thanks = "Thanks for your time. If this isn't right for you, please share it with someone it could help.";
+var allowedOfficial = "Check the official sources for your case.";
+assert(html.replace(allowedOfficial, "").search(/official/i) === -1, "tool page has no official wording outside the allowed footer");
+assert(deadline.replace(allowedOfficial, "").search(/official/i) === -1, "deadline page has no official wording outside the allowed footer");
+assert(html.indexOf('<p class="kit-note"><strong>' + refund + '</strong> The kit cannot guarantee Amazon acceptance.</p>') !== -1, "tool page contiguous refund line");
+assert(deadline.indexOf("<p><strong>" + refund + "</strong></p>") !== -1, "deadline contiguous refund line");
+assert(html.indexOf('<p class="thanks">' + thanks + "</p>") !== -1, "tool result exact thanks line");
+assert(deadline.indexOf('<p class="thanks">' + thanks + "</p>") !== -1, "deadline exact thanks line");
+assert(html.indexOf("before Nov 2, 2026") === -1 && html.indexOf("before November 2, 2026") === -1, "tool page has no past before-Nov-2 date");
+assert(deadline.indexOf("before Nov 2, 2026") === -1 && deadline.indexOf("before November 2, 2026") === -1, "deadline has no past before-Nov-2 date");
 assert(deadline.indexOf('<p>Free: <a href="/tools/amazon-coi-check/">paste your certificate text and check it against Amazon\'s criteria</a> (runs in your browser, nothing uploaded).</p>') !== -1, "deadline page free-tool line");
 assert(deadline.indexOf("Amazon Insurance Certificate Checklist: What to Review Before Uploading") !== -1, "deadline checklist heading");
 assert(deadline.indexOf("Can the newer requirement apply below $10,000 in monthly sales?") !== -1, "deadline sales question");
