@@ -85,6 +85,43 @@ function imageValues(node, out) {
   }
 }
 
+const E1 = "Last day to file information returns through the FIRE system. That date has passed. The FIRE page says 3 p.m. Eastern time. The news release says 3 p.m. ET.";
+const E2 = "The IRS says IRIS will be the only information returns electronic filing system, including current year, prior year, or corrections, after Jan. 1, 2027. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS.";
+const E3 = "The FIRE page says IRIS will be the only information returns electronic filing system, including current year, prior year, or corrections, after Jan. 1, 2027. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS. The IRS says current FIRE users who will e-file in IRIS themselves must complete a separate IRIS Application for TCC. If a payroll provider, accountant, or paid e-file service files for you, this may already be handled. Ask them.";
+const E1_PAGES = [
+  "deadlines/fire-to-iris-transition-checklist.html",
+  "deadlines/iris-tcc-application-how-long.html",
+  "deadlines/file-1099-nec-2027-iris.html"
+];
+const JAN1 = "IRIS will be the only information returns electronic filing system, including current year, prior year, or corrections, after Jan. 1, 2027.";
+
+test("E1 to E6 use the approved past-tense lines", () => {
+  for (const rel of E1_PAGES) {
+    const html = read(rel);
+    assert.equal(html.includes(E1), true, rel);
+    assert.equal(html.includes("Last day to file information returns through FIRE. The FIRE page says 3 p.m. Eastern time."), false, rel);
+    assert.equal(html.includes("When was the last day to file on IRS FIRE?"), true, rel);
+    assert.equal(html.includes("When is the last day to file on IRS FIRE?"), false, rel);
+  }
+  const transition = read("deadlines/fire-to-iris-transition-checklist.html");
+  assert.equal(transition.includes(E2), true);
+  assert.equal(transition.split(E3).length - 1, 2);
+  assert.equal(transition.includes("After January 1, 2027, IRIS is the only e-file system for information returns, including current year, prior year, and corrections."), false);
+  const finder = read("deadlines/finder/index.html");
+  assert.equal(finder.includes('<p class="chip">Next: Jan 1, 2027</p>'), true);
+  assert.equal(finder.includes("Next: Nov 19"), false);
+  assert.equal(finder.includes('<li class="past"><strong>passed on Nov 19, 2026, 3 p.m. ET</strong>: Last day to file information returns through FIRE.</li>'), true);
+  assert.equal(finder.includes("Anyone who e-filed Forms 1099 or other information returns through the IRS FIRE system themselves."), true);
+  assert.equal(finder.includes("who e-files"), false);
+  assert.equal(finder.split(JAN1).length - 1, 2);
+  const data = JSON.parse(finder.match(/<script type="application\/json" id="finder-data">([\s\S]*?)<\/script>/)[1]);
+  const fire = data.items.find((item) => item.id === "irs-fire");
+  assert.equal(fire.key_dates[3].text, JAN1);
+  const hub = read("deadlines/index.html");
+  assert.equal(hub.includes("Businesses that e-filed 1099s and other information returns through FIRE ("), true);
+  assert.equal(hub.includes("that e-file 1099s"), false);
+});
+
 test("share images and JSON-LD do not keep the FIRE kit preview or the kit offer", () => {
   for (const rel of PAGES) {
     const html = read(rel);
