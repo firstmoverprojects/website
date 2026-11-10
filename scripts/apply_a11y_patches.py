@@ -45,17 +45,16 @@ def is_blocked(path: Path) -> bool:
     return rel(path) in BLOCKED or "/tests/" in rel(path)
 
 
-def ensure_stylesheet(html: str, needle: str, link_tag: str) -> str:
+def ensure_stylesheet(html: str, href: str, link_tag: str) -> str:
     if link_tag in html:
         return html
-    if needle in html:
-        close = needle
-        if not needle.rstrip().endswith("/>"):
-            close = needle.rstrip() + " />"
-            html = html.replace(needle, close, 1)
-            needle = close
-        return html.replace(needle, needle + "\n    " + link_tag, 1)
-    return html
+    pattern = re.compile(
+        rf'(<link\s+rel="stylesheet"[^>]*href="{re.escape(href)}"\s*/>)',
+        re.I,
+    )
+    if not pattern.search(html):
+        return html
+    return pattern.sub(r"\1\n    " + link_tag, html, count=1)
 
 
 def ensure_skip(html: str, skip_html: str) -> str:
@@ -71,14 +70,14 @@ def ensure_main_id(html: str) -> str:
 
 
 def patch_root_legal(path: Path, html: str) -> str:
-    html = ensure_stylesheet(html, 'href="./assets/styles-Bi5nM5kw.css"', SITE_A11Y.replace("./", "./"))
+    html = ensure_stylesheet(html, "./assets/styles-Bi5nM5kw.css", SITE_A11Y)
     html = ensure_skip(html, SKIP_MAIN)
     html = ensure_main_id(html)
     return html
 
 
 def patch_index(html: str) -> str:
-    html = ensure_stylesheet(html, 'href="./assets/styles-Bi5nM5kw.css"', SITE_A11Y)
+    html = ensure_stylesheet(html, "./assets/styles-Bi5nM5kw.css", SITE_A11Y)
     if SKIP_MAIN not in html:
         html = html.replace("<body>\n    <div id=\"app\">", "<body>\n    " + SKIP_MAIN + "\n    <div id=\"app\">")
     html = re.sub(r"<main>", '<main id="main">', html, count=1)
@@ -89,11 +88,11 @@ def patch_deadline_page(path: Path, html: str) -> str:
     nested = "/index.html" in rel(path) and path.parent.name != "deadlines"
     link = DEADLINE_PATCH_NESTED if nested else DEADLINE_PATCH
     if 'href="styles.css"' in html:
-        html = ensure_stylesheet(html, 'href="styles.css"', link)
+        html = ensure_stylesheet(html, "styles.css", link)
     elif 'href="../styles.css"' in html:
-        html = ensure_stylesheet(html, 'href="../styles.css"', DEADLINE_PATCH)
+        html = ensure_stylesheet(html, "../styles.css", DEADLINE_PATCH)
     elif 'href="/deadlines/styles.css"' in html:
-        html = ensure_stylesheet(html, 'href="/deadlines/styles.css"', GAMES_PATCH)
+        html = ensure_stylesheet(html, "/deadlines/styles.css", GAMES_PATCH)
     return html
 
 
@@ -111,11 +110,13 @@ def patch_tool(html: str) -> str:
 
 
 def patch_games(html: str) -> str:
-    return ensure_stylesheet(html, 'href="/deadlines/styles.css"', GAMES_PATCH)
+    return ensure_stylesheet(html, "/deadlines/styles.css", GAMES_PATCH)
 
 
 def patch_help(html: str) -> str:
-    return ensure_stylesheet(html, 'href="../shopify-quickbooks-cleanup/help-article.css"', HELP_PATCH)
+    return ensure_stylesheet(
+        html, "../shopify-quickbooks-cleanup/help-article.css", HELP_PATCH
+    )
 
 
 def main() -> None:
