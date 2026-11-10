@@ -14,7 +14,27 @@ const STATIC = "Next IRS date: Nov 9, 2026, the last day to change your IR Appli
 const NOV19_LINE = "Last day to file on FIRE: Nov 19, 2026, 3 p.m. ET. ";
 const CLOSED = "FIRE is closed. IRIS is the only IRS e-file system for information returns from Jan 1, 2027.";
 const PRODUCT = "https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist";
+const SHARE_TITLE = "IRS FIRE filing ended Nov 19, 2026 (3 p.m. ET) - Free IRIS readiness &amp; 1099 CSV check";
+const SHARE_DESC = "Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE. IRIS is the only system after Jan. 1, 2027. Nov 9, 2026 was the last day to change IR Applications for TCC, and those applications are now read-only.";
 const FOOTER = "First Mover Projects, PO Box 98, Firth, NE 68358. firstmoverprojects@gmail.com. General guidance, not legal, tax or IT advice. Check the IRS's own pages for your case. Not affiliated with any vendor named on this page. Names are used only to describe compatibility.";
+
+function metaContent(source, attr, name) {
+  const match = source.match(new RegExp(`<meta ${attr}="${name}" content="([^"]*)"`));
+  assert.ok(match, name);
+  return match[1];
+}
+
+function descriptionValues(nodes, out) {
+  out = out || [];
+  if (Array.isArray(nodes)) {
+    for (const item of nodes) descriptionValues(item, out);
+    return out;
+  }
+  if (!nodes || typeof nodes !== "object") return out;
+  if (typeof nodes.description === "string") out.push(nodes.description);
+  for (const value of Object.values(nodes)) descriptionValues(value, out);
+  return out;
+}
 
 function hero() {
   const start = html.indexOf('<section class="hero"');
@@ -104,9 +124,9 @@ test("the kit is described as one 3-page PDF and the house lines stay", () => {
   assert.equal(html.includes(FOOTER), true);
   assert.equal(html.includes("Deadlines for small businesses, in plain English, with source links."), true);
   assert.equal(html.includes("General guidance, not legal, tax or IT advice. Check the IRS's own pages and ask your tax professional for your situation. Not affiliated with the IRS. Names are used only to describe compatibility."), true);
-  const shareTitle = "FIRE filing ends Nov 19, 2026 3 p.m. ET - Free IRIS readiness &amp; 1099 CSV check";
-  assert.equal(html.split(shareTitle).length - 1, 3);
-  assert.equal(html.replaceAll(shareTitle, "").includes("\u2014"), false);
+  assert.equal(html.split(SHARE_TITLE).length - 1, 3);
+  assert.equal(html.includes("FIRE filing ends Nov 19"), false);
+  assert.equal(html.replaceAll(SHARE_TITLE, "").includes("\u2014"), false);
   assert.equal(html.includes("\u2013"), false);
   assert.equal(html.includes("&mdash;"), false);
   assert.equal(/\bofficial\b/i.test(html), false);
@@ -121,8 +141,31 @@ test("FAQPage JSON matches the visible questions and answers", () => {
   const data = blocks.map((block) => JSON.parse(block[1])).find((item) => item["@type"] === "FAQPage");
   assert.ok(data);
   assert.equal(data.dateModified, "2026-11-10");
-  assert.match(html, /<meta name="description" content="November 19, 2026 at 3 p\.m\. ET is the last FIRE filing day and the next IRS date\./);
+  assert.equal(metaContent(html, "name", "description"), SHARE_DESC);
+  assert.equal(metaContent(html, "property", "og:title"), SHARE_TITLE);
+  assert.equal(metaContent(html, "property", "og:description"), SHARE_DESC);
+  assert.equal(metaContent(html, "name", "twitter:title"), SHARE_TITLE);
+  assert.equal(metaContent(html, "name", "twitter:description"), SHARE_DESC);
+  assert.equal(html.includes("is the last FIRE filing day and the next IRS date"), false);
+  assert.equal(html.includes("Optional $9 checklist."), false);
+  for (const text of [SHARE_TITLE, SHARE_DESC]) {
+    assert.equal(text.includes("$9"), false, text);
+    assert.equal(/checklist/i.test(text), false, text);
+    assert.equal(/FIRE closes/i.test(text), false, text);
+    assert.equal(text.includes("\u2014"), false, text);
+  }
+  const graph = blocks.map((block) => JSON.parse(block[1])).find((item) => Array.isArray(item["@graph"]));
+  const article = graph["@graph"].find((item) => item["@type"] === "Article");
+  assert.equal(article.description, SHARE_DESC);
+  assert.deepEqual(descriptionValues(blocks.map((block) => JSON.parse(block[1]))), [SHARE_DESC]);
+  assert.equal(html.includes('id="product-jsonld"'), false);
+  assert.equal(html.includes("priceValidUntil"), false);
+  assert.equal(/"@type":\s*"Product"/.test(html), false);
+  assert.equal(/"@type":\s*"Offer"/.test(html), false);
   assert.match(html, /property="og:image" content="https:\/\/firstmoverprojects\.com\/assets\/previews\/fire-to-iris-kit-preview-1280x720\.webp"/);
+  const sitemap = readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
+  assert.match(sitemap, /<loc>https:\/\/firstmoverprojects\.com\/deadlines\/irs-fire-retirement-nov-19\.html<\/loc>\s*<lastmod>2026-11-19<\/lastmod>/);
+  assert.match(sitemap, /<loc>https:\/\/firstmoverprojects\.com\/tools\/fire-to-iris-check\/<\/loc>\s*<lastmod>2026-11-19<\/lastmod>/);
   assert.equal(html.includes("The next IRS date is November 9, 2026"), false);
   const faq = html.slice(html.indexOf('id="faq-h"'), html.indexOf('id="src-h"'));
   const questions = [...faq.matchAll(/<summary>([\s\S]*?)<\/summary>\s*<p>([\s\S]*?)<\/p>/g)];
