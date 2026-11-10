@@ -1,5 +1,6 @@
-# Free static checks for the whole site: internal links and assets, HTML validity,
-# JSON-LD, page meta tags, sitemap.xml, Gumroad house lines, and the RSS feed.
+# Free static checks for the whole site: internal links and assets, image extensions,
+# HTML validity, JSON-LD, title/description meta, denylist strings (scripts/site_denylist.txt),
+# sitemap.xml, Gumroad house lines, and the RSS feed.
 # Reads the checkout only. No secrets, no paid services, no network calls to third parties.
 
 name: Site checks

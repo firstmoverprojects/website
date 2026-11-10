@@ -1,0 +1,11 @@
+# Retired copy, wrong prices, and bad product links (substring match, case-insensitive).
+# One pattern per line. Lines starting with # and blank lines are ignored.
+# To block new stale text after a product or price change, add a distinctive phrase here
+# (for example the old badge line or Gumroad slug). Keep patterns specific enough
+# that legitimate IRS/tax copy (such as FUTA over $500) is not caught by accident.
+Get the full kit, $500
+gumroad.com/l/fire-to-iris-kit
+· $149</span>
+LOOM SEAT AUDIT · $29
+EARLY-ACCESS WAITLIST · $500
+2-page pdf
