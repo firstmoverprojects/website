@@ -41,6 +41,13 @@ async function check(pagePath, fn, frozenIso) {
 
 const FIRE_BEFORE_CUTOFF = DEFAULT_FROZEN;
 const FIRE_AFTER_CUTOFF = "2026-11-19T21:00:00.000Z";
+const FIRE_CUTOFF_ONE_SEC_BEFORE = "2026-11-19T19:59:59.000Z";
+const FIRE_CUTOFF_INSTANT = "2026-11-19T20:00:00.000Z";
+
+const FIRE_POST140_NEED_TCC =
+  "You still need a separate IRIS Application for TCC. FIRE filing ended Nov 19, 2026 at 3 p.m. ET.";
+const FIRE_POST140_OPEN2026 =
+  "FIRE filing ended Nov 19, 2026 at 3 p.m. ET. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS.";
 
 async function fireEra(page) {
   const title = await page.title();
@@ -765,5 +772,42 @@ test("FIRE to IRIS check after Nov 19 cutoff uses post-cutoff copy and hides kit
       await fireBranchChecks(page, era);
     },
     FIRE_AFTER_CUTOFF
+  );
+});
+
+async function assertFirePost140ExactBranches(page) {
+  await assertLive(page, "#results");
+  await page.locator("#c-self").check();
+  await page.locator("#go").click();
+  assert.equal(await page.locator("#result-problem").innerText(), FIRE_POST140_NEED_TCC);
+  await page.locator("#c-iris-tcc").check();
+  await page.locator("#c-open-2026").check();
+  await page.locator("#go").click();
+  assert.equal(await page.locator("#result-problem").innerText(), FIRE_POST140_OPEN2026);
+}
+
+test("FIRE to IRIS check one second before Nov 19 3 p.m. ET keeps kit and countdown", async () => {
+  await check(
+    "/tools/fire-to-iris-check/",
+    async (page) => {
+      const era = await fireEra(page);
+      assert.match(await page.locator("#next-irs").innerText(), FIRE_NEXT_IRS_COUNTDOWN);
+      assert.equal(await page.locator("#kit-top").isVisible(), true);
+      if (era === "post140") await assertFirePost140ExactBranches(page);
+    },
+    FIRE_CUTOFF_ONE_SEC_BEFORE
+  );
+});
+
+test("FIRE to IRIS check at Nov 19 3 p.m. ET hides kit and shows post-cutoff copy", async () => {
+  await check(
+    "/tools/fire-to-iris-check/",
+    async (page) => {
+      const era = await fireEra(page);
+      assert.match(await page.locator("#next-irs").innerText(), FIRE_NEXT_IRS_CLOSED[era]);
+      assert.equal(await page.locator("#kit-top").isHidden(), true);
+      if (era === "post140") await assertFirePost140ExactBranches(page);
+    },
+    FIRE_CUTOFF_INSTANT
   );
 });
