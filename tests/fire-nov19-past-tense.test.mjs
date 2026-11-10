@@ -99,7 +99,15 @@ test("both FIRE pages use past tense for Nov 19 and drop future filing lines", (
     assert.ok(dates.length > 0, rel);
     for (const date of dates) assert.equal(date, "2026-11-19", rel + " " + date);
     assert.equal(html.includes(R3), true, rel);
-    assert.equal(JSON.stringify([...html.matchAll(/<script type="application\/ld\+json"[\s\S]*?<\/script>/g)]).includes("What is in the $9 checklist"), false, rel);
+    assert.equal(html.includes('property="og:image" content="https://firstmoverprojects.com/assets/fmp-logo-460.png"') || html.includes('property="og:image" content="https://firstmoverprojects.com/assets/fmp-logo-460.png" />'), true, rel);
+    assert.equal(html.includes("kit-preview"), html.includes("/assets/previews/fire-to-iris-kit-preview-1280x720"), rel);
+    assert.equal((html.match(/og:image" content="[^"]*kit-preview/g) || []).length, 0, rel);
+    assert.equal((html.match(/twitter:image" content="[^"]*kit-preview/g) || []).length, 0, rel);
+    assert.equal(html.includes('name="twitter:card" content="summary"') || html.includes('name="twitter:card" content="summary" />'), true, rel);
+    assert.equal(html.includes("summary_large_image"), false, rel);
+    const jsonBlocks = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].map((block) => JSON.parse(block[1]));
+    assert.equal(JSON.stringify(jsonBlocks).includes("checklist"), false, rel);
+    assert.equal(JSON.stringify(jsonBlocks).includes("kit-preview"), false, rel);
   }
 });
 
@@ -264,6 +272,10 @@ test("after the cutoff a finished check hides the result kit box, and before it 
       assert.equal(after.boxHidden, true, JSON.stringify(flags));
       for (const phrase of KIT_BANS) {
         assert.equal(after.text.includes(phrase), false, phrase + " " + JSON.stringify(flags));
+      }
+      if (flags.self && !flags.iris && !flags.open) {
+        assert.equal(after.text.includes("flagged before the November"), false, JSON.stringify(flags));
+        assert.equal(after.text.includes("item to follow up on was flagged from your selections."), true, JSON.stringify(flags));
       }
       const before = await run("2026-11-19T19:59:59.000Z", flags);
       assert.equal(before.boxHidden, false, JSON.stringify(flags));

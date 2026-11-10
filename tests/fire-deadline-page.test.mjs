@@ -164,7 +164,7 @@ test("FAQPage JSON matches the visible questions and answers", () => {
   assert.equal(html.includes("priceValidUntil"), false);
   assert.equal(/"@type":\s*"Product"/.test(html), false);
   assert.equal(/"@type":\s*"Offer"/.test(html), false);
-  assert.match(html, /property="og:image" content="https:\/\/firstmoverprojects\.com\/assets\/previews\/fire-to-iris-kit-preview-1280x720\.webp"/);
+  assert.match(html, /property="og:image" content="https:\/\/firstmoverprojects\.com\/assets\/fmp-logo-460\.png"/);
   const sitemap = readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
   assert.match(sitemap, /<loc>https:\/\/firstmoverprojects\.com\/deadlines\/irs-fire-retirement-nov-19\.html<\/loc>\s*<lastmod>2026-11-19<\/lastmod>/);
   assert.match(sitemap, /<loc>https:\/\/firstmoverprojects\.com\/tools\/fire-to-iris-check\/<\/loc>\s*<lastmod>2026-11-19<\/lastmod>/);
