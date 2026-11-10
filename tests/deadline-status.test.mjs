@@ -123,12 +123,12 @@ test("detail pages and the finder use the same status wording", () => {
   assert.match(read("deadlines/zenbusiness-banking-closure.html"), /Accounts close Nov 30/);
   assert.match(read("deadlines/zenbusiness-banking-closure.html"), /Deposits stopped Nov 3/);
   const finder = read("deadlines/finder/index.html");
-  for (const stale of ["Next: Nov 1, 2026", "Next: Nov 2, 2026", "Next: Nov 3, 2026", "Next: Nov 4, 2026"]) {
+  for (const stale of ["Next: Nov 1, 2026", "Next: Nov 2, 2026", "Next: Nov 3, 2026", "Next: Nov 4, 2026", "Next: Nov 9, 2026"]) {
     assert.equal(finder.includes(stale), false, stale);
   }
   assert.match(finder, /Took effect Nov 1/);
   assert.match(finder, /Until Jan 31, 2027/);
-  assert.match(finder, /Next: Nov 9, 2026/);
+  assert.match(finder, /Next: Nov 19, 2026, 3 p\.m\. ET/);
   assert.match(finder, /Next: Nov 10, 2026/);
   assert.match(finder, /Next: Nov 30, 2026/);
 });

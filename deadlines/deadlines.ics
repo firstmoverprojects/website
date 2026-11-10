@@ -145,7 +145,7 @@ UID:irs-fire-tcc-20261109@firstmoverprojects.com
 DTSTAMP:20261013T194913Z
 DTSTART;VALUE=DATE:20261109
 DTEND;VALUE=DATE:20261110
-SUMMARY:IRS FIRE: last day to change IR Applications for TCC
+SUMMARY:Nov 9, 2026 was the last day to change FIRE IR Applications for TCC
 DESCRIPTION:Who: Businesses that file through FIRE\nWhat to check: Check 
  whether an IRIS Application for TCC is started (the IRS says current FIRE
   users must complete a separate IRIS Application for TCC).\nOfficial sour
@@ -158,7 +158,8 @@ URL:https://firstmoverprojects.com/deadlines/irs-fire-retirement-nov-19.h
 TRANSP:TRANSPARENT
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:IRS FIRE: last day to change IR Applications for TCC
+DESCRIPTION:Nov 9, 2026 was the last day to change FIRE IR Applicatio
+ ns for TCC
 TRIGGER:-P7D
 END:VALARM
 END:VEVENT
