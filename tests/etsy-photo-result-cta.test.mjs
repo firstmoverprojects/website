@@ -59,6 +59,8 @@ test("result copy stays on the page facts and keeps the house lines", () => {
   assert.equal(html.includes("Get the $9 photo checklist"), false);
   assert.equal(html.includes("Optional: $9 photo checklist on Gumroad"), true);
   assert.equal(html.includes(PRICE_NOTE), true);
+  assert.equal(html.includes("INSTANT DOWNLOAD · 3-PAGE PDF SHOT LIST + CSV LISTING AUDIT SHEET · $9"), true);
+  assert.equal(/2[- ]page/i.test(html), false);
   assert.match(html, /id="kit-offer"[^>]*>[\s\S]*id="kit-result"[\s\S]*id="kit-after-click"[^>]*>Opens Gumroad\. ZIP download after you pay \(3-page PDF \+ CSV sheet\)\. Close the tab anytime with no purchase\.<\/span><span class="kit-refund" id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described\.<\/span>/);
   assert.match(html, /id="result-kit-lead"/);
   assert.match(html, /data-goatcounter-click="cta\/etsy-photo-result-mockup"/);
