@@ -45,7 +45,7 @@ test("result copy stays on the page facts and keeps the house lines", () => {
   assert.equal(html.includes("Thank you for your time."), false);
   assert.equal(html.includes(DEADLINE), true);
   assert.equal(html.includes("\u2014"), false);
-  assert.equal(html.split(REFUND).length - 1, 4);
+  assert.equal(html.split(REFUND).length - 1, 6);
   for (const id of ["gtin-checkout", "paid-link"]) {
     const at = html.indexOf(`id="${id}"`);
     const next = html.slice(at, html.indexOf("</p>", html.indexOf("</p>", at) + 4));

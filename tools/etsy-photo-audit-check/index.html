@@ -166,6 +166,14 @@ textarea.fmp-snippet{width:100%;max-width:100%;min-height:8.5em;box-sizing:borde
 .kit-top{margin:0 0 16px}
 a#kit-top{display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;box-sizing:border-box;min-height:48px;padding:12px 18px;margin:12px 0 0;text-align:center;white-space:normal}
 .kit-note{margin:.4em 0 0;color:#5a636e;font-size:.82rem;line-height:1.4}
+.fit-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:12px 0}
+.fit-box{border:1px solid #cbd5e1;border-radius:8px;padding:10px 12px;background:#fff;min-width:0;overflow-wrap:anywhere}
+.fit-box h3{margin:0 0 4px;font-size:1rem}
+.fit-box p{margin:0}
+#is-this-for-you,#buyer-faq{overflow-wrap:anywhere;max-width:100%}
+@media (min-width:640px){
+  .fit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 @media print{.fmp-share{display:none !important}}
 input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,textarea,#fmp-embed-snippet{font-size:16px}
 input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.input--hidden),select,button{min-height:44px}
@@ -295,6 +303,71 @@ picture {
   ]
 }
 </script>
+<script type="application/ld+json" id="buyer-faq-jsonld">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "dateModified": "2026-11-11",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What exactly is the $9 kit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The $9 checklist is a file you download. It is a 3-page PDF shot list plus a CSV listing sheet, in a ZIP. It lists which photos to take for each kind of item, plus a sheet with one row per listing. The 3-page printable PDF in the ZIP has real-background shot ideas for jewelry, ceramics, clothing, home decor, craft supplies, and custom items. The CSV is a one-row-per-listing spreadsheet (Excel, Google Sheets, Numbers) to mark which listings already have an unedited real-background photo. The ZIP also includes a camera-settings safe-default checklist (turning off portrait blur, beauty mode, and AI background swaps) and Etsy's original Oct 22, 2026 handbook quotes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does delivery work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Checkout on Gumroad; instant download after payment. The $9 kit is a separate file on Gumroad. This page does not send your listings there. You can close the Gumroad tab anytime with no purchase."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if the kit does not fit, or a file is wrong?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is not an Etsy app or service. Not for checking the photo files themselves. If that is what you need, skip the kit. Refunds: within 30 days if a file is corrupt or materially not as described."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need the kit to use the free check?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. What you get free: a risk list and fix plan for up to 10 listings, a plain-text checklist, and an AI prompt you can copy. The free check runs in your browser. Nothing is uploaded. The $9 kit is a separate file on Gumroad."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the kit see my shop or my photo files?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The $9 checklist is a file you download. It lists which photos to take for each kind of item, plus a sheet with one row per listing. It is not an Etsy app or service. This page cannot see your shop, and it cannot tell whether a photo was edited or made with AI."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the shot list cover?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The 3-page printable PDF in the ZIP has real-background shot ideas for jewelry, ceramics, clothing, home decor, craft supplies, and custom items. The CSV listing sheet is one row per listing, for Excel, Google Sheets, or Numbers, to mark which listings already have an unedited real-background photo. Etsy has since allowed crop, resize, watermark, and file-format changes on the unedited photo (no AI tools, and no lighting changes). Use this page and Etsy Help for the current rule."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this an Etsy product or legal advice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It is not an Etsy app or service. General guidance, not legal, tax or IT advice. Not affiliated with or endorsed by Etsy."
+      }
+    }
+  ]
+}
+</script>
 <script type="application/ld+json" id="product-jsonld">
 {
   "@context": "https://schema.org",
@@ -338,6 +411,37 @@ picture {
 <p><a target="_blank" class="btn" id="kit-top" data-goatcounter-click="cta/etsy-photo-check-top" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=offer_page&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=etsy-photo-check-top" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 photo checklist (PDF + CSV in a ZIP)</a></p>
 <p class="kit-note">For Etsy sellers fixing listing photos before enforcement. Refunds: within 30 days if a file is corrupt or materially not as described.</p>
 </div>
+<section class="card" id="is-this-for-you" aria-labelledby="fit-h">
+<h2 id="fit-h">Is this for you?</h2>
+<div class="fit-grid">
+<div class="fit-box">
+<h3>A fit</h3>
+<p>For Etsy sellers fixing listing photos before enforcement. The $9 checklist is a file you download. It lists which photos to take for each kind of item, plus a sheet with one row per listing.</p>
+</div>
+<div class="fit-box">
+<h3>Not a fit</h3>
+<p>It is not an Etsy app or service. Not for checking the photo files themselves. This page cannot see your shop, and it cannot tell whether a photo was edited or made with AI.</p>
+</div>
+</div>
+</section>
+<section class="card" id="buyer-faq" aria-labelledby="buyer-faq-h">
+<h2 id="buyer-faq-h">FAQ</h2>
+<h3>What exactly is the $9 kit?</h3>
+<p>The $9 checklist is a file you download. It is a 3-page PDF shot list plus a CSV listing sheet, in a ZIP. It lists which photos to take for each kind of item, plus a sheet with one row per listing. The 3-page printable PDF in the ZIP has real-background shot ideas for jewelry, ceramics, clothing, home decor, craft supplies, and custom items. The CSV is a one-row-per-listing spreadsheet (Excel, Google Sheets, Numbers) to mark which listings already have an unedited real-background photo. The ZIP also includes a camera-settings safe-default checklist (turning off portrait blur, beauty mode, and AI background swaps) and Etsy's original Oct 22, 2026 handbook quotes.</p>
+<h3>How does delivery work?</h3>
+<p>Checkout on Gumroad; instant download after payment. The $9 kit is a separate file on Gumroad. This page does not send your listings there. You can close the Gumroad tab anytime with no purchase.</p>
+<h3>What if the kit does not fit, or a file is wrong?</h3>
+<p>It is not an Etsy app or service. Not for checking the photo files themselves. If that is what you need, skip the kit. Refunds: within 30 days if a file is corrupt or materially not as described.</p>
+<h3>Do I need the kit to use the free check?</h3>
+<p>No. What you get free: a risk list and fix plan for up to 10 listings, a plain-text checklist, and an AI prompt you can copy. The free check runs in your browser. Nothing is uploaded. The $9 kit is a separate file on Gumroad.</p>
+<h3>Does the kit see my shop or my photo files?</h3>
+<p>The $9 checklist is a file you download. It lists which photos to take for each kind of item, plus a sheet with one row per listing. It is not an Etsy app or service. This page cannot see your shop, and it cannot tell whether a photo was edited or made with AI.</p>
+<h3>What does the shot list cover?</h3>
+<p>The 3-page printable PDF in the ZIP has real-background shot ideas for jewelry, ceramics, clothing, home decor, craft supplies, and custom items. The CSV listing sheet is one row per listing, for Excel, Google Sheets, or Numbers, to mark which listings already have an unedited real-background photo. Etsy has since allowed crop, resize, watermark, and file-format changes on the unedited photo (no AI tools, and no lighting changes). Use this page and Etsy Help for the current rule.</p>
+<h3>Is this an Etsy product or legal advice?</h3>
+<p>No. It is not an Etsy app or service. General guidance, not legal, tax or IT advice. Not affiliated with or endorsed by Etsy.</p>
+<p>Read the <a href="/refund-policy.html">Refund Policy</a>.</p>
+</section>
 
 <section class="card" aria-labelledby="rules-h">
 <h2 id="rules-h">Checks this page runs</h2>
