@@ -26,7 +26,6 @@ const GUMROAD = {
   etsyResult: "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=offer_page&utm_campaign=etsy-photo-audit-check&utm_content=etsy-photo-result-mockup",
   hvac: "https://firstmoverprojects.gumroad.com/l/afwbvt?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
   intake: "https://firstmoverprojects.gumroad.com/l/fretzy?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
-  roofing: "https://firstmoverprojects.gumroad.com/l/wymols?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
   plumbing: "https://firstmoverprojects.gumroad.com/l/unjou?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
   electrical: "https://firstmoverprojects.gumroad.com/l/lykya?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
   garage: "https://firstmoverprojects.gumroad.com/l/cybqmi?wanted=true&utm_source=site&utm_medium=site&utm_campaign=after-hours-gap-check&utm_content=trade-pill",
@@ -158,7 +157,7 @@ test("static CSP, privacy, nav, and footer guards", () => {
   const encoded = (url) => url.replace(/&/g, "&amp;");
   assert.ok(etsy.includes(encoded(GUMROAD.etsy)));
   assert.ok(etsy.includes(encoded(GUMROAD.etsyResult)));
-  for (const key of ["hvac", "intake", "roofing", "plumbing", "electrical", "garage", "water"]) {
+  for (const key of ["hvac", "intake", "plumbing", "electrical", "garage", "water"]) {
     assert.ok(after.includes(encoded(GUMROAD[key])), key);
   }
   assert.ok(loom.includes(encoded(GUMROAD.loom)));
@@ -358,7 +357,8 @@ test("After-hours profiles, arithmetic, trade kits, and 390px layout", async () 
   assert.match(await page.innerText("#math-instant"), /\$4,333\.33/);
   assert.match(await page.innerText("#math-annual"), /\$32,500\.00/);
   assert.equal(await page.getAttribute("#math-annual", "data-dollars"), String((instant - current) * 12));
-  assert.equal(await page.getAttribute('a[data-trade="roofing"]', "aria-current"), "true");
+  assert.equal(await page.locator('a[data-trade="roofing"]').count(), 0);
+  assert.equal(await page.locator(".trade-link[aria-current='true']").count(), 0);
   assert.equal(await page.getAttribute("#intake-wrap", "hidden"), "");
   const checklist = await page.innerText("#checklist");
   assert.match(checklist, /10-minute implementation checklist/);
