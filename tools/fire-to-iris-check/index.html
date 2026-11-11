@@ -117,14 +117,6 @@ a#kit-top{display:flex;align-items:center;justify-content:center;width:100%;max-
 .kit-note{margin:.4em 0 0;color:#5a636e;font-size:.82rem;line-height:1.4}
 .next-irs{margin:.4em 0 0;color:#1b1f24;font-size:1rem;font-weight:400;line-height:1.45}
 .kit-fit{margin:.6em 0;font-weight:600}
-.fit-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:12px 0}
-.fit-box{border:1px solid #cbd5e1;border-radius:8px;padding:10px 12px;background:#fff;min-width:0;overflow-wrap:anywhere}
-.fit-box h3{margin:0 0 4px;font-size:1rem}
-.fit-box p{margin:0}
-#is-this-for-you,#buyer-faq{overflow-wrap:anywhere;max-width:100%}
-@media (min-width:640px){
-  .fit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
 .result-kit-lead{margin:.8em 0 .2em;font-weight:600}
 #kit-offer[hidden],#provider-copy[hidden],#kit-result[hidden],#kit-refund[hidden]{display:none !important}
 .provider-copy{background:#eef1f5;border:1px solid #b9c0c8;border-radius:8px;padding:12px;margin:12px 0 0}
@@ -218,71 +210,6 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
   ]
 }
 </script>
-<script type="application/ld+json" id="buyer-faq-jsonld">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "dateModified": "2026-11-11",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What exactly is the $9 checklist?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The $9 checklist is one 3-page PDF in a ZIP. It puts the switch in order, with the IRS dates and links, your FIRE account, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on. That ZIP includes what is changing, in plain words; key dates from the IRS FIRE page (Nov. 9, Nov. 19 at 3 p.m. ET, Jan. 1, 2027) with a Done? box for each; your FIRE account (the Nov 9, 2026 change deadline has passed): TCCs, Responsible Official and contacts, a saved copy of your IR Application; starting your IRIS Application for TCC; anything still due in FIRE before Nov 19, 3 p.m. ET; getting ready for the 2027 filing season (tax year 2026); a 1099-NEC add-on with the $2,000 threshold, the January 31 deadline, and how to file and correct in IRIS, with a sample contractor table (example data); and links to the IRS's own pages and IRS Publications 5903, 1099 and the 1099-MISC/NEC instructions."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I get the ZIP?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The buy buttons on this page open the $9 checklist on Gumroad. The page marks that download as instant: one 3-page PDF checklist in a ZIP. This page does not send your files there."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What if the checklist does not fit, or a file is wrong?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If your provider files for you, you don't need the checklist. Not needed if your software files for you. The checklist is optional. Refunds: within 30 days if a file is corrupt or materially not as described."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do I have to buy the checklist to use the free check?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. The check is free and runs in your browser. The checklist is optional."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does this page send my CSV or taxpayer data to Gumroad?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. It runs entirely in your browser. Nothing is uploaded, stored or sent anywhere. This page does not send your files there. Do not paste real taxpayer names, Social Security numbers, EINs, or TCCs. Paste only column header names."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is the checklist legal, tax, or IT advice?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. General guidance, not legal, tax or IT advice."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does a FIRE TCC carry over to IRIS?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. A FIRE TCC does not carry over automatically. Current FIRE users who will e-file in IRIS themselves must complete a separate IRIS Application for TCC. IRS Publication 5903 says a typical application is processed within 45 business days. If a provider or paid e-file service transmits for you, ask whether they file under their own IRIS TCC."
-      }
-    }
-  ]
-}
-</script>
 <script type="application/ld+json" id="product-jsonld">
 {
   "@context": "https://schema.org",
@@ -363,37 +290,6 @@ picture:has(> .kit-preview-img),picture:has(> img){display:block;max-width:100%}
 </script>
 <p class="kit-note" data-fire-kit="1">One 3-page PDF checklist in a ZIP. Refunds: within 30 days if a file is corrupt or materially not as described.</p>
 </div>
-<section class="card" id="is-this-for-you" aria-labelledby="fit-h">
-<h2 id="fit-h">Is this for you?</h2>
-<div class="fit-grid">
-<div class="fit-box">
-<h3>A fit</h3>
-<p>Good fit if you file 1099s for your business or clients and must move from FIRE to IRIS by Jan 1, 2027. The checklist is for people who file their own 1099s.</p>
-</div>
-<div class="fit-box">
-<h3>Not a fit</h3>
-<p>Not needed if your software files for you. If your provider files for you, you don't need the checklist.</p>
-</div>
-</div>
-</section>
-<section class="card" id="buyer-faq" aria-labelledby="buyer-faq-h">
-<h2 id="buyer-faq-h">FAQ</h2>
-<h3>What exactly is the $9 checklist?</h3>
-<p>The $9 checklist is one 3-page PDF in a ZIP. It puts the switch in order, with the IRS dates and links, your FIRE account, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on. That ZIP includes what is changing, in plain words; key dates from the IRS FIRE page (Nov. 9, Nov. 19 at 3 p.m. ET, Jan. 1, 2027) with a Done? box for each; your FIRE account (the Nov 9, 2026 change deadline has passed): TCCs, Responsible Official and contacts, a saved copy of your IR Application; starting your IRIS Application for TCC; anything still due in FIRE before Nov 19, 3 p.m. ET; getting ready for the 2027 filing season (tax year 2026); a 1099-NEC add-on with the $2,000 threshold, the January 31 deadline, and how to file and correct in IRIS, with a sample contractor table (example data); and links to the IRS's own pages and IRS Publications 5903, 1099 and the 1099-MISC/NEC instructions.</p>
-<h3>How do I get the ZIP?</h3>
-<p>The buy buttons on this page open the $9 checklist on Gumroad. The page marks that download as instant: one 3-page PDF checklist in a ZIP. This page does not send your files there.</p>
-<h3>What if the checklist does not fit, or a file is wrong?</h3>
-<p>If your provider files for you, you don't need the checklist. Not needed if your software files for you. The checklist is optional. Refunds: within 30 days if a file is corrupt or materially not as described.</p>
-<h3>Do I have to buy the checklist to use the free check?</h3>
-<p>No. The check is free and runs in your browser. The checklist is optional.</p>
-<h3>Does this page send my CSV or taxpayer data to Gumroad?</h3>
-<p>No. It runs entirely in your browser. Nothing is uploaded, stored or sent anywhere. This page does not send your files there. Do not paste real taxpayer names, Social Security numbers, EINs, or TCCs. Paste only column header names.</p>
-<h3>Is the checklist legal, tax, or IT advice?</h3>
-<p>No. General guidance, not legal, tax or IT advice.</p>
-<h3>Does a FIRE TCC carry over to IRIS?</h3>
-<p>No. A FIRE TCC does not carry over automatically. Current FIRE users who will e-file in IRIS themselves must complete a separate IRIS Application for TCC. IRS Publication 5903 says a typical application is processed within 45 business days. If a provider or paid e-file service transmits for you, ask whether they file under their own IRIS TCC.</p>
-<p>Read the <a href="/refund-policy.html">Refund Policy</a>.</p>
-</section>
 <p id="what">A free check that runs in your browser: see which IRS FIRE cutoff still applies to you and check your 1099 CSV header before you move to IRIS. If you want the steps on paper, there's an optional $9 checklist after your result.</p>
 <p><strong>Check which November 2026 IRS FIRE cutoff hits you, and verify your 1099 export header row before moving to IRIS.</strong></p>
 <p>Runs entirely in your browser. Nothing is uploaded, stored or sent anywhere.</p>

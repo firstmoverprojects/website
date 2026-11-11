@@ -1,4 +1,4 @@
-// Buyer fit notes and FAQ on the three live offer pages.
+// Buyer fit notes and FAQ on the two live offer pages.
 // Questions and answers must match the FAQPage JSON-LD, and the new blocks
 // must not add Gumroad hrefs.
 import assert from "node:assert/strict";
@@ -9,15 +9,6 @@ import { test } from "node:test";
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const REFUND = "Refunds: within 30 days if a file is corrupt or materially not as described.";
 const PAGES = [
-  {
-    rel: "tools/fire-to-iris-check/index.html",
-    hrefs: [
-      "https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-check-top",
-      "https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-result-need-tcc",
-      "https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=footer",
-      "https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=fire-to-iris-check&amp;utm_content=fire-check-sticky"
-    ]
-  },
   {
     rel: "tools/amazon-coi-check/index.html",
     hrefs: [
@@ -78,7 +69,7 @@ for (const page of PAGES) {
     assert.equal(/gumroad\.com/i.test(fit), false, "fit section must not add a Gumroad link");
 
     const faq = section(html, "buyer-faq");
-    assert.match(faq, /<h2 id="buyer-faq-h">FAQ<\/h2>/);
+    assert.match(faq, /<h2 id="buyer-faq-h">Before you buy<\/h2>/);
     const visible = pairs(faq);
     assert.ok(visible.length >= 5 && visible.length <= 7, `expected 5-7 questions, got ${visible.length}`);
     const blob = visible.map((item) => `${item.q} ${item.a}`).join(" ");
