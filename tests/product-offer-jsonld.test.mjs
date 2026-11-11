@@ -12,9 +12,8 @@ const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
 const HOST = "https://firstmoverprojects.com";
 // Unpublished on Gumroad. PR #111 removes the EU buy links. The Maryland FAMLI
 // notice kit is unpublished because the state posts the 2026 employee notice
-// template free. The roofing capture kit (wymols) was retired in late October
-// 2026 and has no current replacement listing. Do not describe these as products.
-const UNPUBLISHED = new Set(["fetwsm", "maryland-famli-payroll-notice-kit", "wymols"]);
+// template free. Do not describe either as a product.
+const UNPUBLISHED = new Set(["fetwsm", "maryland-famli-payroll-notice-kit"]);
 const PREVIEW = {
   lnfgc: "/assets/previews/etsy-photo-audit-kit-preview-1280x720.png",
   "fire-to-iris-switch-checklist": "/assets/previews/fire-to-iris-kit-preview-1280x720.png",
@@ -34,6 +33,9 @@ const PREVIEW = {
   ykxxot: "/assets/previews/after-hours-gap-kit-preview-1280x720.png",
   fretzy: "/assets/previews/after-hours-gap-kit-preview-1280x720.png"
 };
+// The roofing capture kit (wymols) was retired in late October 2026 and has no
+// current replacement listing. Do not describe it as a product.
+UNPUBLISHED.add("wymols");
 const BANNED = [/money-?back guarantee/i, /no questions asked/i, /full refund/i];
 const BANNED_KEYS = new Set(["aggregateRating", "review", "reviewRating", "ratingValue", "refundType"]);
 
