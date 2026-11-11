@@ -48,12 +48,6 @@
       "file": "deadlines/whiteboard-azure-oct-16.html",
       "match": "og:image",
       "reason": "Edited by open PR #142. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
-    },
-    {
-      "check": "meta",
-      "file": "tools/index.html",
-      "match": "og:image",
-      "reason": "Edited by open PR #142. Fix: add <meta property=\"og:image\" content=\"https://firstmoverprojects.com/assets/fmp-logo-460.png\"> next to the other og: tags."
     }
   ]
 }
