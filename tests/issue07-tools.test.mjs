@@ -8,7 +8,7 @@ import { test, before, after } from "node:test";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
-let chromium;
+import { blockExternalOnPage, chromiumLaunchOptions, importChromium } from "./playwright-helpers.mjs";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const CSP = "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action 'none'; base-uri 'none'";
@@ -59,23 +59,17 @@ function usd(n) {
 let browser;
 
 before(async () => {
-  const mod = process.env.PLAYWRIGHT_CORE || "playwright-core";
-  ({ chromium } = await import(mod));
-  browser = await chromium.launch({
-    executablePath: process.env.CHROME_PATH || "/usr/bin/google-chrome",
-    headless: true,
-    args: [
-      "--no-sandbox",
-      "--disable-dev-shm-usage",
-      "--disable-gpu",
+  const chromium = await importChromium();
+  browser = await chromium.launch(
+    chromiumLaunchOptions([
       "--disable-background-networking",
       "--disable-component-update",
       "--disable-default-apps",
       "--no-first-run",
       "--disable-sync",
       "--disable-extensions"
-    ]
-  });
+    ])
+  );
 });
 
 after(async () => {
@@ -84,6 +78,7 @@ after(async () => {
 
 async function openPage(rel) {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await blockExternalOnPage(page);
   const hits = [];
   page.on("request", (req) => {
     if (/^https?:/i.test(req.url())) hits.push(req.url());

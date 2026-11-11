@@ -4,6 +4,7 @@
   "description": "Dev-only checks for the static site: offer page safety and static site checks. The site itself is static HTML.",
   "scripts": {
     "test:offers": "node --test --test-concurrency=1 tests/offer-page-safety.test.mjs",
+    "test:unit": "PLAYWRIGHT_CORE=playwright node --test --test-concurrency=1 tests/*.test.mjs",
     "check:site": "node scripts/check_site.mjs",
     "test:e2e": "node --test --test-concurrency=1 tests/e2e/*.test.mjs"
   },
