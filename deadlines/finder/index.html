@@ -289,14 +289,17 @@
         title: title,
         event: true
       });
+      return;
     }
     var gcCountUrl = "https://firstmoverprojects.goatcounter.com/count?p=" + encodeURIComponent(path) + "&t=" + encodeURIComponent(title) + "&e=true";
     try {
+      if (typeof navigator !== "undefined" && navigator && typeof navigator.sendBeacon === "function" && navigator.sendBeacon(gcCountUrl)) {
+        return;
+      }
+    } catch (beaconErr) {}
+    try {
       if (typeof fetch === "function") fetch(gcCountUrl, { keepalive: true, mode: "no-cors" });
     } catch (fetchErr) {}
-    try {
-      if (typeof navigator !== "undefined" && navigator && typeof navigator.sendBeacon === "function") navigator.sendBeacon(gcCountUrl);
-    } catch (beaconErr) {}
   }
   function trackGumroadClick(ev) {
     if (ev.type === "auxclick" && ev.button !== 1) return;
@@ -319,8 +322,7 @@
         var tiktokRel = node.getAttribute("rel") || "";
         if (tiktokRel.indexOf("noopener") === -1) node.setAttribute("rel", (tiktokRel ? tiktokRel + " " : "") + "noopener");
       }
-      // Keep the counted GoatCounter name, but do not leave a root-relative event literal in the source.
-      path = (testVisit ? "TEST-EXCLUDE-" : "") + ["", "event", "tiktok-follow-click-"].join("/") + toolSlug;
+      path = (testVisit ? "TEST-EXCLUDE-" : "") + "event/tiktok-follow-click-" + toolSlug;
       title = "TikTok follow click: " + toolSlug;
       sendGcEvent(path, title);
       return;
