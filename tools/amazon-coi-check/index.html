@@ -204,6 +204,8 @@ a#kit-top{display:flex;align-items:center;justify-content:center;width:100%;max-
 .fit-box{border:1px solid #cbd5e1;border-radius:8px;padding:10px 12px;background:#fff}
 .fit-box h3{margin:0 0 4px;font-size:1rem}
 .fit-box p{margin:0}
+.fit-box{min-width:0;overflow-wrap:anywhere}
+#is-this-for-you,#buyer-faq{overflow-wrap:anywhere;max-width:100%}
 .source-inline{font-size:.9rem}
 .result-kit-lead{margin:.8em 0 .2em;font-weight:600}
 #result-kit-offer[hidden],#nofit-next[hidden],#kit-result[hidden],#kit-refund[hidden]{display:none !important}
@@ -327,6 +329,55 @@ picture {
   }
 })();
 </script>
+<script type="application/ld+json" id="buyer-faq-jsonld">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "dateModified": "2026-11-11",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What exactly is the $29 kit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is a downloadable ZIP of checklists and editable templates. It is not insurance, not a broker, and not a filing service. A ZIP with 12 files: a policy-terms checklist that quotes Amazon word for word, a COI pre-submission checker, a category screen, a copy-paste broker email, and a spreadsheet workbook (.xlsx). Price: $29, one-time download."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does delivery work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Checkout opens on Gumroad, and the ZIP downloads right after payment. This page does not send your certificate to Gumroad."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if the kit does not fit, or a file is wrong?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If you need an insurance policy, a quote, a broker, someone to submit the certificate, or a promise that Amazon will accept it, skip the kit. Refunds: within 30 days if a file is corrupt or materially not as described."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who sends the certificate to Amazon?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You submit the certificate yourself, as described on Amazon's insurance page. The kit cannot submit the certificate for you. This page does not send your certificate to Gumroad."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need the $29 kit to use the free check?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The free browser check is $0, on this page. Paste certificate text. The check runs in this browser tab. Nothing is uploaded."
+      }
+    }
+  ]
+}
+</script>
 <script type="application/ld+json" id="product-jsonld">
 {
   "@context": "https://schema.org",
@@ -359,6 +410,33 @@ picture {
 <p><a target="_blank" class="btn" id="kit-top" data-goatcounter-click="cta/coi-check-top" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=offer_page&amp;utm_campaign=amazon-coi-check&amp;utm_content=coi-check-top" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $29 kit (12-file ZIP)</a></p>
 <p class="kit-note">For Amazon.com sellers reviewing a certificate or broker questions before upload. Refunds: within 30 days if a file is corrupt or materially not as described.</p>
 </div>
+<section class="card" id="is-this-for-you" aria-labelledby="fit-h">
+<h2 id="fit-h">Is this for you?</h2>
+<div class="fit-grid">
+<div class="fit-box">
+<h3>A fit</h3>
+<p>For Amazon.com sellers reviewing a certificate or broker questions before upload. You have a COI or are preparing broker questions, and want reusable checklists and templates.</p>
+</div>
+<div class="fit-box">
+<h3>Not a fit</h3>
+<p>It is not for someone looking to buy an insurance policy, get a quote, hire a broker, have a certificate submitted, or receive legal or insurance advice.</p>
+</div>
+</div>
+</section>
+<section class="card" id="buyer-faq" aria-labelledby="buyer-faq-h">
+<h2 id="buyer-faq-h">Before you buy</h2>
+<h3>What exactly is the $29 kit?</h3>
+<p>It is a downloadable ZIP of checklists and editable templates. It is not insurance, not a broker, and not a filing service. A ZIP with 12 files: a policy-terms checklist that quotes Amazon word for word, a COI pre-submission checker, a category screen, a copy-paste broker email, and a spreadsheet workbook (.xlsx). Price: $29, one-time download.</p>
+<h3>How does delivery work?</h3>
+<p>Checkout opens on Gumroad, and the ZIP downloads right after payment. This page does not send your certificate to Gumroad.</p>
+<h3>What if the kit does not fit, or a file is wrong?</h3>
+<p>If you need an insurance policy, a quote, a broker, someone to submit the certificate, or a promise that Amazon will accept it, skip the kit. Refunds: within 30 days if a file is corrupt or materially not as described.</p>
+<h3>Who sends the certificate to Amazon?</h3>
+<p>You submit the certificate yourself, as described on Amazon's insurance page. The kit cannot submit the certificate for you. This page does not send your certificate to Gumroad.</p>
+<h3>Do I need the $29 kit to use the free check?</h3>
+<p>No. The free browser check is $0, on this page. Paste certificate text. The check runs in this browser tab. Nothing is uploaded.</p>
+<p>Read the <a href="/refund-policy.html">Refund Policy</a>.</p>
+</section>
 <p><a class="runway-pill" href="https://launchfree.io/listings/amazon-nov-2-coi-pre-check.html" target="_blank" rel="noopener noreferrer">Listed on The Runway (LaunchFree.io) - Upvote This Free Tool</a></p>
 <p><a href="https://sellercentral.amazon.com/seller-forums/discussions/t/287d5c33-8278-4802-ba69-2f58f7dda408" rel="noopener noreferrer">Amazon's November 2 announcement</a> says sellers with products in categories with enhanced safety listing requirements need USD 1 million commercial liability coverage per occurrence and in aggregate, regardless of sales. Paste your certificate text and get a question list to take to your broker before you upload it.</p>
 <ul class="hooks">
