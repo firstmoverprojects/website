@@ -69,13 +69,13 @@ const AS_OF = localDate(2026, 10, 4);
 test("static hub chips for dates before Nov 4, 2026 do not say Upcoming", () => {
   const main = hub.split("<tbody>")[1].split("</tbody>")[0];
   const rows = [...main.matchAll(/<tr class="dated-item"([^>]*)>([\s\S]*?)<\/tr>/g)];
-  assert.equal(rows.length, 15);
+  assert.equal(rows.length, 16);
   const labels = rows.map((match) => {
     const status = match[2].match(/data-chip="status">([^<]*)</);
     assert.ok(status, match[1]);
     return { attrs: match[1], label: status[1] };
   });
-  assert.equal(labels.filter((item) => item.label === "Upcoming").length, 9);
+  assert.equal(labels.filter((item) => item.label === "Upcoming").length, 10);
   assert.deepEqual(labels.map((item) => item.label), [
     "Upcoming",
     "Took effect Nov 1",
@@ -84,6 +84,7 @@ test("static hub chips for dates before Nov 4, 2026 do not say Upcoming", () => 
     "Until Nov 10 if deposits were on time",
     "Took effect Nov 4",
     "Accounts close Nov 30",
+    "Upcoming",
     "Upcoming",
     "Upcoming",
     "Upcoming",

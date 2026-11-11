@@ -239,7 +239,9 @@ var unlisted = [
 unlisted.forEach(function (row) {
   var body = fs.readFileSync(row[1], "utf8");
   assert(body.indexOf("windows-server-2016-check") === -1, "checker URL not listed in " + row[0]);
-  if (row[0] !== "deadlines/index.html") {
+  // The public how-to page names Windows Server 2016 in the deadlines hub and the RSS feed.
+  // The unlisted checker URL above stays out of the sitemap, feed, finder, and homepage.
+  if (row[0] !== "deadlines/index.html" && row[0] !== "deadlines/feed.xml") {
     assert(body.indexOf("Windows Server 2016") === -1, "no Windows Server 2016 mention in " + row[0]);
   }
 });
