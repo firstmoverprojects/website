@@ -23,7 +23,6 @@ const PREVIEW = {
   "loom-seat-audit-exit-pack": "/assets/previews/loom-seat-audit-kit-preview-1280x720.png",
   fguyxn: "/assets/previews/loom-seat-audit-kit-preview-1280x720.png",
   afwbvt: "/assets/previews/after-hours-gap-kit-preview-1280x720.png",
-  wymols: "/assets/previews/after-hours-gap-kit-preview-1280x720.png",
   "ahwc-electrical": "/assets/previews/after-hours-gap-kit-preview-1280x720.png",
   "ahwc-garage-door": "/assets/previews/after-hours-gap-kit-preview-1280x720.png",
   "ahwc-plumbing": "/assets/previews/after-hours-gap-kit-preview-1280x720.png",
@@ -34,6 +33,9 @@ const PREVIEW = {
   ykxxot: "/assets/previews/after-hours-gap-kit-preview-1280x720.png",
   fretzy: "/assets/previews/after-hours-gap-kit-preview-1280x720.png"
 };
+// The roofing capture kit (wymols) was retired in late October 2026 and has no
+// current replacement listing. Do not describe it as a product.
+UNPUBLISHED.add("wymols");
 const BANNED = [/money-?back guarantee/i, /no questions asked/i, /full refund/i];
 const BANNED_KEYS = new Set(["aggregateRating", "review", "reviewRating", "ratingValue", "refundType"]);
 
