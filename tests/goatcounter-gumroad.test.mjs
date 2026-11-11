@@ -81,7 +81,7 @@ function helperBody(html) {
   return html.slice(start + "<script>".length, end).split("\n").map((line) => line.trim()).filter(Boolean).join("\n");
 }
 
-function loadHelper(search) {
+function loadHelper(search, { withCount = true } = {}) {
   const code = helperBody(read("tools/amazon-coi-check/index.html"));
   const counts = [];
   const listeners = {};
@@ -95,8 +95,10 @@ function loadHelper(search) {
   };
   sandbox.window = sandbox;
   vm.runInNewContext(code, sandbox, { filename: "goatcounter-helper.js" });
-  sandbox.goatcounter = sandbox.goatcounter || {};
-  sandbox.goatcounter.count = (payload) => counts.push(JSON.parse(JSON.stringify(payload)));
+  if (withCount) {
+    sandbox.goatcounter = sandbox.goatcounter || {};
+    sandbox.goatcounter.count = (payload) => counts.push(JSON.parse(JSON.stringify(payload)));
+  }
   return { counts, listeners, sandbox };
 }
 
@@ -153,7 +155,8 @@ test("tracking pages load the test-exclude helper before count.js", () => {
   assert.match(canonical, /click-amazon-kit/);
   assert.match(canonical, /click-etsy-kit/);
   assert.equal(canonical.includes('"/event/tiktok-follow-click-"'), false);
-  assert.match(canonical, /\["", "event", "tiktok-follow-click-"\]\.join\("\/"\)/);
+  assert.match(canonical, /"event\/tiktok-follow-click-" \+ toolSlug/);
+  assert.equal(/^\/event\//.test("event/tiktok-follow-click-x"), false);
   assert.match(canonical, /TEST-EXCLUDE-/);
   assert.match(canonical, /var gcCountUrl = "https:\/\/firstmoverprojects\.goatcounter\.com\/count\?p="/);
   assert.match(canonical, /fetch\(gcCountUrl, \{ keepalive: true, mode: "no-cors" \}\)/);
@@ -303,13 +306,8 @@ test("checkout clicks record gumroad-click/slug and test visits stay under TEST-
     }
   };
   click(live.listeners, href);
-  assert.equal(fetches.length, 2);
-  assert.equal(fetches[0].opts.keepalive, true);
-  assert.equal(fetches[0].opts.mode, "no-cors");
-  assert.match(fetches[0].url, /^https:\/\/firstmoverprojects\.goatcounter\.com\/count\?/);
-  assert.match(fetches[0].url, /p=gumroad-click%2Famazon-1m-insurance-readiness-kit/);
-  assert.match(fetches[1].url, /p=click-amazon-kit/);
-  assert.deepEqual(beacons, fetches.map((item) => item.url));
+  assert.equal(fetches.length, 0);
+  assert.equal(beacons.length, 0);
   assert.deepEqual(live.counts, [
     {
       path: "gumroad-click/amazon-1m-insurance-readiness-kit",
@@ -342,11 +340,8 @@ test("checkout clicks record gumroad-click/slug and test visits stay under TEST-
     click(testVisit.listeners, href);
     assert.equal(testVisit.counts[0].path, "TEST-EXCLUDE/gumroad-click/amazon-1m-insurance-readiness-kit");
     assert.equal(testVisit.counts[1].path, "TEST-EXCLUDE/click-amazon-kit");
-    assert.match(fetches[0].url, /p=TEST-EXCLUDE%2Fgumroad-click%2Famazon-1m-insurance-readiness-kit/);
-    assert.match(fetches[1].url, /p=TEST-EXCLUDE%2Fclick-amazon-kit/);
-    assert.equal(fetches[0].opts.keepalive, true);
-    assert.equal(fetches[0].opts.mode, "no-cors");
-    assert.equal(beacons.length, 2);
+    assert.equal(fetches.length, 0);
+    assert.equal(beacons.length, 0);
   }
 
   const ignored = loadHelper("?fmp_test=12");
@@ -396,7 +391,7 @@ function clickTikTok(listeners, slug, type = "click", button = 0) {
   });
 }
 
-test("TikTok follow clicks record /event/tiktok-follow-click and test visits use TEST-EXCLUDE-", () => {
+test("TikTok follow clicks record event/tiktok-follow-click and test visits use TEST-EXCLUDE-", () => {
   const live = loadHelper("");
   const fetches = [];
   live.sandbox.fetch = (url, opts) => {
@@ -406,13 +401,11 @@ test("TikTok follow clicks record /event/tiktok-follow-click and test visits use
   live.sandbox.navigator = { sendBeacon(url) { return url; } };
   clickTikTok(live.listeners, "amazon-coi-check");
   assert.deepEqual(live.counts, [{
-    path: "/event/tiktok-follow-click-amazon-coi-check",
+    path: "event/tiktok-follow-click-amazon-coi-check",
     title: "TikTok follow click: amazon-coi-check",
     event: true
   }]);
-  assert.match(fetches[0].url, /p=%2Fevent%2Ftiktok-follow-click-amazon-coi-check/);
-  assert.equal(fetches[0].opts.keepalive, true);
-  assert.equal(fetches[0].opts.mode, "no-cors");
+  assert.equal(fetches.length, 0);
 
   const testVisit = loadHelper("?fmp_test=1");
   const testFetches = [];
@@ -422,12 +415,75 @@ test("TikTok follow clicks record /event/tiktok-follow-click and test visits use
   };
   testVisit.sandbox.navigator = { sendBeacon() { return true; } };
   clickTikTok(testVisit.listeners, "etsy-photo-audit-check");
-  assert.equal(testVisit.counts[0].path, "TEST-EXCLUDE-/event/tiktok-follow-click-etsy-photo-audit-check");
-  assert.match(testFetches[0].url, /p=TEST-EXCLUDE-%2Fevent%2Ftiktok-follow-click-etsy-photo-audit-check/);
+  assert.equal(testVisit.counts[0].path, "TEST-EXCLUDE-event/tiktok-follow-click-etsy-photo-audit-check");
+  assert.equal(testFetches.length, 0);
 
   const bad = loadHelper("");
   bad.sandbox.fetch = () => Promise.resolve();
   bad.sandbox.navigator = { sendBeacon() { return true; } };
   clickTikTok(bad.listeners, "../secret");
   assert.deepEqual(bad.counts, []);
+});
+
+test("sendGcEvent uses goatcounter.count once when present and does not fetch or beacon", () => {
+  const live = loadHelper("");
+  let countCalls = 0;
+  const originalCount = live.sandbox.goatcounter.count;
+  live.sandbox.goatcounter.count = (payload) => {
+    countCalls += 1;
+    originalCount(payload);
+  };
+  const fetches = [];
+  const beacons = [];
+  live.sandbox.fetch = (url) => {
+    fetches.push(url);
+    return Promise.resolve();
+  };
+  live.sandbox.navigator = {
+    sendBeacon(url) {
+      beacons.push(url);
+      return true;
+    }
+  };
+  const href = "https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true";
+  click(live.listeners, href);
+  assert.equal(countCalls, 2);
+  assert.equal(fetches.length, 0);
+  assert.equal(beacons.length, 0);
+  for (const item of live.counts) {
+    assert.notEqual(item.path.charAt(0), "/");
+  }
+});
+
+test("sendGcEvent falls back to a single beacon or fetch when count.js is missing", () => {
+  const noCount = loadHelper("", { withCount: false });
+  const beacons = [];
+  let fetchCalls = 0;
+  noCount.sandbox.fetch = (url, opts) => {
+    fetchCalls += 1;
+    return Promise.resolve();
+  };
+  noCount.sandbox.navigator = {
+    sendBeacon(url) {
+      beacons.push(url);
+      return true;
+    }
+  };
+  const href = "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true";
+  click(noCount.listeners, href);
+  assert.deepEqual(noCount.counts, []);
+  assert.equal(beacons.length, 2);
+  assert.equal(fetchCalls, 0);
+  assert.match(beacons[0], /p=gumroad-click%2Flnfgc/);
+  assert.match(beacons[1], /p=click-etsy-kit/);
+
+  const fetchOnly = loadHelper("", { withCount: false });
+  let fetchOnlyCalls = 0;
+  fetchOnly.sandbox.fetch = (url, opts) => {
+    fetchOnlyCalls += 1;
+    return Promise.resolve();
+  };
+  fetchOnly.sandbox.navigator = { sendBeacon() { return false; } };
+  click(fetchOnly.listeners, href);
+  assert.equal(fetchOnlyCalls, 2);
 });
