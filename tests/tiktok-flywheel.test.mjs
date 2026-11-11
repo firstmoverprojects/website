@@ -7,8 +7,8 @@ import { test, before, after } from "node:test";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { blockExternalOnPage, chromiumLaunchOptions, importChromium } from "./playwright-helpers.mjs";
 
-let chromium;
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const PROMPT = "Came from TikTok, Reels, or Shorts? Tap the rule change you watched:";
 const MAILTO = "mailto:firstmoverprojects@gmail.com?subject=White-Label%20Tool%20License";
@@ -114,13 +114,8 @@ test("every interactive checker has an embed snippet, license link, and embed-mo
 
 let browser;
 before(async () => {
-  const mod = process.env.PLAYWRIGHT_CORE || "playwright-core";
-  ({ chromium } = await import(mod));
-  browser = await chromium.launch({
-    executablePath: process.env.CHROME_PATH || "/usr/bin/google-chrome",
-    headless: true,
-    args: ["--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu"]
-  });
+  const chromium = await importChromium();
+  browser = await chromium.launch(chromiumLaunchOptions());
 });
 
 after(async () => {
@@ -129,6 +124,7 @@ after(async () => {
 
 async function open(rel, search) {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await blockExternalOnPage(page);
   const errors = [];
   page.on("pageerror", (err) => errors.push(String(err)));
   const url = pathToFileURL(path.join(ROOT, rel)).href + (search || "");

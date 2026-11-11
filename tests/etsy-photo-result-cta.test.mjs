@@ -7,6 +7,7 @@ import { test } from "node:test";
 import { mkdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { blockExternalOnPage, chromiumLaunchOptions, importChromium } from "./playwright-helpers.mjs";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const PAGE = path.join(ROOT, "tools/etsy-photo-audit-check/index.html");
@@ -96,17 +97,13 @@ test("photo-rule copy matches Etsy's Nov 2026 help text", () => {
 });
 
 test("all five outcomes set the lead, offer, and gumroad click at 1280 and 390", async () => {
-  const mod = process.env.PLAYWRIGHT_CORE || "playwright-core";
-  const { chromium } = await import(mod);
-  const browser = await chromium.launch({
-    executablePath: process.env.CHROME_PATH || "/usr/bin/google-chrome",
-    headless: true,
-    args: ["--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu"]
-  });
+  const chromium = await importChromium();
+  const browser = await chromium.launch(chromiumLaunchOptions());
   const context = await browser.newContext({
     viewport: { width: 1280, height: 2000 }
   });
   const page = await context.newPage();
+  await blockExternalOnPage(page);
   const shots = process.env.ETSY_CTA_SHOTS;
   if (shots) mkdirSync(shots, { recursive: true });
   await page.goto(pathToFileURL(PAGE).href, { waitUntil: "load" });

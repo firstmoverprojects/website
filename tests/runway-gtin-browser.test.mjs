@@ -6,6 +6,7 @@ import assert from "node:assert/strict";
 import { test, before, after } from "node:test";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { blockExternalOnPage, chromiumLaunchOptions, importChromium } from "./playwright-helpers.mjs";
 
 const PILL = "Listed on The Runway (LaunchFree.io) — Upvote This Free Tool";
 const PILL_BY_PAGE = {
@@ -45,18 +46,12 @@ const CHECKOUT = {
     "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=offer_page&utm_campaign=etsy-photo-audit-check&utm_content=gtin-helper"
 };
 
-let chromium;
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 let browser;
 
 before(async () => {
-  const mod = process.env.PLAYWRIGHT_CORE || "playwright-core";
-  ({ chromium } = await import(mod));
-  browser = await chromium.launch({
-    executablePath: process.env.CHROME_PATH || "/usr/bin/google-chrome",
-    headless: true,
-    args: ["--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu"]
-  });
+  const chromium = await importChromium();
+  browser = await chromium.launch(chromiumLaunchOptions());
 });
 
 after(async () => {
@@ -69,6 +64,7 @@ function toolNetwork(urls) {
 
 async function open(rel) {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await blockExternalOnPage(page);
   const errors = [];
   const nets = [];
   page.on("pageerror", (err) => errors.push(String(err)));

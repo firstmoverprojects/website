@@ -48,6 +48,7 @@ async function captureOnClick(pagePath, selector) {
     if (u.includes("goatcounter.com/count")) counts.push(u);
   });
   await page.route(/goatcounter\.com\/count|gc\.zgo\.at/, (r) => r.fulfill({ status: 204, body: "" }));
+  await page.route(/gumroad\.com|brevo\.com|sendinblue\.com/i, (r) => r.abort());
   await page.goto(origin + pagePath, { waitUntil: "networkidle" });
   const before = counts.length;
   await page.locator(selector).first().click({ button: "middle" });
