@@ -6,7 +6,7 @@
   <atom:link href="https://firstmoverprojects.com/deadlines/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Dated vendor and system changes small businesses should check, each with its official source. General guidance, not legal, tax or IT advice.</description>
   <language>en-us</language>
-  <lastBuildDate>Thu, 05 Nov 2026 12:00:00 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 11 Nov 2026 12:00:00 +0000</lastBuildDate>
   <item>
     <title>Oct 16: Old Microsoft Whiteboards still in Azure are deleted</title>
     <link>https://firstmoverprojects.com/deadlines/whiteboard-azure-oct-16.html</link>
@@ -125,6 +125,34 @@
     <guid isPermaLink="false">exchange-online-ews-shutdown-20270401@firstmoverprojects.com</guid>
     <pubDate>Thu, 22 Oct 2026 08:30:00 +0000</pubDate>
     <description><![CDATA[<p><b>Date:</b> Apr 1, 2027 (phased switch-off rolls out tenant by tenant from Oct 2026)<br/><b>Who:</b> Microsoft 365 admins whose apps, scripts or services still use EWS<br/><b>What to check:</b> Review EWS usage reports, read EWSEnabled and your AppID allow list (read-only), and move apps to Microsoft Graph. Microsoft says there will be no exceptions past April 2027.<br/><b>Source:</b> <a href="https://techcommunity.microsoft.com/blog/exchange/exchange-online-ews-your-time-is-almost-up/4492361">https://techcommunity.microsoft.com/blog/exchange/exchange-online-ews-your-time-is-almost-up/4492361</a></p><p>General guidance, not legal, tax or IT advice.</p>]]></description>
+  </item>
+  <item>
+    <title>What Etsy sellers need to know about the unedited listing photo rule</title>
+    <link>https://firstmoverprojects.com/deadlines/etsy-listing-photo-requirements.html</link>
+    <guid isPermaLink="false">etsy-listing-photo-requirements-20261111@firstmoverprojects.com</guid>
+    <pubDate>Wed, 11 Nov 2026 12:00:00 +0000</pubDate>
+    <description><![CDATA[<p><b>Who:</b> Etsy sellers checking listing photos<br/><b>What to check:</b> Etsy Help says most listings need at least one unedited photo of the actual item against a real background. Crop, resize, watermark, and file-format changes are allowed on that photo. Other photos can be edited, including with AI, if they still show what the buyer will receive. These help pages do not name a last day.<br/><b>Source:</b> <a href="https://help.etsy.com/hc/en-us/articles/115015663347-Requirements-and-Best-Practices-for-Images-in-Your-Etsy-Shop">https://help.etsy.com/hc/en-us/articles/115015663347-Requirements-and-Best-Practices-for-Images-in-Your-Etsy-Shop</a></p><p>General guidance, not legal, tax or IT advice.</p>]]></description>
+  </item>
+  <item>
+    <title>Jan 15, 2027: most 2027 US FBA fee changes take effect</title>
+    <link>https://firstmoverprojects.com/deadlines/amazon-fba-fees-2027.html</link>
+    <guid isPermaLink="false">amazon-fba-fees-20270115@firstmoverprojects.com</guid>
+    <pubDate>Wed, 11 Nov 2026 12:00:00 +0000</pubDate>
+    <description><![CDATA[<p><b>Date:</b> Jan 15, 2027 for most changes. Storage fees change Feb 1, 2027.<br/><b>Who:</b> Amazon.com sellers who use Fulfillment by Amazon<br/><b>What to check:</b> Amazon's Nov 5, 2026 letter says average FBA fulfillment fees rise by $0.19 per unit, the fuel and logistics surcharge stays the same, and the storage utilization surcharge ends Feb 1, 2027. Open the Fee Change Comparison dashboard for your own SKUs.<br/><b>Source:</b> <a href="https://sellingpartners.aboutamazon.com/update-to-us-referral-and-fulfillment-by-amazon-fees-for-2027">https://sellingpartners.aboutamazon.com/update-to-us-referral-and-fulfillment-by-amazon-fees-for-2027</a></p><p>General guidance, not legal, tax or IT advice.</p>]]></description>
+  </item>
+  <item>
+    <title>Loom Creator Lite seats become paid Creators on your integration date</title>
+    <link>https://firstmoverprojects.com/deadlines/loom-creator-lite-deprecation.html</link>
+    <guid isPermaLink="false">loom-creator-lite-deprecation-20261111@firstmoverprojects.com</guid>
+    <pubDate>Wed, 11 Nov 2026 12:00:00 +0000</pubDate>
+    <description><![CDATA[<p><b>Date:</b> Your workspace integration date, which Atlassian says arrives by email. Billing for upgraded seats starts on the next billing date.<br/><b>Who:</b> Loom admins who still have Creator Lite users<br/><b>What to check:</b> Read the Creator Lite count under Admin tools, then Billing. Download the last 6 months of user activity. Deactivate people you do not want as paid Creators before the next bill.<br/><b>Source:</b> <a href="https://support.atlassian.com/loom/docs/loom-customer-integration-with-atlassian-pricing-billing-and-role-changes/">https://support.atlassian.com/loom/docs/loom-customer-integration-with-atlassian-pricing-billing-and-role-changes/</a></p><p>General guidance, not legal, tax or IT advice.</p>]]></description>
+  </item>
+  <item>
+    <title>Jan 12, 2027: Windows Server 2016 end of support</title>
+    <link>https://firstmoverprojects.com/deadlines/windows-server-2016-end-of-support.html</link>
+    <guid isPermaLink="false">windows-server-2016-eos-20270112@firstmoverprojects.com</guid>
+    <pubDate>Wed, 11 Nov 2026 12:00:00 +0000</pubDate>
+    <description><![CDATA[<p><b>Date:</b> Jan 12, 2027 on Microsoft's ESU article. The lifecycle page lists an Extended End Date of 1/13/2027 6:59:59 AM Pacific Time. Azure Arc ESU billing begins Jan 13, 2027.<br/><b>Who:</b> Shops still running Windows Server 2016<br/><b>What to check:</b> Confirm the edition. ESUs cover Critical and Important updates for Standard and Datacenter through 2030. Essentials Remote Web Access is supported only through Jan 12, 2027.<br/><b>Source:</b> <a href="https://learn.microsoft.com/en-us/lifecycle/products/windows-server-2016">https://learn.microsoft.com/en-us/lifecycle/products/windows-server-2016</a> · <a href="https://learn.microsoft.com/en-us/azure/azure-arc/servers/prepare-extended-security-updates">https://learn.microsoft.com/en-us/azure/azure-arc/servers/prepare-extended-security-updates</a></p><p>General guidance, not legal, tax or IT advice.</p>]]></description>
   </item>
 </channel>
 </rss>
