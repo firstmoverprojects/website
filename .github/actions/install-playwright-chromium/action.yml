@@ -1,0 +1,85 @@
+# Shared Chromium install for the free GitHub-hosted browser jobs.
+# Caches ~/.cache/ms-playwright on the Playwright package version.
+# Retries the install. If apt cannot install OS packages (--with-deps),
+# falls back to the browser download alone. ubuntu-latest already has
+# the libraries Chromium needs for these headless checks.
+# No secrets and no paid services.
+
+name: Install Playwright Chromium
+description: Cache Chromium for this Playwright version, retry the install, and skip apt if OS packages fail.
+
+runs:
+  using: composite
+  steps:
+    - name: Read Playwright version
+      id: playwright-version
+      shell: bash
+      run: echo "version=$(node -p "require('playwright/package.json').version")" >> "$GITHUB_OUTPUT"
+
+    - name: Restore Playwright browser cache
+      id: playwright-cache
+      uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+      with:
+        path: ~/.cache/ms-playwright
+        key: ms-playwright-${{ runner.os }}-chromium-${{ steps.playwright-version.outputs.version }}
+
+    - name: Install Chromium
+      shell: bash
+      env:
+        PLAYWRIGHT_CACHE_HIT: ${{ steps.playwright-cache.outputs.cache-hit }}
+      run: |
+        set -euo pipefail
+
+        retry_browser() {
+          local attempt
+          for attempt in 1 2 3; do
+            echo "Chromium browser download attempt ${attempt}/3"
+            if npx playwright install chromium; then
+              return 0
+            fi
+            echo "playwright install chromium failed (attempt ${attempt})"
+            if [ "$attempt" -lt 3 ]; then
+              sleep $((attempt * 10))
+            fi
+          done
+          return 1
+        }
+
+        if [ "${PLAYWRIGHT_CACHE_HIT}" = "true" ]; then
+          echo "Playwright Chromium cache hit for this version. Skipping apt."
+          retry_browser
+          exit $?
+        fi
+
+        # Playwright's --with-deps runs apt-get. Retries cover a short DNS blip.
+        # The short timeout keeps a dead mirror from using the whole job.
+        printf '%s\n' \
+          'Acquire::Retries "5";' \
+          'Acquire::http::Timeout "20";' \
+          'Acquire::https::Timeout "20";' \
+          | sudo tee /etc/apt/apt.conf.d/80-retries >/dev/null
+
+        for attempt in 1 2 3; do
+          echo "Chromium install attempt ${attempt}/3 (browser plus OS packages)"
+          if timeout --kill-after=20s 180s npx playwright install --with-deps chromium; then
+            exit 0
+          fi
+          echo "playwright install --with-deps failed (attempt ${attempt}). Installing Chromium without OS packages."
+          if npx playwright install chromium; then
+            exit 0
+          fi
+          echo "playwright install chromium failed (attempt ${attempt})"
+          if [ "$attempt" -lt 3 ]; then
+            sleep $((attempt * 10))
+          fi
+        done
+
+        echo "Chromium install failed after 3 attempts"
+        exit 1
+
+    - name: Save Playwright browser cache
+      if: steps.playwright-cache.outputs.cache-hit != 'true'
+      uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ steps.playwright-cache.outputs.cache-primary-key }}

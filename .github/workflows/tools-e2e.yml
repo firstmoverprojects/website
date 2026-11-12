@@ -2,6 +2,7 @@
 # Serves this repository on localhost and drives Playwright's own Chromium.
 # ubuntu-latest only. No secrets, no paid runners, and no requests to Gumroad,
 # Brevo, or other third parties. GoatCounter is stubbed inside the test.
+# actions: write is only for the Playwright browser cache.
 
 name: Tool page end-to-end
 
@@ -10,6 +11,7 @@ on:
 
 permissions:
   contents: read
+  actions: write
 
 concurrency:
   group: tools-e2e-${{ github.ref }}
@@ -33,7 +35,7 @@ jobs:
         run: npm ci
 
       - name: Install Chromium
-        run: npx playwright install --with-deps chromium
+        uses: ./.github/actions/install-playwright-chromium
 
       - name: Run tool page tests
         run: npm run test:e2e
