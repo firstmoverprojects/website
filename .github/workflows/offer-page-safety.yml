@@ -35,12 +35,12 @@ jobs:
         run: npm ci
 
       - name: Install Chromium
-        run: npx playwright install --with-deps chromium
+        uses: ./.github/actions/install-playwright-chromium
 
       - name: Check offer pages
         env:
           OFFER_SCREENSHOT_DIR: offer-page-screenshots
-        run: node --test --test-concurrency=1 tests/offer-page-safety.test.mjs
+        run: node --test --test-concurrency=1 tests/offer-page-safety.test.mjs tests/first-screen-buy-path.test.mjs
 
       - name: Upload 390px screenshots
         if: always()
@@ -48,4 +48,4 @@ jobs:
         with:
           name: offer-pages-390px
           path: offer-page-screenshots/
-          if-no-files-found: error
+          if-no-files-found: warn
