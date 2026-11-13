@@ -29,15 +29,13 @@ const PAST_EASTERN = "Nov 19, 2026 at 3 p.m. Eastern was the last day to file in
 const PAST_ET = "Nov 19, 2026 at 3 p.m. ET was the last day to file information returns through FIRE.";
 const FAQ_Q = "When was the last day to file information returns through FIRE?";
 const H1 = "When was the last day to file on IRS FIRE?";
-const R3 = "FIRE filing ended Nov 19, 2026 at 3 p.m. ET. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS. ";
+const R3 = "FIRE is closed. After Jan 1, 2027, IRIS is the IRS e-file system for information returns (foreign filers without a U.S. TIN use IDES).";
 const R4_CHECK = "We still have 2026 or prior-year returns or corrections to file (FIRE filing ended Nov 19, 2026 at 3 p.m. ET; the IRS says IRIS takes tax year 2022 and later returns and corrections)";
 const R4_TEXT = "FIRE filing ended Nov 19, 2026 at 3 p.m. ET. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS.";
 const R4_QUOTE2 = "You can e-file information returns for tax year 2022 and later with the Information Returns Intake System (IRIS). The system also lets you file corrections and request automatic extensions.";
 const FORBIDDEN = [
   "is the last day",
   "file through FIRE by",
-  "before Nov 19",
-  "Before Nov 19",
   "before the November 19",
   "you can still file",
   "You can still file",
@@ -89,10 +87,11 @@ test("both FIRE pages use past tense for Nov 19 and drop future filing lines", (
     assert.equal(html.includes('var CUTOFF = Date.UTC(2026, 10, 19, 20, 0, 0);'), true, rel);
     assert.equal(script(html, "fmp-next-irs").includes('var NOV19_LINE = "Last day to file on FIRE: Nov 19, 2026, 3 p.m. ET. ";'), true, rel);
     assert.equal(script(html, "fmp-next-irs").includes('var CLOSED = "' + R3 + '";'), true, rel);
-    assert.equal(html.includes("FIRE is closed"), false, rel);
+    assert.equal(html.includes(R3), true, rel);
+    assert.equal(html.includes("IRIS is the only IRS e-file system"), false, rel);
     assert.equal(html.includes('"event/tiktok-follow-click-" + toolSlug'), true, rel);
     assert.equal(html.includes("Refunds: within 30 days if a file is corrupt or materially not as described."), true, rel);
-    assert.match(html, /data-next-irs-copy="">FIRE filing ended Nov 19, 2026 at 3 p\.m\. ET\. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS\. /);
+    assert.match(html, /data-next-irs-copy="">FIRE is closed\. After Jan 1, 2027, IRIS is the IRS e-file system for information returns \(foreign filers without a U\.S\. TIN use IDES\)\./);
     assert.match(html, /<a href="https:\/\/www\.irs\.gov\/filing\/e-file-information-returns-with-iris" rel="noopener noreferrer">irs\.gov\/iris<\/a>/);
     assert.match(html, /\[data-fire-kit\]\[hidden\]\{display:none !important\}/);
     const dates = [...html.matchAll(/"dateModified": "([^"]+)"/g)].map((match) => match[1]);
@@ -128,7 +127,7 @@ test("the deadline FAQ question and answer are past tense and match JSON-LD", ()
   assert.equal(html.includes("2. If we filed through FIRE ourselves, list anything still open (2026 corrections or late returns) and whether we have an IRIS Application for TCC started. FIRE filing has ended, so anything still open would go through IRIS."), true);
   assert.equal(html.includes("5. Nov 9, 2026 was the last day to change an IR Application for TCC, and those applications are now read-only."), true);
   assert.equal(html.includes("5. Nov 9, 2026 was the last day to change an IR Application for TCC, and those applications are now read-only. " + PAST_ET), false);
-  assert.equal(html.includes("The IRS says " + PAST_ET.slice(0, -1) + ", and IRIS will be the only e-file system for information returns after Jan. 1, 2027."), true);
+  assert.equal(html.includes("The IRS says " + PAST_ET.slice(0, -1) + ". After Jan 1, 2027, IRIS is the IRS e-file system for information returns (foreign filers without a U.S. TIN use IDES)."), true);
   assert.equal(html.includes("and IRIS is the only system after Jan. 1, 2027"), false);
   assert.equal(html.includes('aria-label="Free check"'), true);
   assert.equal(html.includes('aria-label="Free check and checklist"'), false);
@@ -137,8 +136,10 @@ test("the deadline FAQ question and answer are past tense and match JSON-LD", ()
 test("the FIRE check states the passed filing day outside the kit hide nodes", () => {
   const html = read("tools/fire-to-iris-check/index.html");
   assert.equal(html.split(PAST_EASTERN).length - 1 >= 2, true);
-  assert.equal(html.includes(R4_CHECK), true);
-  assert.equal(html.includes('id="c-open-2026"> ' + R4_CHECK), true);
+  const CHECK_PRE = "We still have 2026 or prior-year returns, corrections, or test files we plan to submit through FIRE before Nov 19, 2026 at 3 p.m. ET";
+  assert.equal(html.includes('id="c-open-2026-copy">' + R4_CHECK), true);
+  assert.equal(html.includes('var CHECK_PRE = "' + CHECK_PRE + '";'), true);
+  assert.equal(html.includes('var CHECK_POST = "' + R4_CHECK + '";'), true);
   assert.equal(html.includes('problem.textContent = "' + R4_TEXT + '"'), true);
   assert.equal(html.includes('"Nov 19, 2026 (passed)", "' + R4_TEXT + '"'), true);
   assert.equal(html.includes(R4_QUOTE2), true);
@@ -205,7 +206,8 @@ test("at the cutoff the kit is hidden and the Nov 19 card is Passed, and before 
       assert.equal(after.text.includes("checklist is optional"), false, rel);
       assert.equal(after.text.includes("Refunds:"), false, rel);
       assert.equal(after.gumroad, 0, rel + " gumroad");
-      assert.equal(after.text.includes("FIRE is closed"), false, rel);
+      assert.equal(after.text.includes(r3), true, rel);
+      assert.equal(after.text.includes("before Nov 19"), false, rel);
       assert.equal(after.text.includes("Today (Nov 19"), false, rel);
       assert.equal(after.next, r3, rel + " next");
       const html = read(rel);

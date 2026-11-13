@@ -195,7 +195,7 @@
           </tr>
           </tbody>
         </table>
-        <!-- REMOVE Nov 20, 2026: FIRE kit unpublishes -->
+        <!-- FIRE kit links hide after Nov 19, 2026, 20:00 UTC unless FMP_FIRE_KIT_KEEP_SELLING is true in the fmp-fire-kit script on this page -->
         <p class="kit-link">Optional printable kits on Gumroad:</p>
         <!-- Kit links. Gumroad product ids: lnfgc; wzxbmp (live permalink fire-to-iris-switch-checklist); amazon-1m-insurance-readiness-kit (short id zasjos redirects and keeps the query). utm_campaign=deadlines and utm_content=hub. -->
         <p class="kit-link"><a rel="noopener" target="_blank" class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=deadlines&amp;utm_content=hub" referrerpolicy="strict-origin-when-cross-origin">Get the $9 Etsy photo checklist</a></p>
@@ -402,11 +402,14 @@
 <script id="fmp-fire-kit">
 (function () {
   "use strict";
+  // Chief flips false to true on this line only after Risk GOs the v1.4 ZIP.
+  if (typeof window.FMP_FIRE_KIT_KEEP_SELLING !== "boolean") window.FMP_FIRE_KIT_KEEP_SELLING = false;
   var CUTOFF = Date.UTC(2026, 10, 19, 20, 0, 0);
   function expired(now) {
     return (now || new Date()).getTime() >= CUTOFF;
   }
   function hide(now) {
+    if (window.FMP_FIRE_KIT_KEEP_SELLING === true) return;
     if (!expired(now) || !document.querySelectorAll) return;
     var nodes = document.querySelectorAll("[data-fire-kit]");
     var i;
