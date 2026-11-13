@@ -256,7 +256,7 @@ test("EU product ID checker shows one result, the November 1 rule, and the remin
   assert.equal(await page.locator("#result-cta a").count(), 0);
   assert.equal(await page.locator("#kit-result, #paid-link, a[href*='fetwsm'], a[href*='gumroad.com']").count(), 0);
   assert.equal(await page.locator("#results .follow-bar, #results .kit-conv-box, #results .email-cap-box, #results .btn-buy-now").count(), 0);
-  assert.match(await page.innerText("#result-problem"), /4 of 6 rows need a fix before November 1, 2026/);
+  assert.match(await page.innerText("#result-problem"), /4 of 6 rows need a fix\. Product identifiers have been mandatory since November 1, 2026/);
   assert.match(await page.innerText("#result-deadline"), /November 1, 2026/);
   assert.match(await page.innerText("#result-deadline"), /EUR 150/);
   assert.match(await page.innerText("#next-steps"), /Y081/);

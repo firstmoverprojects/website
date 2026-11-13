@@ -675,7 +675,7 @@ function leadFor(result) {
   } else if (result.needsFix) {
     var rowWord = n === 1 ? "row" : "rows";
     var verb = result.needsFix === 1 ? "needs" : "need";
-    problem = result.needsFix + " of " + n + " " + rowWord + " " + verb + " a fix before November 1, 2026.";
+    problem = result.needsFix + " of " + n + " " + rowWord + " " + verb + " a fix. Product identifiers have been mandatory since November 1, 2026.";
   } else {
     problem = "No problems found in these checks. Product identifiers became mandatory on November 1, 2026.";
   }
