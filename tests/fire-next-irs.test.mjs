@@ -1,5 +1,5 @@
 // The line under the FIRE checklist button follows America/Chicago for Nov 9
-// and 3 p.m. Eastern for Nov 19. Static HTML is the post-Nov-9 sentence.
+// and 3 p.m. Eastern for Nov 19. Static HTML is the post-Nov-19 sentence.
 // The apply() cases still feed the pre-Nov-9 sentence to prove that flip is unchanged.
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -11,7 +11,7 @@ const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
 const html = readFileSync(path.join(ROOT, "tools/fire-to-iris-check/index.html"), "utf8");
 const STATIC = "Next IRS date: Nov 9, 2026, the last day to change your IR Application for TCC (after that it is read-only). Last day to file on FIRE: Nov 19, 2026, 3 p.m. ET. ";
 const NOV19_LINE = "Last day to file on FIRE: Nov 19, 2026, 3 p.m. ET. ";
-const CLOSED = "FIRE is closed. IRIS is the only IRS e-file system for information returns from Jan 1, 2027.";
+const CLOSED = "FIRE filing ended Nov 19, 2026 at 3 p.m. ET. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS. ";
 
 function load() {
   const match = html.match(/<script id="fmp-next-irs">([\s\S]*?)<\/script>/);
@@ -34,8 +34,9 @@ function line(copyText) {
   };
 }
 
-test("static HTML states that Nov 9 has passed and names Nov 19 next, and keeps the IRS link", () => {
-  assert.match(html, /data-next-irs-copy="">Nov 9, 2026 has passed\. Existing IR Applications for TCC are now read-only\. Next IRS date: Nov 19, 2026, 3 p\.m\. ET, the last day to file on FIRE\. <\/span>Source: <a href="https:\/\/www\.irs\.gov\/e-file-providers\/filing-information-returns-electronically-fire"/);
+test("static HTML states the Nov 19 filing day in the past tense and keeps the IRS link", () => {
+  assert.match(html, /data-next-irs-copy="">FIRE filing ended Nov 19, 2026 at 3 p\.m\. ET\. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS\. <\/span>Source: <a href="https:\/\/www\.irs\.gov\/e-file-providers\/filing-information-returns-electronically-fire"/);
+  assert.match(html, /<a href="https:\/\/www\.irs\.gov\/filing\/e-file-information-returns-with-iris" rel="noopener noreferrer">irs\.gov\/iris<\/a>/);
   assert.equal(html.includes("Next IRS date: Nov 9, 2026"), false);
   const cards = html.slice(html.indexOf('aria-label="IRS FIRE and IRIS dates"'), html.indexOf('aria-labelledby="facts-h"'));
   const order = ["cd-nov9", "cd-nov19", "cd-jan1", "cd-nov1"].map((id) => cards.indexOf('id="' + id + '"'));
