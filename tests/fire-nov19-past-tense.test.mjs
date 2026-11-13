@@ -90,7 +90,7 @@ test("both FIRE pages use past tense for Nov 19 and drop future filing lines", (
     assert.equal(script(html, "fmp-next-irs").includes('var NOV19_LINE = "Last day to file on FIRE: Nov 19, 2026, 3 p.m. ET. ";'), true, rel);
     assert.equal(script(html, "fmp-next-irs").includes('var CLOSED = "' + R3 + '";'), true, rel);
     assert.equal(html.includes("FIRE is closed"), false, rel);
-    assert.equal(html.includes('["", "event", "tiktok-follow-click-"].join("/")'), true, rel);
+    assert.equal(html.includes('"event/tiktok-follow-click-" + toolSlug'), true, rel);
     assert.equal(html.includes("Refunds: within 30 days if a file is corrupt or materially not as described."), true, rel);
     assert.match(html, /data-next-irs-copy="">FIRE filing ended Nov 19, 2026 at 3 p\.m\. ET\. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS\. /);
     assert.match(html, /<a href="https:\/\/www\.irs\.gov\/filing\/e-file-information-returns-with-iris" rel="noopener noreferrer">irs\.gov\/iris<\/a>/);
