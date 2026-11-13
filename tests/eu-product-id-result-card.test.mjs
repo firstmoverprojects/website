@@ -80,7 +80,7 @@ test("the answer block leads with one result and the thanks line", () => {
   assert.match(card, /November 1, 2026/);
   assert.match(card, /EUR 150/);
   assert.match(card, /General guidance, not legal, tax or IT advice/);
-  assert.match(html, /Not affiliated with the European Commission or any customs authority/);
+  assert.match(html, /Not affiliated with or endorsed by the European Commission/);
   assert.match(html, /General guidance, not legal, tax or IT advice/);
   assert.match(html, /id="faq"/);
   assert.match(html, /property="og:image" content="https:\/\/firstmoverprojects.com\/assets\/fmp-logo-460.png"/);
