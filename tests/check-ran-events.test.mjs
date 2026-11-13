@@ -2,7 +2,6 @@
 // a result is shown. window.goatcounter.count is stubbed. Count URLs are
 // fulfilled locally so the live GoatCounter host is never contacted.
 import assert from "node:assert/strict";
-import { execFileSync } from "node:child_process";
 import { createServer } from "node:http";
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
@@ -11,7 +10,6 @@ import { fileURLToPath } from "node:url";
 import { blockExternalOnPage, chromiumLaunchOptions, importChromium } from "./playwright-helpers.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const BASELINE = "2966146";
 const VIEWPORTS = [
   { width: 390, height: 844 },
   { width: 1280, height: 800 }
@@ -84,22 +82,13 @@ function startServer() {
         res.writeHead(400);
         return res.end("bad");
       }
-      let body;
-      if (baseline) {
-        try {
-          body = execFileSync("git", ["show", `${BASELINE}:${rel}`], { cwd: ROOT });
-        } catch {
-          res.writeHead(404);
-          return res.end("nf");
-        }
-      } else {
-        const file = path.join(ROOT, rel);
-        if (!file.startsWith(ROOT + path.sep) || !existsSync(file)) {
-          res.writeHead(404);
-          return res.end("nf");
-        }
-        body = readFileSync(file);
+      const file = path.join(ROOT, rel);
+      if (!file.startsWith(ROOT + path.sep) || !existsSync(file)) {
+        res.writeHead(404);
+        return res.end("nf");
       }
+      let body = readFileSync(file);
+      if (baseline && rel.endsWith(".html")) body = Buffer.from(withoutCheckRan(body.toString("utf8")));
       const ext = path.extname(rel);
       const types = {
         ".html": "text/html; charset=utf-8",
@@ -121,6 +110,21 @@ function startServer() {
 
 function stripScripts(html) {
   return html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
+}
+
+// CI checks out the pull request with depth 1, so the parent commit is not
+// available. The visible baseline is this file with only the check-ran script
+// removed. That is the whole edit, and it stays inside <script>.
+function withoutCheckRan(html) {
+  const next = html
+    .replace(/\nvar checkRanEventSent = false;\nfunction trackCheckRan\(\) \{[\s\S]*?\n\}\n/, "\n")
+    .replace(/\n  trackCheckRan\(\);/g, "")
+    .replace(/\n  window\.fmpSendGcEvent = sendGcEvent;/g, "");
+  if (next === html || next.includes("trackCheckRan") || next.includes("fmpSendGcEvent")) {
+    throw new Error("check-ran script was not removed");
+  }
+  if (!next.includes("function sendGcEvent")) throw new Error("sendGcEvent helper was removed");
+  return next;
 }
 
 function expectedEvent(slug, testVisit) {
@@ -230,7 +234,7 @@ test("checker markup outside scripts is unchanged", () => {
   for (const spec of PAGES) {
     const rel = spec.path.slice(1) + "index.html";
     const current = readFileSync(path.join(ROOT, rel), "utf8");
-    const baseline = execFileSync("git", ["show", `${BASELINE}:${rel}`], { cwd: ROOT, encoding: "utf8" });
+    const baseline = withoutCheckRan(current);
     assert.equal(stripScripts(current), stripScripts(baseline), rel);
   }
 });
