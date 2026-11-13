@@ -256,7 +256,7 @@ test("EU product ID checker shows one result, the November 1 rule, and the remin
   assert.equal(await page.locator("#result-cta a").count(), 0);
   assert.equal(await page.locator("#kit-result, #paid-link, a[href*='fetwsm'], a[href*='gumroad.com']").count(), 0);
   assert.equal(await page.locator("#results .follow-bar, #results .kit-conv-box, #results .email-cap-box, #results .btn-buy-now").count(), 0);
-  assert.match(await page.innerText("#result-problem"), /4 of 6 rows need a fix before November 1, 2026/);
+  assert.match(await page.innerText("#result-problem"), /4 of 6 rows need a fix\. Product identifiers have been mandatory since November 1, 2026/);
   assert.match(await page.innerText("#result-deadline"), /November 1, 2026/);
   assert.match(await page.innerText("#result-deadline"), /EUR 150/);
   assert.match(await page.innerText("#next-steps"), /Y081/);
@@ -265,7 +265,7 @@ test("EU product ID checker shows one result, the November 1 rule, and the remin
   assert.equal(cardText.includes("$29"), false);
   assert.match(cardText, /Thanks for your time\. If this isn't right for you, please share it with someone it could help\./);
   assert.match(cardText, /General guidance, not legal, tax or IT advice/);
-  assert.match(await page.innerText("footer"), /Not affiliated with the European Commission or any customs authority/);
+  assert.match(await page.innerText("footer"), /Not affiliated with or endorsed by the European Commission/);
   const colors = await page.evaluate(() => {
     return {
       bg: getComputedStyle(document.querySelector("#result-cta")).backgroundColor,

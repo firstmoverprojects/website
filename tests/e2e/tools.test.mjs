@@ -483,7 +483,7 @@ test("EU product identifiers flag 4 of 6 example rows and price the handling fee
     await page.locator("#example").click();
     assert.equal(
       await page.locator("#result-problem").innerText(),
-      "4 of 6 rows need a fix before November 1, 2026."
+      "4 of 6 rows need a fix. Product identifiers have been mandatory since November 1, 2026."
     );
     const table = await page.locator("#tbody").innerText();
     assert.match(table, /Needs a fix/);

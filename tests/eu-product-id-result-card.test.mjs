@@ -80,7 +80,7 @@ test("the answer block leads with one result and the thanks line", () => {
   assert.match(card, /November 1, 2026/);
   assert.match(card, /EUR 150/);
   assert.match(card, /General guidance, not legal, tax or IT advice/);
-  assert.match(html, /Not affiliated with the European Commission or any customs authority/);
+  assert.match(html, /Not affiliated with or endorsed by the European Commission/);
   assert.match(html, /General guidance, not legal, tax or IT advice/);
   assert.match(html, /id="faq"/);
   assert.match(html, /property="og:image" content="https:\/\/firstmoverprojects.com\/assets\/fmp-logo-460.png"/);
@@ -95,7 +95,7 @@ test("the answer block leads with one result and the thanks line", () => {
 test("the result names the date, the rule, and the next step for that answer", () => {
   const leadFor = leadForFromPage();
   const fixes = leadFor({ processed: 6, needsFix: 4, y081: 2, capped: false, totalDataRows: 6 });
-  assert.equal(fixes.problem, "4 of 6 rows need a fix before November 1, 2026.");
+  assert.equal(fixes.problem, "4 of 6 rows need a fix. Product identifiers have been mandatory since November 1, 2026.");
   assert.equal(fixes.steps.length, 3);
   assert.match(fixes.steps[0], /Needs a fix/);
   assert.match(fixes.steps[1], /2 rows have no barcode/);
@@ -103,7 +103,7 @@ test("the result names the date, the rule, and the next step for that answer", (
   assert.match(fixes.steps[2], /customs declaration/);
 
   const one = leadFor({ processed: 6, needsFix: 1, y081: 0, capped: false, totalDataRows: 6 });
-  assert.equal(one.problem, "1 of 6 rows needs a fix before November 1, 2026.");
+  assert.equal(one.problem, "1 of 6 rows needs a fix. Product identifiers have been mandatory since November 1, 2026.");
 
   const clear = leadFor({ processed: 1, needsFix: 0, y081: 0, capped: false, totalDataRows: 1 });
   assert.match(clear.problem, /No problems found in these checks/);
