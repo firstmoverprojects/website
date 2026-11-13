@@ -343,7 +343,7 @@ assert(deadline.indexOf("Amazon Insurance Certificate Checklist: What to Review 
 assert(deadline.indexOf("Can the newer requirement apply below $10,000 in monthly sales?") !== -1, "deadline sales question");
 assert(deadline.indexOf("SAMPLE SCENARIO: FICTIONAL DATA") !== -1, "deadline fictional sample label");
 assert(deadline.indexOf('src="/assets/previews/amazon-coi-kit-preview-1280x720.png"') !== -1, "deadline kit preview");
-assert(html.indexOf("Free Browser Check vs. $29 Readiness Kit") !== -1, "comparison heading");
+assert(html.indexOf("Free Browser Check vs. $19 Readiness Kit") !== -1, "comparison heading");
 assert(html.indexOf("Before you upload your Amazon insurance certificate, here is how to organize the questions you need to ask your broker") !== -1, "demo hook");
 assert(html.indexOf("SAMPLE SCENARIO: FICTIONAL DATA") !== -1, "fictional sample label");
 assert(html.indexOf("PRODUCT DEMONSTRATION: SAMPLE SCENARIO") !== -1, "product demonstration label");
@@ -362,7 +362,7 @@ assertEq(FMP.amazonKitVisible("no"), false, "kit hides when enhanced-safety cate
 assertEq(FMP.amazonKitVisible("unsure"), false, "kit hides when the category answer is not sure");
 assertEq(FMP.amazonKitVisible(""), false, "kit hides when the category question is blank");
 assert(html.indexOf('id="amazon-kit" hidden') !== -1, "Amazon kit starts hidden");
-assert(html.indexOf("Get the $29 kit with broker email") !== -1, "Amazon kit button names the kit");
+assert(html.indexOf("Get the $19 kit with broker email") !== -1, "Amazon kit button names the kit");
 assert(html.indexOf("Not affiliated with or endorsed by Amazon.") !== -1, "Not affiliated with or endorsed by Amazon under the kit");
 var kitAt = html.indexOf('id="kit-result"');
 var adviceAt = html.indexOf("General guidance, not legal, tax or IT advice.", kitAt);

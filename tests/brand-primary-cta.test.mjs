@@ -57,7 +57,7 @@ test("audited CTA copy and the FIRE checklist link stay put", () => {
   for (const label of [
     "$9 Switch Checklist",
     "$39 Planner",
-    "$29 COI Kit (1-Click Buy)",
+    "$19 COI Kit (1-Click Buy)",
     "Open free check"
   ]) {
     assert.ok(tools.includes(label), label);
