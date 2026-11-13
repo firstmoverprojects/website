@@ -1252,12 +1252,23 @@ function copyText(preId) {
   });
 }
 
+var checkRanEventSent = false;
+function trackCheckRan() {
+  if (checkRanEventSent) return;
+  checkRanEventSent = true;
+  var sendGcEvent = window.fmpSendGcEvent;
+  if (typeof sendGcEvent !== "function") return;
+  var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(location.search || "");
+  sendGcEvent((testVisit ? "TEST-EXCLUDE/" : "") + "check/etsy-photo-audit-check-ran", "Check ran: etsy-photo-audit-check");
+}
+
 function showResult(model) {
   render(model);
   var box = byId("results");
   if (box && box.scrollIntoView) {
     try { box.scrollIntoView({ block: "start" }); } catch (e) {}
   }
+  trackCheckRan();
   return model;
 }
 
@@ -1584,6 +1595,7 @@ if (window.addEventListener) window.addEventListener("resize", function () {
       if (typeof fetch === "function") fetch(gcCountUrl, { keepalive: true, mode: "no-cors" });
     } catch (fetchErr) {}
   }
+  window.fmpSendGcEvent = sendGcEvent;
   function trackGumroadClick(ev) {
     if (ev.type === "auxclick" && ev.button !== 1) return;
     var node = ev.target && ev.target.closest ? ev.target.closest("a") : null;

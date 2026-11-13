@@ -81,6 +81,12 @@ function helperBody(html) {
   return html.slice(start + "<script>".length, end).split("\n").map((line) => line.trim()).filter(Boolean).join("\n");
 }
 
+// The three result checkers publish the closed-over sendGcEvent so a result
+// can be counted once. That one line is not part of the shared helper.
+function comparableHelper(html) {
+  return helperBody(html).replace(/\nwindow\.fmpSendGcEvent = sendGcEvent;/g, "");
+}
+
 function loadHelper(search, { withCount = true } = {}) {
   const code = helperBody(read("tools/amazon-coi-check/index.html"));
   const counts = [];
@@ -168,7 +174,7 @@ test("tracking pages load the test-exclude helper before count.js", () => {
       assert.equal(html.split('src="https://gc.zgo.at/count.js"').length - 1, 0, rel);
       continue;
     }
-    assert.equal(helperBody(html), canonical, rel);
+    assert.equal(comparableHelper(html), comparableHelper(read("tools/amazon-coi-check/index.html")), rel);
     const helperAt = html.indexOf("function trackGumroadClick");
     const countAt = html.indexOf(COUNT);
     assert.ok(helperAt !== -1 && countAt !== -1 && helperAt < countAt, rel);
