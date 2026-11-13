@@ -1,7 +1,7 @@
 // Outcome-specific result CTA on the Amazon $1M COI check.
 // Headless run:
 //   npm install --prefix /tmp/issue07-pw playwright-core
-//   PLAYWRIGHT_CORE=/tmp/issue07-pw/node_modules/playwright-core/index.mjs AMAZON_CTA_SHOTS=/opt/cursor/artifacts/amazon-coi-result-cta node --test tests/amazon-result-cta.test.mjs
+//   PLAYWRIGHT_CORE=/tmp/issue07-pw/node_modules/playwright-core/index.mjs AMAZON_CTA_SHOTS=/tmp/artifacts/amazon-coi-result-cta node --test tests/amazon-result-cta.test.mjs
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { mkdirSync, readFileSync } from "node:fs";

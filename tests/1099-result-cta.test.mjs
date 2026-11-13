@@ -1,6 +1,6 @@
 // Outcome-specific result CTA on the 1099-NEC or 1099-K check.
 // Headless run:
-//   PLAYWRIGHT_CORE=/tmp/issue07-pw/node_modules/playwright-core/index.mjs NEC_CTA_SHOTS=/opt/cursor/artifacts/1099-result-cta node --test tests/1099-result-cta.test.mjs
+//   PLAYWRIGHT_CORE=/tmp/issue07-pw/node_modules/playwright-core/index.mjs NEC_CTA_SHOTS=/tmp/artifacts/1099-result-cta node --test tests/1099-result-cta.test.mjs
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { mkdirSync } from "node:fs";

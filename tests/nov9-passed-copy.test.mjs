@@ -74,7 +74,7 @@ test("unguarded copy does not treat Nov 9, 2026 as still upcoming", () => {
   assert.match(finder, /<strong>passed on Nov 9, 2026<\/strong>: Last day to make changes to IR Applications for TCCs; those applications are now read-only\./);
   assert.equal(fire.key_dates[1].text, "Last day to make changes to IR Applications for TCCs; those applications are now read-only.");
   assert.equal(fire.key_dates[2].text, "Last day to file information returns through FIRE.");
-  assert.equal(fire.prompt_text.includes("The IRS says Nov 19, 2026 at 3 p.m. ET was the last day to file information returns through FIRE, and IRIS will be the only e-file system for information returns after Jan. 1, 2027."), true);
+  assert.equal(fire.prompt_text.includes("The IRS says Nov 19, 2026 at 3 p.m. ET was the last day to file information returns through FIRE, and IRIS will be the only e-file system for information returns after Jan. 1, 2027 (foreign filers without a U.S. TIN use IDES)."), true);
   assert.equal(fire.prompt_text.includes("Nov 9, 2026 was the last day to change an IR Application for TCC, and those applications are now read-only."), true);
   assert.equal(fire.prompt_text.includes("before the November 19 last FIRE filing day"), false);
   assert.match(read("deadlines/feed.xml"), /Nov 9, 2026 was the last day to change FIRE IR Applications for TCC/);
