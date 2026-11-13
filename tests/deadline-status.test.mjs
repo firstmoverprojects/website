@@ -129,7 +129,8 @@ test("detail pages and the finder use the same status wording", () => {
   }
   assert.match(finder, /Took effect Nov 1/);
   assert.match(finder, /Until Jan 31, 2027/);
-  assert.match(finder, /Next: Nov 19, 2026, 3 p\.m\. ET/);
+  assert.match(finder, /Next: Jan 1, 2027/);
+  assert.equal(finder.includes("Next: Nov 19, 2026, 3 p.m. ET"), false);
   assert.match(finder, /Next: Nov 10, 2026/);
   assert.match(finder, /Next: Nov 30, 2026/);
 });

@@ -382,7 +382,14 @@ test("each offer page loads, internal links resolve, and Gumroad buy links are h
       if (problem) failures.push(`${offer.name}: ${problem}`);
     }
     const structured = offerUrls(html);
-    if (structured.length === 0) failures.push(`${offer.name}: no product offer URL`);
+    if (offer.id === "fire") {
+      if (structured.length !== 0) failures.push(`${offer.name}: Product Offer must be absent`);
+      if (html.includes('id="product-jsonld"') || html.includes("priceValidUntil") || /"@type":\s*"Product"/.test(html) || /"@type":\s*"Offer"/.test(html)) {
+        failures.push(`${offer.name}: Product Offer JSON-LD is still present`);
+      }
+    } else if (structured.length === 0) {
+      failures.push(`${offer.name}: no product offer URL`);
+    }
     for (const href of structured) {
       const problem = buyProblem(href, offer.slug);
       if (problem) failures.push(`${offer.name} product: ${problem}`);

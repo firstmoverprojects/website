@@ -706,3 +706,4 @@ pre.prompt {
 .hero .signup {
   margin-bottom: 0;
 }
+[data-fire-kit][hidden]{display:none !important}
