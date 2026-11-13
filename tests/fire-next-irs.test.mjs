@@ -11,7 +11,7 @@ const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
 const html = readFileSync(path.join(ROOT, "tools/fire-to-iris-check/index.html"), "utf8");
 const STATIC = "Next IRS date: Nov 9, 2026, the last day to change your IR Application for TCC (after that it is read-only). Last day to file on FIRE: Nov 19, 2026, 3 p.m. ET. ";
 const NOV19_LINE = "Last day to file on FIRE: Nov 19, 2026, 3 p.m. ET. ";
-const CLOSED = "FIRE filing ended Nov 19, 2026 at 3 p.m. ET. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS. ";
+const CLOSED = "FIRE is closed. After Jan 1, 2027, IRIS is the IRS e-file system for information returns (foreign filers without a U.S. TIN use IDES).";
 
 function load() {
   const match = html.match(/<script id="fmp-next-irs">([\s\S]*?)<\/script>/);
@@ -35,7 +35,7 @@ function line(copyText) {
 }
 
 test("static HTML states the Nov 19 filing day in the past tense and keeps the IRS link", () => {
-  assert.match(html, /data-next-irs-copy="">FIRE filing ended Nov 19, 2026 at 3 p\.m\. ET\. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS\. <\/span>Source: <a href="https:\/\/www\.irs\.gov\/e-file-providers\/filing-information-returns-electronically-fire"/);
+  assert.match(html, /data-next-irs-copy="">FIRE is closed\. After Jan 1, 2027, IRIS is the IRS e-file system for information returns \(foreign filers without a U\.S\. TIN use IDES\)\.<\/span> Source: <a href="https:\/\/www\.irs\.gov\/e-file-providers\/filing-information-returns-electronically-fire"/);
   assert.match(html, /<a href="https:\/\/www\.irs\.gov\/filing\/e-file-information-returns-with-iris" rel="noopener noreferrer">irs\.gov\/iris<\/a>/);
   assert.equal(html.includes("Next IRS date: Nov 9, 2026"), false);
   const cards = html.slice(html.indexOf('aria-label="IRS FIRE and IRIS dates"'), html.indexOf('aria-labelledby="facts-h"'));

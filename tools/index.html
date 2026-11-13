@@ -403,7 +403,7 @@
           <p id="tiktok-jump-h" class="tiktok-jump-label">Came from TikTok, Reels, or Shorts? Tap the rule change you watched:</p>
           <div class="tiktok-jump-row">
             <a class="tiktok-chip" href="/tools/eu-product-id-check/"><span class="tiktok-when">Sun, Nov 1</span><span class="tiktok-what">EU &lt;= EUR 150 Product IDs</span></a>
-            <a class="tiktok-chip" href="/tools/fire-to-iris-check/"><span class="tiktok-when">Sun, Nov 1 / Nov 19</span><span class="tiktok-what">IRS FIRE-to-IRIS 1099 Cutoff</span></a>
+            <a class="tiktok-chip" href="/tools/fire-to-iris-check/"><span class="tiktok-when" id="fire-chip-when">Sun, Nov 1 / Nov 19</span><span class="tiktok-what" id="fire-chip-what">IRS FIRE-to-IRIS 1099 Cutoff</span></a>
             <a class="tiktok-chip" href="/tools/amazon-coi-check/"><span class="tiktok-when">Mon, Nov 2</span><span class="tiktok-what">Amazon $1M Insurance (3-Month Rule)</span></a>
             <a class="tiktok-chip" href="/tools/etsy-photo-audit-check/"><span class="tiktok-what">Etsy Unedited Real-Photo Rule</span></a>
             <a class="tiktok-chip" href="/tools/custom-gpt-retirement-checker/"><span class="tiktok-when">Fri, Dec 11</span><span class="tiktok-what">OpenAI Custom GPT Retirement</span></a>
@@ -507,11 +507,11 @@
             </article>
             <article class="card">
               <div data-fire-kit="1">
-              <picture><source type="image/webp" srcset="/assets/previews/fire-to-iris-kit-preview-1280x720.webp"><img src="/assets/previews/fire-to-iris-kit-preview-1280x720.png" alt="Inside the $9 FIRE to IRIS Switch Checklist" width="1280" height="720" loading="lazy" style="width:100%;height:auto;border-radius:8px;margin-bottom:10px;border:1px solid #dde1e6" /></picture>
+              <picture><source type="image/webp" srcset="/assets/previews/fire-to-iris-kit-preview-1280x720.webp"><img src="/assets/previews/fire-to-iris-kit-preview-1280x720.png" alt="FIRE to IRIS Switch Checklist: 3-page printable PDF in a ZIP with the IRIS Application for TCC, Publication 5717 (up to 45 calendar days), and 2027 filing season steps" width="1280" height="720" loading="lazy" style="width:100%;height:auto;border-radius:8px;margin-bottom:10px;border:1px solid #dde1e6" /></picture>
               </div>
               <h3>IRS FIRE to IRIS Readiness &amp; 1099 CSV Header Check (Free)</h3>
               <p>
-                Nov 1, 2026 was the last day for FIRE test filings. Nov 9, 2026 was the last day to make changes to FIRE IR Applications for TCC; those applications are now read-only. FIRE filing ended Nov 19, 2026 at 3 p.m. ET. The IRS says IRIS will be the only e-file system for information returns after Jan. 1, 2027. Check your TCC steps and 1099 CSV column headers in your browser.
+                Nov 1, 2026 was the last day for FIRE test filings. Nov 9, 2026 was the last day to make changes to FIRE IR Applications for TCC; those applications are now read-only. FIRE filing ended Nov 19, 2026 at 3 p.m. ET. After Jan 1, 2027, IRIS is the IRS e-file system for information returns (foreign filers without a U.S. TIN use IDES). Check your TCC steps and 1099 CSV column headers in your browser.
               </p>
               <p class="kicker">Free in browser<span data-fire-kit="1"> · Optional $9 Checklist</span></p>
               <div class="ctas">
@@ -522,7 +522,7 @@
             </article>
             <article class="card">
               <div data-fire-kit="1">
-              <picture><source type="image/webp" srcset="/assets/previews/fire-to-iris-kit-preview-1280x720.webp"><img src="/assets/previews/fire-to-iris-kit-preview-1280x720.png" alt="Inside the $9 FIRE to IRIS Switch Checklist" width="1280" height="720" loading="lazy" style="width:100%;height:auto;border-radius:8px;margin-bottom:10px;border:1px solid #dde1e6" /></picture>
+              <picture><source type="image/webp" srcset="/assets/previews/fire-to-iris-kit-preview-1280x720.webp"><img src="/assets/previews/fire-to-iris-kit-preview-1280x720.png" alt="FIRE to IRIS Switch Checklist: 3-page printable PDF in a ZIP with the IRIS Application for TCC, Publication 5717 (up to 45 calendar days), and 2027 filing season steps" width="1280" height="720" loading="lazy" style="width:100%;height:auto;border-radius:8px;margin-bottom:10px;border:1px solid #dde1e6" /></picture>
               </div>
               <h3>1099-NEC or 1099-K Check (Free)</h3>
               <p>
@@ -607,7 +607,7 @@
             <article class="card">
               <div data-fire-kit="1">
               <h3>FIRE to IRIS Switch Checklist (IRS 1099 e-filing)</h3>
-              <p>
+              <p id="fire-paid-blurb">
                 IRS FIRE takes its last information returns Nov 19, 2026 (test system Nov 1 has passed; Nov 9, 2026 was the last day to make changes to FIRE IR Applications for TCC and those applications are now read-only). A short checklist for moving your 1099 e-filing to IRIS, with a 1099-NEC add-on.
               </p>
               </div>
@@ -616,7 +616,7 @@
               </p>
               <p class="kicker" data-fire-kit="1">$9</p>
               <div class="ctas" data-fire-kit="1">
-                <!-- REMOVE Nov 20, 2026: FIRE kit unpublishes -->
+                <!-- FIRE kit links hide after Nov 19, 2026, 20:00 UTC unless FMP_FIRE_KIT_KEEP_SELLING is true in the fmp-fire-kit script on this page -->
                 <a rel="noopener" target="_blank"
                   class="btn primary"
                   data-fire-kit="1"
@@ -1058,18 +1058,38 @@
 <script id="fmp-fire-kit">
 (function () {
   "use strict";
+  // Chief flips false to true on this line only after Risk GOs the v1.4 ZIP.
+  if (typeof window.FMP_FIRE_KIT_KEEP_SELLING !== "boolean") window.FMP_FIRE_KIT_KEEP_SELLING = false;
   var CUTOFF = Date.UTC(2026, 10, 19, 20, 0, 0);
   function expired(now) {
     return (now || new Date()).getTime() >= CUTOFF;
   }
+  var PAID_PRE = "IRS FIRE takes its last information returns Nov 19, 2026 (test system Nov 1 has passed; Nov 9, 2026 was the last day to make changes to FIRE IR Applications for TCC and those applications are now read-only). A short checklist for moving your 1099 e-filing to IRIS, with a 1099-NEC add-on.";
+  var PAID_POST = "FIRE closed for filing on Nov 19, 2026, at 3 p.m. ET (test system Nov 1 has passed; Nov 9, 2026 was the last day to make changes to FIRE IR Applications for TCC and those applications are now read-only). A short checklist for moving your 1099 e-filing to IRIS, with a 1099-NEC add-on.";
+  function applyCopy(now) {
+    now = now || new Date();
+    var paid = document.getElementById("fire-paid-blurb");
+    if (paid) paid.textContent = now.getTime() >= CUTOFF ? PAID_POST : PAID_PRE;
+    if (now.getTime() < CUTOFF) return;
+    var when = document.getElementById("fire-chip-when");
+    var what = document.getElementById("fire-chip-what");
+    if (when) when.textContent = "Nov 19, 2026";
+    if (what) what.textContent = "FIRE closed for filing on Nov 19, 2026, at 3 p.m. ET";
+  }
   function hide(now) {
+    if (window.FMP_FIRE_KIT_KEEP_SELLING === true) return;
     if (!expired(now) || !document.querySelectorAll) return;
     var nodes = document.querySelectorAll("[data-fire-kit]");
     var i;
     for (i = 0; i < nodes.length; i++) nodes[i].hidden = true;
   }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { hide(new Date()); });
-  else hide(new Date());
+  function boot() {
+    var now = new Date();
+    applyCopy(now);
+    hide(now);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
   if (typeof window !== "undefined") window.FMP_FIRE_KIT = { CUTOFF: CUTOFF, expired: expired, hide: hide };
 })();
 </script>

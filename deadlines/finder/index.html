@@ -105,7 +105,7 @@
         <article class="item" id="irs-fire" data-tools="irs-fire" data-status="upcoming">
           <h3>IRS FIRE e-file system retires (1099s move to IRIS)</h3>
           <p class="chip">Next: Jan 1, 2027</p><p>FIRE filing ended Nov 19, 2026 at 3 p.m. ET. Nov. 9, 2026 was the last day to make changes to FIRE IR Applications for TCC; those applications are now read-only and retained for historical reference. The IRS says current FIRE users who will e-file in IRIS themselves must complete a separate IRIS Application for TCC. If a payroll provider, accountant, or paid e-file service files for you, this may already be handled. Ask them.</p>
-          <ul class="kd"><li class="past"><strong>passed on Nov 1, 2026</strong>: Last day to file test information returns through the FIRE test system.</li><li class="past"><strong>passed on Nov 9, 2026</strong>: Last day to make changes to IR Applications for TCCs; those applications are now read-only.</li><li class="past"><strong>passed on Nov 19, 2026, 3 p.m. ET</strong>: Last day to file information returns through FIRE.</li><li class="up"><strong>Jan 1, 2027</strong>: IRIS will be the only information returns electronic filing system, including current year, prior year, or corrections, after Jan. 1, 2027.</li></ul>
+          <ul class="kd"><li class="past"><strong>passed on Nov 1, 2026</strong>: Last day to file test information returns through the FIRE test system.</li><li class="past"><strong>passed on Nov 9, 2026</strong>: Last day to make changes to IR Applications for TCCs; those applications are now read-only.</li><li class="past"><strong>passed on Nov 19, 2026, 3 p.m. ET</strong>: Last day to file information returns through FIRE.</li><li class="up"><strong>Jan 1, 2027</strong>: IRIS will be the only information returns electronic filing system, including current year, prior year, or corrections, after Jan. 1, 2027 (foreign filers without a U.S. TIN use IDES).</li></ul>
           <p class="who"><strong>Who is hit:</strong> Anyone who e-filed Forms 1099 or other information returns through the IRS FIRE system themselves.</p>
           <p class="src">Source: <a href="https://www.irs.gov/e-file-providers/filing-information-returns-electronically-fire">www.irs.gov</a> · <a href="https://www.irs.gov/filing/e-file-information-returns-with-iris">www.irs.gov</a> · <a href="https://www.irs.gov/newsroom/irs-reminder-information-return-e-file-system-transitioning-to-a-new-platform">www.irs.gov</a>. Last checked Oct 12, 2026.</p>
           <p><a href="https://firstmoverprojects.com/deadlines/irs-fire-retirement-nov-19.html">Full page with the copy-paste prompt</a></p>
@@ -244,11 +244,14 @@
     <script id="fmp-fire-kit">
 (function () {
   "use strict";
+  // Chief flips false to true on this line only after Risk GOs the v1.4 ZIP.
+  if (typeof window.FMP_FIRE_KIT_KEEP_SELLING !== "boolean") window.FMP_FIRE_KIT_KEEP_SELLING = false;
   var CUTOFF = Date.UTC(2026, 10, 19, 20, 0, 0);
   function expired(now) {
     return (now || new Date()).getTime() >= CUTOFF;
   }
   function hide(now) {
+    if (window.FMP_FIRE_KIT_KEEP_SELLING === true) return;
     if (!expired(now) || !document.querySelectorAll) return;
     var nodes = document.querySelectorAll("[data-fire-kit]");
     var i;

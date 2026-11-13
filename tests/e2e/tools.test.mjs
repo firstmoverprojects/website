@@ -57,7 +57,7 @@ async function fireEra(page) {
 const FIRE_NEXT_IRS_CLOSED = {
   pre140: /FIRE is closed\. IRIS is the only IRS e-file system for information returns from Jan 1, 2027\./,
   post140:
-    /FIRE filing ended Nov 19, 2026 at 3 p\.m\. ET\. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS\./
+    /FIRE is closed\. After Jan 1, 2027, IRIS is the IRS e-file system for information returns \(foreign filers without a U\.S\. TIN use IDES\)\./
 };
 
 const FIRE_NEXT_IRS_COUNTDOWN = /Last day to file on FIRE: Nov 19, 2026, 3 p\.m\. ET\./;

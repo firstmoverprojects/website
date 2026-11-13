@@ -242,7 +242,7 @@ legend{font-weight:700;padding:0 6px}
 <div class="kit-top">
 <p data-fire-kit="1" id="kit-top-offer"><a target="_blank" class="btn" id="kit-top" data-goatcounter-click="cta/1099-nec-or-1099-k-check-top" data-goatcounter-title="1099-NEC or 1099-K check top" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=1099-nec-or-1099-k-check&amp;utm_content=fire-check-top" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">See the $9 FIRE to IRIS checklist</a><span class="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</span></p>
 <p id="kit-top-free" hidden><a class="free-next" id="kit-top-free-link" data-goatcounter-click="cta/1099-top-free-fire" href="/tools/fire-to-iris-check/">Open the free FIRE to IRIS check</a></p>
-<p class="kit-note">If you already know a form is yours to file, the <a href="/tools/fire-to-iris-check/">free FIRE to IRIS check</a> covers the IRIS TCC steps. FIRE filing ended Nov 19, 2026 at 3 p.m. ET. The IRS says IRIS will be the only e-file system for information returns after Jan. 1, 2027.</p>
+<p class="kit-note">If you already know a form is yours to file, the <a href="/tools/fire-to-iris-check/">free FIRE to IRIS check</a> covers the IRIS TCC steps. FIRE filing ended Nov 19, 2026 at 3 p.m. ET. After Jan 1, 2027, IRIS is the IRS e-file system for information returns (foreign filers without a U.S. TIN use IDES).</p>
 <p>General guidance, not legal, tax or IT advice.</p>
 <p>Not affiliated with or endorsed by the IRS.</p>
 </div>
@@ -367,7 +367,7 @@ legend{font-weight:700;padding:0 6px}
 <span class="kit-conv-badge">INSTANT DOWNLOAD · ONE PDF, 3 PAGES · CHECKLIST + 1099-NEC ADD-ON · $9</span>
 <h2 id="paid-h">FIRE to IRIS Switch Checklist</h2>
 <p class="kit-fit">Good fit if you file 1099s for your business or clients and must move from FIRE to IRIS by Jan 1, 2027. Not needed if your software files for you.</p>
-<picture><source type="image/webp" srcset="/assets/previews/fire-to-iris-kit-preview-1280x720.webp"><img class="kit-preview-img" src="/assets/previews/fire-to-iris-kit-preview-1280x720.png" alt="See What's Inside the $9 FIRE to IRIS Switch Checklist: one PDF, 3 pages, with the IRS dates, your FIRE account, the IRIS Application for TCC, and a 1099-NEC add-on" width="1280" height="720" loading="lazy"></picture>
+<picture><source type="image/webp" srcset="/assets/previews/fire-to-iris-kit-preview-1280x720.webp"><img class="kit-preview-img" src="/assets/previews/fire-to-iris-kit-preview-1280x720.png" alt="FIRE to IRIS Switch Checklist: 3-page printable PDF in a ZIP with the IRIS Application for TCC, Publication 5717 (up to 45 calendar days), and 2027 filing season steps" width="1280" height="720" loading="lazy"></picture>
 <p>One 3-page PDF with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on.</p>
 </div>
 <p id="kit-footer-free"><a class="free-next" id="kit-footer-free-link" data-goatcounter-click="cta/1099-footer-free-fire" href="/tools/fire-to-iris-check/">Open the free FIRE to IRIS check</a></p>
@@ -946,11 +946,14 @@ if (dismiss && dismiss.addEventListener) {
 <script id="fmp-fire-kit">
 (function () {
   "use strict";
+  // Chief flips false to true on this line only after Risk GOs the v1.4 ZIP.
+  if (typeof window.FMP_FIRE_KIT_KEEP_SELLING !== "boolean") window.FMP_FIRE_KIT_KEEP_SELLING = false;
   var CUTOFF = Date.UTC(2026, 10, 19, 20, 0, 0);
   function expired(now) {
     return (now || new Date()).getTime() >= CUTOFF;
   }
   function hide(now) {
+    if (window.FMP_FIRE_KIT_KEEP_SELLING === true) return;
     if (!expired(now) || !document.querySelectorAll) return;
     var nodes = document.querySelectorAll("[data-fire-kit]");
     var i;

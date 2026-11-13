@@ -35,7 +35,8 @@ const OFFER_TOOL_PAGES = new Set([
 
 function walk(dir, out = []) {
   for (const name of readdirSync(dir)) {
-    if (name === "node_modules" || name.startsWith(".")) continue;
+    // scripts/ holds preview generators, not published pages.
+    if (name === "node_modules" || name === "scripts" || name.startsWith(".")) continue;
     const full = path.join(dir, name);
     if (statSync(full).isDirectory()) walk(full, out);
     else if (name.endsWith(".html")) out.push(full);

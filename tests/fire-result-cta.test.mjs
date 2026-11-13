@@ -14,7 +14,7 @@ const PAGE = path.join(ROOT, "tools/fire-to-iris-check/index.html");
 const html = readFileSync(PAGE, "utf8");
 const QUESTION = "Will you file our tax year 2026 information returns through IRIS?";
 const SHARE_TITLE = "IRS FIRE filing ended Nov 19, 2026 (3 p.m. ET) - Free IRIS readiness &amp; 1099 CSV check";
-const SHARE_DESC = "Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE. The IRS says IRIS will be the only e-file system for information returns after Jan. 1, 2027. Nov 9, 2026 was the last day to change IR Applications for TCC, and those applications are now read-only.";
+const SHARE_DESC = "Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE. After Jan 1, 2027, IRIS is the IRS e-file system for information returns (foreign filers without a U.S. TIN use IDES). Nov 9, 2026 was the last day to change IR Applications for TCC, and those applications are now read-only.";
 const REFUND = "Refunds: within 30 days if a file is corrupt or materially not as described.";
 const DISCLAIMER = "General guidance, not legal, tax or IT advice.";
 const BUTTON = "Get the $9 checklist (PDF in a ZIP)";
@@ -33,7 +33,7 @@ const PROBLEMS = {
   C: "Nov 9, 2026 has passed. Existing IR Applications for TCC are now read-only.",
   D: "FIRE filing ended Nov 19, 2026 at 3 p.m. ET. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS.",
   E: "You still have a step to finish. FIRE filing ended Nov 19, 2026 at 3 p.m. ET.",
-  F: "Nothing urgent was flagged from the boxes you checked. On Jan 1, 2027, the new system is the only way to file."
+  F: "Nothing urgent was flagged from the boxes you checked. After Jan 1, 2027, IRIS is the IRS e-file system for information returns (foreign filers without a U.S. TIN use IDES)."
 };
 
 function metaContent(source, attr, name) {
@@ -87,7 +87,7 @@ test("body, FAQ, badges, schema, alt text, and the sticky name the ZIP download"
   assert.equal(html.split(DELIVERY).length - 1, 1);
   assert.match(html, /<p class="kit-note" data-fire-kit="1">One 3-page PDF checklist in a ZIP\. Refunds: within 30 days if a file is corrupt or materially not as described\.<\/p>/);
   assert.equal(html.split("INSTANT DOWNLOAD · ONE 3-PAGE PDF IN A ZIP · CHECKLIST + 1099-NEC ADD-ON · $9").length - 1, 2);
-  assert.equal(html.split('alt="See What\'s Inside the $9 FIRE to IRIS Switch Checklist: one 3-page PDF checklist in a ZIP, with the IRS dates, your FIRE account, the IRIS Application for TCC, and a 1099-NEC add-on"').length - 1, 2);
+  assert.equal(html.split('alt="FIRE to IRIS Switch Checklist: 3-page printable PDF in a ZIP with the IRIS Application for TCC, Publication 5717 (up to 45 calendar days), and 2027 filing season steps"').length - 1, 2);
   assert.equal(html.split("One 3-page PDF checklist in a ZIP. What is changing, in plain words.").length - 1, 2);
   assert.equal(html.includes("The $9 checklist is one 3-page PDF in a ZIP."), true);
   assert.match(html, /id="kit-sticky-label"[^>]*>\$9 FIRE to IRIS checklist \(PDF in a ZIP\)</);
