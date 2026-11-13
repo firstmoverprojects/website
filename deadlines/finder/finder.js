@@ -10,6 +10,15 @@
   if (today < D.today) today = D.today; /* never show a date as upcoming that the build already treated as passed */
   var byId = {};
   D.items.forEach(function (it) { byId[it.id] = it; });
+  var IDES = " (foreign filers without a U.S. TIN use IDES)";
+  function idesCarve(it, text) {
+    if (!it || it.id !== "irs-fire" || !text || text.indexOf("use IDES") !== -1) return text;
+    var clause = ", and IRIS will be the only e-file system for information returns after Jan. 1, 2027.";
+    var next = ". After Jan 1, 2027, IRIS is the IRS e-file system for information returns" + IDES + ".";
+    if (text.indexOf(clause) !== -1) return text.replace(clause, next);
+    if (text.indexOf("only") === -1) return text;
+    return text.replace(/\.\s*$/, IDES + ".");
+  }
   function status(it) {
     if (today >= it.review_by) return "expired";
     if (it.primary_date < today) {
@@ -35,14 +44,14 @@
           chip.textContent = "Expired. Passed on " + lbl + ", what to do now";
           var desc = chip.nextElementSibling;
           if (!desc || desc.tagName !== "P" || desc.className) { desc = document.createElement("p"); chip.parentNode.insertBefore(desc, chip.nextSibling); }
-          desc.className = "past-sum"; desc.textContent = it.past_summary;
+          desc.className = "past-sum"; desc.textContent = idesCarve(it, it.past_summary);
         }
         a.setAttribute("data-status", "passed");
       } else { a.parentNode.removeChild(a); return; }
     }
     var late = today >= D.past_switch;
     var ps = a.querySelector(".past-sum");
-    if (ps && late && it.past_summary_late) ps.textContent = it.past_summary_late;
+    if (ps && late && it.past_summary_late) ps.textContent = idesCarve(it, it.past_summary_late);
     var lis = a.querySelectorAll("ul.kd li");
     var nov19Cutoff = Date.UTC(2026, 10, 19, 20, 0, 0);
     function keyPassed(k) {
@@ -112,6 +121,7 @@
     shown.forEach(function (it, i) {
       var txt = it.prompt_text;
       if (status(it) === "passed" && it.past_prompt) txt = (today >= D.past_switch && it.past_prompt_late) ? it.past_prompt_late : it.past_prompt;
+      txt = idesCarve(it, txt);
       var hd = it.change.toLowerCase().indexOf(it.tool.toLowerCase()) === 0 ? it.change : it.tool + ": " + it.change;
       parts.push("--- " + (i + 1) + ". " + hd + " ---\n" + txt);
     });
@@ -149,9 +159,9 @@
       var note = document.createElement("p");
       note.textContent = "General guidance, not legal, tax or IT advice.";
       ctaP.appendChild(note);
-      if (String(a.href).indexOf("fire-to-iris-switch-checklist") !== -1) {
+        if (String(a.href).indexOf("fire-to-iris-switch-checklist") !== -1) {
         ctaP.setAttribute("data-fire-kit", "1");
-        if (window.FMP_FIRE_KIT && window.FMP_FIRE_KIT.expired(new Date())) ctaP.hidden = true;
+        if (window.FMP_FIRE_KIT && window.FMP_FIRE_KIT.expired(new Date()) && window.FMP_FIRE_KIT_KEEP_SELLING !== true) ctaP.hidden = true;
       }
       var freeP = document.createElement("p");
       freeP.className = "kit-free";

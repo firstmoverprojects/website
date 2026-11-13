@@ -86,8 +86,8 @@ function imageValues(node, out) {
 }
 
 const E1 = "Last day to file information returns through the FIRE system. That date has passed. The FIRE page says 3 p.m. Eastern time. The news release says 3 p.m. ET.";
-const E2 = "The IRS says IRIS will be the only information returns electronic filing system, including current year, prior year, or corrections, after Jan. 1, 2027. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS.";
-const E3 = "The FIRE page says IRIS will be the only information returns electronic filing system, including current year, prior year, or corrections, after Jan. 1, 2027. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS. The IRS says current FIRE users who will e-file in IRIS themselves must complete a separate IRIS Application for TCC. If a payroll provider, accountant, or paid e-file service files for you, this may already be handled. Ask them.";
+const E2 = "The IRS says IRIS will be the only information returns electronic filing system, including current year, prior year, or corrections, after Jan. 1, 2027 (foreign filers without a U.S. TIN use IDES). The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS.";
+const E3 = "The FIRE page says IRIS will be the only information returns electronic filing system, including current year, prior year, or corrections, after Jan. 1, 2027 (foreign filers without a U.S. TIN use IDES). The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS. The IRS says current FIRE users who will e-file in IRIS themselves must complete a separate IRIS Application for TCC. If a payroll provider, accountant, or paid e-file service files for you, this may already be handled. Ask them.";
 const E1_PAGES = [
   "deadlines/fire-to-iris-transition-checklist.html",
   "deadlines/iris-tcc-application-how-long.html",
@@ -113,7 +113,8 @@ test("E1 to E6 use the approved past-tense lines", () => {
   assert.equal(finder.includes('<li class="past"><strong>passed on Nov 19, 2026, 3 p.m. ET</strong>: Last day to file information returns through FIRE.</li>'), true);
   assert.equal(finder.includes("Anyone who e-filed Forms 1099 or other information returns through the IRS FIRE system themselves."), true);
   assert.equal(finder.includes("who e-files"), false);
-  assert.equal(finder.split(JAN1).length - 1, 2);
+  assert.equal(finder.split(JAN1).length - 1, 1);
+  assert.equal(finder.includes(JAN1.slice(0, -1) + " (foreign filers without a U.S. TIN use IDES)."), true);
   const data = JSON.parse(finder.match(/<script type="application\/json" id="finder-data">([\s\S]*?)<\/script>/)[1]);
   const fire = data.items.find((item) => item.id === "irs-fire");
   assert.equal(fire.key_dates[3].text, JAN1);

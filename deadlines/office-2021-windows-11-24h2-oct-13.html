@@ -75,7 +75,7 @@
         <p><span class="chip chip--past chip--expired">Expired</span></p>
         <h1>Agent prompt: track this deadline — Office 2021 and Windows 11 24H2 Home/Pro (ended Oct 13, 2026)</h1>
         <p class="lead">Anyone still on Office 2021 or Windows 11 version 24H2 Home or Pro.</p>
-        <!-- REMOVE Nov 20, 2026: FIRE kit unpublishes -->
+        <!-- FIRE kit links hide after Nov 19, 2026, 20:00 UTC unless FMP_FIRE_KIT_KEEP_SELLING is true in the fmp-fire-kit script on this page -->
         <p class="kit-cta" data-fire-kit="1"><a rel="noopener" target="_blank" class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=office-2021-windows-11-24h2-oct-13&amp;utm_content=top-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $9 FIRE→IRIS checklist (Gumroad)</a></p>
         <p>General guidance, not legal, tax or IT advice.</p>
         <p class="kit-cta__note">FIRE filing ended Nov 19, 2026 at 3 p.m. ET (<a href="irs-fire-retirement-nov-19.html">see the free page</a>).</p>
@@ -115,7 +115,7 @@ When you state any deadline or date, quote the exact line from the official sour
         <button class="btn btn--secondary" type="button" id="copy-prompt" hidden>Copy prompt</button>
       </section>
 
-      <!-- REMOVE Nov 20, 2026: FIRE kit unpublishes (bottom button) -->
+      <!-- FIRE kit links hide after Nov 19, 2026, 20:00 UTC unless FMP_FIRE_KIT_KEEP_SELLING is true in the fmp-fire-kit script on this page (bottom button) -->
       <p class="kit-link">FIRE filing ended Nov 19, 2026 at 3 p.m. ET.</p>
       <p class="kit-link" data-fire-kit="1"><a rel="noopener" target="_blank" class="btn btn--primary" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=office-2021-windows-11-24h2-oct-13&amp;utm_content=bottom-cta" referrerpolicy="strict-origin-when-cross-origin">Get the $9 FIRE→IRIS checklist on Gumroad</a></p>
       <p>General guidance, not legal, tax or IT advice.</p>
@@ -309,11 +309,14 @@ When you state any deadline or date, quote the exact line from the official sour
 <script id="fmp-fire-kit">
 (function () {
   "use strict";
+  // Chief flips false to true on this line only after Risk GOs the v1.4 ZIP.
+  if (typeof window.FMP_FIRE_KIT_KEEP_SELLING !== "boolean") window.FMP_FIRE_KIT_KEEP_SELLING = false;
   var CUTOFF = Date.UTC(2026, 10, 19, 20, 0, 0);
   function expired(now) {
     return (now || new Date()).getTime() >= CUTOFF;
   }
   function hide(now) {
+    if (window.FMP_FIRE_KIT_KEEP_SELLING === true) return;
     if (!expired(now) || !document.querySelectorAll) return;
     var nodes = document.querySelectorAll("[data-fire-kit]");
     var i;
