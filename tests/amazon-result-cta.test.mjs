@@ -15,8 +15,8 @@ const html = readFileSync(PAGE, "utf8");
 const REFUND = "Refunds: within 30 days if a file is corrupt or materially not as described.";
 const THANKS = "Thanks for your time. If this isn't right for you, please share it with someone it could help.";
 const DISCLAIMER = "General guidance, not legal, tax or IT advice.";
-const BUTTON = "Get the $29 kit with broker email";
-const QUIET = "Optional: $29 kit with broker email";
+const BUTTON = "Get the $19 kit with broker email";
+const QUIET = "Optional: $19 kit with broker email";
 const KIT_CONTENTS = "a spreadsheet that compares what you type from your certificate with Amazon's quoted terms, a policy-terms checklist that quotes Amazon word for word, and a copy-paste broker email";
 const DELETE_STEP = "Check Amazon's category list and the notice in Account Health before buying anything. This page cannot see your account.";
 const CATEGORY_CHECK = "Check Amazon's category list and your Account Health page. This page can't see your account.";
@@ -25,8 +25,8 @@ const SALES_RULE = "Amazon's existing rule already applies: insurance within 30 
 const AIA_RULE = "Amazon's page says Mainland China sellers must get the policy through the Amazon Insurance Accelerator (AIA) program unless Amazon agrees otherwise in writing. From Nov 2, Amazon says it will reject newly submitted policies not obtained through AIA.";
 const AMAZON_DECIDES = "Amazon decides. Check Amazon's own help pages.";
 const GUMROAD_KIT = "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit";
-const BEYOND_HEADING = "What the $29 kit adds beyond a free check";
-const BEYOND_INTRO = "The free check lists mismatches in the certificate text you paste. It stays in your browser. The $29 kit is a downloadable ZIP you keep.";
+const BEYOND_HEADING = "What the $19 kit adds beyond a free check";
+const BEYOND_INTRO = "The free check lists mismatches in the certificate text you paste. It stays in your browser. The $19 kit is a downloadable ZIP you keep.";
 const BEYOND_BULLETS = [
   "That download is a 12-file ZIP: a policy-terms checklist that quotes Amazon word for word, a COI pre-submission checker, a category screen, a broker email, and an Excel workbook.",
   "A copy-paste broker email that asks for the exact certificate wording. The free check gives you a fix list, not that email.",
@@ -73,7 +73,7 @@ test("result copy stays on the page facts and keeps the house lines", () => {
   assert.equal(beyond.includes(BEYOND_NOTE), true);
   assert.equal(beyond.split("12-file").length - 1, 1);
   assert.equal(beyond.split("Excel workbook").length - 1, 1);
-  assert.equal(outsideBeyond.includes("What the $29 kit adds beyond a free check"), false);
+  assert.equal(outsideBeyond.includes("What the $19 kit adds beyond a free check"), false);
   const beyondLinks = [...beyond.matchAll(/<a\b[^>]*href="([^"]+)"/gi)].map((match) => match[1].replace(/&amp;/g, "&"));
   assert.equal(beyondLinks.length, 1);
   assert.equal(beyondLinks[0].startsWith(GUMROAD_KIT), true, beyondLinks[0]);
@@ -93,7 +93,7 @@ test("result copy stays on the page facts and keeps the house lines", () => {
   assert.equal(html.includes("sellers around $1,500"), false);
   assert.equal(html.includes("This is not insurance and First Mover Projects is not an insurance broker or agent."), true);
   assert.equal(html.includes("Who it is not for:"), true);
-  assert.equal(html.includes("Get the $29 kit (12-file ZIP)"), true);
+  assert.equal(html.includes("Get the $19 kit (12-file ZIP)"), true);
   assert.equal(html.includes("checked Nov 10, 2026"), true);
   assert.equal(html.includes('<p class="kit-note">For Amazon.com sellers reviewing a certificate or broker questions before upload. ' + REFUND + '</p>'), true);
   assert.equal(html.includes("The kit cannot guarantee Amazon acceptance."), true);
@@ -466,7 +466,7 @@ test("the deadline page kit block quotes the same additions and one Gumroad link
   const url = new URL(links[0]);
   assert.equal(url.hostname, "firstmoverprojects.gumroad.com");
   assert.equal(url.pathname, "/l/amazon-1m-insurance-readiness-kit");
-  assert.equal(block.includes("Get the full kit, $29"), true);
+  assert.equal(block.includes("Get the full kit, $19"), true);
   assert.equal(deadline.includes("<p><strong>" + REFUND + "</strong></p>"), true);
   assert.equal(deadline.includes('<p class="thanks">' + THANKS + "</p>"), true);
   assert.equal(deadline.replaceAll("Check the official sources for your case.", "").match(/official/gi), null);

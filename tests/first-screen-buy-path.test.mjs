@@ -29,7 +29,7 @@ const PAGES = [
       { label: "what the page is", source: "certificate of insurance" },
       { label: "what the kit is", source: "downloadable kit" },
       { label: "what is in the kit", source: "12-file ZIP" },
-      { label: "price", source: "\\$29(?!\\d)" }
+      { label: "price", source: "\\$19(?!\\d)" }
     ]
   },
   {
