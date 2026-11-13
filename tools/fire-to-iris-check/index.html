@@ -692,6 +692,16 @@ function setResultOffer(content, quiet) {
   }
 }
 
+var checkRanEventSent = false;
+function trackCheckRan() {
+  if (checkRanEventSent) return;
+  checkRanEventSent = true;
+  var sendGcEvent = window.fmpSendGcEvent;
+  if (typeof sendGcEvent !== "function") return;
+  var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(location.search || "");
+  sendGcEvent((testVisit ? "TEST-EXCLUDE/" : "") + "check/fire-to-iris-check-ran", "Check ran: fire-to-iris-check");
+}
+
 function render() {
   var res = analyze({
     selfFile: byId("c-self").checked,
@@ -789,6 +799,7 @@ function render() {
   byId("copystate").textContent = "";
   byId("results").hidden = false;
   syncKitSticky(true);
+  trackCheckRan();
   return res;
 }
 
@@ -913,6 +924,7 @@ updateDays(new Date());
       if (typeof fetch === "function") fetch(gcCountUrl, { keepalive: true, mode: "no-cors" });
     } catch (fetchErr) {}
   }
+  window.fmpSendGcEvent = sendGcEvent;
   function trackGumroadClick(ev) {
     if (ev.type === "auxclick" && ev.button !== 1) return;
     var node = ev.target && ev.target.closest ? ev.target.closest("a") : null;
