@@ -4,6 +4,7 @@
 // Chief flips that one assignment to true only after Risk GOs the v1.4 ZIP.
 import assert from "node:assert/strict";
 import { mkdirSync, readFileSync } from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import vm from "node:vm";
 import { test } from "node:test";
@@ -87,7 +88,7 @@ test("each hide script keeps the kit after the cutoff only when the flag is true
 });
 
 test("after the cutoff the two FIRE pages show E3, and the flag keeps the kit link", async () => {
-  const outDir = "/opt/cursor/artifacts/fire-cutoff";
+  const outDir = process.env.FIRE_CUTOFF_SHOTS || path.join(os.tmpdir(), "fire-cutoff");
   mkdirSync(outDir, { recursive: true });
   const started = await startServer();
   const { browser } = await startBrowser();

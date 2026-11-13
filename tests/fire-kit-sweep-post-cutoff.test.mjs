@@ -113,11 +113,12 @@ test("E1 to E6 use the approved past-tense lines", () => {
   assert.equal(finder.includes('<li class="past"><strong>passed on Nov 19, 2026, 3 p.m. ET</strong>: Last day to file information returns through FIRE.</li>'), true);
   assert.equal(finder.includes("Anyone who e-filed Forms 1099 or other information returns through the IRS FIRE system themselves."), true);
   assert.equal(finder.includes("who e-files"), false);
-  assert.equal(finder.split(JAN1).length - 1, 1);
-  assert.equal(finder.includes(JAN1.slice(0, -1) + " (foreign filers without a U.S. TIN use IDES)."), true);
+  const JAN1_CARVED = JAN1.slice(0, -1) + " (foreign filers without a U.S. TIN use IDES).";
+  assert.equal(finder.split(JAN1).length - 1, 0);
+  assert.equal(finder.split(JAN1_CARVED).length - 1, 2);
   const data = JSON.parse(finder.match(/<script type="application\/json" id="finder-data">([\s\S]*?)<\/script>/)[1]);
   const fire = data.items.find((item) => item.id === "irs-fire");
-  assert.equal(fire.key_dates[3].text, JAN1);
+  assert.equal(fire.key_dates[3].text, JAN1_CARVED);
   const hub = read("deadlines/index.html");
   assert.equal(hub.includes("Businesses that e-filed 1099s and other information returns through FIRE ("), true);
   assert.equal(hub.includes("that e-file 1099s"), false);

@@ -1,7 +1,7 @@
 // Outcome-specific result CTA on the FIRE to IRIS check.
 // Headless run:
 //   npm install --prefix /tmp/issue07-pw playwright-core
-//   PLAYWRIGHT_CORE=/tmp/issue07-pw/node_modules/playwright-core/index.mjs FIRE_CTA_SHOTS=/opt/cursor/artifacts node --test tests/fire-result-cta.test.mjs
+//   PLAYWRIGHT_CORE=/tmp/issue07-pw/node_modules/playwright-core/index.mjs FIRE_CTA_SHOTS=/tmp/artifacts node --test tests/fire-result-cta.test.mjs
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { mkdirSync, readFileSync } from "node:fs";
