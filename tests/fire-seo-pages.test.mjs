@@ -142,7 +142,7 @@ test("the duplicate FIRE shutdown page is gone", () => {
 
 test("the 1099-NEC page states the 2026 payment threshold", () => {
   const html = read("deadlines/file-1099-nec-2027-iris.html");
-  const line = "The IRS lists a $2,000 threshold for payments made in 2026 and a January 31 due date";
+  const line = "The IRS lists a $2,000 threshold for payments made in 2026. For 2026 payments, Form 1099-NEC is due February 1, 2027, because January 31, 2027 is a Sunday.";
   assert.match(html, new RegExp(`<meta name="description" content="${line.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
   assert.match(html, new RegExp(`<meta property="og:description" content="${line.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
   assert.match(html, /The \$2,000 threshold applies to payments made in 2026 \(the One Big Beautiful Bill Act raised it from \$600 for payments made after December 31, 2025\)\. For payments made in calendar year 2027, the section 6041\(a\) reporting threshold is \$2,100 \(<a href="https:\/\/www\.irs\.gov\/pub\/irs-drop\/rp-26-35\.pdf">Rev\. Proc\. 2026-35 section 3\.52<\/a>\)\. Payments made in 2026 stay \$2,000\. That figure covers Form 1099-NEC and most Form 1099-MISC payment types that use the same threshold; it does not change the \$10 royalty threshold, Form 1099-K rules, or backup withholding\./);
