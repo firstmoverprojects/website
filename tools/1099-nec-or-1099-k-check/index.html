@@ -325,7 +325,7 @@ legend{font-weight:700;padding:0 6px}
 <h2>Answer key</h2>
 <p>Use this if you are reading the questions without the button.</p>
 <ul class="answer-key">
-<li>Personal payment, wages to an employee, a payment to a corporation that is not for legal services, or a cash, check, bank, and ACH total under $2,000: Likely no 1099 needed.</li>
+<li>Personal payment, wages to an employee, a payment to a corporation that is not for legal services, or a cash, check, bank, and ACH total under $2,000: Likely no federal 1099 needed.<p>This covers the federal rule only. Some states still have lower 1099 thresholds; check your state tax agency.</p></li>
 <li>Every dollar by credit card, debit card, or a payment app's goods-and-services checkout: The card company or payment app reports it on 1099-K, so you likely don't file a 1099-NEC for those payments.</li>
 <li>Both ways, and the cash, check, bank, and ACH portion is $2,000 or more: Mixed: file 1099-NEC only for the non-card portion.</li>
 <li>Cash, check, bank transfer, or ACH only, and that total is $2,000 or more, for services in your trade or business: 1099-NEC is likely yours to file.</li>
@@ -340,6 +340,7 @@ legend{font-weight:700;padding:0 6px}
      Paid links stay on fire-to-iris-switch-checklist. No other product. -->
 <div class="lead-cta" id="result-cta">
 <h2 id="result-problem"></h2>
+<p id="result-federal-note" hidden>This covers the federal rule only. Some states still have lower 1099 thresholds; check your state tax agency.</p>
 <ol class="next-steps" id="next-steps"></ol>
 <p class="result-kit-lead" id="result-kit-lead">Because this payment looks like a Form 1099-NEC for you to file, the checklist puts the IRIS steps and a 1099-NEC add-on on one printable list.</p>
 <p data-fire-kit="1" id="kit-offer"><a target="_blank" class="btn" id="kit-result" data-goatcounter-click="cta/1099-result-nec" data-goatcounter-title="1099-NEC or 1099-K check result" href="https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=1099-nec-or-1099-k-check&amp;utm_content=1099-result-nec" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $9 checklist (PDF in a ZIP)</a><span class="kit-refund" id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</span></p>
@@ -463,7 +464,7 @@ var HEADLINES = {
   nec: "1099-NEC is likely yours to file",
   k: "The card company or payment app reports it on 1099-K, so you likely don't file a 1099-NEC for those payments",
   mixed: "Mixed: file 1099-NEC only for the non-card portion",
-  none: "Likely no 1099 needed",
+  none: "Likely no federal 1099 needed",
   unsure: "This check needs a clearer answer before it can pick one result."
 };
 var FILE_STEPS = [
@@ -723,6 +724,8 @@ function render() {
   var box = byId("results");
   if (!title || !list || !box) return result;
   title.textContent = result.headline;
+  var federalNote = byId("result-federal-note");
+  if (federalNote) federalNote.hidden = result.id !== "none";
   while (list.firstChild) list.removeChild(list.firstChild);
   var i;
   for (i = 0; i < result.steps.length; i++) {

@@ -714,9 +714,9 @@ test("1099-NEC or 1099-K follows the 2026 $2,000 and card-payment rules", async 
       await run("business", "contractor", "mixed", "least"),
       "Mixed: file 1099-NEC only for the non-card portion"
     );
-    assert.equal(await run("personal", "contractor", "noncard", "least"), "Likely no 1099 needed");
-    assert.equal(await run("business", "corporation", "noncard", "least"), "Likely no 1099 needed");
-    assert.equal(await run("business", "contractor", "noncard", "under"), "Likely no 1099 needed");
+    assert.equal(await run("personal", "contractor", "noncard", "least"), "Likely no federal 1099 needed");
+    assert.equal(await run("business", "corporation", "noncard", "least"), "Likely no federal 1099 needed");
+    assert.equal(await run("business", "contractor", "noncard", "under"), "Likely no federal 1099 needed");
     const under = (await lines(page, "#next-steps li")).join("\n");
     assert.match(under, /\$600/);
     assert.match(under, /\$2,000/);
