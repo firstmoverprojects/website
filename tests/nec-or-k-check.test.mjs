@@ -37,8 +37,19 @@ test("the four answer headlines match the page copy", () => {
   assert.equal(H.nec, "1099-NEC is likely yours to file");
   assert.equal(H.k, "The card company or payment app reports it on 1099-K, so you likely don't file a 1099-NEC for those payments");
   assert.equal(H.mixed, "Mixed: file 1099-NEC only for the non-card portion");
-  assert.equal(H.none, "Likely no 1099 needed");
+  assert.equal(H.none, "Likely no federal 1099 needed");
   for (const line of Object.values(H)) assert.equal(html.includes(line), true, line);
+  const federal = "This covers the federal rule only. Some states still have lower 1099 thresholds; check your state tax agency.";
+  assert.equal(html.includes("Likely no 1099 needed"), false);
+  const key = html.slice(html.indexOf('id="answer-key"'), html.indexOf('id="results"'));
+  const keyResult = key.indexOf("Likely no federal 1099 needed.");
+  assert.ok(keyResult !== -1);
+  assert.ok(key.indexOf(federal) > keyResult);
+  const resultAt = html.indexOf('id="result-problem"');
+  const noteAt = html.indexOf('id="result-federal-note"');
+  const stepsAt = html.indexOf('id="next-steps"');
+  assert.ok(resultAt < noteAt && noteAt < stepsAt);
+  assert.equal(html.slice(noteAt, stepsAt).includes(federal), true);
 });
 
 test("business non-card services of $2,000 or more are Form 1099-NEC", () => {
@@ -218,7 +229,7 @@ test("a no-fit none result keeps the backup withholding exception in the visible
     const result = decide(row[0], row[1], row[2], row[3]);
     const label = row.join("|");
     assert.equal(result.id, "none", label);
-    assert.equal(result.headline, "Likely no 1099 needed", label);
+    assert.equal(result.headline, "Likely no federal 1099 needed", label);
     assert.equal(result.steps.includes(step), true, label);
     assert.equal(api.offerFor(result.id), offer, label);
   }

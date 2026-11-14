@@ -18,6 +18,7 @@ const QUIET = "Optional: $9 checklist (PDF in a ZIP)";
 const FREE = "/tools/fire-to-iris-check/";
 const WITHHELD = "If you withheld federal income tax, the amount is not the limit: Form 1099-NEC is still required; see the backup-withholding step above.";
 const NONE_LEAD = "You likely do not need to buy a checklist for this payment. " + WITHHELD + " Watch the $2,000 threshold on cash, check, bank transfer, and ACH payments, and keep notes on who you paid and how.";
+const FEDERAL = "This covers the federal rule only. Some states still have lower 1099 thresholds; check your state tax agency.";
 const UNDER = { purpose: "business", who: "contractor", method: "noncard", noncard: "under" };
 const NEC = { purpose: "business", who: "contractor", method: "noncard", noncard: "least" };
 
@@ -52,7 +53,7 @@ const CASES = [
   {
     key: "none",
     answers: { purpose: "personal", who: "contractor", method: "noncard", noncard: "under" },
-    headline: "Likely no 1099 needed",
+    headline: "Likely no federal 1099 needed",
     lead: NONE_LEAD,
     utm: "1099-result-none",
     quiet: true,
@@ -115,6 +116,9 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
       const stickyUrl = sticky.getAttribute("href") || "";
       return {
         problem: document.getElementById("result-problem").textContent,
+        federalNote: document.getElementById("result-federal-note").textContent,
+        federalHidden: document.getElementById("result-federal-note").hidden,
+        federalUnder: document.getElementById("result-federal-note").previousElementSibling === document.getElementById("result-problem"),
         lead: document.getElementById("result-kit-lead").textContent,
         leadVisible: shown(document.getElementById("result-kit-lead")),
         steps: document.getElementById("next-steps").innerText,
@@ -179,6 +183,13 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
     await answer(item.answers);
     const state = await stateOf();
     assert.equal(state.problem, item.headline, item.key);
+    assert.equal(state.federalUnder, true, item.key);
+    if (item.key === "none") {
+      assert.equal(state.federalHidden, false, item.key);
+      assert.equal(state.federalNote, FEDERAL, item.key);
+    } else {
+      assert.equal(state.federalHidden, true, item.key);
+    }
     assert.equal(state.lead, item.lead, item.key);
     assert.equal(state.leadVisible, true, item.key);
     if (item.key === "none") {
@@ -263,7 +274,9 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
 
   await answer(UNDER);
   const noneUnder = await stateOf();
-  assert.equal(noneUnder.problem, "Likely no 1099 needed");
+  assert.equal(noneUnder.problem, "Likely no federal 1099 needed");
+  assert.equal(noneUnder.federalHidden, false);
+  assert.equal(noneUnder.federalNote, FEDERAL);
   assert.equal(noneUnder.lead, NONE_LEAD);
   assert.equal(noneUnder.leadVisible, true);
   assert.equal(noneUnder.lead.includes(WITHHELD), true);

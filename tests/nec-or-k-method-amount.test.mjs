@@ -12,7 +12,8 @@ const PAGE = path.join(ROOT, "tools/1099-nec-or-1099-k-check/index.html");
 const NEC = "1099-NEC is likely yours to file";
 const K = "The card company or payment app reports it on 1099-K, so you likely don't file a 1099-NEC for those payments";
 const MIXED = "Mixed: file 1099-NEC only for the non-card portion";
-const NONE = "Likely no 1099 needed";
+const NONE = "Likely no federal 1099 needed";
+const FEDERAL = "This covers the federal rule only. Some states still have lower 1099 thresholds; check your state tax agency.";
 const UNSURE = "This check needs a clearer answer before it can pick one result.";
 const CARD_PICK_ONE = "You marked credit card, debit card, or payment app only, and also marked a cash, check, bank transfer, or ACH amount. Pick one.";
 
@@ -42,13 +43,28 @@ test("each method and non-card amount pair renders one result in the browser", a
           await page.check(`input[name="method"][value="${method}"]`);
           await page.check(`input[name="noncard"][value="${noncard}"]`);
           await page.click("#go");
-          const state = await page.evaluate(() => ({
-            hidden: document.getElementById("results").hidden,
-            problem: document.getElementById("result-problem").textContent,
-            steps: [...document.querySelectorAll("#next-steps li")].map((li) => li.textContent)
-          }));
+          const state = await page.evaluate(() => {
+            const note = document.getElementById("result-federal-note");
+            const headlineEl = document.getElementById("result-problem");
+            const steps = document.getElementById("next-steps");
+            return {
+              hidden: document.getElementById("results").hidden,
+              problem: headlineEl.textContent,
+              steps: [...document.querySelectorAll("#next-steps li")].map((li) => li.textContent),
+              note: note ? note.textContent : "",
+              noteHidden: note ? note.hidden : true,
+              noteUnderHeadline: !!(note && note.previousElementSibling === headlineEl && note.nextElementSibling === steps)
+            };
+          });
           assert.equal(state.hidden, false, label);
           assert.equal(state.problem, headline, label);
+          assert.equal(state.noteUnderHeadline, true, label);
+          if (headline === NONE) {
+            assert.equal(state.noteHidden, false, label);
+            assert.equal(state.note, FEDERAL, label);
+          } else {
+            assert.equal(state.noteHidden, true, label);
+          }
           if (method === "card" && (noncard === "least" || noncard === "under")) {
             assert.deepEqual(state.steps, [CARD_PICK_ONE], label);
           }
