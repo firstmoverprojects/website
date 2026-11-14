@@ -35,6 +35,10 @@ const LISTINGS = {
   "tools/custom-gpt-retirement-checker/index.html":
     "https://launchfree.io/listings/custom-gpt-retirement-checker.html"
 };
+PILL_BY_PAGE["tools/after-hours-gap-check/index.html"] =
+  "Listed on The Runway (LaunchFree.io): Upvote This Free Tool";
+PILL_BY_PAGE["tools/loom-seat-audit-calculator/index.html"] =
+  "Listed on The Runway (LaunchFree.io): Upvote This Free Tool";
 const COMMERCE = {
   "tools/etsy-photo-audit-check/index.html":
     "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&utm_source=site&utm_medium=offer_page&utm_campaign=etsy-photo-audit-check&utm_content=gtin-helper"
