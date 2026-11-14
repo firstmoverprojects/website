@@ -382,7 +382,20 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
           assert.equal(state.className, "btn", label);
           assert.equal(state.bg, "rgb(0, 85, 255)", label);
           assert.equal(state.color, "rgb(255, 255, 255)", label);
-          assert.equal(state.stickyVisible, width < 768, label);
+          if (width < 768) {
+            await page.evaluate(() => {
+              const footer = document.querySelector("footer") || document.body;
+              footer.scrollIntoView({ block: "end" });
+            });
+            const stickyShown = await page.evaluate(() => {
+              const sticky = document.getElementById("kit-sticky");
+              if (!sticky || sticky.hidden) return false;
+              return !!(sticky.offsetWidth || sticky.offsetHeight || sticky.getClientRects().length);
+            });
+            assert.equal(stickyShown, true, label);
+          } else {
+            assert.equal(state.stickyVisible, false, label);
+          }
         }
         const tracked = await page.evaluate(() => {
           window.__gc = [];
