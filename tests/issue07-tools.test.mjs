@@ -120,10 +120,27 @@ test("static CSP, privacy, nav, and footer guards", () => {
     assert.match(html, /href="\/tools\/"/);
     assert.match(html, /href="\/deadlines\/"/);
     for (const line of FOOTER) assert.ok(html.includes(line), rel + " missing footer line");
-    const affiliation = rel === PAGES.etsy
-      ? "Not affiliated with or endorsed by Etsy."
-      : "Not affiliated with Etsy, Inc., Atlassian/Loom, or any third-party platform.";
-    assert.ok(html.includes(affiliation), rel + " missing footer line");
+    const affiliations = rel === PAGES.etsy
+      ? ["Not affiliated with or endorsed by Etsy."]
+      : rel === PAGES.loom
+        ? ["Not affiliated with or endorsed by Loom."]
+        : [
+            "Not affiliated with or endorsed by Brevo.",
+            "Not affiliated with or endorsed by Gumroad.",
+            "Not affiliated with or endorsed by LaunchFree.io.",
+            "Not affiliated with or endorsed by TikTok."
+          ];
+    for (const affiliation of affiliations) {
+      assert.ok(html.includes(affiliation), rel + " missing footer line: " + affiliation);
+    }
+    const thanks = "Thanks for your time. If this isn't right for you, please share it with someone it could help.";
+    if (rel === PAGES.after || rel === PAGES.loom) {
+      assert.equal(html.split(thanks).length - 1, 1, rel + " thanks line count");
+    }
+    assert.equal(html.includes("never catch you off guard"), false, rel);
+    if (rel === PAGES.after || rel === PAGES.loom) {
+      assert.equal(/[—]/.test(html), false, rel + " em dash");
+    }
     const surface = html.replace(/<script id="fmp-utm">[\s\S]*?<\/script>/g, "");
     for (const banned of BANNED) assert.equal(surface.includes(banned), false, rel + " contains " + banned);
     const helperAt = html.indexOf("function trackGumroadClick");
