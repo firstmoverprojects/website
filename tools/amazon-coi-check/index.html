@@ -224,6 +224,8 @@ a#kit-top{display:flex;align-items:center;justify-content:center;width:100%;max-
 .kit-sticky-link{flex:0 1 auto;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;max-width:46%;min-width:44px;min-height:44px;padding:10px 12px;border-radius:8px;background:#0055ff;color:#fff !important;font-weight:800;line-height:1.2;text-align:center;text-decoration:none;white-space:normal}
 .kit-sticky-link:hover,.kit-sticky-link:focus{background:#0044cc;color:#fff !important}
 .kit-sticky-dismiss{flex:0 0 auto;margin:0;min-width:44px;min-height:44px;padding:8px 10px;background:#e4e8ee;color:#1b1f24}
+button.kit-sticky-link{border:none;margin:0;font:inherit;font-family:inherit;cursor:pointer;-webkit-appearance:none;appearance:none}
+.tool-input-end{height:1px;width:100%;pointer-events:none;margin:0;padding:0;border:0}
 @media (max-width:767px){
   .fit-grid{grid-template-columns:1fr}
   .kit-sticky:not([hidden]){display:flex;position:fixed;z-index:40;left:0;right:0;bottom:0;width:auto;max-width:100%;gap:8px;align-items:center;margin:0;padding:8px 10px calc(8px + env(safe-area-inset-bottom, 0px));background:#fff;color:#1b1f24;border-top:2px solid #071b31;box-shadow:0 -6px 18px rgba(15,23,42,.16)}
@@ -612,6 +614,7 @@ Please reissue my certificate with these corrections:
 <button id="clear" class="sec" type="button">Clear</button>
 <p id="sample-note" class="muted">Load a sample fills the box with a fictional certificate for Sample Goods LLC and Example Mutual Insurance Co. It is not a real policy.</p>
 </section>
+<div id="tool-input-end" class="tool-input-end" aria-hidden="true"></div>
 
 <section class="card gtin-card" id="gtin-fee" aria-labelledby="gtin-h">
 <h2 id="gtin-h">Quick GTIN / Barcode Check-Digit &amp; Break-Even Fee Calculator</h2>
@@ -833,7 +836,8 @@ Please reissue my certificate with these corrections:
 <noscript><p>This check needs JavaScript in your browser. Nothing is uploaded.</p></noscript>
 <div id="kit-sticky" class="kit-sticky" hidden role="region" aria-labelledby="kit-sticky-label">
 <p id="kit-sticky-label" class="kit-sticky-label">$19 Amazon insurance kit</p>
-<a target="_blank" class="kit-sticky-link" data-goatcounter-click="cta/coi-check-sticky" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=offer_page&amp;utm_campaign=amazon-coi-check&amp;utm_content=coi-check-sticky" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the kit</a>
+<a id="kit-sticky-link" target="_blank" class="kit-sticky-link" data-goatcounter-click="cta/coi-check-sticky" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=offer_page&amp;utm_campaign=amazon-coi-check&amp;utm_content=coi-check-sticky" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the kit</a>
+<button type="button" id="kit-sticky-run" class="kit-sticky-link" hidden>Run the free check</button>
 <button type="button" class="kit-sticky-dismiss" id="kit-sticky-dismiss">Dismiss</button>
 </div>
 <script>
@@ -1543,7 +1547,7 @@ function paint(result, opts) {
   setText("fixlist", result.fixList);
   setText("checked", result.checkedText);
   setText("copystate", "");
-  syncKitSticky(mode === "button");
+  setKitStickyIntent(mode === "button" ? "buy" : "off");
   if (opts && opts.scroll && box.scrollIntoView) {
     try { box.scrollIntoView({ block: "start" }); } catch (e) {}
   }
@@ -1663,7 +1667,7 @@ function boot() {
     if (byId("expiry")) byId("expiry").value = "";
     var box = byId("results");
     if (box) box.hidden = true;
-    syncKitSticky(false);
+    setKitStickyIntent("run");
     var kit = byId("amazon-kit");
     if (kit) kit.hidden = true;
     var tb = byId("tbody");
@@ -1708,13 +1712,63 @@ function boot() {
     }
   });
   paintScope();
+  initKitStickyMobile();
 }
 
 var kitStickyDismissed = false;
-function syncKitSticky(show) {
+var kitStickyIntent = "run";
+var kitStickyPastInput = false;
+var kitStickyInputFocused = false;
+var kitStickyCtaInView = false;
+var kitStickyBuyCopy = null;
+var kitStickyCtaSeen = {};
+var kitStickySentinelSeen = false;
+
+function kitStickyMobile() {
+  return !!(window.matchMedia && window.matchMedia("(max-width: 767px)").matches);
+}
+
+function rememberKitStickyBuy() {
+  var link = byId("kit-sticky-link");
+  var label = byId("kit-sticky-label");
+  if (!link || kitStickyBuyCopy) return;
+  kitStickyBuyCopy = {
+    href: link.getAttribute("href") || "",
+    click: link.getAttribute("data-goatcounter-click") || "",
+    text: link.textContent || "Get the kit",
+    label: label ? label.textContent : "$19 Amazon insurance kit"
+  };
+}
+
+function showKitStickyRunFace() {
+  var label = byId("kit-sticky-label");
+  var link = byId("kit-sticky-link");
+  var run = byId("kit-sticky-run");
+  if (label) label.textContent = "Free check, nothing uploaded";
+  if (link) link.hidden = true;
+  if (run) run.hidden = false;
+}
+
+function showKitStickyBuyFace() {
+  var label = byId("kit-sticky-label");
+  var link = byId("kit-sticky-link");
+  var run = byId("kit-sticky-run");
+  rememberKitStickyBuy();
+  if (!kitStickyBuyCopy || !link) return;
+  if (label) label.textContent = kitStickyBuyCopy.label;
+  link.textContent = kitStickyBuyCopy.text;
+  link.setAttribute("href", kitStickyBuyCopy.href);
+  link.setAttribute("target", "_blank");
+  link.setAttribute("data-goatcounter-click", kitStickyBuyCopy.click);
+  link.setAttribute("rel", "noopener");
+  link.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+  link.hidden = false;
+  if (run) run.hidden = true;
+}
+
+function setKitStickyBarOn(on) {
   var bar = byId("kit-sticky");
   if (!bar || !document.body || !document.body.classList) return;
-  var on = !!show && !kitStickyDismissed;
   bar.hidden = !on;
   if (on) {
     document.body.classList.add("kit-sticky-on");
@@ -1725,20 +1779,135 @@ function syncKitSticky(show) {
     document.body.style.paddingBottom = "";
   }
 }
-var kitStickyDismiss = byId("kit-sticky-dismiss");
-if (kitStickyDismiss && kitStickyDismiss.addEventListener) kitStickyDismiss.addEventListener("click", function () {
-  kitStickyDismissed = true;
-  syncKitSticky(false);
-  var back = byId("results") || byId("main");
-  if (back && back.focus) {
-    if (!back.hasAttribute("tabindex")) back.setAttribute("tabindex", "-1");
-    back.focus();
+
+function updateKitStickyBar() {
+  if (!kitStickyMobile() || kitStickyDismissed) {
+    setKitStickyBarOn(false);
+    return;
   }
-});
-if (window.addEventListener) window.addEventListener("resize", function () {
-  var bar = byId("kit-sticky");
-  if (bar && !bar.hidden) syncKitSticky(true);
-});
+  if (kitStickyInputFocused) {
+    setKitStickyBarOn(false);
+    return;
+  }
+  if (kitStickyIntent === "run") {
+    if (!kitStickyPastInput) {
+      setKitStickyBarOn(false);
+      return;
+    }
+    showKitStickyRunFace();
+    setKitStickyBarOn(true);
+    return;
+  }
+  if (kitStickyIntent === "buy") {
+    if (kitStickyCtaInView) {
+      setKitStickyBarOn(false);
+      return;
+    }
+    showKitStickyBuyFace();
+    setKitStickyBarOn(true);
+    return;
+  }
+  setKitStickyBarOn(false);
+}
+
+function setKitStickyIntent(mode) {
+  kitStickyIntent = mode || "off";
+  updateKitStickyBar();
+}
+
+function focusToolInput() {
+  var target = byId("coi");
+  if (!target) return;
+  try {
+    target.scrollIntoView({ behavior: "smooth", block: "center" });
+  } catch (e) {
+    try { target.scrollIntoView(); } catch (e2) {}
+  }
+  if (target.focus) target.focus();
+}
+
+function trackStickyRunClick() {
+  var sendGcEvent = window.fmpSendGcEvent;
+  if (typeof sendGcEvent !== "function") return;
+  var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(location.search || "");
+  sendGcEvent((testVisit ? "TEST-EXCLUDE/" : "") + "cta/coi-check-sticky-run", "COI check sticky run");
+}
+
+function initKitStickyMobile() {
+  if (initKitStickyMobile.done) return;
+  initKitStickyMobile.done = true;
+  rememberKitStickyBuy();
+  var sentinel = byId("tool-input-end");
+  if (sentinel && window.IntersectionObserver) {
+    var scrollIo = new IntersectionObserver(function (entries) {
+      var ent = entries[0];
+      if (!ent) return;
+      if (ent.isIntersecting) kitStickySentinelSeen = true;
+      kitStickyPastInput = kitStickySentinelSeen && !ent.isIntersecting;
+      updateKitStickyBar();
+    }, { threshold: 0 });
+    scrollIo.observe(sentinel);
+  }
+  if (window.IntersectionObserver) {
+    var ctaIo = new IntersectionObserver(function (entries) {
+      var i;
+      for (i = 0; i < entries.length; i++) {
+        var id = entries[i].target && entries[i].target.id;
+        if (id) kitStickyCtaSeen[id] = entries[i].isIntersecting;
+      }
+      var key;
+      kitStickyCtaInView = false;
+      for (key in kitStickyCtaSeen) {
+        if (kitStickyCtaSeen[key]) kitStickyCtaInView = true;
+      }
+      updateKitStickyBar();
+    }, { threshold: 0, rootMargin: "0px 0px 0px 0px" });
+    ["kit-result", "kit-top"].forEach(function (id) {
+      var node = byId(id);
+      if (node) ctaIo.observe(node);
+    });
+  }
+  document.addEventListener("focusin", function (ev) {
+    var t = ev.target;
+    if (!t || !t.matches || !t.closest) return;
+    if (t.matches("textarea, input, select") && t.closest("#main")) {
+      kitStickyInputFocused = true;
+      updateKitStickyBar();
+    }
+  });
+  document.addEventListener("focusout", function () {
+    setTimeout(function () {
+      var a = document.activeElement;
+      kitStickyInputFocused = !!(a && a.matches && a.matches("textarea, input, select") && a.closest && a.closest("#main"));
+      updateKitStickyBar();
+    }, 0);
+  });
+  var runBtn = byId("kit-sticky-run");
+  if (runBtn && runBtn.addEventListener) {
+    runBtn.addEventListener("click", function () {
+      focusToolInput();
+      trackStickyRunClick();
+    });
+  }
+  var kitStickyDismiss = byId("kit-sticky-dismiss");
+  if (kitStickyDismiss && kitStickyDismiss.addEventListener) {
+    kitStickyDismiss.addEventListener("click", function () {
+      kitStickyDismissed = true;
+      updateKitStickyBar();
+      var back = byId("results") || byId("main");
+      if (back && back.focus) {
+        if (!back.hasAttribute("tabindex")) back.setAttribute("tabindex", "-1");
+        back.focus();
+      }
+    });
+  }
+  if (window.addEventListener) {
+    window.addEventListener("resize", function () {
+      updateKitStickyBar();
+    });
+  }
+  setKitStickyIntent("run");
+}
 
 window.checkCOI = checkCOI;
 window.FMP_COI = {

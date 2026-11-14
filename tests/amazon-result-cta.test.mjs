@@ -105,6 +105,7 @@ test("result copy stays on the page facts and keeps the house lines", () => {
 test("all outcomes set the lead, offer, and gumroad click", async () => {
   const chromium = await importChromium();
   const browser = await chromium.launch(chromiumLaunchOptions());
+  try {
   const shots = process.env.AMAZON_CTA_SHOTS;
   if (shots) mkdirSync(shots, { recursive: true });
 
@@ -382,7 +383,20 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
           assert.equal(state.className, "btn", label);
           assert.equal(state.bg, "rgb(0, 85, 255)", label);
           assert.equal(state.color, "rgb(255, 255, 255)", label);
-          assert.equal(state.stickyVisible, width < 768, label);
+          if (width < 768) {
+            await page.evaluate(() => {
+              const footer = document.querySelector("footer") || document.body;
+              footer.scrollIntoView({ block: "end" });
+            });
+            const stickyShown = await page.waitForFunction(() => {
+              const sticky = document.getElementById("kit-sticky");
+              if (!sticky || sticky.hidden) return false;
+              return !!(sticky.offsetWidth || sticky.offsetHeight || sticky.getClientRects().length);
+            }, null, { timeout: 3000 }).then(() => true, () => false);
+            assert.equal(stickyShown, true, label);
+          } else {
+            assert.equal(state.stickyVisible, false, label);
+          }
         }
         const tracked = await page.evaluate(() => {
           window.__gc = [];
@@ -445,7 +459,9 @@ test("all outcomes set the lead, offer, and gumroad click", async () => {
   assert.equal(kept.source, "tiktok");
   assert.equal(kept.content, "amazon-coi-result-fix");
   await taggedContext.close();
-  await browser.close();
+  } finally {
+    await browser.close();
+  }
 });
 
 test("the deadline page kit block quotes the same additions and one Gumroad link", () => {
