@@ -1420,7 +1420,6 @@ function showResultBridge(meaning, fine) {
 
 function resultIsFine(q1, q2, q3, nFix, nCheck) {
   if (q1 === "yes" && nFix === 0 && nCheck === 0) return true;
-  if (q1 === "no" && q2 === "no" && q3 === "no") return true;
   return false;
 }
 
@@ -1585,7 +1584,12 @@ function paint(result, opts) {
   setText("result-deadline", date.line);
   var mode = applyResultCta(q1, q2, q3, nFix, nCheck, date);
   paintSteps(collectSteps(result, q3));
-  showResultBridge(bridgeMeaning(q1, q2, q3), resultIsFine(q1, q2, q3, nFix, nCheck));
+  if (mode === "nofit") {
+    var bridgeHide = byId("result-bridge");
+    if (bridgeHide) bridgeHide.hidden = true;
+  } else {
+    showResultBridge(bridgeMeaning(q1, q2, q3), resultIsFine(q1, q2, q3, nFix, nCheck));
+  }
   var cap = byId("cap");
   if (cap) {
     cap.hidden = !result.truncated;

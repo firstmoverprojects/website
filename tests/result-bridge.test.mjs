@@ -84,6 +84,11 @@ const PAGES = [
         "FAKE gift gift gift coaster,5,real,linked,missing"
       ].join("\n"));
       await page.locator("#go").click();
+    },
+    async runEmpty(page) {
+      await page.locator("#clear").click();
+      await page.locator("#inp").fill("title,photos,primary,variations,disclosure");
+      await page.locator("#go").click();
     }
   }
 ];
@@ -275,27 +280,21 @@ test("bridge stays hidden until a result, then links the existing kit", { timeou
     await blockExternalOnPage(amazon);
     await amazon.goto(pathToFileURL(path.join(ROOT, PAGES[0].rel)).href, { waitUntil: "load" });
     await PAGES[0].runScopeFine(amazon);
-    const scope = await amazon.locator("#result-bridge-meaning").innerText();
-    assert.match(scope, /Neither rule appears to apply based on your answers\./);
-    assert.match(scope, /Want the full checklist anyway\?/);
-    assert.equal(await shown(amazon, "#result-bridge"), true);
-    const scopeFit = await bridgeFit(amazon);
-    assert.equal(scopeFit.sw, scopeFit.cw, JSON.stringify(scopeFit));
-    assert.ok(scopeFit.bottom <= scopeFit.ih + 1 && scopeFit.right <= scopeFit.iw + 1, JSON.stringify(scopeFit));
+    await amazon.locator("#results").waitFor({ state: "visible" });
+    assert.equal(await shown(amazon, "#result-bridge"), false, "amazon scope nofit");
+    if (shots) await amazon.screenshot({ path: path.join(shots, "amazon-coi-390-hidden.png") });
     await amazon.close();
 
     const etsy = await browser.newPage({ viewport: { width: 390, height: 844 } });
     await blockExternalOnPage(etsy);
     await etsy.goto(pathToFileURL(path.join(ROOT, PAGES[1].rel)).href, { waitUntil: "load" });
     await PAGES[1].runDisclosure(etsy);
-    assert.equal(await shown(etsy, "#result-bridge"), true);
+    await etsy.locator("#results").waitFor({ state: "visible" });
+    assert.equal(await shown(etsy, "#result-bridge"), false, "etsy disclosure");
     assert.equal(await shown(etsy, "#kit-result"), false);
-    const disclosure = await etsy.locator("#result-bridge-meaning").innerText();
-    assert.match(disclosure, /production partner/);
-    assert.equal(disclosure.includes(SOFT), false, disclosure);
-    const disclosureFit = await bridgeFit(etsy);
-    assert.equal(disclosureFit.sw, disclosureFit.cw, JSON.stringify(disclosureFit));
-    assert.ok(disclosureFit.bottom <= disclosureFit.ih + 1 && disclosureFit.right <= disclosureFit.iw + 1, JSON.stringify(disclosureFit));
+    if (shots) await etsy.screenshot({ path: path.join(shots, "etsy-photo-390-hidden.png") });
+    await PAGES[1].runEmpty(etsy);
+    assert.equal(await shown(etsy, "#result-bridge"), false, "etsy empty");
     await etsy.close();
   } finally {
     await browser.close();

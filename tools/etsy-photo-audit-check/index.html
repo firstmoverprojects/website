@@ -1211,7 +1211,13 @@ function render(model) {
   var problem = byId("result-problem");
   if (problem) problem.textContent = resultLead(model);
   applyResultOffer(model);
-  showResultBridge(resultLead(model), outcomeKind(model) === "ontrack");
+  var kind = outcomeKind(model);
+  if (kind === "empty" || kind === "disclosure") {
+    var bridgeHide = byId("result-bridge");
+    if (bridgeHide) bridgeHide.hidden = true;
+  } else {
+    showResultBridge(resultLead(model), kind === "ontrack");
+  }
   paintSteps(collectSteps(model));
   byId("mode-note").textContent = model.note;
   byId("n-checked").textContent = String(model.listings.length);
