@@ -183,7 +183,8 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
     assert.equal(new URL(resultHref).searchParams.get("utm_content"), item.resultContent || "result-card");
     assert.equal(new URL(footerHref).searchParams.get("utm_content"), "footer");
     if (item.resultContent) {
-      assert.equal(await page.locator("#results a[href*='gumroad.com']").count(), 1, item.rel);
+      const bridgeLinks = await page.locator("#results #result-bridge-link").count();
+      assert.equal(await page.locator("#results a[href*='gumroad.com']").count(), 1 + bridgeLinks, item.rel);
       assert.match(await page.innerText("#result-cta"), /General guidance, not legal, tax or IT advice/);
       const steps = await page.locator("#next-steps li").count();
       assert.ok(steps >= 2 && steps <= 3, item.rel + " steps " + steps);
