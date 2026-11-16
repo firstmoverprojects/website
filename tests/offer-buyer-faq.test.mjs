@@ -13,6 +13,7 @@ const PAGES = [
     rel: "tools/amazon-coi-check/index.html",
     hrefs: [
       "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=offer_page&amp;utm_campaign=amazon-coi-check&amp;utm_content=coi-check-top",
+      "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=checker_result&amp;utm_campaign=amazon-coi-check&amp;utm_content=result-bridge",
       "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=offer_page&amp;utm_campaign=amazon-coi-check&amp;utm_content=amazon-coi-result-fix",
       "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=offer_page&amp;utm_campaign=amazon-coi-check&amp;utm_content=footer",
       "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=offer_page&amp;utm_campaign=amazon-coi-check&amp;utm_content=coi-check-sticky"
@@ -23,6 +24,7 @@ const PAGES = [
     hrefs: [
       "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=offer_page&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=etsy-photo-check-top",
       "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=offer_page&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=gtin-helper",
+      "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=checker_result&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=result-bridge",
       "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=offer_page&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=etsy-photo-result-mockup",
       "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=offer_page&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=footer",
       "https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true&amp;utm_source=site&amp;utm_medium=offer_page&amp;utm_campaign=etsy-photo-audit-check&amp;utm_content=etsy-photo-check-sticky"

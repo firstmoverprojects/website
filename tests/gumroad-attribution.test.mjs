@@ -26,7 +26,7 @@ const QUIET_HTML = new Set([
 const CONTENTS = new Set([
   "above-fold", "article", "bottom-cta", "card", "checklist", "comparison", "faq", "footer",
   "1099-result-k-only", "1099-result-nec", "1099-result-none", "1099-result-split", "1099-result-warn", "amazon-coi-result-check", "amazon-coi-result-fix", "amazon-coi-result-ontrack", "coi-check-result", "coi-check-sticky", "coi-check-top", "etsy-check-result", "etsy-photo-check-sticky", "etsy-photo-check-top", "etsy-photo-result-fix", "etsy-photo-result-mockup", "etsy-photo-result-ontrack", "fire-check-result", "fire-check-sticky", "fire-check-top", "fire-result-need-tcc", "fire-result-nov9", "fire-result-ontrack", "fire-result-still-fire", "fire-result-warn", "gtin-helper", "hub", "kit-preview", "link", "post-check", "product-demo", "result-card", "ws-check-result", "ws2016",
-  "result-cta", "sticky-cta", "tools-free", "tools-kit", "top-cta", "trade-pill", "eu-fee"
+  "result-bridge", "result-cta", "sticky-cta", "tools-free", "tools-kit", "top-cta", "trade-pill", "eu-fee"
 ]);
 const OFFER_TOOL_PAGES = new Set([
   "tools/amazon-coi-check/index.html",
@@ -137,6 +137,12 @@ test("every Gumroad product link carries source, medium, campaign, and content",
         assert.equal(url.searchParams.get("utm_source"), "site", raw);
         assert.equal(content, "link", rel + " " + content);
         assert.equal(internalKitCampaigns.has(campaign), true, rel + " " + campaign);
+      } else if (content === "result-bridge") {
+        assert.equal(url.searchParams.get("utm_source"), "site", raw);
+        assert.equal(medium, "checker_result", raw);
+        assert.equal(CONTENTS.has(content), true, rel + " " + content);
+        assert.equal(OFFER_TOOL_PAGES.has(rel), true, rel);
+        assert.equal(campaign, pageSlug(rel), raw);
       } else {
         assert.equal(url.searchParams.get("utm_source"), "site", raw);
         assert.equal(
