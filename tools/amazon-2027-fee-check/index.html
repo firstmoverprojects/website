@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://gc.zgo.at; connect-src https://firstmoverprojects.goatcounter.com; img-src 'self' data: https://firstmoverprojects.goatcounter.com; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/amazon-2027-fee-check/">
+<title>Amazon 2027 Fee Change Checker (free)</title>
+<meta name="description" content="Free check for US Amazon sellers. Pick FBA, older stored stock, and bundles. See only the 2027 changes Amazon has published that hit that setup.">
+<meta property="og:title" content="Amazon 2027 Fee Change Checker (free)">
+<meta property="og:description" content="Free check for US Amazon sellers. Pick FBA, older stored stock, and bundles. See only the 2027 changes Amazon has published that hit that setup.">
+<meta property="og:url" content="https://firstmoverprojects.com/tools/amazon-2027-fee-check/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://firstmoverprojects.com/assets/fmp-logo-460.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Amazon 2027 Fee Change Checker (free)">
+<meta name="twitter:description" content="Free check for US Amazon sellers. Pick FBA, older stored stock, and bundles. See only the 2027 changes Amazon has published that hit that setup.">
+<meta name="twitter:image" content="https://firstmoverprojects.com/assets/fmp-logo-460.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "dateModified": "2026-11-17",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "When do the 2027 US FBA fee changes start?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Amazon's November 5, 2026 letter says most 2027 US referral and FBA fee changes take effect on January 15, 2027. On average, FBA fulfillment fees increase by $0.19 per unit sold, approximately 0.8% of the average item's selling price. Some products go up and some go down. The letter does not list a referral-fee percent."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens to stored inventory on February 1, 2027?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The same letter says that on February 1, 2027 Amazon drops the storage utilization surcharge and combines the aged inventory surcharge with monthly storage into one age-based rate. Fees are flat or lower for inventory that turns in under six months, and higher for aged inventory. The public letter does not list dollar rates or 180, 271, or 365 day prices."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What changes for bundles on January 11, 2027?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Amazon's seller notice says that on January 11, 2027 most bundles listed as one product must be packed by the original manufacturer or brand. Exceptions include a letter of authorization, gifting browse nodes, camera product types, and Virtual Bundles. Noncompliant listings are turned off after that date. This is a packing rule, not a fee rate."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the $19 kit calculate these fees?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The Amazon $1M Insurance Readiness Kit is a downloadable ZIP of checklists and templates for Amazon's $1 million commercial liability certificate. It does not calculate 2027 fees. The free check on this page is $0."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json" id="product-jsonld">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Amazon $1M Insurance Readiness Kit",
+  "description": "A downloadable ZIP of checklists and templates for Amazon's $1 million commercial liability certificate. It does not calculate 2027 fees.",
+  "offers": {
+    "@type": "Offer",
+    "url": "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit",
+    "price": 19,
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Organization",
+      "name": "First Mover Projects",
+      "url": "https://firstmoverprojects.com/"
+    }
+  }
+}
+</script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1b1f24;background:#f6f7f9}
+main{max-width:860px;margin:0 auto;padding:16px;min-width:0}
+h1{font-size:1.6rem;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.2em 0 .4em}
+h3{font-size:1.02rem;margin:.6em 0 .2em}
+.card{background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:16px;margin:12px 0}
+.muted{color:#5a636e;font-size:.92rem}
+label{display:block;font-weight:600;margin-top:12px}
+.choice label{font-weight:400;display:flex;gap:8px;align-items:flex-start;margin-top:8px}
+select{width:100%;max-width:100%;font:inherit;font-size:16px;padding:8px;border:1px solid #b9c0c8;border-radius:6px;background:#fff;min-height:48px}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:0;background:#1f5fbf;color:#fff;cursor:pointer;margin:12px 8px 0 0;min-height:48px}
+button.sec{background:#e4e8ee;color:#1b1f24}
+a{color:#0055ff}
+a.btn{display:inline-flex;align-items:center;justify-content:center;max-width:100%;box-sizing:border-box;min-height:48px;font-weight:800;line-height:1.3;text-decoration:none;background:#0055ff;color:#fff;padding:12px 18px;border-radius:8px;margin:12px 0 0;text-align:center}
+a.btn:hover{background:#0044cc;color:#fff}
+.hit{background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:12px;margin:10px 0}
+.when{font-weight:800;margin:0}
+.action{margin:.35em 0 0}
+.tag{display:inline-block;font-size:.8rem;padding:2px 8px;border-radius:9px;margin:0 0 6px;background:#e4e8ee}
+.skip{position:absolute;left:-999px;top:0}
+.skip:focus{left:8px;top:8px;background:#fff;padding:8px 12px;z-index:2}
+fieldset{border:1px solid #dde1e6;border-radius:8px;margin:12px 0;padding:8px 12px}
+legend{font-weight:600;padding:0 4px}
+a:focus,button:focus,select:focus,input:focus{outline:3px solid #1f5fbf;outline-offset:2px}
+a,p,li,label,legend,h1,h2,h3{overflow-wrap:anywhere}
+[hidden]{display:none !important}
+.result-bridge{box-sizing:border-box;max-width:100%;margin:12px 0;padding:12px;border:1px solid #cbd5e1;border-radius:10px;background:#f8fafc;overflow-wrap:anywhere}
+.result-bridge p{margin:.4em 0;max-width:100%;overflow-wrap:anywhere}
+#result-bridge-meaning{font-weight:700}
+#result-bridge-link{display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:100%;max-width:100%;min-height:48px;margin:8px 0 0;padding:12px;background:#0055ff;color:#fff;font-weight:800;line-height:1.3;text-align:center;text-decoration:none;border-radius:8px;white-space:normal;overflow-wrap:anywhere}
+#result-bridge-link:hover,#result-bridge-link:focus{background:#0044cc;color:#fff}
+#result-bridge-free{margin-bottom:0;color:#071b31;font-size:.92rem}
+.follow-bar{background:#01060b;color:#f4f7fa;border:1px solid #00d8ff;border-radius:12px;padding:12px;margin:12px 0 0;max-width:100%;box-sizing:border-box}
+.follow-bar-title{margin:0 0 8px;font-weight:800;font-size:.95rem;line-height:1.35;color:#f4f7fa}
+.follow-bar-actions{display:flex;flex-wrap:wrap;gap:8px;min-width:0}
+.follow-tiktok,.follow-email{flex:1 1 220px;min-width:0;max-width:100%;box-sizing:border-box;display:inline-block;padding:8px 12px;border-radius:999px;font-weight:800;font-size:.92rem;line-height:1.35;text-decoration:none !important;text-align:center;white-space:normal;overflow-wrap:anywhere}
+.follow-tiktok{background:#0c1520;color:#f4f7fa !important;border:1px solid #00d8ff}
+.follow-tiktok:hover,.follow-tiktok:focus{color:#00d8ff !important;outline:3px solid #00d8ff;outline-offset:2px}
+.follow-email{background:linear-gradient(135deg,#22c55e 0%,#4ade80 100%);color:#01060b !important;border:0}
+.follow-email:hover,.follow-email:focus{background:#16a34a;color:#01060b !important;outline:3px solid #00d8ff;outline-offset:2px}
+html.fmp-embed .site-nav{display:none !important}
+#signup a.signup-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0.25rem 0 0.75rem;
+  padding: 0.85rem 1.35rem;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #22c55e 0%, #4ade80 100%);
+  color: #02060f;
+  font-weight: 800;
+  line-height: 1.3;
+  text-align: center;
+  text-decoration: none;
+  white-space: normal;
+}
+#signup a.signup-cta:hover,
+#signup a.signup-cta:focus-visible {
+  background: #16a34a;
+  color: #02060f;
+}
+.signup{background:#fff;border:1px solid #007bff;border-radius:10px;padding:16px;margin:12px 0}
+@media (max-width: 390px) {
+  main{padding-left:max(12px, env(safe-area-inset-left));padding-right:max(12px, env(safe-area-inset-right))}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<p class="muted site-nav"><a href="/">First Mover Projects</a> · <a href="/tools/">Tools</a> · free tool</p>
+<h1>Amazon 2027 fee change checker</h1>
+<p>Check only the boxes that match your Amazon.com selling. This page shows the dated changes we could confirm on Amazon's own pages, and skips the rest.</p>
+<p class="muted">General guidance, not legal, tax or IT advice. Not affiliated with or endorsed by Amazon.</p>
+
+<section class="card" aria-labelledby="form-h">
+<h2 id="form-h">What applies to you?</h2>
+<form id="fee-form">
+<fieldset>
+<legend>Selling and stock</legend>
+<div class="choice">
+<label><input type="checkbox" id="fba" name="fba"> I sell with Fulfillment by Amazon (FBA) in the US</label>
+<label><input type="checkbox" id="age180" name="age180"> I store FBA inventory older than 180 days</label>
+<label><input type="checkbox" id="age271" name="age271"> I store FBA inventory older than 271 days</label>
+<label><input type="checkbox" id="age365" name="age365"> I store FBA inventory older than 365 days</label>
+<label><input type="checkbox" id="bundles" name="bundles"> I sell a bundle as one product listing</label>
+</div>
+<p class="muted">180, 271, and 365 are ages you can check. Amazon's public letter does not publish those day counts or a dollar rate for them. It says stock that turns in under six months is flat or lower, and aged stock costs more.</p>
+</fieldset>
+<label for="category">Category, if you sell bundles</label>
+<select id="category" name="category">
+<option value="">Not sure</option>
+<option value="gifting">Gifting</option>
+<option value="camera">Camera</option>
+<option value="media">Books, music, video, DVD, or video games</option>
+<option value="consumables">Consumables</option>
+<option value="other">Another category</option>
+</select>
+<p class="muted">Amazon's January 11 notice names gifting browse nodes and camera product types as exceptions. Other categories are not an exception on that notice.</p>
+<button id="go" type="submit">Show what hits me</button>
+</form>
+</section>
+
+<section class="card" id="results" hidden aria-live="polite">
+<h2 id="result-h">Your result</h2>
+<p id="result-headline"></p>
+<div id="result-hits"></div>
+<div id="result-notes"></div>
+<div id="result-bridge" class="result-bridge" data-kit-what="checklists for Amazon's $1 million liability certificate, not a 2027 fee calculator" hidden>
+<p id="result-bridge-meaning">Your check result is ready.</p>
+<p id="result-bridge-kit">This is a downloadable kit.</p>
+<p><a id="result-bridge-link" class="result-bridge-link" target="_blank" data-goatcounter-click="cta/amazon-2027-fee-check-result-bridge" data-goatcounter-title="Result bridge: amazon-2027-fee-check" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=checker_result&amp;utm_campaign=amazon-2027-fee-check&amp;utm_content=result-bridge" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $19 kit</a></p>
+<p id="result-bridge-free">Not a fit? The checker stays free.</p>
+<p><a href="/tools/amazon-coi-check/">Free certificate check</a> for the separate November 2 insurance rule.</p>
+</div>
+<div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
+<p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
+<div class="follow-bar-actions">
+<a class="follow-tiktok" data-tool-slug="amazon-2027-fee-check" target="_blank" rel="noopener" href="https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&amp;utm_medium=tool_result&amp;utm_campaign=follower_growth">Follow @firstmoverprojects on TikTok (Daily 60-Sec Checklists)</a>
+<a class="follow-email" href="#signup">Get Free Email Deadline Reminders</a>
+</div>
+</div>
+</section>
+
+<section class="card" aria-labelledby="src-h">
+<h2 id="src-h">Sources and what we could not confirm</h2>
+<p id="last-checked">Last checked 2026-11-16. Opened again on 2026-11-17; the same dates were still on the pages below.</p>
+<ul>
+<li><a href="https://sellingpartners.aboutamazon.com/update-to-us-referral-and-fulfillment-by-amazon-fees-for-2027">Amazon Selling Partners letter, November 5, 2026: Update to US Referral and Fulfillment by Amazon fees for 2027</a>. Confirmed: most changes on January 15, 2027; average FBA fulfillment fee up $0.19 per unit; storage changes on February 1, 2027; low-inventory test on February 1. The letter links the <a href="https://sellercentral.amazon.com/manage/scenario-modeling?id=2027_ANNUAL_FEE_CHANGE">Fee Change Comparison dashboard</a>, <a href="https://sellercentral.amazon.com/economics">Profit Analytics</a>, and the <a href="https://sellercentral.amazon.com/revcal">Revenue Calculator</a>.</li>
+<li><a href="https://sellercentral.amazon.com/seller-forums/discussions/t/da850a57-839d-4e38-a96f-298dbc450b69">Amazon seller notice: New requirements for product bundles starting January 11</a>. Confirmed: January 11, 2027 packing rule for bundles listed as one product. The notice points to the <a href="https://sellercentral.amazon.com/help/hub/reference/G200442350">Product bundling policy</a>. That help page did not show the policy text without a seller login, so this check uses the notice wording.</li>
+<li><a href="https://sellercentral.amazon.com/gp/help/external/G201411300">Seller Central: 2027 US Referral and Fulfillment by Amazon fees</a>. Unconfirmed here: referral-fee percents, per-size fulfillment prices, storage dollar rates, and the "Buy X, Get Y" details. The page asks for a login. This check does not guess those numbers.</li>
+</ul>
+<p>Background write-up: <a href="/deadlines/amazon-fba-fees-2027.html">What Amazon sellers should check about the 2027 FBA fee changes</a>.</p>
+<p>The separate Amazon $1M Insurance Readiness Kit is not a fee calculator. A downloadable ZIP of checklists and templates for Amazon's $1 million commercial liability certificate. It does not calculate 2027 fees. The buy button appears only after you say you sell with FBA.</p>
+</section>
+
+<section class="card" id="faq" aria-labelledby="faq-h">
+<h2 id="faq-h">FAQ</h2>
+<details>
+<summary>When do the 2027 US FBA fee changes start?</summary>
+<p>Amazon's November 5, 2026 letter says most 2027 US referral and FBA fee changes take effect on January 15, 2027. On average, FBA fulfillment fees increase by $0.19 per unit sold, approximately 0.8% of the average item's selling price. Some products go up and some go down. The letter does not list a referral-fee percent.</p>
+</details>
+<details>
+<summary>What happens to stored inventory on February 1, 2027?</summary>
+<p>The same letter says that on February 1, 2027 Amazon drops the storage utilization surcharge and combines the aged inventory surcharge with monthly storage into one age-based rate. Fees are flat or lower for inventory that turns in under six months, and higher for aged inventory. The public letter does not list dollar rates or 180, 271, or 365 day prices.</p>
+</details>
+<details>
+<summary>What changes for bundles on January 11, 2027?</summary>
+<p>Amazon's seller notice says that on January 11, 2027 most bundles listed as one product must be packed by the original manufacturer or brand. Exceptions include a letter of authorization, gifting browse nodes, camera product types, and Virtual Bundles. Noncompliant listings are turned off after that date. This is a packing rule, not a fee rate.</p>
+</details>
+<details>
+<summary>Does the $19 kit calculate these fees?</summary>
+<p>No. The Amazon $1M Insurance Readiness Kit is a downloadable ZIP of checklists and templates for Amazon's $1 million commercial liability certificate. It does not calculate 2027 fees. The free check on this page is $0.</p>
+</details>
+</section>
+
+<div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
+<p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
+<div class="follow-bar-actions">
+<a class="follow-tiktok" data-tool-slug="amazon-2027-fee-check" target="_blank" rel="noopener" href="https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&amp;utm_medium=tool_result&amp;utm_campaign=follower_growth">Follow @firstmoverprojects on TikTok (Daily 60-Sec Checklists)</a>
+<a class="follow-email" href="/deadlines/#signup">Get Free Email Deadline Reminders</a>
+</div>
+</div>
+
+<section class="signup" id="signup" aria-labelledby="signup-h">
+<h2 id="signup-h">Get the First Mover Projects Weekly Update</h2>
+<p><a href="https://05279842.sibforms.com/serve/MUIFAOl30i4SqBWIywYgwCK-R-JtXw9dFx8m5j-td4xmrSh6dXO-1ysXwauPn74aUR1704Woip5d-zVEij--7PVs3Ny9ANkpwvsp6zi8LQaPXra8EtECZfFOjzPBw1houYxtyGNprdB_IAejV4AHahfUP0AeeMyIpgcAFFaxNlyGv9PQhVHeo9NHrVFBHvcyJyn7qSpur2L10Tzt8A==" class="signup-cta" target="_blank" rel="noopener">Sign up for the weekly FMP email (1-click)</a></p>
+<p>One short weekly email covering our newest free 60-second browser checks, ready-to-use kits, small-business tech &amp; compliance deadlines, and cozy browser puzzle games. Double opt-in; unsubscribe anytime. See our <a href="https://firstmoverprojects.com/privacy.html">Privacy Policy</a>.</p>
+</section>
+<p>First Mover Projects, PO Box 98, Firth, NE 68358. firstmoverprojects@gmail.com. General guidance, not legal, tax or IT advice. Not affiliated with or endorsed by Amazon.</p>
+</main>
+<script>
+(function () {
+  function byId(id) { return document.getElementById(id); }
+
+  function evaluate(input) {
+    var fba = !!input.fba;
+    var bundles = !!input.bundles;
+    var category = input.category || "";
+    var aged = !!(input.age180 || input.age271 || input.age365);
+    var hits = [];
+    var notes = [];
+
+    if (fba) {
+      hits.push({
+        id: "fba-jan15",
+        title: "FBA fulfillment fee change",
+        date: "January 15, 2027",
+        action: "Before January 15, 2027, open the Fee Change Comparison dashboard and the Revenue Calculator for your own products. Amazon's average is $0.19 per unit, and some products go up while others go down."
+      });
+      if (aged) {
+        var oldest = input.age365 ? "365" : (input.age271 ? "271" : "180");
+        hits.push({
+          id: "storage-feb1",
+          title: "Aged inventory and storage fees",
+          date: "February 1, 2027",
+          action: "Before February 1, 2027, sell, discount, or remove FBA stock that has sat longer than about six months. Amazon says aged inventory pays higher fees. You said some stock is older than " + oldest + " days. The public letter does not list a dollar rate, and it does not name " + oldest + " days as a cutoff."
+        });
+      } else {
+        hits.push({
+          id: "storage-feb1",
+          title: "Storage fee change for FBA inventory",
+          date: "February 1, 2027",
+          action: "Before February 1, 2027, confirm your FBA stock turns in under six months. Amazon says those fees are flat or lower, and the storage utilization surcharge goes away."
+        });
+      }
+      notes.push("Also on the same letter, for FBA sellers: starting February 1, 2027, the low-inventory fee applies only when stock is under 28 days of supply. This check does not know your supply days, so that change is not marked as a hit.");
+    } else if (aged) {
+      notes.push("You checked older stored inventory, and you said you do not sell with FBA. The February 1 storage change is for FBA inventory, so it does not hit you.");
+    }
+
+    if (bundles) {
+      if (category === "gifting" || category === "camera") {
+        var group = category === "gifting" ? "gifting browse nodes" : "camera product types";
+        notes.push("You sell bundles, and you picked " + group + ". Amazon's January 11, 2027 notice says those bundles do not need to be packed by the original manufacturer. This packing rule does not hit you if the listing is actually in that group.");
+      } else {
+        var extra = "";
+        if (category === "media") {
+          extra = " Amazon's notice also says you can now create bundles in Books, Music, Video, DVD, and Video Games. The packing rule still applies.";
+        } else if (category === "consumables") {
+          extra = " Amazon's notice says multi-brand bundles in Consumables are allowed with a letter of authorization.";
+        }
+        hits.push({
+          id: "bundles-jan11",
+          title: "Bundle packing rule",
+          date: "January 11, 2027",
+          action: "Before January 11, 2027, make sure each bundle listed as one product was packed by the original brand, or get a letter of authorization, or move it to a Virtual Bundle. Amazon says noncompliant listings are turned off after that date." + extra
+        });
+      }
+    }
+
+    return { hits: hits, notes: notes, none: hits.length === 0, showKit: fba };
+  }
+
+  function readKitFacts() {
+    var name = "";
+    var price = "";
+    var currency = "USD";
+    var node = byId("product-jsonld");
+    if (node && node.textContent) {
+      try {
+        var data = JSON.parse(node.textContent);
+        name = data && data.name ? String(data.name) : "";
+        var offer = data && data.offers ? data.offers : null;
+        if (offer) {
+          if (offer.price != null && String(offer.price).trim() !== "") price = String(offer.price).trim();
+          if (offer.priceCurrency) currency = String(offer.priceCurrency);
+        }
+      } catch (err) {}
+    }
+    var dollars = "";
+    if (price && currency === "USD") dollars = "$" + price;
+    else if (price) dollars = price + " " + currency;
+    return { name: name, dollars: dollars };
+  }
+
+  function showResultBridge(meaning) {
+    var bridge = byId("result-bridge");
+    var meaningEl = byId("result-bridge-meaning");
+    var kitEl = byId("result-bridge-kit");
+    var link = byId("result-bridge-link");
+    if (!bridge || !meaningEl || !kitEl || !link) return;
+    var facts = readKitFacts();
+    meaningEl.textContent = String(meaning || "").replace(/\s+/g, " ").trim();
+    var what = bridge.getAttribute("data-kit-what") || "";
+    var named = facts.name || "This";
+    if (named.slice(0, 4).toLowerCase() !== "the ") named = "The " + named;
+    var kitLine = named + " is a downloadable kit";
+    if (what) kitLine += " (" + what + ")";
+    kitLine += ".";
+    if (facts.dollars) kitLine += " Price: " + facts.dollars + ".";
+    kitEl.textContent = kitLine;
+    link.textContent = facts.dollars ? "Get the " + facts.dollars + " kit" : "Get the kit";
+    bridge.hidden = false;
+  }
+
+  function hideResultBridge() {
+    var bridge = byId("result-bridge");
+    if (bridge) bridge.hidden = true;
+  }
+
+  function paint(result) {
+    var box = byId("results");
+    var headline = byId("result-headline");
+    var hitsEl = byId("result-hits");
+    var notesEl = byId("result-notes");
+    if (!box || !headline || !hitsEl || !notesEl) return;
+    hitsEl.textContent = "";
+    notesEl.textContent = "";
+    if (result.none) {
+      headline.textContent = "None of these changes hit you.";
+    } else {
+      headline.textContent = "These changes hit you.";
+    }
+    result.hits.forEach(function (hit) {
+      var article = document.createElement("article");
+      article.className = "hit";
+      article.setAttribute("data-hit", hit.id);
+      var title = document.createElement("h3");
+      title.textContent = hit.title;
+      var when = document.createElement("p");
+      when.className = "when";
+      when.textContent = hit.date;
+      var action = document.createElement("p");
+      action.className = "action";
+      action.textContent = hit.action;
+      article.appendChild(title);
+      article.appendChild(when);
+      article.appendChild(action);
+      hitsEl.appendChild(article);
+    });
+    result.notes.forEach(function (note) {
+      var p = document.createElement("p");
+      p.className = "muted";
+      p.textContent = note;
+      notesEl.appendChild(p);
+    });
+    if (result.showKit) {
+      var meaning = result.none
+        ? "None of these changes hit you."
+        : "These changes hit you. The kit below is a separate insurance checklist, not a fee calculator.";
+      showResultBridge(meaning);
+    } else {
+      hideResultBridge();
+    }
+    box.hidden = false;
+    var send = window.fmpSendGcEvent;
+    if (typeof send === "function" && !window.__fbaFeeCounted) {
+      window.__fbaFeeCounted = true;
+      send("check/amazon-2027-fee-check-ran", "Check ran: amazon-2027-fee-check");
+    }
+  }
+
+  function readForm() {
+    return {
+      fba: !!(byId("fba") && byId("fba").checked),
+      age180: !!(byId("age180") && byId("age180").checked),
+      age271: !!(byId("age271") && byId("age271").checked),
+      age365: !!(byId("age365") && byId("age365").checked),
+      bundles: !!(byId("bundles") && byId("bundles").checked),
+      category: byId("category") ? byId("category").value : ""
+    };
+  }
+
+  var form = byId("fee-form");
+  if (form) {
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      paint(evaluate(readForm()));
+    });
+  }
+
+  window.FMP_FBA_2027 = { evaluate: evaluate, paint: paint, readKitFacts: readKitFacts };
+})();
+</script>
+<script>
+(function () {
+  var q = location.search || "";
+  var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(q);
+  var kitClickBySlug = {
+    "fire-to-iris-switch-checklist": "click-fire-kit",
+    "amazon-1m-insurance-readiness-kit": "click-amazon-kit",
+    "lnfgc": "click-etsy-kit"
+  };
+  function prefixExcludedClick(ev) {
+    var node = ev.target && ev.target.closest ? ev.target.closest("[data-goatcounter-click]") : null;
+    if (!node || !node.getAttribute) return;
+    var cur = node.getAttribute("data-goatcounter-click") || "";
+    if (!cur || cur.indexOf("TEST-EXCLUDE") === 0) return;
+    node.setAttribute("data-goatcounter-click", "TEST-EXCLUDE/" + cur);
+  }
+  if (testVisit) {
+    window.goatcounter = { path: function (p) { return "TEST-EXCLUDE" + p; } };
+    document.addEventListener("click", prefixExcludedClick, true);
+    document.addEventListener("auxclick", prefixExcludedClick, true);
+  }
+  function sendGcEvent(path, title) {
+    if (!path) return;
+    if (window.goatcounter && typeof window.goatcounter.count === "function") {
+      window.goatcounter.count({
+        path: path,
+        title: title,
+        event: true
+      });
+      return;
+    }
+    var gcCountUrl = "https://firstmoverprojects.goatcounter.com/count?p=" + encodeURIComponent(path) + "&t=" + encodeURIComponent(title) + "&e=true";
+    try {
+      if (typeof navigator !== "undefined" && navigator && typeof navigator.sendBeacon === "function" && navigator.sendBeacon(gcCountUrl)) {
+        return;
+      }
+    } catch (beaconErr) {}
+    try {
+      if (typeof fetch === "function") fetch(gcCountUrl, { keepalive: true, mode: "no-cors" });
+    } catch (fetchErr) {}
+  }
+  window.fmpSendGcEvent = sendGcEvent;
+  function trackGumroadClick(ev) {
+    if (ev.type === "auxclick" && ev.button !== 1) return;
+    var node = ev.target && ev.target.closest ? ev.target.closest("a") : null;
+    if (!node || !node.getAttribute) return;
+    var ctaPath = node.getAttribute("data-goatcounter-click") || "";
+    if (ctaPath) {
+      var ctaTitle = node.getAttribute("data-goatcounter-title") || ("CTA click: " + ctaPath);
+      sendGcEvent(ctaPath, ctaTitle);
+    }
+    var href = node.getAttribute("href") || "";
+    var toolSlug = node.getAttribute("data-tool-slug") || "";
+    var className = node.getAttribute("class") || "";
+    var path = "";
+    var title = "";
+    if (className.indexOf("follow-tiktok") !== -1) {
+      if (!/^[a-z0-9-]{1,80}$/.test(toolSlug)) return;
+      if (node.target !== "_blank") node.target = "_blank";
+      if (typeof node.setAttribute === "function") {
+        var tiktokRel = node.getAttribute("rel") || "";
+        if (tiktokRel.indexOf("noopener") === -1) node.setAttribute("rel", (tiktokRel ? tiktokRel + " " : "") + "noopener");
+      }
+      path = (testVisit ? "TEST-EXCLUDE-" : "") + "event/tiktok-follow-click-" + toolSlug;
+      title = "TikTok follow click: " + toolSlug;
+      sendGcEvent(path, title);
+      return;
+    }
+    var parts = href.split("/");
+    if (parts[0] !== "https:" || parts[2] !== "firstmoverprojects.gumroad.com" || parts[3] !== "l") return;
+    if (href.indexOf("wanted=true") === -1) return;
+    var slug = parts[4] || "";
+    var cut = slug.search(/[?#]/);
+    if (cut !== -1) slug = slug.slice(0, cut);
+    if (!slug) return;
+    if (node.target !== "_blank") node.target = "_blank";
+    if (typeof node.setAttribute === "function") {
+      var rel = node.getAttribute("rel") || "";
+      if (rel.indexOf("noopener") === -1) node.setAttribute("rel", (rel ? rel + " " : "") + "noopener");
+    }
+    path = (testVisit ? "TEST-EXCLUDE/" : "") + "gumroad-click/" + slug;
+    title = "Gumroad checkout click: " + slug;
+    sendGcEvent(path, title);
+    var kitPath = kitClickBySlug[slug];
+    if (kitPath) {
+      sendGcEvent((testVisit ? "TEST-EXCLUDE/" : "") + kitPath, "Kit buy click: " + kitPath);
+    }
+  }
+  document.addEventListener("click", trackGumroadClick);
+  document.addEventListener("auxclick", trackGumroadClick);
+})();
+</script>
+<script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" data-goatcounter-settings="{&quot;no_events&quot;:true}" async src="https://gc.zgo.at/count.js"></script>
+<script id="fmp-utm">
+(function () {
+  "use strict";
+  var KEY = "fmp_utm_source";
+  var FALLBACK = "site";
+
+  function clean(value) {
+    if (value == null) return "";
+    var s = String(value).replace(/\+/g, " ").trim().toLowerCase();
+    try { s = decodeURIComponent(s); } catch (e) { /* keep the raw token */ }
+    s = s.trim().toLowerCase().replace(/[^a-z0-9\-_]/g, "-").slice(0, 200).replace(/^-+|-+$/g, "");
+    if (!/^[a-z0-9][a-z0-9_-]*$/.test(s) || s === FALLBACK) return "";
+    return s;
+  }
+
+  function fromLocation() {
+    var q = "";
+    try { q = location.search || ""; } catch (e) { q = ""; }
+    var m = /(?:^|[?&])utm_source=([^&#]*)/.exec(q);
+    return m ? clean(m[1]) : "";
+  }
+
+  function landingSource() {
+    var fromUrl = fromLocation();
+    var saved = "";
+    try {
+      saved = clean(sessionStorage.getItem(KEY));
+      if (!saved && fromUrl) {
+        sessionStorage.setItem(KEY, fromUrl);
+        saved = fromUrl;
+      }
+    } catch (e) {
+      saved = fromUrl;
+    }
+    return saved || FALLBACK;
+  }
+
+  function patchHref(anchor, source) {
+    if (!anchor || !source || source === FALLBACK || !anchor.getAttribute) return;
+    var href = anchor.getAttribute("href");
+    if (!href || href.indexOf("firstmoverprojects.gumroad.com/l/") === -1) return;
+    if (href.indexOf("utm_source=") === -1) return;
+    var next = href.replace(/([?&]utm_source=)[^&#]*/, "$1" + source);
+    if (next !== href) anchor.setAttribute("href", next);
+  }
+
+  function patchAll(source) {
+    if (!document.querySelectorAll) return;
+    var links = document.querySelectorAll('a[href*="firstmoverprojects.gumroad.com/l/"]');
+    for (var i = 0; i < links.length; i++) patchHref(links[i], source);
+  }
+
+  function onClick(ev) {
+    var t = ev.target;
+    if (!t || !t.closest) return;
+    patchHref(t.closest("a"), landingSource());
+  }
+
+  patchAll(landingSource());
+  document.addEventListener("click", onClick, true);
+  document.addEventListener("auxclick", onClick, true);
+})();
+</script>
+</body>
+</html>

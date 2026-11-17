@@ -36,6 +36,7 @@ Run by First Mover Projects, PO Box 98, Firth, NE 68358. Contact: firstmoverproj
 
 ## Free browser tools
 - [Amazon Nov 2 Insurance Certificate (COI) Pre-Check](https://firstmoverprojects.com/tools/amazon-coi-check/): Paste your certificate of insurance text to check 7 key terms against Amazon's $1M commercial liability insurance criteria and get a plain-text fix list for your broker. Runs in the browser. Nothing is uploaded.
+- [Amazon 2027 Fee Change Checker](https://firstmoverprojects.com/tools/amazon-2027-fee-check/): Pick FBA, older stored inventory, bundles, and a category. Shows only the January 11, January 15, and February 1, 2027 changes confirmed on Amazon's public pages. Runs in the browser. Nothing is uploaded.
 - [EWS Setting Decoder](https://firstmoverprojects.com/tools/ews-setting-decoder/): Paste the output of a read-only Exchange Online PowerShell command to see what Microsoft's phased EWS switch-off and Apr 1, 2027 permanent disable date mean for your tenant. Runs in the browser. Nothing is uploaded.
 - [Etsy Real-Photo & Listing Audit Check](https://firstmoverprojects.com/tools/etsy-photo-audit-check/): Paste up to 10 listing rows, or toggle one listing, and get a current-risk column beside a real-photo fix plan. Runs in the browser. Nothing is uploaded.
 - [After-Hours Lead Capture Side-by-Side Scorecard](https://firstmoverprojects.com/tools/after-hours-gap-check/): Six questions plus your own inquiry, ticket, and close-rate numbers. Current setup beside an instant-capture checklist. Arithmetic uses only the numbers you enter.

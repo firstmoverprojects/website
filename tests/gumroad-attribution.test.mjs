@@ -30,7 +30,8 @@ const CONTENTS = new Set([
 ]);
 const OFFER_TOOL_PAGES = new Set([
   "tools/amazon-coi-check/index.html",
-  "tools/etsy-photo-audit-check/index.html"
+  "tools/etsy-photo-audit-check/index.html",
+  "tools/amazon-2027-fee-check/index.html"
 ]);
 
 function walk(dir, out = []) {
