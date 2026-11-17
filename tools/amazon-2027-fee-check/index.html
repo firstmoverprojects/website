@@ -8,21 +8,21 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://firstmoverprojects.com/tools/amazon-2027-fee-check/">
 <title>Amazon 2027 Fee Change Checker (free)</title>
-<meta name="description" content="Free check for US Amazon sellers. Pick FBA, older stored stock, and bundles. See only the 2027 changes Amazon has published that hit that setup.">
+<meta name="description" content="Free check for US Amazon sellers. Pick FBA, older stored stock, and bundles. See only the 2027 changes Amazon has published that apply to that setup.">
 <meta property="og:title" content="Amazon 2027 Fee Change Checker (free)">
-<meta property="og:description" content="Free check for US Amazon sellers. Pick FBA, older stored stock, and bundles. See only the 2027 changes Amazon has published that hit that setup.">
+<meta property="og:description" content="Free check for US Amazon sellers. Pick FBA, older stored stock, and bundles. See only the 2027 changes Amazon has published that apply to that setup.">
 <meta property="og:url" content="https://firstmoverprojects.com/tools/amazon-2027-fee-check/">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://firstmoverprojects.com/assets/fmp-logo-460.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Amazon 2027 Fee Change Checker (free)">
-<meta name="twitter:description" content="Free check for US Amazon sellers. Pick FBA, older stored stock, and bundles. See only the 2027 changes Amazon has published that hit that setup.">
+<meta name="twitter:description" content="Free check for US Amazon sellers. Pick FBA, older stored stock, and bundles. See only the 2027 changes Amazon has published that apply to that setup.">
 <meta name="twitter:image" content="https://firstmoverprojects.com/assets/fmp-logo-460.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "dateModified": "2026-11-17",
+  "dateModified": "2026-11-16",
   "mainEntity": [
     {
       "@type": "Question",
@@ -183,7 +183,7 @@ html.fmp-embed .site-nav{display:none !important}
 <option value="other">Another category</option>
 </select>
 <p class="muted">Amazon's January 11 notice names gifting browse nodes and camera product types as exceptions. Other categories are not an exception on that notice.</p>
-<button id="go" type="submit">Show what hits me</button>
+<button id="go" type="submit">Show what applies to me</button>
 </form>
 </section>
 
@@ -210,11 +210,11 @@ html.fmp-embed .site-nav{display:none !important}
 
 <section class="card" aria-labelledby="src-h">
 <h2 id="src-h">Sources and what we could not confirm</h2>
-<p id="last-checked">Last checked 2026-11-16. Opened again on 2026-11-17; the same dates were still on the pages below.</p>
+<p id="last-checked">Last checked November 16, 2026.</p>
 <ul>
 <li><a href="https://sellingpartners.aboutamazon.com/update-to-us-referral-and-fulfillment-by-amazon-fees-for-2027">Amazon Selling Partners letter, November 5, 2026: Update to US Referral and Fulfillment by Amazon fees for 2027</a>. Confirmed: most changes on January 15, 2027; average FBA fulfillment fee up $0.19 per unit; storage changes on February 1, 2027; low-inventory test on February 1. The letter links the <a href="https://sellercentral.amazon.com/manage/scenario-modeling?id=2027_ANNUAL_FEE_CHANGE">Fee Change Comparison dashboard</a>, <a href="https://sellercentral.amazon.com/economics">Profit Analytics</a>, and the <a href="https://sellercentral.amazon.com/revcal">Revenue Calculator</a>.</li>
-<li><a href="https://sellercentral.amazon.com/seller-forums/discussions/t/da850a57-839d-4e38-a96f-298dbc450b69">Amazon seller notice: New requirements for product bundles starting January 11</a>. Confirmed: January 11, 2027 packing rule for bundles listed as one product. The notice points to the <a href="https://sellercentral.amazon.com/help/hub/reference/G200442350">Product bundling policy</a>. That help page did not show the policy text without a seller login, so this check uses the notice wording.</li>
-<li><a href="https://sellercentral.amazon.com/gp/help/external/G201411300">Seller Central: 2027 US Referral and Fulfillment by Amazon fees</a>. Unconfirmed here: referral-fee percents, per-size fulfillment prices, storage dollar rates, and the "Buy X, Get Y" details. The page asks for a login. This check does not guess those numbers.</li>
+<li><a href="https://sellercentral.amazon.com/seller-forums/discussions/t/da850a57-839d-4e38-a96f-298dbc450b69">Amazon seller notice: New requirements for product bundles starting January 11</a>. Confirmed: January 11, 2027 packing rule for bundles listed as one product. The notice points to the <a href="https://sellercentral.amazon.com/help/hub/reference/external/G200442350">Product bundling policy</a>. That policy page does not show the January 11 date, so this check uses the notice wording for the date.</li>
+<li><a href="https://sellercentral.amazon.com/help/hub/reference/external/G201411300">Seller Central: 2027 US Referral and Fulfillment by Amazon fees</a>. Unconfirmed here: referral-fee percents, per-size fulfillment prices, storage dollar rates, and the "Buy X, Get Y" details. It lists more changes this check doesn't repeat. This check does not guess those numbers.</li>
 </ul>
 <p>Background write-up: <a href="/deadlines/amazon-fba-fees-2027.html">What Amazon sellers should check about the 2027 FBA fee changes</a>.</p>
 <p>The separate Amazon $1M Insurance Readiness Kit is not a fee calculator. A downloadable ZIP of checklists and templates for Amazon's $1 million commercial liability certificate. It does not calculate 2027 fees. The buy button appears only after you say you sell with FBA.</p>
@@ -290,15 +290,15 @@ html.fmp-embed .site-nav{display:none !important}
           action: "Before February 1, 2027, confirm your FBA stock turns in under six months. Amazon says those fees are flat or lower, and the storage utilization surcharge goes away."
         });
       }
-      notes.push("Also on the same letter, for FBA sellers: starting February 1, 2027, the low-inventory fee applies only when stock is under 28 days of supply. This check does not know your supply days, so that change is not marked as a hit.");
+      notes.push("Also on the same letter, for FBA sellers: starting February 1, 2027, the low-inventory fee applies only when stock is under 28 days of supply. This check does not know your supply days, so that change is not marked as applying to you.");
     } else if (aged) {
-      notes.push("You checked older stored inventory, and you said you do not sell with FBA. The February 1 storage change is for FBA inventory, so it does not hit you.");
+      notes.push("You checked older stored inventory, and you said you do not sell with FBA. The February 1 storage change is for FBA inventory, so it does not apply to you.");
     }
 
     if (bundles) {
       if (category === "gifting" || category === "camera") {
         var group = category === "gifting" ? "gifting browse nodes" : "camera product types";
-        notes.push("You sell bundles, and you picked " + group + ". Amazon's January 11, 2027 notice says those bundles do not need to be packed by the original manufacturer. This packing rule does not hit you if the listing is actually in that group.");
+        notes.push("You sell bundles, and you picked " + group + ". Amazon's January 11, 2027 notice says those bundles do not need to be packed by the original manufacturer. This packing rule does not apply to you if the listing is actually in that group.");
       } else {
         var extra = "";
         if (category === "media") {
@@ -355,6 +355,7 @@ html.fmp-embed .site-nav{display:none !important}
     if (what) kitLine += " (" + what + ")";
     kitLine += ".";
     if (facts.dollars) kitLine += " Price: " + facts.dollars + ".";
+    kitLine += " It only helps if Amazon asks you for a $1 million liability certificate.";
     kitEl.textContent = kitLine;
     link.textContent = facts.dollars ? "Get the " + facts.dollars + " kit" : "Get the kit";
     bridge.hidden = false;
@@ -374,9 +375,9 @@ html.fmp-embed .site-nav{display:none !important}
     hitsEl.textContent = "";
     notesEl.textContent = "";
     if (result.none) {
-      headline.textContent = "None of these changes hit you.";
+      headline.textContent = "None of these changes apply to you.";
     } else {
-      headline.textContent = "These changes hit you.";
+      headline.textContent = "These changes apply to you.";
     }
     result.hits.forEach(function (hit) {
       var article = document.createElement("article");
@@ -403,8 +404,8 @@ html.fmp-embed .site-nav{display:none !important}
     });
     if (result.showKit) {
       var meaning = result.none
-        ? "None of these changes hit you."
-        : "These changes hit you. The kit below is a separate insurance checklist, not a fee calculator.";
+        ? "None of these changes apply to you."
+        : "These changes apply to you. The kit below is a separate insurance checklist, not a fee calculator.";
       showResultBridge(meaning);
     } else {
       hideResultBridge();

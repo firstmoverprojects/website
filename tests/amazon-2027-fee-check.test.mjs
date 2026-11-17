@@ -19,11 +19,23 @@ test("the page is indexable and cites the official Amazon pages", () => {
   const html = read();
   assert.equal(/noindex/i.test(html), false);
   assert.match(html, /content="index, follow"/);
-  assert.match(html, /Last checked 2026-11-16/);
-  assert.match(html, /Opened again on 2026-11-17/);
+  assert.match(html, /<p id="last-checked">Last checked November 16, 2026\.<\/p>/);
+  assert.equal(html.includes("Opened again on 2026-11-17"), false);
+  assert.match(html, /"dateModified": "2026-11-16"/);
+  assert.equal(html.includes("2026-11-17"), false);
   assert.match(html, /https:\/\/sellingpartners\.aboutamazon\.com\/update-to-us-referral-and-fulfillment-by-amazon-fees-for-2027/);
   assert.match(html, /https:\/\/sellercentral\.amazon\.com\/seller-forums\/discussions\/t\/da850a57-839d-4e38-a96f-298dbc450b69/);
-  assert.match(html, /https:\/\/sellercentral\.amazon\.com\/gp\/help\/external\/G201411300/);
+  assert.match(html, /https:\/\/sellercentral\.amazon\.com\/help\/hub\/reference\/external\/G201411300/);
+  assert.match(html, /https:\/\/sellercentral\.amazon\.com\/help\/hub\/reference\/external\/G200442350/);
+  assert.match(html, /It lists more changes this check doesn't repeat\./);
+  assert.match(html, /That policy page does not show the January 11 date, so this check uses the notice wording for the date\./);
+  assert.equal(/login/i.test(html), false);
+  assert.match(html, /Show what applies to me/);
+  assert.match(html, /that apply to that setup/);
+  assert.equal(html.includes("Show what hits me"), false);
+  assert.equal(html.includes("hit you"), false);
+  assert.equal(html.includes("hit that setup"), false);
+  assert.equal(html.includes("marked as a hit"), false);
   assert.match(html, /Unconfirmed here/);
   assert.equal(html.includes("$0.78"), false);
   assert.equal(html.includes("$2.78"), false);
@@ -31,7 +43,14 @@ test("the page is indexable and cites the official Amazon pages", () => {
   assert.match(html, /amazon-1m-insurance-readiness-kit/);
   assert.match(html, /not a 2027 fee calculator/);
   assert.match(html, /It does not calculate 2027 fees/);
+  assert.match(html, /It only helps if Amazon asks you for a \$1 million liability certificate\./);
   assert.equal(html.includes("\u2014") || html.includes("\u2013"), false);
+  const sitemap = readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
+  const feeBlock = sitemap.split("https://firstmoverprojects.com/tools/amazon-2027-fee-check/")[1] || "";
+  assert.match(feeBlock.slice(0, 120), /<lastmod>2026-11-16<\/lastmod>/);
+  const tools = readFileSync(path.join(ROOT, "tools/index.html"), "utf8");
+  assert.match(tools, /changes Amazon has published that apply to that setup/);
+  assert.equal(tools.includes("that hit that setup"), false);
 });
 
 test("none apply and some apply at phone and desktop widths", async () => {
@@ -48,10 +67,11 @@ test("none apply and some apply at phone and desktop widths", async () => {
       assert.equal(await page.locator("#results").isHidden(), true, width + " before");
       assert.equal(await page.locator("#result-bridge").isHidden(), true, width + " bridge before");
 
+      assert.equal(await page.locator("#go").innerText(), "Show what applies to me");
       await page.locator("#go").click();
       await page.locator("#results").waitFor({ state: "visible" });
-      assert.equal(await page.locator("#result-headline").innerText(), "None of these changes hit you.");
-      assert.equal(await page.locator("#result-hits article").count(), 0, width + " none hits");
+      assert.equal(await page.locator("#result-headline").innerText(), "None of these changes apply to you.");
+      assert.equal(await page.locator("#result-hits article").count(), 0, width + " none apply");
       assert.equal(await page.locator("#result-bridge").isHidden(), true, width + " none bridge");
       const noneScroll = await page.evaluate(() => ({
         sw: document.documentElement.scrollWidth,
@@ -68,17 +88,18 @@ test("none apply and some apply at phone and desktop widths", async () => {
       await page.locator("#category").selectOption("other");
       await page.locator("#go").click();
       const text = await page.locator("#results").innerText();
-      assert.match(text, /These changes hit you\./);
+      assert.match(text, /These changes apply to you\./);
       assert.match(text, /January 15, 2027/);
       assert.match(text, /February 1, 2027/);
       assert.match(text, /January 11, 2027/);
       assert.match(text, /older than 271 days/);
-      assert.equal(await page.locator("#result-hits article").count(), 3, width + " some hits");
+      assert.equal(await page.locator("#result-hits article").count(), 3, width + " some apply");
       assert.equal(await page.locator("#result-bridge").isVisible(), true, width + " kit");
       const kit = await page.locator("#result-bridge-kit").innerText();
       assert.match(kit, /The Amazon \$1M Insurance Readiness Kit is a downloadable kit/);
       assert.match(kit, /not a 2027 fee calculator/);
       assert.match(kit, /Price: \$19\./);
+      assert.match(kit, /It only helps if Amazon asks you for a \$1 million liability certificate\./);
       assert.equal(await page.locator("#result-bridge-free").innerText(), "Not a fit? The checker stays free.");
       const href = await page.getAttribute("#result-bridge-link", "href");
       const url = new URL(href);
@@ -112,7 +133,9 @@ test("none apply and some apply at phone and desktop widths", async () => {
     });
     assert.equal(cases.exempt.none, true);
     assert.equal(cases.exempt.showKit, false);
-    assert.match(cases.exempt.notes.join(" "), /does not hit you/);
+    assert.match(cases.exempt.notes.join(" "), /does not apply to you/);
+    assert.match(cases.young.notes.join(" "), /not marked as applying to you/);
+    assert.match(cases.agedOnly.notes.join(" "), /does not apply to you/);
     assert.equal(cases.young.showKit, true);
     assert.equal(cases.young.hits.map((hit) => hit.id).join(","), "fba-jan15,storage-feb1");
     assert.match(cases.young.hits[1].action, /under six months/);
