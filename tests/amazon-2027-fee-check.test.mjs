@@ -27,7 +27,7 @@ test("the page is indexable and cites the official Amazon pages", () => {
   assert.match(html, /https:\/\/sellercentral\.amazon\.com\/seller-forums\/discussions\/t\/da850a57-839d-4e38-a96f-298dbc450b69/);
   assert.match(html, /https:\/\/sellercentral\.amazon\.com\/help\/hub\/reference\/external\/G201411300/);
   assert.match(html, /https:\/\/sellercentral\.amazon\.com\/help\/hub\/reference\/external\/G200442350/);
-  assert.match(html, /It lists more changes this check doesn't repeat\./);
+  assert.match(html, /It lists more changes this check doesn't repeat\. Those include referral-fee, per-size fulfillment, storage, and "Buy X, Get Y" details\. This check does not guess those numbers\./);
   assert.match(html, /That policy page does not show the January 11 date, so this check uses the notice wording for the date\./);
   assert.equal(/login/i.test(html), false);
   assert.match(html, /Show what applies to me/);
@@ -36,7 +36,7 @@ test("the page is indexable and cites the official Amazon pages", () => {
   assert.equal(html.includes("hit you"), false);
   assert.equal(html.includes("hit that setup"), false);
   assert.equal(html.includes("marked as a hit"), false);
-  assert.match(html, /Unconfirmed here/);
+  assert.equal(html.includes("Unconfirmed here"), false);
   assert.equal(html.includes("$0.78"), false);
   assert.equal(html.includes("$2.78"), false);
   assert.equal(html.includes("$6.68"), false);
