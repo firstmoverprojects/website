@@ -35,7 +35,7 @@ These rules are for agents editing First Mover Projects offer and checker pages.
 
 Wording, prices, guarantees, and who a product is for are Risk’s. If a layout needs different words, stop and list the exact old sentence and the exact new sentence for Risk. Do not ship the new sentence in the page.
 
-The fee-checker buy button stays behind its gate: it appears only after the visitor says they sell with FBA and that Amazon asked for a $1 million liability certificate. The `#kit-sticky` bar stays `display: none !important`.
+The fee-checker buy button stays behind its gate: it appears only after the visitor says they sell with FBA and that Amazon asked for a $1 million liability certificate. The `#kit-sticky` bar keeps its current behavior: hidden by default and `display: none !important` from 768px up; below 768px the existing script shows it only after a certificate result that needs work. Do not show it anywhere else or change when it appears without a Risk gate.
 
 ## Sources, for the ideas behind this list
 
