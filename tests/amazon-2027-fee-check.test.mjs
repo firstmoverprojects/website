@@ -44,6 +44,15 @@ test("the page is indexable and cites the official Amazon pages", () => {
   assert.match(html, /not a 2027 fee calculator/);
   assert.match(html, /It does not calculate 2027 fees/);
   assert.match(html, /It only helps if Amazon asks you for a \$1 million liability certificate\./);
+  assert.match(html, /Separate rule since November 2: has Amazon asked you for a \$1 million liability certificate\?/);
+  assert.match(html, /<button type="button" id="bridge-yes"[^>]*aria-expanded="false"[^>]*aria-controls="bridge-yes-panel"[^>]*data-goatcounter-click="cta\/fee-check-bridge-yes"/);
+  assert.match(html, /<button type="button" id="bridge-unsure"[^>]*aria-expanded="false"[^>]*aria-controls="bridge-unsure-panel"[^>]*data-goatcounter-click="cta\/fee-check-bridge-unsure"/);
+  assert.match(html, /data-goatcounter-click="cta\/amazon-2027-fee-check-result-bridge"/);
+  assert.match(html, /utm_content=result-bridge-yes/);
+  assert.match(html, /utm_content=result-bridge-unsure/);
+  assert.equal(html.includes("utm_content=result-bridge\""), false);
+  assert.equal(html.includes("utm_content=result-bridge&"), false);
+  assert.match(html, /The buy button appears only after you say you sell with FBA and that Amazon has asked you for a \$1 million liability certificate\./);
   assert.equal(html.includes("\u2014") || html.includes("\u2013"), false);
   const sitemap = readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
   const feeBlock = sitemap.split("https://firstmoverprojects.com/tools/amazon-2027-fee-check/")[1] || "";
@@ -62,6 +71,23 @@ test("none apply and some apply at phone and desktop widths", async () => {
       const page = await browser.newPage({ viewport: { width, height: width < 500 ? 900 : 800 } });
       const errors = [];
       page.on("pageerror", (err) => errors.push(String(err)));
+      await page.addInitScript(() => {
+        window.__gc = [];
+        const record = (payload) => {
+          window.__gc.push({
+            path: payload && payload.path,
+            title: payload && payload.title,
+            event: payload && payload.event
+          });
+        };
+        window.goatcounter = { count: record };
+        document.addEventListener("click", (ev) => {
+          const node = ev.target && ev.target.closest ? ev.target.closest("a") : null;
+          if (!node) return;
+          const href = node.getAttribute("href") || "";
+          if (href.indexOf("gumroad.com") !== -1) ev.preventDefault();
+        }, true);
+      });
       await blockExternalOnPage(page);
       await page.goto(pathToFileURL(path.join(ROOT, REL)).href, { waitUntil: "load" });
       assert.equal(await page.locator("#results").isHidden(), true, width + " before");
@@ -94,19 +120,121 @@ test("none apply and some apply at phone and desktop widths", async () => {
       assert.match(text, /January 11, 2027/);
       assert.match(text, /older than 271 days/);
       assert.equal(await page.locator("#result-hits article").count(), 3, width + " some apply");
-      assert.equal(await page.locator("#result-bridge").isVisible(), true, width + " kit");
+      assert.equal(await page.locator("#result-bridge").isVisible(), true, width + " question");
+      assert.equal(await page.locator("#bridge-question").innerText(), "Separate rule since November 2: has Amazon asked you for a $1 million liability certificate?");
+      assert.equal(await page.locator("#bridge-yes").evaluate((el) => el.tagName), "BUTTON", width);
+      assert.equal(await page.locator("#bridge-unsure").evaluate((el) => el.tagName), "BUTTON", width);
+      assert.equal(await page.locator("#bridge-yes").innerText(), "Yes");
+      assert.equal(await page.locator("#bridge-unsure").innerText(), "No / not sure");
+      assert.equal(await page.getAttribute("#bridge-yes", "aria-expanded"), "false", width + " yes collapsed");
+      assert.equal(await page.getAttribute("#bridge-unsure", "aria-expanded"), "false", width + " unsure collapsed");
+      assert.equal(await page.locator("#result-bridge-link").isHidden(), true, width + " kit hidden");
+      assert.equal(await page.locator("#bridge-coi-link").isHidden(), true, width + " certificate hidden");
+      assert.equal(await page.locator("#result-bridge-free").innerText(), "Not a fit? The checker stays free.");
+      const questionTop = await page.locator("#bridge-question").evaluate((el) => el.offsetTop);
+      const scrollOk = async (label) => {
+        const box = await page.evaluate(() => ({
+          sw: document.documentElement.scrollWidth,
+          cw: document.documentElement.clientWidth
+        }));
+        assert.equal(box.sw, box.cw, width + " " + label + " " + JSON.stringify(box));
+      };
+      await scrollOk("question");
+      const yesBox = await page.locator("#bridge-yes").boundingBox();
+      const unsureBox = await page.locator("#bridge-unsure").boundingBox();
+      assert.ok(yesBox && yesBox.height >= 48, width + " yes height");
+      assert.ok(unsureBox && unsureBox.height >= 48, width + " unsure height");
+      if (SHOTS) {
+        await page.locator("#result-bridge").screenshot({ path: path.join(SHOTS, "amazon-2027-fee-question-" + width + ".png") });
+      }
+
+      await page.locator("#bridge-yes").click();
+      assert.equal(await page.getAttribute("#bridge-yes", "aria-expanded"), "true", width);
+      assert.equal(await page.getAttribute("#bridge-unsure", "aria-expanded"), "false", width);
+      assert.equal(await page.locator("#bridge-yes-panel").isVisible(), true, width + " yes panel");
+      assert.equal(await page.locator("#bridge-unsure-panel").isHidden(), true, width + " unsure still hidden");
       const kit = await page.locator("#result-bridge-kit").innerText();
       assert.match(kit, /The Amazon \$1M Insurance Readiness Kit is a downloadable kit/);
       assert.match(kit, /not a 2027 fee calculator/);
       assert.match(kit, /Price: \$19\./);
       assert.match(kit, /It only helps if Amazon asks you for a \$1 million liability certificate\./);
-      assert.equal(await page.locator("#result-bridge-free").innerText(), "Not a fit? The checker stays free.");
+      assert.match(await page.locator("#bridge-yes-panel").innerText(), /The kit below is a separate insurance checklist, not a fee calculator\./);
+      assert.equal(await page.locator("#result-bridge-link").innerText(), "Get the $19 kit with broker email");
       const href = await page.getAttribute("#result-bridge-link", "href");
       const url = new URL(href);
       assert.equal(url.pathname, "/l/amazon-1m-insurance-readiness-kit");
+      assert.equal(url.searchParams.get("wanted"), "true");
+      assert.equal(url.searchParams.get("utm_source"), "site");
       assert.equal(url.searchParams.get("utm_medium"), "checker_result");
       assert.equal(url.searchParams.get("utm_campaign"), "amazon-2027-fee-check");
-      assert.equal(url.searchParams.get("utm_content"), "result-bridge");
+      assert.equal(url.searchParams.get("utm_content"), "result-bridge-yes");
+      assert.equal(await page.getAttribute("#bridge-yes-email", "href"), "/deadlines/#signup");
+      assert.match(await page.locator("#bridge-yes-panel").innerText(), /Get Free Email Deadline Reminders/);
+      assert.equal(await page.locator("#bridge-question").evaluate((el) => el.offsetTop), questionTop, width + " yes shift");
+      await scrollOk("yes");
+      const yesEvents = await page.evaluate(() => window.__gc.slice());
+      const yesHit = yesEvents.filter((row) => row.path === "cta/fee-check-bridge-yes");
+      assert.equal(yesHit.length, 1, width + " " + JSON.stringify(yesEvents));
+      assert.equal(yesHit[0].title, "Fee check bridge yes");
+      assert.equal(yesHit[0].event, true);
+      if (SHOTS) {
+        await page.locator("#result-bridge").screenshot({ path: path.join(SHOTS, "amazon-2027-fee-yes-" + width + ".png") });
+      }
+
+      await page.locator("#bridge-unsure").click();
+      assert.equal(await page.getAttribute("#bridge-yes", "aria-expanded"), "false", width);
+      assert.equal(await page.getAttribute("#bridge-unsure", "aria-expanded"), "true", width);
+      assert.equal(await page.locator("#bridge-yes-panel").isHidden(), true, width + " kit closed");
+      assert.equal(await page.locator("#result-bridge-link").isHidden(), true, width + " kit link closed");
+      assert.equal(await page.locator("#bridge-unsure-panel").isVisible(), true, width + " unsure panel");
+      assert.equal(await page.locator("#bridge-coi-link").innerText(), "Free certificate check");
+      const coi = new URL(await page.getAttribute("#bridge-coi-link", "href"), "https://firstmoverprojects.com");
+      assert.equal(coi.pathname, "/tools/amazon-coi-check/");
+      assert.equal(coi.searchParams.get("utm_source"), "site");
+      assert.equal(coi.searchParams.get("utm_medium"), "checker_result");
+      assert.equal(coi.searchParams.get("utm_campaign"), "amazon-2027-fee-check");
+      assert.equal(coi.searchParams.get("utm_content"), "result-bridge-unsure");
+      assert.equal(await page.getAttribute("#bridge-unsure-email", "href"), "/deadlines/#signup");
+      assert.match(await page.locator("#bridge-unsure-panel").innerText(), /Get Free Email Deadline Reminders/);
+      assert.match(await page.locator("#bridge-unsure-panel").innerText(), /for the separate November 2 insurance rule\./);
+      assert.equal(await page.locator("#bridge-question").evaluate((el) => el.offsetTop), questionTop, width + " unsure shift");
+      await scrollOk("unsure");
+      const unsureEvents = await page.evaluate(() => window.__gc.slice());
+      const unsureHit = unsureEvents.filter((row) => row.path === "cta/fee-check-bridge-unsure");
+      assert.equal(unsureHit.length, 1, width + " " + JSON.stringify(unsureEvents));
+      assert.equal(unsureHit[0].title, "Fee check bridge no");
+      assert.equal(unsureHit[0].event, true);
+      if (SHOTS) {
+        await page.locator("#result-bridge").screenshot({ path: path.join(SHOTS, "amazon-2027-fee-no-" + width + ".png") });
+      }
+
+      await page.locator("#bridge-yes").click();
+      await page.locator("#result-bridge-link").click();
+      const kitEvents = await page.evaluate(() => window.__gc.map((row) => row.path));
+      assert.equal(kitEvents.filter((item) => item === "cta/amazon-2027-fee-check-result-bridge").length, 1, width + " " + kitEvents.join(","));
+      assert.equal(kitEvents.filter((item) => item === "click-amazon-kit").length, 1, width);
+      assert.equal(kitEvents.filter((item) => item === "cta/fee-check-bridge-yes").length, 2, width);
+
+      await page.locator("#go").click();
+      assert.equal(await page.locator("#result-bridge").isVisible(), true, width + " asked again");
+      assert.equal(await page.getAttribute("#bridge-yes", "aria-expanded"), "false", width + " reset");
+      assert.equal(await page.locator("#result-bridge-link").isHidden(), true, width + " reset kit");
+      assert.equal(await page.locator("#bridge-coi-link").isHidden(), true, width + " reset certificate");
+      await page.locator("#bridge-yes").focus();
+      await page.keyboard.press("Space");
+      assert.equal(await page.getAttribute("#bridge-yes", "aria-expanded"), "true", width + " keyboard");
+      assert.equal(await page.locator("#bridge-yes-panel").isVisible(), true, width + " keyboard panel");
+      await page.locator("#bridge-unsure").focus();
+      await page.keyboard.press("Enter");
+      assert.equal(await page.getAttribute("#bridge-unsure", "aria-expanded"), "true", width + " keyboard unsure");
+      assert.equal(await page.locator("#result-bridge-link").isHidden(), true, width + " keyboard kit hidden");
+      assert.equal(await page.locator("#bridge-coi-link").isVisible(), true, width + " keyboard certificate");
+
+      await page.locator("#fba").uncheck();
+      await page.locator("#go").click();
+      assert.match(await page.locator("#result-headline").innerText(), /These changes apply to you\./);
+      assert.equal(await page.locator("#result-bridge").isHidden(), true, width + " non-fba bridge");
+      assert.equal(await page.locator("#result-bridge-link").isHidden(), true, width + " non-fba kit");
       const someScroll = await page.evaluate(() => ({
         sw: document.documentElement.scrollWidth,
         cw: document.documentElement.clientWidth

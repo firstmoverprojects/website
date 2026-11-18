@@ -113,6 +113,9 @@ a,p,li,label,legend,h1,h2,h3{overflow-wrap:anywhere}
 #result-bridge-link{display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:100%;max-width:100%;min-height:48px;margin:8px 0 0;padding:12px;background:#0055ff;color:#fff;font-weight:800;line-height:1.3;text-align:center;text-decoration:none;border-radius:8px;white-space:normal;overflow-wrap:anywhere}
 #result-bridge-link:hover,#result-bridge-link:focus{background:#0044cc;color:#fff}
 #result-bridge-free{margin-bottom:0;color:#071b31;font-size:.92rem}
+.bridge-answers{display:flex;flex-wrap:wrap;gap:8px;max-width:100%;margin-top:8px}
+.bridge-answers button{flex:1 1 9rem;margin:0;min-width:0;min-height:48px}
+.bridge-answers button[aria-expanded="true"]{box-shadow:inset 0 0 0 3px #071b31}
 .follow-bar{background:#01060b;color:#f4f7fa;border:1px solid #00d8ff;border-radius:12px;padding:12px;margin:12px 0 0;max-width:100%;box-sizing:border-box}
 .follow-bar-title{margin:0 0 8px;font-weight:800;font-size:.95rem;line-height:1.35;color:#f4f7fa}
 .follow-bar-actions{display:flex;flex-wrap:wrap;gap:8px;min-width:0}
@@ -194,10 +197,22 @@ html.fmp-embed .site-nav{display:none !important}
 <div id="result-notes"></div>
 <div id="result-bridge" class="result-bridge" data-kit-what="checklists for Amazon's $1 million liability certificate, not a 2027 fee calculator" hidden>
 <p id="result-bridge-meaning">Your check result is ready.</p>
-<p id="result-bridge-kit">This is a downloadable kit.</p>
-<p><a id="result-bridge-link" class="result-bridge-link" target="_blank" data-goatcounter-click="cta/amazon-2027-fee-check-result-bridge" data-goatcounter-title="Result bridge: amazon-2027-fee-check" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=checker_result&amp;utm_campaign=amazon-2027-fee-check&amp;utm_content=result-bridge" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $19 kit</a></p>
+<p id="bridge-question">Separate rule since November 2: has Amazon asked you for a $1 million liability certificate?</p>
+<div class="bridge-answers" role="group" aria-labelledby="bridge-question">
+<button type="button" id="bridge-yes" aria-expanded="false" aria-controls="bridge-yes-panel" data-goatcounter-click="cta/fee-check-bridge-yes" data-goatcounter-title="Fee check bridge yes">Yes</button>
+<button type="button" id="bridge-unsure" class="sec" aria-expanded="false" aria-controls="bridge-unsure-panel" data-goatcounter-click="cta/fee-check-bridge-unsure" data-goatcounter-title="Fee check bridge no">No / not sure</button>
+</div>
 <p id="result-bridge-free">Not a fit? The checker stays free.</p>
-<p><a href="/tools/amazon-coi-check/">Free certificate check</a> for the separate November 2 insurance rule.</p>
+<div id="bridge-yes-panel" hidden>
+<p>The kit below is a separate insurance checklist, not a fee calculator.</p>
+<p id="result-bridge-kit">This is a downloadable kit.</p>
+<p><a id="result-bridge-link" class="result-bridge-link" target="_blank" data-goatcounter-click="cta/amazon-2027-fee-check-result-bridge" data-goatcounter-title="Result bridge: amazon-2027-fee-check" href="https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&amp;utm_source=site&amp;utm_medium=checker_result&amp;utm_campaign=amazon-2027-fee-check&amp;utm_content=result-bridge-yes" rel="noopener" referrerpolicy="strict-origin-when-cross-origin">Get the $19 kit with broker email</a></p>
+<p><a id="bridge-yes-email" href="/deadlines/#signup">Get Free Email Deadline Reminders</a></p>
+</div>
+<div id="bridge-unsure-panel" hidden>
+<p><a id="bridge-coi-link" href="/tools/amazon-coi-check/?utm_source=site&amp;utm_medium=checker_result&amp;utm_campaign=amazon-2027-fee-check&amp;utm_content=result-bridge-unsure">Free certificate check</a> for the separate November 2 insurance rule.</p>
+<p><a id="bridge-unsure-email" href="/deadlines/#signup">Get Free Email Deadline Reminders</a></p>
+</div>
 </div>
 <div class="follow-bar" role="region" aria-label="Save and follow for 60-second deadline alerts">
 <p class="follow-bar-title">Save &amp; Follow for 60-Second Deadline Alerts</p>
@@ -217,7 +232,7 @@ html.fmp-embed .site-nav{display:none !important}
 <li><a href="https://sellercentral.amazon.com/help/hub/reference/external/G201411300">Seller Central: 2027 US Referral and Fulfillment by Amazon fees</a>. It lists more changes this check doesn't repeat. Those include referral-fee, per-size fulfillment, storage, and "Buy X, Get Y" details. This check does not guess those numbers.</li>
 </ul>
 <p>Background write-up: <a href="/deadlines/amazon-fba-fees-2027.html">What Amazon sellers should check about the 2027 FBA fee changes</a>.</p>
-<p>The separate Amazon $1M Insurance Readiness Kit is not a fee calculator. A downloadable ZIP of checklists and templates for Amazon's $1 million commercial liability certificate. It does not calculate 2027 fees. The buy button appears only after you say you sell with FBA.</p>
+<p>The separate Amazon $1M Insurance Readiness Kit is not a fee calculator. A downloadable ZIP of checklists and templates for Amazon's $1 million commercial liability certificate. It does not calculate 2027 fees. The buy button appears only after you say you sell with FBA and that Amazon has asked you for a $1 million liability certificate.</p>
 </section>
 
 <section class="card" id="faq" aria-labelledby="faq-h">
@@ -357,13 +372,48 @@ html.fmp-embed .site-nav{display:none !important}
     if (facts.dollars) kitLine += " Price: " + facts.dollars + ".";
     kitLine += " It only helps if Amazon asks you for a $1 million liability certificate.";
     kitEl.textContent = kitLine;
-    link.textContent = facts.dollars ? "Get the " + facts.dollars + " kit" : "Get the kit";
+    link.textContent = facts.dollars ? "Get the " + facts.dollars + " kit with broker email" : "Get the kit with broker email";
+    resetBridgeChoice();
     bridge.hidden = false;
+  }
+
+  function resetBridgeChoice() {
+    var yes = byId("bridge-yes");
+    var unsure = byId("bridge-unsure");
+    var yesPanel = byId("bridge-yes-panel");
+    var unsurePanel = byId("bridge-unsure-panel");
+    if (yes) yes.setAttribute("aria-expanded", "false");
+    if (unsure) unsure.setAttribute("aria-expanded", "false");
+    if (yesPanel) yesPanel.hidden = true;
+    if (unsurePanel) unsurePanel.hidden = true;
   }
 
   function hideResultBridge() {
     var bridge = byId("result-bridge");
+    resetBridgeChoice();
     if (bridge) bridge.hidden = true;
+  }
+
+  function chooseBridge(openYes) {
+    var yes = byId("bridge-yes");
+    var unsure = byId("bridge-unsure");
+    var yesPanel = byId("bridge-yes-panel");
+    var unsurePanel = byId("bridge-unsure-panel");
+    if (yes) yes.setAttribute("aria-expanded", openYes ? "true" : "false");
+    if (unsure) unsure.setAttribute("aria-expanded", openYes ? "false" : "true");
+    if (yesPanel) yesPanel.hidden = !openYes;
+    if (unsurePanel) unsurePanel.hidden = openYes;
+  }
+
+  function onBridgeChoice(ev) {
+    var button = ev.currentTarget;
+    if (!button || !button.getAttribute) return;
+    var openYes = button.id === "bridge-yes";
+    chooseBridge(openYes);
+    var path = button.getAttribute("data-goatcounter-click") || "";
+    var title = button.getAttribute("data-goatcounter-title") || ("CTA click: " + path);
+    var send = window.fmpSendGcEvent;
+    if (path && typeof send === "function") send(path, title);
   }
 
   function paint(result) {
@@ -405,7 +455,7 @@ html.fmp-embed .site-nav{display:none !important}
     if (result.showKit) {
       var meaning = result.none
         ? "None of these changes apply to you."
-        : "These changes apply to you. The kit below is a separate insurance checklist, not a fee calculator.";
+        : "These changes apply to you.";
       showResultBridge(meaning);
     } else {
       hideResultBridge();
@@ -436,6 +486,11 @@ html.fmp-embed .site-nav{display:none !important}
       paint(evaluate(readForm()));
     });
   }
+
+  var bridgeYes = byId("bridge-yes");
+  var bridgeUnsure = byId("bridge-unsure");
+  if (bridgeYes) bridgeYes.addEventListener("click", onBridgeChoice);
+  if (bridgeUnsure) bridgeUnsure.addEventListener("click", onBridgeChoice);
 
   window.FMP_FBA_2027 = { evaluate: evaluate, paint: paint, readKitFacts: readKitFacts };
 })();
