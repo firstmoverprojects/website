@@ -93,7 +93,7 @@ const products = [
     accent: "#0369a1",
     wash: "#f0f9ff",
     page: "#e5f3fb",
-    note: "Not affiliated with Google. General guidance, not legal, tax or IT advice.",
+    note: "Not affiliated with or endorsed by Google. General guidance, not legal, tax or IT advice.",
     icon: "report"
   },
   {
@@ -113,7 +113,7 @@ const products = [
     stem: "windows-server-2016-checklist-preview",
     kicker: "Planning checklist",
     name: "Windows Server 2016 planning checklist",
-    description: "The $19 checklist is a planning sheet for the same date.",
+    description: "A planning sheet for Jan 12, 2027, the extended support end date Microsoft lists for Windows Server 2016.",
     price: "$19",
     accent: "#1e3a5f",
     wash: "#f1f5f9",
