@@ -1,8 +1,9 @@
 // Product JSON-LD for paid kits linked from tool pages.
 // Prices, names, and descriptions must already be on the page (or a data file it loads).
-// Google merchant listing required fields: Product name, image when the page has a preview,
-// Offer price and priceCurrency. Availability, offer URL, and seller
-// are included so a shopping assistant can read the kit and the price.
+// Google merchant listing required fields: Product name, image when a real preview
+// file is mapped for that product, Offer price and priceCurrency. The preview may
+// be rendered on a sibling page. Availability, offer URL, and seller are included
+// so a shopping assistant can read the kit and the price.
 import assert from "node:assert/strict";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
@@ -190,10 +191,11 @@ test("live paid-kit links on tool pages have Product offers, and the unpublished
       assert.ok(facts.includes(flat(product.name)), `${rel} name is not on the page: ${product.name}`);
       assert.ok(facts.includes(flat(product.description)), `${rel} description is not on the page: ${product.description}`);
       const preview = PREVIEW[slug];
-      if (preview && corpus.includes(preview)) {
+      const previewFile = preview && existsSync(path.join(ROOT, preview.slice(1)));
+      if (previewFile) {
         assert.equal(product.image, HOST + preview, `${rel} ${slug} image`);
       } else {
-        assert.equal(product.image, undefined, `${rel} ${slug} image is not on the page`);
+        assert.equal(product.image, undefined, `${rel} ${slug} has no preview asset`);
       }
       const serialized = JSON.stringify(product);
       for (const phrase of BANNED) assert.equal(phrase.test(serialized), false, `${rel} ${slug} ${phrase}`);
