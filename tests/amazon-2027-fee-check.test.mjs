@@ -21,7 +21,7 @@ test("the page is indexable and cites the official Amazon pages", () => {
   assert.match(html, /content="index, follow"/);
   assert.match(html, /<p id="last-checked">Last checked November 16, 2026\.<\/p>/);
   assert.equal(html.includes("Opened again on 2026-11-17"), false);
-  assert.match(html, /"dateModified": "2026-11-16"/);
+  assert.match(html, /"dateModified": "2026-11-18"/);
   assert.equal(html.includes("2026-11-17"), false);
   assert.match(html, /https:\/\/sellingpartners\.aboutamazon\.com\/update-to-us-referral-and-fulfillment-by-amazon-fees-for-2027/);
   assert.match(html, /https:\/\/sellercentral\.amazon\.com\/seller-forums\/discussions\/t\/da850a57-839d-4e38-a96f-298dbc450b69/);
@@ -31,7 +31,7 @@ test("the page is indexable and cites the official Amazon pages", () => {
   assert.match(html, /That policy page does not show the January 11 date, so this check uses the notice wording for the date\./);
   assert.equal(/login/i.test(html), false);
   assert.match(html, /Show what applies to me/);
-  assert.match(html, /that apply to that setup/);
+  assert.match(html, /Free checker for US Amazon sellers: tick FBA, aged stock or bundles and see which 2027 fee and policy changes apply, from Jan 15 and Feb 1, 2027\./);
   assert.equal(html.includes("Show what hits me"), false);
   assert.equal(html.includes("hit you"), false);
   assert.equal(html.includes("hit that setup"), false);
