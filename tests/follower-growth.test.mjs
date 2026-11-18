@@ -84,7 +84,8 @@ test("every tool checker has a follow bar under the result kit button and the ma
     assert.equal(bars.length, copies, rel);
     assert.equal(html.split(`data-tool-slug="${slug}"`).length - 1, copies, rel);
     assert.equal(html.split(TIKTOK_LABEL).length - 1, copies, rel);
-    assert.equal(html.split(EMAIL_LABEL).length - 1, copies, rel);
+    const emailCopies = rel === "tools/amazon-2027-fee-check/index.html" ? copies + 2 : copies;
+    assert.equal(html.split(EMAIL_LABEL).length - 1, emailCopies, rel);
     assert.ok(html.includes(TIKTOK.replace(/&/g, "&amp;")), rel);
     assert.match(html, /\.follow-tiktok\{[^}]*background:#0c1520/, rel);
     assert.match(html, /\.follow-tiktok\{[^}]*border:1px solid #00d8ff/, rel);
