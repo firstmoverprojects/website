@@ -88,10 +88,17 @@ test("each live LaunchFree tool has one Runway upvote pill", () => {
     assert.ok(tag.includes(`href="${href}"`), rel);
     assert.match(tag, /target="_blank"/, rel);
     assert.match(tag, /rel="noopener noreferrer"/, rel);
-    assert.match(html, /a\.runway-pill\{[^}]*background:#01060b/, rel);
-    assert.match(html, /a\.runway-pill\{[^}]*color:#f4f7fa !important/, rel);
-    assert.match(html, /a\.runway-pill\{[^}]*border:1px solid #00d8ff/, rel);
-    assert.match(html, /a\.runway-pill\{[^}]*border-radius:999px/, rel);
+    if (rel === "tools/amazon-coi-check/index.html") {
+      assert.match(html, /a\.runway-pill\{[^}]*background:#f6f7f9/, rel);
+      assert.match(html, /a\.runway-pill\{[^}]*color:#1b1f24 !important/, rel);
+      assert.match(html, /a\.runway-pill\{[^}]*border:1px solid #dde1e6/, rel);
+      assert.match(html, /a\.runway-pill\{[^}]*border-radius:8px/, rel);
+    } else {
+      assert.match(html, /a\.runway-pill\{[^}]*background:#01060b/, rel);
+      assert.match(html, /a\.runway-pill\{[^}]*color:#f4f7fa !important/, rel);
+      assert.match(html, /a\.runway-pill\{[^}]*border:1px solid #00d8ff/, rel);
+      assert.match(html, /a\.runway-pill\{[^}]*border-radius:999px/, rel);
+    }
     for (const banned of BANNED) assert.equal(banned.test(html), false, rel);
   }
 });

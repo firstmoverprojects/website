@@ -14,6 +14,12 @@ const HUB_LABEL = "Watch our 60-second live-drawing deadline checklists on TikTo
 // "gumroad", so the public follow bar does not belong on them:
 // scripts/test_deadline_checkers.js, scripts/test_nj_contractor_check.js,
 // scripts/test_sba_7a_calculator.js, and tools/deadline-watch/test.js.
+// These two money pages use the paper follow bar (white / #f6f7f9, #dde1e6 border).
+// Other checkers still use the dark follow bar.
+const PAPER_FOLLOW = new Set([
+  "tools/amazon-coi-check/index.html",
+  "tools/amazon-2027-fee-check/index.html"
+]);
 const QUIET_TOOLS = new Set([
   "tools/deadline-watch/index.html",
   "tools/detroit-business-tax-check/index.html",
@@ -87,11 +93,22 @@ test("every tool checker has a follow bar under the result kit button and the ma
     const emailCopies = rel === "tools/amazon-2027-fee-check/index.html" ? copies + 2 : copies;
     assert.equal(html.split(EMAIL_LABEL).length - 1, emailCopies, rel);
     assert.ok(html.includes(TIKTOK.replace(/&/g, "&amp;")), rel);
-    assert.match(html, /\.follow-tiktok\{[^}]*background:#0c1520/, rel);
-    assert.match(html, /\.follow-tiktok\{[^}]*border:1px solid #00d8ff/, rel);
-    assert.match(html, /\.follow-email\{[^}]*background:linear-gradient\(135deg,#22c55e 0%,#4ade80 100%\)/, rel);
-    assert.match(html, /\.follow-email\{[^}]*color:#01060b !important/, rel);
-    assert.match(html, /\.follow-bar\{[^}]*background:#01060b/, rel);
+    if (PAPER_FOLLOW.has(rel)) {
+      assert.match(html, /\.follow-bar\{[^}]*background:#f6f7f9/, rel);
+      assert.match(html, /\.follow-bar\{[^}]*border:1px solid #dde1e6/, rel);
+      assert.match(html, /\.follow-bar\{[^}]*border-radius:10px/, rel);
+      assert.match(html, /\.follow-tiktok,\.follow-email\{[^}]*background:#fff/, rel);
+      assert.match(html, /\.follow-tiktok,\.follow-email\{[^}]*color:#1b1f24 !important/, rel);
+      assert.match(html, /\.follow-tiktok,\.follow-email\{[^}]*border:1px solid #dde1e6/, rel);
+      assert.equal(/\.follow-email\{[^}]*linear-gradient/.test(html), false, rel);
+      assert.equal(/\.follow-bar\{[^}]*#00d8ff/.test(html), false, rel);
+    } else {
+      assert.match(html, /\.follow-tiktok\{[^}]*background:#0c1520/, rel);
+      assert.match(html, /\.follow-tiktok\{[^}]*border:1px solid #00d8ff/, rel);
+      assert.match(html, /\.follow-email\{[^}]*background:linear-gradient\(135deg,#22c55e 0%,#4ade80 100%\)/, rel);
+      assert.match(html, /\.follow-email\{[^}]*color:#01060b !important/, rel);
+      assert.match(html, /\.follow-bar\{[^}]*background:#01060b/, rel);
+    }
     const tags = [...html.matchAll(/<a\b[^>]*class="follow-tiktok"[^>]*>/g)].map((match) => match[0]);
     assert.equal(tags.length, copies, rel);
     for (const tag of tags) {

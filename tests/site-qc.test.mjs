@@ -44,7 +44,7 @@ function linkedCss(html, filePath) {
   return css;
 }
 
-test("every #signup section is the full FMP weekly update with a green pill button", () => {
+test("every #signup section is the full FMP weekly update with its signup button", () => {
   const pages = walk(ROOT, []).filter((file) => /<section\b[^>]*class="signup"[^>]*id="signup"/.test(readFileSync(file, "utf8")));
   const rels = pages.map((file) => path.relative(ROOT, file)).sort();
   assert.ok(rels.includes("deadlines/index.html"), rels.join(", "));
@@ -86,9 +86,17 @@ test("every #signup section is the full FMP weekly update with a green pill butt
       for (const phrase of LINEUP) assert.ok(section.includes(phrase), rel + " missing " + phrase);
       assert.equal(/Deadlines This Week|weekly deadline email/i.test(section), false, rel);
       const css = linkedCss(html, file);
-      assert.match(css, /#signup a\.signup-cta\s*\{[^}]*background:\s*linear-gradient\(135deg,\s*#22c55e\s*0%,\s*#4ade80\s*100%\)/s, rel);
-      assert.match(css, /#signup a\.signup-cta\s*\{[^}]*color:\s*#02060f/s, rel);
-      assert.match(css, /#signup a\.signup-cta\s*\{[^}]*border-radius:\s*999px/s, rel);
+      if (rel === "tools/amazon-2027-fee-check/index.html") {
+        assert.match(css, /#signup a\.signup-cta\s*\{[^}]*background:\s*#f6f7f9/s, rel);
+        assert.match(css, /#signup a\.signup-cta\s*\{[^}]*color:\s*#1b1f24/s, rel);
+        assert.match(css, /#signup a\.signup-cta\s*\{[^}]*border:\s*1px solid #dde1e6/s, rel);
+        assert.match(css, /#signup a\.signup-cta\s*\{[^}]*border-radius:\s*8px/s, rel);
+        assert.equal(/#signup a\.signup-cta\s*\{[^}]*linear-gradient/s.test(css), false, rel);
+      } else {
+        assert.match(css, /#signup a\.signup-cta\s*\{[^}]*background:\s*linear-gradient\(135deg,\s*#22c55e\s*0%,\s*#4ade80\s*100%\)/s, rel);
+        assert.match(css, /#signup a\.signup-cta\s*\{[^}]*color:\s*#02060f/s, rel);
+        assert.match(css, /#signup a\.signup-cta\s*\{[^}]*border-radius:\s*999px/s, rel);
+      }
       assert.match(css, /font-weight:\s*800/, rel);
       from = at + 'id="signup"'.length;
     }
