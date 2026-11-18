@@ -44,7 +44,8 @@ test("the page is indexable and cites the official Amazon pages", () => {
   assert.match(html, /not a 2027 fee calculator/);
   assert.match(html, /It does not calculate 2027 fees/);
   assert.match(html, /It only helps if Amazon asks you for a \$1 million liability certificate\./);
-  assert.match(html, /Separate rule since November 2: has Amazon asked you for a \$1 million liability certificate\?/);
+  assert.match(html, /Separate insurance rule, updated November 2: has Amazon asked you for a \$1 million liability certificate\?/);
+  assert.match(html, /Free certificate check<\/a> for the separate insurance rule\. Amazon's rule can apply before Amazon asks: if your Amazon\.com gross proceeds pass USD 10,000 in a month, or you list products in a category with enhanced safety listing requirements\./);
   assert.match(html, /<button type="button" id="bridge-yes"[^>]*aria-expanded="false"[^>]*aria-controls="bridge-yes-panel"[^>]*data-goatcounter-click="cta\/fee-check-bridge-yes"/);
   assert.match(html, /<button type="button" id="bridge-unsure"[^>]*aria-expanded="false"[^>]*aria-controls="bridge-unsure-panel"[^>]*data-goatcounter-click="cta\/fee-check-bridge-unsure"/);
   assert.match(html, /data-goatcounter-click="cta\/amazon-2027-fee-check-result-bridge"/);
@@ -121,7 +122,7 @@ test("none apply and some apply at phone and desktop widths", async () => {
       assert.match(text, /older than 271 days/);
       assert.equal(await page.locator("#result-hits article").count(), 3, width + " some apply");
       assert.equal(await page.locator("#result-bridge").isVisible(), true, width + " question");
-      assert.equal(await page.locator("#bridge-question").innerText(), "Separate rule since November 2: has Amazon asked you for a $1 million liability certificate?");
+      assert.equal(await page.locator("#bridge-question").innerText(), "Separate insurance rule, updated November 2: has Amazon asked you for a $1 million liability certificate?");
       assert.equal(await page.locator("#bridge-yes").evaluate((el) => el.tagName), "BUTTON", width);
       assert.equal(await page.locator("#bridge-unsure").evaluate((el) => el.tagName), "BUTTON", width);
       assert.equal(await page.locator("#bridge-yes").innerText(), "Yes");
@@ -196,7 +197,7 @@ test("none apply and some apply at phone and desktop widths", async () => {
       assert.equal(coi.searchParams.get("utm_content"), "result-bridge-unsure");
       assert.equal(await page.getAttribute("#bridge-unsure-email", "href"), "/deadlines/#signup");
       assert.match(await page.locator("#bridge-unsure-panel").innerText(), /Get Free Email Deadline Reminders/);
-      assert.match(await page.locator("#bridge-unsure-panel").innerText(), /for the separate November 2 insurance rule\./);
+      assert.match(await page.locator("#bridge-unsure-panel").innerText(), /for the separate insurance rule\. Amazon's rule can apply before Amazon asks: if your Amazon\.com gross proceeds pass USD 10,000 in a month, or you list products in a category with enhanced safety listing requirements\./);
       assert.equal(await page.locator("#bridge-question").evaluate((el) => el.offsetTop), questionTop, width + " unsure shift");
       await scrollOk("unsure");
       const unsureEvents = await page.evaluate(() => window.__gc.slice());
