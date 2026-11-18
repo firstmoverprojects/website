@@ -43,7 +43,8 @@ const PAGES = [
       "below 28 days of supply",
       "This page does not restate those rates"
     ],
-    mustNot: ["3.5%", "upfront fee", "inbound placement fee"]
+    mustNot: ["3.5%", "upfront fee", "inbound placement fee"],
+    dateModified: "2026-11-18"
   },
   {
     file: "deadlines/loom-creator-lite-deprecation.html",
@@ -139,7 +140,7 @@ test("FAQPage JSON matches the visible questions and answers", () => {
     const blocks = [...html.matchAll(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/g)].map((block) => JSON.parse(block[1]));
     const faq = blocks.find((item) => item["@type"] === "FAQPage");
     assert.ok(faq, page.file);
-    assert.equal(faq.dateModified, "2026-11-11");
+    assert.equal(faq.dateModified, page.dateModified || "2026-11-11");
     const visible = html.slice(html.indexOf('id="faq-h"'), html.indexOf('id="src-h"'));
     const questions = [...visible.matchAll(/<summary>([\s\S]*?)<\/summary>\s*<p>([\s\S]*?)<\/p>/g)];
     assert.equal(questions.length, faq.mainEntity.length, page.file);
