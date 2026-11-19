@@ -1,8 +1,8 @@
 // Product JSON-LD for paid kits linked from tool pages.
 // Prices, names, and descriptions must already be on the page (or a data file it loads).
-// Google merchant listing required fields: Product name, image when a real preview
-// file is mapped for that product, Offer price and priceCurrency. The preview may
-// be rendered on a sibling page. Availability, offer URL, and seller are included
+// Google merchant listing required fields: Product name, image, Offer price and
+// priceCurrency. Every Product needs a mapped preview file. The preview may be
+// rendered on a sibling page. Availability, offer URL, and seller are included
 // so a shopping assistant can read the kit and the price.
 import assert from "node:assert/strict";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
@@ -32,8 +32,27 @@ const PREVIEW = {
   lykya: "/assets/previews/after-hours-gap-kit-preview-1280x720.png",
   cybqmi: "/assets/previews/after-hours-gap-kit-preview-1280x720.png",
   ykxxot: "/assets/previews/after-hours-gap-kit-preview-1280x720.png",
-  fretzy: "/assets/previews/after-hours-gap-kit-preview-1280x720.png"
+  fretzy: "/assets/previews/after-hours-gap-kit-preview-1280x720.png",
+  qzkgfo: "/assets/previews/income-expense-workbook-preview-1280x720.png",
+  ppuaxu: "/assets/previews/rfq-price-match-guard-preview-1280x720.png",
+  itdkk: "/assets/previews/contact-collision-checker-preview-1280x720.png",
+  zpgoi: "/assets/previews/inventory-count-reconciliation-preview-1280x720.png",
+  itxqj: "/assets/previews/ai-answer-audit-pack-preview-1280x720.png",
+  "multimodal-search-report-template": "/assets/previews/multimodal-search-report-preview-1280x720.png",
+  "intakebay-hvac": "/assets/previews/intakebay-hvac-preview-1280x720.png",
+  "windows-server-2016-end-of-support-kit": "/assets/previews/windows-server-2016-checklist-preview-1280x720.png"
 };
+// These eight had no image. Each file is specific to that product.
+const OWN_PREVIEW = [
+  "qzkgfo",
+  "ppuaxu",
+  "itdkk",
+  "zpgoi",
+  "itxqj",
+  "multimodal-search-report-template",
+  "intakebay-hvac",
+  "windows-server-2016-end-of-support-kit"
+];
 // The roofing capture kit (wymols) was retired in late October 2026 and has no
 // current replacement listing. Do not describe it as a product.
 UNPUBLISHED.add("wymols");
@@ -191,12 +210,12 @@ test("live paid-kit links on tool pages have Product offers, and the unpublished
       assert.ok(facts.includes(flat(product.name)), `${rel} name is not on the page: ${product.name}`);
       assert.ok(facts.includes(flat(product.description)), `${rel} description is not on the page: ${product.description}`);
       const preview = PREVIEW[slug];
-      const previewFile = preview && existsSync(path.join(ROOT, preview.slice(1)));
-      if (previewFile) {
-        assert.equal(product.image, HOST + preview, `${rel} ${slug} image`);
-      } else {
-        assert.equal(product.image, undefined, `${rel} ${slug} has no preview asset`);
-      }
+      assert.equal(typeof preview, "string", `${rel} ${slug} needs an image`);
+      assert.equal(preview.startsWith("/assets/previews/"), true, `${rel} ${slug} image path`);
+      assert.equal(existsSync(path.join(ROOT, preview.slice(1))), true, `${rel} ${slug} preview file missing`);
+      assert.equal(typeof product.image, "string", `${rel} ${slug} image`);
+      assert.equal(product.image.length > 0, true, `${rel} ${slug} image`);
+      assert.equal(product.image, HOST + preview, `${rel} ${slug} image`);
       const serialized = JSON.stringify(product);
       for (const phrase of BANNED) assert.equal(phrase.test(serialized), false, `${rel} ${slug} ${phrase}`);
       forbidKeys(product, `${rel} ${slug}`);
@@ -205,5 +224,15 @@ test("live paid-kit links on tool pages have Product offers, and the unpublished
       assert.equal(UNPUBLISHED.has(slug), false, slug);
       assert.ok(slugs.includes(slug), `${rel} Product ${slug} has no buy link on the page`);
     }
+  }
+});
+
+test("the eight new product previews are real files and are not reused", () => {
+  const files = OWN_PREVIEW.map((slug) => PREVIEW[slug]);
+  assert.equal(new Set(files).size, files.length);
+  for (const file of files) {
+    assert.equal(existsSync(path.join(ROOT, file.slice(1))), true, file);
+    const others = Object.entries(PREVIEW).filter((entry) => entry[1] === file && !OWN_PREVIEW.includes(entry[0]));
+    assert.deepEqual(others, [], file);
   }
 });
