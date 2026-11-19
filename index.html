@@ -175,7 +175,7 @@ summary:focus-visible {
             <p id="tiktok-jump-h" class="tiktok-jump-label">Came from TikTok, Reels, or Shorts? Tap the rule change you watched:</p>
             <div class="tiktok-jump-row">
               <a class="tiktok-chip" href="/tools/eu-product-id-check/"><span class="tiktok-when">Sun, Nov 1</span><span class="tiktok-what">EU &lt;= EUR 150 Product IDs</span></a>
-              <a class="tiktok-chip" href="/tools/fire-to-iris-check/"><span class="tiktok-when">Sun, Nov 1 / Nov 19</span><span class="tiktok-what">IRS FIRE-to-IRIS 1099 Cutoff</span></a>
+              <a class="tiktok-chip" href="/tools/fire-to-iris-check/"><span class="tiktok-when" id="fire-chip-when">Sun, Nov 1 / Nov 19</span><span class="tiktok-what" id="fire-chip-what">IRS FIRE-to-IRIS 1099 Cutoff</span></a>
               <a class="tiktok-chip" href="/tools/amazon-coi-check/"><span class="tiktok-when">Mon, Nov 2</span><span class="tiktok-what">Amazon $1M Insurance (3-Month Rule)</span></a>
               <a class="tiktok-chip" href="/tools/etsy-photo-audit-check/"><span class="tiktok-what">Etsy Unedited Real-Photo Rule</span></a>
               <a class="tiktok-chip" href="/tools/custom-gpt-retirement-checker/"><span class="tiktok-when">Fri, Dec 11</span><span class="tiktok-what">OpenAI Custom GPT Retirement</span></a>
@@ -475,6 +475,17 @@ summary:focus-visible {
   patchAll(landingSource());
   document.addEventListener("click", onClick, true);
   document.addEventListener("auxclick", onClick, true);
+})();
+</script>
+<script id="fmp-fire-chip">
+(function () {
+  "use strict";
+  var CUTOFF = Date.UTC(2026, 10, 19, 20, 0, 0);
+  if (new Date().getTime() < CUTOFF) return;
+  var when = document.getElementById("fire-chip-when");
+  var what = document.getElementById("fire-chip-what");
+  if (when) when.textContent = "Nov 19, 2026";
+  if (what) what.textContent = "FIRE closed for filing on Nov 19, 2026, at 3 p.m. ET";
 })();
 </script>
 </body>
