@@ -27,7 +27,22 @@ test("the page is indexable and cites the official Amazon pages", () => {
   assert.match(html, /https:\/\/sellercentral\.amazon\.com\/seller-forums\/discussions\/t\/da850a57-839d-4e38-a96f-298dbc450b69/);
   assert.match(html, /https:\/\/sellercentral\.amazon\.com\/help\/hub\/reference\/external\/G201411300/);
   assert.match(html, /https:\/\/sellercentral\.amazon\.com\/help\/hub\/reference\/external\/G200442350/);
-  assert.match(html, /It lists more changes this check doesn't repeat\. Those include referral-fee, per-size fulfillment, storage, and "Buy X, Get Y" details\. This check does not guess those numbers\./);
+  assert.match(html, /It lists more changes this check doesn't repeat as dollar rates\. Those include referral-fee percents, weight-by-weight fulfillment prices, storage dollar rates, and "Buy X, Get Y" details\. This check does not guess those numbers\. The per-unit illustrations use only the averages on the Global Selling notice above\./);
+  assert.match(html, /<h3 id="per-unit-h">What it looks like per unit<\/h3>/);
+  assert.match(html, /Illustrations of averages Amazon published for a size and price group\. They are not your product's fee, and they are not advice\./);
+  assert.match(html, /Small standard-size item, selling price \$10 to \$50: the average fulfillment fee is \$0\.40 more per unit, from January 15, 2027\./);
+  assert.match(html, /Large standard-size item, selling price \$10 to \$50: the average fulfillment fee is \$0\.12 more per unit, from January 15, 2027\./);
+  assert.match(html, /Large standard-size item that is not apparel, selling price under \$10: the average fulfillment fee stays the same, from January 15, 2027\./);
+  assert.match(html, /The pages checked do not list a dollar rate for that change, so this block has no aged-storage dollar example\./);
+  assert.match(html, /<a id="per-unit-revcal" href="https:\/\/sellercentral\.amazon\.com\/revcal">FBA Revenue Calculator<\/a>/);
+  assert.match(html, /<p class="muted" id="per-unit-checked">Checked November 19, 2026\. Averages: <a href="https:\/\/globalselling\.amazon\.com\/news\/news-notics-261105">Amazon Global Selling notice, 2027 US referral and FBA fee changes<\/a>/);
+  assert.match(html, /from February 1, 2027 that current surcharge applies to Amazon Warehousing and Distribution \(AWD\) transportation fees\./);
+  assert.equal(html.includes("Multi-Channel Fulfillment transport"), false);
+  const perUnitAt = html.indexOf('id="per-unit"');
+  const bridgeAt = html.indexOf('id="result-bridge"');
+  const kitAt = html.indexOf('id="result-bridge-link"');
+  assert.ok(perUnitAt > 0 && bridgeAt > perUnitAt && kitAt > bridgeAt, "per-unit block stays before the certificate bridge and kit link");
+  assert.match(html, /"price": 19/);
   assert.match(html, /That policy page does not show the January 11 date, so this check uses the notice wording for the date\./);
   assert.equal(/login/i.test(html), false);
   assert.match(html, /Show what applies to me/);
@@ -57,7 +72,7 @@ test("the page is indexable and cites the official Amazon pages", () => {
   assert.equal(html.includes("\u2014") || html.includes("\u2013"), false);
   const sitemap = readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
   const feeBlock = sitemap.split("https://firstmoverprojects.com/tools/amazon-2027-fee-check/")[1] || "";
-  assert.match(feeBlock.slice(0, 120), /<lastmod>2026-11-16<\/lastmod>/);
+  assert.match(feeBlock.slice(0, 120), /<lastmod>2026-11-19<\/lastmod>/);
   const tools = readFileSync(path.join(ROOT, "tools/index.html"), "utf8");
   assert.match(tools, /changes Amazon has published that apply to that setup/);
   assert.equal(tools.includes("that hit that setup"), false);
@@ -92,6 +107,7 @@ test("none apply and some apply at phone and desktop widths", async () => {
       await blockExternalOnPage(page);
       await page.goto(pathToFileURL(path.join(ROOT, REL)).href, { waitUntil: "load" });
       assert.equal(await page.locator("#results").isHidden(), true, width + " before");
+      assert.equal(await page.locator("#per-unit").isHidden(), true, width + " per-unit before");
       assert.equal(await page.locator("#result-bridge").isHidden(), true, width + " bridge before");
 
       assert.equal(await page.locator("#go").innerText(), "Show what applies to me");
@@ -99,6 +115,16 @@ test("none apply and some apply at phone and desktop widths", async () => {
       await page.locator("#results").waitFor({ state: "visible" });
       assert.equal(await page.locator("#result-headline").innerText(), "None of these changes apply to you.");
       assert.equal(await page.locator("#result-hits article").count(), 0, width + " none apply");
+      assert.equal(await page.locator("#per-unit").isVisible(), true, width + " per-unit none");
+      assert.equal(await page.locator("#per-unit-h").innerText(), "What it looks like per unit");
+      assert.match(await page.locator("#per-unit").innerText(), /\$0\.40 more per unit/);
+      assert.match(await page.locator("#per-unit").innerText(), /\$0\.12 more per unit/);
+      assert.match(await page.locator("#per-unit").innerText(), /stays the same/);
+      assert.match(await page.locator("#per-unit").innerText(), /not advice/);
+      assert.match(await page.locator("#per-unit").innerText(), /no aged-storage dollar example/);
+      assert.equal(await page.locator("#per-unit-revcal").innerText(), "FBA Revenue Calculator");
+      assert.equal(await page.getAttribute("#per-unit-revcal", "href"), "https://sellercentral.amazon.com/revcal");
+      assert.match(await page.locator("#per-unit-checked").innerText(), /Checked November 19, 2026/);
       assert.equal(await page.locator("#result-bridge").isHidden(), true, width + " none bridge");
       const noneScroll = await page.evaluate(() => ({
         sw: document.documentElement.scrollWidth,
@@ -107,6 +133,7 @@ test("none apply and some apply at phone and desktop widths", async () => {
       assert.equal(noneScroll.sw, noneScroll.cw, width + " none " + JSON.stringify(noneScroll));
       if (SHOTS) {
         await page.locator("#results").screenshot({ path: path.join(SHOTS, "amazon-2027-fee-none-" + width + ".png") });
+        await page.locator("#per-unit").screenshot({ path: path.join(SHOTS, "amazon-2027-fee-per-unit-" + width + ".png") });
       }
 
       await page.locator("#fba").check();
@@ -247,6 +274,25 @@ test("none apply and some apply at phone and desktop widths", async () => {
       assert.deepEqual(errors, [], width);
       await page.close();
     }
+
+    const narrow = await browser.newPage({ viewport: { width: 375, height: 900 } });
+    await blockExternalOnPage(narrow);
+    await narrow.goto(pathToFileURL(path.join(ROOT, REL)).href, { waitUntil: "load" });
+    await narrow.locator("#fba").check();
+    await narrow.locator("#go").click();
+    await narrow.locator("#per-unit").waitFor({ state: "visible" });
+    const narrowScroll = await narrow.evaluate(() => ({
+      sw: document.documentElement.scrollWidth,
+      cw: document.documentElement.clientWidth
+    }));
+    assert.equal(narrowScroll.sw, narrowScroll.cw, "375 " + JSON.stringify(narrowScroll));
+    const revcalBox = await narrow.locator("#per-unit-revcal").boundingBox();
+    assert.ok(revcalBox && revcalBox.width > 0 && revcalBox.x >= 0, "375 calculator link");
+    assert.ok(revcalBox.x + revcalBox.width <= 375 + 1, "375 calculator link inside viewport");
+    if (SHOTS) {
+      await narrow.locator("#per-unit").screenshot({ path: path.join(SHOTS, "amazon-2027-fee-per-unit-375.png") });
+    }
+    await narrow.close();
 
     const page = await browser.newPage();
     await blockExternalOnPage(page);
