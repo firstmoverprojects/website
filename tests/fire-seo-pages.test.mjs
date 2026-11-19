@@ -89,7 +89,12 @@ test("FAQPage JSON matches the visible questions and the kit sections have no Pr
     assert.ok(faq, rel);
     assert.equal(faq.dateModified, rel === "deadlines/file-1099-nec-2027-iris.html" ? "2026-11-09" : "2026-11-05");
     const visible = html.slice(html.indexOf('id="faq-h"'), html.indexOf('id="src-h"'));
-    const questions = [...visible.matchAll(/<summary>([\s\S]*?)<\/summary>\s*<p>([\s\S]*?)<\/p>/g)];
+    const questions = [...visible.matchAll(/<summary>([\s\S]*?)<\/summary>\s*<p>([\s\S]*?)<\/p>/g)]
+      .filter((item) => item[1] !== "What is in the $9 checklist?");
+    assert.equal(faq.mainEntity.some((item) => item.name === "What is in the $9 checklist?"), false, rel);
+    if (html.includes("What is in the $9 checklist?")) {
+      assert.match(html, /<details data-fire-kit="1">\s*<summary>What is in the \$9 checklist\?<\/summary>/, rel);
+    }
     assert.equal(questions.length, faq.mainEntity.length, rel);
     faq.mainEntity.forEach((item, i) => {
       assert.equal(item.name, questions[i][1], rel);

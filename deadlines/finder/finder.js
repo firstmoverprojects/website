@@ -44,14 +44,19 @@
     var ps = a.querySelector(".past-sum");
     if (ps && late && it.past_summary_late) ps.textContent = it.past_summary_late;
     var lis = a.querySelectorAll("ul.kd li");
+    var nov19Cutoff = Date.UTC(2026, 10, 19, 20, 0, 0);
+    function keyPassed(k) {
+      if (k.date === "2026-11-19") return now.getTime() >= nov19Cutoff;
+      return k.date < today;
+    }
     it.key_dates.forEach(function (k, i) {
-      if (lis[i] && k.date < today && lis[i].className !== "past") {
+      if (lis[i] && keyPassed(k) && lis[i].className !== "past") {
         lis[i].className = "past";
         lis[i].querySelector("strong").textContent = "passed on " + k.label;
       }
     });
     var act = a.querySelector(".act");
-    var future = it.key_dates.filter(function (k) { return k.date >= today; });
+    var future = it.key_dates.filter(function (k) { return !keyPassed(k); });
     var nx = a.querySelector(".chip:not(.chip--past)");
     if (nx && future.length) nx.textContent = "Next: " + future[0].label;
     if (act && future.length) {
