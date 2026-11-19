@@ -15,6 +15,7 @@ const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
 const HOST = "firstmoverprojects.com";
 const SHOP = "firstmoverprojects.gumroad.com";
 const VIEWPORT = { width: 390, height: 844 };
+const FIRE_ENDED = "FIRE filing ended Nov 19, 2026 at 3 p.m. ET.";
 
 // Landing buy button. On Etsy, #kit-result is inside hidden #results until the
 // visitor runs the check, so the button on first paint is #gtin-checkout.
@@ -26,7 +27,10 @@ const OFFERS = [
     route: "/tools/fire-to-iris-check/",
     file: "tools/fire-to-iris-check/index.html",
     slug: "fire-to-iris-switch-checklist",
-    cta: "#kit-top"
+    cta: "#kit-top",
+    // After Nov 19, 2026, 20:00 UTC the page hides this button.
+    // FMP_FIRE_KIT_KEEP_SELLING stays false, so the 390px check must not scroll to it.
+    closedKit: true
   },
   {
     id: "amazon",
@@ -317,6 +321,48 @@ async function readCta(page, selector, slug) {
   };
 }
 
+// The FIRE kit button stays in the DOM and is hidden with its data-fire-kit parent.
+// scrollIntoViewIfNeeded would wait until that hidden button becomes visible.
+async function readClosedFireKit(page, offer) {
+  const problems = [];
+  const cta = page.locator(offer.cta);
+  const href = (await cta.count()) === 1 ? await cta.getAttribute("href") : "";
+  const buy = buyProblem(href || "", offer.slug);
+  if ((await cta.count()) !== 1) problems.push(`${offer.cta} is missing`);
+  else if (await cta.isVisible()) problems.push(`${offer.cta} is visible`);
+  if (buy) problems.push(`${offer.cta} ${buy}`);
+  const visibleBuys = await page.locator("a[href*='gumroad.com']").evaluateAll((links) => {
+    function shown(el) {
+      for (let node = el; node && node.nodeType === 1; node = node.parentElement) {
+        if (node.hidden) return false;
+        const style = getComputedStyle(node);
+        if (style.display === "none" || style.visibility === "hidden") return false;
+      }
+      return true;
+    }
+    return links.filter(shown).map((el) => el.getAttribute("href") || "");
+  });
+  if (visibleBuys.length) problems.push(`visible FIRE Gumroad buy link: ${visibleBuys.join(", ")}`);
+  const answer = page.locator("#aeo-answer");
+  const answerText = ((await answer.count()) === 1 ? await answer.innerText() : "").replace(/\s+/g, " ").trim();
+  if ((await answer.count()) !== 1 || !(await answer.isVisible()) || !answerText.includes(FIRE_ENDED)) {
+    problems.push(`missing past-tense FIRE filing ended copy: ${answerText}`);
+  }
+  const keepSelling = await page.evaluate(() => window.FMP_FIRE_KIT_KEEP_SELLING);
+  if (keepSelling !== false) problems.push(`FMP_FIRE_KIT_KEEP_SELLING is ${keepSelling}`);
+  return {
+    problems,
+    detail: {
+      selector: offer.cta,
+      href,
+      visible: false,
+      visibleGumroad: visibleBuys,
+      endedCopy: answerText.includes(FIRE_ENDED),
+      keepSelling
+    }
+  };
+}
+
 before(async () => {
   const started = await startServer();
   server = started.server;
@@ -436,7 +482,7 @@ test("the Etsy inline weekly email form fields are present", () => {
   writeReport();
 });
 
-test("a 390px render has no horizontal overflow and shows the primary CTA", { timeout: 120000 }, async () => {
+test("a 390px render has no horizontal overflow, hides the FIRE kit, and shows the other primary CTAs", { timeout: 120000 }, async () => {
   const dir = screenshotDir();
   mkdirSync(dir, { recursive: true });
   const problems = [];
@@ -475,7 +521,9 @@ test("a 390px render has no horizontal overflow and shows the primary CTA", { ti
         const landingProblem = overflowProblem(landing, `${offer.name} at 390px`);
         if (landingProblem) problems.push(landingProblem);
         await page.screenshot({ path: path.join(dir, `${offer.id}-390.png`), fullPage: true });
-        const cta = await readCta(page, offer.cta, offer.slug);
+        const cta = offer.closedKit
+          ? await readClosedFireKit(page, offer)
+          : await readCta(page, offer.cta, offer.slug);
         for (const problem of cta.problems) problems.push(`${offer.name}: ${problem}`);
         await page.screenshot({ path: path.join(dir, `${offer.id}-390-cta.png`) });
 
