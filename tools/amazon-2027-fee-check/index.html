@@ -127,6 +127,11 @@ a,p,li,label,legend,h1,h2,h3{overflow-wrap:anywhere}
 #result-bridge-link{display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:100%;max-width:100%;min-height:48px;margin:8px 0 0;padding:12px;background:#0055ff;color:#fff;font-weight:800;line-height:1.3;text-align:center;text-decoration:none;border-radius:8px;white-space:normal;overflow-wrap:anywhere}
 #result-bridge-link:hover,#result-bridge-link:focus{background:#0044cc;color:#fff}
 #result-bridge-free{margin-bottom:0;color:#071b31;font-size:.92rem}
+.per-unit{box-sizing:border-box;max-width:100%;margin:16px 0 0;padding:16px 0 0;border:0;border-top:1px solid #dde1e6;border-radius:0;background:transparent;overflow-wrap:anywhere}
+.per-unit h3{margin-top:0}
+.per-unit ul{margin:.4em 0;padding-left:1.2rem}
+.per-unit li{margin:.45em 0}
+.per-unit a{text-decoration:underline}
 .bridge-answers{display:flex;flex-wrap:wrap;gap:8px;max-width:100%;margin-top:8px}
 .bridge-answers button{flex:1 1 9rem;margin:0;min-width:0;min-height:48px}
 .bridge-answers button[aria-expanded="true"]{box-shadow:inset 0 0 0 3px #071b31}
@@ -214,6 +219,18 @@ html.fmp-embed .site-nav{display:none !important}
 <p id="result-headline"></p>
 <div id="result-hits"></div>
 <div id="result-notes"></div>
+<div id="per-unit" class="per-unit">
+<h3 id="per-unit-h">What it looks like per unit</h3>
+<p>For FBA sellers: these are average fulfillment-fee changes Amazon published for each size and price group, shown as illustrations. They are not your product's fee and not advice. Your item's change depends on its exact size tier, weight and price, and Amazon says a single product can differ from its group's average. These group averages cannot be added to the $0.19 overall average. For your own number, use Amazon's FBA Revenue Calculator below.</p>
+<ul>
+<li>Small standard-size item, selling price $10 to $50: the average fulfillment fee is $0.40 more per unit, from January 15, 2027.</li>
+<li>Large standard-size item, selling price $10 to $50: the average fulfillment fee is $0.12 more per unit, from January 15, 2027.</li>
+<li>Large standard-size item that is not apparel, selling price under $10: the average fulfillment fee stays the same, from January 15, 2027.</li>
+</ul>
+<p>Aged inventory costs more from February 1, 2027, according to Amazon's November 5, 2026 letter. The pages checked do not list a dollar rate for that change, so this block has no aged-storage dollar example.</p>
+<p>Run your own ASIN in Amazon's <a id="per-unit-revcal" href="https://sellercentral.amazon.com/revcal">FBA Revenue Calculator</a>.</p>
+<p class="muted" id="per-unit-checked">Checked November 18, 2026. Averages: <a href="https://globalselling.amazon.com/news/news-notics-261105">Amazon Global Selling notice (in Chinese), 2027 US referral and FBA fee changes</a>. Overall average and the aged-storage wording: <a href="https://sellingpartners.aboutamazon.com/update-to-us-referral-and-fulfillment-by-amazon-fees-for-2027">Amazon Selling Partners letter, November 5, 2026</a>.</p>
+</div>
 <div id="result-bridge" class="result-bridge" data-kit-what="checklists for Amazon's $1 million liability certificate, not a 2027 fee calculator" hidden>
 <p id="result-bridge-meaning">Your check result is ready.</p>
 <p id="bridge-question">Separate insurance rule, updated November 2: has Amazon asked you for a $1 million liability certificate?</p>
@@ -247,8 +264,9 @@ html.fmp-embed .site-nav{display:none !important}
 <p id="last-checked">Last checked November 16, 2026.</p>
 <ul>
 <li><a href="https://sellingpartners.aboutamazon.com/update-to-us-referral-and-fulfillment-by-amazon-fees-for-2027">Amazon Selling Partners letter, November 5, 2026: Update to US Referral and Fulfillment by Amazon fees for 2027</a>. Confirmed: most changes on January 15, 2027; average FBA fulfillment fee up $0.19 per unit; storage changes on February 1, 2027; low-inventory test on February 1. The letter links the <a href="https://sellercentral.amazon.com/manage/scenario-modeling?id=2027_ANNUAL_FEE_CHANGE">Fee Change Comparison dashboard</a>, <a href="https://sellercentral.amazon.com/economics">Profit Analytics</a>, and the <a href="https://sellercentral.amazon.com/revcal">Revenue Calculator</a>.</li>
+<li><a href="https://globalselling.amazon.com/news/news-notics-261105">Amazon Global Selling notice (in Chinese): 2027 US referral and FBA fee changes</a>. The page shows the date October 5, 2026, but it describes the same changes as Amazon's November 5, 2026 letter. Checked November 18, 2026. It states the average fulfillment-fee changes in the per-unit illustrations: small standard-size at $10 to $50 is $0.40 more per unit, large standard-size at $10 to $50 is $0.12 more per unit, and large standard-size non-apparel under $10 stays the same. It also says the FBA fuel and logistics surcharge stays at 3.5%, and that from February 1, 2027 that current surcharge applies to Amazon Warehousing and Distribution (AWD) transportation fees.</li>
 <li><a href="https://sellercentral.amazon.com/seller-forums/discussions/t/da850a57-839d-4e38-a96f-298dbc450b69">Amazon seller notice: New requirements for product bundles starting January 11</a>. Confirmed: January 11, 2027 packing rule for bundles listed as one product. The notice points to the <a href="https://sellercentral.amazon.com/help/hub/reference/external/G200442350">Product bundling policy</a>. That policy page does not show the January 11 date, so this check uses the notice wording for the date.</li>
-<li><a href="https://sellercentral.amazon.com/help/hub/reference/external/G201411300">Seller Central: 2027 US Referral and Fulfillment by Amazon fees</a>. It lists more changes this check doesn't repeat. Those include referral-fee, per-size fulfillment, storage, and "Buy X, Get Y" details. This check does not guess those numbers.</li>
+<li><a href="https://sellercentral.amazon.com/help/hub/reference/external/G201411300">Seller Central: 2027 US Referral and Fulfillment by Amazon fees</a>. It lists more changes this check doesn't repeat as dollar rates. Those include referral-fee percents, weight-by-weight fulfillment prices, storage dollar rates, and "Buy X, Get Y" details. This check does not guess those numbers. The per-unit illustrations use only the averages on the Global Selling notice above.</li>
 </ul>
 <p>Background write-up: <a href="/deadlines/amazon-fba-fees-2027.html">What Amazon sellers should check about the 2027 FBA fee changes</a>.</p>
 <p>The separate Amazon $1M Insurance Readiness Kit is not a fee calculator. A downloadable ZIP of checklists and templates for Amazon's $1 million commercial liability certificate. It does not calculate 2027 fees. The buy button appears only after you say you sell with FBA and that Amazon has asked you for a $1 million liability certificate.</p>
