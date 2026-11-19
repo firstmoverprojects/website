@@ -14,7 +14,7 @@
   function idesCarve(it, text) {
     if (!it || it.id !== "irs-fire" || !text || text.indexOf("use IDES") !== -1) return text;
     var clause = ", and IRIS will be the only e-file system for information returns after Jan. 1, 2027.";
-    var next = ". After Jan 1, 2027, IRIS is the IRS e-file system for information returns" + IDES + ".";
+    var next = ". In January 2027, IRIS replaces FIRE for the information returns FIRE handled" + IDES + ".";
     if (text.indexOf(clause) !== -1) return text.replace(clause, next);
     if (text.indexOf("only") === -1) return text;
     return text.replace(/\.\s*$/, IDES + ".");
