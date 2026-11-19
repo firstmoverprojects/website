@@ -27,6 +27,11 @@ const LEADS = {
   E: "You still have a step to finish. The checklist puts the IRS dates, IRIS TCC steps and a 1099-NEC add-on in one printable list.",
   F: "You look on track from what you checked. Most people in your spot don't need to buy anything. If you'd like 2027 prep and the IRS dates on one printable list, the checklist is optional."
 };
+const BEFORE_CUTOFF = "2026-11-19T19:59:59.000Z";
+const AFTER_CUTOFF = "2026-11-19T20:05:00.000Z";
+const FIRE_ENDED = "FIRE filing ended Nov 19, 2026 at 3 p.m. ET.";
+const IRIS_GUIDANCE = "The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS.";
+
 const PROBLEMS = {
   A: "A provider may file your 1099 forms. Ask them to confirm they will file through IRIS after Jan 1, 2027.",
   B: "You still need a separate IRIS Application for TCC. FIRE filing ended Nov 19, 2026 at 3 p.m. ET.",
@@ -131,11 +136,14 @@ test("body, FAQ, badges, schema, alt text, and the sticky name the ZIP download"
 test("all six outcomes set the lead, offer, and gumroad click", async () => {
   const chromium = await importChromium();
   const browser = await chromium.launch(chromiumLaunchOptions());
+  try {
   const context = await browser.newContext({
     viewport: { width: 1280, height: 1400 },
     permissions: ["clipboard-read", "clipboard-write"]
   });
   const page = await context.newPage();
+  await page.clock.install({ time: new Date(BEFORE_CUTOFF) });
+  await page.clock.setFixedTime(new Date(BEFORE_CUTOFF));
   await blockExternalOnPage(page);
   const shots = process.env.FIRE_CTA_SHOTS;
   if (shots) mkdirSync(shots, { recursive: true });
@@ -316,6 +324,8 @@ test("all six outcomes set the lead, offer, and gumroad click", async () => {
   assert.equal(wide.sw, wide.cw);
 
   const tagged = await context.newPage();
+  await tagged.clock.install({ time: new Date(BEFORE_CUTOFF) });
+  await tagged.clock.setFixedTime(new Date(BEFORE_CUTOFF));
   await tagged.goto(pathToFileURL(PAGE).href + "?utm_source=tiktok", { waitUntil: "load" });
   await tagged.click("#go");
   const kept = await tagged.evaluate(() => {
@@ -328,5 +338,81 @@ test("all six outcomes set the lead, offer, and gumroad click", async () => {
   assert.equal(kept.source, "tiktok");
   assert.equal(kept.content, "fire-result-need-tcc");
 
-  await browser.close();
+  const closed = await context.newPage();
+  await closed.clock.install({ time: new Date(AFTER_CUTOFF) });
+  await closed.clock.setFixedTime(new Date(AFTER_CUTOFF));
+  await blockExternalOnPage(closed);
+  await closed.goto(pathToFileURL(PAGE).href, { waitUntil: "load" });
+  const answer = await closed.locator("#aeo-answer").innerText();
+  assert.equal(answer.includes(FIRE_ENDED), true);
+  assert.equal(answer.includes(IRIS_GUIDANCE), true);
+  assert.equal(await closed.locator("#kit-top").isVisible(), false);
+  assert.equal(await closed.locator("a[href*='gumroad.com']:visible").count(), 0);
+  assert.equal(await closed.evaluate(() => window.FMP_FIRE_KIT_KEEP_SELLING), false);
+  assert.equal(
+    await closed.locator("#deadline-reminder-h").innerText(),
+    "The FIRE deadline has passed. Get the weekly email for the next deadline"
+  );
+  async function closedBoxes(flags) {
+    await closed.evaluate((state) => {
+      document.getElementById("c-self").checked = state.self;
+      document.getElementById("c-iris-tcc").checked = state.iris;
+      document.getElementById("c-ir-changes").checked = state.ir;
+      document.getElementById("c-open-2026").checked = state.open;
+      document.getElementById("c-over100").checked = false;
+      document.getElementById("inp").value = state.csv;
+    }, flags);
+    await closed.click("#go");
+  }
+  await closedBoxes({ self: false, iris: true, ir: true, open: true, csv: "" });
+  let closedState = await closed.evaluate(() => {
+    const link = document.getElementById("kit-result");
+    const box = document.getElementById("provider-copy");
+    function shown(el) {
+      return !!(el && (el.offsetWidth || el.offsetHeight || el.getClientRects().length));
+    }
+    return {
+      problem: document.getElementById("result-problem").textContent,
+      lead: document.getElementById("result-kit-lead").textContent,
+      linkVisible: shown(link),
+      refundVisible: shown(document.getElementById("kit-refund")),
+      boxVisible: shown(box),
+      question: document.getElementById("provider-question").textContent,
+      gumroad: [...document.querySelectorAll("a[href*='gumroad.com']")].filter(shown).length
+    };
+  });
+  assert.equal(closedState.problem, PROBLEMS.A);
+  assert.equal(closedState.lead, LEADS.A);
+  assert.equal(closedState.boxVisible, true);
+  assert.equal(closedState.question, QUESTION);
+  assert.equal(closedState.linkVisible, false);
+  assert.equal(closedState.refundVisible, false);
+  assert.equal(closedState.gumroad, 0);
+  for (const item of shown) {
+    await closedBoxes(item.flags);
+    closedState = await closed.evaluate(() => {
+      const link = document.getElementById("kit-result");
+      function shownEl(el) {
+        return !!(el && (el.offsetWidth || el.offsetHeight || el.getClientRects().length));
+      }
+      return {
+        problem: document.getElementById("result-problem").textContent,
+        lead: document.getElementById("result-kit-lead").textContent,
+        linkVisible: shownEl(link),
+        refundVisible: shownEl(document.getElementById("kit-refund")),
+        boxVisible: shownEl(document.getElementById("provider-copy")),
+        gumroad: [...document.querySelectorAll("a[href*='gumroad.com']")].filter(shownEl).length
+      };
+    });
+    assert.equal(closedState.problem, PROBLEMS[item.key], item.key);
+    assert.equal(closedState.lead, LEADS[item.key], item.key);
+    assert.equal(closedState.boxVisible, false, item.key);
+    assert.equal(closedState.linkVisible, false, item.key);
+    assert.equal(closedState.refundVisible, false, item.key);
+    assert.equal(closedState.gumroad, 0, item.key);
+  }
+  await closed.close();
+  } finally {
+    await browser.close();
+  }
 });

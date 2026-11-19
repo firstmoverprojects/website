@@ -24,9 +24,16 @@ function toolNetwork(urls) {
   return urls.filter((url) => !/^https:\/\/(?:gc\.zgo\.at|firstmoverprojects\.goatcounter\.com)(?:[/?#]|$)/.test(url));
 }
 
-async function open(rel) {
+const BEFORE_CUTOFF = "2026-11-19T19:59:59.000Z";
+const AFTER_CUTOFF = "2026-11-19T20:05:00.000Z";
+
+async function open(rel, when) {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await blockExternalOnPage(page);
+  if (when) {
+    await page.clock.install({ time: new Date(when) });
+    await page.clock.setFixedTime(new Date(when));
+  }
   const errors = [];
   const nets = [];
   page.on("pageerror", (err) => errors.push(String(err)));
@@ -37,8 +44,9 @@ async function open(rel) {
   return { page, errors, nets };
 }
 
-async function assertReminder(page, eventPath, rel, heading) {
+async function assertReminder(page, eventPath, rel, heading, buttonText) {
   const label = heading || "Get a reminder before this deadline";
+  const submitLabel = buttonText || label;
   assert.equal(await page.locator("#results .deadline-reminder").isVisible(), true, rel);
   assert.equal(await page.locator("#result-cta #deadline-reminder-form").count(), 0, rel);
   assert.equal(await page.innerText("#deadline-reminder-h"), label, rel);
@@ -67,7 +75,7 @@ async function assertReminder(page, eventPath, rel, heading) {
     };
   });
   assert.equal(colors.heading, "rgb(12, 74, 110)", rel);
-  assert.equal(colors.button, label, rel);
+  assert.equal(colors.button, submitLabel, rel);
   assert.equal(colors.box, "rgb(240, 249, 255)", rel);
   assert.equal(colors.btnBg, "rgb(12, 74, 110)", rel);
   assert.equal(colors.btnColor, "rgb(255, 255, 255)", rel);
@@ -137,7 +145,23 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
       slug: "/l/fire-to-iris-switch-checklist",
       campaign: "fire-to-iris-check",
       resultContent: "fire-result-need-tcc",
-      reminder: "signup/fire-to-iris-check"
+      reminder: "signup/fire-to-iris-check",
+      when: AFTER_CUTOFF,
+      closedKit: true,
+      reminderHeading: "The FIRE deadline has passed. Get the weekly email for the next deadline",
+      reminderButton: "Get the weekly deadline email"
+    },
+    {
+      rel: "tools/fire-to-iris-check/index.html",
+      click: "#example",
+      problem: /You still need a separate IRIS Application for TCC\. FIRE filing ended Nov 19, 2026 at 3 p\.m\. ET\./,
+      deadline: /Nov 19, 2026 at 3 p\.m\. Eastern was the last day to file information returns through FIRE/,
+      button: "Get the $9 checklist (PDF in a ZIP)",
+      slug: "/l/fire-to-iris-switch-checklist",
+      campaign: "fire-to-iris-check",
+      resultContent: "fire-result-need-tcc",
+      reminder: "signup/fire-to-iris-check",
+      when: BEFORE_CUTOFF
     },
     {
       rel: "tools/amazon-coi-check/index.html",
@@ -157,12 +181,20 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
     }
   ];
   for (const item of cases) {
-    const { page, errors, nets } = await open(item.rel);
+    const { page, errors, nets } = await open(item.rel, item.when);
     if (item.before) await item.before(page);
     await page.click(item.click);
     assert.equal(await page.locator("#results").isVisible(), true, item.rel);
     assert.equal(await page.locator("#result-cta").isVisible(), true, item.rel);
     assert.equal(await page.locator("#result-cta a.btn").count(), 1, item.rel);
+    assert.equal(await page.locator("#kit-result").isVisible(), item.closedKit !== true, item.rel);
+    if (item.closedKit) {
+      assert.equal(await page.locator("a[href*='gumroad.com']:visible").count(), 0, item.rel);
+      const answer = await page.locator("#aeo-answer").innerText();
+      assert.match(answer, /FIRE filing ended Nov 19, 2026 at 3 p\.m\. ET\./, item.rel);
+      assert.match(answer, /IRIS/, item.rel);
+      assert.equal(await page.evaluate(() => window.FMP_FIRE_KIT_KEEP_SELLING), false, item.rel);
+    }
     assert.match(await page.innerText("#result-problem"), item.problem, item.rel);
     assert.match(await page.innerText("#result-deadline"), item.deadline, item.rel);
     assert.equal(await page.innerText("#kit-result"), item.button, item.rel);
@@ -225,7 +257,7 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
     } else {
       assert.match(await page.innerText("#result-cta"), /free weekly deadline email/);
     }
-    if (item.reminder) await assertReminder(page, item.reminder, item.rel, item.reminderHeading);
+    if (item.reminder) await assertReminder(page, item.reminder, item.rel, item.reminderHeading, item.reminderButton);
     assert.deepEqual(errors, [], item.rel);
     assert.deepEqual(toolNetwork(nets), [], item.rel);
     await assertNoHScroll(page);

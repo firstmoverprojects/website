@@ -12,6 +12,12 @@ import { blockExternalOnPage, chromiumLaunchOptions, importChromium } from "./pl
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const PROMPT = "Came from TikTok, Reels, or Shorts? Tap the rule change you watched:";
 const MAILTO = "mailto:firstmoverprojects@gmail.com?subject=White-Label%20Tool%20License";
+const BEFORE_CUTOFF = "2026-11-19T19:59:59.000Z";
+const AFTER_CUTOFF = "2026-11-19T20:05:00.000Z";
+const FIRE_KIT_PAGES = new Set([
+  "tools/1099-nec-or-1099-k-check/index.html",
+  "tools/fire-to-iris-check/index.html"
+]);
 const CHIPS = [
   ["Sun, Nov 1", "EU <= EUR 150 Product IDs", "/tools/eu-product-id-check/"],
   ["Sun, Nov 1 / Nov 19", "IRS FIRE-to-IRIS 1099 Cutoff", "/tools/fire-to-iris-check/"],
@@ -122,9 +128,13 @@ after(async () => {
   if (browser) await browser.close();
 });
 
-async function open(rel, search) {
+async function open(rel, search, when) {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await blockExternalOnPage(page);
+  if (when) {
+    await page.clock.install({ time: new Date(when) });
+    await page.clock.setFixedTime(new Date(when));
+  }
   const errors = [];
   page.on("pageerror", (err) => errors.push(String(err)));
   const url = pathToFileURL(path.join(ROOT, rel)).href + (search || "");
@@ -167,7 +177,8 @@ test("?embed=1 hides the site nav and keeps the powered-by link and kit button",
     assert.equal(await plain.page.evaluate(() => document.documentElement.classList.contains("fmp-embed")), false, rel);
     await plain.page.close();
 
-    const { page, errors } = await open(rel, "?embed=1");
+    const fireKit = FIRE_KIT_PAGES.has(rel);
+    const { page, errors } = await open(rel, "?embed=1", fireKit ? AFTER_CUTOFF : undefined);
     assert.deepEqual(errors, [], rel);
     assert.equal(await page.evaluate(() => document.documentElement.classList.contains("fmp-embed")), true, rel);
     assert.equal(await page.locator(".site-nav").first().isVisible(), false, rel);
@@ -176,6 +187,17 @@ test("?embed=1 hides the site nav and keeps the powered-by link and kit button",
     if (rel === "tools/eu-product-id-check/index.html") {
       assert.equal(await page.locator("#paid-link, #kit-result, a[href*='fetwsm'], a[href*='gumroad.com']").count(), 0, rel);
       assert.equal(await page.locator(".follow-email").isVisible(), true, rel);
+    } else if (fireKit) {
+      assert.equal(await page.locator("#paid-link").isVisible(), false, rel);
+      assert.equal(await page.locator("a[href*='gumroad.com']:visible").count(), 0, rel);
+      const text = await page.locator("body").innerText();
+      assert.equal(text.includes("FIRE filing ended Nov 19, 2026 at 3 p.m. ET."), true, rel);
+      assert.match(text, /IRIS/, rel);
+      assert.equal(await page.evaluate(() => window.FMP_FIRE_KIT_KEEP_SELLING), false, rel);
+      const early = await open(rel, "?embed=1", BEFORE_CUTOFF);
+      assert.deepEqual(early.errors, [], rel + " before cutoff");
+      assert.equal(await early.page.locator("#paid-link").isVisible(), true, rel + " before cutoff");
+      await early.page.close();
     } else {
       const kit = page.locator("#paid-link, a.trade-link").first();
       assert.equal(await kit.isVisible(), true, rel);

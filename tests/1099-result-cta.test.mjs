@@ -21,6 +21,10 @@ const NONE_LEAD = "You likely do not need to buy a checklist for this payment. "
 const FEDERAL = "This covers the federal rule only. Some states still have lower 1099 thresholds; check your state tax agency.";
 const UNDER = { purpose: "business", who: "contractor", method: "noncard", noncard: "under" };
 const NEC = { purpose: "business", who: "contractor", method: "noncard", noncard: "least" };
+const BEFORE_CUTOFF = "2026-11-19T19:59:59.000Z";
+const AFTER_CUTOFF = "2026-11-19T20:05:00.000Z";
+const FIRE_ENDED = "FIRE filing ended Nov 19, 2026 at 3 p.m. ET.";
+const IRIS_GUIDANCE = "After Jan 1, 2027, IRIS is the IRS e-file system for information returns (foreign filers without a U.S. TIN use IDES).";
 
 const CASES = [
   {
@@ -73,8 +77,11 @@ const CASES = [
 test("all five outcomes set the lead, button, utm, and no-fit chrome", async () => {
   const chromium = await importChromium();
   const browser = await chromium.launch(chromiumLaunchOptions());
+  try {
   const context = await browser.newContext({ viewport: { width: 1280, height: 1400 } });
   const page = await context.newPage();
+  await page.clock.install({ time: new Date(BEFORE_CUTOFF) });
+  await page.clock.setFixedTime(new Date(BEFORE_CUTOFF));
   await blockExternalOnPage(page);
   const shots = process.env.NEC_CTA_SHOTS;
   if (shots) mkdirSync(shots, { recursive: true });
@@ -378,6 +385,8 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
   assert.equal(wide.sw, wide.cw);
 
   const tagged = await context.newPage();
+  await tagged.clock.install({ time: new Date(BEFORE_CUTOFF) });
+  await tagged.clock.setFixedTime(new Date(BEFORE_CUTOFF));
   await tagged.goto(pathToFileURL(PAGE).href + "?utm_source=tiktok", { waitUntil: "load" });
   await tagged.evaluate(() => {
     ["purpose", "who", "method", "noncard"].forEach((name) => {
@@ -482,5 +491,67 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
   assert.equal(expiredBuy.buyButtons, 0);
   assert.equal(await page.evaluate(() => document.getElementById("kit-sticky").hidden), true);
   assert.deepEqual(errors.filter((item) => item.indexOf("Failed to fetch") === -1), []);
-  await browser.close();
+
+  const closed = await context.newPage();
+  await closed.clock.install({ time: new Date(AFTER_CUTOFF) });
+  await closed.clock.setFixedTime(new Date(AFTER_CUTOFF));
+  await blockExternalOnPage(closed);
+  await closed.goto(pathToFileURL(PAGE).href, { waitUntil: "load" });
+  const closedText = await closed.locator("body").innerText();
+  assert.equal(closedText.includes(FIRE_ENDED), true);
+  assert.equal(closedText.includes(IRIS_GUIDANCE), true);
+  assert.equal(await closed.locator("a[href*='gumroad.com']:visible").count(), 0);
+  assert.equal(await closed.evaluate(() => window.FMP_FIRE_KIT_KEEP_SELLING), false);
+  assert.equal(await closed.locator("#deadline-reminder-h").innerText(), "The FIRE deadline has passed. Get the weekly email for the next deadline");
+  assert.equal(await closed.locator("#deadline-reminder-submit").innerText(), "Get the weekly deadline email");
+  await closed.setViewportSize({ width: 390, height: 844 });
+  for (const item of CASES) {
+    await closed.evaluate((input) => {
+      ["purpose", "who", "method", "noncard"].forEach((name) => {
+        const nodes = document.getElementsByName(name);
+        for (let i = 0; i < nodes.length; i++) nodes[i].checked = nodes[i].value === input[name];
+      });
+    }, item.answers);
+    await closed.click("#go");
+    const state = await closed.evaluate(() => {
+      function shown(el) {
+        if (!el) return false;
+        return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+      }
+      const link = document.getElementById("kit-result");
+      const sticky = document.getElementById("kit-sticky");
+      return {
+        problem: document.getElementById("result-problem").textContent,
+        lead: document.getElementById("result-kit-lead").textContent,
+        leadVisible: shown(document.getElementById("result-kit-lead")),
+        linkVisible: shown(link),
+        refundVisible: shown(document.getElementById("kit-refund")),
+        topPaid: shown(document.getElementById("kit-top-offer")),
+        topFree: shown(document.getElementById("kit-top-free")),
+        stickyVisible: shown(sticky),
+        stickyText: document.getElementById("kit-sticky-link").textContent,
+        gumroad: [...document.querySelectorAll("a[href*='gumroad.com']")].filter(shown).length
+      };
+    });
+    const selling = /the checklist puts/i.test(item.lead);
+    assert.equal(state.problem, item.headline, item.key);
+    assert.equal(state.lead, item.lead, item.key);
+    assert.equal(state.leadVisible, !selling, item.key);
+    assert.equal(state.linkVisible, false, item.key);
+    assert.equal(state.refundVisible, false, item.key);
+    assert.equal(state.topPaid, false, item.key);
+    assert.equal(state.gumroad, 0, item.key);
+    if (item.nofit) {
+      assert.equal(state.topFree, true, item.key);
+      assert.equal(state.stickyVisible, true, item.key);
+      assert.equal(state.stickyText, "Open the free check", item.key);
+    } else {
+      assert.equal(state.topFree, false, item.key);
+      assert.equal(state.stickyVisible, false, item.key);
+    }
+  }
+  await closed.close();
+  } finally {
+    await browser.close();
+  }
 });
