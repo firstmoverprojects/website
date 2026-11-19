@@ -86,14 +86,14 @@ function imageValues(node, out) {
 }
 
 const E1 = "Last day to file information returns through the FIRE system. That date has passed. The FIRE page says 3 p.m. Eastern time. The news release says 3 p.m. ET.";
-const E2 = "IRIS replaces FIRE for these returns in January 2027 (foreign filers without a U.S. TIN use IDES). The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS.";
-const E3 = "IRIS replaces FIRE for these returns in January 2027 (foreign filers without a U.S. TIN use IDES). The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS. The IRS says current FIRE users who will e-file in IRIS themselves must complete a separate IRIS Application for TCC. If a payroll provider, accountant, or paid e-file service files for you, this may already be handled. Ask them.";
+const E2 = "In January 2027, IRIS replaces FIRE for the information returns FIRE handled (foreign filers without a U.S. TIN use IDES). The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS.";
+const E3 = "In January 2027, IRIS replaces FIRE for the information returns FIRE handled (foreign filers without a U.S. TIN use IDES). The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS. The IRS says current FIRE users who will e-file in IRIS themselves must complete a separate IRIS Application for TCC. If a payroll provider, accountant, or paid e-file service files for you, this may already be handled. Ask them.";
 const E1_PAGES = [
   "deadlines/fire-to-iris-transition-checklist.html",
   "deadlines/iris-tcc-application-how-long.html",
   "deadlines/file-1099-nec-2027-iris.html"
 ];
-const JAN1 = "IRIS replaces FIRE for these returns in January 2027.";
+const JAN1 = "In January 2027, IRIS replaces FIRE for the information returns FIRE handled.";
 
 test("E1 to E6 use the approved past-tense lines", () => {
   for (const rel of E1_PAGES) {
