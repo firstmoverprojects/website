@@ -42,7 +42,7 @@ test("static HTML states the Nov 19 filing day in the past tense and keeps the I
   const order = ["cd-nov9", "cd-nov19", "cd-jan1", "cd-nov1"].map((id) => cards.indexOf('id="' + id + '"'));
   assert.deepEqual(order, order.slice().sort((a, b) => a - b));
   assert.ok(order[0] >= 0);
-  assert.match(cards, /id="cd-jan1"[\s\S]*IRIS-only e-filing[\s\S]*Jan 1, 2027/);
+  assert.match(cards, /id="cd-jan1"[\s\S]*IRIS replaces FIRE \(Jan 2027\)[\s\S]*Jan 1, 2027/);
   assert.match(cards, /id="cd-nov1"[\s\S]*Nov 1, 2026 \(passed\)/);
   const top = html.match(/id="kit-top"[^>]*href="([^"]+)"/);
   const result = html.match(/id="kit-result"[^>]*href="([^"]+)"/);
