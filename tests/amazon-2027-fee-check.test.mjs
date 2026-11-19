@@ -29,13 +29,13 @@ test("the page is indexable and cites the official Amazon pages", () => {
   assert.match(html, /https:\/\/sellercentral\.amazon\.com\/help\/hub\/reference\/external\/G200442350/);
   assert.match(html, /It lists more changes this check doesn't repeat as dollar rates\. Those include referral-fee percents, weight-by-weight fulfillment prices, storage dollar rates, and "Buy X, Get Y" details\. This check does not guess those numbers\. The per-unit illustrations use only the averages on the Global Selling notice above\./);
   assert.match(html, /<h3 id="per-unit-h">What it looks like per unit<\/h3>/);
-  assert.match(html, /Illustrations of averages Amazon published for a size and price group\. They are not your product's fee, and they are not advice\./);
+  assert.match(html, /For FBA sellers: these are average fulfillment-fee changes Amazon published for each size and price group, shown as illustrations\. They are not your product's fee and not advice\. Your item's change depends on its exact size tier, weight and price, and Amazon says a single product can differ from its group's average\. These group averages cannot be added to the \$0\.19 overall average\. For your own number, use Amazon's FBA Revenue Calculator below\./);
   assert.match(html, /Small standard-size item, selling price \$10 to \$50: the average fulfillment fee is \$0\.40 more per unit, from January 15, 2027\./);
   assert.match(html, /Large standard-size item, selling price \$10 to \$50: the average fulfillment fee is \$0\.12 more per unit, from January 15, 2027\./);
   assert.match(html, /Large standard-size item that is not apparel, selling price under \$10: the average fulfillment fee stays the same, from January 15, 2027\./);
   assert.match(html, /The pages checked do not list a dollar rate for that change, so this block has no aged-storage dollar example\./);
   assert.match(html, /<a id="per-unit-revcal" href="https:\/\/sellercentral\.amazon\.com\/revcal">FBA Revenue Calculator<\/a>/);
-  assert.match(html, /<p class="muted" id="per-unit-checked">Checked November 19, 2026\. Averages: <a href="https:\/\/globalselling\.amazon\.com\/news\/news-notics-261105">Amazon Global Selling notice, 2027 US referral and FBA fee changes<\/a>/);
+  assert.match(html, /<p class="muted" id="per-unit-checked">Checked November 18, 2026\. Averages: <a href="https:\/\/globalselling\.amazon\.com\/news\/news-notics-261105">Amazon Global Selling notice \(in Chinese\), 2027 US referral and FBA fee changes<\/a>/);
   assert.match(html, /from February 1, 2027 that current surcharge applies to Amazon Warehousing and Distribution \(AWD\) transportation fees\./);
   assert.equal(html.includes("Multi-Channel Fulfillment transport"), false);
   const perUnitAt = html.indexOf('id="per-unit"');
@@ -72,7 +72,7 @@ test("the page is indexable and cites the official Amazon pages", () => {
   assert.equal(html.includes("\u2014") || html.includes("\u2013"), false);
   const sitemap = readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
   const feeBlock = sitemap.split("https://firstmoverprojects.com/tools/amazon-2027-fee-check/")[1] || "";
-  assert.match(feeBlock.slice(0, 120), /<lastmod>2026-11-19<\/lastmod>/);
+  assert.match(feeBlock.slice(0, 120), /<lastmod>2026-11-18<\/lastmod>/);
   const tools = readFileSync(path.join(ROOT, "tools/index.html"), "utf8");
   assert.match(tools, /changes Amazon has published that apply to that setup/);
   assert.equal(tools.includes("that hit that setup"), false);
@@ -124,7 +124,7 @@ test("none apply and some apply at phone and desktop widths", async () => {
       assert.match(await page.locator("#per-unit").innerText(), /no aged-storage dollar example/);
       assert.equal(await page.locator("#per-unit-revcal").innerText(), "FBA Revenue Calculator");
       assert.equal(await page.getAttribute("#per-unit-revcal", "href"), "https://sellercentral.amazon.com/revcal");
-      assert.match(await page.locator("#per-unit-checked").innerText(), /Checked November 19, 2026/);
+      assert.match(await page.locator("#per-unit-checked").innerText(), /Checked November 18, 2026/);
       assert.equal(await page.locator("#result-bridge").isHidden(), true, width + " none bridge");
       const noneScroll = await page.evaluate(() => ({
         sw: document.documentElement.scrollWidth,
