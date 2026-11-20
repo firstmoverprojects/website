@@ -108,7 +108,8 @@ test("E1 to E6 use the approved past-tense lines", () => {
   assert.equal(transition.split(E3).length - 1, 2);
   assert.equal(transition.includes("After January 1, 2027, IRIS is the only e-file system for information returns, including current year, prior year, and corrections."), false);
   const finder = read("deadlines/finder/index.html");
-  assert.equal(finder.includes('<p class="chip">Next: Jan 1, 2027</p>'), true);
+  assert.equal(finder.includes('<p class="chip chip--past">Expired. Passed on Nov 19, 2026, 3 p.m. ET, what to do now</p>'), true);
+  assert.equal(finder.includes('<p class="chip">Next: Jan 1, 2027</p>'), false);
   assert.equal(finder.includes("Next: Nov 19"), false);
   assert.equal(finder.includes('<li class="past"><strong>passed on Nov 19, 2026, 3 p.m. ET</strong>: Last day to file information returns through FIRE.</li>'), true);
   assert.equal(finder.includes("Anyone who e-filed Forms 1099 or other information returns through the IRS FIRE system themselves."), true);

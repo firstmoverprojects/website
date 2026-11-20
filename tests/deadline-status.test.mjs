@@ -125,15 +125,18 @@ test("detail pages and the finder use the same status wording", () => {
   assert.match(read("deadlines/zenbusiness-banking-closure.html"), /Accounts close Nov 30/);
   assert.match(read("deadlines/zenbusiness-banking-closure.html"), /Deposits stopped Nov 3/);
   const finder = read("deadlines/finder/index.html");
-  for (const stale of ["Next: Nov 1, 2026", "Next: Nov 2, 2026", "Next: Nov 3, 2026", "Next: Nov 4, 2026", "Next: Nov 9, 2026"]) {
+  for (const stale of ["Next: Nov 1, 2026", "Next: Nov 2, 2026", "Next: Nov 3, 2026", "Next: Nov 4, 2026", "Next: Nov 9, 2026", "Next: Nov 10, 2026", "Next: Jan 1, 2027", "Until Jan 31, 2027"]) {
     assert.equal(finder.includes(stale), false, stale);
   }
+  // Finder snapshot as of Nov 20, 2026. finder.js labels the next key date
+  // "Next:" and drops a card once its status is expired.
   assert.match(finder, /Took effect Nov 1/);
-  assert.match(finder, /Until Jan 31, 2027/);
-  assert.match(finder, /Next: Jan 1, 2027/);
+  assert.match(finder, /Next: Dec 31, 2026/);
+  assert.match(finder, /Expired\. Passed on Nov 19, 2026, 3 p\.m\. ET, what to do now/);
   assert.equal(finder.includes("Next: Nov 19, 2026, 3 p.m. ET"), false);
-  assert.match(finder, /Next: Nov 10, 2026/);
   assert.match(finder, /Next: Nov 30, 2026/);
+  assert.equal(finder.includes('id="form-941-q3"'), false);
+  assert.equal(finder.includes('id="ebay-payments-terms"'), false);
 });
 
 test("script leaves a date that is still today as Upcoming and relabels yesterday", () => {
