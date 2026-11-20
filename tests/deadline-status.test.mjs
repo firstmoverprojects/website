@@ -141,7 +141,8 @@ test("detail pages and the finder use the same status wording", () => {
   assert.match(finder, /<article class="item" id="office-2021-windows-11-24h2" data-tools="m365 windows" data-status="passed">/);
   assert.match(finder, /<p class="chip chip--past">Expired\. Passed on Oct 13, 2026, what to do now<\/p>/);
   assert.match(finder, /<li class="up"><strong>Oct 12, 2027<\/strong>: Windows 11 version 24H2 Enterprise and Education editions reach end of updates\.<\/li>/);
-  assert.match(finder, /id="irs-fire"[\s\S]*?Last checked Nov 20, 2026\./);
+  assert.match(finder, /id="irs-fire"(?:(?!<\/article>)[\s\S])*?Last checked Nov 20, 2026\./);
+  assert.equal(finder.includes("unmanaged Home/Pro PCs are offered the 25H2 update automatically"), false);
   assert.equal(finder.includes('id="count">12</span>'), true);
 });
 
