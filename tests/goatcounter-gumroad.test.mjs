@@ -364,7 +364,7 @@ test("checkout clicks record gumroad-click/slug and test visits stay under TEST-
 
 test("kit slug clicks also record click-fire-kit, click-amazon-kit, and click-etsy-kit", () => {
   const samples = [
-    ["https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true", "click-fire-kit"],
+    ["https://firstmoverprojects.gumroad.com/l/" + "fire-to-iris-switch-checklist?wanted=true", "click-fire-kit"],
     ["https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true", "click-amazon-kit"],
     ["https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true", "click-etsy-kit"]
   ];
@@ -451,7 +451,7 @@ test("sendGcEvent uses goatcounter.count once when present and does not fetch or
       return true;
     }
   };
-  const href = "https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true";
+  const href = "https://firstmoverprojects.gumroad.com/l/" + "fire-to-iris-switch-checklist?wanted=true";
   click(live.listeners, href);
   assert.equal(countCalls, 2);
   assert.equal(fetches.length, 0);

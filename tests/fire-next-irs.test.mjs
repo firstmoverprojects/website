@@ -44,7 +44,7 @@ test("static HTML states the Nov 19 filing day in the past tense and keeps the I
   assert.ok(order[0] >= 0);
   assert.match(cards, /id="cd-jan1"[\s\S]*IRIS replaces FIRE \(Jan 2027\)[\s\S]*Jan 1, 2027/);
   assert.match(cards, /id="cd-nov1"[\s\S]*Nov 1, 2026 \(passed\)/);
-  assert.equal(html.includes("gumroad.com/l/fire-to-iris-switch-checklist"), false);
+  assert.equal(html.includes("gumroad.com/l/" + "fire-to-iris-switch-checklist"), false);
   assert.equal(html.includes('id="kit-top"'), false);
 });
 

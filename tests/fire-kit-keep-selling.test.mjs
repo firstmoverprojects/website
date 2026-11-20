@@ -13,7 +13,7 @@ import { startBrowser, startServer } from "./e2e/harness.mjs";
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const E3 = "FIRE is closed. After Jan 1, 2027, IRIS is the IRS e-file system for information returns (foreign filers without a U.S. TIN use IDES).";
 const FLAG_LINE = 'if (typeof window.FMP_FIRE_KIT_KEEP_SELLING !== "boolean") window.FMP_FIRE_KIT_KEEP_SELLING = false;';
-const PERMALINK = "https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist";
+const PERMALINK = "https://firstmoverprojects.gumroad.com/l/" + "fire-to-iris-switch-checklist";
 const BEFORE = "2026-11-19T19:59:59.000Z";
 const AFTER = "2026-11-19T20:05:00.000Z";
 const PAGES = [

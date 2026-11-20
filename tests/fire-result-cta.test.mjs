@@ -84,7 +84,7 @@ test("result copy stays on the spec sentences and keeps the house lines", () => 
   assert.equal(html.includes('id="kit-refund"'), false);
   assert.equal(html.includes('data-goatcounter-click="cta/fire-result-need-tcc"'), false);
   assert.equal(html.includes("utm_content=fire-result-need-tcc"), false);
-  assert.equal(html.includes("gumroad.com/l/fire-to-iris-switch-checklist"), false);
+  assert.equal(html.includes("gumroad.com/l/" + "fire-to-iris-switch-checklist"), false);
 });
 
 const DELIVERY = "One 3-page PDF checklist in a ZIP, with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on.";

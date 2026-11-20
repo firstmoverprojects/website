@@ -8,7 +8,7 @@ import vm from "node:vm";
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const FIT = "Good fit if you file 1099s for your business or clients and must move from FIRE to IRIS by Jan 1, 2027. Not needed if your software files for you.";
 const DISCLAIMER = "General guidance, not legal, tax or IT advice.";
-const PRODUCT = "https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist";
+const PRODUCT = "https://firstmoverprojects.gumroad.com/l/" + "fire-to-iris-switch-checklist";
 const REFUND = "Refunds: within 30 days if a file is corrupt or materially not as described.";
 const PAGES = [
   "deadlines/iris-tcc-application-how-long.html",

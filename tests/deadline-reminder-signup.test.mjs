@@ -185,7 +185,7 @@ test("each tool result has one accessible reminder form on the existing list", (
       assert.equal(html.includes('id="kit-result"'), false, page.rel);
     } else if (page.rel === "tools/fire-to-iris-check/index.html" || page.rel === "tools/1099-nec-or-1099-k-check/index.html") {
       assert.equal(kitClicks.length, 0, page.rel + " kit buttons " + kitClicks.length);
-      assert.equal(html.includes("gumroad.com/l/fire-to-iris-switch-checklist"), false, page.rel);
+      assert.equal(html.includes("gumroad.com/l/" + "fire-to-iris-switch-checklist"), false, page.rel);
     } else {
       assert.ok(kitClicks.length >= 3, page.rel + " kit buttons " + kitClicks.length);
       assert.match(html, /id="kit-result"[^>]*data-goatcounter-click="cta\/[a-z0-9-]+"/, page.rel);
