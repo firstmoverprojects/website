@@ -163,7 +163,8 @@ test("every Gumroad product link carries source, medium, campaign, and content",
       if (!url.pathname.endsWith("/pdkqbs")) assert.equal(url.searchParams.get("wanted"), "true", raw);
     }
   }
-  assert.ok(count >= 76, String(count));
+  // 75 after the Nov 20, 2026 finder snapshot dropped the expired Amazon insurance card and its static buy link.
+  assert.ok(count >= 75, String(count));
 });
 
 function runUtm(search, hrefs, storage) {
