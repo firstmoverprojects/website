@@ -163,7 +163,7 @@ test("every Gumroad product link carries source, medium, campaign, and content",
       if (!url.pathname.endsWith("/pdkqbs")) assert.equal(url.searchParams.get("wanted"), "true", raw);
     }
   }
-  assert.ok(count >= 87, String(count));
+  assert.ok(count >= 76, String(count));
 });
 
 function runUtm(search, hrefs, storage) {
@@ -189,7 +189,7 @@ function runUtm(search, hrefs, storage) {
   return { anchors, listeners, store };
 }
 
-const SAMPLE = "https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&utm_source=site&utm_medium=site&utm_campaign=fire-to-iris-check&utm_content=footer";
+const SAMPLE = "https://firstmoverprojects.gumroad.com/l/" + "fire-to-iris-switch-checklist?wanted=true&utm_source=site&utm_medium=site&utm_campaign=fire-to-iris-check&utm_content=footer";
 
 test("landing utm_source is stored and written onto checkout links", () => {
   const first = runUtm("?utm_source=TikTok&utm_medium=newsletter&utm_campaign=newsletter-week&utm_content=nl-body", [SAMPLE]);

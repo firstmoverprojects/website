@@ -178,7 +178,7 @@ test("the FIRE check and the Nov 19 deadline page have no Product Offer", () => 
     assert.equal(/"@type":\s*"Offer"/.test(html), false, rel);
     const shareTitle = "IRS FIRE filing ended Nov 19, 2026 (3 p.m. ET) - Free IRIS readiness &amp; 1099 CSV check";
     assert.equal(html.split(shareTitle).length - 1, 3, rel);
-    assert.match(html, /firstmoverprojects\.gumroad\.com\/l\/fire-to-iris-switch-checklist/, rel);
+    assert.doesNotMatch(html, /firstmoverprojects\.gumroad\.com\/l\/fire-to-iris-switch-checklist/, rel);
   }
 });
 
@@ -198,7 +198,7 @@ test("live paid-kit links on tool pages have Product offers, and the unpublished
       assert.equal(/"@type":\s*"Product"/.test(html), false, rel);
       assert.equal(/"@type":\s*"Offer"/.test(html), false, rel);
       assert.equal(productsOf(html).length, 0, rel);
-      assert.match(html, /firstmoverprojects\.gumroad\.com\/l\/fire-to-iris-switch-checklist/, rel);
+      assert.doesNotMatch(html, /firstmoverprojects\.gumroad\.com\/l\/fire-to-iris-switch-checklist/, rel);
       continue;
     }
     const stripped = stripProductScript(html);

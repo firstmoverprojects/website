@@ -8,7 +8,7 @@ import vm from "node:vm";
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const FIT = "Good fit if you file 1099s for your business or clients and must move from FIRE to IRIS by Jan 1, 2027. Not needed if your software files for you.";
 const DISCLAIMER = "General guidance, not legal, tax or IT advice.";
-const PRODUCT = "https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist";
+const PRODUCT = "https://firstmoverprojects.gumroad.com/l/" + "fire-to-iris-switch-checklist";
 const REFUND = "Refunds: within 30 days if a file is corrupt or materially not as described.";
 const PAGES = [
   "deadlines/iris-tcc-application-how-long.html",
@@ -44,21 +44,9 @@ test("each landing page answers first, cites Publication 5717 and the IRIS pages
     assert.match(sitemap, new RegExp(`<loc>https://firstmoverprojects.com/deadlines/${name}\\.html</loc>`));
     assert.match(hub, new RegExp(`href="${name}\\.html"`));
     const hrefs = [...html.matchAll(/<a\b[^>]*href="(https:\/\/firstmoverprojects\.gumroad\.com\/l\/[^"]+)"/g)].map((match) => match[1].replace(/&amp;/g, "&"));
-    assert.equal(hrefs.length, 3, rel);
-    const clicks = ["top", "result", "sticky"];
-    clicks.forEach((part, i) => {
-      assert.match(html, new RegExp(`data-goatcounter-click="cta/${name}-${part}"`));
-      const url = new URL(hrefs[i]);
-      assert.equal(url.origin + url.pathname, PRODUCT);
-      assert.equal(url.searchParams.get("wanted"), "true");
-      assert.equal(url.searchParams.get("utm_source"), "site");
-      assert.equal(url.searchParams.get("utm_medium"), "site");
-      assert.equal(url.searchParams.get("utm_campaign"), name);
-    });
-    assert.equal(new URL(hrefs[0]).searchParams.get("utm_content"), "fire-check-top");
-    assert.equal(new URL(hrefs[1]).searchParams.get("utm_content"), "fire-check-result");
-    assert.equal(new URL(hrefs[2]).searchParams.get("utm_content"), "fire-check-sticky");
-    assert.match(html, />Get the \$9 checklist \(PDF in a ZIP\)</, rel);
+    assert.equal(hrefs.length, 0, rel);
+    assert.equal(html.includes(PRODUCT), false, rel);
+    assert.equal(html.includes(">Get the $9 checklist (PDF in a ZIP)<"), false, rel);
     assert.equal(html.includes("(PDF, instant download)"), false, rel);
     assert.equal(html.includes("(instant PDF)"), false, rel);
   }

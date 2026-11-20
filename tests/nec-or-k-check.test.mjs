@@ -200,14 +200,13 @@ test("each outcome sets its own checklist offer on the existing $9 product", () 
   assert.match(api.offerFor("none").lead, /Watch the \$2,000 threshold/);
   assert.match(api.offerFor("none").lead, /keep notes on who you paid and how/);
   assert.match(api.offerFor("unsure").lead, /^Because you said/);
-  assert.match(html, /utm_content=1099-result-nec/);
-  assert.match(html, /id="kit-offer"/);
+  assert.equal(html.includes("utm_content=1099-result-nec"), false);
+  assert.equal(html.includes('id="kit-offer"'), false);
   assert.match(html, /id="result-irs">Not affiliated with or endorsed by the IRS\./);
-  assert.match(html, /id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described\./);
+  assert.equal(html.includes('id="kit-refund"'), false);
   assert.equal(html.includes("Not affiliated with the IRS."), false);
   const slugs = [...html.matchAll(/firstmoverprojects\.gumroad\.com\/l\/([A-Za-z0-9_-]+)/g)].map((match) => match[1]);
-  assert.ok(slugs.length >= 4);
-  for (const slug of slugs) assert.equal(slug, "fire-to-iris-switch-checklist");
+  assert.equal(slugs.length, 0);
 });
 
 test("a no-fit none result keeps the backup withholding exception in the visible lead", () => {

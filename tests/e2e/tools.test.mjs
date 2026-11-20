@@ -755,7 +755,7 @@ test("FIRE to IRIS check before Nov 19 cutoff uses the countdown copy and keeps 
     async (page) => {
       const era = await fireEra(page);
       assert.match(await page.locator("#next-irs").innerText(), FIRE_NEXT_IRS_COUNTDOWN);
-      assert.equal(await page.locator("#kit-top").isVisible(), true);
+      assert.equal(await page.locator("#kit-top").count(), 0);
       await fireBranchChecks(page, era);
     },
     FIRE_BEFORE_CUTOFF
@@ -792,7 +792,7 @@ test("FIRE to IRIS check one second before Nov 19 3 p.m. ET keeps kit and countd
     async (page) => {
       const era = await fireEra(page);
       assert.match(await page.locator("#next-irs").innerText(), FIRE_NEXT_IRS_COUNTDOWN);
-      assert.equal(await page.locator("#kit-top").isVisible(), true);
+      assert.equal(await page.locator("#kit-top").count(), 0);
       if (era === "post140") await assertFirePost140ExactBranches(page);
     },
     FIRE_CUTOFF_ONE_SEC_BEFORE

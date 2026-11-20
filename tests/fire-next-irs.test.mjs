@@ -44,13 +44,8 @@ test("static HTML states the Nov 19 filing day in the past tense and keeps the I
   assert.ok(order[0] >= 0);
   assert.match(cards, /id="cd-jan1"[\s\S]*IRIS replaces FIRE \(Jan 2027\)[\s\S]*Jan 1, 2027/);
   assert.match(cards, /id="cd-nov1"[\s\S]*Nov 1, 2026 \(passed\)/);
-  const top = html.match(/id="kit-top"[^>]*href="([^"]+)"/);
-  const result = html.match(/id="kit-result"[^>]*href="([^"]+)"/);
-  const sticky = html.match(/data-goatcounter-click="cta\/fire-check-sticky"[^>]*href="([^"]+)"/);
-  assert.equal(top[1].includes("utm_content=fire-check-top"), true);
-  assert.equal(result[1].includes("utm_content=fire-result-need-tcc"), true);
-  assert.equal(sticky[1].includes("utm_content=fire-check-sticky"), true);
-  assert.equal(top[1].includes("fire-to-iris-switch-checklist"), true);
+  assert.equal(html.includes("gumroad.com/l/" + "fire-to-iris-switch-checklist"), false);
+  assert.equal(html.includes('id="kit-top"'), false);
 });
 
 test("Nov 9 stays through the Chicago day, then only Nov 19, then the closed line", () => {

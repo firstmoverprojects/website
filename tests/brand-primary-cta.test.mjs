@@ -55,19 +55,19 @@ test("audited CTA copy and the FIRE checklist link stay put", () => {
 
   const tools = read("tools/index.html");
   for (const label of [
-    "$9 Switch Checklist",
     "$39 Planner",
     "$19 COI Kit (1-Click Buy)",
     "Open free check"
   ]) {
     assert.ok(tools.includes(label), label);
   }
-  assert.equal((tools.match(/fire-to-iris-switch-checklist/g) || []).length >= 2, true);
+  assert.equal(tools.includes("$9 Switch Checklist"), false);
+  assert.equal(tools.includes("gumroad.com/l/" + "fire-to-iris-switch-checklist"), false);
 
   const deadlines = read("deadlines/index.html");
-  assert.ok(deadlines.includes("Get the $9 IRS filing checklist"));
+  assert.equal(deadlines.includes("Get the $9 IRS filing checklist"), false);
   assert.ok(deadlines.includes("Get the $9 Etsy photo checklist"));
-  assert.ok(deadlines.includes("fire-to-iris-switch-checklist"));
+  assert.equal(deadlines.includes("gumroad.com/l/" + "fire-to-iris-switch-checklist"), false);
   assert.ok(deadlines.includes("Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE"));
 
   const games = read("games/index.html");
