@@ -96,8 +96,14 @@ test("the result names the date that applies to the answer", () => {
   const enterprise = leadFor(true, true, true);
   assert.match(enterprise.problem, /Enterprise/);
   assert.match(enterprise.deadline, /Dec 11, 2026/);
-  assert.match(enterprise.deadline, /Feb 11, 2027/);
+  assert.match(enterprise.deadline, /Feb 28, 2027/);
   assert.match(enterprise.deadline, /Oct 26, 2026/);
   assert.match(enterprise.deadline, /FedRAMP/);
+  assert.match(enterprise.deadline, /qualifying, approved deferral/);
   assert.match(enterprise.deadline, /deferral alone does not preserve eligibility/);
+  assert.equal(html.includes("Feb 11, 2027"), false);
+  assert.match(html, /Last updated Nov 20, 2026/);
+  assert.match(html, /If you used a GPT to keep instructions and reference files together for ongoing work, you can also start a project in ChatGPT\./);
+  assert.match(html, /Standard Chat, including Instant, does not currently support running scripts bundled with installed plugins\./);
+  assert.match(html, /Follow your workspace-specific notice and use the account or workspace where the GPT was created\./);
 });

@@ -419,7 +419,7 @@ test("Custom GPT checker follows the Dec 11 and Enterprise dates", async () => {
       "This Enterprise GPT's retirement date depends on the workspace."
     );
     const deadline = await page.locator("#result-deadline").innerText();
-    assert.match(deadline, /Feb 11, 2027/);
+    assert.match(deadline, /Feb 28, 2027/);
     assert.match(deadline, /Oct 26, 2026/);
     assert.match(deadline, /deferral alone does not preserve eligibility/);
   });
