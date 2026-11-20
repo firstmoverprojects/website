@@ -215,7 +215,6 @@ test("served JavaScript has no slash-leading string that is not a real page or a
   }
   assert.deepEqual(problems, []);
   assert.equal(allowed.has("/"), true);
-  assert.equal(allowed.has("/tools/fire-to-iris-check/"), true);
   assert.equal([...allowed].some((value) => value.startsWith("/event/")), false);
 });
 

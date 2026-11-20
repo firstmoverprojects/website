@@ -127,7 +127,7 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
         federalNote: document.getElementById("result-federal-note").textContent,
         federalHidden: document.getElementById("result-federal-note").hidden,
         federalUnder: document.getElementById("result-federal-note").previousElementSibling === document.getElementById("result-problem"),
-        lead: document.getElementById("result-kit-lead").textContent,
+        lead: (document.getElementById("result-kit-lead") || { textContent: "" }).textContent,
         leadVisible: shown(document.getElementById("result-kit-lead")),
         steps: document.getElementById("next-steps").innerText,
         linkText: link ? link.textContent : "",
@@ -198,15 +198,13 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
     } else {
       assert.equal(state.federalHidden, true, item.key);
     }
-    assert.equal(state.lead, item.lead, item.key);
-    assert.equal(state.leadVisible, true, item.key);
+    assert.equal(state.lead, "", item.key);
+    assert.equal(state.leadVisible, false, item.key);
     if (item.key === "none") {
-      assert.equal(state.lead.includes(WITHHELD), true, item.key);
-      assert.ok(state.lead.indexOf(WITHHELD) < state.lead.indexOf("Watch the $2,000 threshold"), item.key);
       assert.match(state.steps, /If you withheld any federal income tax under the backup withholding rules/, item.key);
       assert.match(state.steps, /report that withholding in box 4/, item.key);
     } else {
-      assert.equal(state.lead.includes(WITHHELD), false, item.key);
+      assert.equal(state.steps.includes(WITHHELD), false, item.key);
     }
     assert.equal(state.linkVisible, false, item.key);
     assert.equal(state.refundVisible, false, item.key);
@@ -239,7 +237,7 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
   assert.equal(buyFirst.cta, "buy");
   assert.equal(buyFirst.topPaid, false);
   assert.equal(buyFirst.topFree, false);
-  assert.equal(buyFirst.lead.includes(WITHHELD), false);
+  assert.equal(buyFirst.lead, "");
   assert.equal(buyFirst.stickyHref, "");
 
   await answer(UNDER);
@@ -247,18 +245,11 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
   assert.equal(noneUnder.problem, "Likely no federal 1099 needed");
   assert.equal(noneUnder.federalHidden, false);
   assert.equal(noneUnder.federalNote, FEDERAL);
-  assert.equal(noneUnder.lead, NONE_LEAD);
-  assert.equal(noneUnder.leadVisible, true);
-  assert.equal(noneUnder.lead.includes(WITHHELD), true);
-  assert.ok(noneUnder.lead.indexOf(WITHHELD) < noneUnder.lead.indexOf("Watch the $2,000 threshold"));
+  assert.equal(noneUnder.lead, "");
+  assert.equal(noneUnder.leadVisible, false);
   assert.match(noneUnder.steps, /cash, check, bank transfer, and ACH total here is under \$2,000/);
   assert.match(noneUnder.steps, /If you withheld any federal income tax under the backup withholding rules, file Form 1099-NEC for that person no matter the amount\./);
-  const stepBeforeLead = await page.evaluate(() => {
-    const steps = document.getElementById("next-steps");
-    const lead = document.getElementById("result-kit-lead");
-    return !!(steps.compareDocumentPosition(lead) & Node.DOCUMENT_POSITION_FOLLOWING);
-  });
-  assert.equal(stepBeforeLead, true);
+  assert.equal(await page.locator("#result-kit-lead").count(), 0);
   assert.equal(noneUnder.linkVisible, false);
   assert.equal(noneUnder.buyButtons, 0);
   assert.equal(noneUnder.refundVisible, false);
@@ -279,13 +270,13 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
   assert.equal(buyAgain.topPaid, false);
   assert.equal(buyAgain.topFree, false);
   assert.equal(buyAgain.footerPaid, false);
-  assert.equal(buyAgain.lead.includes(WITHHELD), false);
+  assert.equal(buyAgain.lead, "");
   assert.equal(buyAgain.stickyHref, "");
   assert.equal(buyAgain.refundVisible, false);
 
   await answer(UNDER);
   const noneAgain = await stateOf();
-  assert.equal(noneAgain.lead, NONE_LEAD);
+  assert.equal(noneAgain.lead, "");
   assert.equal(noneAgain.linkVisible, false);
   assert.equal(noneAgain.buyButtons, 0);
   assert.equal(noneAgain.cta, "nofit");
@@ -307,8 +298,8 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
   }
   await answer(UNDER);
   const mobileUnder = await stateOf();
-  assert.equal(mobileUnder.lead, NONE_LEAD);
-  assert.equal(mobileUnder.leadVisible, true);
+  assert.equal(mobileUnder.lead, "");
+  assert.equal(mobileUnder.leadVisible, false);
   assert.equal(mobileUnder.linkVisible, false);
   assert.equal(mobileUnder.buyButtons, 0);
   assert.equal(mobileUnder.cta, "nofit");
@@ -323,7 +314,7 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
   assert.equal(mobileBox.sticky, false);
   await shot("1099-result-none-withholding-390.png");
   await page.evaluate(() => {
-    document.getElementById("result-kit-lead").scrollIntoView({ block: "start" });
+    document.getElementById("result-problem").scrollIntoView({ block: "start" });
   });
   if (shots) {
     await page.screenshot({ path: path.join(shots, "1099-result-none-withholding-390-view.png") });
@@ -359,11 +350,11 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
   const keptNone = await tagged.evaluate(() => {
     return {
       link: !!document.getElementById("kit-result"),
-      lead: document.getElementById("result-kit-lead").textContent
+      lead: (document.getElementById("result-kit-lead") || { textContent: "" }).textContent
     };
   });
   assert.equal(keptNone.link, false);
-  assert.equal(keptNone.lead, NONE_LEAD);
+  assert.equal(keptNone.lead, "");
 
   await answer(UNDER);
   const liveCutoff = await page.evaluate(() => ({
@@ -373,7 +364,7 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
   assert.equal(liveCutoff.before, false);
   assert.equal(liveCutoff.at, true);
   const beforeExpiry = await stateOf();
-  assert.equal(beforeExpiry.lead, NONE_LEAD);
+  assert.equal(beforeExpiry.lead, "");
   assert.equal(beforeExpiry.linkVisible, false);
   assert.equal(beforeExpiry.refundVisible, false);
   assert.equal(beforeExpiry.className, "");
@@ -394,8 +385,8 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
   });
   await answer(UNDER);
   const expiredNone = await stateOf();
-  assert.equal(expiredNone.lead, NONE_LEAD);
-  assert.equal(expiredNone.leadVisible, true);
+  assert.equal(expiredNone.lead, "");
+  assert.equal(expiredNone.leadVisible, false);
   assert.equal(expiredNone.linkVisible, false);
   assert.equal(expiredNone.refundVisible, false);
   assert.equal(expiredNone.buyButtons, 0);
@@ -450,7 +441,7 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
       const sticky = document.getElementById("kit-sticky");
       return {
         problem: document.getElementById("result-problem").textContent,
-        lead: document.getElementById("result-kit-lead").textContent,
+        lead: (document.getElementById("result-kit-lead") || { textContent: "" }).textContent,
         leadVisible: shown(document.getElementById("result-kit-lead")),
         linkVisible: shown(link),
         refundVisible: shown(document.getElementById("kit-refund")),
@@ -461,10 +452,9 @@ test("all five outcomes set the lead, button, utm, and no-fit chrome", async () 
         gumroad: [...document.querySelectorAll("a[href*='gumroad.com']")].filter(shown).length
       };
     });
-    const selling = /the checklist puts/i.test(item.lead);
     assert.equal(state.problem, item.headline, item.key);
-    assert.equal(state.lead, item.lead, item.key);
-    assert.equal(state.leadVisible, !selling, item.key);
+    assert.equal(state.lead, "", item.key);
+    assert.equal(state.leadVisible, false, item.key);
     assert.equal(state.linkVisible, false, item.key);
     assert.equal(state.refundVisible, false, item.key);
     assert.equal(state.topPaid, false, item.key);

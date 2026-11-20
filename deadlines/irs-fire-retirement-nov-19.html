@@ -19,14 +19,10 @@
     <style>
       .answer-first { margin: 0 0 0.75rem; }
       .fire-buy { display: flex; flex-direction: column; align-items: stretch; gap: 0.35rem; max-width: 40rem; }
-      .fire-buy .kit-cta { margin: 0; max-width: 28rem; }
       .hero .next-irs { margin: 0; color: #f4f7fa; font-size: 0.8125rem; font-weight: 400; line-height: 1.4; max-width: 36rem; }
-      .hero .kit-refund, .kit-link .kit-refund { display: block; margin: 0; color: #c2d0dc; font-size: 0.8125rem; font-weight: 400; line-height: 1.4; max-width: 28rem; }
       @media (min-width: 768px) {
         .fire-buy { flex-direction: row; flex-wrap: wrap; align-items: flex-start; gap: 0.35rem 1rem; max-width: none; }
-        .fire-buy .kit-cta { flex: 1 1 18rem; }
         .hero .next-irs { flex: 1 1 16rem; margin-top: 0.2rem; }
-        .fire-buy .kit-refund { flex: 1 1 100%; }
       }
       @media (max-width: 767px) {
         .hero { padding: 0.75rem; }
@@ -34,7 +30,6 @@
         .answer-first { margin-bottom: 0.5rem; }
         .fire-free { margin-bottom: 0.5rem; }
       }
-      .hero .kit-note { margin: 0.5rem 0 0; font-size: 0.875rem; line-height: 1.4; }
       .fire-free { margin: 0 0 0.75rem; }
       .dated-item[data-status="passed"] { border-left-color: #ffb800; }
       .fire-sticky { display: none; }
@@ -42,11 +37,9 @@
         .fire-sticky { display: flex; position: fixed; z-index: 40; left: 0; right: 0; bottom: 0; gap: 8px; align-items: stretch; margin: 0; padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px)); background: #f4f7fa; border-top: 2px solid #071b31; }
         .fire-sticky .btn { flex: 1 1 0; width: auto; max-width: none; margin: 0; min-height: 44px; font-size: 0.9375rem; padding: 0.65rem 0.7rem; }
         .fire-sticky .btn--secondary { background: #01060b; color: #f4f7fa; border-color: #01060b; }
-        .fire-sticky [hidden] { display: none !important; }
         body { padding-bottom: 76px; }
       }
       @media print { .fire-sticky { display: none !important; } body { padding-bottom: 0 !important; } }
-      [data-fire-kit][hidden]{display:none !important}
     </style>
   <script type="application/ld+json">
 {
@@ -156,11 +149,8 @@
         <p class="answer-first">This page lists the IRS FIRE retirement dates and what to do next. If you e-filed 1099s or other information returns through FIRE yourself, run the free check. November 9, 2026 has passed, so existing IR Applications for TCC are read-only. Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE.</p>
         <p class="kit-cta fire-free"><a class="btn btn--secondary" href="/tools/fire-to-iris-check/">Free FIRE to IRIS check</a></p>
         <div class="fire-buy">
-          <!-- FIRE kit links hide after Nov 19, 2026, 20:00 UTC unless FMP_FIRE_KIT_KEEP_SELLING is true in the fmp-fire-kit script on this page (hero CTA too) -->
           <p class="next-irs" id="next-irs"><span data-next-irs-copy="">FIRE is closed. After Jan 1, 2027, IRIS is the IRS e-file system for information returns (foreign filers without a U.S. TIN use IDES).</span> Source: <a href="https://www.irs.gov/e-file-providers/filing-information-returns-electronically-fire" rel="noopener noreferrer">irs.gov/fire</a> · <a href="https://www.irs.gov/filing/e-file-information-returns-with-iris" rel="noopener noreferrer">irs.gov/iris</a></p>
-          <p class="kit-refund" data-fire-kit="1">Refunds: within 30 days if a file is corrupt or materially not as described.</p>
         </div>
-        <p class="kit-note" data-fire-kit="1">One PDF, 3 pages: the IRS dates and links, your FIRE account, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on.</p>
         <p class="lead">Anyone who e-filed Forms 1099 or other information returns through the IRS FIRE system themselves. The free check runs in your browser: no sign-up, nothing uploaded.</p>
         <p>General guidance, not legal, tax or IT advice.</p>
       </section>
@@ -199,10 +189,6 @@
           <summary>What if a payroll provider or accountant files the returns?</summary>
           <p>If a payroll provider or accountant files for you, this may already be handled. Ask them.</p>
         </details>
-        <details data-fire-kit="1">
-          <summary>What is in the $9 checklist?</summary>
-          <p>One 3-page PDF with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on. Refunds: within 30 days if a file is corrupt or materially not as described.</p>
-        </details>
         </div>
       </section>
 
@@ -225,8 +211,6 @@ When you state any deadline or date, quote the exact line from the IRS's own pag
         <button class="btn btn--secondary" type="button" id="copy-prompt" hidden>Copy prompt</button>
       </section>
 
-      <!-- FIRE kit links hide after Nov 19, 2026, 20:00 UTC unless FMP_FIRE_KIT_KEEP_SELLING is true in the fmp-fire-kit script on this page -->
-      <p class="kit-link" data-fire-kit="1">One 3-page PDF with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on.</p>
       <p class="kit-link"><a class="btn btn--secondary" href="/tools/fire-to-iris-check/">Free FIRE to IRIS check</a></p>
       <p>General guidance, not legal, tax or IT advice.</p>
 
@@ -269,7 +253,6 @@ When you state any deadline or date, quote the exact line from the IRS's own pag
   var q = location.search || "";
   var testVisit = /(?:^|[?&])(?:fmp_test=1|utm_source=fmp_test_exclude)(?:&|$)/.test(q);
   var kitClickBySlug = {
-    "fire-to-iris-switch-checklist": "click-fire-kit",
     "amazon-1m-insurance-readiness-kit": "click-amazon-kit",
     "lnfgc": "click-etsy-kit"
   };
@@ -421,27 +404,6 @@ When you state any deadline or date, quote the exact line from the IRS's own pag
 })();
 </script>
 <script src="/deadlines/assets/deadline-status.js"></script>
-<script id="fmp-fire-kit">
-(function () {
-  "use strict";
-  // Chief flips false to true on this line only after Risk GOs the v1.4 ZIP.
-  if (typeof window.FMP_FIRE_KIT_KEEP_SELLING !== "boolean") window.FMP_FIRE_KIT_KEEP_SELLING = false;
-  var CUTOFF = Date.UTC(2026, 10, 19, 20, 0, 0);
-  function expired(now) {
-    return (now || new Date()).getTime() >= CUTOFF;
-  }
-  function hide(now) {
-    if (window.FMP_FIRE_KIT_KEEP_SELLING === true) return;
-    if (!expired(now) || !document.querySelectorAll) return;
-    var nodes = document.querySelectorAll("[data-fire-kit]");
-    var i;
-    for (i = 0; i < nodes.length; i++) nodes[i].hidden = true;
-  }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { hide(new Date()); });
-  else hide(new Date());
-  if (typeof window !== "undefined") window.FMP_FIRE_KIT = { CUTOFF: CUTOFF, expired: expired, hide: hide };
-})();
-</script>
 <script id="fmp-next-irs">
 (function () {
   "use strict";

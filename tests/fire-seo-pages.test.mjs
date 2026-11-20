@@ -3,7 +3,6 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { test } from "node:test";
-import vm from "node:vm";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const FIT = "Good fit if you file 1099s for your business or clients and must move from FIRE to IRIS by Jan 1, 2027. Not needed if your software files for you.";
@@ -30,11 +29,12 @@ test("each landing page answers first, cites Publication 5717 and the IRIS pages
   for (const rel of PAGES) {
     const html = read(rel);
     const name = slug(rel);
-    const heroEnd = html.indexOf('id="kit"');
+    const heroEnd = html.indexOf('id="dates-h"');
     const answerAt = html.indexOf('class="answer-first"');
     assert.ok(answerAt !== -1 && answerAt < heroEnd, rel);
     assert.equal(html.includes(DISCLAIMER), true, rel);
-    assert.equal(html.includes(FIT), true, rel);
+    assert.equal(html.includes(FIT), false, rel);
+    assert.equal(html.includes('data-fire-kit="1"'), false, rel);
     assert.match(html, /https:\/\/www\.irs\.gov\/pub\/irs-pdf\/p5717\.pdf/);
     assert.match(html, /https:\/\/www\.irs\.gov\/filing\/e-file-information-returns-with-iris/);
     assert.match(html, /https:\/\/www\.irs\.gov\/e-file-providers\/filing-information-returns-electronically-fire/);
@@ -52,24 +52,7 @@ test("each landing page answers first, cites Publication 5717 and the IRIS pages
   }
 });
 
-function loadKit(html) {
-  const match = html.match(/<script id="fmp-fire-kit">([\s\S]*?)<\/script>/);
-  assert.ok(match);
-  const nodes = [];
-  const sandbox = {
-    document: {
-      readyState: "complete",
-      querySelectorAll() { return nodes; },
-      addEventListener() {}
-    },
-    Date
-  };
-  sandbox.window = sandbox;
-  vm.runInNewContext(match[1], sandbox, { filename: "fmp-fire-kit.js" });
-  return { api: sandbox.FMP_FIRE_KIT, nodes };
-}
-
-test("FAQPage JSON matches the visible questions and the kit sections have no Product schema", () => {
+test("FAQPage JSON matches the visible questions and the kit sections are gone", () => {
   for (const rel of PAGES) {
     const html = read(rel);
     const blocks = [...html.matchAll(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/g)].map((block) => JSON.parse(block[1]));
@@ -80,9 +63,7 @@ test("FAQPage JSON matches the visible questions and the kit sections have no Pr
     const questions = [...visible.matchAll(/<summary>([\s\S]*?)<\/summary>\s*<p>([\s\S]*?)<\/p>/g)]
       .filter((item) => item[1] !== "What is in the $9 checklist?");
     assert.equal(faq.mainEntity.some((item) => item.name === "What is in the $9 checklist?"), false, rel);
-    if (html.includes("What is in the $9 checklist?")) {
-      assert.match(html, /<details data-fire-kit="1">\s*<summary>What is in the \$9 checklist\?<\/summary>/, rel);
-    }
+    assert.equal(html.includes("What is in the $9 checklist?"), false, rel);
     assert.equal(questions.length, faq.mainEntity.length, rel);
     faq.mainEntity.forEach((item, i) => {
       assert.equal(item.name, questions[i][1], rel);
@@ -90,39 +71,24 @@ test("FAQPage JSON matches the visible questions and the kit sections have no Pr
     });
     assert.equal(blocks.some((item) => item["@type"] === "Product"), false, rel);
     assert.equal(html.includes("InStock"), false, rel);
-    for (const id of ["kit", "kit-bottom"]) {
-      const start = html.indexOf(`id="${id}"`);
-      const end = html.indexOf("</section>", start);
-      const section = html.slice(start, end);
-      assert.match(section, /data-fire-kit="1" hidden/, rel + " " + id);
-      assert.match(section, /class="kit-fit"/, rel + " " + id);
-      assert.equal(section.includes(FIT), true, rel + " " + id);
-      assert.equal(section.includes(REFUND), true, rel + " " + id);
-      assert.equal(section.includes('"@type": "Product"'), false, rel + " " + id);
-    }
+    assert.equal(html.includes('id="kit"'), false, rel);
+    assert.equal(html.includes('id="kit-bottom"'), false, rel);
   }
 });
 
-test("the kit is shown before 20:00:00Z on Nov 19 and hidden at the cutoff", () => {
-  const first = read(PAGES[0]);
+test("the kit sections and hide script are gone, and the page copy stays", () => {
   for (const rel of PAGES) {
     const html = read(rel);
     assert.equal(html.includes("business days"), false, rel);
     assert.equal(html.includes("approved"), false, rel);
-    assert.equal(html.includes(REFUND), true, rel);
+    assert.equal(html.includes(REFUND), false, rel);
     assert.equal(html.includes("Refunds within 30 days if the file is corrupt"), false, rel);
     assert.match(html, /Thanks for your time\. If this isn't right for you, please share it with someone it could help\./);
     assert.match(html, /Not affiliated with or endorsed by the IRS\./);
     assert.match(html, /Check the IRS's own pages for your case\. Not affiliated with or endorsed by the IRS or any vendor named on this page\./);
-    assert.equal(html.match(/<script id="fmp-fire-kit">[\s\S]*?<\/script>/)[0], first.match(/<script id="fmp-fire-kit">[\s\S]*?<\/script>/)[0], rel);
+    assert.equal(html.includes('<script id="fmp-fire-kit">'), false, rel);
+    assert.equal(html.includes("FMP_FIRE_KIT"), false, rel);
   }
-  const { api, nodes } = loadKit(first);
-  nodes.push({ hidden: false }, { hidden: false });
-  assert.equal(api.SHOW, true);
-  api.hide(new Date("2026-11-19T19:59:59Z"));
-  assert.deepEqual(nodes.map((node) => node.hidden), [false, false]);
-  api.hide(new Date("2026-11-19T20:00:00Z"));
-  assert.deepEqual(nodes.map((node) => node.hidden), [true, true]);
 });
 
 test("the duplicate FIRE shutdown page is gone", () => {

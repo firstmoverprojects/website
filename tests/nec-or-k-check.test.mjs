@@ -275,7 +275,8 @@ test("the page cites the IRS sources, the check date, and stays in the sitemap a
   const questions = [...html.slice(html.indexOf('id="faq-h"')).matchAll(/<h3>([\s\S]*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/g)]
     .filter((item) => item[1] !== "Do I need the checklist to use this check?");
   assert.equal(faq.mainEntity.some((item) => item.name === "Do I need the checklist to use this check?"), false);
-  assert.match(html, /<div data-fire-kit="1">\s*<h3>Do I need the checklist to use this check\?<\/h3>/);
+  assert.equal(html.includes("Do I need the checklist to use this check?"), false);
+  assert.equal(html.includes('data-fire-kit="1"'), false);
   assert.equal(questions.length, faq.mainEntity.length);
   faq.mainEntity.forEach((item, i) => {
     assert.equal(item.name, questions[i][1]);

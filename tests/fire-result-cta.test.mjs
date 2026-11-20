@@ -78,7 +78,7 @@ test("result copy stays on the spec sentences and keeps the house lines", () => 
   assert.equal(html.includes("\u2013"), false);
   assert.equal(html.includes("&mdash;"), false);
   assert.equal(html.includes(QUESTION), true);
-  for (const key of ["B", "C", "D", "E", "F"]) assert.equal(html.includes(LEADS[key]), true, key);
+  for (const key of ["A", "B", "C", "D", "E", "F"]) assert.equal(html.includes(LEADS[key]), false, key);
   assert.equal(html.includes("Thanks for your time. If this isn't right for you, please share it with someone it could help."), true);
   assert.equal(html.split(DISCLAIMER).length - 1 >= 3, true);
   assert.equal(html.includes('id="kit-refund"'), false);
@@ -89,13 +89,13 @@ test("result copy stays on the spec sentences and keeps the house lines", () => 
 
 const DELIVERY = "One 3-page PDF checklist in a ZIP, with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on.";
 
-test("body, FAQ, badges, schema, alt text, and the sticky name the ZIP download", () => {
-  assert.equal(html.split(DELIVERY).length - 1, 1);
-  assert.match(html, /<p class="kit-note" data-fire-kit="1">One 3-page PDF checklist in a ZIP\. Refunds: within 30 days if a file is corrupt or materially not as described\.<\/p>/);
-  assert.equal(html.split("INSTANT DOWNLOAD · ONE 3-PAGE PDF IN A ZIP · CHECKLIST + 1099-NEC ADD-ON · $9").length - 1, 2);
-  assert.equal(html.split('alt="FIRE to IRIS Switch Checklist: 3-page printable PDF in a ZIP with the IRIS Application for TCC, Publication 5717 (up to 45 calendar days), and 2027 filing season steps"').length - 1, 2);
-  assert.equal(html.split("One 3-page PDF checklist in a ZIP. What is changing, in plain words.").length - 1, 2);
-  assert.equal(html.includes("The $9 checklist is one 3-page PDF in a ZIP."), true);
+test("body, FAQ, badges, schema, and alt text no longer name the ZIP download", () => {
+  assert.equal(html.split(DELIVERY).length - 1, 0);
+  assert.equal(html.includes('data-fire-kit="1"'), false);
+  assert.equal(html.split("INSTANT DOWNLOAD · ONE 3-PAGE PDF IN A ZIP · CHECKLIST + 1099-NEC ADD-ON · $9").length - 1, 0);
+  assert.equal(html.split('alt="FIRE to IRIS Switch Checklist: 3-page printable PDF in a ZIP with the IRIS Application for TCC, Publication 5717 (up to 45 calendar days), and 2027 filing season steps"').length - 1, 0);
+  assert.equal(html.split("One 3-page PDF checklist in a ZIP. What is changing, in plain words.").length - 1, 0);
+  assert.equal(html.includes("The $9 checklist is one 3-page PDF in a ZIP."), false);
   assert.equal(html.includes('id="kit-sticky-label"'), false);
   assert.equal(html.includes(">Get the $9 checklist (PDF in a ZIP)<"), false);
   assert.equal(html.includes(">Optional: $9 checklist (PDF in a ZIP)<"), false);
@@ -117,18 +117,18 @@ test("body, FAQ, badges, schema, alt text, and the sticky name the ZIP download"
   assert.equal(faq.dateModified, "2026-11-19");
   assert.equal(faq.mainEntity.some((item) => item.name === "What is in the $9 checklist?"), false);
   const visibleFaq = html.slice(html.indexOf('id="faq"'), html.indexOf("</section>", html.indexOf('id="faq"')));
-  assert.equal(visibleFaq.includes(DELIVERY + " " + REFUND), true);
-  assert.match(visibleFaq, /<div data-fire-kit="1">[\s\S]*What is in the \$9 checklist/);
-  assert.equal(html.includes(REFUND), true);
-  assert.equal(html.includes("If you want every step on 3 pages, the $9 checklist is optional."), true);
+  assert.equal(visibleFaq.includes(DELIVERY + " " + REFUND), false);
+  assert.equal(visibleFaq.includes("What is in the $9 checklist"), false);
+  assert.equal(html.includes(REFUND), false);
+  assert.equal(html.includes("If you want every step on 3 pages, the $9 checklist is optional."), false);
   assert.equal(html.includes("every step on one page"), false);
   assert.equal(html.includes("on one page set"), false);
-  assert.equal(html.includes("on 3 pages."), true);
+  assert.equal(html.includes("on 3 pages."), false);
   assert.equal(html.includes("submit them by Nov. 1, 2026"), false);
   assert.equal(html.includes("Nov. 1, 2026 was the last day to file test information returns through the FIRE Trading Partner Test System."), true);
   assert.equal(html.includes("Nov. 1, 2026: Last day to file test information returns through the FIRE Trading Partner Test System."), true);
   assert.equal(html.includes("Submit any remaining live FIRE information returns by Nov. 19, 2026, at 3 p.m. ET."), false);
-  assert.equal(html.includes("Nov 19, 2026 at 3 p.m. ET was the last day to file information returns through FIRE."), true);
+  assert.equal(html.includes("Nov 19, 2026 at 3 p.m. ET was the last day to file information returns through FIRE."), false);
   assert.equal(html.split("Not affiliated with or endorsed by the IRS.").length - 1, 2);
   assert.equal(html.includes("Not affiliated with the IRS."), false);
 });
@@ -178,7 +178,7 @@ test("all six outcomes set the lead, offer, and gumroad click", async () => {
       const style = link ? getComputedStyle(link) : { backgroundColor: "", color: "", textDecorationLine: "" };
       const url = link ? new URL(link.href) : null;
       return {
-        lead: document.getElementById("result-kit-lead").textContent,
+        lead: (document.getElementById("result-kit-lead") || { textContent: "" }).textContent,
         problem: document.getElementById("result-problem").textContent,
         linkVisible: !!(link && (link.offsetWidth || link.offsetHeight || link.getClientRects().length)),
         refundVisible: !!(refund && (refund.offsetWidth || refund.offsetHeight || refund.getClientRects().length)),
@@ -228,7 +228,7 @@ test("all six outcomes set the lead, offer, and gumroad click", async () => {
   await setBoxes({ self: false, iris: true, ir: true, open: true, csv: "" });
   let state = await offerState();
   assert.equal(state.problem, PROBLEMS.A);
-  assert.equal(state.lead, LEADS.A);
+  assert.equal(state.lead, "");
   assert.equal(state.boxVisible, true);
   assert.equal(state.question, QUESTION);
   assert.equal(state.linkVisible, false);
@@ -260,7 +260,7 @@ test("all six outcomes set the lead, offer, and gumroad click", async () => {
     await setBoxes(item.flags);
     state = await offerState();
     assert.equal(state.problem, PROBLEMS[item.key], item.key);
-    assert.equal(state.lead, LEADS[item.key], item.key);
+    assert.equal(state.lead, "", item.key);
     assert.equal(state.boxVisible, false, item.key);
     assert.equal(state.linkVisible, false, item.key);
     assert.equal(state.refundVisible, false, item.key);
@@ -273,7 +273,7 @@ test("all six outcomes set the lead, offer, and gumroad click", async () => {
     if (item.key === "B") {
       await setBoxes({ self: true, iris: false, ir: true, open: true, csv: "" });
       const earlier = await offerState();
-      assert.equal(earlier.lead, LEADS.B);
+      assert.equal(earlier.lead, "");
       assert.equal(earlier.linkVisible, false);
     }
   }
@@ -340,7 +340,7 @@ test("all six outcomes set the lead, offer, and gumroad click", async () => {
     }
     return {
       problem: document.getElementById("result-problem").textContent,
-      lead: document.getElementById("result-kit-lead").textContent,
+      lead: (document.getElementById("result-kit-lead") || { textContent: "" }).textContent,
       linkVisible: shown(link),
       refundVisible: shown(document.getElementById("kit-refund")),
       boxVisible: shown(box),
@@ -349,7 +349,7 @@ test("all six outcomes set the lead, offer, and gumroad click", async () => {
     };
   });
   assert.equal(closedState.problem, PROBLEMS.A);
-  assert.equal(closedState.lead, LEADS.A);
+  assert.equal(closedState.lead, "");
   assert.equal(closedState.boxVisible, true);
   assert.equal(closedState.question, QUESTION);
   assert.equal(closedState.linkVisible, false);
@@ -364,7 +364,7 @@ test("all six outcomes set the lead, offer, and gumroad click", async () => {
       }
       return {
         problem: document.getElementById("result-problem").textContent,
-        lead: document.getElementById("result-kit-lead").textContent,
+        lead: (document.getElementById("result-kit-lead") || { textContent: "" }).textContent,
         linkVisible: shownEl(link),
         refundVisible: shownEl(document.getElementById("kit-refund")),
         boxVisible: shownEl(document.getElementById("provider-copy")),
@@ -372,7 +372,7 @@ test("all six outcomes set the lead, offer, and gumroad click", async () => {
       };
     });
     assert.equal(closedState.problem, PROBLEMS[item.key], item.key);
-    assert.equal(closedState.lead, LEADS[item.key], item.key);
+    assert.equal(closedState.lead, "", item.key);
     assert.equal(closedState.boxVisible, false, item.key);
     assert.equal(closedState.linkVisible, false, item.key);
     assert.equal(closedState.refundVisible, false, item.key);

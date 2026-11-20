@@ -58,18 +58,14 @@ function runMarker(html, marker) {
   return sandbox;
 }
 
-test("FIRE kit buttons hide at Nov 19, 2026 3:00 p.m. Eastern", () => {
-  const sandbox = runMarker(read("tools/fire-to-iris-check/index.html"), "function expired");
+test("the FIRE cutoff still closes the reminder copy and no longer hides kit nodes", () => {
+  const html = read("tools/fire-to-iris-check/index.html");
+  assert.equal(html.includes('querySelectorAll("[data-fire-kit]")'), false);
+  const sandbox = runMarker(html, "function expired");
   const api = sandbox.FMP_FIRE_KIT;
   assert.equal(api.expired(new Date("2026-11-19T19:59:59Z")), false);
   assert.equal(api.expired(new Date("2026-11-19T20:00:00Z")), true);
   assert.equal(api.expired(new Date("2026-11-20T15:00:00Z")), true);
-  const node = { hidden: false };
-  sandbox.document.querySelectorAll = () => [node];
-  api.hide(new Date("2026-11-19T19:59:59Z"));
-  assert.equal(node.hidden, false);
-  api.hide(new Date("2026-11-19T20:00:00Z"));
-  assert.equal(node.hidden, true);
 });
 
 test("deadline rows keep each kit on its own row", () => {

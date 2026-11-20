@@ -84,16 +84,16 @@ test("both FIRE pages use past tense for Nov 19 and drop future filing lines", (
     }
     assert.equal(scanned.includes("\u2014"), false, rel);
     assert.equal(scanned.includes("\u2013"), false, rel);
-    assert.equal(html.includes('var CUTOFF = Date.UTC(2026, 10, 19, 20, 0, 0);'), true, rel);
+    assert.equal(html.includes('var CUTOFF = Date.UTC(2026, 10, 19, 20, 0, 0);'), rel === "tools/fire-to-iris-check/index.html", rel);
     assert.equal(script(html, "fmp-next-irs").includes('var NOV19_LINE = "Last day to file on FIRE: Nov 19, 2026, 3 p.m. ET. ";'), true, rel);
     assert.equal(script(html, "fmp-next-irs").includes('var CLOSED = "' + R3 + '";'), true, rel);
     assert.equal(html.includes(R3), true, rel);
     assert.equal(html.includes("IRIS is the only IRS e-file system"), false, rel);
     assert.equal(html.includes('"event/tiktok-follow-click-" + toolSlug'), true, rel);
-    assert.equal(html.includes("Refunds: within 30 days if a file is corrupt or materially not as described."), true, rel);
+    assert.equal(html.includes("Refunds: within 30 days if a file is corrupt or materially not as described."), false, rel);
     assert.match(html, /data-next-irs-copy="">FIRE is closed\. After Jan 1, 2027, IRIS is the IRS e-file system for information returns \(foreign filers without a U\.S\. TIN use IDES\)\./);
     assert.match(html, /<a href="https:\/\/www\.irs\.gov\/filing\/e-file-information-returns-with-iris" rel="noopener noreferrer">irs\.gov\/iris<\/a>/);
-    assert.match(html, /\[data-fire-kit\]\[hidden\]\{display:none !important\}/);
+    assert.equal(html.includes("[data-fire-kit]"), false, rel);
     const dates = [...html.matchAll(/"dateModified": "([^"]+)"/g)].map((match) => match[1]);
     assert.ok(dates.length > 0, rel);
     for (const date of dates) assert.equal(date, "2026-11-19", rel + " " + date);
@@ -145,12 +145,12 @@ test("the FIRE check states the passed filing day outside the kit hide nodes", (
   assert.equal(html.includes(R4_QUOTE2), true);
   assert.equal(html.includes("You still need a separate IRIS Application for TCC. FIRE filing ended Nov 19, 2026 at 3 p.m. ET."), true);
   assert.equal(html.includes("You still have a step to finish. FIRE filing ended Nov 19, 2026 at 3 p.m. ET."), true);
-  assert.equal(html.includes('<div class="kit-conv-box" data-fire-kit="1">'), true);
+  assert.equal(html.includes('<div class="kit-conv-box" data-fire-kit="1">'), false);
   assert.equal(html.includes("(last day to file information returns through the FIRE system; that date has passed). <a href=\"https://www.irs.gov/newsroom/"), true);
   assert.equal(html.includes("(last day to file information returns through the FIRE system; that date has passed) <a"), false);
   assert.equal(html.includes("Nothing urgent was flagged from your selections. Review the list below."), true);
   assert.equal(html.includes("No immediate FIRE cutoff blockers flagged from your selections. Review the checklist below."), false);
-  assert.equal(html.includes("Because you still have returns or corrections to file, the checklist lists the IRS dates and links, your IRIS TCC steps and 2027 prep on 3 pages."), true);
+  assert.equal(html.includes("Because you still have returns or corrections to file, the checklist lists the IRS dates and links, your IRIS TCC steps and 2027 prep on 3 pages."), false);
   const blocks = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].map((block) => JSON.parse(block[1]));
   const faq = blocks.find((item) => item["@type"] === "FAQPage");
   assert.equal(faq.dateModified, "2026-11-19");
@@ -211,14 +211,14 @@ test("at the cutoff the kit is hidden and the Nov 19 card is Passed, and before 
       assert.equal(after.text.includes("Today (Nov 19"), false, rel);
       assert.equal(after.next, r3, rel + " next");
       const html = read(rel);
-      assert.equal(html.includes("What is in the $9 checklist"), true, rel);
+      assert.equal(html.includes("What is in the $9 checklist"), false, rel);
       const json = [...html.matchAll(/<script type="application\/ld\+json"[\s\S]*?<\/script>/g)].join("\n");
       assert.equal(json.includes("What is in the $9 checklist"), false, rel);
       assert.equal(html.includes(R3), true, rel);
     }
     const before = await openAt("tools/fire-to-iris-check/index.html", "2026-11-19T19:59:59.000Z");
     assert.equal(before.nov19.includes("Today (Nov 19, 2026)"), true, before.nov19);
-    assert.equal(before.text.includes("$9"), true);
+    assert.equal(before.text.includes("$9"), false);
     const passed = await openAt("tools/fire-to-iris-check/index.html", "2026-11-19T20:05:00.000Z");
     assert.equal(passed.nov19.includes("Passed (Nov 19, 2026)"), true, passed.nov19);
     assert.equal(passed.nov19.includes("Today (Nov 19"), false, passed.nov19);
@@ -271,7 +271,7 @@ test("after the cutoff a finished check hides the result kit box, and before it 
   try {
     for (const flags of flows) {
       const after = await run("2026-11-19T20:00:00.000Z", flags);
-      assert.equal(after.boxHidden, true, JSON.stringify(flags));
+      assert.equal(after.boxHidden, false, JSON.stringify(flags));
       for (const phrase of KIT_BANS) {
         assert.equal(after.text.includes(phrase), false, phrase + " " + JSON.stringify(flags));
       }
@@ -281,7 +281,7 @@ test("after the cutoff a finished check hides the result kit box, and before it 
       }
       const before = await run("2026-11-19T19:59:59.000Z", flags);
       assert.equal(before.boxHidden, false, JSON.stringify(flags));
-      assert.equal(before.text.includes("$9"), true, JSON.stringify(flags));
+      assert.equal(before.text.includes("$9"), false, JSON.stringify(flags));
     }
   } finally {
     await browser.close();

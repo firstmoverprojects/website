@@ -157,7 +157,7 @@ test("tracking pages load the test-exclude helper before count.js", () => {
   assert.match(canonical, /window\.goatcounter = \{ path: function \(p\) \{ return "TEST-EXCLUDE" \+ p; \} \}/);
   assert.match(canonical, /gumroad-click\//);
   assert.match(canonical, /function sendGcEvent/);
-  assert.match(canonical, /click-fire-kit/);
+  assert.equal(canonical.includes("click-fire-kit"), false);
   assert.match(canonical, /click-amazon-kit/);
   assert.match(canonical, /click-etsy-kit/);
   assert.equal(canonical.includes('"/event/tiktok-follow-click-"'), false);
@@ -362,9 +362,8 @@ test("checkout clicks record gumroad-click/slug and test visits stay under TEST-
   ]);
 });
 
-test("kit slug clicks also record click-fire-kit, click-amazon-kit, and click-etsy-kit", () => {
+test("kit slug clicks record click-amazon-kit and click-etsy-kit, and the FIRE slug does not record click-fire-kit", () => {
   const samples = [
-    ["https://firstmoverprojects.gumroad.com/l/" + "fire-to-iris-switch-checklist?wanted=true", "click-fire-kit"],
     ["https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true", "click-amazon-kit"],
     ["https://firstmoverprojects.gumroad.com/l/lnfgc?wanted=true", "click-etsy-kit"]
   ];
@@ -376,6 +375,12 @@ test("kit slug clicks also record click-fire-kit, click-amazon-kit, and click-et
     assert.equal(live.counts.some((item) => item.path === "gumroad-click/" + href.split("/l/")[1].split("?")[0]), true, href);
     assert.equal(live.counts.some((item) => item.path === kitPath), true, href);
   }
+  const fire = loadHelper("");
+  fire.sandbox.fetch = () => Promise.resolve();
+  fire.sandbox.navigator = { sendBeacon() { return true; } };
+  const fireHref = "https://firstmoverprojects.gumroad.com/l/" + "fire-to-iris-switch-checklist?wanted=true";
+  click(fire.listeners, fireHref);
+  assert.deepEqual(fire.counts.map((item) => item.path), ["gumroad-click/fire-to-iris-switch-checklist"]);
 });
 
 function clickTikTok(listeners, slug, type = "click", button = 0) {
@@ -451,7 +456,7 @@ test("sendGcEvent uses goatcounter.count once when present and does not fetch or
       return true;
     }
   };
-  const href = "https://firstmoverprojects.gumroad.com/l/" + "fire-to-iris-switch-checklist?wanted=true";
+  const href = "https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true";
   click(live.listeners, href);
   assert.equal(countCalls, 2);
   assert.equal(fetches.length, 0);

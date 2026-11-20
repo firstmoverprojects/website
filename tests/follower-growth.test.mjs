@@ -85,8 +85,9 @@ test("every tool checker has a follow bar under the result kit button and the ma
       continue;
     }
     const singleResultCta = rel === "tools/amazon-coi-check/index.html" || rel === "tools/etsy-photo-audit-check/index.html" || rel === "tools/custom-gpt-retirement-checker/index.html" || rel === "tools/eu-product-id-check/index.html";
+    const fireKitRemoved = rel === "tools/fire-to-iris-check/index.html";
     const bars = html.match(/<div class="follow-bar"/g) || [];
-    const copies = singleResultCta ? 1 : 2;
+    const copies = singleResultCta || fireKitRemoved ? 1 : 2;
     assert.equal(bars.length, copies, rel);
     assert.equal(html.split(`data-tool-slug="${slug}"`).length - 1, copies, rel);
     assert.equal(html.split(TIKTOK_LABEL).length - 1, copies, rel);
@@ -126,11 +127,15 @@ test("every tool checker has a follow bar under the result kit button and the ma
         ? 0
         : (rel === "tools/amazon-coi-check/index.html" || rel === "tools/etsy-photo-audit-check/index.html" ? 2 : 1);
       assert.equal((result.match(/gumroad\.com/g) || []).length, gumroadInResult, rel + " result");
+    } else if (fireKitRemoved) {
+      assert.equal(result.split('class="follow-bar"').length - 1, 1, rel + " result");
+      assert.match(result, /class="follow-email" href="#signup"/, rel);
+      assert.equal(outside.includes('class="follow-bar"'), false, rel);
     } else {
       assert.equal(result.split('class="follow-bar"').length - 1, 1, rel + " result");
       assert.match(result, /class="follow-email" href="#signup"/, rel);
     }
-    assert.match(outside, /class="follow-email" href="\/deadlines\/#signup"/, rel);
+    if (!fireKitRemoved) assert.match(outside, /class="follow-email" href="\/deadlines\/#signup"/, rel);
     assert.equal(/C\.?\s*J\.?\s*Crispin|CurioFinch/i.test(html), false, rel);
   }
 });

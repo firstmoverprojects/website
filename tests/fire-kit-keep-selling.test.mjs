@@ -17,17 +17,21 @@ const PERMALINK = "https://firstmoverprojects.gumroad.com/l/" + "fire-to-iris-sw
 const BEFORE = "2026-11-19T19:59:59.000Z";
 const AFTER = "2026-11-19T20:05:00.000Z";
 const PAGES = [
-  "tools/fire-to-iris-check/index.html",
-  "tools/index.html",
-  "tools/1099-nec-or-1099-k-check/index.html",
   "deadlines/index.html",
   "deadlines/finder/index.html",
+  "deadlines/office-2021-windows-11-24h2-oct-13.html",
+  "deadlines/whiteboard-azure-oct-16.html"
+];
+const REMINDER_PAGES = [
+  "tools/fire-to-iris-check/index.html",
+  "tools/1099-nec-or-1099-k-check/index.html"
+];
+const REMOVED_PAGES = [
+  "tools/index.html",
   "deadlines/irs-fire-retirement-nov-19.html",
   "deadlines/fire-to-iris-transition-checklist.html",
   "deadlines/iris-tcc-application-how-long.html",
-  "deadlines/file-1099-nec-2027-iris.html",
-  "deadlines/office-2021-windows-11-24h2-oct-13.html",
-  "deadlines/whiteboard-azure-oct-16.html"
+  "deadlines/file-1099-nec-2027-iris.html"
 ];
 const SHOTS = [
   { path: "/tools/fire-to-iris-check/", file: "fire-to-iris-check" },
@@ -61,11 +65,18 @@ function loadHide(rel, keep) {
   return { api: sandbox.FMP_FIRE_KIT, nodes };
 }
 
-test("every FIRE kit script has the same keep-selling flag line, default false", () => {
-  for (const rel of PAGES) {
+test("every remaining FIRE kit script has the same keep-selling flag line, default false", () => {
+  for (const rel of PAGES.concat(REMINDER_PAGES)) {
     const html = read(rel);
     assert.equal(html.split(FLAG_LINE).length - 1, 1, rel);
     assert.equal(html.includes('src="/assets/fire-kit-cutoff.js"'), false, rel);
+  }
+  for (const rel of REMOVED_PAGES) {
+    const html = read(rel);
+    assert.equal(html.includes(FLAG_LINE), false, rel);
+    assert.equal(html.includes('<script id="fmp-fire-kit">'), false, rel);
+    assert.equal(html.includes('data-fire-kit="1"'), false, rel);
+    assert.equal(html.includes(PERMALINK), false, rel);
   }
 });
 
