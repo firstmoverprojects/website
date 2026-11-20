@@ -327,10 +327,12 @@ async function readClosedFireKit(page, offer) {
   const problems = [];
   const cta = page.locator(offer.cta);
   const href = (await cta.count()) === 1 ? await cta.getAttribute("href") : "";
-  const buy = buyProblem(href || "", offer.slug);
-  if ((await cta.count()) !== 1) problems.push(`${offer.cta} is missing`);
-  else if (await cta.isVisible()) problems.push(`${offer.cta} is visible`);
-  if (buy) problems.push(`${offer.cta} ${buy}`);
+  if ((await cta.count()) > 1) problems.push(`${offer.cta} is duplicated`);
+  else if ((await cta.count()) === 1 && await cta.isVisible()) problems.push(`${offer.cta} is visible`);
+  if ((await cta.count()) === 1) {
+    const buy = buyProblem(href || "", offer.slug);
+    if (buy) problems.push(`${offer.cta} ${buy}`);
+  }
   const visibleBuys = await page.locator("a[href*='gumroad.com']").evaluateAll((links) => {
     function shown(el) {
       for (let node = el; node && node.nodeType === 1; node = node.parentElement) {
@@ -422,7 +424,8 @@ test("each offer page loads, internal links resolve, and Gumroad buy links are h
     for (const item of broken) failures.push(`${offer.name}: ${item}`);
 
     const buys = buyLinks(html);
-    if (buys.length === 0) failures.push(`${offer.name}: no Gumroad buy link`);
+    if (buys.length === 0 && offer.id !== "fire") failures.push(`${offer.name}: no Gumroad buy link`);
+    if (offer.id === "fire" && buys.length !== 0) failures.push(`${offer.name}: FIRE kit Gumroad link is still present`);
     for (const href of buys) {
       const problem = buyProblem(href, offer.slug);
       if (problem) failures.push(`${offer.name}: ${problem}`);

@@ -23,8 +23,8 @@ Ignore rows whose source is `fmp_test_exclude`. That value marks test visits.
 
 ## Example
 
-Someone opens `https://firstmoverprojects.com/?utm_source=tiktok` and uses the footer button on the FIRE checker. Gumroad sees:
+Someone opens `https://firstmoverprojects.com/?utm_source=tiktok` and uses the footer button on the Amazon COI checker. Gumroad sees:
 
-`https://firstmoverprojects.gumroad.com/l/fire-to-iris-switch-checklist?wanted=true&utm_source=tiktok&utm_medium=site&utm_campaign=fire-to-iris-check&utm_content=footer`
+`https://firstmoverprojects.gumroad.com/l/amazon-1m-insurance-readiness-kit?wanted=true&utm_source=tiktok&utm_medium=site&utm_campaign=amazon-coi-check&utm_content=footer`
 
-In Analytics → Links, that is source `tiktok`, medium `site`, campaign `fire-to-iris-check`. The same button with no landing tag is source `site`.
+In Analytics → Links, that is source `tiktok`, medium `site`, campaign `amazon-coi-check`. The same button with no landing tag is source `site`.

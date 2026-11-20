@@ -59,7 +59,7 @@ for (const rel of PAGES) {
     const buy = firstBuyIndex(html);
     assert.ok(h1 !== -1 && answer > h1, "#aeo-answer should follow the H1");
     assert.ok(end > answer, "#aeo-answer should close");
-    assert.ok(buy > answer, "#aeo-answer should precede the first Gumroad buy link");
+    assert.ok(buy === -1 || buy > answer, "#aeo-answer should precede the first Gumroad buy link");
     const count = words(html.slice(answer, end)).length;
     assert.ok(count >= 40 && count <= 60, `word count ${count} is outside 40-60`);
   });

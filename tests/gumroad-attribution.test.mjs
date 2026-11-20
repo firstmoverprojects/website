@@ -163,7 +163,7 @@ test("every Gumroad product link carries source, medium, campaign, and content",
       if (!url.pathname.endsWith("/pdkqbs")) assert.equal(url.searchParams.get("wanted"), "true", raw);
     }
   }
-  assert.ok(count >= 87, String(count));
+  assert.ok(count >= 76, String(count));
 });
 
 function runUtm(search, hrefs, storage) {

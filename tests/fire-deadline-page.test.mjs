@@ -65,9 +65,9 @@ function load(id) {
 test("the hero answers first, then shows the passed Nov 19 line beside the checklist", () => {
   const top = hero();
   const answerAt = top.indexOf('class="answer-first"');
-  const buyAt = top.indexOf('id="kit-top"');
   const nextAt = top.indexOf('id="next-irs"');
-  assert.ok(answerAt !== -1 && answerAt < buyAt && buyAt < nextAt);
+  assert.equal(top.includes('id="kit-top"'), false);
+  assert.ok(answerAt !== -1 && answerAt < nextAt);
   assert.match(top, /This page lists the IRS FIRE retirement dates and what to do next\./);
   assert.match(top, /November 9, 2026 has passed, so existing IR Applications for TCC are read-only/);
   assert.match(top, /Nov 19, 2026 at 3 p\.m\. Eastern was the last day to file information returns through FIRE\./);
@@ -81,7 +81,7 @@ test("the hero answers first, then shows the passed Nov 19 line beside the check
   assert.equal(/Nov(?:ember)? 1\b/.test(top), false);
   assert.equal(top.includes("(passed)"), false);
   const free = top.indexOf('href="/tools/fire-to-iris-check/"');
-  assert.ok(free !== -1 && free < buyAt);
+  assert.ok(free !== -1 && free < nextAt);
 });
 
 test("passed Nov 1 is marked passed and is not the first date", () => {
@@ -95,30 +95,19 @@ test("passed Nov 1 is marked passed and is not the first date", () => {
   assert.match(dates, /That date has passed\./);
 });
 
-test("checklist links reuse the tool page product, price, labels, and click names", () => {
-  const toolTop = tool.match(/id="kit-top"[^>]*>/);
-  assert.ok(toolTop);
-  assert.match(toolTop[0], /utm_content=fire-check-top/);
-  assert.match(html, /id="kit-top"[^>]*data-goatcounter-click="cta\/fire-check-top"[^>]*href="https:\/\/firstmoverprojects\.gumroad\.com\/l\/fire-to-iris-switch-checklist\?wanted=true&amp;utm_source=site&amp;utm_medium=site&amp;utm_campaign=irs-fire-retirement-nov-19&amp;utm_content=fire-check-top"/);
-  assert.match(html, /id="kit-result"[^>]*data-goatcounter-click="cta\/fire-check-result"[^>]*utm_content=fire-check-result"/);
-  assert.match(html, /data-goatcounter-click="cta\/fire-check-sticky"[^>]*utm_content=fire-check-sticky"/);
-  assert.match(html, />See the \$9 FIRE to IRIS checklist</);
-  assert.match(html, />Get the \$9 checklist \(PDF in a ZIP\)</);
+test("the FIRE checklist Gumroad links are gone", () => {
+  assert.equal(html.includes('id="kit-top"'), false);
+  assert.equal(html.includes('id="kit-result"'), false);
+  assert.equal(html.includes("See the $9 FIRE to IRIS checklist"), false);
+  assert.equal(html.includes(">Get the $9 checklist (PDF in a ZIP)<"), false);
+  assert.equal(html.includes(">Get the checklist<"), false);
   assert.equal(html.includes("(PDF, instant download)"), false);
   assert.equal(html.includes("(instant PDF)"), false);
-  assert.match(html, />Get the checklist</);
   assert.equal(html.includes("FIRE→IRIS"), false);
-  assert.equal(html.split(PRODUCT).length - 1, 3);
-  const hrefs = [...html.matchAll(/https:\/\/firstmoverprojects\.gumroad\.com\/l\/[^"']+/g)].map((match) => match[0].replace(/&amp;/g, "&"));
-  assert.equal(hrefs.length, 3);
-  for (const href of hrefs) {
-    const url = new URL(href);
-    assert.equal(url.origin + url.pathname, PRODUCT);
-    assert.equal(url.searchParams.get("wanted"), "true");
-    assert.equal(url.searchParams.get("utm_source"), "site");
-    assert.equal(url.searchParams.get("utm_medium"), "site");
-    assert.equal(url.searchParams.get("utm_campaign"), "irs-fire-retirement-nov-19");
-  }
+  assert.equal(html.split(PRODUCT).length - 1, 0);
+  assert.equal(tool.split(PRODUCT).length - 1, 0);
+  const hrefs = [...html.matchAll(/https:\/\/firstmoverprojects\.gumroad\.com\/l\/[^"']+/g)];
+  assert.equal(hrefs.length, 0);
 });
 
 test("the kit is described as one 3-page PDF and the house lines stay", () => {

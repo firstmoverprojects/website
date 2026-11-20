@@ -90,9 +90,8 @@ async function closedFirePage() {
   }
 }
 
-test("primary kit CTAs emit click-fire-kit, click-amazon-kit, and click-etsy-kit", async () => {
+test("primary kit CTAs emit click-amazon-kit and click-etsy-kit, and the FIRE kit link is gone", async () => {
   const cases = [
-    ["/tools/fire-to-iris-check/", 'a[data-goatcounter-click="cta/fire-check-top"]', "click-fire-kit", BEFORE_CUTOFF],
     ["/tools/amazon-coi-check/", 'a[href*="amazon-1m-insurance"][href*="wanted=true"]', "click-amazon-kit"],
     ["/tools/etsy-photo-audit-check/", 'a[href*="lnfgc"][href*="wanted=true"]', "click-etsy-kit"]
   ];

@@ -72,7 +72,7 @@ test("every FIRE kit script has the same keep-selling flag line, default false",
 test("each hide script keeps the kit after the cutoff only when the flag is true", () => {
   for (const rel of PAGES) {
     const html = read(rel);
-    assert.equal(html.includes(PERMALINK), true, rel);
+    assert.equal(html.includes(PERMALINK), false, rel);
     assert.equal(html.includes("REMOVE Nov 20, 2026"), false, rel);
     for (const keep of [false, true]) {
       for (const when of [BEFORE, AFTER]) {
@@ -110,9 +110,8 @@ test("after the cutoff the two FIRE pages show E3, and the flag keeps the kit li
         assert.equal(response.status(), 200, spec.path);
         const next = (await page.locator("#next-irs").innerText()).replace(/\s+/g, " ").trim();
         assert.equal(next.startsWith(E3), true, spec.file + " " + next);
-        assert.equal(await page.locator("#kit-top").isVisible(), keep, spec.file + " kit visible");
-        const href = await page.locator("#kit-top").getAttribute("href");
-        assert.equal(href.startsWith(PERMALINK), true, href);
+        assert.equal(await page.locator("#kit-top").count(), 0, spec.file + " kit removed");
+        assert.equal(await page.locator("a[href*='fire-to-iris-switch-checklist']").count(), 0, spec.file);
         const shot = path.join(outDir, spec.file + (keep ? "-keep-selling" : "-hidden") + ".png");
         await page.screenshot({ path: shot, fullPage: false });
         await context.close();

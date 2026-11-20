@@ -75,7 +75,7 @@ test("static hub chips for dates before Nov 4, 2026 do not say Upcoming", () => 
     assert.ok(status, match[1]);
     return { attrs: match[1], label: status[1] };
   });
-  assert.equal(labels.filter((item) => item.label === "Upcoming").length, 10);
+  assert.equal(labels.filter((item) => item.label === "Upcoming").length, 9);
   assert.deepEqual(labels.map((item) => item.label), [
     "Upcoming",
     "Took effect Nov 1",
@@ -84,7 +84,7 @@ test("static hub chips for dates before Nov 4, 2026 do not say Upcoming", () => 
     "Until Nov 10 if deposits were on time",
     "Took effect Nov 4",
     "Accounts close Nov 30",
-    "Upcoming",
+    "Expired. Passed Nov 19",
     "Upcoming",
     "Upcoming",
     "Upcoming",
@@ -103,7 +103,8 @@ test("static hub chips for dates before Nov 4, 2026 do not say Upcoming", () => 
   }
   assert.match(main, /<span class="chip chip--past">Passed Nov 2<\/span>/);
   assert.match(main, /<span class="chip chip--past">Deposits stopped Nov 3<\/span>/);
-  assert.doesNotMatch(main, />Expired/);
+  assert.match(main, />Expired\. Passed Nov 19</);
+  assert.equal((main.match(/>Expired/g) || []).length, 1);
   const passed = hub.split('id="past-h"')[1];
   assert.match(passed, /Expired\. Passed Oct 13/);
   assert.match(passed, /Expired\. Passed Oct 16/);
@@ -284,7 +285,7 @@ test("the hub and the FIRE deadline page set the Nov 19 cutoff", () => {
   const page = readFileSync(path.join(ROOT, "deadlines/irs-fire-retirement-nov-19.html"), "utf8");
   assert.equal(hub.split('data-cutoff="').length - 1, 1);
   assert.match(hub, new RegExp(`<tr class="dated-item" data-date="Nov 19, 2026" data-cutoff="${FIRE_CUTOFF}">[\\s\\S]*?irs-fire-retirement-nov-19\\.html`));
-  assert.match(page, new RegExp(`<li class="dated-item" data-date="Nov 19, 2026, 3 p\\.m\\. ET" data-cutoff="${FIRE_CUTOFF}" data-past-label="Expired\\. Passed Nov 19"><p class="when">Nov 19, 2026, 3 p\\.m\\. ET<br /><span class="chip" data-chip="status">Upcoming</span></p>`));
+  assert.match(page, new RegExp(`<li class="dated-item" data-date="Nov 19, 2026, 3 p\\.m\\. ET" data-cutoff="${FIRE_CUTOFF}" data-past-label="Expired\\. Passed Nov 19"><p class="when">Nov 19, 2026, 3 p\\.m\\. ET<br /><span class="chip chip--past chip--expired" data-chip="status">Expired\\. Passed Nov 19</span></p>`));
   assert.match(page, /<script src="\/deadlines\/assets\/deadline-status\.js"><\/script>/);
   assert.equal(page.split('data-cutoff="').length - 1, 1);
 });

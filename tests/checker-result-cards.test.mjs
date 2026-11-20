@@ -186,6 +186,23 @@ test("Etsy, FIRE, and Amazon checkers show one tagged kit button", async () => {
     await page.click(item.click);
     assert.equal(await page.locator("#results").isVisible(), true, item.rel);
     assert.equal(await page.locator("#result-cta").isVisible(), true, item.rel);
+    if (item.rel === "tools/fire-to-iris-check/index.html") {
+      assert.equal(await page.locator("a[href*='fire-to-iris-switch-checklist']").count(), 0, item.rel);
+      assert.equal(await page.locator("a[href*='gumroad.com']:visible").count(), 0, item.rel);
+      assert.match(await page.innerText("#result-problem"), item.problem, item.rel);
+      assert.match(await page.innerText("#result-deadline"), item.deadline, item.rel);
+      const steps = await page.locator("#next-steps li").count();
+      assert.ok(steps >= 2 && steps <= 3, item.rel + " steps " + steps);
+      assert.match(await page.innerText("#result-cta"), /free weekly deadline email/);
+      if (item.reminder) await assertReminder(page, item.reminder, item.rel, item.reminderHeading, item.reminderButton);
+      assert.deepEqual(errors, [], item.rel);
+      assert.deepEqual(toolNetwork(nets), [], item.rel);
+      await assertNoHScroll(page);
+      await page.setViewportSize({ width: 1280, height: 900 });
+      await assertNoHScroll(page);
+      await page.close();
+      continue;
+    }
     assert.equal(await page.locator("#result-cta a.btn").count(), 1, item.rel);
     assert.equal(await page.locator("#kit-result").isVisible(), item.closedKit !== true, item.rel);
     if (item.closedKit) {

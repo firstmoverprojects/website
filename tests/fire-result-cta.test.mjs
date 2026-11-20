@@ -81,9 +81,10 @@ test("result copy stays on the spec sentences and keeps the house lines", () => 
   for (const key of ["B", "C", "D", "E", "F"]) assert.equal(html.includes(LEADS[key]), true, key);
   assert.equal(html.includes("Thanks for your time. If this isn't right for you, please share it with someone it could help."), true);
   assert.equal(html.split(DISCLAIMER).length - 1 >= 3, true);
-  assert.match(html, /id="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described\./);
-  assert.match(html, /data-goatcounter-click="cta\/fire-result-need-tcc"/);
-  assert.match(html, /utm_content=fire-result-need-tcc/);
+  assert.equal(html.includes('id="kit-refund"'), false);
+  assert.equal(html.includes('data-goatcounter-click="cta/fire-result-need-tcc"'), false);
+  assert.equal(html.includes("utm_content=fire-result-need-tcc"), false);
+  assert.equal(html.includes("gumroad.com/l/fire-to-iris-switch-checklist"), false);
 });
 
 const DELIVERY = "One 3-page PDF checklist in a ZIP, with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on.";
@@ -95,10 +96,9 @@ test("body, FAQ, badges, schema, alt text, and the sticky name the ZIP download"
   assert.equal(html.split('alt="FIRE to IRIS Switch Checklist: 3-page printable PDF in a ZIP with the IRIS Application for TCC, Publication 5717 (up to 45 calendar days), and 2027 filing season steps"').length - 1, 2);
   assert.equal(html.split("One 3-page PDF checklist in a ZIP. What is changing, in plain words.").length - 1, 2);
   assert.equal(html.includes("The $9 checklist is one 3-page PDF in a ZIP."), true);
-  assert.match(html, /id="kit-sticky-label"[^>]*>\$9 FIRE to IRIS checklist \(PDF in a ZIP\)</);
-  assert.equal(html.includes(BUTTON), true);
-  assert.equal(html.includes(QUIET), true);
-  assert.equal(html.includes(">Get the $9 checklist (PDF in a ZIP)<"), true);
+  assert.equal(html.includes('id="kit-sticky-label"'), false);
+  assert.equal(html.includes(">Get the $9 checklist (PDF in a ZIP)<"), false);
+  assert.equal(html.includes(">Optional: $9 checklist (PDF in a ZIP)<"), false);
   for (const phrase of ["One PDF", "ONE PDF", "one PDF", "instant PDF", "(PDF, instant download)", "One 3-page PDF with", "is one PDF"]) {
     assert.equal(html.includes(phrase), false, phrase);
   }
@@ -175,29 +175,29 @@ test("all six outcomes set the lead, offer, and gumroad click", async () => {
       const refund = document.getElementById("kit-refund");
       const box = document.getElementById("provider-copy");
       const disclaimer = document.querySelector("#result-cta .disclaimer");
-      const style = getComputedStyle(link);
-      const url = new URL(link.href);
+      const style = link ? getComputedStyle(link) : { backgroundColor: "", color: "", textDecorationLine: "" };
+      const url = link ? new URL(link.href) : null;
       return {
         lead: document.getElementById("result-kit-lead").textContent,
         problem: document.getElementById("result-problem").textContent,
-        linkVisible: !!(link.offsetWidth || link.offsetHeight || link.getClientRects().length),
-        refundVisible: !!(refund.offsetWidth || refund.offsetHeight || refund.getClientRects().length),
+        linkVisible: !!(link && (link.offsetWidth || link.offsetHeight || link.getClientRects().length)),
+        refundVisible: !!(refund && (refund.offsetWidth || refund.offsetHeight || refund.getClientRects().length)),
         boxVisible: !!(box.offsetWidth || box.offsetHeight || box.getClientRects().length),
         disclaimer: disclaimer.textContent,
         disclaimerVisible: !!(disclaimer.offsetWidth || disclaimer.offsetHeight || disclaimer.getClientRects().length),
-        linkText: link.textContent,
-        className: link.className,
+        linkText: link ? link.textContent : "",
+        className: link ? link.className : "",
         bg: style.backgroundColor,
         color: style.color,
         deco: style.textDecorationLine,
         question: document.getElementById("provider-question").textContent,
-        refund: refund.textContent,
-        content: url.searchParams.get("utm_content"),
-        source: url.searchParams.get("utm_source"),
-        medium: url.searchParams.get("utm_medium"),
-        campaign: url.searchParams.get("utm_campaign"),
-        wanted: url.searchParams.get("wanted"),
-        click: link.getAttribute("data-goatcounter-click"),
+        refund: refund ? refund.textContent : "",
+        content: url ? url.searchParams.get("utm_content") : "",
+        source: url ? url.searchParams.get("utm_source") : "",
+        medium: url ? url.searchParams.get("utm_medium") : "",
+        campaign: url ? url.searchParams.get("utm_campaign") : "",
+        wanted: url ? url.searchParams.get("wanted") : "",
+        click: link ? link.getAttribute("data-goatcounter-click") : "",
         steps: document.querySelectorAll("#next-steps li").length,
         boxTop: box.getBoundingClientRect().top,
         disclaimerTop: disclaimer.getBoundingClientRect().top
@@ -262,45 +262,19 @@ test("all six outcomes set the lead, offer, and gumroad click", async () => {
     assert.equal(state.problem, PROBLEMS[item.key], item.key);
     assert.equal(state.lead, LEADS[item.key], item.key);
     assert.equal(state.boxVisible, false, item.key);
-    assert.equal(state.linkVisible, true, item.key);
-    assert.equal(state.refundVisible, true, item.key);
-    assert.equal(state.refund, REFUND, item.key);
+    assert.equal(state.linkVisible, false, item.key);
+    assert.equal(state.refundVisible, false, item.key);
+    assert.equal(await page.locator("#kit-result").count(), 0, item.key);
+    assert.equal(await page.locator("a[href*='fire-to-iris-switch-checklist']").count(), 0, item.key);
     assert.equal(state.disclaimer, DISCLAIMER, item.key);
     assert.equal(state.disclaimerVisible, true, item.key);
-    assert.equal(state.content, item.content, item.key);
-    assert.equal(state.source, "site", item.key);
-    assert.equal(state.medium, "site", item.key);
-    assert.equal(state.campaign, "fire-to-iris-check", item.key);
-    assert.equal(state.wanted, "true", item.key);
-    assert.equal(state.click, "cta/" + item.content, item.key);
     assert.ok(state.steps >= 1 && state.steps <= 3, item.key);
-    if (item.quiet) {
-      assert.equal(state.linkText, QUIET, item.key);
-      assert.equal(state.className, "paid-quiet", item.key);
-      assert.equal(state.bg, "rgba(0, 0, 0, 0)", item.key);
-      assert.equal(state.color, "rgb(0, 85, 255)", item.key);
-      assert.equal(state.deco, "underline", item.key);
-    } else {
-      assert.equal(state.linkText, BUTTON, item.key);
-      assert.equal(state.className, "btn", item.key);
-      assert.equal(state.bg, "rgb(0, 85, 255)", item.key);
-      assert.equal(state.color, "rgb(255, 255, 255)", item.key);
-    }
-    const tracked = await page.evaluate(() => {
-      window.__gc = [];
-      window.goatcounter = window.goatcounter || {};
-      window.goatcounter.count = (payload) => { window.__gc.push(payload); };
-      document.getElementById("kit-result").click();
-      return window.__gc.map((row) => row.path);
-    });
-    assert.equal(tracked.includes("gumroad-click/fire-to-iris-switch-checklist"), true, item.key + " " + tracked.join(","));
     await shot(item.file);
     if (item.key === "B") {
       await setBoxes({ self: true, iris: false, ir: true, open: true, csv: "" });
       const earlier = await offerState();
       assert.equal(earlier.lead, LEADS.B);
-      assert.equal(earlier.content, "fire-result-need-tcc");
-      assert.equal(earlier.linkText, BUTTON);
+      assert.equal(earlier.linkVisible, false);
     }
   }
 
@@ -328,15 +302,8 @@ test("all six outcomes set the lead, offer, and gumroad click", async () => {
   await tagged.clock.setFixedTime(new Date(BEFORE_CUTOFF));
   await tagged.goto(pathToFileURL(PAGE).href + "?utm_source=tiktok", { waitUntil: "load" });
   await tagged.click("#go");
-  const kept = await tagged.evaluate(() => {
-    const url = new URL(document.getElementById("kit-result").href);
-    return {
-      source: url.searchParams.get("utm_source"),
-      content: url.searchParams.get("utm_content")
-    };
-  });
-  assert.equal(kept.source, "tiktok");
-  assert.equal(kept.content, "fire-result-need-tcc");
+  assert.equal(await tagged.locator("#kit-result").count(), 0);
+  assert.equal(await tagged.locator("a[href*='fire-to-iris-switch-checklist']").count(), 0);
 
   const closed = await context.newPage();
   await closed.clock.install({ time: new Date(AFTER_CUTOFF) });

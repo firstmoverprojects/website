@@ -196,7 +196,8 @@ test("?embed=1 hides the site nav and keeps the powered-by link and kit button",
       assert.equal(await page.evaluate(() => window.FMP_FIRE_KIT_KEEP_SELLING), false, rel);
       const early = await open(rel, "?embed=1", BEFORE_CUTOFF);
       assert.deepEqual(early.errors, [], rel + " before cutoff");
-      assert.equal(await early.page.locator("#paid-link").isVisible(), true, rel + " before cutoff");
+      assert.equal(await early.page.locator("#paid-link").count(), 0, rel + " before cutoff");
+      assert.equal(await early.page.locator("a[href*='fire-to-iris-switch-checklist']").count(), 0, rel + " before cutoff");
       await early.page.close();
     } else {
       const kit = page.locator("#paid-link, a.trade-link").first();

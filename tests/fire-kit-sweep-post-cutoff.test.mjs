@@ -218,15 +218,14 @@ test("the FIRE kit stays on sale one second before the cutoff and is gone at the
   try {
     for (const rel of PAGES) {
       const before = await openAt(rel, "2026-11-19T19:59:59.000Z");
-      assert.ok(before.gumroad > 0, rel + " offer before cutoff");
+      assert.equal(before.gumroad, 0, rel + " offer removed");
       const after = await openAt(rel, "2026-11-19T20:00:00.000Z");
       assertHidden(after, rel);
       const checked = await runCheck(rel, "2026-11-19T20:00:00.000Z");
       assertHidden(checked, rel + " after check");
       if (rel === "tools/1099-nec-or-1099-k-check/index.html") {
         const stillSelling = await runCheck(rel, "2026-11-19T19:59:59.000Z");
-        assert.ok(stillSelling.gumroad > 0, rel + " result offer before cutoff");
-        assert.equal(stillSelling.text.includes("$9"), true, rel + " $9 before cutoff");
+        assert.equal(stillSelling.gumroad, 0, rel + " result offer removed");
       }
     }
   } finally {
