@@ -136,7 +136,9 @@ test("share images and JSON-LD do not keep the FIRE kit preview or the kit offer
       assert.equal(url.includes("fire-to-iris-kit-preview"), false, rel + " " + url);
     }
     assert.equal(FIRE_JSON.test(JSON.stringify(blocks)), false, rel);
-    assert.equal(withCss(rel).includes("[data-fire-kit][hidden]{display:none !important}"), true, rel);
+    if (html.includes("data-fire-kit")) {
+      assert.equal(withCss(rel).includes("[data-fire-kit][hidden]{display:none !important}"), true, rel);
+    }
   }
   for (const rel of SHARE_PAGES) {
     const html = read(rel);

@@ -76,8 +76,8 @@ test("the hero answers first, then shows the passed Nov 19 line beside the check
   assert.equal(top.includes("Next IRS date: Nov 19"), false);
   assert.match(top, /data-next-irs-copy="">FIRE is closed\. After Jan 1, 2027, IRIS is the IRS e-file system for information returns \(foreign filers without a U\.S\. TIN use IDES\)\.<\/span>/);
   assert.match(top, /<a href="https:\/\/www\.irs\.gov\/filing\/e-file-information-returns-with-iris" rel="noopener noreferrer">irs\.gov\/iris<\/a>/);
-  assert.match(top, /Refunds: within 30 days if a file is corrupt or materially not as described\./);
-  assert.match(top, /One PDF, 3 pages/);
+  assert.equal(top.includes("Refunds: within 30 days if a file is corrupt or materially not as described."), false);
+  assert.equal(top.includes("One PDF, 3 pages"), false);
   assert.equal(/Nov(?:ember)? 1\b/.test(top), false);
   assert.equal(top.includes("(passed)"), false);
   const free = top.indexOf('href="/tools/fire-to-iris-check/"');
@@ -110,8 +110,8 @@ test("the FIRE checklist Gumroad links are gone", () => {
   assert.equal(hrefs.length, 0);
 });
 
-test("the kit is described as one 3-page PDF and the house lines stay", () => {
-  assert.match(html, /One 3-page PDF with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on\./);
+test("the kit description is gone and the house lines stay", () => {
+  assert.equal(html.includes("One 3-page PDF with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on."), false);
   assert.equal(html.includes(FOOTER), true);
   assert.equal(html.includes("Deadlines for small businesses, in plain English, with source links."), true);
   assert.equal(html.includes("General guidance, not legal, tax or IT advice. Check the IRS's own pages and ask your tax professional for your situation. Not affiliated with the IRS. Names are used only to describe compatibility."), true);

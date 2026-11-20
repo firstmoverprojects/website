@@ -16,14 +16,11 @@
     <link rel="stylesheet" href="styles.css" />
     <style>
       .answer-first { margin: 0 0 0.75rem; font-size: 1.0625rem; }
-      .kit-fit { margin: 0.35rem 0 0.75rem; font-weight: 600; }
-      .kit-preview-img { width: 100%; height: auto; border-radius: 8px; }
       .fire-sticky { display: none; }
       @media (max-width: 767px) {
         .fire-sticky { display: flex; position: fixed; z-index: 40; left: 0; right: 0; bottom: 0; gap: 8px; align-items: stretch; margin: 0; padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px)); background: #f4f7fa; border-top: 2px solid #071b31; }
         .fire-sticky .btn { flex: 1 1 0; width: auto; max-width: none; margin: 0; min-height: 44px; font-size: 0.9375rem; padding: 0.65rem 0.7rem; }
         .fire-sticky .btn--secondary { background: #01060b; color: #f4f7fa; border-color: #01060b; }
-        .fire-sticky [hidden] { display: none !important; }
         body { padding-bottom: 76px; }
       }
       @media print { .fire-sticky { display: none !important; } body { padding-bottom: 0 !important; } }
@@ -154,16 +151,6 @@
         <p class="kit-cta"><a class="btn btn--secondary" href="/tools/fire-to-iris-check/">Free FIRE to IRIS check</a></p>
       </section>
 
-      <!-- FIRE kit links hide after Nov 19, 2026, 20:00 UTC unless FMP_FIRE_KIT_KEEP_SELLING is true in the fmp-fire-kit script on this page -->
-      <section class="kit-section" id="kit" aria-labelledby="kit-h" data-fire-kit="1" hidden>
-        <h2 id="kit-h">See What's Inside the $9 FIRE to IRIS Switch Checklist</h2>
-        <p class="kit-fit">Good fit if you file 1099s for your business or clients and must move from FIRE to IRIS by Jan 1, 2027. Not needed if your software files for you.</p>
-        <picture><source type="image/webp" srcset="/assets/previews/fire-to-iris-kit-preview-1280x720.webp"><img class="kit-preview-img" src="/assets/previews/fire-to-iris-kit-preview-1280x720.png" alt="FIRE to IRIS Switch Checklist: 3-page printable PDF in a ZIP with the IRIS Application for TCC, Publication 5717 (up to 45 calendar days), and 2027 filing season steps" width="1280" height="720" loading="lazy"></picture>
-        <p>One 3-page PDF with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on.</p>
-        <p class="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</p>
-        <p>General guidance, not legal, tax or IT advice.</p>
-      </section>
-
       <section aria-labelledby="dates-h">
         <h2 id="dates-h">Key dates</h2>
         <ul class="dates">
@@ -222,15 +209,6 @@
           <li><a href="https://www.irs.gov/publications/p1099">IRS Publication 1099 (2026), General Instructions for Certain Information Returns</a></li>
         </ul>
         <p>Checked Nov 5, 2026.</p>
-      </section>
-
-      <!-- FIRE kit links hide after Nov 19, 2026, 20:00 UTC unless FMP_FIRE_KIT_KEEP_SELLING is true in the fmp-fire-kit script on this page -->
-      <section class="kit-section" id="kit-bottom" aria-labelledby="kit-bottom-h" data-fire-kit="1" hidden>
-        <h2 id="kit-bottom-h">$9 FIRE to IRIS Switch Checklist</h2>
-        <p class="kit-fit">Good fit if you file 1099s for your business or clients and must move from FIRE to IRIS by Jan 1, 2027. Not needed if your software files for you.</p>
-        <p>One 3-page PDF with the IRS dates and links, your FIRE account steps, the IRIS Application for TCC, 2027 prep, and a 1099-NEC add-on.</p>
-        <p class="kit-refund">Refunds: within 30 days if a file is corrupt or materially not as described.</p>
-        <p>General guidance, not legal, tax or IT advice.</p>
       </section>
 
       <p class="related">More: <a href="irs-fire-retirement-nov-19.html">When was the last day to file on IRS FIRE?</a> · <a href="fire-to-iris-transition-checklist.html">FIRE to IRIS transition checklist</a> · <a href="file-1099-nec-2027-iris.html">file 1099-NEC 2027 IRIS</a> · <a href="/tools/fire-to-iris-check/">Free FIRE to IRIS check</a> · <a href="/deadlines/">All deadlines</a></p>
@@ -409,30 +387,6 @@
 })();
 </script>
     <script src="/deadlines/assets/deadline-status.js"></script>
-<script id="fmp-fire-kit">
-(function () {
-  "use strict";
-  // Chief flips false to true on this line only after Risk GOs the v1.4 ZIP.
-  if (typeof window.FMP_FIRE_KIT_KEEP_SELLING !== "boolean") window.FMP_FIRE_KIT_KEEP_SELLING = false;
-  // Gumroad refund badge is off. Kit links hide at Nov 19, 2026, 20:00 UTC unless FMP_FIRE_KIT_KEEP_SELLING is true in this script.
-  var SHOW = true;
-  var CUTOFF = Date.UTC(2026, 10, 19, 20, 0, 0);
-  function expired(now) {
-    return (now || new Date()).getTime() >= CUTOFF;
-  }
-  function hide(now) {
-    if (!document.querySelectorAll) return;
-    var off = !api.SHOW || (expired(now) && window.FMP_FIRE_KIT_KEEP_SELLING !== true);
-    var nodes = document.querySelectorAll("[data-fire-kit]");
-    var i;
-    for (i = 0; i < nodes.length; i++) nodes[i].hidden = off;
-  }
-  var api = { SHOW: SHOW, CUTOFF: CUTOFF, expired: expired, hide: hide };
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { hide(new Date()); });
-  else hide(new Date());
-  if (typeof window !== "undefined") window.FMP_FIRE_KIT = api;
-})();
-</script>
 <script id="fmp-passed-dates">
 (function () {
   "use strict";

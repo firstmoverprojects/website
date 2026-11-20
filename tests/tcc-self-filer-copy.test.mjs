@@ -89,10 +89,10 @@ test("the FIRE TCC calendar event is CRLF, folded to 75 octets, and names self-f
   assert.equal(text.includes("DTSTAMP:20261013T194913Z"), true);
 });
 
-test("the FIRE kit content bullets end with a period", () => {
+test("the FIRE kit content bullets are gone", () => {
   const tool = read("tools/fire-to-iris-check/index.html");
-  assert.equal(count(tool, DATES_BULLET), 2);
-  assert.equal(count(tool, ACCOUNT_BULLET), 2);
+  assert.equal(count(tool, DATES_BULLET), 0);
+  assert.equal(count(tool, ACCOUNT_BULLET), 0);
   assert.equal(tool.includes("with a Done? box for each</li>"), false);
   assert.equal(tool.includes("a saved copy of your IR Application</li>"), false);
 });
