@@ -96,7 +96,8 @@ test("both FIRE pages use past tense for Nov 19 and drop future filing lines", (
     assert.equal(html.includes("[data-fire-kit]"), false, rel);
     const dates = [...html.matchAll(/"dateModified": "([^"]+)"/g)].map((match) => match[1]);
     assert.ok(dates.length > 0, rel);
-    for (const date of dates) assert.equal(date, "2026-11-19", rel + " " + date);
+    const expectedDate = rel === "tools/fire-to-iris-check/index.html" ? "2026-11-20" : "2026-11-19";
+    for (const date of dates) assert.equal(date, expectedDate, rel + " " + date);
     assert.equal(html.includes(R3), true, rel);
     assert.equal(html.includes('property="og:image" content="https://firstmoverprojects.com/assets/fmp-logo-460.png"') || html.includes('property="og:image" content="https://firstmoverprojects.com/assets/fmp-logo-460.png" />'), true, rel);
     assert.equal(html.includes("kit-preview"), html.includes("/assets/previews/fire-to-iris-kit-preview-1280x720"), rel);
@@ -153,7 +154,7 @@ test("the FIRE check states the passed filing day outside the kit hide nodes", (
   assert.equal(html.includes("Because you still have returns or corrections to file, the checklist lists the IRS dates and links, your IRIS TCC steps and 2027 prep on 3 pages."), false);
   const blocks = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].map((block) => JSON.parse(block[1]));
   const faq = blocks.find((item) => item["@type"] === "FAQPage");
-  assert.equal(faq.dateModified, "2026-11-19");
+  assert.equal(faq.dateModified, "2026-11-20");
   const dates = faq.mainEntity.find((item) => item.name === "What November 2026 FIRE dates does the IRS list?");
   assert.equal(dates.acceptedAnswer.text.endsWith(PAST_EASTERN), true);
   assert.equal(dates.acceptedAnswer.text.includes("is the last day"), false);

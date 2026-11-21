@@ -51,7 +51,9 @@ const FIRE_POST140_OPEN2026 =
 
 async function fireEra(page) {
   const title = await page.title();
-  return /filing ended/i.test(title) ? "post140" : "pre140";
+  // The live page uses the post-deadline result copy. The title used to say
+  // "filing ended"; the replacement title does not, and the copy is unchanged.
+  return /filing ended|IRS FIRE Replacement/i.test(title) ? "post140" : "pre140";
 }
 
 const FIRE_NEXT_IRS_CLOSED = {

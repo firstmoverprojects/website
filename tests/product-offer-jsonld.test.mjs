@@ -170,14 +170,17 @@ function forbidKeys(node, where) {
 const toolPages = walkHtml(path.join(ROOT, "tools"), []).map((file) => path.relative(ROOT, file)).sort();
 
 test("the FIRE check and the Nov 19 deadline page have no Product Offer", () => {
-  for (const rel of ["tools/fire-to-iris-check/index.html", "deadlines/irs-fire-retirement-nov-19.html"]) {
+  const shareTitles = {
+    "tools/fire-to-iris-check/index.html": "IRS FIRE Replacement: File 1099s in IRIS (Free CSV Check)",
+    "deadlines/irs-fire-retirement-nov-19.html": "IRS FIRE filing ended Nov 19, 2026 (3 p.m. ET) - Free IRIS readiness &amp; 1099 CSV check"
+  };
+  for (const rel of Object.keys(shareTitles)) {
     const html = readFileSync(path.join(ROOT, rel), "utf8");
     assert.equal(html.includes('id="product-jsonld"'), false, rel);
     assert.equal(html.includes("priceValidUntil"), false, rel);
     assert.equal(/"@type":\s*"Product"/.test(html), false, rel);
     assert.equal(/"@type":\s*"Offer"/.test(html), false, rel);
-    const shareTitle = "IRS FIRE filing ended Nov 19, 2026 (3 p.m. ET) - Free IRIS readiness &amp; 1099 CSV check";
-    assert.equal(html.split(shareTitle).length - 1, 3, rel);
+    assert.equal(html.split(shareTitles[rel]).length - 1, 3, rel);
     assert.doesNotMatch(html, /firstmoverprojects\.gumroad\.com\/l\/fire-to-iris-switch-checklist/, rel);
   }
 });

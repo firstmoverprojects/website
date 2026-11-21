@@ -104,6 +104,6 @@ test("primary kit CTAs emit click-amazon-kit and click-etsy-kit, and the FIRE ki
   assert.equal(closed.kitVisible, false);
   assert.equal(closed.visibleGumroad, 0);
   assert.equal(closed.keepSelling, false);
-  assert.equal(closed.answer.includes("FIRE filing ended Nov 19, 2026 at 3 p.m. ET."), true);
+  assert.equal(closed.answer.includes("The IRS FIRE system closed for filing on Nov 19, 2026 at 3 p.m. ET."), true);
   assert.equal(closed.answer.includes("IRIS"), true);
 });
