@@ -1,0 +1,11 @@
+Date,Type,Title,Info,Currency,Amount,Fees & Taxes,Net
+"January 3, 2027",Fee,Transaction fee: Beeswax candle,Order #1006 Listing #L300,USD,--,-$1.95,-$1.95
+"January 3, 2027",Fee,Transaction fee: Shipping,Order #1006,USD,--,-$0.26,-$0.26
+"January 3, 2027",Fee,Processing fee,Order #1006,USD,--,-$1.27,-$1.27
+"January 3, 2027",Fee,Listing fee,Order #1006 Listing #L300,USD,--,-$0.40,-$0.40
+"January 3, 2027",Fee,Share & Save credit,Order #1006,USD,--,$2.21,$2.21
+"January 6, 2027",Fee,Transaction fee: Beeswax candle,Order #1007 Listing #L300,USD,--,-$0.98,-$0.98
+"January 6, 2027",Fee,Transaction fee: Shipping,Order #1007,USD,--,-$0.26,-$0.26
+"January 6, 2027",Fee,Processing fee,Order #1007,USD,--,-$0.82,-$0.82
+"January 6, 2027",Fee,Listing fee,Order #1007 Listing #L300,USD,--,-$0.20,-$0.20
+"January 6, 2027",Fee,Share & Save credit,Order #1007,USD,--,$0.76,$0.76

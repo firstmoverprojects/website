@@ -32,6 +32,8 @@ const QUIET_TOOLS = new Set([
   "tools/sba-surety-fee-check/index.html",
   "tools/tx-franchise-report-check/index.html"
 ]);
+// Sold-order files stay on the device. This page must not call GoatCounter or any other host.
+const LOCAL_ONLY_TOOLS = new Set(["tools/etsy-profit-per-listing/index.html"]);
 const COUNT = '<script data-goatcounter="https://firstmoverprojects.goatcounter.com/count" data-goatcounter-settings="{&quot;no_events&quot;:true}" async src="https://gc.zgo.at/count.js"></script>';
 const BANNED = ["XMLHttpRequest", "localStorage", "sessionStorage", "indexedDB"];
 
@@ -127,6 +129,14 @@ test("every individual tool page allows GoatCounter and sends an origin referrer
   for (const rel of QUIET_TOOLS) assert.ok(pages.includes(rel), rel);
   for (const rel of pages) {
     const html = read(rel);
+    if (LOCAL_ONLY_TOOLS.has(rel)) {
+      assert.equal(html.includes("gc.zgo.at"), false, rel);
+      assert.equal(/goatcounter/i.test(html), false, rel);
+      assert.equal(html.includes("function trackGumroadClick"), false, rel);
+      assert.equal(html.includes('content="noindex'), false, rel);
+      assert.match(html, /connect-src 'none'/, rel);
+      continue;
+    }
     if (QUIET_TOOLS.has(rel)) {
       assert.equal(html.includes("gc.zgo.at"), false, rel);
       assert.equal(/goatcounter/i.test(html), false, rel);
@@ -169,7 +179,7 @@ test("tracking pages load the test-exclude helper before count.js", () => {
   assert.match(canonical, /navigator\.sendBeacon\(gcCountUrl\)/);
   for (const rel of trackingPages()) {
     const html = read(rel);
-    if (QUIET_TOOLS.has(rel)) {
+    if (QUIET_TOOLS.has(rel) || LOCAL_ONLY_TOOLS.has(rel)) {
       assert.equal(html.includes("function trackGumroadClick"), false, rel);
       assert.equal(html.split('src="https://gc.zgo.at/count.js"').length - 1, 0, rel);
       continue;

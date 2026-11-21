@@ -1,0 +1,86 @@
+{
+  "source": "https://www.etsy.com/legal/fees",
+  "sourceLabel": "etsy.com/legal/fees",
+  "currency": "USD",
+  "shareAndSave": {
+    "holidayThrough": "2027-01-04",
+    "holidayPercent": 6.5,
+    "standardPercent": 4,
+    "holidayStart": "2026-10-20"
+  },
+  "defaults": [
+    {
+      "id": "transaction",
+      "label": "Transaction fee",
+      "effective": "2022-04-11",
+      "effectiveLabel": "Effective April 11, 2022",
+      "source": "https://www.etsy.com/legal/fees",
+      "percent": 6.5,
+      "note": "Percent of the item price plus shipping and gift wrap. US sales tax is not included."
+    },
+    {
+      "id": "processing",
+      "label": "Payment processing, United States bank account",
+      "effective": "2022-04-11",
+      "effectiveLabel": "In effect on April 11, 2022, and still the United States rate on the fee policy",
+      "source": "https://www.etsy.com/legal/fees",
+      "percent": 3,
+      "fixed": 0.25,
+      "note": "Assessed on the total sale, including tax and shipping. Other bank countries use a different percent and fixed amount. Edit both numbers."
+    },
+    {
+      "id": "listing",
+      "label": "Listing or renewal fee",
+      "effective": "2022-04-11",
+      "effectiveLabel": "In effect on April 11, 2022, and still $0.20 USD on the fee policy",
+      "source": "https://www.etsy.com/legal/fees",
+      "fixed": 0.2,
+      "note": "Charged when a listing is published or renewed, including the renewal after a quantity sells. Counted once per unit in the fallback."
+    },
+    {
+      "id": "offsiteAds",
+      "label": "Offsite Ads",
+      "effective": "2020-04-14",
+      "effectiveLabel": "Effective April 14, 2020",
+      "source": "https://www.etsy.com/legal/fees",
+      "percent": 0,
+      "cap": 100,
+      "choices": [
+        { "label": "No Offsite Ads on these orders", "percent": 0 },
+        { "label": "15% (shop under $10,000 in sales)", "percent": 15 },
+        { "label": "12% (shop at $10,000 or more)", "percent": 12 }
+      ],
+      "note": "Charged only on orders attributed to Offsite Ads, and not more than $100 on one order. The fallback uses the percent you pick. A statement replaces this guess."
+    },
+    {
+      "id": "shareAndSave",
+      "label": "Share & Save credit",
+      "effective": "2026-10-20",
+      "effectiveLabel": "Holiday rate effective October 20, 2026 through January 4, 2027",
+      "source": "https://www.etsy.com/legal/fees",
+      "percent": 0,
+      "note": "A credit, so it lowers fees. The usual credit is 4% of the eligible order total. From October 20, 2026 through January 4, 2027 the holiday credit is 6.5%. After January 4, 2027 it returns to 4%. The fallback stays at 0% until you turn Share & Save on, because only eligible orders get the credit."
+    },
+    {
+      "id": "regulatory",
+      "label": "Regulatory operating fee",
+      "effective": "2026-06-22",
+      "effectiveLabel": "Country rates effective June 22, 2026, except where noted",
+      "source": "https://www.etsy.com/legal/fees",
+      "percent": 0,
+      "choices": [
+        { "label": "None, including United States", "percent": 0 },
+        { "label": "Canada 0.50%", "percent": 0.5 },
+        { "label": "France 1.14%", "percent": 1.14 },
+        { "label": "Hungary 1.97%", "percent": 1.97 },
+        { "label": "India 0.05%", "percent": 0.05 },
+        { "label": "Italy 0.80%", "percent": 0.8 },
+        { "label": "Spain 0.88%", "percent": 0.88 },
+        { "label": "Turkiye 1.67%", "percent": 1.67 },
+        { "label": "United Kingdom 0.48%", "percent": 0.48 },
+        { "label": "Vietnam 1.24%", "percent": 1.24 }
+      ],
+      "note": "Percent of item price plus shipping and gift wrap. France, Hungary, India, Italy, Spain, Turkiye, and the United Kingdom changed on June 22, 2026. Canada and Vietnam are the rates listed with those countries. The United States has no regulatory operating fee."
+    }
+  ]
+}

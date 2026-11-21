@@ -1,0 +1,9 @@
+Date,Type,Title,Info,Currency,Amount,Fees & Taxes,Net
+"October 5, 2026",Fee,Transaction fee: Cedar mug,Order #1009 Listing #L100,USD,--,-$1.17,-$1.17
+"October 5, 2026",Fee,Transaction fee: Shipping,Order #1009,USD,--,-$0.33,-$0.33
+"October 5, 2026",Fee,Processing fee,Order #1009,USD,--,-$0.94,-$0.94
+"October 5, 2026",Fee,Listing fee,Order #1009 Listing #L100,USD,--,-$0.20,-$0.20
+"October 28, 2026",Fee,Transaction fee: Wool scarf,Order #1010 Listing #L400,USD,--,-$2.73,-$2.73
+"October 28, 2026",Fee,Processing fee,Order #1010,USD,--,-$1.51,-$1.51
+"October 28, 2026",Fee,Listing fee,Order #1010 Listing #L400,USD,--,-$0.20,-$0.20
+"October 28, 2026",Marketing,Fee for sale made through Offsite Ads,Order #1010,USD,--,-$6.30,-$6.30

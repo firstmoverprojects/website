@@ -1,0 +1,2 @@
+oid,lid,title,qty,unit_price,line_total,ship_charged,sold_on,var,buyer_name,buyer_email
+2001,L900,Maple spoon,1,10.00,10.00,2.00,2026-11-01,Size:Small,Nora Quinn,nora.quinn.example@invalid.test
