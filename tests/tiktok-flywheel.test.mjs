@@ -191,7 +191,10 @@ test("?embed=1 hides the site nav and keeps the powered-by link and kit button",
       assert.equal(await page.locator("#paid-link").isVisible(), false, rel);
       assert.equal(await page.locator("a[href*='gumroad.com']:visible").count(), 0, rel);
       const text = await page.locator("body").innerText();
-      assert.equal(text.includes("FIRE filing ended Nov 19, 2026 at 3 p.m. ET."), true, rel);
+      const ended = rel === "tools/fire-to-iris-check/index.html"
+        ? "The IRS FIRE system closed for filing on Nov 19, 2026 at 3 p.m. ET."
+        : "FIRE filing ended Nov 19, 2026 at 3 p.m. ET.";
+      assert.equal(text.includes(ended), true, rel);
       assert.match(text, /IRIS/, rel);
       assert.equal(await page.evaluate(() => window.FMP_FIRE_KIT_KEEP_SELLING), false, rel);
       const early = await open(rel, "?embed=1", BEFORE_CUTOFF);

@@ -13,8 +13,9 @@ const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
 const PAGE = path.join(ROOT, "tools/fire-to-iris-check/index.html");
 const html = readFileSync(PAGE, "utf8");
 const QUESTION = "Will you file our tax year 2026 information returns through IRIS?";
-const SHARE_TITLE = "IRS FIRE filing ended Nov 19, 2026 (3 p.m. ET) - Free IRIS readiness &amp; 1099 CSV check";
-const SHARE_DESC = "Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE. After Jan 1, 2027, IRIS is the IRS e-file system for information returns (foreign filers without a U.S. TIN use IDES). Nov 9, 2026 was the last day to change IR Applications for TCC, and those applications are now read-only.";
+const SHARE_TITLE = "IRS FIRE Replacement: File 1099s in IRIS (Free CSV Check)";
+const SHARE_DESC = "The IRS FIRE system closed Nov 19, 2026. IRIS replaces it for 1099 e-filing. Free check: test your 1099 CSV headers before an IRIS upload. Nothing uploads.";
+const LEAD = "The IRS FIRE system closed for filing on Nov 19, 2026 at 3 p.m. ET.";
 const REFUND = "Refunds: within 30 days if a file is corrupt or materially not as described.";
 const DISCLAIMER = "General guidance, not legal, tax or IT advice.";
 const BUTTON = "Get the $9 checklist (PDF in a ZIP)";
@@ -30,7 +31,7 @@ const LEADS = {
 const BEFORE_CUTOFF = "2026-11-19T19:59:59.000Z";
 const AFTER_CUTOFF = "2026-11-19T20:05:00.000Z";
 const FIRE_ENDED = "FIRE filing ended Nov 19, 2026 at 3 p.m. ET.";
-const IRIS_GUIDANCE = "The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS.";
+const IRIS_GUIDANCE = "the IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS";
 
 const PROBLEMS = {
   A: "A provider may file your 1099 forms. Ask them to confirm they will file through IRIS after Jan 1, 2027.",
@@ -61,6 +62,8 @@ function descriptionValues(nodes, out) {
 
 test("result copy stays on the spec sentences and keeps the house lines", () => {
   assert.equal(html.split(SHARE_TITLE).length - 1, 3);
+  assert.equal(SHARE_TITLE.length <= 60, true, SHARE_TITLE.length);
+  assert.equal(SHARE_DESC.length, 155);
   assert.equal(html.includes("FIRE filing ends Nov 19"), false);
   assert.equal(metaContent(html, "name", "description"), SHARE_DESC);
   assert.equal(metaContent(html, "property", "og:title"), SHARE_TITLE);
@@ -114,9 +117,17 @@ test("body, FAQ, badges, schema, and alt text no longer name the ZIP download", 
   assert.equal(/"@type":\s*"Product"/.test(html), false);
   assert.equal(/"@type":\s*"Offer"/.test(html), false);
   assert.deepEqual(descriptionValues(blocks), []);
-  assert.equal(faq.dateModified, "2026-11-19");
+  assert.equal(faq.dateModified, "2026-11-21");
   assert.equal(faq.mainEntity.some((item) => item.name === "What is in the $9 checklist?"), false);
   const visibleFaq = html.slice(html.indexOf('id="faq"'), html.indexOf("</section>", html.indexOf('id="faq"')));
+  const questions = [...visibleFaq.matchAll(/<h3>([\s\S]*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/g)];
+  assert.equal(questions.length, faq.mainEntity.length);
+  faq.mainEntity.forEach((item, i) => {
+    assert.equal(item.name, questions[i][1]);
+    assert.equal(item.acceptedAnswer.text, questions[i][2]);
+    assert.equal(/\$9|\bchecklist\b|\bkit\b/i.test(item.name + " " + item.acceptedAnswer.text), false, item.name);
+    assert.equal(/\bcloses\b/i.test(item.acceptedAnswer.text), false, item.name);
+  });
   assert.equal(visibleFaq.includes(DELIVERY + " " + REFUND), false);
   assert.equal(visibleFaq.includes("What is in the $9 checklist"), false);
   assert.equal(html.includes(REFUND), false);
@@ -311,7 +322,7 @@ test("all six outcomes set the lead, offer, and gumroad click", async () => {
   await blockExternalOnPage(closed);
   await closed.goto(pathToFileURL(PAGE).href, { waitUntil: "load" });
   const answer = await closed.locator("#aeo-answer").innerText();
-  assert.equal(answer.includes(FIRE_ENDED), true);
+  assert.equal(answer.includes(LEAD), true);
   assert.equal(answer.includes(IRIS_GUIDANCE), true);
   assert.equal(await closed.locator("#kit-top").isVisible(), false);
   assert.equal(await closed.locator("a[href*='gumroad.com']:visible").count(), 0);

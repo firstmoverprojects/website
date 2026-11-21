@@ -15,7 +15,7 @@ const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
 const HOST = "firstmoverprojects.com";
 const SHOP = "firstmoverprojects.gumroad.com";
 const VIEWPORT = { width: 390, height: 844 };
-const FIRE_ENDED = "FIRE filing ended Nov 19, 2026 at 3 p.m. ET.";
+const FIRE_ENDED = "The IRS FIRE system closed for filing on Nov 19, 2026 at 3 p.m. ET.";
 
 // Landing buy button. On Etsy, #kit-result is inside hidden #results until the
 // visitor runs the check, so the button on first paint is #gtin-checkout.
