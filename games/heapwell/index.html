@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Heapwell is a top-down pile sort. Drag buttons, beads, washers, leaves, and shells into bins. Free in the browser, with no first-person camera." />
+    <title>Heapwell, a top-down pile sort</title>
+    <link rel="canonical" href="https://firstmoverprojects.com/games/heapwell/" />
+    <link rel="icon" href="data:," />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Heapwell, a top-down pile sort" />
+    <meta property="og:description" content="Heapwell is a top-down pile sort. Drag buttons, beads, washers, leaves, and shells into bins. Free in the browser, with no first-person camera." />
+    <meta property="og:url" content="https://firstmoverprojects.com/games/heapwell/" />
+    <meta property="og:image" content="https://firstmoverprojects.com/assets/fmp-logo-460.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Heapwell, a top-down pile sort" />
+    <meta name="twitter:description" content="Heapwell is a top-down pile sort. Drag buttons, beads, washers, leaves, and shells into bins. Free in the browser, with no first-person camera." />
+    <meta name="twitter:image" content="https://firstmoverprojects.com/assets/fmp-logo-460.png" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --desk: #241c16;
+        --ink: #f6efe4;
+        --muted: #d9cbb8;
+        --line: #8c7152;
+        --clay: #c46a45;
+        --good: #7dcea0;
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+        background: #140f0c;
+        color: var(--ink);
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+      #fit {
+        height: 100%;
+        width: 100%;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+      }
+      #frame {
+        width: 360px;
+        height: 640px;
+        position: relative;
+        overflow: hidden;
+        background: var(--desk);
+        transform-origin: center center;
+      }
+      #board {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 360px;
+        height: 640px;
+        z-index: 1;
+        touch-action: none;
+      }
+      #top, #bottom, .bin-col, #overlay { position: absolute; z-index: 4; }
+      #top {
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 88px;
+        display: grid;
+        grid-template-columns: 48px 1fr 48px;
+        grid-template-rows: 48px 36px;
+        gap: 2px;
+        padding: 4px 4px 0;
+        background: linear-gradient(#2c231c, rgba(36, 28, 22, 0.2));
+        pointer-events: none;
+      }
+      #top button, #bottom button, .bin, #overlay button, #overlay a { pointer-events: auto; }
+      #title-block { grid-column: 2; grid-row: 1; min-width: 0; text-align: center; align-self: center; }
+      h1 { margin: 0; font-size: 18px; line-height: 1.1; letter-spacing: 0.01em; }
+      #heap-name { margin: 1px 0 0; font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      #btn-pause { grid-column: 1; grid-row: 1; }
+      #btn-mute { grid-column: 3; grid-row: 1; }
+      #meter {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 8px;
+        align-items: center;
+        pointer-events: none;
+      }
+      #cleared { font-size: 12px; font-weight: 700; color: var(--ink); }
+      #bar { display: block; height: 12px; border-radius: 99px; background: #3a2e24; border: 1px solid var(--line); overflow: hidden; }
+      #bar-fill { display: block; height: 100%; width: 0; background: var(--good); }
+      .bin-col { top: 96px; width: 74px; display: flex; flex-direction: column; gap: 8px; }
+      .bin-col.left { left: 4px; }
+      .bin-col.right { right: 4px; }
+      button, .bin {
+        font: 700 12px/1.2 system-ui, sans-serif;
+        color: var(--ink);
+        background: #3a2d24;
+        border: 2px solid var(--line);
+        border-radius: 10px;
+        min-width: 44px;
+        min-height: 44px;
+        padding: 4px;
+        touch-action: manipulation;
+      }
+      button:focus-visible, a:focus-visible { outline: 3px solid #f0d7a2; outline-offset: 2px; }
+      button:disabled { opacity: 0.55; }
+      .bin {
+        height: 214px;
+        width: 74px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        background: rgba(28, 48, 54, 0.72);
+        padding: 8px 4px;
+      }
+      .bin .rule { display: block; }
+      .bin .meta { display: block; color: #f0d7a2; font-size: 11px; }
+      .bin.full { border-color: var(--clay); }
+      #bottom {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 96px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 44px 44px;
+        gap: 4px;
+        padding: 4px;
+        background: #2c231c;
+      }
+      #bottom button { width: 100%; height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+      #btn-motion { grid-column: 1 / span 2; }
+      #coins {
+        grid-column: 3 / span 2;
+        margin: 0;
+        align-self: center;
+        text-align: center;
+        font-weight: 800;
+        font-size: 14px;
+      }
+      #buy-magnet .cs, #buy-sieve .cs, #buy-conveyor .cs, #buy-bins .cs { color: #f0d7a2; font-size: 11px; }
+      #overlay {
+        inset: 0;
+        z-index: 6;
+        background: rgba(16, 11, 8, 0.97);
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        overflow: auto;
+        padding: 12px;
+      }
+      #overlay[hidden] { display: none !important; }
+      #panel { width: 100%; max-width: 336px; background: #1c1612; border: 1px solid #8c7152; border-radius: 12px; padding: 12px; }
+      #panel h2 { margin: 0 0 6px; font-size: 22px; }
+      #panel-copy { margin: 0 0 10px; color: var(--muted); font-size: 14px; line-height: 1.35; }
+      #panel-actions { display: flex; flex-direction: column; gap: 6px; }
+      #panel-actions button, #panel-actions a.menu-link {
+        width: 100%;
+        min-height: 44px;
+        text-align: center;
+        text-decoration: underline;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #panel .disclaimer, #panel .thanks, #panel .back {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.35;
+      }
+      #panel .back a { color: #f0d7a2; }
+      .nm { display: block; }
+    </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Heapwell",
+        "url": "https://firstmoverprojects.com/games/heapwell/",
+        "description": "A top-down pile sort. Drag buttons, beads, washers, leaves, and shells into bins.",
+        "applicationCategory": "Game",
+        "operatingSystem": "Web",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "First Mover Projects",
+          "url": "https://firstmoverprojects.com/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main id="fit">
+      <div id="frame">
+        <canvas id="board" width="360" height="640">A top-down heap of buttons, beads, washers, leaves, and shells, with a bin on each edge.</canvas>
+        <header id="top">
+          <button type="button" id="btn-pause">Pause</button>
+          <div id="title-block">
+            <h1>Heapwell</h1>
+            <p id="heap-name">Choose a heap</p>
+          </div>
+          <button type="button" id="btn-mute" aria-pressed="false">Mute</button>
+          <div id="meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Percent cleared">
+            <span id="cleared">0% cleared</span>
+            <span id="bar"><span id="bar-fill"></span></span>
+          </div>
+        </header>
+        <div class="bin-col left">
+          <button type="button" class="bin" id="bin-0"><span class="rule">Bin</span><span class="meta"></span></button>
+          <button type="button" class="bin" id="bin-1"><span class="rule">Bin</span><span class="meta"></span></button>
+        </div>
+        <div class="bin-col right">
+          <button type="button" class="bin" id="bin-2"><span class="rule">Bin</span><span class="meta"></span></button>
+          <button type="button" class="bin" id="bin-3"><span class="rule">Bin</span><span class="meta"></span></button>
+        </div>
+        <footer id="bottom">
+          <button type="button" id="buy-magnet"><span class="nm">Magnet</span><span class="cs">12</span></button>
+          <button type="button" id="buy-sieve"><span class="nm">Sieve</span><span class="cs">16</span></button>
+          <button type="button" id="buy-conveyor"><span class="nm">Conveyor</span><span class="cs">20</span></button>
+          <button type="button" id="buy-bins"><span class="nm">Bigger bins</span><span class="cs">10</span></button>
+          <button type="button" id="btn-motion" aria-pressed="false">Low motion off</button>
+          <p id="coins">0 coins</p>
+        </footer>
+        <div id="overlay">
+          <div id="panel" role="dialog" aria-modal="true" aria-labelledby="panel-title">
+            <h2 id="panel-title">Heapwell</h2>
+            <p id="panel-copy">Sort the pile from above. Drag or flick a piece into a bin. A wrong piece bounces back.</p>
+            <div id="panel-actions"></div>
+            <p class="disclaimer">General guidance, not legal, tax or IT advice.</p>
+            <p class="thanks">Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
+            <p class="back"><a href="matter.LICENSE">Matter.js license (MIT)</a> · <a href="/games/">All games</a></p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Matter.js 0.20.0, MIT. License: matter.LICENSE -->
+    <script src="matter.min.js"></script>
+    <script src="game.js"></script>
+  </body>
+</html>
