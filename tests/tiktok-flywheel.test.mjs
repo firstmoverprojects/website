@@ -19,7 +19,7 @@ const FIRE_KIT_PAGES = new Set([
   "tools/fire-to-iris-check/index.html"
 ]);
 const CHIPS = [
-  ["Sun, Nov 1", "EU <= EUR 150 Product IDs", "/tools/eu-product-id-check/"],
+  ["Fri, Jan 15", "Amazon 2027 FBA Fee Changes", "/tools/amazon-2027-fee-check/"],
   ["Sun, Nov 1 / Nov 19", "IRS FIRE-to-IRIS 1099 Cutoff", "/tools/fire-to-iris-check/"],
   ["Mon, Nov 2", "Amazon $1M Insurance (3-Month Rule)", "/tools/amazon-coi-check/"],
   ["", "Etsy Unedited Real-Photo Rule", "/tools/etsy-photo-audit-check/"],
