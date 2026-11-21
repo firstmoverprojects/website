@@ -124,7 +124,7 @@ picture:has(> img){display:block;max-width:100%}
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "dateModified": "2026-11-21",
+  "dateModified": "2026-11-20",
   "mainEntity": [
     {
       "@type": "Question",
@@ -139,7 +139,7 @@ picture:has(> img){display:block;max-width:100%}
       "name": "Can I upload a 1099 CSV file to IRIS?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. The IRS says the IRIS Taxpayer Portal has an \"Upload CSV with Form Data\" option, with CSV template formatting guidelines for each tax year, and CSV troubleshooting tips in Publication 5717. You need an IRIS Transmitter Control Code (TCC) to use the portal. This free check tests your CSV headers before you upload."
+        "text": "Yes. The IRS says the IRIS Taxpayer Portal has an \"Upload CSV with Form Data\" option, with CSV template formatting guidelines by tax year, and CSV troubleshooting tips in Publication 5717. You need an IRIS Transmitter Control Code (TCC) to use the portal. This free check tests your CSV headers before you upload."
       }
     },
     {
@@ -267,7 +267,7 @@ picture:has(> img){display:block;max-width:100%}
   <div class="muted">IRIS replaces FIRE (Jan 2027)</div>
   <div class="big">Jan 1, 2027</div>
   <div class="muted" data-k="v"></div>
-  <div class="muted">IRS: “IRIS will be the only information returns electronic filing system, including current year, prior year, or corrections, after Jan. 1, 2027.” (Foreign filers without a U.S. TIN use IDES.)</div>
+  <div class="muted">IRS: “Beginning January 1, 2027, you must use Information Returns Intake System (IRIS) to electronically file information returns, including current-year returns, prior-year returns and corrections.” (Foreign filers without a U.S. TIN use IDES.)</div>
  </div>
  <div id="cd-nov1">
   <div class="muted">FIRE test system closed</div>
@@ -399,7 +399,7 @@ picture:has(> img){display:block;max-width:100%}
 <h3>What replaced the IRS FIRE system for filing 1099s?</h3>
 <p>IRIS, the IRS Information Returns Intake System. FIRE closed for filing on Nov 19, 2026 at 3 p.m. Eastern. The IRS says you can e-file information returns for tax year 2022 and later, and corrections, in IRIS. Foreign filers without a U.S. TIN use IDES.</p>
 <h3>Can I upload a 1099 CSV file to IRIS?</h3>
-<p>Yes. The IRS says the IRIS Taxpayer Portal has an "Upload CSV with Form Data" option, with CSV template formatting guidelines for each tax year, and CSV troubleshooting tips in Publication 5717. You need an IRIS Transmitter Control Code (TCC) to use the portal. This free check tests your CSV headers before you upload.</p>
+<p>Yes. The IRS says the IRIS Taxpayer Portal has an "Upload CSV with Form Data" option, with CSV template formatting guidelines by tax year, and CSV troubleshooting tips in Publication 5717. You need an IRIS Transmitter Control Code (TCC) to use the portal. This free check tests your CSV headers before you upload.</p>
 <h3>What November 2026 FIRE dates does the IRS list?</h3>
 <p>Nov. 1, 2026 was the last day to file test information returns through the FIRE Trading Partner Test System. That date has passed. Nov. 9, 2026 was the last day to make changes to Information Returns Applications for Transmitter Control Codes, after which existing IR TCC applications become read-only. That date has passed, so those applications are now read-only. Nov 19, 2026 at 3 p.m. Eastern was the last day to file information returns through FIRE.</p>
 <h3>When does IRIS replace FIRE?</h3>
@@ -489,12 +489,12 @@ function analyze(opts) {
     items.push({ kind: kind, tag: tagText, text: text, quote: quote, quote2: quote2 || "" });
   }
   if (!selfFile) {
-    add("info", "Ask provider", "If a payroll provider, accountant, or third-party e-file service files for you, ask them in writing to confirm they are ready to file your tax year 2026 returns through IRIS.", "IRIS will be the only information returns electronic filing system, including current year, prior year, or corrections, after Jan. 1, 2027 (foreign filers without a U.S. TIN use IDES).");
+    add("info", "Ask provider", "If a payroll provider, accountant, or third-party e-file service files for you, ask them in writing to confirm they are ready to file your tax year 2026 returns through IRIS.", "Beginning January 1, 2027, you must use Information Returns Intake System (IRIS) to electronically file information returns, including current-year returns, prior-year returns and corrections.");
   }
   if (selfFile && !irisTcc) {
     add("warn", "Action needed", "Start your separate IRIS Application for TCC (either an IRIS Taxpayer Portal TCC or an IRIS A2A TCC). Both the free IRIS Taxpayer Portal and IRIS A2A require an IRIS TCC, and your existing FIRE TCC cannot be used for IRIS.", "To use the IRIS Taxpayer Portal, you need an IRIS Transmitter Control Code (TCC). This 5-digit code identifies your business when you e-file forms. It can only be used for IRIS.");
   } else if (selfFile && irisTcc) {
-    add("ok", "Ready step", "You noted you already started or hold a separate IRIS TCC. Confirm your responsible officials and portal sign-in work before January filing.", "Current FIRE users must complete an Information Returns Intake System (IRIS) Application for TCC and transition to IRIS to file tax year 2026 information returns during the 2027 filing season.");
+    add("ok", "Ready step", "You noted you already started or hold a separate IRIS TCC. Confirm your responsible officials and portal sign-in work before January filing.", "Current FIRE users must transition to IRIS to file tax year 2026 information returns during the 2027 filing season.");
   }
   if (irChanges) {
     add("warn", "Nov 9, 2026 (passed)", "Nov. 9, 2026 was the last day to make changes to your existing Information Returns (IR) Application for TCC. That date has passed, so existing IR TCC applications are now read-only.", "Nov. 9, 2026: Last day to make changes to the Information Returns (IR) Applications for Transmitter Control Codes (TCC).");
@@ -619,6 +619,7 @@ function render() {
     q.className = "muted";
     q.textContent = "(IRS: “" + it.quote + "”)";
     if (it.quote2) q.textContent += " (IRS: “" + it.quote2 + "”)";
+    if (it.tag === "Ask provider") q.textContent += " (foreign filers without a U.S. TIN use IDES.)";
     li.appendChild(q);
     ul.appendChild(li);
     lines.push((idx + 1) + ". [" + it.tag + "] " + it.text + " " + q.textContent);

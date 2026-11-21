@@ -117,7 +117,7 @@ test("body, FAQ, badges, schema, and alt text no longer name the ZIP download", 
   assert.equal(/"@type":\s*"Product"/.test(html), false);
   assert.equal(/"@type":\s*"Offer"/.test(html), false);
   assert.deepEqual(descriptionValues(blocks), []);
-  assert.equal(faq.dateModified, "2026-11-21");
+  assert.equal(faq.dateModified, "2026-11-20");
   assert.equal(faq.mainEntity.some((item) => item.name === "What is in the $9 checklist?"), false);
   const visibleFaq = html.slice(html.indexOf('id="faq"'), html.indexOf("</section>", html.indexOf('id="faq"')));
   const questions = [...visibleFaq.matchAll(/<h3>([\s\S]*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/g)];
