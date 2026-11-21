@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Bidwick is a made-up storage auction. Peek with a flashlight, bid against rivals, read three clue cards, and haggle the shelf for coins." />
+    <title>Bidwick, a storage auction for coins</title>
+    <link rel="canonical" href="https://firstmoverprojects.com/games/bidwick/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Bidwick, a storage auction for coins" />
+    <meta property="og:description" content="Bidwick is a made-up storage auction. Peek with a flashlight, bid against rivals, read three clue cards, and haggle the shelf for coins." />
+    <meta property="og:url" content="https://firstmoverprojects.com/games/bidwick/" />
+    <meta property="og:image" content="https://firstmoverprojects.com/assets/fmp-logo-460.png" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect fill='%23e2b15a' width='16' height='16' rx='2'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="style.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Bidwick",
+        "url": "https://firstmoverprojects.com/games/bidwick/",
+        "description": "A made-up storage auction. Peek, bid, appraise, and haggle for coins.",
+        "genre": "Simulation",
+        "playMode": "SinglePlayer",
+        "author": { "@type": "Organization", "name": "First Mover Projects" }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="scaler">
+      <div id="frame">
+        <header id="top">
+          <div class="top-row">
+            <h1>Bidwick</h1>
+            <button type="button" class="icon-btn" id="mute" aria-pressed="false">Sound</button>
+            <button type="button" class="icon-btn" id="pause">Pause</button>
+          </div>
+          <p id="coins">100 coins</p>
+        </header>
+        <canvas id="board" width="360" height="168" aria-label="The storage unit"></canvas>
+        <div id="screen">
+          <p>Bidwick needs JavaScript to run the yard.</p>
+        </div>
+        <p id="toast" aria-live="polite"></p>
+        <div id="overlay" hidden>
+          <h2>Paused</h2>
+          <p>The clock is held. Resume when you are back.</p>
+          <button type="button" class="primary" id="resume">Resume</button>
+        </div>
+        <div id="adhold" hidden>
+          <p>One moment.</p>
+        </div>
+      </div>
+    </div>
+    <script id="fmp-utm">
+(function () {
+  "use strict";
+  var KEY = "fmp_utm_source";
+  var FALLBACK = "site";
+
+  function clean(value) {
+    if (value == null) return "";
+    var s = String(value).replace(/\+/g, " ").trim().toLowerCase();
+    try { s = decodeURIComponent(s); } catch (e) { /* keep the raw token */ }
+    s = s.trim().toLowerCase().replace(/[^a-z0-9\-_]/g, "-").slice(0, 200).replace(/^-+|-+$/g, "");
+    if (!/^[a-z0-9][a-z0-9_-]*$/.test(s) || s === FALLBACK) return "";
+    return s;
+  }
+
+  function fromLocation() {
+    var q = "";
+    try { q = location.search || ""; } catch (e) { q = ""; }
+    var m = /(?:^|[?&])utm_source=([^&#]*)/.exec(q);
+    return m ? clean(m[1]) : "";
+  }
+
+  function landingSource() {
+    var fromUrl = fromLocation();
+    var saved = "";
+    try {
+      saved = clean(sessionStorage.getItem(KEY));
+      if (!saved && fromUrl) {
+        sessionStorage.setItem(KEY, fromUrl);
+        saved = fromUrl;
+      }
+    } catch (e) {
+      saved = fromUrl;
+    }
+    return saved || FALLBACK;
+  }
+
+  function patchHref(anchor, source) {
+    if (!anchor || !source || source === FALLBACK || !anchor.getAttribute) return;
+    var href = anchor.getAttribute("href");
+    if (!href || href.indexOf("firstmoverprojects.gumroad.com/l/") === -1) return;
+    if (href.indexOf("utm_source=") === -1) return;
+    var next = href.replace(/([?&]utm_source=)[^&#]*/, "$1" + source);
+    if (next !== href) anchor.setAttribute("href", next);
+  }
+
+  function patchAll(source) {
+    if (!document.querySelectorAll) return;
+    var links = document.querySelectorAll('a[href*="firstmoverprojects.gumroad.com/l/"]');
+    for (var i = 0; i < links.length; i++) patchHref(links[i], source);
+  }
+
+  function onClick(ev) {
+    var t = ev.target;
+    if (!t || !t.closest) return;
+    patchHref(t.closest("a"), landingSource());
+  }
+
+  patchAll(landingSource());
+  document.addEventListener("click", onClick, true);
+  document.addEventListener("auxclick", onClick, true);
+})();
+</script>
+    <script src="items.js"></script>
+    <script src="sim.js"></script>
+    <script src="draw.js"></script>
+    <script src="game.js"></script>
+  </body>
+</html>
