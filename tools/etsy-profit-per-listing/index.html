@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" href="data:,">
+<link rel="canonical" href="https://firstmoverprojects.com/tools/etsy-profit-per-listing/">
+<title>Profit per listing for Etsy sellers</title>
+<meta name="description" content="Profit per listing for Etsy sellers. Sold-order and statement CSVs stay on this device. The free page includes 5 listings.">
+<meta property="og:title" content="Profit per listing for Etsy sellers">
+<meta property="og:description" content="Profit per listing for Etsy sellers. Sold-order and statement CSVs stay on this device. The free page includes 5 listings.">
+<meta property="og:url" content="https://firstmoverprojects.com/tools/etsy-profit-per-listing/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://firstmoverprojects.com/assets/fmp-logo-460.png">
+<meta property="og:image:alt" content="First Mover Projects">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Profit per listing for Etsy sellers">
+<meta name="twitter:description" content="Profit per listing for Etsy sellers. Sold-order and statement CSVs stay on this device. The free page includes 5 listings.">
+<meta name="twitter:image" content="https://firstmoverprojects.com/assets/fmp-logo-460.png">
+<meta name="twitter:image:alt" content="First Mover Projects">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1b1f24;background:#f6f7f9;overflow-wrap:anywhere}
+main{max-width:960px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;margin:.4em 0}
+h2{font-size:1.15rem;margin:1.2em 0 .4em}
+.card{background:#fff;border:1px solid #dde1e6;border-radius:10px;padding:16px;margin:12px 0}
+.muted{color:#3d4651}
+a{color:#0055ff}
+main p a,main li a{text-decoration:underline;text-underline-offset:2px}
+label{display:block;font-weight:600;margin-top:12px}
+label.check{font-weight:400;display:flex;gap:8px;align-items:center;min-height:44px}
+input,select,button{font:inherit}
+input:not([type="checkbox"]):not([type="file"]),select{width:100%;max-width:100%;font-size:16px;min-height:44px;padding:8px;border:1px solid #b9c0c8;border-radius:6px;background:#fff;color:inherit}
+button{min-height:48px;padding:10px 18px;border-radius:8px;cursor:pointer;margin:12px 8px 0 0}
+button.primary{background:#0055ff;color:#fff;border:0}
+button.primary:hover{background:#0044cc}
+button.secondary{background:#fff;color:#1b1f24;border:1px solid #dde1e6}
+a:focus,button:focus,input:focus,select:focus{outline:3px solid #1f5fbf;outline-offset:2px}
+.drop{display:block;border:1px dashed #8b95a1;border-radius:10px;padding:16px;background:#fff;font-weight:600}
+.drop.drag{border-color:#0055ff}
+.table-wrap{overflow-x:auto;max-width:100%}
+table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0}
+th,td{border:1px solid #dde1e6;padding:6px 8px;text-align:left;vertical-align:top}
+caption{text-align:left;font-weight:600;padding:4px 0}
+th button{margin:0;min-height:44px;background:#fff;color:#1b1f24;border:1px solid #dde1e6;font-weight:700}
+tr.is-loss{background:#fde8e6}
+tr.is-thin{background:#fff3d6}
+tr.is-loss.is-thin{background:#fde8e6}
+fieldset{border:1px solid #dde1e6;border-radius:8px;margin:12px 0;padding:8px 12px;min-width:0}
+legend{font-weight:600;padding:0 6px}
+.cost-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;align-items:end}
+.skip{position:absolute;left:-9999px;top:.5rem;background:#fff;color:#1b1f24;padding:.5rem .75rem;z-index:2}
+.skip:focus{left:.5rem}
+[hidden]{display:none !important}
+.site-nav a{display:inline-flex;align-items:center;min-height:44px;padding:8px 6px}
+footer{margin:8px 0 24px}
+.follow-bar{background:#01060b;color:#f4f7fa;border:1px solid #00d8ff;border-radius:12px;padding:12px;margin:12px 0 0;max-width:100%;box-sizing:border-box}
+.follow-bar-title{margin:0 0 8px;font-weight:800;font-size:.95rem;line-height:1.35;color:#f4f7fa}
+.follow-bar-actions{display:flex;flex-wrap:wrap;gap:8px;min-width:0}
+.follow-tiktok,.follow-email{flex:1 1 220px;min-width:0;max-width:100%;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 12px;border-radius:999px;font-weight:800;font-size:.92rem;line-height:1.35;text-decoration:none !important;text-align:center;white-space:normal;overflow-wrap:anywhere}
+.follow-tiktok{background:#0c1520;color:#f4f7fa !important;border:1px solid #00d8ff}
+.follow-email{background:linear-gradient(135deg,#22c55e 0%,#4ade80 100%);color:#01060b !important;border:0}
+@media print{
+  body{background:#fff}
+  .noprint,.follow-bar{display:none !important}
+  #results{display:block !important}
+  a{color:#1b1f24}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<main id="main">
+<header class="site-nav">
+<nav aria-label="Site">
+<p class="muted"><a href="https://firstmoverprojects.com/">First Mover Projects</a> · <a href="/tools/">Tools</a> · <a href="/deadlines/">Deadlines</a></p>
+</nav>
+</header>
+<h1>Profit per listing for Etsy sellers</h1>
+<p id="privacy-line">Your files never leave this device.</p>
+<p id="edition">Free page for Etsy sellers. The free page includes 5 listings. Your files never leave this device.</p>
+<p>This page is for Etsy sellers.</p>
+<p>Not affiliated with or endorsed by Etsy. General guidance, not tax or accounting advice.</p>
+<p>Add the Sold Order Items CSV, and optionally one or more monthly statement CSVs. Profit is item revenue plus shipping charged, minus the fees on the statement for that order ID. Without a statement, the editable default rates below are used. Enter material cost and labor minutes per listing, or per variation.</p>
+<p id="share-save-note">Through January 4, 2027, the Share &amp; Save holiday credit is 6.5% of the eligible order total. After January 4, 2027, that credit returns to 4%. Listing fees and payment processing still apply. A statement shows the credit that was posted.</p>
+<p>The free page includes 5 listings. The offline file is the $19 download and it includes every listing. This page does not open a checkout.</p>
+
+<section class="card noprint" aria-labelledby="files-h">
+<h2 id="files-h">Files</h2>
+<p class="muted">Column names are detected from the header row. If a header is not recognized, match it on the next screen. Buyer name, address, email, and username columns are dropped before anything is saved.</p>
+<label class="drop" id="orders-drop" for="orders-file">Sold order items CSV
+<input id="orders-file" type="file" accept=".csv,text/csv">
+</label>
+<label class="drop" id="statements-drop" for="statements-file">Monthly statement CSVs, optional
+<input id="statements-file" type="file" accept=".csv,text/csv" multiple>
+</label>
+</section>
+
+<section class="card noprint" id="rates-card" aria-labelledby="rates-h">
+<h2 id="rates-h">Default rates</h2>
+<p id="fee-source">These rates are used because no statement is loaded.</p>
+<label class="check" for="share-by-date"><input id="share-by-date" type="checkbox"> Apply Share &amp; Save by sale date (6.5% through January 4, 2027, then 4%)</label>
+<div id="fee-rates"></div>
+</section>
+
+<section class="card noprint" id="mapping" hidden aria-labelledby="mapping-title">
+<h2 id="mapping-title">Match the columns</h2>
+<p id="mapping-error" role="alert"></p>
+<div id="mapping-fields"></div>
+<button type="button" class="primary" id="mapping-apply">Use this mapping</button>
+</section>
+
+<section class="card" id="results" hidden aria-live="polite">
+<h2>Listings</h2>
+<p id="status"></p>
+<p id="cap-note" hidden></p>
+<label for="month-filter">Month</label>
+<select id="month-filter">
+<option value="all">All months</option>
+</select>
+<p id="flag-summary"></p>
+<p id="summary"></p>
+<div class="table-wrap">
+<table id="profit-table">
+<caption>Profit per listing</caption>
+<thead>
+<tr>
+<th scope="col" data-sort="itemName"><button type="button" data-sort="itemName">Listing</button></th>
+<th scope="col" data-sort="units"><button type="button" data-sort="units">Units</button></th>
+<th scope="col" data-sort="revenueCents"><button type="button" data-sort="revenueCents">Revenue</button></th>
+<th scope="col" data-sort="feeCents"><button type="button" data-sort="feeCents">Fees</button></th>
+<th scope="col" data-sort="materialCents"><button type="button" data-sort="materialCents">Materials</button></th>
+<th scope="col" data-sort="profitCents"><button type="button" data-sort="profitCents">Profit</button></th>
+<th scope="col" data-sort="margin"><button type="button" data-sort="margin">Margin %</button></th>
+<th scope="col" data-sort="perHourCents"><button type="button" data-sort="perHourCents">Profit per labor hour</button></th>
+<th scope="col">Flags</th>
+</tr>
+</thead>
+<tbody></tbody>
+<tfoot></tfoot>
+</table>
+</div>
+<h2 id="costs-h">Material cost and labor minutes</h2>
+<div id="costs"></div>
+<p class="noprint">
+<button type="button" class="primary" id="export-csv">Export CSV</button>
+<button type="button" class="secondary" id="print-summary">Print summary</button>
+<button type="button" class="secondary" id="clear-statements">Remove statements and use default rates</button>
+<button type="button" class="secondary" id="erase">Erase everything</button>
+</p>
+<div class="follow-bar">
+<p class="follow-bar-title">Deadline reminders</p>
+<div class="follow-bar-actions">
+<a class="follow-tiktok" data-tool-slug="etsy-profit-per-listing" target="_blank" rel="noopener" href="https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&amp;utm_medium=tool_result&amp;utm_campaign=follower_growth">Follow @firstmoverprojects on TikTok (Daily 60-Sec Checklists)</a>
+<a class="follow-email" href="#signup">Get Free Email Deadline Reminders</a>
+</div>
+</div>
+</section>
+
+<section class="card" id="signup" aria-labelledby="signup-h">
+<h2 id="signup-h">Email reminders</h2>
+<p>Order files stay in this browser. The weekly deadline email is a separate form.</p>
+<p><a href="/deadlines/#signup">Get the free weekly deadline email</a>.</p>
+</section>
+
+<div class="follow-bar">
+<p class="follow-bar-title">Deadline reminders</p>
+<div class="follow-bar-actions">
+<a class="follow-tiktok" data-tool-slug="etsy-profit-per-listing" target="_blank" rel="noopener" href="https://www.tiktok.com/@firstmoverprojects?utm_source=firstmoverprojects&amp;utm_medium=tool_result&amp;utm_campaign=follower_growth">Follow @firstmoverprojects on TikTok (Daily 60-Sec Checklists)</a>
+<a class="follow-email" href="/deadlines/#signup">Get Free Email Deadline Reminders</a>
+</div>
+</div>
+
+<h2>What the numbers mean</h2>
+<ul>
+<li>Revenue is the item total plus the order's shipping, split across the items in that order by item total.</li>
+<li>Fees matched from a statement are transaction, processing, listing or renewal, Offsite Ads, Share &amp; Save credit, and regulatory operating fee. A credit lowers the fee total.</li>
+<li>Margin is profit divided by revenue. A listing that loses money, or has a margin under 15%, is flagged.</li>
+<li>Profit per labor hour uses the minutes you enter, times units, divided into profit.</li>
+</ul>
+<p>General guidance, not legal, tax or IT advice. Names are used only to describe compatibility.</p>
+<p class="thanks">Thanks for your time. If this isn't right for you, please share it with someone it could help.</p>
+<footer>
+<p>First Mover Projects, PO Box 98, Firth, NE 68358. firstmoverprojects@gmail.com. General guidance, not legal, tax or IT advice. Check the official sources for your case. Not affiliated with or endorsed by Etsy. Names are used only to describe compatibility.</p>
+<p><a href="/privacy.html">Privacy</a> · <a href="/refund-policy.html">Refund Policy</a></p>
+</footer>
+</main>
+<script id="fee-defaults" type="application/json">
+{
+  "source": "https://www.etsy.com/legal/fees",
+  "sourceLabel": "etsy.com/legal/fees",
+  "currency": "USD",
+  "shareAndSave": {
+    "holidayThrough": "2027-01-04",
+    "holidayPercent": 6.5,
+    "standardPercent": 4,
+    "holidayStart": "2026-10-20"
+  },
+  "defaults": [
+    {
+      "id": "transaction",
+      "label": "Transaction fee",
+      "effective": "2022-04-11",
+      "effectiveLabel": "Effective April 11, 2022",
+      "source": "https://www.etsy.com/legal/fees",
+      "percent": 6.5,
+      "note": "Percent of the item price plus shipping and gift wrap. US sales tax is not included."
+    },
+    {
+      "id": "processing",
+      "label": "Payment processing, United States bank account",
+      "effective": "2022-04-11",
+      "effectiveLabel": "In effect on April 11, 2022, and still the United States rate on the fee policy",
+      "source": "https://www.etsy.com/legal/fees",
+      "percent": 3,
+      "fixed": 0.25,
+      "note": "Assessed on the total sale, including tax and shipping. Other bank countries use a different percent and fixed amount. Edit both numbers."
+    },
+    {
+      "id": "listing",
+      "label": "Listing or renewal fee",
+      "effective": "2022-04-11",
+      "effectiveLabel": "In effect on April 11, 2022, and still $0.20 USD on the fee policy",
+      "source": "https://www.etsy.com/legal/fees",
+      "fixed": 0.2,
+      "note": "Charged when a listing is published or renewed, including the renewal after a quantity sells. Counted once per unit in the fallback."
+    },
+    {
+      "id": "offsiteAds",
+      "label": "Offsite Ads",
+      "effective": "2020-04-14",
+      "effectiveLabel": "Effective April 14, 2020",
+      "source": "https://www.etsy.com/legal/fees",
+      "percent": 0,
+      "cap": 100,
+      "choices": [
+        {
+          "label": "No Offsite Ads on these orders",
+          "percent": 0
+        },
+        {
+          "label": "15% (shop under $10,000 in sales)",
+          "percent": 15
+        },
+        {
+          "label": "12% (shop at $10,000 or more)",
+          "percent": 12
+        }
+      ],
+      "note": "Charged only on orders attributed to Offsite Ads, and not more than $100 on one order. The fallback uses the percent you pick. A statement replaces this guess."
+    },
+    {
+      "id": "shareAndSave",
+      "label": "Share & Save credit",
+      "effective": "2026-10-20",
+      "effectiveLabel": "Holiday rate effective October 20, 2026 through January 4, 2027",
+      "source": "https://www.etsy.com/legal/fees",
+      "percent": 0,
+      "note": "A credit, so it lowers fees. The usual credit is 4% of the eligible order total. From October 20, 2026 through January 4, 2027 the holiday credit is 6.5%. After January 4, 2027 it returns to 4%. The fallback stays at 0% until you turn Share & Save on, because only eligible orders get the credit."
+    },
+    {
+      "id": "regulatory",
+      "label": "Regulatory operating fee",
+      "effective": "2026-06-22",
+      "effectiveLabel": "Country rates effective June 22, 2026, except where noted",
+      "source": "https://www.etsy.com/legal/fees",
+      "percent": 0,
+      "choices": [
+        {
+          "label": "None, including United States",
+          "percent": 0
+        },
+        {
+          "label": "Canada 0.50%",
+          "percent": 0.5
+        },
+        {
+          "label": "France 1.14%",
+          "percent": 1.14
+        },
+        {
+          "label": "Hungary 1.97%",
+          "percent": 1.97
+        },
+        {
+          "label": "India 0.05%",
+          "percent": 0.05
+        },
+        {
+          "label": "Italy 0.80%",
+          "percent": 0.8
+        },
+        {
+          "label": "Spain 0.88%",
+          "percent": 0.88
+        },
+        {
+          "label": "Turkiye 1.67%",
+          "percent": 1.67
+        },
+        {
+          "label": "United Kingdom 0.48%",
+          "percent": 0.48
+        },
+        {
+          "label": "Vietnam 1.24%",
+          "percent": 1.24
+        }
+      ],
+      "note": "Percent of item price plus shipping and gift wrap. France, Hungary, India, Italy, Spain, Turkiye, and the United Kingdom changed on June 22, 2026. Canada and Vietnam are the rates listed with those countries. The United States has no regulatory operating fee."
+    }
+  ]
+}
+</script>
+<script id="fmp-utm">
+(function () {
+  "use strict";
+  var KEY = "fmp_utm_source";
+  var FALLBACK = "site";
+
+  function clean(value) {
+    if (value == null) return "";
+    var s = String(value).replace(/\+/g, " ").trim().toLowerCase();
+    try { s = decodeURIComponent(s); } catch (e) { /* keep the raw token */ }
+    s = s.trim().toLowerCase().replace(/[^a-z0-9\-_]/g, "-").slice(0, 200).replace(/^-+|-+$/g, "");
+    if (!/^[a-z0-9][a-z0-9_-]*$/.test(s) || s === FALLBACK) return "";
+    return s;
+  }
+
+  function fromLocation() {
+    var q = "";
+    try { q = location.search || ""; } catch (e) { q = ""; }
+    var m = /(?:^|[?&])utm_source=([^&#]*)/.exec(q);
+    return m ? clean(m[1]) : "";
+  }
+
+  function landingSource() {
+    var fromUrl = fromLocation();
+    var saved = "";
+    try {
+      saved = clean(sessionStorage.getItem(KEY));
+      if (!saved && fromUrl) {
+        sessionStorage.setItem(KEY, fromUrl);
+        saved = fromUrl;
+      }
+    } catch (e) {
+      saved = fromUrl;
+    }
+    return saved || FALLBACK;
+  }
+
+  function patchHref(anchor, source) {
+    if (!anchor || !source || source === FALLBACK || !anchor.getAttribute) return;
+    var href = anchor.getAttribute("href");
+    if (!href || href.indexOf("firstmoverprojects.gumroad.com/l/") === -1) return;
+    if (href.indexOf("utm_source=") === -1) return;
+    var next = href.replace(/([?&]utm_source=)[^&#]*/, "$1" + source);
+    if (next !== href) anchor.setAttribute("href", next);
+  }
+
+  function patchAll(source) {
+    if (!document.querySelectorAll) return;
+    var links = document.querySelectorAll('a[href*="firstmoverprojects.gumroad.com/l/"]');
+    for (var i = 0; i < links.length; i++) patchHref(links[i], source);
+  }
+
+  function onClick(ev) {
+    var t = ev.target;
+    if (!t || !t.closest) return;
+    patchHref(t.closest("a"), landingSource());
+  }
+
+  patchAll(landingSource());
+  document.addEventListener("click", onClick, true);
+  document.addEventListener("auxclick", onClick, true);
+})();
+</script>
+<script src="papaparse.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

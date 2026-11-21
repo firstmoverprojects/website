@@ -1,0 +1,7 @@
+Sale Date,Item Name,Buyer,Quantity,Price,Item Total,Order Shipping,Order Sales Tax,Order ID,Listing ID,Variations,Ship Name,Ship Address1,Ship City,Buyer User ID,Buyer Email
+11/01/2026,Cap Alpha,Nora Quinn,1,10.00,10.00,0.00,0.00,3001,C1,,Nora Quinn,418 Privet Lane,Redactedville,nq_buyer_handle,nora.quinn.example@invalid.test
+11/02/2026,Cap Bravo,Samir Patel,1,10.00,10.00,0.00,0.00,3002,C2,,Samir Patel,77 Harbor Street,Example Harbor,spatel_buyer,samir.patel.example@invalid.test
+11/03/2026,Cap Charlie,Nora Quinn,1,10.00,10.00,0.00,0.00,3003,C3,,Nora Quinn,418 Privet Lane,Redactedville,nq_buyer_handle,nora.quinn.example@invalid.test
+11/04/2026,Cap Delta,Samir Patel,1,10.00,10.00,0.00,0.00,3004,C4,,Samir Patel,77 Harbor Street,Example Harbor,spatel_buyer,samir.patel.example@invalid.test
+11/05/2026,Cap Echo,Nora Quinn,1,10.00,10.00,0.00,0.00,3005,C5,,Nora Quinn,418 Privet Lane,Redactedville,nq_buyer_handle,nora.quinn.example@invalid.test
+11/06/2026,Cap Foxtrot,Sixth Buyer,1,10.00,10.00,0.00,0.00,3006,C6,,Sixth Buyer,9 Omitted Road,Leftout Town,sixth_buyer_handle,sixth.buyer.example@invalid.test

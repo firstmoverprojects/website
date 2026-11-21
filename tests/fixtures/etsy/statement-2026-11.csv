@@ -1,0 +1,25 @@
+Date,Type,Title,Info,Currency,Amount,Fees & Taxes,Net
+"November 2, 2026",Sale,Payment for Order #1001,Order #1001,USD,$25.00,--,$25.00
+"November 2, 2026",Tax,Sales tax paid by buyer,Order #1001,USD,-$1.60,--,-$1.60
+"November 2, 2026",Fee,Transaction fee: Cedar mug,Order #1001 Listing #L100,USD,--,-$1.30,-$1.30
+"November 2, 2026",Fee,Transaction fee: Shipping,Order #1001,USD,--,-$0.33,-$0.33
+"November 2, 2026",Fee,Processing fee,Order #1001,USD,--,-$0.85,-$0.85
+"November 2, 2026",Fee,Listing fee,Order #1001 Listing #L100,USD,--,-$0.20,-$0.20
+"November 3, 2026",Marketing,Etsy Ads,Bill for click-throughs to your shop,USD,--,-$3.00,-$3.00
+"November 3, 2026",Fee,Transaction fee: Cedar mug,Order #1002 Listing #L100,USD,--,-$3.12,-$3.12
+"November 3, 2026",Fee,Transaction fee: Shipping,Order #1002,USD,--,-$0.39,-$0.39
+"November 3, 2026",Fee,Processing fee,Order #1002,USD,--,-$1.80,-$1.80
+"November 3, 2026",Fee,Listing fee,Order #1002 Listing #L100,USD,--,-$0.40,-$0.40
+"November 3, 2026",Marketing,Fee for sale made through Offsite Ads,Order #1002,USD,--,-$8.10,-$8.10
+"November 3, 2026",Fee,Share & Save credit,Order #1002,USD,--,$2.16,$2.16
+"November 15, 2026",Fee,Transaction fee: Linen towel,Order #1003 Listing #L200,USD,--,-$1.95,-$1.95
+"November 15, 2026",Fee,Processing fee,Order #1003,USD,--,-$1.15,-$1.15
+"November 15, 2026",Fee,Listing fee,Order #1003 Listing #L200,USD,--,-$0.20,-$0.20
+"November 20, 2026",Fee,Transaction fee: Wool scarf,Order #1008 Listing #L400,USD,--,-$2.60,-$2.60
+"November 20, 2026",Fee,Transaction fee: Linen towel,Order #1008 Listing #L200,USD,--,-$0.65,-$0.65
+"November 20, 2026",Fee,Transaction fee: Shipping,Order #1008,USD,--,-$0.65,-$0.65
+"November 20, 2026",Fee,Processing fee,Order #1008,USD,--,-$2.00,-$2.00
+"November 20, 2026",Fee,Listing fee,Order #1008 Listing #L400,USD,--,-$0.20,-$0.20
+"November 20, 2026",Fee,Listing fee,Order #1008 Listing #L200,USD,--,-$0.20,-$0.20
+"November 20, 2026",Marketing,Fee for sale made through Offsite Ads,Order #1008,USD,--,-$7.50,-$7.50
+"November 20, 2026",Fee,Regulatory Operating fee,Order #1008,USD,--,-$0.25,-$0.25

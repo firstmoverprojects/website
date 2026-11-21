@@ -1,0 +1,11 @@
+Date,Type,Title,Info,Currency,Amount,Fees & Taxes,Net
+"December 1, 2026",Fee,Transaction fee: Linen towel,Order #1004 Listing #L200,USD,--,-$5.85,-$5.85
+"December 1, 2026",Fee,Transaction fee: Shipping,Order #1004,USD,--,-$0.52,-$0.52
+"December 1, 2026",Fee,Processing fee,Order #1004,USD,--,-$3.10,-$3.10
+"December 1, 2026",Fee,Listing fee,Order #1004 Listing #L200,USD,--,-$0.60,-$0.60
+"December 1, 2026",Fee,Regulatory Operating fee,Order #1004,USD,--,-$0.47,-$0.47
+"December 20, 2026",Fee,Transaction fee: Beeswax candle,Order #1005 Listing #L300,USD,--,-$0.98,-$0.98
+"December 20, 2026",Fee,Transaction fee: Shipping,Order #1005,USD,--,-$0.26,-$0.26
+"December 20, 2026",Fee,Processing fee,Order #1005,USD,--,-$0.82,-$0.82
+"December 20, 2026",Fee,Listing fee,Order #1005 Listing #L300,USD,--,-$0.20,-$0.20
+"December 20, 2026",Fee,Share & Save credit,Order #1005,USD,--,$0.76,$0.76
